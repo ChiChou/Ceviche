@@ -1,6 +1,6 @@
-# Ceviche
+# Ceviche RAW Studio
 
-A native RAW photo editor for macOS, with nondestructive editing, AI masks and denoise, film looks, HDR, panoramas, and night-sky stacking. Photo processing runs on your Mac.
+A native Mac darkroom specialized for the night sky: meteor tracking, star trails, and sky noise reduction, alongside nondestructive RAW editing, AI masks and denoise, HDR, panoramas, and film looks. Photo processing runs on your Mac.
 
 **Early preview for testers.** Requires Apple silicon and macOS 15 or later; some features need a newer macOS version. The source is not published yet.
 
