@@ -1,6 +1,6 @@
 #!/bin/bash
-# Checks out the codec sources the vendor frameworks are built from, where their licenses and corresponding source are
-# read. vendor.sh leaves them behind when it builds, but frameworks restored from a cache (as in CI) come without them;
+# Checks out the codec sources the vendor frameworks are built from, where their licenses and notices are read.
+# vendor.sh leaves them behind when it builds, but frameworks restored from a cache (as in CI) come without them;
 # resolving fetches them without building anything.
 set -euo pipefail
 APP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"

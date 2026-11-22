@@ -8,7 +8,7 @@
     "Model notices follow `models/MODELS.md` and `models/fetch-models.sh`. Models are optional downloads; the current model-set manifest has no published tag. Depth Anything V2 here is specifically Small.",
     "The film print's model and its profiles are credited to Fotufilm, whose engine it is derived from, with Colour for the projector spectrum the model carries; colour transforms to ACES and OpenColorIO Config ACES. A note on what Ceviche took from Fotufilm and changed is included beside its licences.",
     "Hald is not bundled. Its licence and README are retained as research, with per-pack provenance still to be checked before redistribution. Build-tool records do not imply that Python packages ship with Ceviche.",
-    "Ceviche itself is Apache-2.0 since 2026-11-12 (AGPL-3.0 before). The encoder source archive is still published with releases.",
+    "Ceviche itself is Apache-2.0 since 2026-11-12 (AGPL-3.0 before). The encoders' exact upstream revisions are pinned in app/Vendor/Package.resolved.",
     "Colour’s ColorChecker table in the app is verified against v0.4.6."
   ],
   "components": [

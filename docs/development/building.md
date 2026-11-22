@@ -84,7 +84,7 @@ without `welcome/` the screen shows no photo.
 Three GitHub Actions workflows in `.github/workflows` run on GitHub's `xcode-27` macOS image with the same scripts as above:
 
 - **CI** (`ci.yml`): a debug build and `make test`, then a launch of the built app on macOS 15. Automatic runs on pushes and pull requests are paused to save Actions credits, so it runs only by hand (Actions › CI › Run workflow); until they return, run `make test` locally before merging.
-- **Release** (`release.yml`): for a `v*` tag whose version matches `CFBundleShortVersionString`, a release build zipped with its dSYMs, the encoders' corresponding source and checksums, attached to a draft GitHub release to finish by hand (notes, the samples archive). Run manually it only uploads the same files as a workflow artifact.
+- **Release** (`release.yml`): for a `v*` tag whose version matches `CFBundleShortVersionString`, a release build zipped with its dSYMs and checksums, attached to a draft GitHub release to finish by hand (notes, the samples archive). Run manually it only uploads the same files as a workflow artifact.
 - **Models** (`models.yml`): run by hand with a tag such as `models-v2`, converts every model with `models/fetch-models.sh`, packages them with `models/package-models.sh` (one uncompressed Apple Archive per model, `<Name>.aar` with the model and its `LICENSE`, and for the models in `MODEL_INT8` a `<Name>-INT8.aar` with the INT8 copy that `models/quantize_int8.py` writes, plus `SHA256SUMS` and the `ModelSet.json` manifest, which lists the INT8 archives under `int8`; the app unpacks them with the AppleArchive framework) and publishes them as a model-set release, then opens a pull request that pins the manifest in the app. Model sets are versioned apart from the app and never overwritten; an app build downloads only the set it pins, so a new set reaches users through that one-file change, made only when a model changes. `make models-pin TAG=models-vN` pins by hand.
 
 ## Export encoders
@@ -100,5 +100,5 @@ only when `app/Vendor/Package.swift`, its `Package.resolved` or `vendor.sh` chan
 
 The encoders and their dependencies use permissive open-source licenses.
 See [encoder license and distribution notes](../../app/licenses/ENCODERS.md). The bundle includes
-native dependency notices; `app/scripts/archive-encoder-sources.sh` prepares the encoder
-source archive to publish alongside releases.
+native dependency notices; the encoders' exact revisions are pinned in `app/Vendor/Package.resolved`, which the
+release's source archive carries.

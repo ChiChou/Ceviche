@@ -1,5 +1,5 @@
-# Release build of the app for a v* tag, attached to a draft GitHub release together with the dSYMs, the encoders'
-# corresponding source and checksums. Publish the draft after adding the release notes.
+# Release build of the app for a v* tag, attached to a draft GitHub release together with the dSYMs and checksums.
+# Publish the draft after adding the release notes.
 # The app bundles the small face models (models/models.sh MODEL_BUNDLED), fetched from the model set pinned in
 # CevicheCore/Resources/ModelSet.json, and downloads the rest of that set on demand.
 # Run manually (workflow_dispatch) it only builds and uploads the same files as a workflow artifact, as a dry run.
@@ -53,8 +53,6 @@ jobs:
         env:
           CEVICHE_REQUIRE_BUNDLED_MODELS: 1
         run: make build
-      - name: Encoder corresponding source
-        run: app/scripts/archive-encoder-sources.sh
       - name: Package
         env:
           VERSION: ${{ steps.version.outputs.version }}
@@ -62,7 +60,6 @@ jobs:
           mkdir -p release
           ditto -c -k --sequesterRsrc --keepParent app/dist/Ceviche.app "release/Ceviche-$VERSION.zip"
           ditto -c -k --norsrc --keepParent app/dist/dSYMs "release/Ceviche-$VERSION-dSYMs.zip"
-          cp app/dist/encoder-corresponding-source.tar.gz "release/Ceviche-$VERSION-encoder-corresponding-source.tar.gz"
           (cd release && shasum -a 256 -- * > SHA256SUMS)
           ls -l release
       - uses: actions/upload-artifact@v7
@@ -82,7 +79,6 @@ jobs:
 
           - \`Ceviche-$VERSION.zip\`: the app, with the face models built in; Settings › Models downloads the rest of the [$models](https://github.com/$GITHUB_REPOSITORY/releases/tag/$models) model set on demand, verified by checksum.
           - \`Ceviche-$VERSION-dSYMs.zip\`: debug symbols for symbolicating crash logs.
-          - \`Ceviche-$VERSION-encoder-corresponding-source.tar.gz\`: exact source of the bundled libwebp and libjxl frameworks.
 
           NOTES
           gh release create "$GITHUB_REF_NAME" --draft --title "Ceviche $VERSION" --notes-file notes.md --generate-notes release/*

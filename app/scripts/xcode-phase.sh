@@ -114,7 +114,7 @@ assemble() {
     cp "$REPO_ROOT/LICENSE" "$resources/LICENSE"
     # The welcome screen's photos with their credits, from welcome/.
     python3 -I "$APP_ROOT/scripts/welcome-photos.py" "$REPO_ROOT/welcome" "$resources/Welcome"
-    # The encoders' licences and where their corresponding source is; third-party licences ship in
+    # The encoders' licences and notices; third-party licences ship in
     # Ceviche_CevicheMac.bundle with credits.json (scripts/credits.py), which the Licenses window reads.
     "$APP_ROOT/scripts/vendor-sources.sh"
     rm -rf "$resources/EncoderLicenses"

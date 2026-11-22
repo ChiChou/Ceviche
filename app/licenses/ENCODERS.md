@@ -20,7 +20,6 @@ distributions. The script fails on a missing notice.
 BSD, MIT and Apache-2.0 notice requirements are retained; Highway also offers BSD-3-Clause.
 None of these licenses requires publishing source.
 
-For a release, use `scripts/archive-encoder-sources.sh` after building. Publish its
-source archive alongside the application.
-It contains the exact native encoder checkouts, including their submodules and notices.
+Releases publish no separate encoder source archive: `Vendor/Package.resolved`, in the source archive GitHub attaches
+to every release, pins the exact upstream revisions the bundled encoders are built from, submodules included.
 
