@@ -114,7 +114,7 @@ private struct ModelRow: View {
                         openWindow(id: LicensesView.windowID)
                     }
                     .buttonStyle(.link).help(L10n.tr("Open Source Licenses"))
-                    if let shown = library.set.asset(model, library.variant(model) ?? .fp16) ?? asset, !(model.isBuiltIn && !library.isInstalled(model)) {
+                    if !model.isBuiltIn, let shown = library.set.asset(model, library.variant(model) ?? .fp16) ?? asset {
                         Text(verbatim: "- " + ByteCountFormatter.string(fromByteCount: shown.bytes, countStyle: .file)).foregroundStyle(.secondary)
                     }
                 }.font(.caption).lineLimit(2).fixedSize(horizontal: false, vertical: true)
@@ -127,9 +127,9 @@ private struct ModelRow: View {
         .background(highlighted ? Theme.accent.opacity(0.08) : .clear)
     }
     @ViewBuilder private var status: some View {
-        switch library.status(model) {
+        if model.isBuiltIn { Text(L10n.tr("Built in")).font(.caption).foregroundStyle(.secondary) } else { switch library.status(model) {
         case .notInstalled:
-            if model.isBuiltIn { Text(L10n.tr("Built in")).font(.caption).foregroundStyle(.secondary) }
+            EmptyView()
         case .installed(let record):
             switch (record.source, library.matchesPin(model)) {
             // The button beside it already says whether it is installed; only the model set it came from, and which
@@ -149,7 +149,7 @@ private struct ModelRow: View {
             Text(transferText(transfer)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
         case .failed(let message):
             Label(message, systemImage: "xmark.circle").font(.caption).foregroundStyle(Theme.error).lineLimit(2).fixedSize(horizontal: false, vertical: true)
-        }
+        } }
     }
     private func transferText(_ transfer: ModelLibrary.Transfer) -> String {
         switch transfer {
@@ -162,7 +162,8 @@ private struct ModelRow: View {
         }
     }
     @ViewBuilder private var actions: some View {
-        switch library.status(model) {
+        // The app's own copy: nothing to download, remove or replace.
+        if model.isBuiltIn { EmptyView() } else { switch library.status(model) {
         case .transferring(let transfer):
             DownloadRing(fraction: transfer.fraction, installing: transfer == .installing) { library.cancel(model) }
                 .accessibilityLabel(L10n.tr("Stop downloading \(model.feature)"))
@@ -176,8 +177,6 @@ private struct ModelRow: View {
                 }
                 Button(L10n.tr("Remove"), action: remove).accessibilityLabel(L10n.tr("Remove \(model.feature)"))
             }
-        case .notInstalled where model.isBuiltIn:
-            EmptyView()
         case .notInstalled, .failed:
             // Icons, with Download outermost: the ring takes its place while the model downloads.
             HStack(spacing: 2) {
@@ -204,7 +203,7 @@ private struct ModelRow: View {
                         .accessibilityLabel(L10n.tr("Download \(model.feature)"))
                 }
             }
-        }
+        } }
     }
 }
 

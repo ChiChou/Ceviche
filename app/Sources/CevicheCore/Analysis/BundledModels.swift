@@ -18,15 +18,15 @@ public enum BundledModel: String, CaseIterable, Sendable {
     case faceMesh = "FaceMesh"
     case faceIdentity = "SFace"
 
-    /// Searched in order: `CEVICHE_MODELS` (tests and command-line tools, usually `models/build/compiled`), the user's
-    /// model library (so a downloaded copy overrides a built-in one), the built-in models, then the folder a debug
-    /// build recorded in its Info.plist (`CevicheDevelopmentModels`, set by the build to `models/build/compiled`) so
-    /// `make dev` sees locally converted models without copying.
+    /// Searched in order: `CEVICHE_MODELS` (tests and command-line tools, usually `models/build/compiled`), the built-in
+    /// models (always the ones this build was made with, whatever the library holds), the user's model library, then the
+    /// folder a debug build recorded in its Info.plist (`CevicheDevelopmentModels`, set by the build to
+    /// `models/build/compiled`) so `make dev` sees locally converted models without copying.
     public static var searchDirectories: [URL] {
         var directories: [URL] = []
         if let path = ProcessInfo.processInfo.environment["CEVICHE_MODELS"] { directories.append(URL(fileURLWithPath: path)) }
-        directories.append(ModelLibrary.defaultDirectory)
         if let builtIn = builtInDirectory { directories.append(builtIn) }
+        directories.append(ModelLibrary.defaultDirectory)
         if let path = Bundle.main.object(forInfoDictionaryKey: "CevicheDevelopmentModels") as? String, !path.isEmpty { directories.append(URL(fileURLWithPath: path)) }
         return directories
     }
@@ -39,7 +39,7 @@ public enum BundledModel: String, CaseIterable, Sendable {
     /// The models built into CevicheKit.framework, `<Name>/<Name>.mlmodelc` with its LICENSE. The framework rather
     /// than the app, so the index service and the MCP helper, which load it from the app, find them too.
     public static let builtInDirectory: URL? = Bundle(for: BundledModelCache.self).resourceURL?.appendingPathComponent("Models", isDirectory: true)
-    /// Whether this build carries the model itself, so it needs no download.
+    /// Whether this build carries the model itself: it needs no download and can't be removed.
     public var isBuiltIn: Bool {
         guard let directory = Self.builtInDirectory else { return false }
         return FileManager.default.fileExists(atPath: directory.appendingPathComponent(rawValue).appendingPathComponent(rawValue + ".mlmodelc").path)
