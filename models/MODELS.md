@@ -12,10 +12,10 @@ uncompressed Apple Archive holding `<Name>/<Name>.mlpackage` (or `.mlmodel`) and
 the table below, as listed in `models/models.sh`. Every model is optional and a missing one disables only its feature.
 A model set changes only when a model does, independently of app versions.
 
-Most models also come as `<Name>-INT8.aar`, laid out the same with the INT8 copy that `quantize_int8.py` writes
+The packaging script also builds `<Name>-INT8.aar` for eligible models using the copy that `quantize_int8.py` writes
 (`MODEL_INT8` in `models/models.sh`): weights quantized linearly to 8 bits with one scale per output channel,
-activations FP16, about half the size and as fast on the Neural Engine. Settings › Models offers FP16 or INT8 for
-each and can switch between them, so users can say which works better on their photos. DETR has no INT8 copy (it
+activations FP16, about half the size and as fast on the Neural Engine. Settings › Models offers a choice when the pinned manifest lists both archives.
+The current pin, `models-v1`, lists one archive per model. DETR has no INT8 copy (it
 loses whole labels at INT8) and Big-LaMa stays as it is; SFace ships only as INT8 (see below). For development, `make models` converts
 locally and `make models-prebuilt` downloads the pinned set into `models/build`.
 

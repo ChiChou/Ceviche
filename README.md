@@ -3,13 +3,13 @@
 ![Screenshot](docs/screenshot.webp)
 
 A native macOS photo catalog and RAW darkroom: SwiftUI, Apple's Core Image RAW decoder, a Metal image pipeline and a
-local SQLite catalog. Edits are nondestructive and stay in the catalog; originals are never overwritten.
+local SQLite catalog. Edits are nondestructive. Catalog photos keep their edits in the catalog. Browse Folders saves edits in XMP sidecars beside the originals.
 
-- Library: local or iCloud catalogs, folder browsing, albums, search, culling tools
+- Library: local catalogs (iCloud sync in builds configured for iCloud), folder browsing, albums, search, culling tools
 - Develop: tone, color, curves, masks, noise reduction, defringe, dust spots, crop and upright, retouch and AI fill
 - Merges: panorama, HDR, night sky, focus stack
 - Darkroom film printing, camera profiles and LUTs, XMP sidecars and presets
-- Export to every format ImageIO offers, plus WebP and JPEG XL; MCP server for AI clients
+- Export to JPEG, PNG, TIFF, HEIF and AVIF where supported, plus WebP and JPEG XL. Local MCP server for AI clients.
 
 English, Spanish, Italian, Simplified and Traditional Chinese.
 
@@ -19,7 +19,7 @@ macOS 15 or later on Apple silicon. Some features need newer systems and are dis
 selection needs macOS 27). **Help › System Info…** checks a Mac's RAM and GPU.
 
 The face models behind People and People masks are built in. The Core ML models behind depth, scene and sky masks, AI
-denoise and AI fill are not: **Ceviche › Settings… › Models** downloads them, FP16 or a smaller INT8 copy, from a
+denoise and AI fill are not: **Ceviche › Settings… › Models** downloads them from a
 separately versioned model-set release, verified by checksum.
 
 macOS's RAW decoder develops a DNG only up to a maximum width or height, which can differ between macOS versions;

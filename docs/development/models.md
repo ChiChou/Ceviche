@@ -9,7 +9,7 @@ What the models Ceviche uses do and where they are used. Planned work is in `ROA
 All are optional (`BundledModel` in `CevicheCore/Analysis/BundledModels.swift`, pinned set `models-v1` in
 `CevicheCore/Resources/ModelSet.json`, conversion in `models/`, described in `models/MODELS.md`). Loaded once per
 process by `BundledModelCache`. PeopleParts, FaceMesh and SFace (INT8) are built into the app; the others are
-downloaded, FP16 or INT8 except DETR and Big-LaMa, which are FP16 only.
+downloaded. The pinned set provides one archive per model.
 
 | Model | Output | Input, speed, size | Used in |
 |---|---|---|---|
@@ -22,6 +22,7 @@ downloaded, FP16 or INT8 except DETR and Big-LaMa, which are FP16 only.
 | **SkinTone** | Blend layer applied as soft light | 512 × 512 face crop, about 0.1 s a face; 26 MB | Portrait › Light › Even tone (`Adjustments/SkinTone.swift`, `FacePanel.swift`). |
 | **PeopleParts** (Selfie Multiclass) | 6 classes: background, hair, body skin, face skin, clothes, other | 256 × 256 square crop around one Vision person; 8 MB | People masks (`RawRenderer+People.swift`, `PortraitMasks.swift`, `PeopleMaskChooser.swift`); Portrait Details. |
 | **FaceMesh** | 478 face points and a face score | 256 × 256 face crop with a quarter margin; 3 MB; points within 0.27 px of TFLite | Eyes, irises, lips, teeth and brows in People masks; Touch Up (`RawRenderer+People.swift`, `PortraitToolbar.swift`). Falls back to Vision landmarks. |
+| **SFace** | 128-value face embedding | 112 × 112 aligned face, INT8 weights | People groups faces by similarity between embeddings (`PeopleIndex.swift`). |
 
 ### Apple frameworks
 
@@ -29,7 +30,7 @@ downloaded, FP16 or INT8 except DETR and Big-LaMa, which are FP16 only.
 |---|---|
 | `VNDetectFaceRectanglesRequest`, `VNDetectFaceLandmarksRequest`, `VNDetectFaceCaptureQualityRequest` | Import tagging and the Faces wall (`CatalogImporter.classifyLabels`, 1600 px decode); culling reports (`PhotoQuality.swift`, eye openness from the landmark outline); Check Faces; Straighten › Eyes (`StraightenEstimator.swift`); Facial Features (`FaceLiquify.swift`); Reframe (`PortraitFraming.swift`); blemish crops; ID Photo; Match Series (`SeriesMatcher.swift`). |
 | `VNClassifyImageRequest` | Tags at import (up to 12 labels at confidence ≥ 0.2), feeding search and Album name suggestions; ID Photo. |
-| `VNCalculateImageAestheticsScoresRequest`, `VNGenerateAttentionBasedSaliencyImageRequest`, `VNGenerateImageFeaturePrintRequest` | Culling reports only: aesthetics and utility flag, saliency box as the subject when there is no face, and the feature print `BurstDetector` compares. |
+| `VNCalculateImageAestheticsScoresRequest`, `VNGenerateAttentionBasedSaliencyImageRequest`, `VNGenerateImageFeaturePrintRequest` | Culling measures aesthetics, utility and saliency and compares feature prints within bursts. Background indexing also generates feature prints for Show Similar Photos and Duplicates. |
 | `VNGenerateForegroundInstanceMaskRequest` | Subject and Background masks; ID Photo background. |
 | `VNGeneratePersonInstanceMaskRequest`, `VNDetectHumanRectanglesRequest` | People masks; Distraction Removal's person finding. |
 | `VNGeneratePersonSegmentationRequest` | ID Photo. |

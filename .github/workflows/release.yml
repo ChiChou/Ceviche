@@ -80,7 +80,7 @@ jobs:
           Developer ID, so after unzipping either right-click → Open once or run
           \`xattr -dr com.apple.quarantine Ceviche.app\`.
 
-          - \`Ceviche-$VERSION.zip\`: the app, with the face models built in; Settings › Models downloads the rest of the [$models](https://github.com/$GITHUB_REPOSITORY/releases/tag/$models) model set on demand, FP16 or INT8, verified by checksum.
+          - \`Ceviche-$VERSION.zip\`: the app, with the face models built in; Settings › Models downloads the rest of the [$models](https://github.com/$GITHUB_REPOSITORY/releases/tag/$models) model set on demand, verified by checksum.
           - \`Ceviche-$VERSION-dSYMs.zip\`: debug symbols for symbolicating crash logs.
           - \`Ceviche-$VERSION-encoder-corresponding-source.tar.gz\`: exact source of the bundled libwebp and libjxl frameworks.
 

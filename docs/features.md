@@ -8,10 +8,9 @@ What the app ships today, by area. Names match the menus.
   the originals. Edits are nondestructive and never touch the original file. Open, close and back up catalogs from
   the File menu; a backup can include the originals. A catalog last opened by a newer version, or whose database
   fails to open or upgrade, can still be opened read-only to browse and export from, with nothing in it changed.
-- **Welcome screen.** Shown when no catalog is open: one column with import, new and open catalog actions (iCloud
-  included), Browse Folders, recent catalogs and Models, beside a credited photo or looping clip in wide windows, with arrows to step through the others. Return opens the most
+- **Welcome screen.** Shown when no catalog is open: one column with import, new and open catalog actions, Browse Folders, recent catalogs and Models, beside a credited photo or looping clip in wide windows, with arrows to step through the others. Return opens the most
   recent one.
-- **iCloud catalogs.** Ratings, metadata, edits, albums, trash and snapshots sync between Macs. Originals are not
+- **iCloud catalogs.** Available in builds configured for iCloud. Ratings, metadata, edits, albums, trash and snapshots sync between Macs. Originals are not
   uploaded; each Mac reads them from its own disks. Work continues offline and syncs later.
 - **Folders tab.** Browse folders on disk without importing. Edits on browsed photos are saved to XMP sidecars beside
   them (`IMG.ceviche.xmp` when another app wrote `IMG.xmp`). RAW files opened from the Finder show here. The last folder
@@ -184,8 +183,8 @@ Closing a tool stops measuring the photos it asked for. Their large preview show
 
 ## Tools
 
-Each tool takes over the window: select the photos, adjust in a large preview, and the result is written beside the
-sources and added to the catalog. Merges of RAW photos produce a linear DNG that develops like any RAW. Merges of
+Merges add their result to the catalog. If the first source is referenced from a writable local folder, the result goes beside it.
+For other sources, including those on network shares, it goes into catalog originals. RAW merges normally produce a linear DNG. Oversized Pixel Shift results are saved as TIFF or JPEG. Merges of
 HEIC, JPEG, TIFF or PNG photos (Merge to HDR, Focus Stack, Stack, Merge Best Faces and the Night Sky tools) keep the
 photos' own format, color space and HDR gain map, or with **Merge to TIFF** (**Stack to TIFF**) are a 16-bit TIFF, and
 take the photo's edits as they are. Each source's Remove
@@ -245,7 +244,7 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   with **Bodies** their bodies, take their true shape while the background keeps straight lines. A tag over each person
   corrects them or leaves them as shot, and a click on a missed head adds it. A pinch zooms the preview and scrolling pans
   it, both photos together in Side by Side. **Lens** takes the 35 mm equivalent focal length from the EXIF, or one typed
-  in when the EXIF lacks it or is wrong; Correct waits for one. The copy goes beside the photo: a DNG for
+  in when the EXIF lacks it or is wrong; Correct waits for one. The copy follows the same destination rules as merges. It is a DNG for
   a RAW; for other photos **Format** Original keeps HEIC, JPEG, TIFF or PNG (HDR gain map included) and saves rarer
   formats such as AVIF as HEIC, or TIFF saves a 16-bit TIFF.
 - **Convert Negative.** Inverts film scans using the film base, splits a roll by base when they differ, and balances
@@ -264,7 +263,7 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
 
 ## Output
 
-- **Export.** JPEG, TIFF, HEIF, WebP, AVIF and JPEG XL, in 8, 16 or 32 bits, SDR or HDR. Resize, color profile,
+- **Export.** JPEG, PNG, TIFF, HEIF, AVIF, WebP and JPEG XL. Bit depth and HDR options depend on the format, including 10-bit HEIF and AVIF and 32-bit linear HDR TIFF. Resize, color profile,
   metadata, GPS, watermark and AI noise reduction at the output size. Settings can be saved as presets. GPS is the
   location the catalog has for the photo, so one set or removed in Ceviche is what the file carries.
 - **Print.** **File › Print** (⌘P) prints the open photo or library selection at full size, independently of export
@@ -290,5 +289,4 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
 ## Models
 
 - **Models.** The face models behind People and People masks are built in. Depth, scene and sky masks, AI noise
-  reduction, AI fill, Find blemishes and Even tone download their models in Settings › Models, most as FP16 or a
-  smaller INT8 copy, with a button to switch between them.
+  reduction, AI fill, Find blemishes and Even tone download their models in Settings › Models in the community build. The pinned model set provides one download per model.

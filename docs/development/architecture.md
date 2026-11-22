@@ -35,7 +35,7 @@ transaction to `asset.suggestedTags`, `assetFace` (one row per face, top-left no
 which always equals the photo's rows (nil: not analysed). Photos with a face at least 3 % wide also get 256-pixel
 tiles cut from the original by `FaceCrops`, kept in the `faceTile` table of `previews.sqlite` for the Faces wall.
 Face boxes sync with the suggested tags (`SyncedAnalysis.faceBoxes`); tiles do not, and a photo analysed on another
-Mac shows its face cut from the library thumbnail. The culling measure, feature prints and bursts stay on demand.
+Mac shows its face cut from the library thumbnail. Background indexing also saves a feature print for Show Similar Photos and Duplicates. Culling computes its own report and burst-comparison print on demand.
 People runs in the app, not the index service (`CatalogPeopleGrouper`, `PeopleIndex`): Vision finds five points on
 each wall tile, `FaceEmbedding` aligns the face to OpenCV's 112-pixel template and SFace gives 128 numbers, kept on the
 face's row (`assetFace.embedding`, Float16, with its revision), about 15 ms a face. `PeopleGrouping` then places faces

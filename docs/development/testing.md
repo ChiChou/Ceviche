@@ -25,7 +25,7 @@ CEVICHE_SNAPSHOT_PATH=/tmp/ceviche-editor.png \
 CEVICHE_TEST_LOCAL_VISION=1 CEVICHE_UI_SNAPSHOTS=1 ./app/scripts/test.sh
 ```
 
-Panel snapshots are written to `/private/tmp/ceviche-{light & color,masks,profiles,export}.png`. Vision asset downloads may be needed on the first run. Normal test runs skip these opt-in checks.
+Panel snapshots are written to `/private/tmp/` with the prefix `ceviche-`. The test captures Crop, Retouch, Light & Color, Detail, Masks, Info and the export dialog. Set `CEVICHE_LOOKS_ROOT` to a library containing profiles or LUTs to also capture the applied looks under `ceviche-looks-`. Vision asset downloads may be needed on the first run. Normal test runs skip these opt-in checks.
 
 ## Defringe review
 
