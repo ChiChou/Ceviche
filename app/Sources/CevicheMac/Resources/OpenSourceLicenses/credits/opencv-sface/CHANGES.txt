@@ -1,0 +1,2 @@
+SFace face recognition model from OpenCV Zoo (models/face_recognition_sface, face_recognition_sface_2021dec.onnx at revision ba91a3b9), licensed under the Apache License 2.0.
+Ceviche converts the ONNX graph to Core ML (operators mapped one to one) and names its output "embedding"; the weights are quantized to INT8 (linear, one scale per block of 32) and the model is built into the app. Inputs and normalization are otherwise unchanged.

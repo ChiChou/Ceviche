@@ -1,0 +1,21 @@
+Ceviche {{VERSION}}
+
+INSTALACIÓN
+1. Mueve Ceviche.app a Aplicaciones.
+[[unnotarized]]
+   Ceviche aún no está notarizado, así que macOS lo bloquea tras la descarga. Abre Terminal y ejecuta:
+     xattr -rc /Applications/Ceviche.app
+[[/unnotarized]]
+2. Abre Ceviche, elige Ceviche › Ajustes… › Modelos y haz clic en Descargar todo. Hasta entonces, las herramientas que usan un
+   modelo lo piden.
+[[models]]
+   Sin internet, descomprime {{MODELS}} y copia todo el contenido de su carpeta Models en
+   ~/Library/Application Support/Ceviche/Models (Finder: Ir › Ir a la carpeta…; crea la carpeta Models si no existe),
+   y vuelve a abrir Ceviche.
+[[/models]]
+
+Los ajustes preestablecidos vienen integrados: pestaña Aspectos › Ajustes preestablecidos › Integrado.
+
+ACTUALIZAR
+Sustituye Ceviche.app de la misma forma. Se conservan los modelos, los catálogos, los ajustes
+y tus aspectos.

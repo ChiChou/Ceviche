@@ -1,0 +1,4 @@
+Copyright (c) Alibaba, Inc. and its affiliates.
+Ceviche adapts ModelScope's DetectionUNet and ConvBNActiv for fixed-size Core ML inference. Only the detection_net weights from joint_20210926.pth are converted. The output includes sigmoid probabilities.
+Ceviche also adapts ModelScope's skin-retouching UNet (unet_deploy.py) for fixed-size 512 x 512 Core ML inference of the generator weights in pytorch_model.pt, without its deep-supervision heads; the predicted blend layer is applied by Ceviche as the upstream pipeline does, scaled by an Amount.
+The model set also offers an INT8 copy, its weights quantized linearly to 8 bits with one scale per output channel (models/quantize_int8.py).

@@ -1,0 +1,1 @@
+Apple's Core ML conversion of Depth Anything V2 Small (apple/coreml-depth-anything-v2-small) is distributed unchanged. The model set also offers an INT8 copy, its weights quantized linearly to 8 bits with one scale per output channel (models/quantize_int8.py).

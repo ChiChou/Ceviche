@@ -1,0 +1,77 @@
+// Settings for every target in Ceviche.xcodeproj. The CEVICHE_* inputs below are the defaults (an ad-hoc signed
+// community build); `make` writes this Mac's values from build.config into Local.xcconfig (git-ignored), which the
+// Xcode window reads too, and a snapshot passes its own with -xcconfig. Personal values live only there.
+CEVICHE_BUNDLE_ID = me.chichou.ceviche
+CEVICHE_ICLOUD_CONTAINER = iCloud.$(CEVICHE_BUNDLE_ID)
+// community (open source, macOS 15, no store) or appstore (Ceviche Pro, macOS 26, sandbox required).
+CEVICHE_DISTRIBUTION = community
+// App Sandbox for the app and both helpers, YES or NO; the helpers are signed without entitlements when NO.
+CEVICHE_SANDBOX = NO
+// iCloud catalogs and iCloud Drive, YES or NO; needs a signed build with a profile that has the container.
+CEVICHE_ICLOUD = NO
+CEVICHE_STORE_PRODUCTS =
+// Where a build without iCloud Drive keeps LUTs and profiles: folders or database.
+CEVICHE_LOCAL_STORAGE = folders
+// adhoc, automatic (Xcode manages the Apple Development profile) or manual (CEVICHE_SIGN_IDENTITY, with
+// CEVICHE_PROVISIONING_PROFILE when iCloud is on).
+CEVICHE_SIGNING = adhoc
+CEVICHE_SIGN_IDENTITY =
+CEVICHE_PROVISIONING_PROFILE =
+// Hardened runtime and a secure timestamp: a Developer ID build, which is notarized.
+CEVICHE_HARDENED_RUNTIME = NO
+CURRENT_PROJECT_VERSION = 1
+#include? "Local.xcconfig"
+
+MACOSX_DEPLOYMENT_TARGET = $(CEVICHE_MACOS_MIN_$(CEVICHE_DISTRIBUTION))
+CEVICHE_MACOS_MIN_community = 15.0
+CEVICHE_MACOS_MIN_appstore = 26.0
+SDKROOT = macosx
+SUPPORTED_PLATFORMS = macosx
+SWIFT_VERSION = 5.0
+// Apple silicon only: the code does not build for Intel (Float16), and the codecs are arm64 only.
+ARCHS = arm64
+ONLY_ACTIVE_ARCH = YES
+DEAD_CODE_STRIPPING = YES
+// The build phases run the scripts in app/scripts, which read the source tree and models/.
+ENABLE_USER_SCRIPT_SANDBOXING = NO
+ALWAYS_SEARCH_USER_PATHS = NO
+
+SWIFT_OPTIMIZATION_LEVEL[config=Debug] = -Onone
+SWIFT_OPTIMIZATION_LEVEL[config=Release] = -O
+SWIFT_COMPILATION_MODE[config=Release] = wholemodule
+SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Debug] = DEBUG
+GCC_OPTIMIZATION_LEVEL[config=Debug] = 0
+// Release symbols go to dSYMs (app/dist/dSYMs) and the installed binaries are stripped.
+DEBUG_INFORMATION_FORMAT[config=Debug] = dwarf
+DEBUG_INFORMATION_FORMAT[config=Release] = dwarf-with-dsym
+COPY_PHASE_STRIP = NO
+STRIP_INSTALLED_PRODUCT[config=Debug] = NO
+STRIP_INSTALLED_PRODUCT[config=Release] = YES
+// Strip on every release build, not only on install or archive.
+DEPLOYMENT_POSTPROCESSING[config=Release] = YES
+
+CODE_SIGN_STYLE = $(CEVICHE_SIGN_STYLE_$(CEVICHE_SIGNING))
+CEVICHE_SIGN_STYLE_adhoc = Manual
+CEVICHE_SIGN_STYLE_automatic = Automatic
+CEVICHE_SIGN_STYLE_manual = Manual
+CODE_SIGN_IDENTITY = $(CEVICHE_IDENTITY_$(CEVICHE_SIGNING))
+CEVICHE_IDENTITY_adhoc = -
+CEVICHE_IDENTITY_automatic = Apple Development
+CEVICHE_IDENTITY_manual = $(CEVICHE_SIGN_IDENTITY)
+PROVISIONING_PROFILE_SPECIFIER = $(CEVICHE_PROVISIONING_PROFILE)
+// No get-task-allow in debug builds: without the hardened runtime lldb attaches anyway, and the entitlements stay as
+// the build settings say.
+CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO
+ENABLE_HARDENED_RUNTIME = $(CEVICHE_HARDENED_RUNTIME)
+OTHER_CODE_SIGN_FLAGS = $(CEVICHE_TIMESTAMP_$(CEVICHE_HARDENED_RUNTIME))
+CEVICHE_TIMESTAMP_YES = --timestamp
+CEVICHE_TIMESTAMP_NO =
+
+// The iCloud keys are signed in only with a profile to back them: never ad hoc.
+CEVICHE_CLOUD_ENTITLED = $(CEVICHE_CLOUD_ENTITLED_$(CEVICHE_SIGNING)_$(CEVICHE_ICLOUD))
+CEVICHE_CLOUD_ENTITLED_adhoc_YES = NO
+CEVICHE_CLOUD_ENTITLED_adhoc_NO = NO
+CEVICHE_CLOUD_ENTITLED_automatic_YES = YES
+CEVICHE_CLOUD_ENTITLED_automatic_NO = NO
+CEVICHE_CLOUD_ENTITLED_manual_YES = YES
+CEVICHE_CLOUD_ENTITLED_manual_NO = NO

@@ -1,0 +1,3 @@
+Copyright 2023 Google LLC. Model card: "LICENSED UNDER Apache License, Version 2.0".
+Ceviche converts the selfie_multiclass_256x256 TFLite model to Core ML (operators mapped one to one, FP16 weights) and adds a softmax to its output; it runs the model on a crop around one person and cuts the result to that person.
+The model set also offers an INT8 copy, its weights quantized linearly to 8 bits with one scale per output channel (models/quantize_int8.py).

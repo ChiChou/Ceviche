@@ -1,0 +1,13 @@
+"CFBundleDisplayName" = "Ceviche RAW Studio";
+"CFBundleName" = "Ceviche";
+"NSDesktopFolderUsageDescription" = "Ceviche mostra le foto delle cartelle che apri nella sua barra laterale.";
+"NSDocumentsFolderUsageDescription" = "Ceviche mostra le foto delle cartelle che apri nella sua barra laterale.";
+"NSDownloadsFolderUsageDescription" = "Ceviche mostra le foto delle cartelle che apri nella sua barra laterale.";
+"NSNetworkVolumesUsageDescription" = "Ceviche legge le foto dai volumi di rete che sfogli o da cui importi.";
+"NSPhotoLibraryAddUsageDescription" = "Ceviche aggiunge a Foto le Live Photo che crei.";
+"NSRemovableVolumesUsageDescription" = "Ceviche legge le foto dalle schede e dalle unità che sfogli o da cui importi.";
+"Ceviche Catalog" = "Catalogo di Ceviche";
+"Ceviche photos" = "Foto di Ceviche";
+"Ceviche RAW edits" = "Modifiche RAW di Ceviche";
+"XMP sidecar" = "File XMP collaterale";
+"RAW Photo" = "Foto RAW";

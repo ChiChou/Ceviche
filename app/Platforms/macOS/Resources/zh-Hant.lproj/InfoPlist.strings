@@ -1,0 +1,13 @@
+"CFBundleDisplayName" = "鮮調修圖";
+"CFBundleName" = "鮮調修圖";
+"NSDesktopFolderUsageDescription" = "鮮調修圖會顯示你在其邊欄中打開的檔案夾裡的照片。";
+"NSDocumentsFolderUsageDescription" = "鮮調修圖會顯示你在其邊欄中打開的檔案夾裡的照片。";
+"NSDownloadsFolderUsageDescription" = "鮮調修圖會顯示你在其邊欄中打開的檔案夾裡的照片。";
+"NSNetworkVolumesUsageDescription" = "鮮調修圖會讀取你瀏覽或輸入的網路卷宗中的照片。";
+"NSPhotoLibraryAddUsageDescription" = "鮮調修圖會將你製作的原況照片加入「照片」。";
+"NSRemovableVolumesUsageDescription" = "鮮調修圖會讀取你瀏覽或輸入的記憶卡和磁碟機中的照片。";
+"Ceviche Catalog" = "鮮調修圖編目";
+"Ceviche photos" = "鮮調修圖照片";
+"Ceviche RAW edits" = "鮮調修圖 RAW 編輯";
+"XMP sidecar" = "XMP 附屬檔案";
+"RAW Photo" = "RAW 照片";

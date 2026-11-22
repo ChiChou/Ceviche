@@ -1,0 +1,46 @@
+RAWmakase adaptations in Ceviche
+===============================
+
+Upstream reference checked on 2026-11-13:
+https://github.com/pch/rawmakase/tree/f9b574b2398f4ce0f63e5d51d19c3d427ba6705e
+
+The MIT licence in RAWmakase-MIT.txt matches LICENSE at this revision.
+The original import revision was not recorded. This is a verified reference,
+not a claim that all adapted code was imported from this particular commit.
+
+Exact data comparisons against crates/rawmakase-engine/src/develop/:
+
+- ColorGradeCurvesData.swift: decoding the Base64 yields all 146432 bytes of
+  color_grade_curves.bin, unchanged. Git blob SHA-1:
+  521f83bbd4c826de7129bcbd963b66b1b5a85f59.
+- ColorMixerTablesData.swift: decoding the Base64 yields the first 373248
+  bytes of color_mixer_chart.bin (the eight HSL bands). The upstream file is
+  404352 bytes, Git blob SHA-1 ab81fd13e62f8aca0d03f7c5b7330d73641a3e2b.
+  Ceviche omits the final Saturation/Vibrance tables. The retained bytes are
+  unchanged; their Git blob SHA-1 is
+  7590a0e10dfca69e0b0c4df8932be4b018e300e2.
+
+The companion color_grade_curves.rs and color_mixer.rs explain the tables'
+layout and measured responses. Upstream describes these as measurements of
+Camera Raw responses, not copied Adobe program code. The retained mixer data
+contains the eight bands measured with a synthetic chart; the omitted global
+Saturation/Vibrance tables are described upstream as measured from photos.
+
+Code adaptations live in:
+- app/Sources/CevicheCore/Adjustments/ColorGradeCurves.swift
+- app/Sources/CevicheCore/Adjustments/ColorMixerTables.swift
+- app/Sources/CevicheCore/Adjustments/ToneCurve.swift
+- app/Sources/CevicheCore/Analysis/GuidedUpright.swift
+- app/Sources/CevicheCore/Analysis/UprightAnalyzer.swift
+
+These are Swift adaptations, not verbatim upstream Rust files. Ceviche uses
+its own adjustment types, HDR handling, rendering integration, mixer range
+control and image coordinates. guided.rs and upright.rs at the reference
+revision document the upstream camera-rotation solvers. The original port
+also credits RAWmakase for natural cubic point curves and hue-preserving
+tone-curve application. Ceviche's current line detector is separately written
+from the LSD article; this record does not attribute that detector to RAWmakase.
+
+The MIT notice is retained for these adaptations and data. Paths, byte counts
+and hashes here make the data provenance independently checkable after a
+source-only initial commit; no original development history is needed.

@@ -1,0 +1,13 @@
+"CFBundleDisplayName" = "鲜调修图";
+"CFBundleName" = "鲜调修图";
+"NSDesktopFolderUsageDescription" = "鲜调修图会显示你在其边栏中打开的文件夹里的照片。";
+"NSDocumentsFolderUsageDescription" = "鲜调修图会显示你在其边栏中打开的文件夹里的照片。";
+"NSDownloadsFolderUsageDescription" = "鲜调修图会显示你在其边栏中打开的文件夹里的照片。";
+"NSNetworkVolumesUsageDescription" = "鲜调修图会读取你浏览或导入的网络宗卷中的照片。";
+"NSPhotoLibraryAddUsageDescription" = "鲜调修图会将你创建的实况照片添加到“照片”。";
+"NSRemovableVolumesUsageDescription" = "鲜调修图会读取你浏览或导入的存储卡和驱动器中的照片。";
+"Ceviche Catalog" = "鲜调修图目录";
+"Ceviche photos" = "鲜调修图照片";
+"Ceviche RAW edits" = "鲜调修图 RAW 编辑";
+"XMP sidecar" = "XMP 附属文件";
+"RAW Photo" = "RAW 照片";

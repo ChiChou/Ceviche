@@ -1,0 +1,35 @@
+Fotufilm in Ceviche
+===================
+
+Ceviche's Darkroom renders film with its own film print (app/Sources/FilmPrint), which is derived from the Fotufilm
+engine (https://fotufilm.com, Copyright 2026 MUAStudio Inc.) as published at
+https://github.com/DhaliwalX/fotufilm-engine, commit 3a789c436716c902654f248166ebb4f580611146.
+
+- The engine's code is licensed under the Apache License, Version 2.0 (FOTUFILM-ENGINE-LICENSE.txt, NOTICE). Ceviche
+  carries a modified part of it:
+  - FilmPrint/Model is the engine's FotufilmCore reduced to what Ceviche's Darkroom reaches: the stock definitions,
+    the spectral model and its tables, and the plan that packs a development's parameters. The camera profiles, RAW
+    decoding, lens and diffusion filters, the layered transport and film-tile grain models, the camera gate and
+    border, the delivery transforms, the CPU reference renderer, pack sealing and validation were removed. A measured
+    film curve keeps its highest density instead of searching its samples on every read, the stock library reads
+    LZFSE-compressed definitions, and the packed configuration's layout is named in Swift (Slot.swift) rather than
+    in a C header.
+  - FilmPrint/Metal is Ceviche's own renderer. It replaces the engine's FotufilmHalide and FotufilmMetal modules
+    (the Halide pipeline, its ahead-of-time kernels and their C++ host): the stages those define (exposure through
+    the spectral cube, the emulsion's spread, halation, couplers and adjacency, grain, the print) are written as
+    Metal compute kernels (FilmKernels.swift) that read the same packed configuration, with their own tiling.
+    No Halide code or runtime is part of Ceviche.
+  Each file taken from the engine says so at its top. The upstream THIRD_PARTY_NOTICES.md also describes Halide,
+  browser and desktop RAW decoders and camera profiles that Ceviche does not ship.
+- The film profiles in the engine's Stocks folder are licensed under Creative Commons Attribution-ShareAlike 4.0
+  International (FOTUFILM_LICENSE.txt, FOTUFILM-PROFILES.txt). Ceviche ships each one with its whitespace and the
+  records its film print does not read (layeredTransport, edgePrinting, crystalGrainPopulation, sheetNotches)
+  removed and the result LZFSE-compressed, as `<id>.json.lzfse` (app/scripts/film-stocks.py); every number it keeps
+  is as published. The repacked files are shared under the same licence. Ceviche lists the stocks by the names and
+  makers they carry and leaves the three synthetic example stocks out of its list.
+- THIRD_PARTY_NOTICES.md is the engine's own record of the third-party material it carries: of that, Ceviche ships
+  the measured-reflectance prior, the projector spectrum from colour-science and the print media digitised from
+  manufacturers' datasheets.
+
+Product names are the trademarks of their owners and identify which material a profile describes. Ceviche is not
+affiliated with or endorsed by Fotufilm, MUAStudio Inc. or those manufacturers.

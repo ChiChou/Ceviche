@@ -1,0 +1,33 @@
+// The Ceviche app target. Its code is the Ceviche module in CevicheKit.framework (app/Package.swift), shared with the
+// index service and the MCP helper; this target is only the launcher.
+PRODUCT_NAME = Ceviche
+PRODUCT_MODULE_NAME = CevicheLauncher
+PRODUCT_BUNDLE_IDENTIFIER = $(CEVICHE_BUNDLE_ID)
+INFOPLIST_FILE = Platforms/macOS/Info.plist
+INFOPLIST_PREPROCESS = NO
+STRINGS_FILE_OUTPUT_ENCODING = binary
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+INSTALL_PATH = /
+COMBINE_HIDPI_IMAGES = YES
+
+// Ceviche.entitlements, without the sandbox keys and/or the iCloud keys as the build asks.
+CODE_SIGN_ENTITLEMENTS = Platforms/macOS/Entitlements/Ceviche$(CEVICHE_ENTITLEMENTS_SANDBOX_$(CEVICHE_SANDBOX))$(CEVICHE_ENTITLEMENTS_CLOUD_$(CEVICHE_CLOUD_ENTITLED)).entitlements
+CEVICHE_ENTITLEMENTS_SANDBOX_YES =
+CEVICHE_ENTITLEMENTS_SANDBOX_NO = -Unsandboxed
+CEVICHE_ENTITLEMENTS_CLOUD_YES =
+CEVICHE_ENTITLEMENTS_CLOUD_NO = -Local
+// Push and iCloud environments follow the profile: development for Apple Development, production otherwise.
+CEVICHE_APS_ENVIRONMENT = $(CEVICHE_APS_ENVIRONMENT_$(CEVICHE_SIGNING))
+CEVICHE_APS_ENVIRONMENT_automatic = development
+CEVICHE_APS_ENVIRONMENT_manual = production
+CEVICHE_APS_ENVIRONMENT_adhoc = development
+CEVICHE_CLOUD_ENVIRONMENT = $(CEVICHE_CLOUD_ENVIRONMENT_$(CEVICHE_SIGNING))
+CEVICHE_CLOUD_ENVIRONMENT_automatic = Development
+CEVICHE_CLOUD_ENVIRONMENT_manual = Production
+CEVICHE_CLOUD_ENVIRONMENT_adhoc = Development
+
+// models/build/compiled (make models), recorded in a debug build's Info.plist so the app finds the models there.
+CEVICHE_DEVELOPMENT_MODELS[config=Debug] = $(SRCROOT)/../models/build/compiled
+CEVICHE_DEVELOPMENT_MODELS[config=Release] =
+// Xcode Previews build the app as a stub around Ceviche.debug.dylib; the bundle keeps one executable, as before.
+ENABLE_DEBUG_DYLIB = NO

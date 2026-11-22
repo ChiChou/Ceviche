@@ -1,0 +1,22 @@
+.DS_Store
+app/.build/
+app/dist/
+app/Vendor/Frameworks/
+*.ceviche
+*.ceviche-journal
+*.ceviche-wal
+*.ceviche-shm
+models/cache/
+models/build
+models/.venv/
+__pycache__/
+xcuserdata/
+samples/
+notes/
+build.config
+models/dist/
+app/Platforms/macOS/Config/Local.xcconfig
+app/Ceviche.xcodeproj/project.xcworkspace/
+
+# Command-line prototypes stay out of the repo (see AGENTS.md)
+/prototypes/

@@ -1,0 +1,3 @@
+Copyright 2022-2023 Google LLC. Face Mesh V2 model card: "LICENSED UNDER Apache License, Version 2.0".
+Ceviche converts only face_landmarks_detector.tflite from the face_landmarker.task bundle to Core ML (operators mapped one to one, FP16 weights) and reshapes its outputs to 478 points and a face score.
+The model set also offers an INT8 copy, its weights quantized linearly to 8 bits with one scale per output channel (models/quantize_int8.py).

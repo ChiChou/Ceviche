@@ -1,0 +1,6 @@
+# Model conversion only; nothing here ships in the app.
+torch==2.8.0
+coremltools==8.3.0
+numpy
+onnx
+tflite

@@ -1,0 +1,471 @@
+[
+ {
+  "id": "icao",
+  "country": "ICAO",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   31.5,
+   36
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain, light, uniform",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Generic 35×45 template. ICAO leaflet specifies width 35–40 mm and face 70–80%; 45 mm height is a template choice, not a universal document requirement.",
+  "source": "https://www.icao.int/sites/default/files/FAL/Annex_A-Photograph_Guidelines.pdf"
+ },
+ {
+  "id": "us-passport",
+  "country": "US",
+  "document": "Passport",
+  "widthMM": 50.8,
+  "heightMM": 50.8,
+  "headHeightMM": [
+   25.4,
+   34.9
+  ],
+  "background": "white",
+  "backgroundNote": "white or off-white",
+  "glasses": "never",
+  "headwear": "religious-or-medical",
+  "expression": "neutral-or-slight-smile",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Closed-mouth smile accepted; no exaggerated expression. No glasses except medically necessary with a signed doctor’s note. Religious or medical headwear requires a signed statement.",
+  "source": "https://travel.state.gov/content/travel/en/passports/how-apply/photos.html"
+ },
+ {
+  "id": "us-visa",
+  "country": "US",
+  "document": "Visa",
+  "widthMM": 50.8,
+  "heightMM": 50.8,
+  "headHeightMM": [
+   25.4,
+   34.9
+  ],
+  "eyeLineFromBottomMM": [
+   28.6,
+   34.9
+  ],
+  "background": "white",
+  "backgroundNote": "white or off-white",
+  "glasses": "never",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    600,
+    600
+   ],
+   "maxPx": [
+    1200,
+    1200
+   ],
+   "maxKB": 240
+  },
+  "printDPI": 300,
+  "notes": "Square, sRGB, 24-bit colour.",
+  "source": "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html"
+ },
+ {
+  "id": "us-green-card",
+  "country": "US",
+  "document": "Green Card",
+  "widthMM": 50.8,
+  "heightMM": 50.8,
+  "headHeightMM": [
+   25.4,
+   34.9
+  ],
+  "eyeLineFromBottomMM": [
+   28.6,
+   34.9
+  ],
+  "background": "white",
+  "backgroundNote": "white to off-white",
+  "glasses": "discouraged",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Head measured top of hair to chin. Thin glossy paper, unmounted. USCIS instructions don't address glasses.",
+  "source": "https://www.uscis.gov/sites/default/files/document/forms/i-485instr.pdf"
+ },
+ {
+  "id": "ca-passport",
+  "country": "CA",
+  "document": "Passport",
+  "widthMM": 50,
+  "heightMM": 70,
+  "headHeightMM": [
+   31,
+   36
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain white or light-coloured",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    1200,
+    1800
+   ],
+   "maxPx": [
+    3000,
+    4500
+   ],
+   "maxKB": 5120
+  },
+  "printDPI": 300,
+  "notes": "Digital (online renewal only): 3:2 portrait, 200 KB–5 MB, chin-to-crown 45–50% of height. Photographer name/address/date on back.",
+  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports/photos.html"
+ },
+ {
+  "id": "ca-visa",
+  "country": "CA",
+  "document": "Visa",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   31,
+   36
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain white or light-coloured",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Frame is a minimum (at least 35×45). Chin to skull crown, excluding hair. Temporary resident visas only; PR card photos use a separate 50×70 mm specification.",
+  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/application-forms-guides/temporary-resident-visa-application-photograph-specifications.html"
+ },
+ {
+  "id": "gb-passport",
+  "country": "GB",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   29,
+   34
+  ],
+  "background": "light-grey",
+  "backgroundNote": "plain cream or light grey",
+  "glasses": "discouraged",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    600,
+    750
+   ],
+   "maxPx": null,
+   "maxKB": 10240
+  },
+  "printDPI": 300,
+  "notes": "Prints must not be trimmed from a larger picture. Digital: 50 KB–10 MB, don't crop (HMPO crops).",
+  "source": "https://www.gov.uk/photos-for-passports/photo-requirements"
+ },
+ {
+  "id": "eu-schengen-visa",
+  "country": "EU",
+  "document": "Visa",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "background": "white",
+  "backgroundNote": "white or off-white",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Face 70–80% of photo. Per German missions; other Schengen consulates may vary slightly.",
+  "source": "https://uk.diplo.de/uk-en/02/visa/visa-faq-2442852"
+ },
+ {
+  "id": "de-passport-id",
+  "country": "DE",
+  "document": "Passport / ID Card",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain, light, single colour",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Face 70–80% (chin to top of head). Since May 2025 photos must reach the office digitally via a certified cloud service or be taken there. Children ≤10: 50–80%.",
+  "source": "https://www.personalausweisportal.de/SharedDocs/downloads/Webs/PA/DE/informationsmaterial/weiterefuehrendes-material/Lichtbildschablone_bfrei.pdf?__blob=publicationFile&v=7"
+ },
+ {
+  "id": "fr-passport-id",
+  "country": "FR",
+  "document": "Passport / ID Card",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "background": "light-blue",
+  "backgroundNote": "plain light (light blue or light grey); white forbidden",
+  "glasses": "allowed-no-glare",
+  "headwear": "never",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Chin to top of skull, hair excluded. Bare head required, no headwear exception. Thin frames, clear lenses only.",
+  "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10619",
+  "earsVisible": true
+ },
+ {
+  "id": "it-passport",
+  "country": "IT",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   31.5,
+   36
+  ],
+  "background": "white-or-light",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "35×45 mm; face 70–80% of photo. Head range derived from that percentage. Taken within 6 months; light, uniform background.",
+  "source": "https://conschicago.esteri.it/wp-content/uploads/2025/10/foto-per-passaporto.pdf"
+ },
+ {
+  "id": "nl-passport-id",
+  "country": "NL",
+  "document": "Passport / ID Card",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   26,
+   30
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain light grey, light blue or white, no gradient",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "earsVisible": false,
+  "printDPI": 400,
+  "notes": "Chin to crown 26–30 mm from age 11 (19–30 mm ≤10). Face width ear to ear 16–20 mm. At least 400 dpi; taken within 6 months.",
+  "source": "https://www.rijksoverheid.nl/onderwerpen/paspoort-en-identiteitskaart/eisen-pasfoto-paspoort-id-kaart"
+ },
+ {
+  "id": "au-passport",
+  "country": "AU",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain white or light grey",
+  "glasses": "never",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Print 35–40 mm wide × 45–50 mm high. No glasses except when removal is medically impossible; medical certificate or B-11 explanation required. Glossy dye-sublimation print, at least 200 gsm.",
+  "source": "https://www.passports.gov.au/help/passport-photos"
+ },
+ {
+  "id": "jp-passport",
+  "country": "JP",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "crownToTopMM": [
+   2,
+   6
+  ],
+  "background": "white-or-light",
+  "backgroundNote": "plain; white recommended, light blue accepted",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    600,
+    730
+   ],
+   "maxPx": [
+    600,
+    730
+   ],
+   "maxKB": 600
+  },
+  "printDPI": 300,
+  "notes": "Print: chin to bottom 7±2 mm. Online: exactly 600×730 px JPEG ≤600 KB, a different aspect ratio from the 35×45 mm print. No hair, frames or shadow over eyes.",
+  "source": "https://www.mofa.go.jp/mofaj/toko/passport/ic_photo.html"
+ },
+ {
+  "id": "kr-passport",
+  "country": "KR",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "background": "white",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    395,
+    507
+   ],
+   "maxPx": [
+    431,
+    550
+   ],
+   "maxKB": 500
+  },
+  "printDPI": 300,
+  "notes": "Chin to skull crown, excluding hair. No tinted or colour lenses. Online JPEG ≤500 KB, 395–431×507–550 px; 413×531 px recommended. No background removal.",
+  "source": "https://www.passport.go.kr/home/kor/contents.do?menuPos=32"
+ },
+ {
+  "id": "sg-passport",
+  "country": "SG",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   25,
+   35
+  ],
+  "background": "white",
+  "backgroundNote": "light grey if hair is white",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-only",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "digital": {
+   "minPx": [
+    400,
+    514
+   ],
+   "maxPx": [
+    400,
+    514
+   ],
+   "maxKB": 8192
+  },
+  "printDPI": 300,
+  "notes": "Taken within 3 months. Headwear must not be white. Matte print. Also used for the IC.",
+  "source": "https://www.ica.gov.sg/photo-guidelines"
+ },
+ {
+  "id": "be-passport-id",
+  "country": "BE",
+  "document": "Passport / ID Card",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   31,
+   36
+  ],
+  "background": "white-or-light",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "earsVisible": false,
+  "printDPI": 400,
+  "notes": "Chin to skull crown, excluding hair. Smooth photo paper, at least 400 dpi. Taken within 6 months. Also Kids-ID and residence documents; under-6 posture/expression exceptions apply.",
+  "source": "https://france.diplomatie.belgium.be/sites/default/files/2024-06/Normes%20standards%20photos%20d%27identit%C3%A9.pdf"
+ },
+ {
+  "id": "fi-passport-id",
+  "country": "FI",
+  "document": "Passport / ID Card",
+  "widthMM": 36,
+  "heightMM": 47,
+  "headHeightMM": [
+   32,
+   36
+  ],
+  "crownToTopMM": [
+   4,
+   6
+  ],
+  "background": "white-or-light",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "earsVisible": false,
+  "digital": {
+   "minPx": [
+    500,
+    653
+   ],
+   "maxPx": [
+    500,
+    653
+   ],
+   "maxKB": 250
+  },
+  "printDPI": 300,
+  "notes": "Chin to skull crown, excluding hair and beard. Chin to bottom 7–9 mm. Digital JPEG exactly 500×653 px, head 445–500 px, crown gap 56–84 px, chin gap 96–124 px. Photographer uploads to police photo server; paper accepted at service points. Taken within 6 months.",
+  "source": "https://poliisi.fi/documents/25235045/31329600/Passport-photograph-instructions-by-the-police-2020-EN-fixed.pdf/1eec2f4c-aed7-68e0-c112-0a8f25e0328d/Passport-photograph-instructions-by-the-police-2020-EN-fixed.pdf"
+ },
+ {
+  "id": "pl-passport",
+  "country": "PL",
+  "document": "Passport",
+  "widthMM": 35,
+  "heightMM": 45,
+  "headHeightMM": [
+   31.5,
+   36
+  ],
+  "background": "white-or-light",
+  "glasses": "allowed-no-glare",
+  "headwear": "religious-or-medical",
+  "expression": "neutral",
+  "mouthClosed": true,
+  "printDPI": 300,
+  "notes": "Face 70–80% of photo; head range derived from that percentage. Taken within 6 months. Religious headwear requires a certificate; medical headwear and dark-lens exceptions require supporting evidence. Under-5 and disability/health exceptions apply.",
+  "source": "https://www.gov.pl/web/uw-lubelski/informacja-dotyczaca-fotografii-do-dokumentu-paszportowego"
+ }
+]

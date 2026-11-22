@@ -1,0 +1,19 @@
+Ceviche {{VERSION}}
+
+安裝
+1. 把 Ceviche.app 移到「應用程式」。
+[[unnotarized]]
+   Ceviche 尚未經過公證，下載後 macOS 會阻擋它。打開「終端機」並執行：
+     xattr -rc /Applications/Ceviche.app
+[[/unnotarized]]
+2. 打開 Ceviche，選擇 Ceviche › 設定⋯ › 模型，按一下「全部下載」。下載之前，需要模型的工具會提示下載。
+[[models]]
+   沒有網路時，改為解壓縮 {{MODELS}}，把其中 Models 檔案夾的全部內容拷貝到
+   ~/Library/Application Support/Ceviche/Models（Finder：前往 › 前往檔案夾⋯；如果沒有 Models 檔案夾，請新增一個），
+   然後重新打開 Ceviche。
+[[/models]]
+
+預設集已內建：外觀面板 › 預設集 › 內建。
+
+更新
+用同樣方式取代 Ceviche.app。模型、圖庫、設定和你自己的外觀都會保留。

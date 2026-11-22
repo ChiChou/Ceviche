@@ -1,0 +1,19 @@
+Ceviche {{VERSION}}
+
+INSTALL
+1. Move Ceviche.app into Applications.
+[[unnotarized]]
+   Ceviche is not notarized yet, so macOS blocks it after download. Open Terminal and run:
+     xattr -rc /Applications/Ceviche.app
+[[/unnotarized]]
+2. Open Ceviche, choose Ceviche › Settings… › Models and click Download All. The tools that need a model ask for it until then.
+[[models]]
+   Without internet, unzip {{MODELS}} instead and copy everything in its Models folder into
+   ~/Library/Application Support/Ceviche/Models (Finder: Go › Go to Folder…; create the Models folder if it is not
+   there), then reopen Ceviche.
+[[/models]]
+
+The presets are built in: Looks tab › Presets › Built-in.
+
+UPDATING
+Replace Ceviche.app the same way. Models, catalogs, settings and your own looks are kept.

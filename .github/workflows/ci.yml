@@ -1,0 +1,93 @@
+# Automatic CI is temporarily paused to conserve GitHub Actions credits.
+# Once re-enabled in GitHub, this workflow can be run manually.
+# Debug build and the test suite, then a launch of the built app on macOS 15, the
+# oldest system the app runs on. Building needs the macOS 27 SDK, so the build runs on GitHub's xcode-27 image
+# (macOS 27, Apple silicon) with the Xcode pinned to the version the app is developed with; the smoke job only runs
+# the result. No Core ML model or sample photo is needed: the app downloads models at run time, tests that need one
+# skip, and sample-photo tests are turned off.
+name: CI
+on:
+  workflow_dispatch:
+  # When automatic CI is restored, enable these path-filtered triggers:
+  # push:
+  #   paths:
+  #     - 'app/**'
+  #     - 'Makefile'
+  #     - '.github/workflows/ci.yml'
+  # pull_request:
+  #   paths:
+  #     - 'app/**'
+  #     - 'Makefile'
+  #     - '.github/workflows/ci.yml'
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-and-test:
+    runs-on: xcode-27
+    timeout-minutes: 90
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_27.1.app
+    steps:
+      - uses: actions/checkout@v7
+      - name: Cache SwiftPM downloads
+        uses: actions/cache@v6
+        with:
+          path: app/.build/swiftpm-cache
+          key: swiftpm-${{ hashFiles('app/Package.resolved', 'app/Vendor/Package.resolved') }}
+          restore-keys: swiftpm-
+      - name: Cache the Xcode project's package checkouts
+        uses: actions/cache@v6
+        with:
+          path: app/.build/xcode-packages
+          key: xcode-packages-${{ hashFiles('app/Package.resolved') }}
+          restore-keys: xcode-packages-
+      - name: Cache the vendor codec frameworks
+        uses: actions/cache@v6
+        with:
+          path: app/Vendor/Frameworks
+          key: vendor-xcode27.1-${{ hashFiles('app/Vendor/Package.swift', 'app/Vendor/Package.resolved', 'app/scripts/vendor.sh') }}
+      - name: Build
+        run: make build CONFIGURATION=debug
+      - name: Test
+        # Synthetic inputs only: real photos are for runs on a developer's Mac.
+        env:
+          CEVICHE_SAMPLES: "off"
+        run: make test
+      - name: Keep the test log on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-output
+          path: app/.build/debug/*.xctest/Contents/Resources
+          if-no-files-found: ignore
+      - name: Pack the app for the smoke test
+        run: ditto -c -k --keepParent app/dist/Ceviche.app smoke.zip
+      - uses: actions/upload-artifact@v7
+        with:
+          name: smoke-app
+          path: smoke.zip
+          retention-days: 1
+
+  smoke-macos-15:
+    # The compiler only checks that newer APIs sit behind availability guards; this checks that the binaries load and the
+    # app starts on the oldest supported system, where those symbols are missing from the frameworks.
+    needs: build-and-test
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: smoke-app
+      - name: Unpack and re-sign
+        run: |
+          ditto -x -k smoke.zip .
+          sw_vers
+      - name: Helper loads and answers
+        run: Ceviche.app/Contents/Helpers/ceviche-mcp --schema | head -c 200; echo
+      - name: App launches and stays up
+        run: |
+          open -n Ceviche.app
+          sleep 20
+          pgrep -x Ceviche >/dev/null || { echo "::error::Ceviche is not running 20 s after launch."; log show --last 2m --predicate 'process == "Ceviche" OR eventMessage CONTAINS "Ceviche"' --style compact | tail -50; exit 1; }
+          pkill -x Ceviche

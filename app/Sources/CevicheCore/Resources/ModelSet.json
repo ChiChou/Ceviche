@@ -1,0 +1,56 @@
+{
+  "models": {
+    "BigLaMa": {
+      "bytes": 104557652,
+      "file": "BigLaMa.aar",
+      "sha256": "84613b6fc453f67b65da5535e3f13a605c5b6b01ef0952cd33dba4927df2ed53"
+    },
+    "BlemishDetector": {
+      "bytes": 36102049,
+      "file": "BlemishDetector.aar",
+      "sha256": "8fcfd7ce856ead9140d23cf663ed83e5789ace51ecb42fd5521e5f0b6652bcf3"
+    },
+    "DETRResnet50SemanticSegmentationF16": {
+      "bytes": 85480992,
+      "file": "DETRResnet50SemanticSegmentationF16.aar",
+      "sha256": "cba70d1cb8a0f64da7e62777ce898bac36578991e71b66d23142bf81f51c8edd"
+    },
+    "DepthAnythingV2SmallF16": {
+      "bytes": 49831315,
+      "file": "DepthAnythingV2SmallF16.aar",
+      "sha256": "aefcb7290122a5dc2418d9db41ce2ffcefbdb5b78c9ad9d025849138b36a65d9"
+    },
+    "FaceMesh": {
+      "bytes": 2643754,
+      "file": "FaceMesh.aar",
+      "sha256": "c7177f6cf4959697c41b982f3813aa99dd5e9e2c632836bc977862b2e0ef12eb"
+    },
+    "NAFNetSIDD32": {
+      "bytes": 58915285,
+      "file": "NAFNetSIDD32.aar",
+      "sha256": "718ec27147a68c820b13209e92f68f5451245a7c97254829190631616d75b032"
+    },
+    "PeopleParts": {
+      "bytes": 8321695,
+      "file": "PeopleParts.aar",
+      "sha256": "c6c8eb99952211ade4e35e6b7bce9ec34976e8a1799b89d28def4025df9fdcf5"
+    },
+    "SFace": {
+      "bytes": 19356621,
+      "file": "SFace.aar",
+      "sha256": "56cd1dbcbb8866e359b7eae87f73c1ddaf14280cb8f4d6d2948a42b50b9cb1db"
+    },
+    "SkinTone": {
+      "bytes": 26825970,
+      "file": "SkinTone.aar",
+      "sha256": "ea1c29359aa718c91ffe863027a7336f88a4cd255e05e3f03b10acf1457caf66"
+    },
+    "SkySegmentation": {
+      "bytes": 87982756,
+      "file": "SkySegmentation.aar",
+      "sha256": "9b188fa5f9cba014bd2f1cb795b4da596af76d4751c609f41ac45fcf236aebff"
+    }
+  },
+  "repository": "ChiChou/Ceviche",
+  "tag": "models-v1"
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleDevelopmentRegion</key><string>en</string>
+<key>CFBundleLocalizations</key><array><string>en</string><string>zh-Hans</string><string>zh-Hant</string><string>it</string><string>es</string></array>
+<key>CFBundleName</key><string>Ceviche</string>
+<!-- Matches Ceviche.app, so Finder shows the localized name from Resources/<language>.lproj/InfoPlist.strings (Ceviche RAW Studio in English). -->
+<key>CFBundleDisplayName</key><string>Ceviche</string>
+<key>LSHasLocalizedDisplayName</key><true/>
+<key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+<key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
+<key>CFBundleIconFile</key><string>AppIcon</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleShortVersionString</key><string>0.1.0</string>
+<key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>
+<key>LSMinimumSystemVersion</key><string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+<key>NSHighResolutionCapable</key><true/>
+<key>NSPrincipalClass</key><string>NSApplication</string>
+<key>NSHumanReadableCopyright</key><string>Ceviche RAW Studio</string>
+<!-- What macOS shows when it asks before the first read of a protected folder or volume. The Folders tab reads one only when it is expanded or selected, and camera discovery starts with Import from Camera, so none of these appear at launch. -->
+<key>NSDesktopFolderUsageDescription</key><string>Ceviche shows the photos in folders you open in its sidebar.</string>
+<key>NSDocumentsFolderUsageDescription</key><string>Ceviche shows the photos in folders you open in its sidebar.</string>
+<key>NSDownloadsFolderUsageDescription</key><string>Ceviche shows the photos in folders you open in its sidebar.</string>
+<key>NSRemovableVolumesUsageDescription</key><string>Ceviche reads photos from the cards and drives you browse or import from.</string>
+<key>NSNetworkVolumesUsageDescription</key><string>Ceviche reads photos from the network volumes you browse or import from.</string>
+<key>NSPhotoLibraryAddUsageDescription</key><string>Ceviche adds the Live Photos you create to Photos.</string>
+<!-- The look library (LUTs, camera profiles, color profiles) in iCloud Drive, shown in Finder as Ceviche. -->
+<key>NSUbiquitousContainers</key><dict><key>$(CEVICHE_ICLOUD_CONTAINER)</key><dict>
+<key>NSUbiquitousContainerIsDocumentScopePublic</key><true/>
+<key>NSUbiquitousContainerName</key><string>Ceviche</string>
+<key>NSUbiquitousContainerSupportedFolderLevels</key><string>Any</string>
+</dict></dict>
+<!-- Where a build without iCloud Drive keeps LUTs and profiles: folders or database. From CEVICHE_LOCAL_STORAGE. -->
+<key>CevicheLocalStorage</key><string>$(CEVICHE_LOCAL_STORAGE)</string>
+<!-- The CloudKit and iCloud Drive container (CEVICHE_ICLOUD_CONTAINER). -->
+<key>CevicheCloudContainer</key><string>$(CEVICHE_ICLOUD_CONTAINER)</string>
+<!-- Ceviche Pro App Store product IDs, comma-separated (CEVICHE_STORE_PRODUCTS). Empty: a community build. -->
+<key>CevicheStoreProducts</key><string>$(CEVICHE_STORE_PRODUCTS)</string>
+<!-- Build features (BuildFeatures.swift): community or appstore, iCloud catalogs YES or NO. -->
+<key>CevicheDistribution</key><string>$(CEVICHE_DISTRIBUTION)</string>
+<key>CevicheICloud</key><string>$(CEVICHE_ICLOUD)</string>
+<!-- The index service's bundle identifier, which the app connects to. -->
+<key>CevicheIndexServiceIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER).indexer</string>
+<!-- A debug build's models/build/compiled (make models), where the app also looks for models; empty in release. -->
+<key>CevicheDevelopmentModels</key><string>$(CEVICHE_DEVELOPMENT_MODELS)</string>
+<!-- A catalog is a package: Finder shows it as one item, and double-clicking it opens it in Ceviche. -->
+<key>CFBundleDocumentTypes</key><array>
+<dict><key>CFBundleTypeName</key><string>Ceviche Catalog</string><key>CFBundleTypeRole</key><string>Editor</string><key>LSHandlerRank</key><string>Owner</string><key>LSTypeIsPackage</key><true/><key>LSItemContentTypes</key><array><string>me.chichou.ceviche.catalog</string></array></dict>
+<!-- RAW photos are offered under Open With, never made the default: they open in place in the Folders view, not imported. -->
+<dict><key>CFBundleTypeName</key><string>RAW Photo</string><key>CFBundleTypeRole</key><string>Editor</string><key>LSHandlerRank</key><string>Alternate</string><key>LSItemContentTypes</key><array><string>public.camera-raw-image</string></array></dict>
+</array>
+<key>UTImportedTypeDeclarations</key><array><dict>
+<key>UTTypeIdentifier</key><string>com.adobe.xmp</string>
+<key>UTTypeDescription</key><string>XMP sidecar</string>
+<key>UTTypeConformsTo</key><array><string>public.xml</string></array>
+<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>xmp</string></array></dict>
+</dict></array>
+<key>UTExportedTypeDeclarations</key><array>
+<dict>
+<key>UTTypeIdentifier</key><string>me.chichou.ceviche.latent</string>
+<key>UTTypeDescription</key><string>Ceviche Latent Image</string>
+<key>UTTypeConformsTo</key><array><string>com.apple.package</string><string>public.composite-content</string></array>
+<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>cevichelatent</string></array></dict>
+</dict>
+<dict>
+<key>UTTypeIdentifier</key><string>me.chichou.ceviche.photos</string>
+<key>UTTypeDescription</key><string>Ceviche photos</string>
+<key>UTTypeConformsTo</key><array><string>public.data</string></array>
+</dict>
+<dict>
+<key>UTTypeIdentifier</key><string>me.chichou.ceviche.document</string>
+<key>UTTypeDescription</key><string>Ceviche RAW edits</string>
+<key>UTTypeConformsTo</key><array><string>public.database</string></array>
+<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>ceviche</string></array><key>public.mime-type</key><string>application/x-ceviche</string></dict>
+</dict>
+<dict>
+<key>UTTypeIdentifier</key><string>me.chichou.ceviche.catalog</string>
+<key>UTTypeDescription</key><string>Ceviche Catalog</string>
+<key>UTTypeConformsTo</key><array><string>com.apple.package</string><string>public.composite-content</string></array>
+<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>cevichecatalog</string></array></dict>
+</dict></array>
+</dict></plist>

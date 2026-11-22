@@ -1,0 +1,35 @@
+# Copy to build.config (git-ignored) and fill in. make (app/scripts/config.sh) reads it and writes the Xcode settings
+# into app/Platforms/macOS/Config/Local.xcconfig; a variable set in the environment wins over the file. Lines are NAME=value; quotes are optional.
+
+# Apple Developer Team ID (Apple Developer → Membership details). iCloud needs a paid team, not a Personal Team.
+CEVICHE_TEAM_ID=
+# The app's bundle identifier; Xcode registers it on the first build with CEVICHE_ICLOUD=1.
+CEVICHE_BUNDLE_ID=me.chichou.ceviche
+# CloudKit and iCloud Drive container. Defaults to iCloud.<bundle ID>.
+#CEVICHE_ICLOUD_CONTAINER=iCloud.me.chichou.ceviche
+# Signing certificate: its name, or its SHA-1 hash from `security find-identity -v -p codesigning` when several share a
+# name. Unset: Xcode signs for the team when iCloud is on, otherwise the build is signed ad hoc.
+#CEVICHE_SIGN_IDENTITY=
+# With CEVICHE_SIGN_IDENTITY and iCloud on: the installed provisioning profile to sign with, by name or UUID.
+#CEVICHE_PROVISIONING_PROFILE=
+# make snapshot notarizes with this notarytool keychain profile (xcrun notarytool store-credentials <name>), signing
+# with the team's Developer ID Application identity unless CEVICHE_SIGN_IDENTITY says otherwise.
+#CEVICHE_NOTARY_PROFILE=
+# iCloud catalogs and iCloud Drive: 1 turns them on (Xcode then signs for CEVICHE_TEAM_ID, with the Apple Developer
+# account signed in to Xcode), 0 (the default) leaves them out.
+#CEVICHE_ICLOUD=0
+# Where a build without iCloud Drive keeps LUTs and profiles: folders or database.
+#CEVICHE_LOCAL_STORAGE=folders
+# Which build to make. community (the default): open source, macOS 15+, no store or badge, and models installed by hand
+# from the release page. appstore: the Mac App Store build, macOS 26+, with Ceviche Pro and models delivered by the
+# App Store.
+#CEVICHE_DISTRIBUTION=community
+# App Sandbox: 1 or 0. On by default only for the App Store build, which needs it.
+#CEVICHE_SANDBOX=0
+# iOS and iPadOS: 1 also builds the export codecs for iOS and the iOS Simulator and links them there (about 40 s more,
+# once). 0 (the default) builds for macOS only.
+#CEVICHE_IOS=0
+# Ceviche Pro, the App Store build's one-time purchase that removes the Unpaid badge: its product ID from App Store
+# Connect (comma-separated if there are several). Only IDs go here. App Store Connect API keys and the shared secret are
+# never needed by the app; keep them out of this file and the repository.
+#CEVICHE_STORE_PRODUCTS=

@@ -1,0 +1,12 @@
+// The catalog index XPC service, in Contents/XPCServices; it loads CevicheKit from the app's Frameworks.
+PRODUCT_NAME = CevicheIndexService
+PRODUCT_MODULE_NAME = CevicheIndex
+PRODUCT_BUNDLE_IDENTIFIER = $(CEVICHE_BUNDLE_ID).indexer
+INFOPLIST_FILE = Platforms/macOS/IndexService-Info.plist
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../../../../Frameworks
+SKIP_INSTALL = YES
+// Its entitlements are all sandbox: signed with them only in a sandboxed build.
+CODE_SIGN_ENTITLEMENTS = $(CEVICHE_HELPER_ENTITLEMENTS_$(CEVICHE_SANDBOX))
+CEVICHE_HELPER_ENTITLEMENTS_YES = Platforms/macOS/Entitlements/CevicheIndexService.entitlements
+CEVICHE_HELPER_ENTITLEMENTS_NO =
+

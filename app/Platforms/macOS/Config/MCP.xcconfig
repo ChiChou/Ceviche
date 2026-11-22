@@ -1,0 +1,11 @@
+// The stdio MCP helper, in Contents/Helpers; it loads CevicheKit from the app's Frameworks.
+PRODUCT_NAME = ceviche-mcp
+PRODUCT_MODULE_NAME = CevicheMCP
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+SKIP_INSTALL = YES
+// Its entitlements are all sandbox: signed with them only in a sandboxed build.
+CODE_SIGN_ENTITLEMENTS = $(CEVICHE_HELPER_ENTITLEMENTS_$(CEVICHE_SANDBOX))
+CEVICHE_HELPER_ENTITLEMENTS_YES = Platforms/macOS/Entitlements/CevicheMCP.entitlements
+CEVICHE_HELPER_ENTITLEMENTS_NO =
+// Xcode would otherwise sign a tool with an empty application identifier when it has no entitlements.
+ENTITLEMENTS_REQUIRED = NO

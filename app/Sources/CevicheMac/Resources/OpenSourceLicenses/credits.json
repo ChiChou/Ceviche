@@ -1,0 +1,709 @@
+{
+  "schemaVersion": 2,
+  "collectedOn": "2026-11-13",
+  "scope": "Ceviche app dependencies, vendored adaptations, native codec dependencies, optional models, direct model-conversion requirements, and proposed Hald assets. Not a complete inventory of the developer toolchain or transitive Python packages.",
+  "notes": [
+    "Exact native codec revisions and SwiftPM pins are recorded in the manifest. RAWmakase tables have been verified against a pinned upstream revision; the original port revision was not recorded. See its SOURCE.txt for the comparison and adaptation scope.",
+    "NumPy and ONNX conversion requirements are unpinned; their notices are upstream snapshots from 2026-11-03.",
+    "Model notices follow `models/MODELS.md` and `models/fetch-models.sh`. Models are optional downloads; the current model-set manifest has no published tag. Depth Anything V2 here is specifically Small.",
+    "The film print's model and its profiles are credited to Fotufilm, whose engine it is derived from, with Colour for the projector spectrum the model carries; colour transforms to ACES and OpenColorIO Config ACES. A note on what Ceviche took from Fotufilm and changed is included beside its licences.",
+    "Hald is not bundled. Its licence and README are retained as research, with per-pack provenance still to be checked before redistribution. Build-tool records do not imply that Python packages ship with Ceviche.",
+    "Ceviche itself is Apache-2.0 since 2026-11-12 (AGPL-3.0 before). The encoder source archive is still published with releases.",
+    "Colour’s ColorChecker table in the app is verified against v0.4.6."
+  ],
+  "components": [
+    {
+      "id": "ceviche",
+      "name": "Ceviche",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/ChiChou/Ceviche",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/LICENSE",
+      "distribution": "application",
+      "usage": "Photo editor",
+      "version": null,
+      "revision": null,
+      "evidence": [
+        "LICENSE"
+      ],
+      "notices": [
+        {
+          "path": "credits/ceviche/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "grdb",
+      "name": "GRDB.swift",
+      "license": "MIT",
+      "projectURL": "https://github.com/groue/GRDB.swift",
+      "licenseURL": "https://github.com/groue/GRDB.swift/blob/b83108d10f42680d78f23fe4d4d80fc88dab3212/LICENSE",
+      "distribution": "bundled",
+      "usage": "Catalog database",
+      "version": "7.11.1",
+      "revision": "b83108d10f42680d78f23fe4d4d80fc88dab3212",
+      "evidence": [
+        "app/Package.resolved"
+      ],
+      "notices": [
+        {
+          "path": "credits/grdb/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "rawmakase",
+      "name": "RAWmakase",
+      "license": "MIT",
+      "projectURL": "https://github.com/pch/rawmakase",
+      "licenseURL": "https://github.com/pch/rawmakase/blob/f9b574b2398f4ce0f63e5d51d19c3d427ba6705e/LICENSE",
+      "distribution": "bundled",
+      "usage": "Adapted tone curves, colour grading, mixer tables and Upright solvers",
+      "version": null,
+      "revision": null,
+      "evidence": [
+        "app/Sources/CevicheCore/Adjustments/ColorGradeCurves.swift",
+        "app/Sources/CevicheCore/Adjustments/ColorGradeCurvesData.swift",
+        "app/Sources/CevicheCore/Adjustments/ColorMixerTables.swift",
+        "app/Sources/CevicheCore/Adjustments/ColorMixerTablesData.swift",
+        "app/Sources/CevicheCore/Adjustments/ToneCurve.swift",
+        "app/Sources/CevicheCore/Analysis/GuidedUpright.swift",
+        "app/Sources/CevicheCore/Analysis/UprightAnalyzer.swift"
+      ],
+      "notices": [
+        {
+          "path": "credits/rawmakase/RAWmakase-MIT.txt"
+        },
+        {
+          "path": "credits/rawmakase/SOURCE.txt"
+        }
+      ],
+      "notes": "Original import revision unknown. Upstream reference f9b574b2398f4ce0f63e5d51d19c3d427ba6705e verified on 2026-11-13: grading bytes match in full; mixer bytes match its first 373248 bytes. This reference is not asserted to be the original port revision."
+    },
+    {
+      "id": "libwebp",
+      "name": "libwebp",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/webmproject/libwebp",
+      "licenseURL": "https://github.com/webmproject/libwebp/blob/4fa21912338357f89e4fd51cf2368325b59e9bd9/COPYING",
+      "distribution": "bundled",
+      "usage": "Image encoding",
+      "version": "1.6.0",
+      "revision": "4fa21912338357f89e4fd51cf2368325b59e9bd9",
+      "evidence": [
+        "app/Vendor/Package.resolved",
+        "app/scripts/encoder-notices.py"
+      ],
+      "notices": [
+        {
+          "path": "credits/libwebp/AUTHORS"
+        },
+        {
+          "path": "credits/libwebp/COPYING"
+        },
+        {
+          "path": "credits/libwebp/PATENTS"
+        }
+      ]
+    },
+    {
+      "id": "libjxl",
+      "name": "libjxl",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/libjxl/libjxl",
+      "licenseURL": "https://github.com/libjxl/libjxl/blob/91e935dad222b22e7e12eb452f62fe0be3e70b62/LICENSE",
+      "distribution": "bundled",
+      "usage": "Image encoding",
+      "version": "0.10.4",
+      "revision": "91e935dad222b22e7e12eb452f62fe0be3e70b62",
+      "evidence": [
+        "app/Vendor/Package.resolved",
+        "app/scripts/encoder-notices.py"
+      ],
+      "notices": [
+        {
+          "path": "credits/libjxl/AUTHORS"
+        },
+        {
+          "path": "credits/libjxl/LICENSE"
+        },
+        {
+          "path": "credits/libjxl/PATENTS"
+        }
+      ]
+    },
+    {
+      "id": "brotli",
+      "name": "Brotli",
+      "license": "MIT",
+      "projectURL": "https://github.com/google/brotli",
+      "licenseURL": "https://github.com/google/brotli/blob/36533a866ed1ca4b75cf049f4521e4ec5fe24727/LICENSE",
+      "distribution": "bundled",
+      "usage": "JPEG XL dependency",
+      "version": null,
+      "revision": "36533a866ed1ca4b75cf049f4521e4ec5fe24727",
+      "evidence": [
+        "app/Vendor/Package.resolved",
+        "app/scripts/encoder-notices.py"
+      ],
+      "notices": [
+        {
+          "path": "credits/brotli/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "highway",
+      "name": "Highway",
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "projectURL": "https://github.com/google/highway",
+      "licenseURL": "https://github.com/google/highway/blob/58b52a717469e62b2d9b8eaa2f5dddb44d4a4cbf/LICENSE",
+      "distribution": "bundled",
+      "usage": "JPEG XL dependency",
+      "version": null,
+      "revision": "58b52a717469e62b2d9b8eaa2f5dddb44d4a4cbf",
+      "evidence": [
+        "app/Vendor/Package.resolved",
+        "app/scripts/encoder-notices.py"
+      ],
+      "notices": [
+        {
+          "path": "credits/highway/LICENSE"
+        },
+        {
+          "path": "credits/highway/LICENSE-BSD3"
+        }
+      ]
+    },
+    {
+      "id": "lcms",
+      "name": "Little CMS",
+      "license": "MIT",
+      "projectURL": "https://github.com/mm2/Little-CMS",
+      "licenseURL": "https://github.com/mm2/Little-CMS/blob/65c63bf549d78253c14b30b3d62cb668bbbe612c/COPYING",
+      "distribution": "bundled",
+      "usage": "JPEG XL dependency",
+      "version": null,
+      "revision": "65c63bf549d78253c14b30b3d62cb668bbbe612c",
+      "evidence": [
+        "app/Vendor/Package.resolved",
+        "app/scripts/encoder-notices.py"
+      ],
+      "notices": [
+        {
+          "path": "credits/lcms/AUTHORS",
+          "encoding": "iso-8859-1"
+        },
+        {
+          "path": "credits/lcms/COPYING"
+        }
+      ]
+    },
+    {
+      "id": "libwebp-xcode",
+      "name": "libwebp-Xcode",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/SDWebImage/libwebp-Xcode",
+      "licenseURL": "https://github.com/SDWebImage/libwebp-Xcode/blob/2b5256c29ff4e20f2a0d5ee863b62b1a22144434/LICENSE",
+      "distribution": "build-wrapper",
+      "usage": "SwiftPM packaging for the native encoder",
+      "version": "1.6.0",
+      "revision": "2b5256c29ff4e20f2a0d5ee863b62b1a22144434",
+      "evidence": [
+        "app/Vendor/Package.resolved"
+      ],
+      "notices": [
+        {
+          "path": "credits/libwebp-xcode/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "libjxl-xcode",
+      "name": "libjxl-Xcode",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/SDWebImage/libjxl-Xcode",
+      "licenseURL": "https://github.com/libjxl/libjxl/blob/91e935dad222b22e7e12eb452f62fe0be3e70b62/LICENSE",
+      "distribution": "build-wrapper",
+      "usage": "SwiftPM packaging for the native encoder",
+      "version": "0.10.4",
+      "revision": "069adca6bbe953b52e969d024406781d70ce93ff",
+      "evidence": [
+        "app/Vendor/Package.resolved"
+      ],
+      "notices": [
+        {
+          "path": "credits/libjxl-xcode/LICENSE"
+        }
+      ],
+      "notes": "Wrapper README declares BSD-3-Clause and refers to the native libjxl licence; no separate wrapper licence file."
+    },
+    {
+      "id": "sqlite",
+      "name": "SQLite",
+      "license": "Public domain",
+      "projectURL": "https://sqlite.org/",
+      "licenseURL": "https://sqlite.org/copyright.html",
+      "distribution": "system",
+      "usage": "System SQLite used by GRDB",
+      "version": "Provided by macOS",
+      "revision": null,
+      "evidence": [
+        "app/Package.swift"
+      ],
+      "notices": [
+        {
+          "path": "credits/sqlite/NOTICE"
+        }
+      ],
+      "notes": "Not redistributed as a separate Ceviche library. Notice extracted from the local macOS SDK header; runtime version depends on macOS."
+    },
+    {
+      "id": "zlib",
+      "name": "zlib",
+      "license": "Zlib",
+      "projectURL": "https://zlib.net/",
+      "licenseURL": "https://zlib.net/zlib_license.html",
+      "distribution": "system",
+      "usage": "System Deflate compression used by CDNG",
+      "version": "Provided by macOS",
+      "revision": null,
+      "evidence": [
+        "app/Package.swift"
+      ],
+      "notices": [
+        {
+          "path": "credits/zlib/NOTICE"
+        }
+      ],
+      "notes": "Not redistributed as a separate Ceviche library. Notice extracted from the local macOS SDK header; runtime version depends on macOS."
+    },
+    {
+      "id": "depth-anything",
+      "name": "Depth Anything V2 Small",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/DepthAnything/Depth-Anything-V2",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/models/licenses/Depth-Anything-V2-LICENSE",
+      "distribution": "optional-model",
+      "usage": "Depth masks",
+      "version": "apple/coreml-depth-anything-v2-small@cfef6f6f2a70783dedc0bfae40cecbc2052285d3",
+      "revision": null,
+      "evidence": [
+        "models/MODELS.md",
+        "models/fetch-models.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/depth-anything/Depth-Anything-V2-LICENSE"
+        },
+        {
+          "path": "credits/depth-anything/CHANGES.txt"
+        }
+      ],
+      "notes": "Not bundled in the app. Model-set manifest currently has no published tag; notices accompany model installation.",
+      "modelURL": "https://huggingface.co/apple/coreml-depth-anything-v2-small"
+    },
+    {
+      "id": "detr",
+      "name": "DETR ResNet-50 Panoptic",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/facebookresearch/detr",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/models/licenses/DETR-LICENSE",
+      "distribution": "optional-model",
+      "usage": "Scene masks",
+      "version": "apple/coreml-detr-semantic-segmentation@7c771f8867a479d1441ac5fb0a8de31feea76bb6",
+      "revision": null,
+      "evidence": [
+        "models/MODELS.md",
+        "models/fetch-models.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/detr/DETR-LICENSE"
+        }
+      ],
+      "notes": "Not bundled in the app. Model-set manifest currently has no published tag; notices accompany model installation.",
+      "modelURL": "https://huggingface.co/apple/coreml-detr-semantic-segmentation"
+    },
+    {
+      "id": "nafnet",
+      "name": "NAFNet SIDD width32",
+      "license": "MIT AND Apache-2.0",
+      "projectURL": "https://github.com/megvii-research/NAFNet",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/models/licenses/NAFNet-LICENSE",
+      "distribution": "optional-model",
+      "usage": "Denoising; includes BasicSR notices",
+      "version": "SIDD-width32; weight SHA-256 in models/fetch-models.sh",
+      "revision": null,
+      "evidence": [
+        "models/MODELS.md",
+        "models/fetch-models.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/nafnet/NAFNet-LICENSE"
+        }
+      ],
+      "notes": "Not bundled in the app. Model-set manifest currently has no published tag; notices accompany model installation."
+    },
+    {
+      "id": "lama",
+      "name": "Big-LaMa",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/advimman/lama",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/models/licenses/LaMa-LICENSE",
+      "distribution": "optional-model",
+      "usage": "AI fill",
+      "version": "smartywu/big-lama@05cb2be7f8dbe6ca7c6e78f4fc827a4b2baaa4a9",
+      "revision": null,
+      "evidence": [
+        "models/MODELS.md",
+        "models/fetch-models.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/lama/LaMa-LICENSE"
+        }
+      ],
+      "notes": "Not bundled in the app. Model-set manifest currently has no published tag; notices accompany model installation.",
+      "modelURL": "https://huggingface.co/smartywu/big-lama"
+    },
+    {
+      "id": "sky-segmentation",
+      "name": "Sky Segmentation (U²-Net)",
+      "license": "MIT",
+      "projectURL": "https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing",
+      "licenseURL": "https://github.com/ChiChou/Ceviche/blob/main/models/licenses/SkySegmentation-LICENSE",
+      "distribution": "optional-model",
+      "usage": "Sky masks",
+      "version": "skyseg.onnx; SHA-256 in models/fetch-models.sh",
+      "revision": "3ba8c6df1d9ba9ff26f637c7ba9568ac11a9aa7f",
+      "evidence": [
+        "models/MODELS.md",
+        "models/fetch-models.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/sky-segmentation/SkySegmentation-LICENSE"
+        }
+      ],
+      "notes": "Not bundled in the app. The ONNX file is the author's, as mirrored at huggingface.co/JianyuanWang/skyseg (revision above); converted unmodified apart from format and float16 weights. Model-set manifest currently has no published tag; notices accompany model installation."
+    },
+    {
+      "id": "basicsr",
+      "name": "BasicSR",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/XPixelGroup/BasicSR",
+      "licenseURL": "https://github.com/XPixelGroup/BasicSR/blob/master/LICENSE.txt",
+      "distribution": "optional-model",
+      "usage": "Notices included by NAFNet",
+      "version": null,
+      "revision": null,
+      "evidence": [
+        "models/licenses/NAFNet-LICENSE"
+      ],
+      "notices": [
+        {
+          "path": "credits/basicsr/NAFNet-LICENSE"
+        }
+      ],
+      "notes": "Separate credit for BasicSR, whose notice is included in the NAFNet licence file."
+    },
+    {
+      "id": "torch",
+      "name": "PyTorch",
+      "license": "BSD-3-Clause (with additional notices)",
+      "projectURL": "https://github.com/pytorch/pytorch",
+      "licenseURL": "https://github.com/pytorch/pytorch/blob/v2.8.0/LICENSE",
+      "distribution": "build-tool",
+      "usage": "Model conversion only; Python package not shipped in the app",
+      "version": "2.8.0",
+      "revision": null,
+      "evidence": [
+        "models/requirements.txt"
+      ],
+      "notices": [
+        {
+          "path": "credits/torch/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "coremltools",
+      "name": "Core ML Tools",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/apple/coremltools",
+      "licenseURL": "https://github.com/apple/coremltools/blob/8.3/LICENSE.txt",
+      "distribution": "build-tool",
+      "usage": "Model conversion only; Python package not shipped in the app",
+      "version": "8.3.0",
+      "revision": null,
+      "evidence": [
+        "models/requirements.txt"
+      ],
+      "notices": [
+        {
+          "path": "credits/coremltools/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "numpy",
+      "name": "NumPy",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://numpy.org/",
+      "licenseURL": "https://github.com/numpy/numpy/blob/main/LICENSE.txt",
+      "distribution": "build-tool",
+      "usage": "Model conversion only; Python package not shipped in the app",
+      "version": null,
+      "revision": null,
+      "evidence": [
+        "models/requirements.txt"
+      ],
+      "notices": [
+        {
+          "path": "credits/numpy/LICENSE"
+        }
+      ],
+      "notes": "Unpinned requirement. Notice collected from upstream main on 2026-11-03; not an assertion about a resolved build environment."
+    },
+    {
+      "id": "onnx",
+      "name": "ONNX",
+      "license": "Apache-2.0",
+      "projectURL": "https://onnx.ai/",
+      "licenseURL": "https://github.com/onnx/onnx/blob/main/LICENSE",
+      "distribution": "build-tool",
+      "usage": "Model conversion only; Python package not shipped in the app",
+      "version": null,
+      "revision": null,
+      "evidence": [
+        "models/requirements.txt"
+      ],
+      "notices": [
+        {
+          "path": "credits/onnx/LICENSE"
+        }
+      ],
+      "notes": "Unpinned requirement. Notice collected from upstream main on 2026-11-03; not an assertion about a resolved build environment."
+    },
+    {
+      "id": "hald-clut",
+      "name": "Hald CLUT collection",
+      "license": "GPL-3.0 (repository declaration)",
+      "projectURL": "https://github.com/cedeber/hald-clut",
+      "licenseURL": "https://github.com/cedeber/hald-clut/blob/3b3180f82d4dcea1e6e8c5648473539a910d7f49/LICENSE",
+      "distribution": "proposed",
+      "usage": "Film-look PNGs; not bundled",
+      "version": null,
+      "revision": "3b3180f82d4dcea1e6e8c5648473539a910d7f49",
+      "evidence": [],
+      "notices": [
+        {
+          "path": "credits/hald-clut/LICENSE"
+        },
+        {
+          "path": "credits/hald-clut/README.md"
+        }
+      ],
+      "notes": "Collection credits RawTherapee, PictureFX, Fujifilm XTrans III, Apple Photos and Pixelmator Pro. Per-pack provenance is not established by the top-level GPL file alone. Exclude from shipped credits until assets are actually added."
+    },
+    {
+      "id": "fotufilm",
+      "name": "Fotufilm",
+      "license": "Apache-2.0 (engine); CC BY-SA 4.0 (film profiles)",
+      "projectURL": "https://fotufilm.com",
+      "distribution": "bundled",
+      "usage": "Film model and film profiles of the film print",
+      "notices": [
+        {
+          "path": "credits/fotufilm/FOTUFILM-ENGINE-LICENSE.txt"
+        },
+        {
+          "path": "credits/fotufilm/NOTICE"
+        },
+        {
+          "path": "credits/fotufilm/FOTUFILM_LICENSE.txt"
+        },
+        {
+          "path": "credits/fotufilm/FOTUFILM-PROFILES.txt"
+        },
+        {
+          "path": "credits/fotufilm/THIRD_PARTY_NOTICES.md"
+        },
+        {
+          "path": "credits/fotufilm/fotufilm-CHANGES.txt"
+        }
+      ],
+      "evidence": [
+        "app/Sources/FilmPrint",
+        "app/scripts/film-stocks.py"
+      ],
+      "licenseURL": "https://github.com/DhaliwalX/fotufilm-engine/blob/3a789c436716c902654f248166ebb4f580611146/LICENSING.md",
+      "revision": "3a789c436716c902654f248166ebb4f580611146"
+    },
+    {
+      "id": "aces",
+      "name": "Academy Color Encoding System",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/ampas/aces-core",
+      "distribution": "bundled",
+      "usage": "ACES output transform",
+      "notices": [
+        {
+          "path": "credits/aces/ACES-Apache-2.0.txt"
+        }
+      ],
+      "evidence": [
+        "app/scripts/build.sh"
+      ]
+    },
+    {
+      "id": "ocio-aces",
+      "name": "OpenColorIO Config ACES",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES",
+      "distribution": "bundled",
+      "usage": "ACES configuration used to bake the output transform",
+      "notices": [
+        {
+          "path": "credits/ocio-aces/OpenColorIO-Config-ACES-BSD-3-Clause.txt"
+        }
+      ],
+      "evidence": [
+        "app/scripts/build.sh"
+      ]
+    },
+    {
+      "id": "colour",
+      "name": "Colour",
+      "license": "BSD-3-Clause",
+      "projectURL": "https://www.colour-science.org/",
+      "licenseURL": "https://github.com/colour-science/colour/blob/0c6f868c4b5c5ae861f868ba8015be3abf0f92f0/LICENSE",
+      "distribution": "bundled",
+      "usage": "ColorChecker Classic reference values in the app; projector spectrum carried by the film model",
+      "version": "0.4.6",
+      "evidence": [
+        "app/Sources/FilmPrint/Model/Illuminant.swift",
+        "app/Sources/CevicheCore/ChartProfile/ChartColour.swift"
+      ],
+      "notices": [
+        {
+          "path": "credits/colour/LICENSE"
+        },
+        {
+          "path": "credits/colour/SOURCE.txt"
+        }
+      ],
+      "revision": "0c6f868c4b5c5ae861f868ba8015be3abf0f92f0"
+    },
+    {
+      "id": "emulsion-presets",
+      "name": "EmulsionPresets",
+      "license": "MIT",
+      "projectURL": "https://github.com/peva3/EmulsionPresets",
+      "licenseURL": "https://github.com/peva3/EmulsionPresets/blob/0cdb71c60603867a046bc92c63617feec7894dd1/LICENSE",
+      "distribution": "bundled",
+      "usage": "Film presets in the Looks tab's Built-in folder",
+      "revision": "0cdb71c60603867a046bc92c63617feec7894dd1",
+      "evidence": [
+        "presets/fetch-presets.sh",
+        "app/scripts/xcode-phase.sh"
+      ],
+      "notices": [
+        {
+          "path": "credits/emulsion-presets/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "alibaba-blemish",
+      "name": "Alibaba ModelScope skin retouching",
+      "license": "Apache-2.0",
+      "projectURL": "https://modelscope.cn/models/iic/cv_unet_skin_retouching_torch",
+      "licenseURL": "https://github.com/modelscope/modelscope/blob/master/LICENSE",
+      "distribution": "optional-model",
+      "usage": "Find blemishes and Even tone models",
+      "revision": "30ddc0087d8dbfc4e7605dfd93f043c087858d0b",
+      "evidence": [
+        "models/convert_blemish.py",
+        "models/convert_skin_tone.py",
+        "models/MODELS.md"
+      ],
+      "notices": [
+        {
+          "path": "credits/alibaba-blemish/LICENSE"
+        },
+        {
+          "path": "credits/alibaba-blemish/CHANGES.txt"
+        }
+      ]
+    },
+    {
+      "id": "mediapipe-selfie-multiclass",
+      "name": "MediaPipe Selfie Multiclass segmentation",
+      "license": "Apache-2.0",
+      "projectURL": "https://ai.google.dev/edge/mediapipe/solutions/vision/image_segmenter",
+      "licenseURL": "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Multiclass%20Segmentation.pdf",
+      "distribution": "bundled",
+      "usage": "People masks model",
+      "revision": "1",
+      "evidence": [
+        "models/convert_people_parts.py",
+        "models/MODELS.md"
+      ],
+      "notices": [
+        {
+          "path": "credits/mediapipe-selfie-multiclass/LICENSE"
+        },
+        {
+          "path": "credits/mediapipe-selfie-multiclass/CHANGES.txt"
+        }
+      ]
+    },
+    {
+      "id": "mediapipe-face-landmarker",
+      "name": "MediaPipe Face Landmarker face mesh",
+      "license": "Apache-2.0",
+      "projectURL": "https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker",
+      "licenseURL": "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20MediaPipe%20Face%20Mesh%20V2.pdf",
+      "distribution": "bundled",
+      "usage": "Face mesh model for People masks",
+      "revision": "1",
+      "evidence": [
+        "models/convert_face_mesh.py",
+        "models/tflite_mil.py",
+        "models/MODELS.md"
+      ],
+      "notices": [
+        {
+          "path": "credits/mediapipe-face-landmarker/LICENSE"
+        },
+        {
+          "path": "credits/mediapipe-face-landmarker/CHANGES.txt"
+        }
+      ]
+    },
+    {
+      "id": "opencv-sface",
+      "name": "OpenCV Zoo SFace",
+      "license": "Apache-2.0",
+      "projectURL": "https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface",
+      "licenseURL": "https://github.com/opencv/opencv_zoo/blob/main/models/face_recognition_sface/LICENSE",
+      "distribution": "bundled",
+      "usage": "Face recognition model for People on the Faces wall",
+      "revision": "ba91a3b9",
+      "evidence": [
+        "models/convert_sface.py",
+        "models/MODELS.md"
+      ],
+      "notices": [
+        {
+          "path": "credits/opencv-sface/LICENSE"
+        },
+        {
+          "path": "credits/opencv-sface/CHANGES.txt"
+        }
+      ]
+    }
+  ]
+}

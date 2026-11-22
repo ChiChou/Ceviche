@@ -1,0 +1,26 @@
+Colour data in Ceviche
+======================
+
+Verified 2026-11-13 against Colour v0.4.6, commit
+0c6f868c4b5c5ae861f868ba8015be3abf0f92f0:
+https://github.com/colour-science/colour/blob/0c6f868c4b5c5ae861f868ba8015be3abf0f92f0/colour/characterisation/datasets/colour_checkers/chromaticity_coordinates.py
+
+The source module declares BSD-3-Clause; the accompanying LICENSE is Colour's
+copyright and permission notice. The 24 L*a*b* triples in
+DATA_COLORCHECKER24_AFTER_NOV2014_CIE_LAB match Ceviche's values exactly, in order.
+Colour attributes these reference values to X-Rite (2016), "New color
+specifications for ColorChecker SG and Classic Charts", for the ColorChecker
+Classic formulation after November 2014. This records Colour's declaration
+and attribution, not an independently obtained licence from X-Rite.
+
+Local copy:
+- app/Sources/CevicheCore/ChartProfile/ChartColour.swift
+
+Changes: the NumPy array literals are expressed as Swift SIMD vectors; the
+reference values and their ordering are unchanged. Ceviche computes XYZ and
+rendering values from those references in its own colour pipeline. Other
+Colour datasets in that source module, including BabelColor, are not copied.
+
+Fotufilm also carries a Colour projector spectrum. Its provenance is recorded
+in ../fotufilm/THIRD_PARTY_NOTICES.md. This notice adds the direct chart-table
+use that is separate from that dependency.

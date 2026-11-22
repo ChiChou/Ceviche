@@ -1,0 +1,21 @@
+Ceviche {{VERSION}}
+
+INSTALLAZIONE
+1. Sposta Ceviche.app in Applicazioni.
+[[unnotarized]]
+   Ceviche non è ancora notarizzato, quindi macOS lo blocca dopo il download. Apri Terminale ed esegui:
+     xattr -rc /Applications/Ceviche.app
+[[/unnotarized]]
+2. Apri Ceviche, scegli Ceviche › Impostazioni… › Modelli e fai clic su Scarica tutto. Fino ad allora gli strumenti che usano un
+   modello lo chiedono.
+[[models]]
+   Senza internet, decomprimi invece {{MODELS}} e copia tutto il contenuto della sua cartella Models in
+   ~/Library/Application Support/Ceviche/Models (Finder: Vai › Vai alla cartella…; crea la cartella Models se non
+   c'è), poi riapri Ceviche.
+[[/models]]
+
+I preset sono integrati: pannello Rese cromatiche › Predefiniti › Integrato.
+
+AGGIORNARE
+Sostituisci Ceviche.app allo stesso modo. Modelli, cataloghi, impostazioni e le tue rese cromatiche
+restano.
