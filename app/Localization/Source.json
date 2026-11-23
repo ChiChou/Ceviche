@@ -514,7 +514,7 @@
   {
     "key": "%1$@ faces to group",
     "source": "\"\\(model.peopleStatus.waiting.formatted()) faces to group\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:180"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:189"
   },
   {
     "key": "%1$@ failed",
@@ -1017,9 +1017,9 @@
       "Sources/CevicheMac/Catalog/ArchiveViews.swift:51",
       "Sources/CevicheMac/Catalog/CatalogModel.swift:279",
       "Sources/CevicheMac/Catalog/LatentDetailView.swift:56",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:128",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:293",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:462",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:137",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:311",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:494",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:451",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:9",
       "Sources/CevicheMac/Export/ExportSession.swift:125",
@@ -1213,10 +1213,10 @@
   {
     "key": "%1$@ photos not analyzed yet",
     "source": "\"\\(unanalysed.formatted()) photos not analyzed yet\"",
-    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:73",
+    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:75",
     "uses": [
-      "Sources/CevicheMac/Catalog/FaceWallView.swift:73",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:183"
+      "Sources/CevicheMac/Catalog/FaceWallView.swift:75",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:192"
     ]
   },
   {
@@ -1744,7 +1744,7 @@
   {
     "key": "1 face to group",
     "source": "\"1 face to group\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:180"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:189"
   },
   {
     "key": "1 frame moved back, %1$@ %% crop",
@@ -1808,9 +1808,9 @@
     "uses": [
       "Sources/CevicheMac/Catalog/ArchiveViews.swift:51",
       "Sources/CevicheMac/Catalog/LatentDetailView.swift:56",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:128",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:293",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:462",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:137",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:311",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:494",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:360"
     ]
   },
@@ -1873,10 +1873,10 @@
   {
     "key": "1 photo not analyzed yet",
     "source": "\"1 photo not analyzed yet\"",
-    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:73",
+    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:75",
     "uses": [
-      "Sources/CevicheMac/Catalog/FaceWallView.swift:73",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:183"
+      "Sources/CevicheMac/Catalog/FaceWallView.swift:75",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:192"
     ]
   },
   {
@@ -2345,7 +2345,7 @@
   {
     "key": "Add Name",
     "source": "\"Add Name\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:289"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:307"
   },
   {
     "key": "Add Selected Photos",
@@ -2619,10 +2619,10 @@
   {
     "key": "All Faces",
     "source": "\"All Faces\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:65",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:66",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:65",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:96",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:66",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:97",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:339"
     ]
   },
@@ -3230,15 +3230,15 @@
   {
     "key": "Back to Map",
     "source": "\"Back to Map\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:459"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:491"
   },
   {
     "key": "Back to People",
     "source": "\"Back to People\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:287",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:305",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:287",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:325"
+      "Sources/CevicheMac/Catalog/PeopleView.swift:305",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:343"
     ]
   },
   {
@@ -3998,8 +3998,8 @@
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:87",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:96",
       "Sources/CevicheMac/Catalog/LocationPicker.swift:81",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:77",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:83",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:78",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:84",
       "Sources/CevicheMac/Components/FileChooser.swift:92",
       "Sources/CevicheMac/Components/ToolChrome.swift:73",
       "Sources/CevicheMac/Editor/DustSection.swift:25",
@@ -8033,10 +8033,10 @@
   {
     "key": "Face",
     "source": "\"Face\"",
-    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:115",
+    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:122",
     "uses": [
-      "Sources/CevicheMac/Catalog/FaceWallView.swift:115",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:386",
+      "Sources/CevicheMac/Catalog/FaceWallView.swift:122",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:413",
       "Sources/CevicheCore/Analysis/BundledModels.swift:104",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:30",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:31",
@@ -8102,7 +8102,7 @@
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:366",
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:367",
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:484",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:296",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:314",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:644"
     ]
   },
@@ -8947,7 +8947,7 @@
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:270",
       "Sources/CevicheMac/App/ModelManagerView.swift:277",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:477"
+      "Sources/CevicheMac/Catalog/PeopleView.swift:509"
     ]
   },
   {
@@ -10547,12 +10547,12 @@
   {
     "key": "Its %1$@ faces stay out of People until you move them.",
     "source": "\"Its \\(summary.faces) faces stay out of People until you move them.\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:85"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:86"
   },
   {
     "key": "Its face stays out of People until you move it.",
     "source": "\"Its face stays out of People until you move it.\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:85"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:86"
   },
   {
     "key": "Its saved edits come from an earlier version of Ceviche and can’t be read (%1$@).",
@@ -11740,7 +11740,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:205",
       "Sources/CevicheMac/Catalog/CatalogModel.swift:167",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:202",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:459"
+      "Sources/CevicheMac/Catalog/PeopleView.swift:491"
     ]
   },
   {
@@ -12028,9 +12028,9 @@
   {
     "key": "Merge",
     "source": "\"Merge\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:76",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:77",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:76",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:77",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:102",
       "Sources/CevicheMac/Tools/BestFacesView.swift:174",
       "Sources/CevicheMac/Tools/BestFacesView.swift:197",
@@ -12044,7 +12044,7 @@
   {
     "key": "Merge %1$@ People",
     "source": "\"Merge \\(selection.count) People\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:145"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:154"
   },
   {
     "key": "Merge Best Faces…",
@@ -12059,7 +12059,7 @@
   {
     "key": "Merge People?",
     "source": "\"Merge People?\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:75"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:76"
   },
   {
     "key": "Merge Pixel Shift…",
@@ -12456,7 +12456,7 @@
   {
     "key": "Move To",
     "source": "\"Move To\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:401"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:428"
   },
   {
     "key": "Move earlier",
@@ -12591,7 +12591,7 @@
       "Sources/CevicheMac/App/WelcomeView.swift:241",
       "Sources/CevicheMac/App/WelcomeView.swift:371",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:70",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:114",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:124",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:78",
       "Sources/CevicheMac/Export/WatermarkEditor.swift:61",
       "Sources/CevicheMac/Tools/ChartProfileDialog.swift:207",
@@ -12613,7 +12613,7 @@
   {
     "key": "Name…",
     "source": "\"Name…\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:143"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:152"
   },
   {
     "key": "Narrow",
@@ -12720,7 +12720,7 @@
   {
     "key": "New Person",
     "source": "\"New Person\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:404"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:431"
   },
   {
     "key": "New Snapshot…",
@@ -12915,7 +12915,7 @@
   {
     "key": "No Date",
     "source": "\"No Date\"",
-    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:37"
+    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:38"
   },
   {
     "key": "No Faces",
@@ -13800,7 +13800,7 @@
       "Sources/CevicheMac/App/WelcomeView.swift:218",
       "Sources/CevicheMac/App/WelcomeView.swift:403",
       "Sources/CevicheMac/App/WelcomeView.swift:417",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:142",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:151",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:24",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:55",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:58"
@@ -13829,7 +13829,7 @@
   {
     "key": "Open Photo",
     "source": "\"Open Photo\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:398"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:425"
   },
   {
     "key": "Open Read-Only",
@@ -14295,8 +14295,8 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:205",
       "Sources/CevicheMac/Catalog/CatalogModel.swift:167",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:203",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:287",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:325",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:305",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:343",
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:32",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:57",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:174",
@@ -14317,7 +14317,7 @@
   {
     "key": "People needs a model that is not installed.",
     "source": "\"People needs a model that is not installed.\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:476"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:508"
   },
   {
     "key": "People on the Faces wall",
@@ -14462,7 +14462,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:510",
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:29",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:296"
+      "Sources/CevicheMac/Catalog/PeopleView.swift:314"
     ]
   },
   {
@@ -15813,7 +15813,7 @@
   {
     "key": "Remove %1$@ Faces from Person",
     "source": "\"Remove \\(count) Faces from Person\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:407"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:434"
   },
   {
     "key": "Remove %1$@ Flagged",
@@ -16006,7 +16006,7 @@
   {
     "key": "Remove from Person",
     "source": "\"Remove from Person\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:407"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:434"
   },
   {
     "key": "Remove from Sky",
@@ -16100,9 +16100,9 @@
   {
     "key": "Rename…",
     "source": "\"Rename…\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:143",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:152",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:143",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:152",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:92",
       "Sources/CevicheMac/Editor/MaskPanel.swift:107"
     ]
@@ -17348,7 +17348,7 @@
     "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:269",
     "uses": [
       "Sources/CevicheMac/Catalog/ActivityCenter.swift:269",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:295",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:313",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:151"
     ]
   },
@@ -19069,9 +19069,9 @@
   {
     "key": "The original isn’t available.",
     "source": "\"The original isn’t available.\"",
-    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:190",
+    "context": "Sources/CevicheMac/Catalog/FaceWallView.swift:221",
     "uses": [
-      "Sources/CevicheMac/Catalog/FaceWallView.swift:190",
+      "Sources/CevicheMac/Catalog/FaceWallView.swift:221",
       "Sources/CevicheMac/Tools/ChartProfileDialog.swift:101",
       "Sources/CevicheMac/Tools/FiltersModel.swift:167",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:82"
@@ -19385,12 +19385,12 @@
   {
     "key": "Their faces become one person.",
     "source": "\"Their faces become one person.\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:195"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:204"
   },
   {
     "key": "Their faces become “%1$@”.",
     "source": "\"Their faces become “\\(name)”.\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:194"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:203"
   },
   {
     "key": "There isn’t enough disk space to stack these photos.",
@@ -20354,8 +20354,8 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:304",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:304",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:82",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:153",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:83",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:162",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:201",
       "Sources/CevicheMac/Culling/CatalogModel+Culling.swift:107"
     ]
@@ -20373,15 +20373,15 @@
   {
     "key": "Ungroup?",
     "source": "\"Ungroup?\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:81"
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:82"
   },
   {
     "key": "Ungrouped",
     "source": "\"Ungrouped\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:60",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:61",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:60",
-      "Sources/CevicheMac/Catalog/PeopleView.swift:95"
+      "Sources/CevicheMac/Catalog/PeopleView.swift:61",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:96"
     ]
   },
   {
@@ -20433,9 +20433,9 @@
   {
     "key": "Unnamed",
     "source": "\"Unnamed\"",
-    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:127",
+    "context": "Sources/CevicheMac/Catalog/PeopleView.swift:136",
     "uses": [
-      "Sources/CevicheMac/Catalog/PeopleView.swift:127",
+      "Sources/CevicheMac/Catalog/PeopleView.swift:136",
       "Sources/CevicheCore/XMP/XMPStructures.swift:79"
     ]
   },

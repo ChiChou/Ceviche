@@ -25,6 +25,7 @@ struct PeopleView: View {
     @State private var ungrouping: Summary?
     @FocusState private var focused: Bool
     @FocusState private var nameFocused: Bool
+    @State private var width: CGFloat = 0
 
     static let ungrouped = "ungrouped"
     static let allFaces = "allFaces"
@@ -96,9 +97,17 @@ struct PeopleView: View {
                 if let first = entries.first { collectionCard(Self.allFaces, title: L10n.tr("All Faces"), count: entries.count, cover: first, symbol: "square.grid.3x3") }
             }.padding(14)
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
         .focusable().focused($focused).focusEffectDisabled()
         .onKeyPress(.return) { if let focus { open(focus) }; return .handled }
-        .onKeyPress(keys: [.leftArrow, .rightArrow], phases: [.down, .repeat]) { press in move(by: press.key == .leftArrow ? -1 : 1); return .handled }
+        .onKeyPress(keys: [.leftArrow, .rightArrow, .upArrow, .downArrow], phases: [.down, .repeat]) { press in
+            guard !press.modifiers.contains(.command) else { return .ignored }
+            switch press.key {
+            case .leftArrow, .rightArrow: move(by: press.key == .leftArrow ? -1 : 1)
+            default: move(rows: press.key == .upArrow ? -1 : 1)
+            }
+            return .handled
+        }
         .onAppear { focused = true }
         .onTapGesture { chosen = []; focus = nil }
     }
@@ -108,6 +117,7 @@ struct PeopleView: View {
         return VStack(alignment: .leading, spacing: 5) {
             FaceWallTile(entry: summary.cover, previews: model.previews, cropsThumbnail: assets[summary.cover.assetID]?.lastEditedAt == nil)
                 .aspectRatio(1, contentMode: .fit).clipped()
+                .countBadge(summary.photos)
                 .selectionRing(highlighted ? Theme.accent : nil)
             HStack(spacing: 6) {
                 if renaming == summary.id {
@@ -118,7 +128,6 @@ struct PeopleView: View {
                     Text(name).lineLimit(1).truncationMode(.tail)
                 }
                 Spacer(minLength: 0)
-                Text(summary.photos.formatted()).monospacedDigit().foregroundStyle(.secondary)
             }.font(.callout).frame(height: 18)
         }
         .contentShape(Rectangle())
@@ -159,11 +168,11 @@ struct PeopleView: View {
             FaceWallTile(entry: cover, previews: model.previews, cropsThumbnail: assets[cover.assetID]?.lastEditedAt == nil)
                 .aspectRatio(1, contentMode: .fit).clipped().opacity(0.45)
                 .overlay { Image(systemName: symbol).font(.title.weight(.light)).foregroundStyle(.white.opacity(0.85)) }
+                .countBadge(count)
                 .selectionRing(focus == id ? Theme.accent : nil)
             HStack(spacing: 6) {
                 Text(title).foregroundStyle(.secondary)
                 Spacer(minLength: 0)
-                Text(count.formatted()).monospacedDigit().foregroundStyle(.secondary)
             }.font(.callout).frame(height: 18)
         }
         .contentShape(Rectangle())
@@ -203,11 +212,20 @@ struct PeopleView: View {
         if chosen.contains(id) { chosen.remove(id) } else { chosen.insert(id) }
         focus = id
     }
+    private var cardIDs: [String] {
+        summaries.map(\.id) + (ungroupedEntries.isEmpty ? [] : [Self.ungrouped]) + (entries.isEmpty ? [] : [Self.allFaces])
+    }
     private func move(by step: Int) {
-        let ids = summaries.map(\.id) + (ungroupedEntries.isEmpty ? [] : [Self.ungrouped]) + (entries.isEmpty ? [] : [Self.allFaces])
+        let ids = cardIDs
         guard !ids.isEmpty else { return }
         let index = focus.flatMap { ids.firstIndex(of: $0) }.map { $0 + step } ?? 0
         choose(ids[min(max(0, index), ids.count - 1)])
+    }
+    private func move(rows: Int) {
+        let ids = cardIDs
+        guard let current = focus.flatMap({ ids.firstIndex(of: $0) }) else { move(by: 0); return }
+        let columns = FaceGridLayout.columns(width: width - 28, side: side, spacing: 14)
+        choose(ids[FaceGridLayout.index(from: current, rows: rows, sections: [ids.count], columns: columns)])
     }
     private func open(_ id: String) {
         renaming = nil
@@ -347,6 +365,7 @@ struct PeopleFaceGrid: View {
     @State private var selection: Set<String> = []
     @State private var anchor: String?
     @State private var loupe: CatalogFaceEntry?
+    @State private var width: CGFloat = 0
     @FocusState private var focused: Bool
     private var side: CGFloat { (model.tileSize * 0.6).rounded() }
 
@@ -356,6 +375,7 @@ struct PeopleFaceGrid: View {
                 ForEach(entries) { tile($0) }
             }.padding(12)
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
         .overlay { if let loupe { FaceLoupe(entry: loupe, asset: assets[loupe.assetID], root: model.root) { self.loupe = nil } } }
         .focusable().focused($focused).focusEffectDisabled()
         .onKeyPress(.space) { if let current = anchorEntry { loupe = loupe == nil ? current : nil }; return .handled }
@@ -365,7 +385,14 @@ struct PeopleFaceGrid: View {
             return .ignored
         }
         .onKeyPress(.return) { if let current = anchorEntry, let asset = assets[current.assetID] { model.develop(asset, editor: editor) }; return .handled }
-        .onKeyPress(keys: [.leftArrow, .rightArrow], phases: [.down, .repeat]) { press in move(by: press.key == .leftArrow ? -1 : 1); return .handled }
+        .onKeyPress(keys: [.leftArrow, .rightArrow, .upArrow, .downArrow], phases: [.down, .repeat]) { press in
+            guard !press.modifiers.contains(.command) else { return .ignored }
+            switch press.key {
+            case .leftArrow, .rightArrow: move(by: press.key == .leftArrow ? -1 : 1)
+            default: moveRow(by: press.key == .upArrow ? -1 : 1)
+            }
+            return .handled
+        }
         .onAppear { focused = true }
         .onChange(of: entries.map(\.id)) { _, ids in selection.formIntersection(ids) }
     }
@@ -426,6 +453,11 @@ struct PeopleFaceGrid: View {
         let index = anchor.flatMap { id in entries.firstIndex { $0.id == id } }.map { $0 + step } ?? 0
         choose(entries[min(max(0, index), entries.count - 1)])
     }
+    private func moveRow(by rows: Int) {
+        guard let index = anchor.flatMap({ id in entries.firstIndex { $0.id == id } }) else { move(by: 0); return }
+        let columns = FaceGridLayout.columns(width: width - 24, side: side, spacing: 2)
+        choose(entries[FaceGridLayout.index(from: index, rows: rows, sections: [entries.count], columns: columns)])
+    }
     private func assign(_ keys: [CatalogFaceKey], to person: String?) {
         guard let store = model.store else { return }
         Task {
@@ -478,5 +510,15 @@ struct PeopleModelPrompt: View {
         }
         .font(.caption).foregroundStyle(.secondary)
         .padding(.horizontal, 10).padding(.vertical, 5).background(.regularMaterial, in: Capsule()).padding(10)
+    }
+}
+
+private extension View {
+    /// How many photos, in a small dark badge in the tile's corner: readable on any face, in either appearance.
+    func countBadge(_ count: Int) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            Text(count.formatted()).font(.caption2.weight(.semibold)).monospacedDigit().foregroundStyle(.white)
+                .padding(.horizontal, 5).padding(.vertical, 1.5).background(.black.opacity(0.55), in: Capsule()).padding(4)
+        }
     }
 }

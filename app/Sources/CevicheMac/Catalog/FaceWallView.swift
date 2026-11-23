@@ -15,6 +15,7 @@ struct FaceWallView: View {
     @State private var unanalysed = 0
     @State private var focus: String?
     @State private var loupe: CatalogFaceEntry?
+    @State private var width: CGFloat = 0
     @FocusState private var focused: Bool
 
     private struct Section: Identifiable {
@@ -58,6 +59,7 @@ struct FaceWallView: View {
                     }
                 }.padding(.horizontal, 12).padding(.bottom, 12)
             }
+            .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
             .onChange(of: focus) { _, id in if let id { withAnimation(.easeOut(duration: 0.15)) { proxy.scrollTo(id) } } }
             .onChange(of: model.dateJump) { _, request in
                 // The month's first face, or the nearest day's when it has none.
@@ -80,8 +82,13 @@ struct FaceWallView: View {
         .onKeyPress(.space) { if let current = focusedEntry { loupe = loupe == nil ? current : nil }; return .handled }
         .onKeyPress(.escape) { guard loupe != nil else { return .ignored }; loupe = nil; return .handled }
         .onKeyPress(.return) { if let current = focusedEntry, let asset = assets[current.assetID] { model.develop(asset, editor: editor) }; return .handled }
-        .onKeyPress(keys: [.leftArrow, .rightArrow], phases: [.down, .repeat]) { press in
-            move(by: press.key == .leftArrow ? -1 : 1); return .handled
+        .onKeyPress(keys: [.leftArrow, .rightArrow, .upArrow, .downArrow], phases: [.down, .repeat]) { press in
+            guard !press.modifiers.contains(.command) else { return .ignored }
+            switch press.key {
+            case .leftArrow, .rightArrow: move(by: press.key == .leftArrow ? -1 : 1)
+            default: moveRow(by: press.key == .upArrow ? -1 : 1)
+            }
+            return .handled
         }
         .onAppear { focused = true }
         .task(id: LoadKey(filter: model.filter, analysed: analysis.status.complete / 25)) { await load() }
@@ -128,6 +135,11 @@ struct FaceWallView: View {
         let index = focus.flatMap { id in entries.firstIndex { $0.id == id } }.map { $0 + step } ?? 0
         choose(entries[min(max(0, index), entries.count - 1)])
     }
+    private func moveRow(by rows: Int) {
+        guard let index = focus.flatMap({ id in entries.firstIndex { $0.id == id } }) else { move(by: 0); return }
+        let columns = FaceGridLayout.columns(width: width - 24, side: side, spacing: 2)
+        choose(entries[FaceGridLayout.index(from: index, rows: rows, sections: sections.map(\.entries.count), columns: columns)])
+    }
 
     private func load() async {
         guard let store = model.store else { return }
@@ -169,6 +181,25 @@ struct FaceWallTile: View {
     static func decode(_ data: Data) -> CGImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         return CGImageSourceCreateImageAtIndex(source, 0, nil)
+    }
+}
+
+/// Rows of the face grids, as an adaptive `LazyVGrid` lays them out (each section starts a row), for the up and down arrows.
+enum FaceGridLayout {
+    static func columns(width: CGFloat, side: CGFloat, spacing: CGFloat) -> Int {
+        max(1, Int(((width + spacing) / (side + spacing)).rounded(.down)))
+    }
+    /// The tile `rows` rows from `index`, in the same column, or the last of a shorter row; the ends stop it.
+    static func index(from index: Int, rows: Int, sections: [Int], columns: Int) -> Int {
+        var ranges: [Range<Int>] = []
+        var start = 0
+        for count in sections {
+            for row in stride(from: start, to: start + count, by: columns) { ranges.append(row..<min(row + columns, start + count)) }
+            start += count
+        }
+        guard let current = ranges.firstIndex(where: { $0.contains(index) }) else { return index }
+        let target = ranges[min(max(0, current + rows), ranges.count - 1)]
+        return min(target.lowerBound + index - ranges[current].lowerBound, target.upperBound - 1)
     }
 }
 
