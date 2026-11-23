@@ -20,8 +20,11 @@ public enum FaceFinder {
     /// The faces in the photo at `url`, left to right, in fractions of the upright photo from its top left.
     /// `scene` adds the people only the scene model sees (small, defocused, turned away); it is the slowest part.
     public static func faces(at url: URL, scene: Bool = true) throws -> [PhotoQualityReport.Face] {
+        // Drawn once into a plain bitmap: ImageIO decodes HEIF lazily into an IOSurface, and drawing crops of its
+        // 10-bit surfaces read past their end and crashed (Check Faces on HEIF photos).
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-              let image = ImageDecode.analysisImage(source, url: url, pixelSize: pixelSize, minimum: pixelSize)
+              let decoded = ImageDecode.analysisImage(source, url: url, pixelSize: pixelSize, minimum: pixelSize),
+              let image = resized(decoded, scale: 1)
         else { throw CocoaError(.fileReadCorruptFile) }
         return try faces(in: image, scene: scene ? try? BundledModelCache.shared.model(.scene) : nil)
     }
