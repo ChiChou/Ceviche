@@ -17,6 +17,9 @@ struct CatalogSearchBar: View {
     @State private var scales = Scales()
     @State private var tokens: [CatalogSearchToken] = []
     @State private var text = ""
+    /// The tags offered while the field is empty: the most used, or all of them.
+    @State private var tags: [CatalogSearchSuggestion] = []
+    @State private var allTags = false
     /// Watches for Backspace while the field is focused; the field's editor takes the key before SwiftUI sees it.
     @State private var backspaceMonitor: Any?
     private enum Chip: Hashable { case rating, review, label, focal, exposure(CatalogExposureScale), flash, orientation, faces, token(CatalogSearchToken) }
@@ -35,6 +38,13 @@ struct CatalogSearchBar: View {
             query == other.query && root == other.root && area == other.area && focused == other.focused
         }
     }
+    private struct TagsRequest: Hashable {
+        let root: URL?
+        let area: CatalogArea
+        let generation: Int64
+        let all: Bool
+        let focused: Bool
+    }
     private struct ScalesRequest: Hashable {
         let root: URL?
         let area: CatalogArea
@@ -47,6 +57,13 @@ struct CatalogSearchBar: View {
     }
     private var showingSuggestions: Bool {
         searchFocused && dismissedQuery != text && !suggestions.isEmpty
+    }
+    private var showingTags: Bool {
+        searchFocused && text.isEmpty && dismissedQuery != text && !offeredTags.isEmpty
+    }
+    /// The tags not already in the search.
+    private var offeredTags: [CatalogSearchSuggestion] {
+        tags.filter { tag in !tokens.contains { $0.source == tag.source && $0.label.caseInsensitiveCompare(tag.tag) == .orderedSame } }
     }
     var body: some View {
         HStack(spacing: 6) {
@@ -96,6 +113,8 @@ struct CatalogSearchBar: View {
                         .shadow(color: .black.opacity(0.3), radius: 8, y: 4)
                         .offset(y: 32)
                         .accessibilityElement(children: .contain).accessibilityLabel(L10n.tr("Search suggestions"))
+                } else if showingTags {
+                    tagPanel.offset(y: 32)
                 }
             }
             Button { showingFilters.toggle() } label: {
@@ -147,6 +166,12 @@ struct CatalogSearchBar: View {
             }
         }
         .onDisappear { if let backspaceMonitor { NSEvent.removeMonitor(backspaceMonitor) } }
+        // Loaded only while the field is focused; the shown list stays until a fresh one replaces it.
+        .task(id: TagsRequest(root: model.store?.root, area: model.filter.area, generation: model.indexing.generation, all: allTags, focused: searchFocused)) {
+            guard searchFocused, let store = model.store else { return }
+            let found = (try? await store.popularTags(area: model.filter.area, limit: allTags ? nil : 40)) ?? []
+            if !Task.isCancelled, found != tags { tags = found }
+        }
         .task(id: request) {
             let snapshot = request
             // Only the catalog changed (an import, new tags): the open list stays up until the fresh one replaces it,
@@ -223,7 +248,7 @@ struct CatalogSearchBar: View {
                 accept(suggestions[selectedIndex ?? 0]); return .handled
             }
             .onKeyPress(.escape) {
-                guard showingSuggestions else { return .ignored }
+                guard showingSuggestions || showingTags else { return .ignored }
                 dismiss(); return .handled
             }
     }
@@ -256,6 +281,34 @@ struct CatalogSearchBar: View {
         case .token(let token):
             CatalogSearchChip(symbol: token.source.symbol, label: token.label, help: token.source.title) { remove(chip) }
         }
+    }
+    private var tagPanel: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text(allTags ? L10n.tr("All Tags") : L10n.tr("Popular Tags")).font(.system(size: 10)).foregroundStyle(.secondary)
+                Spacer()
+                Button(allTags ? L10n.tr("Popular") : L10n.tr("All")) { allTags.toggle() }
+                    .buttonStyle(.plain).font(.system(size: 10)).foregroundStyle(Theme.accent)
+            }.padding(.horizontal, 3)
+            ScrollView {
+                TagFlow(spacing: 4) {
+                    ForEach(offeredTags) { tag in
+                        Button { if let token = CatalogSearchToken(tag.completion) { tokens.append(token) } } label: {
+                            Text(verbatim: tag.tag).lineLimit(1).font(.system(size: 11))
+                                .padding(.horizontal, 7).frame(height: 20)
+                                .background(Theme.ink.opacity(tag.source == .keyword ? 0.14 : 0.07), in: Capsule())
+                                .contentShape(Capsule())
+                        }.buttonStyle(.plain)
+                            .help(tag.source.title + " · " + tag.photoCount.formatted())
+                            .accessibilityLabel(tag.photoCount == 1 ? L10n.tr("\(tag.tag), \(tag.photoCount) photo") : L10n.tr("\(tag.tag), \(tag.photoCount) photos"))
+                    }
+                }.frame(maxWidth: .infinity, alignment: .leading)
+            }.frame(maxHeight: 260)
+        }.padding(8).fixedSize(horizontal: false, vertical: true)
+            .background(Theme.panel, in: RoundedRectangle(cornerRadius: Theme.Radius.card))
+            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.card).strokeBorder(Theme.hairline))
+            .shadow(color: .black.opacity(0.3), radius: 8, y: 4)
+            .accessibilityElement(children: .contain).accessibilityLabel(L10n.tr("Tags"))
     }
     private func moveSelection(_ delta: Int) -> KeyPress.Result {
         guard showingSuggestions else { return .ignored }
@@ -462,6 +515,30 @@ private extension CatalogTagSource {
         case .lens: L10n.tr("Lens")
         case .artist: L10n.tr("Photographer")
         case .exposure: L10n.tr("Exposure")
+        }
+    }
+}
+
+
+/// Tags left to right, wrapping to a new line when the next one doesn't fit.
+private struct TagFlow: Layout {
+    let spacing: CGFloat
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let frames = frames(subviews, width: proposal.width ?? .infinity)
+        return CGSize(width: proposal.width ?? frames.map(\.maxX).max() ?? 0, height: frames.map(\.maxY).max() ?? 0)
+    }
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        for (subview, frame) in zip(subviews, frames(subviews, width: bounds.width)) {
+            subview.place(at: CGPoint(x: bounds.minX + frame.minX, y: bounds.minY + frame.minY), proposal: ProposedViewSize(frame.size))
+        }
+    }
+    private func frames(_ subviews: Subviews, width: CGFloat) -> [CGRect] {
+        var x: CGFloat = 0, y: CGFloat = 0, line: CGFloat = 0
+        return subviews.map { subview in
+            let size = subview.sizeThatFits(ProposedViewSize(width: width, height: nil))
+            if x > 0, x + size.width > width { x = 0; y += line + spacing; line = 0 }
+            defer { x += size.width + spacing; line = max(line, size.height) }
+            return CGRect(origin: CGPoint(x: x, y: y), size: size)
         }
     }
 }

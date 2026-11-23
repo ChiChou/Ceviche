@@ -129,7 +129,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogMapView.swift:67",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogMapView.swift:67",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:486",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:468",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:205",
       "Sources/CevicheMac/Editor/DustSection.swift:49",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:126",
@@ -789,16 +789,16 @@
   {
     "key": "%1$@ needs a model that is not installed.",
     "source": "\"\\(model.feature) needs a model that is not installed.\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:275",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:274",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:275",
+      "Sources/CevicheMac/App/ModelManagerView.swift:274",
       "Sources/CevicheMac/Editor/PortraitToolbar.swift:68"
     ]
   },
   {
     "key": "%1$@ needs a model that is not installed. Install it in Settings › Models.",
     "source": "\"\\(model.feature) needs a model that is not installed. Install it in Settings › Models.\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:272"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:271"
   },
   {
     "key": "%1$@ needs its model.",
@@ -1399,9 +1399,9 @@
   {
     "key": "%1$@ star or more",
     "source": "\"\\(value) star or more\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:234",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:259",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:234",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:259",
       "Sources/CevicheMac/Catalog/CatalogView.swift:126"
     ]
   },
@@ -1417,9 +1417,9 @@
   {
     "key": "%1$@ stars or more",
     "source": "\"\\(value) stars or more\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:234",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:259",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:234",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:259",
       "Sources/CevicheMac/Catalog/CatalogView.swift:126"
     ]
   },
@@ -1553,12 +1553,20 @@
   {
     "key": "%1$@, %2$@ photo",
     "source": "\"\\(suggestion.tag), \\(suggestion.photoCount) photo\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:90"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:107",
+    "uses": [
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:107",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:303"
+    ]
   },
   {
     "key": "%1$@, %2$@ photos",
     "source": "\"\\(suggestion.tag), \\(suggestion.photoCount) photos\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:90"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:107",
+    "uses": [
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:107",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:303"
+    ]
   },
   {
     "key": "%1$@, filtered",
@@ -2200,7 +2208,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:354",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:269",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:68",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:77",
       "Sources/CevicheMac/Editor/EditorInspector.swift:299"
     ]
   },
@@ -2342,7 +2350,7 @@
   {
     "key": "Add Selected Photos",
     "source": "\"Add Selected Photos\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:329"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:311"
   },
   {
     "key": "Add local adjustment",
@@ -2374,9 +2382,9 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:259",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:259",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:294",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:595",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:35",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:35"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:44"
     ]
   },
   {
@@ -2601,6 +2609,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogScaleFilter.swift:112",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogScaleFilter.swift:112",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:290",
       "Sources/CevicheMac/Culling/TidyPairsView.swift:307",
       "Sources/CevicheMac/Editor/EditClipboard.swift:127",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:91",
@@ -2628,6 +2637,11 @@
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:31",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:185"
     ]
+  },
+  {
+    "key": "All Tags",
+    "source": "\"All Tags\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:288"
   },
   {
     "key": "All in %1$@",
@@ -2805,9 +2819,9 @@
   {
     "key": "Aperture",
     "source": "\"Aperture\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:396",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:449",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:396",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:449",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:150"
     ]
   },
@@ -2835,8 +2849,8 @@
       "Sources/CevicheMac/App/PreferencesView.swift:34",
       "Sources/CevicheMac/App/PreferencesView.swift:35",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:45",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:586",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:586"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:568",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:568"
     ]
   },
   {
@@ -3119,7 +3133,7 @@
   {
     "key": "Automatic tag",
     "source": "\"Automatic tag\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:459"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:512"
   },
   {
     "key": "Average",
@@ -3776,7 +3790,7 @@
   {
     "key": "Built in",
     "source": "\"Built in\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:132"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:130"
   },
   {
     "key": "Built-in",
@@ -3837,9 +3851,9 @@
   {
     "key": "Camera",
     "source": "\"Camera\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:461",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:514",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:461",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:514",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:246",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:147",
       "Sources/CevicheMac/Import/CardImportView.swift:41",
@@ -4284,7 +4298,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:358",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:281",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:73"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:82"
     ]
   },
   {
@@ -4316,7 +4330,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:395",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:314",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:87"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:96"
     ]
   },
   {
@@ -4676,14 +4690,14 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:175",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:175",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:321",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:374",
       "Sources/CevicheMac/Catalog/CatalogView.swift:92"
     ]
   },
   {
     "key": "Clear Filters (⌥⌘F)",
     "source": "\"Clear Filters (⌥⌘F)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:321"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:374"
   },
   {
     "key": "Clear Rating (0)",
@@ -4693,7 +4707,7 @@
   {
     "key": "Clear Search",
     "source": "\"Clear Search\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:67"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:84"
   },
   {
     "key": "Clear Sky",
@@ -4913,9 +4927,9 @@
   {
     "key": "Collapse %1$@",
     "source": "\"Collapse \\(title)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:472",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:472",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
       "Sources/CevicheMac/Editor/EditClipboard.swift:225"
     ]
   },
@@ -4927,7 +4941,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:308",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:86",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:87",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:182"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:191"
     ]
   },
   {
@@ -5234,7 +5248,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:357",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:278",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:72"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:81"
     ]
   },
   {
@@ -5306,7 +5320,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:271",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:271",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:54",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:63",
       "Sources/CevicheMac/Editor/EditClipboard.swift:240",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:166"
     ]
@@ -5322,7 +5336,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:269",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:269",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:49",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:58",
       "Sources/CevicheMac/Editor/EditClipboard.swift:122",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:165"
     ]
@@ -5358,7 +5372,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:273",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:273",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:55",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:64",
       "Sources/CevicheMac/Editor/EditClipboard.swift:241",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:167"
     ]
@@ -5418,7 +5432,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/ArchiveViews.swift:22",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:330",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:150"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:159"
     ]
   },
   {
@@ -5877,7 +5891,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:388",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:260",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:113"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:122"
     ]
   },
   {
@@ -5892,7 +5906,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:386",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:258",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:112"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:121"
     ]
   },
   {
@@ -5982,7 +5996,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:353",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:273",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:67"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:76"
     ]
   },
   {
@@ -6092,7 +6106,7 @@
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:329",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:331",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:334",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:84"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:93"
     ]
   },
   {
@@ -6329,7 +6343,7 @@
   {
     "key": "Delete Album…",
     "source": "\"Delete Album…\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:333"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:315"
   },
   {
     "key": "Delete All",
@@ -6525,7 +6539,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:27",
       "Sources/CevicheMac/Catalog/CatalogView.swift:184",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:20",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:29",
       "Sources/CevicheMac/Tools/IDPhotoIssues.swift:15"
     ]
   },
@@ -6777,19 +6791,19 @@
   {
     "key": "Download",
     "source": "\"Download\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:198",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:197",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:198",
-      "Sources/CevicheMac/App/ModelManagerView.swift:203"
+      "Sources/CevicheMac/App/ModelManagerView.swift:197",
+      "Sources/CevicheMac/App/ModelManagerView.swift:202"
     ]
   },
   {
     "key": "Download %1$@",
     "source": "\"Download \\(model.feature)\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:199",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:198",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:199",
-      "Sources/CevicheMac/App/ModelManagerView.swift:204"
+      "Sources/CevicheMac/App/ModelManagerView.swift:198",
+      "Sources/CevicheMac/App/ModelManagerView.swift:203"
     ]
   },
   {
@@ -6981,7 +6995,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:313",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:313",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:144",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:153",
       "Sources/CevicheMac/Editor/MaskPanel.swift:108",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:349"
     ]
@@ -6992,7 +7006,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:313",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:313",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:144"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:153"
     ]
   },
   {
@@ -7139,9 +7153,9 @@
   {
     "key": "Edit In",
     "source": "\"Edit In\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:118",
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:127",
     "uses": [
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:118",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:127",
       "Sources/CevicheMac/Export/EditIn.swift:90",
       "Sources/CevicheMac/Export/EditIn.swift:280",
       "Sources/CevicheMac/Export/ExportButton.swift:55"
@@ -7219,7 +7233,7 @@
   {
     "key": "Edits",
     "source": "\"Edits\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:52"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:61"
   },
   {
     "key": "Edits copied",
@@ -7532,9 +7546,9 @@
   {
     "key": "Expand %1$@",
     "source": "\"Expand \\(title)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:472",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:472",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
       "Sources/CevicheMac/Editor/EditClipboard.swift:225"
     ]
   },
@@ -7546,7 +7560,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:308",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:86",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:87",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:182"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:191"
     ]
   },
   {
@@ -7609,7 +7623,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:104",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:79",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:120"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:129"
     ]
   },
   {
@@ -7618,7 +7632,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:100",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:100",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:117",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:126",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:22"
     ]
   },
@@ -7638,7 +7652,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:104",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:104",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:120"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:129"
     ]
   },
   {
@@ -7695,7 +7709,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:295",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:295",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:125"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:134"
     ]
   },
   {
@@ -7816,8 +7830,8 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:100",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:109",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:171",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:292",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:117",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:593",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:126",
       "Sources/CevicheMac/Export/ExportSession.swift:65",
       "Sources/CevicheMac/Export/ExportSession.swift:129",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:22",
@@ -7827,9 +7841,9 @@
   {
     "key": "Exposure",
     "source": "\"Exposure\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:464",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:517",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:464",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:517",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:161",
       "Sources/CevicheMac/Editor/EditingControls.swift:8",
       "Sources/CevicheMac/Editor/EditorInspector.swift:71",
@@ -8033,12 +8047,12 @@
   {
     "key": "Faces",
     "source": "\"Faces\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:255",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:280",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:255",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:313",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:314",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:431",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:280",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:366",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:367",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:484",
       "Sources/CevicheMac/Catalog/PeopleView.swift:296",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:638"
     ]
@@ -8221,7 +8235,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:214",
       "Sources/CevicheMac/Catalog/PhotoBrowsing.swift:29",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:137",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:146",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:199",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:259",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:270",
@@ -8231,16 +8245,16 @@
   {
     "key": "Filters",
     "source": "\"Filters\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:105",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:124",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:105",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:106"
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:124",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:125"
     ]
   },
   {
     "key": "Filters are on",
     "source": "\"Filters are on\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:105"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:124"
   },
   {
     "key": "Find Again",
@@ -8269,7 +8283,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:393",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:313",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:86"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:95"
     ]
   },
   {
@@ -8455,11 +8469,11 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:250",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:250",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:239",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:275",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:264",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:328",
       "Sources/CevicheMac/Catalog/CatalogView.swift:141",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:19",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:29"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:38"
     ]
   },
   {
@@ -8485,13 +8499,13 @@
   {
     "key": "Flash",
     "source": "\"Flash\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:249",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:274",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:249",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:249",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:299",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:300",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:301",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:274",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:274",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:352",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:353",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:354",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:165"
     ]
   },
@@ -8521,7 +8535,7 @@
   {
     "key": "Focal",
     "source": "\"Focal\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:285"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:338"
   },
   {
     "key": "Focal Length",
@@ -8535,9 +8549,9 @@
   {
     "key": "Focal length",
     "source": "\"Focal length\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:242",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:267",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:242",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:267",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:153",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:555"
     ]
@@ -8545,10 +8559,10 @@
   {
     "key": "Focal length (35 mm equivalent)",
     "source": "\"Focal length (35 mm equivalent)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:286",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:339",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:286",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:287"
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:339",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:340"
     ]
   },
   {
@@ -8578,7 +8592,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:376",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:224",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:97"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:106"
     ]
   },
   {
@@ -8807,10 +8821,10 @@
   {
     "key": "From File…",
     "source": "\"From File…\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:185",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:184",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:185",
-      "Sources/CevicheMac/App/ModelManagerView.swift:186"
+      "Sources/CevicheMac/App/ModelManagerView.swift:184",
+      "Sources/CevicheMac/App/ModelManagerView.swift:185"
     ]
   },
   {
@@ -8874,10 +8888,10 @@
   {
     "key": "Get Model…",
     "source": "\"Get Model…\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:271",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:270",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:271",
-      "Sources/CevicheMac/App/ModelManagerView.swift:278",
+      "Sources/CevicheMac/App/ModelManagerView.swift:270",
+      "Sources/CevicheMac/App/ModelManagerView.swift:277",
       "Sources/CevicheMac/Catalog/PeopleView.swift:477"
     ]
   },
@@ -9103,7 +9117,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:302",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:302",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:185"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:194"
     ]
   },
   {
@@ -9114,7 +9128,7 @@
   {
     "key": "Group Photo",
     "source": "\"Group Photo\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:432"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:485"
   },
   {
     "key": "Group Photos",
@@ -9440,7 +9454,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:359",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:359",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:79"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:88"
     ]
   },
   {
@@ -9658,7 +9672,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:356",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:290",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:69"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:78"
     ]
   },
   {
@@ -9727,7 +9741,7 @@
   {
     "key": "Import Photos (⇧⌘I)",
     "source": "\"Import Photos (⇧⌘I)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:556"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:538"
   },
   {
     "key": "Import Photos…",
@@ -9736,7 +9750,7 @@
     "uses": [
       "Sources/CevicheMac/App/WelcomeView.swift:107",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:91",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:553",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:535",
       "Sources/CevicheMac/Catalog/CatalogView.swift:68"
     ]
   },
@@ -9751,7 +9765,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:293",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:293",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:124"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:133"
     ]
   },
   {
@@ -9762,7 +9776,7 @@
   {
     "key": "Import from Camera, Photos, or Folder",
     "source": "\"Import from Camera, Photos, or Folder\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:545"
   },
   {
     "key": "Import from Camera…",
@@ -9787,7 +9801,7 @@
   {
     "key": "Import sources",
     "source": "\"Import sources\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:545"
   },
   {
     "key": "Import stopped",
@@ -9807,17 +9821,17 @@
   {
     "key": "Imported XMP development",
     "source": "\"Imported XMP development\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:582"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:560"
   },
   {
     "key": "Imported XMP metadata",
     "source": "\"Imported XMP metadata\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:574"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:552"
   },
   {
     "key": "Imported development",
     "source": "\"Imported development\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:493"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:471"
   },
   {
     "key": "Imported look",
@@ -9832,7 +9846,7 @@
   {
     "key": "Imported metadata",
     "source": "\"Imported metadata\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:492"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:470"
   },
   {
     "key": "Importing photos",
@@ -9913,10 +9927,10 @@
   {
     "key": "Include Subfolders",
     "source": "\"Include Subfolders\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:523",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:523",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:523"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505"
     ]
   },
   {
@@ -10050,10 +10064,10 @@
   {
     "key": "Indexing %1$@",
     "source": "\"Indexing \\((sync.path as NSString).lastPathComponent)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:531",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:513",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:531",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:534"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:513",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:516"
     ]
   },
   {
@@ -10096,7 +10110,7 @@
   {
     "key": "Install this model from a file on this Mac instead of downloading it.",
     "source": "\"Install this model from a file on this Mac instead of downloading it.\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:185"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:184"
   },
   {
     "key": "Installed from a file; not the copy this build was made with",
@@ -10109,7 +10123,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:161",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:161",
-      "Sources/CevicheMac/App/ModelManagerView.swift:243"
+      "Sources/CevicheMac/App/ModelManagerView.swift:242"
     ]
   },
   {
@@ -10656,7 +10670,7 @@
   {
     "key": "Keyword",
     "source": "\"Keyword\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:458"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:511"
   },
   {
     "key": "Keywords",
@@ -10728,12 +10742,12 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:257",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:257",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:247",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:279",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:368",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:272",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:332",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:421",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:39",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:57",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:34"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:43"
     ]
   },
   {
@@ -10970,9 +10984,9 @@
   {
     "key": "Lens",
     "source": "\"Lens\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:462",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:515",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:462",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:515",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:157",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:526",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:517",
@@ -11299,7 +11313,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:322",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:111",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:161"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:170"
     ]
   },
   {
@@ -11746,7 +11760,7 @@
   {
     "key": "Match Series to %1$@…",
     "source": "\"Match Series to \\(asset.filename)…\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:59"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:68"
   },
   {
     "key": "Match Series…",
@@ -11962,7 +11976,7 @@
     "context": "Sources/CevicheMac/Catalog/PeopleView.swift:76",
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:76",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:93",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:102",
       "Sources/CevicheMac/Tools/BestFacesView.swift:168",
       "Sources/CevicheMac/Tools/BestFacesView.swift:191",
       "Sources/CevicheMac/Tools/FocusStackView.swift:314",
@@ -11984,7 +11998,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:379",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:231",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:99"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:108"
     ]
   },
   {
@@ -11999,8 +12013,8 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:378",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:228",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:76",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:98"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:85",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:107"
     ]
   },
   {
@@ -12030,7 +12044,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:368",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:222",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:95"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:104"
     ]
   },
   {
@@ -12045,7 +12059,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:366",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:220",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:94"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:103"
     ]
   },
   {
@@ -12313,7 +12327,7 @@
   {
     "key": "More Tools",
     "source": "\"More Tools\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:70"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:79"
   },
   {
     "key": "More options",
@@ -12352,7 +12366,7 @@
   {
     "key": "Move %1$@ Photos to Trash",
     "source": "\"Move \\(targets.count) Photos to Trash\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:166"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:175"
   },
   {
     "key": "Move %1$@ Photos to Trash?",
@@ -12416,7 +12430,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/ArchiveViews.swift:19",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:329",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:149"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:158"
     ]
   },
   {
@@ -12430,8 +12444,8 @@
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:114",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:83",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:73",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:16",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:166",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:25",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:175",
       "Sources/CevicheMac/Editor/LooksPanel.swift:452",
       "Sources/CevicheMac/Editor/LooksPanel.swift:494"
     ]
@@ -12442,7 +12456,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:279",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:279",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:302"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:603"
     ]
   },
   {
@@ -12622,9 +12636,9 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:260",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:260",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:299",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:600",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:36",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:36"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:45"
     ]
   },
   {
@@ -12748,7 +12762,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:380",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:380",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:106"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:115"
     ]
   },
   {
@@ -12846,7 +12860,7 @@
   {
     "key": "No Faces",
     "source": "\"No Faces\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:430"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:483"
   },
   {
     "key": "No Faces Found",
@@ -13310,7 +13324,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:245",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:80",
       "Sources/CevicheMac/Catalog/CatalogLabelViews.swift:89",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:26",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:35",
       "Sources/CevicheMac/Editor/EditClipboard.swift:130",
       "Sources/CevicheMac/Export/WatermarkControls.swift:64",
       "Sources/CevicheMac/Export/WatermarkControls.swift:65",
@@ -13726,7 +13740,7 @@
       "Sources/CevicheMac/App/WelcomeView.swift:403",
       "Sources/CevicheMac/App/WelcomeView.swift:417",
       "Sources/CevicheMac/Catalog/PeopleView.swift:142",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:15",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:24",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:55",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:58"
     ]
@@ -13849,9 +13863,9 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:192",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:192",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:252",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:305",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:306",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:277",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:358",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:359",
       "Sources/CevicheMac/Editor/CompareView.swift:32"
     ]
   },
@@ -14158,7 +14172,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:275",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:275",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:50",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:59",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:169"
     ]
   },
@@ -14178,7 +14192,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:275",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:275",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:50"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:59"
     ]
   },
   {
@@ -14303,7 +14317,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:240",
       "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:49",
       "Sources/CevicheMac/Catalog/PhotoBrowsing.swift:30",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:138",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:147",
       "Sources/CevicheMac/Editor/EditClipboard.swift:33",
       "Sources/CevicheMac/Editor/EditorModel.swift:199",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:200",
@@ -14339,10 +14353,10 @@
   {
     "key": "Photo is no longer in this catalog.",
     "source": "\"Photo is no longer in this catalog.\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:435",
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:413",
     "uses": [
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:435",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:452",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:413",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:430",
       "Sources/CevicheCore/Catalog/CatalogTrash.swift:117"
     ]
   },
@@ -14358,11 +14372,11 @@
     "uses": [
       "Sources/CevicheCore/Catalog/CatalogStore+Developments.swift:138",
       "Sources/CevicheCore/Catalog/CatalogStore+Developments.swift:171",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:445",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:458",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:513",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:571",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:602"
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:423",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:436",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:491",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:549",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:580"
     ]
   },
   {
@@ -14378,7 +14392,7 @@
   {
     "key": "Photographer",
     "source": "\"Photographer\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:463"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:516"
   },
   {
     "key": "Photos",
@@ -14438,7 +14452,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:251",
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:188",
       "Sources/CevicheMac/Catalog/CatalogView.swift:288",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:30",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:39",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:679",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:433",
@@ -14503,7 +14517,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:391",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:312",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:85"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:94"
     ]
   },
   {
@@ -14527,7 +14541,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:34",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:34",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:238",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:263",
       "Sources/CevicheMac/Catalog/CatalogView.swift:138",
       "Sources/CevicheMac/Catalog/CatalogView.swift:260",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:22",
@@ -14596,7 +14610,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:73",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:187",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:460"
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:513"
     ]
   },
   {
@@ -14660,6 +14674,16 @@
     "key": "Polarizer",
     "source": "\"Polarizer\"",
     "context": "Sources/CevicheCore/Filters/CreativeFilter.swift:34"
+  },
+  {
+    "key": "Popular",
+    "source": "\"Popular\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:290"
+  },
+  {
+    "key": "Popular Tags",
+    "source": "\"Popular Tags\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:288"
   },
   {
     "key": "Port",
@@ -14881,7 +14905,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:359",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:287",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:79",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:88",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:38"
     ]
   },
@@ -15196,18 +15220,18 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:243",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:390",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:391",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:271",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:324",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:39",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:57",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:12",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:24",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:33",
       "Sources/CevicheCore/Catalog/CatalogRecords.swift:303"
     ]
   },
   {
     "key": "Rating must be 0 to 5.",
     "source": "\"Rating must be 0 to 5.\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:550"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:528"
   },
   {
     "key": "Read and edit",
@@ -15374,13 +15398,13 @@
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:164",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:448",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:114",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:133"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:142"
     ]
   },
   {
     "key": "Recover %1$@ Photos",
     "source": "\"Recover \\(targets.count) Photos\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:133"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:142"
   },
   {
     "key": "Recovered",
@@ -15607,7 +15631,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:251",
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:188",
       "Sources/CevicheMac/Catalog/CatalogView.swift:288",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:31",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:40",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:679",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:434",
@@ -15652,7 +15676,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:35",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:35",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:238",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:263",
       "Sources/CevicheMac/Catalog/CatalogView.swift:140",
       "Sources/CevicheMac/Catalog/CatalogView.swift:260",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:23",
@@ -15693,9 +15717,9 @@
   {
     "key": "Remove",
     "source": "\"Remove\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:177",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:178",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:177",
+      "Sources/CevicheMac/App/ModelManagerView.swift:178",
       "Sources/CevicheMac/Editor/EditorModel.swift:29",
       "Sources/CevicheMac/Editor/FacePanel.swift:156",
       "Sources/CevicheMac/Editor/ImageCanvas+FaceParts.swift:83",
@@ -15713,10 +15737,10 @@
   {
     "key": "Remove %1$@",
     "source": "\"Remove \\(model.feature)\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:177",
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:178",
     "uses": [
-      "Sources/CevicheMac/App/ModelManagerView.swift:177",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:384",
+      "Sources/CevicheMac/App/ModelManagerView.swift:178",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:437",
       "Sources/CevicheMac/Editor/LooksPanel.swift:353"
     ]
   },
@@ -15745,7 +15769,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:345",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:345",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:171"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:180"
     ]
   },
   {
@@ -15858,7 +15882,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:341",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:43",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:44"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:53"
     ]
   },
   {
@@ -15905,7 +15929,7 @@
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:165",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:450",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:82",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:171"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:180"
     ]
   },
   {
@@ -16000,7 +16024,7 @@
   {
     "key": "Rename Album…",
     "source": "\"Rename Album…\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:331"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:313"
   },
   {
     "key": "Rename the new file",
@@ -16083,7 +16107,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:323",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:112",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:162"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:171"
     ]
   },
   {
@@ -16190,7 +16214,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:287",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:287",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:63"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:72"
     ]
   },
   {
@@ -16204,7 +16228,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:287",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:287",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:63"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:72"
     ]
   },
   {
@@ -16823,8 +16847,8 @@
     "context": "Sources/CevicheMac/App/LicensesView.swift:94",
     "uses": [
       "Sources/CevicheMac/App/LicensesView.swift:94",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:210",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:211",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:235",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:236",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:73"
     ]
   },
@@ -16836,12 +16860,12 @@
   {
     "key": "Search suggestions",
     "source": "\"Search suggestions\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:98"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:115"
   },
   {
     "key": "Search text, places, cameras and lenses, or settings such as f/1.4, 35mm, 1/250s, iso>3200",
     "source": "\"Search text, places, cameras and lenses, or settings such as f/1.4, 35mm, 1/250s, iso>3200\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:212"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:237"
   },
   {
     "key": "Searches the map for spots on bright, clear areas, at every size",
@@ -16914,7 +16938,7 @@
   {
     "key": "Select Photos",
     "source": "\"Select Photos\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:291"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:592"
   },
   {
     "key": "Select Sky",
@@ -17073,12 +17097,12 @@
   {
     "key": "Settings",
     "source": "\"Settings\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:581"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
   },
   {
     "key": "Settings (⌘,)",
     "source": "\"Settings (⌘,)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:581"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
   },
   {
     "key": "Shade",
@@ -17359,7 +17383,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:320",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:320",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:157"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:166"
     ]
   },
   {
@@ -17408,7 +17432,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:318",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:318",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:154"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:163"
     ]
   },
   {
@@ -17459,7 +17483,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:168",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:275",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:72",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:159",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:168",
       "Sources/CevicheMac/Editor/LooksPanel.swift:124",
       "Sources/CevicheMac/Editor/LooksPanel.swift:124",
       "Sources/CevicheMac/Editor/LooksPanel.swift:405",
@@ -17527,9 +17551,9 @@
   {
     "key": "Shutter",
     "source": "\"Shutter\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:397",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:450",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:397",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:450",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:151"
     ]
   },
@@ -18040,7 +18064,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:216",
       "Sources/CevicheMac/Catalog/PhotoBrowsing.swift:31",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:139",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:148",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:201",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:261"
     ]
@@ -18067,7 +18091,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:370",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:370",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:101",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:110",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:216",
       "Sources/CevicheCore/Stack/PhotoStackTypes.swift:109"
     ]
@@ -18166,8 +18190,8 @@
     "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:240",
     "uses": [
       "Sources/CevicheMac/Catalog/ActivityCenter.swift:240",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:537",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:537"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519"
     ]
   },
   {
@@ -18183,7 +18207,7 @@
   {
     "key": "Stop Download",
     "source": "\"Stop Download\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:258"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:257"
   },
   {
     "key": "Stop Export",
@@ -18207,7 +18231,7 @@
   {
     "key": "Stop downloading %1$@",
     "source": "\"Stop downloading \\(model.feature)\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:168"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:169"
   },
   {
     "key": "Stop, and keep a patch fill for these strokes (Esc)",
@@ -18273,9 +18297,9 @@
   {
     "key": "Strip Unsupported Settings",
     "source": "\"Strip Unsupported Settings\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:129",
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:138",
     "uses": [
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:129",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:138",
       "Sources/CevicheMac/Catalog/XMPCompatibilitySection.swift:66",
       "Sources/CevicheMac/Editor/XMPReportView.swift:82"
     ]
@@ -18341,7 +18365,7 @@
   {
     "key": "Suggestions",
     "source": "\"Suggestions\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:77"
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:94"
   },
   {
     "key": "Sun Direction",
@@ -18396,12 +18420,12 @@
   {
     "key": "Switch %1$@ to %2$@",
     "source": "\"Switch \\(model.feature) to \\(other.title)\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:175"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:176"
   },
   {
     "key": "Switch to %1$@ (%2$@)",
     "source": "\"Switch to \\(other.title) (\\(size(other)))\"",
-    "context": "Sources/CevicheMac/App/ModelManagerView.swift:174"
+    "context": "Sources/CevicheMac/App/ModelManagerView.swift:175"
   },
   {
     "key": "Sync",
@@ -18426,7 +18450,7 @@
   {
     "key": "Sync Edits from %1$@…",
     "source": "\"Sync Edits from \\(asset.filename)…\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:57"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:66"
   },
   {
     "key": "Sync Edits…",
@@ -18487,6 +18511,11 @@
     "key": "TIFF - Full Size - 16-bit",
     "source": "\"TIFF - Full Size - 16-bit\"",
     "context": "Sources/CevicheCore/Export/ExportPreset.swift:66"
+  },
+  {
+    "key": "Tags",
+    "source": "\"Tags\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:311"
   },
   {
     "key": "Take Light Out",
@@ -19420,7 +19449,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:24",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:24",
-      "Sources/CevicheMac/App/ModelManagerView.swift:203"
+      "Sources/CevicheMac/App/ModelManagerView.swift:202"
     ]
   },
   {
@@ -19632,7 +19661,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:397",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:318",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:88"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:97"
     ]
   },
   {
@@ -19691,7 +19720,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:362",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:262",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:60"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:69"
     ]
   },
   {
@@ -19994,7 +20023,7 @@
   {
     "key": "Trash Photos and Delete Album…",
     "source": "\"Trash Photos and Delete Album…\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:334"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:316"
   },
   {
     "key": "Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out.",
@@ -20100,7 +20129,7 @@
       "Sources/CevicheMac/Catalog/ArchiveViews.swift:16",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:328",
       "Sources/CevicheMac/Catalog/CatalogModel+Archive.swift:33",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:148"
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:157"
     ]
   },
   {
@@ -20235,10 +20264,10 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:251",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:251",
-      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:238",
+      "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:263",
       "Sources/CevicheMac/Catalog/CatalogView.swift:139",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:21",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:32",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:41",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
@@ -20251,7 +20280,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:304",
       "Sources/CevicheMac/Catalog/PeopleView.swift:82",
       "Sources/CevicheMac/Catalog/PeopleView.swift:153",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:188",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:197",
       "Sources/CevicheMac/Culling/CatalogModel+Culling.swift:107"
     ]
   },
@@ -20976,7 +21005,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:355",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:271",
-      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:71",
+      "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:80",
       "Sources/CevicheMac/Editor/EditorInspector.swift:314"
     ]
   },
@@ -21094,7 +21123,7 @@
   {
     "key": "XMP",
     "source": "\"XMP\"",
-    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:119"
+    "context": "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:128"
   },
   {
     "key": "XMP Compatibility",
@@ -21682,19 +21711,19 @@
   {
     "key": "orientation|Landscape",
     "source": "\"Landscape\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:413",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:466",
     "meaning": "orientation"
   },
   {
     "key": "orientation|Portrait",
     "source": "\"Portrait\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:414",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:467",
     "meaning": "orientation"
   },
   {
     "key": "orientation|Square",
     "source": "\"Square\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:415",
+    "context": "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:468",
     "meaning": "orientation"
   },
   {

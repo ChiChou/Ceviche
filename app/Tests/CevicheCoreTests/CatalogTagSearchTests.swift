@@ -35,6 +35,26 @@ final class CatalogTagSearchTests: XCTestCase {
         }
     }
 
+    func testPopularTagsListKeywordsAndAutomaticTagsByCount() async throws {
+        let (directory, url) = try CatalogTests().fixture()
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = try CatalogStore(root: directory.appendingPathComponent("Catalog"))
+        var asset = try CatalogImporter.prepare(url).0; asset.suggestedTags = "sky, beach"
+        var metadata = asset.metadata; metadata.keywords = "Sky, Trip"; asset.metadata = metadata
+        _ = try await store.insert(asset, thumbnail: nil)
+        var copy = asset; copy.id = "copy"; copy.importPath += "-copy"; copy.suggestedTags = "sky"
+        var copyMetadata = copy.metadata; copyMetadata.keywords = ""; copy.metadata = copyMetadata
+        _ = try await store.insert(copy, thumbnail: nil)
+        // "sky" twice as a tag beats "Sky" once as a keyword; places and cameras are not offered.
+        let popular = try await store.popularTags()
+        XCTAssertEqual(popular.map(\.tag), ["sky", "beach", "Trip"])
+        XCTAssertEqual(popular.map(\.completion), ["tag:sky", "tag:beach", "keyword:Trip"])
+        let top = try await store.popularTags(limit: 1); XCTAssertEqual(top.map(\.tag), ["sky"])
+        let all = try await store.popularTags(limit: nil); XCTAssertEqual(all.count, 3)
+        try await store.moveToTrash(copy.id)
+        let trash = try await store.popularTags(area: .trash); XCTAssertEqual(trash.map(\.tag), ["sky"])
+    }
+
     func testWorkerUpdatesTrashRecoveryAndDeletionMaintainCounts() async throws {
         let (directory, url) = try CatalogTests().fixture()
         defer { try? FileManager.default.removeItem(at: directory) }

@@ -429,6 +429,7 @@
 "All" = "All";
 "All Faces" = "All Faces";
 "All Photos" = "All Photos";
+"All Tags" = "All Tags";
 "All in %1$@" = "All in %1$@";
 "All photos are analyzed." = "All photos are analyzed.";
 "All photos in this album will move to Trash, including photos in other albums. The album will be deleted." = "All photos in this album will move to Trash, including photos in other albums. The album will be deleted.";
@@ -2316,6 +2317,8 @@
 "Point color" = "Point color";
 "Point colors" = "Point colors";
 "Polarizer" = "Polarizer";
+"Popular" = "Popular";
+"Popular Tags" = "Popular Tags";
 "Port" = "Port";
 "Portable XMP fields changed outside Ceviche; importing those fields instead of the embedded Ceviche recipe." = "Portable XMP fields changed outside Ceviche; importing those fields instead of the embedded Ceviche recipe.";
 "Portrait" = "Portrait";
@@ -2919,6 +2922,7 @@
 "System Info" = "System Info";
 "System Info…" = "System Info…";
 "TIFF - Full Size - 16-bit" = "TIFF - Full Size - 16-bit";
+"Tags" = "Tags";
 "Take Light Out" = "Take Light Out";
 "Take Light Out: paint where one photo’s light shouldn’t show, such as spill or glare. Click a photo below to choose which." = "Take Light Out: paint where one photo’s light shouldn’t show, such as spill or glare. Click a photo below to choose which.";
 "Take moving things and the exposure from this photo" = "Take moving things and the exposure from this photo";

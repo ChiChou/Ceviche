@@ -23,7 +23,8 @@ What the app ships today, by area. Names match the menus.
   up the import. The grid switches to the new batch only from the whole catalog or a finished import's batch; a
   search, filter, album or folder being shown stays put.
 - **Organizing.** Ratings, pick and reject flags, color labels, albums and groups. Recently Added lists the last
-  imports by day. Search covers text, tags, places and EXIF; the map shows geotagged photos. **Set Location…** in the Info panel's
+  imports by day. Search covers text, tags, places and EXIF; the empty search field lists the most used keywords
+  and automatic tags, or all of them, to add to the search with a click. The map shows geotagged photos. **Set Location…** in the Info panel's
   Place section places one photo or a selection on a map, by search, coordinates or a click; a location set this way
   or by an MCP client is marked Set in Ceviche, framed with a dashed line on the map, and found with `location:set`
   (`location:file` and `location:none` find the others). **Show Nearby Photos** opens the Map zoomed to a photo's

@@ -188,6 +188,26 @@ extension CatalogStore {
         guard tag.contains(where: { $0.isWhitespace || $0 == "\"" }) else { return key + ":" + tag }
         return key + ":\"" + tag.replacingOccurrences(of: "\"", with: "\"\"") + "\""
     }
+    /// The keywords and automatic tags most photos in `area` have, most used first; `limit` nil lists them all. A
+    /// keyword and an automatic tag of the same name are offered once, as whichever more photos have.
+    public func popularTags(area: CatalogArea = .library, limit: Int? = 40) throws -> [CatalogSearchSuggestion] {
+        let count = area != .library ? "trashCount" : "libraryCount"
+        let rows = try database.read { db in
+            try Row.fetchAll(db, sql: """
+                SELECT tag, source, \(count) AS photoCount FROM tagCount
+                    WHERE source IN ('keyword', 'automatic') AND \(count) > 0 ORDER BY \(count) DESC, tag LIMIT ?
+                """, arguments: [limit.map { $0 * 2 } ?? -1])
+        }
+        var seen = Set<String>(), tags: [CatalogSearchSuggestion] = []
+        for row in rows {
+            let tag: String = row["tag"]
+            guard seen.insert(tag.lowercased()).inserted else { continue }
+            let source = CatalogTagSource(rawValue: row["source"]) ?? .automatic
+            tags.append(CatalogSearchSuggestion(tag: tag, source: source, photoCount: row["photoCount"], completion: Self.searchToken(tag, source: source)))
+            if let limit, tags.count == limit { break }
+        }
+        return tags
+    }
     public func searchSuggestions(for query: String, area: CatalogArea = .library, limit: Int = 8) throws -> [CatalogSearchSuggestion] {
         let text = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !text.isEmpty, text.count <= 256 else { return [] }

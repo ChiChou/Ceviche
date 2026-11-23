@@ -3493,3 +3493,7 @@
 "Built in" = "Integrado";
 "Switch %1$@ to %2$@" = "Cambiar %1$@ a %2$@";
 "Switch to %1$@ (%2$@)" = "Cambiar a %1$@ (%2$@)";
+"All Tags" = "Todas las etiquetas";
+"Popular" = "Populares";
+"Popular Tags" = "Etiquetas populares";
+"Tags" = "Etiquetas";
