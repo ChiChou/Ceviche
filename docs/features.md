@@ -29,7 +29,8 @@ What the app ships today, by area. Names match the menus.
   Place section places one photo or a selection on a map, by search, coordinates or a click; a location set this way
   or by an MCP client is marked Set in Ceviche, framed with a dashed line on the map, and found with `location:set`
   (`location:file` and `location:none` find the others). **Show Nearby Photos** opens the Map zoomed to a photo's
-  surroundings, so it shows the photos taken close by. The Faces filter beside
+  surroundings, so it shows the photos taken close by; **Show Photos from Same Day** lists the library's photos from
+  the day a photo was taken. The Faces filter beside
   the search field shows photos with faces, without, or Group Photos (three faces or more), as background tagging
   finds them; photos it hasn't reached yet match none of the three.
 - **Views.** The switch in the bottom bar and the View menu are the same everywhere: Wall ⌘1, Grid ⌘2, Compare ⌘3 and

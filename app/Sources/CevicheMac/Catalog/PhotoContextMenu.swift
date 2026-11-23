@@ -159,11 +159,15 @@ struct PhotoContextMenu: View {
             Button(L10n.tr("Copy to Folder…")) { catalog.exportOriginals(targets) }
             Divider()
         }
-        if single, catalog.canShowSimilar(targets) {
-            Button(L10n.tr("Show Similar Photos")) { Task { await catalog.showSimilar(to: asset, editor: editor) } }
-        }
-        if single, catalog.canShowNearby(targets) {
-            Button(L10n.tr("Show Nearby Photos")) { Task { await catalog.showNearby(asset, editor: editor) } }
+        // Related photos, apart from the file commands below. Each needs a library photo, so Duplicate is above.
+        let similar = single && catalog.canShowSimilar(targets), nearby = single && catalog.canShowNearby(targets)
+        let sameDay = single && catalog.canShowSameDay(targets)
+        if similar || nearby || sameDay {
+            Divider()
+            if similar { Button(L10n.tr("Show Similar Photos")) { Task { await catalog.showSimilar(to: asset, editor: editor) } } }
+            if nearby { Button(L10n.tr("Show Nearby Photos")) { Task { await catalog.showNearby(asset, editor: editor) } } }
+            if sameDay { Button(L10n.tr("Show Photos from Same Day")) { Task { await catalog.showSameDay(asset, editor: editor) } } }
+            Divider()
         }
         Button(L10n.tr("Show in Finder")) { catalog.showInFinder(targets) }
         if single && asset.inLibrary && catalog.selected?.id == asset.id && !catalog.isFolderIndex {

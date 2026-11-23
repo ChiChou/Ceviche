@@ -312,13 +312,17 @@ struct CatalogCommands: Commands {
             if !catalog.isFolderIndex {
                 Button(targets.count > 1 ? L10n.tr("Duplicate \(targets.count) Photos") : L10n.tr("Duplicate")) { let targets = targets; Task { await catalog.duplicate(targets, editor: editor) } }
                     .keyboardShortcut("d").disabled(!inLibrary && !editor.hasImage || !catalog.canDuplicate(targets) || editor.busy || catalog.isFolderIndex)
-            }
-            Button(L10n.tr("Show in Finder")) { catalog.showInFinder(targets) }.keyboardShortcut("r").disabled(targets.allSatisfy(\.isLatent))
-            if !catalog.isFolderIndex {
+                Divider()
                 Button(L10n.tr("Show Similar Photos")) { if let photo = single { Task { await catalog.showSimilar(to: photo, editor: editor) } } }
                     .disabled(single.map { !catalog.canShowSimilar([$0]) } ?? true)
                 Button(L10n.tr("Show Nearby Photos")) { if let photo = single { Task { await catalog.showNearby(photo, editor: editor) } } }
                     .disabled(single.map { !catalog.canShowNearby([$0]) } ?? true)
+                Button(L10n.tr("Show Photos from Same Day")) { if let photo = single { Task { await catalog.showSameDay(photo, editor: editor) } } }
+                    .disabled(single.map { !catalog.canShowSameDay([$0]) } ?? true)
+                Divider()
+            }
+            Button(L10n.tr("Show in Finder")) { catalog.showInFinder(targets) }.keyboardShortcut("r").disabled(targets.allSatisfy(\.isLatent))
+            if !catalog.isFolderIndex {
                 Button(L10n.tr("Locate Original…"), action: catalog.relink).disabled(!inLibrary || single == nil || single?.isLatent == true || catalog.filter.area != .library || catalog.catalogBusy || catalog.isFolderIndex)
                 Button(L10n.tr("Replace Original…"), action: catalog.replaceOriginal).disabled(!inLibrary || single == nil || catalog.filter.area != .library || catalog.catalogBusy || catalog.isFolderIndex)
             }

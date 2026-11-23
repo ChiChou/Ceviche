@@ -176,6 +176,24 @@ extension CatalogModel {
         value.area = filter.area; value.kind = kind; value.captureDay = captureDay; filter = value
     }
 
+    func canShowSameDay(_ targets: [CatalogAsset]) -> Bool {
+        store != nil && !isFolderIndex && targets.count == 1 && targets[0].inLibrary && !targets[0].captureDay.isEmpty
+    }
+    /// The library's photos taken the day this one was, as the sidebar's date shows them; the photo stays selected.
+    func showSameDay(_ asset: CatalogAsset, editor: EditorModel) async {
+        guard canShowSameDay([asset]), !interactionBusy else { return }
+        if !showingLibrary { await closePhoto(editor: editor) }
+        guard await flushMetadata() else { return }
+        clearSelection(); mapFocus = nil
+        showingOverview = true; peopleSubpage = nil
+        var value = baseFilter(); value.area = .library; value.captureDay = asset.captureDay
+        await applyFilterNow(value)
+        if let shown = assets.first(where: { $0.id == asset.id }) {
+            selectedIDs = [shown.id]; selectionAnchorID = shown.id
+            await selectAsset(shown, preservingSelection: true)
+        }
+    }
+
     func focusSearch() { searchFocusRequest += 1 }
     func clearFilters() {
         var value = baseFilter(); value.area = filter.area; value.geotagged = filter.geotagged; value.withFaces = filter.withFaces
