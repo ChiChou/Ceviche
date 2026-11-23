@@ -67,7 +67,7 @@ final class ExposureRampModel: ObservableObject {
                 if number % 16 == 0 { stage = .reading(Double(number + 1) / Double(assets.count)) }
             }
             offline = missing
-            guard available.count >= 3 else { stage = .failed(L10n.tr("Timelapse Deflicker needs three or more photos whose originals are available.")); return }
+            guard available.count >= 3 else { abort(catalog: catalog, L10n.tr("Timelapse Deflicker needs three or more photos whose originals are available.")); return }
             let series = TimelapseSeries(captures)
             frames = series.order.map { available[$0] }
             interval = series.interval
@@ -78,7 +78,7 @@ final class ExposureRampModel: ObservableObject {
                 let measured = try await catalog.measureExposure(frames) { done in self.stage = .measuring(done) }
                 ramp = ExposureRamp(measured: measured.map(\.light), current: measured.map(\.exposure), smoothing: options.smoothing)
             } catch {
-                if !Task.isCancelled { stage = .failed(error.localizedDescription) }
+                if !Task.isCancelled { abort(catalog: catalog, error.localizedDescription) }
                 return
             }
             var thumbnails: [Data?] = []
@@ -86,6 +86,12 @@ final class ExposureRampModel: ObservableObject {
             self.thumbnails = thumbnails
             stage = .ready
         }
+    }
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ message: String) {
+        stop(); catalog.exposureRamp = nil
+        catalog.failure = Failure(L10n.tr("Can’t Deflicker These Photos"), message)
     }
     func stop() { task?.cancel() }
 

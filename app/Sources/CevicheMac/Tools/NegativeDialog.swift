@@ -259,9 +259,17 @@ final class NegativeModel: ObservableObject {
                 if isRoll { measureRoll() }
                 renderInverted()
             } catch {
-                if !Task.isCancelled { stage = .failed(error.localizedDescription) }
+                guard !Task.isCancelled else { return }
+                stage = .failed(error.localizedDescription)
+                if request.assets.count == 1 { close(with: Failure(L10n.tr("Couldn’t Convert the Negatives"), error)) }
             }
         }
+    }
+    /// The only photo couldn't be read: there is nothing to work with, so the tool closes and says why. With several,
+    /// the failure stays on that photo and the others can still be used.
+    private func close(with failure: Failure) {
+        guard let catalog else { return }
+        stop(); catalog.negative = nil; catalog.failure = failure
     }
 
     /// Shows the scan inverted again after its film or base changed, or the roll's inversion once it is measured anew.

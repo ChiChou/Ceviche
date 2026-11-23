@@ -3502,3 +3502,5 @@
 "Reason" = "Motivo";
 "Copy All" = "Copiar todo";
 "Failures" = "Errores";
+"Can’t Deflicker These Photos" = "No se puede quitar el parpadeo de estas fotos";
+"Couldn’t Make an ID Photo" = "No se pudo crear la foto de documento";

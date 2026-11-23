@@ -639,6 +639,7 @@
 "Cannot uniquely match %1$@ to an image in the same folder." = "Cannot uniquely match %1$@ to an image in the same folder.";
 "Can’t Combine These Photos" = "Can’t Combine These Photos";
 "Can’t Cull These Photos" = "Can’t Cull These Photos";
+"Can’t Deflicker These Photos" = "Can’t Deflicker These Photos";
 "Can’t Filter This Photo" = "Can’t Filter This Photo";
 "Can’t Merge These Photos" = "Can’t Merge These Photos";
 "Can’t Open Catalog" = "Can’t Open Catalog";
@@ -896,6 +897,7 @@
 "Couldn’t Import" = "Couldn’t Import";
 "Couldn’t Import XMP" = "Couldn’t Import XMP";
 "Couldn’t Keep the Latent Image" = "Couldn’t Keep the Latent Image";
+"Couldn’t Make an ID Photo" = "Couldn’t Make an ID Photo";
 "Couldn’t Merge the Photos" = "Couldn’t Merge the Photos";
 "Couldn’t Move the Folder to Trash" = "Couldn’t Move the Folder to Trash";
 "Couldn’t Move to Trash" = "Couldn’t Move to Trash";

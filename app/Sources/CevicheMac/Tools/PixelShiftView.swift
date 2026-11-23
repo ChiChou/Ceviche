@@ -57,7 +57,7 @@ final class PixelShiftModel: ObservableObject {
                 }
                 stage = .ready
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(catalog: catalog, error) }
         }
     }
 
@@ -69,6 +69,12 @@ final class PixelShiftModel: ObservableObject {
         self.access = []
         catalog.startPixelShift(merger, analysis: analysis, first: first, editsFrom: developer.asset(for: first), access: access, export: export)
         close(catalog: catalog)
+    }
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ error: Error) {
+        close(catalog: catalog)
+        catalog.failure = Failure(L10n.tr("Can’t Merge These Photos"), error)
     }
     func close(catalog: CatalogModel) {
         stop()

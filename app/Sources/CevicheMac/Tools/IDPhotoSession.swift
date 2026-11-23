@@ -78,6 +78,14 @@ final class IDPhotoSession: ObservableObject {
                 next(); next()
                 while await group.next() != nil { next() }
             }
+            // No photo could be developed: there is nothing to work with, so the tool closes and says why. With some
+            // developed, the failed ones stay in the batch to be removed.
+            guard !Task.isCancelled else { return }
+            let failures = photos.compactMap { if case .failed(let message) = $0.stage { message } else { nil } }
+            if failures.count == photos.count, let first = failures.first {
+                stop(); catalog.idPhoto = nil
+                catalog.failure = Failure(L10n.tr("Couldn’t Make an ID Photo"), first)
+            }
         }
     }
     func stop() {

@@ -123,7 +123,7 @@ final class PhotoStackModel: ObservableObject {
                 render(immediately: true)
                 autoBase()
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(catalog: catalog, error) }
         }
     }
 
@@ -191,6 +191,12 @@ final class PhotoStackModel: ObservableObject {
         close(catalog: catalog)
     }
 
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ error: Error) {
+        close(catalog: catalog)
+        catalog.failure = Failure(L10n.tr("Can’t Stack These Photos"), error)
+    }
     func close(catalog: CatalogModel) {
         stop()
         catalog.photoStack = nil

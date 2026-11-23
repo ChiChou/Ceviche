@@ -161,7 +161,7 @@ final class FocusStackModel: ObservableObject {
                 stage = .preparing(L10n.tr("Creating preview…"), nil)
                 render(immediately: true)
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(catalog: catalog, error) }
         }
     }
 
@@ -271,6 +271,12 @@ final class FocusStackModel: ObservableObject {
         close(catalog: catalog)
     }
 
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ error: Error) {
+        stop(); catalog.focusStack = nil; catalog.focusStackHistory = nil
+        catalog.failure = Failure(L10n.tr("Can’t Stack These Photos"), error)
+    }
     func close(catalog: CatalogModel) {
         keepLatent(catalog: catalog, output: false)
         stop()

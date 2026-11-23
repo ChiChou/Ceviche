@@ -262,7 +262,7 @@ final class NightSkyModel<Workflow: NightSkyWorkflow>: ObservableObject {
                 }
                 try await begin(urls)
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(error.localizedDescription) }
         }
     }
 
@@ -276,11 +276,11 @@ final class NightSkyModel<Workflow: NightSkyWorkflow>: ObservableObject {
         for url in out { assetsByURL[url] = nil }
         unstackable = []
         photoCount = urls.count
-        guard urls.count >= request.tool.minimumCount else { stage = .failed(L10n.tr("Too few photos are left to combine.")); return }
+        guard urls.count >= request.tool.minimumCount else { abort(L10n.tr("Too few photos are left to combine.")); return }
         stage = .preparing(L10n.tr("Reading photos…"), nil)
         task = Task {
             do { try await begin(urls) } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(error.localizedDescription) }
         }
     }
 
@@ -431,6 +431,13 @@ final class NightSkyModel<Workflow: NightSkyWorkflow>: ObservableObject {
         close(catalog: catalog)
     }
 
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(_ message: String) {
+        guard let catalog else { stage = .failed(message); return }
+        close(catalog: catalog)
+        catalog.failure = Failure(L10n.tr("Can’t Combine These Photos"), message)
+    }
     func close(catalog: CatalogModel) {
         guard !closing else { return }
         closing = true

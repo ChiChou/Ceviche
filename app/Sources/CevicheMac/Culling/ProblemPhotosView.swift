@@ -38,6 +38,12 @@ final class ProblemPhotosModel: ObservableObject {
     }
 
     /// Reads what was already measured and has the scanner measure the rest first, so the list fills in as photos land.
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ error: Error) {
+        stop(); catalog.problemPhotos = nil
+        catalog.failure = Failure(L10n.tr("Can’t Cull These Photos"), error)
+    }
     func start(catalog: CatalogModel) {
         guard task == nil, let store = catalog.store else { return }
         let scanner = catalog.cullingScanner, root = catalog.root, assets = request.assets
@@ -51,7 +57,7 @@ final class ProblemPhotosModel: ObservableObject {
                 let pending = assets.filter { reports[$0.id] == nil && unmeasured[$0.id] == nil }
                 updateStage()
                 if !pending.isEmpty { scanner.urgent = true; added = scanner.enqueue(pending, store: store, root: root, first: true) }
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(catalog: catalog, error) }
         }
     }
     private func receive(_ measured: CullingScanner.Measured) {

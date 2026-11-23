@@ -73,7 +73,7 @@ final class BestFacesModel: ObservableObject {
                 for f in merger.names.indices { thumbnails[f] = await Task.detached(priority: .utility) { merger.thumbnail(frame: f, pixels: 264) }.value }
                 await cutFaces(merger)
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { abort(catalog: catalog, error) }
         }
     }
 
@@ -135,6 +135,12 @@ final class BestFacesModel: ObservableObject {
                             done: count == 0 ? L10n.tr("Best faces merged") : count == 1 ? L10n.tr("Best faces merged, 1 face swapped") : L10n.tr("Best faces merged, \(count) faces swapped"),
                             detail: "", stopped: L10n.tr("Best faces merge stopped"), failed: { L10n.tr("The photos couldn’t be merged. \($0)") })
         close(catalog: catalog)
+    }
+    /// Setup failed outright (an original missing, photos the tool can't take): there is nothing to work with, so the
+    /// tool closes and says why.
+    private func abort(catalog: CatalogModel, _ error: Error) {
+        close(catalog: catalog)
+        catalog.failure = Failure(L10n.tr("Can’t Merge These Photos"), error)
     }
     func close(catalog: CatalogModel) {
         stop()

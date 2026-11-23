@@ -145,8 +145,8 @@
       "Sources/CevicheMac/Export/ExportButton.swift:79",
       "Sources/CevicheMac/Export/ExportButton.swift:82",
       "Sources/CevicheMac/Import/CardImportView.swift:155",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:199",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:240"
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:205",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:246"
     ]
   },
   {
@@ -226,7 +226,7 @@
   {
     "key": "%1$@ - roll %2$@",
     "source": "\"\\(asset.filename) - roll \\(model.rollNumber(asset.id) ?? 1)\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:637"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:645"
   },
   {
     "key": "%1$@ - ⌘-click to compare",
@@ -246,10 +246,10 @@
   {
     "key": "%1$@ EV",
     "source": "\"\\(text) EV\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:189",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:195",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:189",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:450",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:195",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:456",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:293"
     ]
   },
@@ -336,10 +336,10 @@
   {
     "key": "%1$@ archived",
     "source": "\"\\(result.archived.formatted()) archived\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:216",
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:222",
     "uses": [
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:216",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:458"
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:222",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:464"
     ]
   },
   {
@@ -360,7 +360,7 @@
   {
     "key": "%1$@ bursts to group",
     "source": "\"\\(groups.formatted()) bursts to group\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:387"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:393"
   },
   {
     "key": "%1$@ by %2$@",
@@ -416,7 +416,7 @@
   {
     "key": "%1$@ can’t show these photos: they cover too wide a view.",
     "source": "\"\\(missing) can’t show these photos: they cover too wide a view.\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:341"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:347"
   },
   {
     "key": "%1$@ checks passed",
@@ -494,7 +494,7 @@
   {
     "key": "%1$@ exposures",
     "source": "\"\\(PhotoMetadataSummary.shutter(shutters[shutters.count / 2])) exposures\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:694"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:700"
   },
   {
     "key": "%1$@ faces",
@@ -509,7 +509,7 @@
   {
     "key": "%1$@ faces from other photos",
     "source": "\"\\(model.swapped) faces from other photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:203"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:209"
   },
   {
     "key": "%1$@ faces to group",
@@ -554,9 +554,9 @@
   {
     "key": "%1$@ frames",
     "source": "\"\\(model.ramp?.window ?? 5) frames\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:471",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:477",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:471",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:477",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:151",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:52",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:58",
@@ -775,7 +775,7 @@
   {
     "key": "%1$@ missing",
     "source": "\"\\(series.missingFrames.formatted()) missing\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:695"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:701"
   },
   {
     "key": "%1$@ mm",
@@ -821,9 +821,9 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:160",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:160",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:231",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:189",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:428",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:237",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:198",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:434",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:596",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:164",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:235",
@@ -846,7 +846,7 @@
   {
     "key": "%1$@ of %2$@ exposures - %3$@ stops",
     "source": "\"\\(used) of \\(analysis.frames.count) exposures - \\(range) stops\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:195"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:201"
   },
   {
     "key": "%1$@ of %2$@ located",
@@ -871,15 +871,15 @@
       "Sources/CevicheMac/Catalog/CatalogModel.swift:277",
       "Sources/CevicheMac/Components/CountRing.swift:29",
       "Sources/CevicheMac/Components/CountRing.swift:31",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:344",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:350",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:118",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:244"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:250"
     ]
   },
   {
     "key": "%1$@ of %2$@ photos - %3$@",
     "source": "\"\\(used) of \\(analysis.frames.count) photos - \\(size)\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:346"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:352"
   },
   {
     "key": "%1$@ of %2$@ photos can be corrected",
@@ -889,7 +889,7 @@
   {
     "key": "%1$@ of %2$@ photos couldn’t be merged: %3$@",
     "source": "\"\\(left) of \\(total) photos couldn’t be merged: \\(alignment.excluded.joined(separator: \", \"))\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:279"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:285"
   },
   {
     "key": "%1$@ of %2$@ photos in %3$@ have faces",
@@ -908,17 +908,17 @@
   {
     "key": "%1$@ of %2$@ photos, %3$@ overlapping regions left out",
     "source": "\"\\(included) of \\(analysis.frames.count) photos, \\(leftOut) overlapping regions left out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:242"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:248"
   },
   {
     "key": "%1$@ of %2$@ photos, 1 overlapping region left out",
     "source": "\"\\(included) of \\(analysis.frames.count) photos, 1 overlapping region left out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:241"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:247"
   },
   {
     "key": "%1$@ of %2$@ positions couldn’t be merged: %3$@",
     "source": "\"\\(left) of \\(total) positions couldn’t be merged: \\(alignment.excluded.joined(separator: \", \"))\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:276"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:282"
   },
   {
     "key": "%1$@ of 24 patches used",
@@ -963,7 +963,7 @@
   {
     "key": "%1$@ pairs in %2$@",
     "source": "\"\\(model.pairs.count.formatted()) pairs in \\(model.request.title)\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:295"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:301"
   },
   {
     "key": "%1$@ patches too bright to use. Shoot the chart about a stop darker.",
@@ -973,7 +973,7 @@
   {
     "key": "%1$@ people",
     "source": "\"\\(merger.persons.count) people\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:274"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:280"
   },
   {
     "key": "%1$@ photo",
@@ -1020,28 +1020,28 @@
       "Sources/CevicheMac/Catalog/PeopleView.swift:128",
       "Sources/CevicheMac/Catalog/PeopleView.swift:293",
       "Sources/CevicheMac/Catalog/PeopleView.swift:462",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:445",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:451",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:9",
       "Sources/CevicheMac/Export/ExportSession.swift:125",
       "Sources/CevicheMac/Import/CardImportView.swift:244",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:201",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:170",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:180",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:207",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:179",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:186",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:93",
       "Sources/CevicheMac/Tools/FiltersModel.swift:376",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:340",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:190",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:346",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:196",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:92",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:235",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:426",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:434",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:360",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:114",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:257",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:365",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:266",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:280",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:236",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:121",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:272",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:286",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:242",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:127",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:49"
     ]
   },
@@ -1053,7 +1053,7 @@
   {
     "key": "%1$@ photos - %2$@ × %3$@",
     "source": "\"\\(analysis.shots) photos - \\(analysis.width.formatted()) × \\(analysis.height.formatted())\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:122"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:128"
   },
   {
     "key": "%1$@ photos and their files are deleted, with their edits and history.",
@@ -1128,11 +1128,11 @@
   {
     "key": "%1$@ photos couldn’t be measured",
     "source": "\"\\(model.unmeasured.count.formatted()) photos couldn’t be measured\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:390",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:390",
-      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:319",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:446",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
+      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:325",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:452",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:439"
     ]
   },
@@ -1164,22 +1164,22 @@
   {
     "key": "%1$@ photos in %2$@",
     "source": "\"\\(model.request.assets.count.formatted()) photos in \\(model.request.title)\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:333"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:339"
   },
   {
     "key": "%1$@ photos in %2$@ - %3$@ bursts",
     "source": "\"\\(count) photos in \\(title) - \\(bursts.formatted()) bursts\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:337"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:343"
   },
   {
     "key": "%1$@ photos in %2$@ - %3$@ bursts, %4$@ timelapses",
     "source": "\"\\(count) photos in \\(title) - \\(bursts.formatted()) bursts, \\(series.formatted()) timelapses\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:338"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:344"
   },
   {
     "key": "%1$@ photos in %2$@ - %3$@ flawed",
     "source": "\"\\(count) photos in \\(model.request.title) - \\(found) flawed\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:199"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:205"
   },
   {
     "key": "%1$@ photos make %2$@ video frames",
@@ -1208,7 +1208,7 @@
   {
     "key": "%1$@ photos need more than the ±5 EV Exposure allows; keep more of the change.",
     "source": "\"\\(clamped) photos need more than the ±5 EV Exposure allows; keep more of the change.\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:499"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:505"
   },
   {
     "key": "%1$@ photos not analyzed yet",
@@ -1270,17 +1270,17 @@
   {
     "key": "%1$@ picked",
     "source": "\"\\(picked.formatted()) picked\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:458",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:464",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:458",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:217",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:459"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:464",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:223",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:465"
     ]
   },
   {
     "key": "%1$@ positions - %2$@ photos",
     "source": "\"\\(total) positions - \\(model.request.assets.count) photos\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:277"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:283"
   },
   {
     "key": "%1$@ ppi available",
@@ -1314,16 +1314,16 @@
   {
     "key": "%1$@ rejected",
     "source": "\"\\(rejected.formatted()) rejected\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:460",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:466",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:460",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:218"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:466",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:224"
     ]
   },
   {
     "key": "%1$@ rejected (%2$@)",
     "source": "\"\\(plan.rejectedFiles.formatted()) rejected (\\(ByteCountFormatter.string(fromByteCount: plan.rejectedBytes, countStyle: .file)))\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:461"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:467"
   },
   {
     "key": "%1$@ repeats",
@@ -1356,7 +1356,7 @@
   {
     "key": "%1$@ seconds",
     "source": "\"\\(Int(value)) seconds\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:379"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:385"
   },
   {
     "key": "%1$@ selected",
@@ -1436,12 +1436,12 @@
   {
     "key": "%1$@ to %2$@: the light falls %3$@ over %4$@ frames",
     "source": "\"\\(from) to \\(to): the light falls \\(change) over \\(count) frames\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:493"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:499"
   },
   {
     "key": "%1$@ to %2$@: the light rises %3$@ over %4$@ frames",
     "source": "\"\\(from) to \\(to): the light rises \\(change) over \\(count) frames\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:494"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:500"
   },
   {
     "key": "%1$@ to check",
@@ -1456,18 +1456,18 @@
   {
     "key": "%1$@ to pick",
     "source": "\"\\(picked.formatted()) to pick\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:386",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:392",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:386",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:392",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:373"
     ]
   },
   {
     "key": "%1$@ to reject",
     "source": "\"\\(rejected.formatted()) to reject\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:385",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:391",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:385",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:391",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:374"
     ]
   },
@@ -1529,12 +1529,12 @@
       "Sources/CevicheMac/Components/ZoomCanvas.swift:178",
       "Sources/CevicheMac/Export/ExportOptions.swift:102",
       "Sources/CevicheMac/Export/WatermarkEditor.swift:216",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:149",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:374",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:463",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:563",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:662",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:348",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:158",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:383",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:469",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:569",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:668",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:354",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:51",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:571",
       "Sources/CevicheCore/Export/ExportPreset.swift:40"
@@ -1610,17 +1610,17 @@
   {
     "key": "%1$@: couldn’t be aligned, used as framed",
     "source": "\"\\(frame.filename): couldn’t be aligned, used as framed\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:666",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:672",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:666",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:454",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:398"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:672",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:460",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:404"
     ]
   },
   {
     "key": "%1$@: magnified %2$@%%, moved %3$@ px, turned %4$@°",
     "source": "\"\\(frame.filename): magnified \\(magnification)%, moved \\(distance) px, turned \\(degrees)°\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:670"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:676"
   },
   {
     "key": "%1$@: missing or oversized mask geometry; group was not applied.",
@@ -1630,12 +1630,12 @@
   {
     "key": "%1$@: moved %2$@ px, turned %3$@°",
     "source": "\"\\(frame.filename): moved \\(distance) px, turned \\(degrees)°\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:457"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:463"
   },
   {
     "key": "%1$@: moved %2$@ px, turned %3$@°, %4$@ EV evened out",
     "source": "\"\\(frame.filename): moved \\(distance) px, turned \\(degrees)°, \\(stops) EV evened out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:402"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:408"
   },
   {
     "key": "%1$@: not a preset, camera profile or LUT",
@@ -1645,7 +1645,7 @@
   {
     "key": "%1$@: sensor moved %2$@, %3$@ px, %4$@ EV evened out",
     "source": "\"\\(frame.filename): sensor moved \\(x), \\(y) px, \\(stops) EV evened out\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:220"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:226"
   },
   {
     "key": "%1$@: the moved file doesn’t match the original.",
@@ -1665,7 +1665,7 @@
   {
     "key": "(base)",
     "source": "\"(base)\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:337"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:343"
   },
   {
     "key": ", %1$@ px",
@@ -1685,16 +1685,16 @@
   {
     "key": "- Base",
     "source": "\"- Base\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:564",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:570",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:564",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:349"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:570",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:355"
     ]
   },
   {
     "key": "0 EV",
     "source": "\"0 EV\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:450"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:456"
   },
   {
     "key": "0 px",
@@ -1719,7 +1719,7 @@
   {
     "key": "1 burst to group",
     "source": "\"1 burst to group\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:387"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:393"
   },
   {
     "key": "1 camera move",
@@ -1739,7 +1739,7 @@
   {
     "key": "1 face from another photo",
     "source": "\"1 face from another photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:203"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:209"
   },
   {
     "key": "1 face to group",
@@ -1794,7 +1794,7 @@
   {
     "key": "1 pair in %1$@",
     "source": "\"1 pair in \\(model.request.title)\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:295"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:301"
   },
   {
     "key": "1 patch too bright to use. Shoot the chart about a stop darker.",
@@ -1837,11 +1837,11 @@
   {
     "key": "1 photo couldn’t be measured",
     "source": "\"1 photo couldn’t be measured\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:390",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:390",
-      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:319",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:446",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
+      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:325",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:452",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:439"
     ]
   },
@@ -1868,7 +1868,7 @@
   {
     "key": "1 photo needs more than the ±5 EV Exposure allows; keep more of the change.",
     "source": "\"1 photo needs more than the ±5 EV Exposure allows; keep more of the change.\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:498"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:504"
   },
   {
     "key": "1 photo not analyzed yet",
@@ -1924,7 +1924,7 @@
   {
     "key": "1 second",
     "source": "\"1 second\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:379"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:385"
   },
   {
     "key": "1 sheet",
@@ -2031,7 +2031,7 @@
   {
     "key": "3D",
     "source": "\"3D\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:477"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:483"
   },
   {
     "key": "3D Relief",
@@ -2110,7 +2110,7 @@
   {
     "key": "A RAW + JPEG pair: shown by its JPEG, and flagged together",
     "source": "\"A RAW + JPEG pair: shown by its JPEG, and flagged together\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:333"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:339"
   },
   {
     "key": "A folder cannot be moved into itself.",
@@ -2135,7 +2135,7 @@
   {
     "key": "A photo adds only light clearly brighter than the base: for light painting on black, where each pass also spills light on the room. Cuts faint light too.",
     "source": "\"A photo adds only light clearly brighter than the base: for light painting on black, where each pass also spills light on the room. Cuts faint light too.\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:290"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:296"
   },
   {
     "key": "A photo developed at a different size from the others.",
@@ -2197,7 +2197,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:269",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:269",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:144",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:153",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:35"
     ]
   },
@@ -2390,21 +2390,21 @@
   {
     "key": "Add to Layer",
     "source": "\"Add to Layer\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:500",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:506",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:500",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:290"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:506",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:296"
     ]
   },
   {
     "key": "Add to Layer: paint over the preview to take those areas from the selected exposure alone",
     "source": "\"Add to Layer: paint over the preview to take those areas from the selected exposure alone\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:291"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:297"
   },
   {
     "key": "Add to Layer: paint over the preview to take those areas from the selected layer’s photo alone",
     "source": "\"Add to Layer: paint over the preview to take those areas from the selected layer’s photo alone\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:501"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:507"
   },
   {
     "key": "Add to Sky",
@@ -2439,7 +2439,7 @@
   {
     "key": "Adds each photo’s light to the base without lifting the shadows’ noise: lighting passes, light painting",
     "source": "\"Adds each photo’s light to the base without lifting the shadows’ noise: lighting passes, light painting\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:339"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:345"
   },
   {
     "key": "Adjust",
@@ -2490,8 +2490,8 @@
     "context": "Sources/CevicheMac/Editor/CompareView.swift:58",
     "uses": [
       "Sources/CevicheMac/Editor/CompareView.swift:58",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:311",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:325",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:320",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:334",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:108",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:329",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:405",
@@ -2569,7 +2569,7 @@
   {
     "key": "Aligned within %1$@ px (median), %2$@ px (95th percentile)",
     "source": "\"Aligned within \\(String(format: \"%.1f\", locale: Locale.current, $0.medianErrorPixels)) px (median), \\(String(format: \"%.1f\", locale: Locale.current, $0.p95ErrorPixels)) px (95th percentile)\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:259"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:265"
   },
   {
     "key": "Aligning again found other lines. Using them clears the lines you chose.",
@@ -2610,7 +2610,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogScaleFilter.swift:112",
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:290",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:307",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:313",
       "Sources/CevicheMac/Editor/EditClipboard.swift:127",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:91",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:141"
@@ -2646,7 +2646,7 @@
   {
     "key": "All in %1$@",
     "source": "\"All in \\(oneFile)\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:169"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:175"
   },
   {
     "key": "All photos are analyzed.",
@@ -2838,7 +2838,7 @@
   {
     "key": "Appeal",
     "source": "\"Appeal\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:639"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:645"
   },
   {
     "key": "Appearance",
@@ -2904,10 +2904,10 @@
   {
     "key": "Apply",
     "source": "\"Apply\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:324",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:330",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:324",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:287",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:330",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:293",
       "Sources/CevicheMac/Editor/ImageCanvas+Framing.swift:18",
       "Sources/CevicheMac/Editor/ImageCanvas+Framing.swift:44",
       "Sources/CevicheMac/Editor/LooksPanel.swift:448",
@@ -2943,12 +2943,12 @@
   {
     "key": "Apply to %1$@ Photos",
     "source": "\"Apply to \\(count) Photos\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:146"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:152"
   },
   {
     "key": "Apply to 1 Photo",
     "source": "\"Apply to 1 Photo\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:146"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:152"
   },
   {
     "key": "Applying camera profile",
@@ -3054,7 +3054,7 @@
   {
     "key": "As Shot",
     "source": "\"As Shot\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:402"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:408"
   },
   {
     "key": "As shot",
@@ -3099,15 +3099,15 @@
   {
     "key": "Auto Crop",
     "source": "\"Auto Crop\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:312"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:318"
   },
   {
     "key": "Auto Frame",
     "source": "\"Auto Frame\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:558",
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:566",
     "uses": [
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:558",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:558"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:566",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:566"
     ]
   },
   {
@@ -3166,7 +3166,7 @@
   {
     "key": "Averages out noise, leaving out what passes through only some photos",
     "source": "\"Averages out noise, leaving out what passes through only some photos\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:337"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:343"
   },
   {
     "key": "Averages the sky again without samples far from the other photos at that spot, such as faint satellites, hot pixels and passing lights. Takes about twice as long to create.",
@@ -3244,12 +3244,12 @@
   {
     "key": "Back to Stack",
     "source": "\"Back to Stack\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:318"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:324"
   },
   {
     "key": "Back to Stack: paint to give an area back to the stack",
     "source": "\"Back to Stack: paint to give an area back to the stack\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:319"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:325"
   },
   {
     "key": "Back to color",
@@ -3305,7 +3305,7 @@
   {
     "key": "Balance each roll on its own. Rolls are told apart by capture order, camera settings and film base.",
     "source": "\"Balance each roll on its own. Rolls are told apart by capture order, camera settings and film base.\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:550"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:558"
   },
   {
     "key": "Balance from the skin and the wall behind the head",
@@ -3319,14 +3319,14 @@
   {
     "key": "Balance the scans as one roll",
     "source": "\"Balance the scans as one roll\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:540"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:548"
   },
   {
     "key": "Balanced",
     "source": "\"Balanced\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:403",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:409",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:403",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:409",
       "Sources/CevicheCore/Adjustments/FilmSimulation.swift:131"
     ]
   },
@@ -3348,17 +3348,17 @@
   {
     "key": "Base",
     "source": "\"Base\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:227",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:233",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:227",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:643",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:429",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:233",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:649",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:435",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:44",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:100",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:231",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:329",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:377",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:358",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:364",
       "Sources/CevicheCore/Stack/PhotoStackTypes.swift:111"
     ]
   },
@@ -3382,11 +3382,11 @@
     "context": "Sources/CevicheMac/Editor/CompareView.swift:48",
     "uses": [
       "Sources/CevicheMac/Editor/CompareView.swift:48",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:151",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:310",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:311",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:321",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:325",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:160",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:319",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:320",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:330",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:334",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:107",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:123",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:508",
@@ -3411,12 +3411,12 @@
   {
     "key": "Bends the edges out to fill the frame",
     "source": "\"Bends the edges out to fill the frame\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:309"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:315"
   },
   {
     "key": "Best",
     "source": "\"Best\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:529"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:535"
   },
   {
     "key": "Best Faces",
@@ -3424,7 +3424,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:231",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:231",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:168"
+      "Sources/CevicheMac/Tools/BestFacesView.swift:174"
     ]
   },
   {
@@ -3549,10 +3549,10 @@
   {
     "key": "Blend",
     "source": "\"Blend\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:453",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:459",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:453",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:454"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:459",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:460"
     ]
   },
   {
@@ -3690,7 +3690,7 @@
   {
     "key": "Boundary Warp",
     "source": "\"Boundary Warp\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:306"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:312"
   },
   {
     "key": "Bright",
@@ -3715,17 +3715,17 @@
   {
     "key": "Brightness",
     "source": "\"Brightness\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:636"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:642"
   },
   {
     "key": "Bring Light Back",
     "source": "\"Bring Light Back\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:311"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:317"
   },
   {
     "key": "Bring Light Back: paint to use a photo’s light again where it was taken out",
     "source": "\"Bring Light Back: paint to use a photo’s light again where it was taken out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:312"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:318"
   },
   {
     "key": "Brings out fainter spots, and more noise",
@@ -3780,7 +3780,7 @@
   {
     "key": "Brushed in",
     "source": "\"Brushed in\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:363"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:369"
   },
   {
     "key": "Buildings",
@@ -4039,27 +4039,50 @@
   {
     "key": "Can’t Combine These Photos",
     "source": "\"Can’t Combine These Photos\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:141"
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:439",
+    "uses": [
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:439",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:141"
+    ]
   },
   {
     "key": "Can’t Cull These Photos",
     "source": "\"Can’t Cull These Photos\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:280"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:252",
+    "uses": [
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:252",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:286",
+      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:45",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:91"
+    ]
+  },
+  {
+    "key": "Can’t Deflicker These Photos",
+    "source": "\"Can’t Deflicker These Photos\"",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:94"
   },
   {
     "key": "Can’t Filter This Photo",
     "source": "\"Can’t Filter This Photo\"",
-    "context": "Sources/CevicheMac/Tools/FiltersDialog.swift:38"
+    "context": "Sources/CevicheMac/Tools/FiltersDialog.swift:38",
+    "uses": [
+      "Sources/CevicheMac/Tools/FiltersDialog.swift:38",
+      "Sources/CevicheMac/Tools/FiltersModel.swift:439"
+    ]
   },
   {
     "key": "Can’t Merge These Photos",
     "source": "\"Can’t Merge These Photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:215",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:143",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:215",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:222",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:294",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:145"
+      "Sources/CevicheMac/Tools/BestFacesView.swift:143",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:221",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:143",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:228",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:226",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:300",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:77",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:151"
     ]
   },
   {
@@ -4074,10 +4097,12 @@
   {
     "key": "Can’t Stack These Photos",
     "source": "\"Can’t Stack These Photos\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:386",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:278",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:386",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:266"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:278",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:392",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:198",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:272"
     ]
   },
   {
@@ -4270,7 +4295,7 @@
   {
     "key": "Changed here",
     "source": "\"Changed here\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:620"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:628"
   },
   {
     "key": "Channel",
@@ -4762,7 +4787,7 @@
   {
     "key": "Click or drag to choose the part shown at full size",
     "source": "\"Click or drag to choose the part shown at full size\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:362"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:371"
   },
   {
     "key": "Click something that should be neutral gray",
@@ -4792,12 +4817,12 @@
   {
     "key": "Click to brush this photo in. %1$@",
     "source": "\"Click to brush this photo in. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:394"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
   },
   {
     "key": "Click to brush this photo’s light. %1$@",
     "source": "\"Click to brush this photo’s light. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:394"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
   },
   {
     "key": "Click to type a value",
@@ -4807,7 +4832,7 @@
   {
     "key": "Click to use as the base. %1$@",
     "source": "\"Click to use as the base. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:394"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
   },
   {
     "key": "Clients using the old token are refused until they get the new one.",
@@ -4817,9 +4842,9 @@
   {
     "key": "Clipped",
     "source": "\"Clipped\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:637",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:643",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:637",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:643",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:87"
     ]
   },
@@ -5088,7 +5113,7 @@
       "Sources/CevicheMac/Catalog/PhotoBrowsing.swift:80",
       "Sources/CevicheMac/Editor/CompareView.swift:31",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:15",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:148",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:157",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:119",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:508",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:207"
@@ -5158,7 +5183,7 @@
   {
     "key": "Confidence",
     "source": "\"Confidence\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:476"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:482"
   },
   {
     "key": "Connect a camera and turn it on. For a memory card, use Import from Folder…",
@@ -5220,12 +5245,12 @@
   {
     "key": "Convert %1$@ Negatives",
     "source": "\"Convert \\(count) Negatives\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:394"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:402"
   },
   {
     "key": "Convert 1 Negative",
     "source": "\"Convert 1 Negative\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:394"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:402"
   },
   {
     "key": "Convert Negative",
@@ -5233,7 +5258,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:278",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:278",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:393"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:401"
     ]
   },
   {
@@ -5259,7 +5284,7 @@
   {
     "key": "Convert this scan",
     "source": "\"Convert this scan\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:641"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:649"
   },
   {
     "key": "Converting %1$@",
@@ -5507,7 +5532,7 @@
   {
     "key": "Correct Focus Breathing",
     "source": "\"Correct Focus Breathing\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:456"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:462"
   },
   {
     "key": "Correct along guides drawn on the photo",
@@ -5575,7 +5600,11 @@
   {
     "key": "Couldn’t Convert the Negatives",
     "source": "\"Couldn’t Convert the Negatives\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:39"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:39",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:39",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:264"
+    ]
   },
   {
     "key": "Couldn’t Correct Faces",
@@ -5699,6 +5728,11 @@
     ]
   },
   {
+    "key": "Couldn’t Make an ID Photo",
+    "source": "\"Couldn’t Make an ID Photo\"",
+    "context": "Sources/CevicheMac/Tools/IDPhotoSession.swift:87"
+  },
+  {
     "key": "Couldn’t Merge the Photos",
     "source": "\"Couldn’t Merge the Photos\"",
     "context": "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:226"
@@ -5765,7 +5799,11 @@
   {
     "key": "Couldn’t Reduce Noise",
     "source": "\"Couldn’t Reduce Noise\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:34"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:34",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:34",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:89"
+    ]
   },
   {
     "key": "Couldn’t Relink the Original",
@@ -5843,15 +5881,15 @@
   {
     "key": "Couldn’t align %1$@; merged as framed",
     "source": "\"Couldn’t align \\(unaligned.joined(separator: \", \")); merged as framed\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:192"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:198"
   },
   {
     "key": "Couldn’t align %1$@; stacked as framed",
     "source": "\"Couldn’t align \\(unaligned.joined(separator: \", \")); stacked as framed\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:342",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:348",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:342",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:238"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:348",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:244"
     ]
   },
   {
@@ -5955,9 +5993,9 @@
     "context": "Sources/CevicheMac/Tools/FocusStackView.swift:161",
     "uses": [
       "Sources/CevicheMac/Tools/FocusStackView.swift:161",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:388",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:394",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:74",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:223",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:229",
       "Sources/CevicheMac/Tools/NightSkyModel.swift:213",
       "Sources/CevicheMac/Tools/NightSkyModel.swift:217",
       "Sources/CevicheMac/Tools/NightSkyModel.swift:294",
@@ -5965,9 +6003,9 @@
       "Sources/CevicheMac/Tools/NightSkyModel.swift:351",
       "Sources/CevicheMac/Tools/NightSkyView.swift:144",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:173",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:295",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:301",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:122",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:267",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:273",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:48"
     ]
   },
@@ -6049,7 +6087,7 @@
   {
     "key": "Crop to Common Area",
     "source": "\"Crop to Common Area\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:458"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:464"
   },
   {
     "key": "Crop with rotation, flips or perspective was not applied; it needs manual alignment.",
@@ -6078,12 +6116,12 @@
   {
     "key": "Crops to the area every included photo covers",
     "source": "\"Crops to the area every included photo covers\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:459"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:465"
   },
   {
     "key": "Crops to the largest rectangle the photos cover",
     "source": "\"Crops to the largest rectangle the photos cover\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:314"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:320"
   },
   {
     "key": "Cross Processing",
@@ -6192,7 +6230,7 @@
   {
     "key": "Cylindrical keeps verticals straight in wide panoramas; Spherical suits tall and whole-sky ones; Perspective keeps every straight line straight, for narrower ones.",
     "source": "\"Cylindrical keeps verticals straight in wide panoramas; Spherical suits tall and whole-sky ones; Perspective keeps every straight line straight, for narrower ones.\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:343"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:349"
   },
   {
     "key": "DNG compression failed.",
@@ -6286,12 +6324,12 @@
   {
     "key": "Deghost",
     "source": "\"Deghost\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:259",
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:265",
     "uses": [
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:259",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:260",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:326",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:327"
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:265",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:266",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:332",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:333"
     ]
   },
   {
@@ -6479,9 +6517,9 @@
   {
     "key": "Depth",
     "source": "\"Depth\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:475",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:481",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:475",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:481",
       "Sources/CevicheCore/Analysis/BundledModels.swift:104",
       "Sources/CevicheCore/Masks/Masks.swift:9"
     ]
@@ -6562,7 +6600,7 @@
   {
     "key": "Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only.",
     "source": "\"Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only.\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:379"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:388"
   },
   {
     "key": "Developed without %1$@: the filters do that.",
@@ -6598,10 +6636,10 @@
   {
     "key": "Developing %1$@…",
     "source": "\"Developing \\(model.asset.filename)…\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:244",
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:253",
     "uses": [
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:244",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:406"
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:253",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:414"
     ]
   },
   {
@@ -6636,7 +6674,7 @@
   {
     "key": "Different film base - converted on its own",
     "source": "\"Different film base - converted on its own\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:627"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:635"
   },
   {
     "key": "Diffuser",
@@ -6763,7 +6801,7 @@
   {
     "key": "Don’t Merge",
     "source": "\"Don’t Merge\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:193"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:199"
   },
   {
     "key": "Don’t enlarge",
@@ -6904,17 +6942,17 @@
   {
     "key": "Drag the target to set a frame's light. Double-click a keyframe to remove it.",
     "source": "\"Drag the target to set a frame's light. Double-click a keyframe to remove it.\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:300"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:306"
   },
   {
     "key": "Drag to look around. \\ shows Before.",
     "source": "\"Drag to look around. \\\\ shows Before.\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:267"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:276"
   },
   {
     "key": "Drag to orbit; scroll to zoom. Gaps mark missing focus evidence or depth jumps.",
     "source": "\"Drag to orbit; scroll to zoom. Gaps mark missing focus evidence or depth jumps.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:429"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:435"
   },
   {
     "key": "Drag to resize - double-click to reset",
@@ -7159,7 +7197,7 @@
   {
     "key": "Edge-Aware takes each area from the photo that is sharpest there, with joins that follow the picture’s edges. Multiscale blends every detail size separately, for comparison; it can leave halos beside depth edges.",
     "source": "\"Edge-Aware takes each area from the photo that is sharpest there, with joins that follow the picture’s edges. Multiscale blends every detail size separately, for comparison; it can leave halos beside depth edges.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:455"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:461"
   },
   {
     "key": "Edit In",
@@ -7483,7 +7521,7 @@
   {
     "key": "Every face comes from %1$@, so the result is a copy of that photo.",
     "source": "\"Every face comes from \\(model.merger?.names[model.base] ?? \"\"), so the result is a copy of that photo.\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:195"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:201"
   },
   {
     "key": "Every feature stays free. Pro removes the badge.",
@@ -7503,12 +7541,12 @@
   {
     "key": "Everyone looks good in %1$@",
     "source": "\"Everyone looks good in \\(merger.names[best])\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:202"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:208"
   },
   {
     "key": "Everyone looks good in this photo",
     "source": "\"Everyone looks good in this photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:235"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:241"
   },
   {
     "key": "Everything Is Sky",
@@ -7861,9 +7899,9 @@
       "Sources/CevicheMac/Editor/FilmPanel.swift:91",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:327",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:328",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:219",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:330",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:431",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:225",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:336",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:437",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:216",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:75"
     ]
@@ -7958,9 +7996,9 @@
   {
     "key": "Eyes look closed",
     "source": "\"Eyes look closed\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:347",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:353",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:347",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:353",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:549",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:691",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:740",
@@ -8065,7 +8103,7 @@
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:367",
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:484",
       "Sources/CevicheMac/Catalog/PeopleView.swift:296",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:638"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:644"
     ]
   },
   {
@@ -8138,7 +8176,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:91",
       "Sources/CevicheMac/Components/FailureAlert.swift:138",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:189",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:195",
       "Sources/CevicheCore/Metadata/PhotoMetadata.swift:95"
     ]
   },
@@ -8170,7 +8208,7 @@
   {
     "key": "Fill Edges",
     "source": "\"Fill Edges\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:315"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:321"
   },
   {
     "key": "Fill Gaps",
@@ -8185,7 +8223,7 @@
   {
     "key": "Fills the empty edges with AI fill",
     "source": "\"Fills the empty edges with AI fill\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:319"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:325"
   },
   {
     "key": "Film",
@@ -8201,7 +8239,7 @@
   {
     "key": "Film base - click to measure it again",
     "source": "\"Film base - click to measure it again\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:530"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:538"
   },
   {
     "key": "Film grain",
@@ -8291,7 +8329,7 @@
   {
     "key": "Find Flawed Photos",
     "source": "\"Find Flawed Photos\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:176"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:182"
   },
   {
     "key": "Find Flawed Photos…",
@@ -8425,7 +8463,7 @@
   {
     "key": "First → Last",
     "source": "\"First → Last\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:420"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:426"
   },
   {
     "key": "Fit",
@@ -8436,8 +8474,8 @@
       "Sources/CevicheMac/Components/ZoomCanvas.swift:180",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:64",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:72",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:423",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:423",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:429",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:429",
       "Sources/CevicheMac/Tools/IDPhotoIssues.swift:11"
     ]
   },
@@ -8501,7 +8539,7 @@
   {
     "key": "Flag the ticked photos as rejected; nothing is deleted",
     "source": "\"Flag the ticked photos as rejected; nothing is deleted\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:190"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:196"
   },
   {
     "key": "Flagged",
@@ -8529,7 +8567,7 @@
   {
     "key": "Flicker",
     "source": "\"Flicker\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:466"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:472"
   },
   {
     "key": "Flip horizontal",
@@ -8537,7 +8575,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:30",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:30",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:565"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:573"
     ]
   },
   {
@@ -8546,7 +8584,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:31",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:31",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:568"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:576"
     ]
   },
   {
@@ -8599,7 +8637,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:224",
       "Sources/CevicheMac/Catalog/LatentDetailView.swift:78",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:313"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:319"
     ]
   },
   {
@@ -8615,12 +8653,12 @@
   {
     "key": "Focus evidence from sharpness and agreement. Hatching marks missing focus evidence.",
     "source": "\"Focus evidence from sharpness and agreement. Hatching marks missing focus evidence.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:431"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:437"
   },
   {
     "key": "Focus position in capture order, not physical distance. Hatching marks missing focus evidence.",
     "source": "\"Focus position in capture order, not physical distance. Hatching marks missing focus evidence.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:430"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:436"
   },
   {
     "key": "Focus stack stopped",
@@ -8645,12 +8683,12 @@
   {
     "key": "Fold every burst under its key photo",
     "source": "\"Fold every burst under its key photo\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:348"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:354"
   },
   {
     "key": "Fold the burst under its key photo, flags as they are (G)",
     "source": "\"Fold the burst under its key photo, flags as they are (G)\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:477"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:483"
   },
   {
     "key": "Folder",
@@ -8758,10 +8796,10 @@
   {
     "key": "Frame",
     "source": "\"Frame\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:239",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:245",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:239",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:330",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:245",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:336",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:96",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:97",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:162",
@@ -8814,10 +8852,10 @@
   {
     "key": "Frames Apart",
     "source": "\"Frames Apart\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:365",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:371",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:365",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:367"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:371",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:373"
     ]
   },
   {
@@ -8869,7 +8907,7 @@
     "context": "Sources/CevicheMac/Tools/FocusStackInspectionCanvas.swift:19",
     "uses": [
       "Sources/CevicheMac/Tools/FocusStackInspectionCanvas.swift:19",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:367"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:373"
     ]
   },
   {
@@ -8984,12 +9022,12 @@
   {
     "key": "Go back to the suggested decisions",
     "source": "\"Go back to the suggested decisions\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:451"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:457"
   },
   {
     "key": "Go back to the suggested faces",
     "source": "\"Go back to the suggested faces\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:272"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:278"
   },
   {
     "key": "Go to Date",
@@ -9123,8 +9161,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:241",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:242",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:284",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:285",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:290",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:291",
       "Sources/CevicheCore/Masks/Masks.swift:46"
     ]
   },
@@ -9140,7 +9178,7 @@
   {
     "key": "Group All",
     "source": "\"Group All\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:347"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:353"
   },
   {
     "key": "Group Photo",
@@ -9174,12 +9212,12 @@
   {
     "key": "Group the burst under this photo",
     "source": "\"Group the burst under this photo\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:655"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:661"
   },
   {
     "key": "Grouped",
     "source": "\"Grouped\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:463"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:469"
   },
   {
     "key": "Grouped %1$@ photos",
@@ -9215,7 +9253,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:202",
       "Sources/CevicheMac/Editor/HistogramView.swift:73",
       "Sources/CevicheMac/Export/ExportOptions.swift:44",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:323",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:329",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:38",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:17"
     ]
@@ -9226,7 +9264,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:222",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:222",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:167"
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:173"
     ]
   },
   {
@@ -9522,10 +9560,10 @@
   {
     "key": "Highlight the areas the result takes from %1$@",
     "source": "\"Highlight the areas the result takes from \\(frame.filename)\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:585",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:591",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:585",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:370"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:591",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:376"
     ]
   },
   {
@@ -9608,12 +9646,12 @@
   {
     "key": "How alike neighbouring photos must look to belong to one burst",
     "source": "\"How alike neighbouring photos must look to belong to one burst\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:362"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:368"
   },
   {
     "key": "How far the sensor moved from the first shot, in pixels",
     "source": "\"How far the sensor moved from the first shot, in pixels\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:194"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:200"
   },
   {
     "key": "How firmly the background keeps its lines straight around the people",
@@ -9633,17 +9671,17 @@
   {
     "key": "How much of the change in light to keep. 0% holds it level; 100% leaves it as shot.",
     "source": "\"How much of the change in light to keep. 0% holds it level; 100% leaves it as shot.\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:464"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:470"
   },
   {
     "key": "How much of this photo’s light is used",
     "source": "\"How much of this photo’s light is used\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:391"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:397"
   },
   {
     "key": "How readily a photo counts as blurry, out of focus, badly exposed or blinking",
     "source": "\"How readily a photo counts as blurry, out of focus, badly exposed or blinking\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:313"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:319"
   },
   {
     "key": "Hue",
@@ -9709,7 +9747,7 @@
       "Sources/CevicheMac/Export/WatermarkEditor.swift:63",
       "Sources/CevicheMac/Export/WatermarkEditor.swift:185",
       "Sources/CevicheMac/Export/WatermarkPreferences.swift:64",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:473"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:479"
     ]
   },
   {
@@ -9988,12 +10026,12 @@
   {
     "key": "Include in Stack",
     "source": "\"Include in Stack\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:377"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:383"
   },
   {
     "key": "Include photos with this flaw",
     "source": "\"Include photos with this flaw\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:210"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:216"
   },
   {
     "key": "Include the photo to see its layer.",
@@ -10003,7 +10041,7 @@
   {
     "key": "Include this exposure in the merge",
     "source": "\"Include this exposure in the merge\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:436"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:442"
   },
   {
     "key": "Include this photo",
@@ -10013,10 +10051,10 @@
   {
     "key": "Include this photo in the stack",
     "source": "\"Include this photo in the stack\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:650",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:656",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:650",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:384"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:656",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:390"
     ]
   },
   {
@@ -10466,10 +10504,10 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:132",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:132",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:414",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:494",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:508",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:517"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:420",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:502",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:516",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:525"
     ]
   },
   {
@@ -10559,12 +10597,12 @@
   {
     "key": "Join Previous Roll",
     "source": "\"Join Previous Roll\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:634"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:642"
   },
   {
     "key": "Join this group to the one above",
     "source": "\"Join this group to the one above\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:474"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:480"
   },
   {
     "key": "Keep JPEG",
@@ -10594,7 +10632,7 @@
   {
     "key": "Keep change",
     "source": "\"Keep change\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:460"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:466"
   },
   {
     "key": "Keep empty corners outside the crop",
@@ -10609,12 +10647,12 @@
   {
     "key": "Keep the framing and exposure of this photo",
     "source": "\"Keep the framing and exposure of this photo\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:645"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:651"
   },
   {
     "key": "Keep the scans as one roll",
     "source": "\"Keep the scans as one roll\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:553"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:561"
   },
   {
     "key": "Keep thumbnails up to",
@@ -10624,12 +10662,12 @@
   {
     "key": "Keeps the brightest value: light and star trails",
     "source": "\"Keeps the brightest value: light and star trails\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:341"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:347"
   },
   {
     "key": "Keeps the darkest value",
     "source": "\"Keeps the darkest value\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:342"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:348"
   },
   {
     "key": "Kept in real time",
@@ -10654,9 +10692,9 @@
   {
     "key": "Key Photo",
     "source": "\"Key Photo\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:558",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:564",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:558",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:564",
       "Sources/CevicheMac/Tools/TimelapseFilmstrip.swift:151"
     ]
   },
@@ -10668,16 +10706,16 @@
   {
     "key": "Keyframe",
     "source": "\"Keyframe\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:213",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:219",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:213",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:434"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:219",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:440"
     ]
   },
   {
     "key": "Keyframes",
     "source": "\"Keyframes\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:474"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:480"
   },
   {
     "key": "Keyline",
@@ -10866,10 +10904,10 @@
   {
     "key": "Layers",
     "source": "\"Layers\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:523",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:529",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:523",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:307"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:529",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:313"
     ]
   },
   {
@@ -10903,15 +10941,15 @@
   {
     "key": "Leave Out of Merge",
     "source": "\"Leave Out of Merge\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:363"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:369"
   },
   {
     "key": "Leave Out of Stack",
     "source": "\"Leave Out of Stack\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:578",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:584",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:578",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:374"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:584",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:380"
     ]
   },
   {
@@ -10922,17 +10960,17 @@
   {
     "key": "Leave every burst as it is",
     "source": "\"Leave every burst as it is\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:350"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:356"
   },
   {
     "key": "Leave out photos that only have this flaw",
     "source": "\"Leave out photos that only have this flaw\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:210"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:216"
   },
   {
     "key": "Leave the burst as it is (S)",
     "source": "\"Leave the burst as it is (S)\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:479"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:485"
   },
   {
     "key": "Leave the selected lines out of the result (X)",
@@ -10942,12 +10980,12 @@
   {
     "key": "Leave this exposure out of the merge (⌫)",
     "source": "\"Leave this exposure out of the merge (⌫)\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:357"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:363"
   },
   {
     "key": "Leave this photo out of the stack (⌫)",
     "source": "\"Leave this photo out of the stack (⌫)\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:572"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:578"
   },
   {
     "key": "Leaves out offline photos, photos without a capture time, repeats of the same moment, photos from another camera or of another size, and frames out of line. Gaps, bursts and camera moves stay; Restore brings everything back.",
@@ -10976,7 +11014,7 @@
   {
     "key": "Left out, original offline: %1$@",
     "source": "\"Left out, original offline: \\(TimelapseDialog.list(model.offline))\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:503"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:509"
   },
   {
     "key": "Legacy Exposure was approximated as exposure EV.",
@@ -11126,7 +11164,7 @@
       "Sources/CevicheMac/Editor/FacePanel.swift:18",
       "Sources/CevicheMac/Editor/FilmPanel.swift:75",
       "Sources/CevicheMac/Editor/FilmPanel.swift:75",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:218",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:224",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:17",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:25"
@@ -11140,7 +11178,7 @@
   {
     "key": "Light (EV)",
     "source": "\"Light (EV)\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:239"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:245"
   },
   {
     "key": "Light Blue",
@@ -11170,7 +11208,7 @@
   {
     "key": "Light change to keep",
     "source": "\"Light change to keep\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:462"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:468"
   },
   {
     "key": "Lighten",
@@ -11440,7 +11478,7 @@
   {
     "key": "Looking for Bursts…",
     "source": "\"Looking for Bursts…\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:408"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:414"
   },
   {
     "key": "Looking for Faces…",
@@ -11450,7 +11488,7 @@
   {
     "key": "Looking for Flaws…",
     "source": "\"Looking for Flaws…\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:220"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:226"
   },
   {
     "key": "Looking for photos…",
@@ -11472,7 +11510,7 @@
   {
     "key": "Looking up or down",
     "source": "\"Looking up or down\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:349"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:355"
   },
   {
     "key": "Looks",
@@ -11515,7 +11553,7 @@
   {
     "key": "Low → High",
     "source": "\"Low → High\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:420"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:426"
   },
   {
     "key": "Lowest First",
@@ -11621,10 +11659,10 @@
   {
     "key": "Make Key Photo",
     "source": "\"Make Key Photo\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:578",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:584",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:578",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:653",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:584",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:659",
       "Sources/CevicheMac/Tools/TimelapseFilmstrip.swift:65",
       "Sources/CevicheMac/Tools/TimelapseFilmstrip.swift:167"
     ]
@@ -11826,7 +11864,7 @@
   {
     "key": "Matches the small change in magnification that focusing causes, so details line up from photo to photo",
     "source": "\"Matches the small change in magnification that focusing causes, so details line up from photo to photo\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:457"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:463"
   },
   {
     "key": "Matching %1$@ of %2$@",
@@ -11903,25 +11941,25 @@
   {
     "key": "Measured",
     "source": "\"Measured\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:211"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:217"
   },
   {
     "key": "Measuring %1$@ of %2$@",
     "source": "\"Measuring \\(measuring.done + 1) of \\(measuring.total)\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:546"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:554"
   },
   {
     "key": "Measuring %1$@ of %2$@ in %3$@…",
     "source": "\"Measuring \\(done.formatted()) of \\(total.formatted()) in \\(model.request.title)…\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:293"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:299"
   },
   {
     "key": "Measuring %1$@ of %2$@ photos in %3$@…",
     "source": "\"Measuring \\(done.formatted()) of \\(total.formatted()) photos in \\(model.request.title)…\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:331",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:337",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:331",
-      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:195"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:337",
+      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:201"
     ]
   },
   {
@@ -11951,7 +11989,7 @@
   {
     "key": "Measuring the light of %1$@ of %2$@ photos…",
     "source": "\"Measuring the light of \\(done) of \\(model.frames.count) photos…\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:153"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:159"
   },
   {
     "key": "Median",
@@ -11994,13 +12032,13 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:76",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:102",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:168",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:191",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:314",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:168",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:174",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:197",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:320",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:174",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:179",
       "Sources/CevicheMac/Tools/NightSkyView.swift:37",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:251"
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:257"
     ]
   },
   {
@@ -12047,12 +12085,12 @@
   {
     "key": "Merge Without Swapping Faces?",
     "source": "\"Merge Without Swapping Faces?\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:190"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:196"
   },
   {
     "key": "Merge to DNG",
     "source": "\"Merge to DNG\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:99"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:105"
   },
   {
     "key": "Merge to HDR…",
@@ -12067,7 +12105,7 @@
   {
     "key": "Merge to JPEG",
     "source": "\"Merge to JPEG\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:98"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:104"
   },
   {
     "key": "Merge to Panorama…",
@@ -12082,28 +12120,28 @@
   {
     "key": "Merge to TIFF",
     "source": "\"Merge to TIFF\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:170",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:176",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:170",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:315",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:169",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:176",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:321",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:175",
       "Sources/CevicheMac/Tools/NightSkyView.swift:107",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:95"
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:101"
     ]
   },
   {
     "key": "Merge with Above",
     "source": "\"Merge with Above\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:473",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:479",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:473",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:592"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:479",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:598"
     ]
   },
   {
     "key": "Merges each position’s bracket to HDR, then stitches",
     "source": "\"Merges each position’s bracket to HDR, then stitches\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:324"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:330"
   },
   {
     "key": "Merging %1$@ photos",
@@ -12299,10 +12337,10 @@
   {
     "key": "Mode",
     "source": "\"Mode\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:275",
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:281",
     "uses": [
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:275",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:276"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:281",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:282"
     ]
   },
   {
@@ -12595,7 +12633,7 @@
   {
     "key": "Nearly Identical",
     "source": "\"Nearly Identical\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:361"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:367"
   },
   {
     "key": "Negative",
@@ -12762,9 +12800,9 @@
   {
     "key": "Next photo",
     "source": "\"Next photo\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:183",
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:192",
     "uses": [
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:183",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:192",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:213"
     ]
   },
@@ -12847,7 +12885,7 @@
   {
     "key": "No Bursts",
     "source": "\"No Bursts\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:408"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:414"
   },
   {
     "key": "No Camera Found",
@@ -12902,7 +12940,7 @@
   {
     "key": "No Flaws Found",
     "source": "\"No Flaws Found\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:220"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:226"
   },
   {
     "key": "No Imported Photos",
@@ -12971,7 +13009,7 @@
     "uses": [
       "Sources/CevicheMac/Culling/CatalogModel+Culling.swift:68",
       "Sources/CevicheMac/Culling/CatalogModel+Culling.swift:77",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:327"
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:333"
     ]
   },
   {
@@ -13104,7 +13142,7 @@
   {
     "key": "No flags changed",
     "source": "\"No flags changed\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:219"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:225"
   },
   {
     "key": "No focal length in its EXIF",
@@ -13200,7 +13238,7 @@
   {
     "key": "No pairs set to %1$@",
     "source": "\"No pairs set to \\($0.title)\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:327"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:333"
   },
   {
     "key": "No people found",
@@ -13336,7 +13374,7 @@
   {
     "key": "Noise reduction strength",
     "source": "\"Noise reduction strength\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:373"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:382"
   },
   {
     "key": "None",
@@ -13350,7 +13388,7 @@
       "Sources/CevicheMac/Editor/EditClipboard.swift:130",
       "Sources/CevicheMac/Export/WatermarkControls.swift:64",
       "Sources/CevicheMac/Export/WatermarkControls.swift:65",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:476",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:482",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:72",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:77"
     ]
@@ -13453,7 +13491,7 @@
   {
     "key": "Not found in %1$@",
     "source": "\"Not found in \\(merger.names[f])\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:332"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:338"
   },
   {
     "key": "Not measured",
@@ -13511,7 +13549,7 @@
   {
     "key": "Nothing is deleted",
     "source": "\"Nothing is deleted\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:288"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:294"
   },
   {
     "key": "Nothing is running.",
@@ -13521,7 +13559,7 @@
   {
     "key": "Nothing moved between the photos",
     "source": "\"Nothing moved between the photos\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:127"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:133"
   },
   {
     "key": "Nothing to Show",
@@ -13531,10 +13569,10 @@
   {
     "key": "Nothing to change",
     "source": "\"Nothing to change\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:395",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:401",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:395",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:456"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:401",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:462"
     ]
   },
   {
@@ -13751,7 +13789,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/RetouchPanel.swift:332",
       "Sources/CevicheMac/Export/WatermarkEditor.swift:87",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:421"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:427"
     ]
   },
   {
@@ -14043,10 +14081,10 @@
   {
     "key": "Overlaps",
     "source": "\"Overlaps\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:279",
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:285",
     "uses": [
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:279",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:280"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:285",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:286"
     ]
   },
   {
@@ -14067,7 +14105,7 @@
   {
     "key": "Paint over a halo to repair it from an aligned source. No layer selection needed.",
     "source": "\"Paint over a halo to repair it from an aligned source. No layer selection needed.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:498"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:504"
   },
   {
     "key": "Paint over the preview to keep those areas out of the sky, even with Everything Is Sky",
@@ -14097,10 +14135,10 @@
   {
     "key": "Painted with the layer brushes",
     "source": "\"Painted with the layer brushes\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:565",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:571",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:565",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:350"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:571",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:356"
     ]
   },
   {
@@ -14110,7 +14148,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:220",
       "Sources/CevicheMac/Catalog/LatentDetailView.swift:77",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:249"
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:255"
     ]
   },
   {
@@ -14141,7 +14179,7 @@
       "Sources/CevicheMac/Editor/FilmPanel.swift:217",
       "Sources/CevicheMac/Editor/PrintProof.swift:225",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:140",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:495"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:503"
     ]
   },
   {
@@ -14262,7 +14300,7 @@
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:32",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:57",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:174",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:267",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:273",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:519",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:26",
       "Sources/CevicheCore/Analysis/BundledModels.swift:104",
@@ -14440,7 +14478,7 @@
   {
     "key": "Photos from one camera taken within this time of each other that show the same scene form a burst",
     "source": "\"Photos from one camera taken within this time of each other that show the same scene form a burst\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:369"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:375"
   },
   {
     "key": "Photos from this import appear here.",
@@ -14476,8 +14514,8 @@
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:188",
       "Sources/CevicheMac/Catalog/CatalogView.swift:288",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:39",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:679",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:685",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:433",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:509",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:837"
@@ -14490,17 +14528,17 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:187",
       "Sources/CevicheMac/Catalog/CatalogView.swift:286",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:678",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:684",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:836"
     ]
   },
   {
     "key": "Pick This",
     "source": "\"Pick This\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:577",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:583",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:577",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:657"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:583",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:663"
     ]
   },
   {
@@ -14526,12 +14564,12 @@
   {
     "key": "Pick film base",
     "source": "\"Pick film base\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:526"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:534"
   },
   {
     "key": "Pick from Bursts",
     "source": "\"Pick from Bursts\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:319"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:325"
   },
   {
     "key": "Pick from Bursts…",
@@ -14551,12 +14589,12 @@
   {
     "key": "Pick one photo from the group",
     "source": "\"Pick one photo from the group\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:345"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:351"
   },
   {
     "key": "Pick this photo, reject the rest of the burst and go to the next (Space)",
     "source": "\"Pick this photo, reject the rest of the burst and go to the next (Space)\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:658"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:664"
   },
   {
     "key": "Picked",
@@ -14568,7 +14606,7 @@
       "Sources/CevicheMac/Catalog/CatalogView.swift:138",
       "Sources/CevicheMac/Catalog/CatalogView.swift:260",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:22",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:544",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:550",
       "Sources/CevicheMac/Editor/CompareView.swift:75",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
@@ -14604,7 +14642,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:228",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:228",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:95"
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:101"
     ]
   },
   {
@@ -14742,12 +14780,12 @@
   {
     "key": "Position %1$@ has %2$@ photos, most have %3$@",
     "source": "\"Position \\(odd + 1) has \\(grouping.groups[odd].count) photos, most have \\(grouping.usualSize)\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:274"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:280"
   },
   {
     "key": "Positions %1$@ and %2$@ show the same view",
     "source": "\"Positions \\(repeated) and \\(repeated + 1) show the same view\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:271"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:277"
   },
   {
     "key": "Possible",
@@ -14876,7 +14914,7 @@
   {
     "key": "Preview: first 4 of 16",
     "source": "\"Preview: first 4 of 16\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:104"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:110"
   },
   {
     "key": "Previous Photo",
@@ -14895,9 +14933,9 @@
   {
     "key": "Previous photo",
     "source": "\"Previous photo\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:181",
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:190",
     "uses": [
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:181",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:190",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:212"
     ]
   },
@@ -14918,7 +14956,7 @@
       "Sources/CevicheMac/Editor/FilmPanel.swift:83",
       "Sources/CevicheMac/Editor/FilmPanel.swift:237",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:210",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:511"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:519"
     ]
   },
   {
@@ -15031,7 +15069,7 @@
   {
     "key": "Projection",
     "source": "\"Projection\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:302"
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:308"
   },
   {
     "key": "Proof",
@@ -15098,7 +15136,7 @@
   {
     "key": "Put the other faces into this photo",
     "source": "\"Put the other faces into this photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:235"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:241"
   },
   {
     "key": "Put the photo back in the library (⌘⌫)",
@@ -15165,7 +15203,7 @@
   {
     "key": "RAW+JPEG",
     "source": "\"RAW+JPEG\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:331"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:337"
   },
   {
     "key": "RGB",
@@ -15284,9 +15322,9 @@
   {
     "key": "Reading capture times…",
     "source": "\"Reading capture times…\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:151",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:157",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:151",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:157",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:83"
     ]
   },
@@ -15505,13 +15543,13 @@
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:338",
       "Sources/CevicheMac/Editor/EditorView.swift:23",
       "Sources/CevicheMac/Tools/FocusStackView.swift:34",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:493",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:285",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:376",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:575",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:499",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:291",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:384",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:583",
       "Sources/CevicheMac/Tools/NightSkyView.swift:10",
       "Sources/CevicheMac/Tools/NightSkyView.swift:262",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:305"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:311"
     ]
   },
   {
@@ -15531,12 +15569,12 @@
   {
     "key": "Redoes what Undo took back (⇧⌘Z)",
     "source": "\"Redoes what Undo took back (⇧⌘Z)\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:494",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:500",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:494",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:286",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:500",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:292",
       "Sources/CevicheMac/Tools/NightSkyView.swift:263",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:306"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:312"
     ]
   },
   {
@@ -15547,12 +15585,12 @@
   {
     "key": "Reduce Noise for %1$@ Photos",
     "source": "\"Reduce Noise for \\(count) Photos\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:145"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:154"
   },
   {
     "key": "Reduce Noise for 1 Photo",
     "source": "\"Reduce Noise for 1 Photo\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:145"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:154"
   },
   {
     "key": "Reduce shine",
@@ -15591,14 +15629,14 @@
   {
     "key": "Ref",
     "source": "\"Ref\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:369"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:375"
   },
   {
     "key": "Reference",
     "source": "\"Reference\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:249",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:255",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:249",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:255",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:256",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:321"
     ]
@@ -15660,8 +15698,8 @@
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:188",
       "Sources/CevicheMac/Catalog/CatalogView.swift:288",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:40",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:679",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:685",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:434",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:510",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:837"
@@ -15670,7 +15708,7 @@
   {
     "key": "Reject %1$@ Photos",
     "source": "\"Reject \\(count.formatted()) Photos\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:187"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:193"
   },
   {
     "key": "Reject (X)",
@@ -15679,14 +15717,14 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:187",
       "Sources/CevicheMac/Catalog/CatalogView.swift:286",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:678",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:684",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:836"
     ]
   },
   {
     "key": "Reject 1 Photo",
     "source": "\"Reject 1 Photo\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:187"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:193"
   },
   {
     "key": "Reject Both",
@@ -15708,7 +15746,7 @@
       "Sources/CevicheMac/Catalog/CatalogView.swift:140",
       "Sources/CevicheMac/Catalog/CatalogView.swift:260",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:23",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:544",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:550",
       "Sources/CevicheMac/Editor/CompareView.swift:76",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
@@ -15731,10 +15769,10 @@
   {
     "key": "Relief",
     "source": "\"Relief\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:412",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:418",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:412",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:413"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:418",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:419"
     ]
   },
   {
@@ -15818,10 +15856,10 @@
   {
     "key": "Remove All Keyframes",
     "source": "\"Remove All Keyframes\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:480",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:486",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:480",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:480"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:486",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:486"
     ]
   },
   {
@@ -15846,11 +15884,11 @@
   {
     "key": "Remove Keyframe",
     "source": "\"Remove Keyframe\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:381",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:387",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:381",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:442",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:442"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:387",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:448",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:448"
     ]
   },
   {
@@ -15901,7 +15939,7 @@
   {
     "key": "Remove flicker",
     "source": "\"Remove flicker\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:467"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:473"
   },
   {
     "key": "Remove from Album",
@@ -15926,21 +15964,21 @@
   {
     "key": "Remove from Layer",
     "source": "\"Remove from Layer\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:502",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:508",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:502",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:292"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:508",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:298"
     ]
   },
   {
     "key": "Remove from Layer: paint over the preview to keep the selected exposure out of those areas; the others fill them",
     "source": "\"Remove from Layer: paint over the preview to keep the selected exposure out of those areas; the others fill them\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:293"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:299"
   },
   {
     "key": "Remove from Layer: paint over the preview to take the selected layer’s photo out of those areas; the other photos fill them",
     "source": "\"Remove from Layer: paint over the preview to take the selected layer’s photo out of those areas; the other photos fill them\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:503"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:509"
   },
   {
     "key": "Remove from Library",
@@ -16012,12 +16050,12 @@
   {
     "key": "Removes everything the brush painted",
     "source": "\"Removes everything the brush painted\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:326"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:332"
   },
   {
     "key": "Removes people and traffic that move through the frame",
     "source": "\"Removes people and traffic that move through the frame\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:335"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:341"
   },
   {
     "key": "Removes the areas painted with Use Photo Here",
@@ -16027,12 +16065,12 @@
   {
     "key": "Removes what the brushes painted on the selected layer, so it is as the merge chose it",
     "source": "\"Removes what the brushes painted on the selected layer, so it is as the merge chose it\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:296"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:302"
   },
   {
     "key": "Removes what the brushes painted on the selected layer, so it is as the stack chose it",
     "source": "\"Removes what the brushes painted on the selected layer, so it is as the stack chose it\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:508"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:514"
   },
   {
     "key": "Removing photos…",
@@ -16072,7 +16110,7 @@
   {
     "key": "Render Video",
     "source": "\"Render Video\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:548"
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:555"
   },
   {
     "key": "Render Video…",
@@ -16107,7 +16145,7 @@
   {
     "key": "Repair Edge",
     "source": "\"Repair Edge\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:497"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:503"
   },
   {
     "key": "Repeats",
@@ -16161,10 +16199,10 @@
   {
     "key": "Reset",
     "source": "\"Reset\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:449",
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:455",
     "uses": [
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:449",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:271",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:455",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:277",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590"
     ]
@@ -16202,16 +16240,16 @@
   {
     "key": "Reset All Layers",
     "source": "\"Reset All Layers\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:526",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:532",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:526",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:310"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:532",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:316"
     ]
   },
   {
     "key": "Reset Brush",
     "source": "\"Reset Brush\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:324"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:330"
   },
   {
     "key": "Reset Corners",
@@ -16262,10 +16300,10 @@
   {
     "key": "Reset Layer",
     "source": "\"Reset Layer\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:506",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:512",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:506",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:294"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:512",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:300"
     ]
   },
   {
@@ -16281,10 +16319,10 @@
   {
     "key": "Reset View",
     "source": "\"Reset View\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:416",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:422",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:416",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:416"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:422",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:422"
     ]
   },
   {
@@ -16470,7 +16508,7 @@
   {
     "key": "Roll",
     "source": "\"Roll\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:541"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:549"
   },
   {
     "key": "Rotate",
@@ -16493,7 +16531,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:29",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:29",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:561"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:569"
     ]
   },
   {
@@ -16502,7 +16540,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:28",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:28",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:562"
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:570"
     ]
   },
   {
@@ -16596,7 +16634,7 @@
   {
     "key": "Same Scene",
     "source": "\"Same Scene\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:361"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:367"
   },
   {
     "key": "Same time as the photo before",
@@ -16795,7 +16833,7 @@
   {
     "key": "Saves a DNG beside each original.",
     "source": "\"Saves a DNG beside each original.\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:377"
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:386"
   },
   {
     "key": "Saves a copy beside each original.",
@@ -17059,7 +17097,7 @@
     "context": "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:152",
     "uses": [
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:152",
-      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:312",
+      "Sources/CevicheMac/Culling/ProblemPhotosView.swift:318",
       "Sources/CevicheMac/Editor/DustSection.swift:13",
       "Sources/CevicheMac/Editor/FacePanel.swift:68"
     ]
@@ -17105,7 +17143,7 @@
   {
     "key": "Set the flags and groups shown here; nothing is deleted",
     "source": "\"Set the flags and groups shown here; nothing is deleted\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:325"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:331"
   },
   {
     "key": "Set the flags shown here",
@@ -17222,9 +17260,9 @@
   {
     "key": "Sharpness",
     "source": "\"Sharpness\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:634",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:640",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:634",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:640",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:88",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:93"
     ]
@@ -17232,12 +17270,12 @@
   {
     "key": "Sharpness %1$@ - brightness %2$@ - clipped %3$@ - cast %4$@",
     "source": "\"Sharpness \\(percent(report.peakSharpness ?? report.sharpness)) - brightness \\(percent(report.brightness)) - clipped \\(percent(report.highlights)) - cast \\(percent(report.colorCast.map { $0 * 10 }))\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:420"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:426"
   },
   {
     "key": "Sharpness %1$@ - subject %2$@ - brightness %3$@",
     "source": "\"Sharpness \\(percent(report.sharpness)) - subject \\(percent(report.subjectSharpness)) - brightness \\(percent(report.brightness))\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:291"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:297"
   },
   {
     "key": "Shift keeps a circle - Esc to cancel",
@@ -17277,7 +17315,7 @@
   {
     "key": "Shot",
     "source": "\"Shot\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:188"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:194"
   },
   {
     "key": "Shot at %1$@ mm; only %2$@ mm and wider stretch faces",
@@ -17287,7 +17325,7 @@
   {
     "key": "Shot at a steady interval: grouped rather than picked from, so every frame stays for the timelapse or star trails",
     "source": "\"Shot at a steady interval: grouped rather than picked from, so every frame stays for the timelapse or star trails\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:450"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:456"
   },
   {
     "key": "Shot faster than the rest",
@@ -17297,7 +17335,7 @@
   {
     "key": "Shots",
     "source": "\"Shots\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:167"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:173"
   },
   {
     "key": "Shoulders",
@@ -17399,10 +17437,10 @@
   {
     "key": "Show Motion",
     "source": "\"Show Motion\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:262",
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:268",
     "uses": [
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:262",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:101"
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:268",
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:107"
     ]
   },
   {
@@ -17432,17 +17470,17 @@
   {
     "key": "Show Photo Alone",
     "source": "\"Show Photo Alone\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:321"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:327"
   },
   {
     "key": "Show Photo Here",
     "source": "\"Show Photo Here\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:316"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:322"
   },
   {
     "key": "Show Photo Here: paint where the stack chose wrongly to show one photo there instead. Click a photo below to choose which.",
     "source": "\"Show Photo Here: paint where the stack chose wrongly to show one photo there instead. Click a photo below to choose which.\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:317"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:323"
   },
   {
     "key": "Show Photos",
@@ -17471,7 +17509,7 @@
   {
     "key": "Show all pairs",
     "source": "\"Show all pairs\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:309"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:315"
   },
   {
     "key": "Show all ratings",
@@ -17550,7 +17588,7 @@
   {
     "key": "Shows a moving subject once for every photo, each whole from its own photo",
     "source": "\"Shows a moving subject once for every photo, each whole from its own photo\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:338"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:344"
   },
   {
     "key": "Shows dust as white dots on black (A); Find Dust then searches the map",
@@ -17570,7 +17608,7 @@
   {
     "key": "Shows the brush’s photo alone, to see what it holds",
     "source": "\"Shows the brush’s photo alone, to see what it holds\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:323"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:329"
   },
   {
     "key": "Shows the paper’s white and the ink’s black. The proof looks dimmer than the screen: paper isn’t as white.",
@@ -17597,7 +17635,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:476",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel.swift:476",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:222",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:231",
       "Sources/CevicheMac/Tools/FiltersModel.swift:69",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:270"
     ]
@@ -17625,7 +17663,7 @@
   {
     "key": "Similar Scene",
     "source": "\"Similar Scene\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:361"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:367"
   },
   {
     "key": "Similar Shot",
@@ -17640,7 +17678,7 @@
   {
     "key": "Similarity",
     "source": "\"Similarity\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:361"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:367"
   },
   {
     "key": "Single",
@@ -17710,7 +17748,7 @@
   {
     "key": "Skip All",
     "source": "\"Skip All\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:349"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:355"
   },
   {
     "key": "Skip the photo",
@@ -17809,12 +17847,12 @@
   {
     "key": "Smart Selection",
     "source": "\"Smart Selection\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:504"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:510"
   },
   {
     "key": "Smart Selection: a stroke selects the whole connected area at the depth it touches, with edges that follow the picture. Off, the brushes paint only where they go.",
     "source": "\"Smart Selection: a stroke selects the whole connected area at the depth it touches, with edges that follow the picture. Off, the brushes paint only where they go.\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:505"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:511"
   },
   {
     "key": "Smile",
@@ -17847,8 +17885,8 @@
     "context": "Sources/CevicheMac/Editor/DustSection.swift:42",
     "uses": [
       "Sources/CevicheMac/Editor/DustSection.swift:42",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:469",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:470"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:475",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:476"
     ]
   },
   {
@@ -17859,7 +17897,7 @@
   {
     "key": "Smooths water and clouds and lowers noise",
     "source": "\"Smooths water and clouds and lowers noise\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:336"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:342"
   },
   {
     "key": "Snapshot",
@@ -17893,7 +17931,7 @@
   {
     "key": "Softer than in other photos",
     "source": "\"Softer than in other photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:350"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:356"
   },
   {
     "key": "Softness",
@@ -17933,7 +17971,7 @@
   {
     "key": "Some Pairs Weren’t Tidied",
     "source": "\"Some Pairs Weren’t Tidied\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:221"
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:227"
   },
   {
     "key": "Some Photos Weren’t Changed",
@@ -18032,7 +18070,7 @@
   {
     "key": "Sources",
     "source": "\"Sources\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:474"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:480"
   },
   {
     "key": "Spacing",
@@ -18055,9 +18093,9 @@
   {
     "key": "Split",
     "source": "\"Split\"",
-    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:222",
+    "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:231",
     "uses": [
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:222",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:231",
       "Sources/CevicheMac/Tools/FiltersModel.swift:68",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:270"
     ]
@@ -18065,7 +18103,7 @@
   {
     "key": "Split into %1$@ Rolls",
     "source": "\"Split into \\(model.proposedRolls.count) Rolls\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:551"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:559"
   },
   {
     "key": "Spot",
@@ -18121,7 +18159,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:370",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:110",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:216",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:222",
       "Sources/CevicheCore/Stack/PhotoStackTypes.swift:109"
     ]
   },
@@ -18148,7 +18186,7 @@
   {
     "key": "Stack to TIFF",
     "source": "\"Stack to TIFF\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:218"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:224"
   },
   {
     "key": "Stacking %1$@ photos",
@@ -18191,7 +18229,7 @@
   {
     "key": "Start New Roll Here",
     "source": "\"Start New Roll Here\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:634"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:642"
   },
   {
     "key": "Starting…",
@@ -18211,7 +18249,7 @@
   {
     "key": "Stock",
     "source": "\"Stock\"",
-    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:501"
+    "context": "Sources/CevicheMac/Tools/NegativeDialog.swift:509"
   },
   {
     "key": "Stop",
@@ -18309,7 +18347,7 @@
     "context": "Sources/CevicheMac/Editor/DustSection.swift:38",
     "uses": [
       "Sources/CevicheMac/Editor/DustSection.swift:38",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:371",
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:380",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:524"
     ]
   },
@@ -18341,7 +18379,7 @@
   {
     "key": "Strokes Only",
     "source": "\"Strokes Only\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:289"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:295"
   },
   {
     "key": "Strong",
@@ -18370,9 +18408,9 @@
   {
     "key": "Subject",
     "source": "\"Subject\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:635",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:641",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:635",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:641",
       "Sources/CevicheCore/Masks/Masks.swift:7"
     ]
   },
@@ -18549,17 +18587,17 @@
   {
     "key": "Take Light Out",
     "source": "\"Take Light Out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:313"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:319"
   },
   {
     "key": "Take Light Out: paint where one photo’s light shouldn’t show, such as spill or glare. Click a photo below to choose which.",
     "source": "\"Take Light Out: paint where one photo’s light shouldn’t show, such as spill or glare. Click a photo below to choose which.\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:314"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:320"
   },
   {
     "key": "Take moving things and the exposure from this photo",
     "source": "\"Take moving things and the exposure from this photo\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:431"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:437"
   },
   {
     "key": "Take the ground and the stars’ positions from this photo",
@@ -18573,7 +18611,7 @@
   {
     "key": "Takes each photo’s darker areas over the base",
     "source": "\"Takes each photo’s darker areas over the base\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:340"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:346"
   },
   {
     "key": "Takes each trail’s color whole from the photo where it was brightest, instead of each color channel’s brightest value",
@@ -18596,7 +18634,7 @@
     "context": "Sources/CevicheMac/Editor/AdjustmentTarget.swift:87",
     "uses": [
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:87",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:212"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:218"
     ]
   },
   {
@@ -18697,9 +18735,9 @@
   {
     "key": "The %1$@ model is not installed. Install it in Settings › Models.",
     "source": "\"The \\(BundledModel.inpaint.feature) model is not installed. Install it in Settings › Models.\"",
-    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:320",
+    "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:326",
     "uses": [
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:320",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:326",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:137",
       "Sources/CevicheCore/Analysis/BundledModels.swift:61",
       "Sources/CevicheCore/Analysis/BundledModels.swift:72",
@@ -19210,7 +19248,7 @@
   {
     "key": "The reference keeps its Exposure; the others follow the target. Other edits stay as they are.",
     "source": "\"The reference keeps its Exposure; the others follow the target. Other edits stay as they are.\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:439"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:445"
   },
   {
     "key": "The reference photo’s original isn’t available.",
@@ -19672,15 +19710,15 @@
   {
     "key": "Tick All",
     "source": "\"Tick All\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:315"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:321"
   },
   {
     "key": "Tidy RAW + JPEG Pairs",
     "source": "\"Tidy RAW + JPEG Pairs\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:211",
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:217",
     "uses": [
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:211",
-      "Sources/CevicheMac/Culling/TidyPairsView.swift:275"
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:217",
+      "Sources/CevicheMac/Culling/TidyPairsView.swift:281"
     ]
   },
   {
@@ -19726,7 +19764,7 @@
   {
     "key": "Timelapse",
     "source": "\"Timelapse\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:692"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:698"
   },
   {
     "key": "Timelapse Deflicker",
@@ -19734,7 +19772,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:262",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:262",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:145"
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:151"
     ]
   },
   {
@@ -19784,12 +19822,12 @@
   {
     "key": "Tints the areas taken from the base exposure alone",
     "source": "\"Tints the areas taken from the base exposure alone\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:273"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:279"
   },
   {
     "key": "Tints the areas taken from the base exposure alone (%1$@%% of the photo)",
     "source": "\"Tints the areas taken from the base exposure alone (\\(percent)% of the photo)\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:275"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:281"
   },
   {
     "key": "Tints what is treated as sky and shows the tools that correct it",
@@ -19799,7 +19837,7 @@
   {
     "key": "Tints what moved between the photos; those areas come from one photo alone (%1$@%% of the photo)",
     "source": "\"Tints what moved between the photos; those areas come from one photo alone (\\(percent)% of the photo)\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:129"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:135"
   },
   {
     "key": "Tipped %1$@",
@@ -20117,7 +20155,7 @@
   {
     "key": "Turned away",
     "source": "\"Turned away\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:348"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:354"
   },
   {
     "key": "Two Photos",
@@ -20200,13 +20238,13 @@
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:337",
       "Sources/CevicheMac/Editor/EditorView.swift:22",
       "Sources/CevicheMac/Tools/FocusStackView.swift:33",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:491",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:283",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:375",
-      "Sources/CevicheMac/Tools/NegativeDialog.swift:574",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:497",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:289",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:383",
+      "Sources/CevicheMac/Tools/NegativeDialog.swift:582",
       "Sources/CevicheMac/Tools/NightSkyView.swift:9",
       "Sources/CevicheMac/Tools/NightSkyView.swift:260",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:303"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:309"
     ]
   },
   {
@@ -20226,7 +20264,7 @@
   {
     "key": "Undo the merges in this group",
     "source": "\"Undo the merges in this group\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:470"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:476"
   },
   {
     "key": "Undo the stretch at the sides; verticals stay straight",
@@ -20246,11 +20284,11 @@
   {
     "key": "Undoes the last brush stroke or reset (⌘Z)",
     "source": "\"Undoes the last brush stroke or reset (⌘Z)\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:492",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:498",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:492",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:284",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:304"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:498",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:290",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:310"
     ]
   },
   {
@@ -20297,7 +20335,7 @@
       "Sources/CevicheMac/Catalog/CatalogView.swift:139",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:21",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:41",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:580",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
   },
@@ -20444,7 +20482,7 @@
   {
     "key": "Untick All",
     "source": "\"Untick All\"",
-    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:316"
+    "context": "Sources/CevicheMac/Culling/ProblemPhotosView.swift:322"
   },
   {
     "key": "Untitled",
@@ -20567,16 +20605,16 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:102",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:379",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:371"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:377"
     ]
   },
   {
     "key": "Use as Reference",
     "source": "\"Use as Reference\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:380",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:386",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:380",
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:438",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:386",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:444",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:333"
     ]
   },
@@ -20706,7 +20744,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorViewControls.swift:153",
       "Sources/CevicheMac/Editor/LooksPanel.swift:117",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:470"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:476"
     ]
   },
   {
@@ -20918,7 +20956,7 @@
   {
     "key": "What shows below the sky, which goes on blending: the stack, the median without the people who walked through, or the base photo. The brush changes where.",
     "source": "\"What shows below the sky, which goes on blending: the stack, the median without the people who walked through, or the base photo. The brush changes where.\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:286"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:292"
   },
   {
     "key": "What the two panes show",
@@ -20933,21 +20971,21 @@
   {
     "key": "Where the exposures disagree because something moved, takes that area from the base exposure alone. Higher settings catch smaller changes.",
     "source": "\"Where the exposures disagree because something moved, takes that area from the base exposure alone. Higher settings catch smaller changes.\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:261",
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:267",
     "uses": [
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:261",
-      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:329"
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:267",
+      "Sources/CevicheMac/Tools/PanoramaMergeView.swift:335"
     ]
   },
   {
     "key": "Where the sensor sat for each shot, as the sensor is oriented",
     "source": "\"Where the sensor sat for each shot, as the sensor is oriented\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:175"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:181"
   },
   {
     "key": "Where two subjects overlap, the one that shows. The other is left out whole: brush it in from its photo.",
     "source": "\"Where two subjects overlap, the one that shows. The other is left out whole: brush it in from its photo.\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:281"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:287"
   },
   {
     "key": "Which document are these photos for?",
@@ -21086,7 +21124,7 @@
   {
     "key": "Would show: %1$@",
     "source": "\"Would show: \\(swap.refusals.map(\\.title).joined(separator: \", \"))\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:339"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:345"
   },
   {
     "key": "Writing %1$@",
@@ -21147,7 +21185,7 @@
   {
     "key": "X",
     "source": "\"X\"",
-    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:190"
+    "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:196"
   },
   {
     "key": "XMP",
@@ -21219,7 +21257,7 @@
     "context": "Sources/CevicheMac/Editor/FilmPanel.swift:93",
     "uses": [
       "Sources/CevicheMac/Editor/FilmPanel.swift:93",
-      "Sources/CevicheMac/Tools/PixelShiftView.swift:191"
+      "Sources/CevicheMac/Tools/PixelShiftView.swift:197"
     ]
   },
   {
@@ -21298,7 +21336,7 @@
     "context": "Sources/CevicheMac/Editor/EditorViewControls.swift:70",
     "uses": [
       "Sources/CevicheMac/Editor/EditorViewControls.swift:70",
-      "Sources/CevicheMac/Tools/DenoiseDialog.swift:149"
+      "Sources/CevicheMac/Tools/DenoiseDialog.swift:158"
     ]
   },
   {
@@ -21348,7 +21386,7 @@
   {
     "key": "Zoom to the subject to check its focus",
     "source": "\"Zoom to the subject to check its focus\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:764"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:770"
   },
   {
     "key": "Zoom to this face at actual pixels",
@@ -21384,7 +21422,7 @@
   {
     "key": "another face too close",
     "source": "\"another face too close\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:363"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:369"
   },
   {
     "key": "appearance|Dark",
@@ -21401,36 +21439,36 @@
   {
     "key": "at the edge of the photo",
     "source": "\"at the edge of the photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:359"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:365"
   },
   {
     "key": "burst action|Group",
     "source": "\"Group\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:476",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:482",
     "meaning": "burst action",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:476",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:589"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:482",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:595"
     ]
   },
   {
     "key": "burst action|Skip",
     "source": "\"Skip\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:478",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:484",
     "meaning": "burst action",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:478",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:590"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:484",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:596"
     ]
   },
   {
     "key": "burst action|Split",
     "source": "\"Split\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:469",
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:475",
     "meaning": "burst action",
     "uses": [
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:469",
-      "Sources/CevicheMac/Culling/CullingAssistantView.swift:593"
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:475",
+      "Sources/CevicheMac/Culling/CullingAssistantView.swift:599"
     ]
   },
   {
@@ -21448,7 +21486,7 @@
   {
     "key": "every %1$@",
     "source": "\"every \\(every)\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:692"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:698"
   },
   {
     "key": "exported without its edits (%1$@)",
@@ -21540,22 +21578,22 @@
   {
     "key": "hair, hands or people around moved",
     "source": "\"hair, hands or people around moved\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:366"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:372"
   },
   {
     "key": "head moved",
     "source": "\"head moved\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:364"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:370"
   },
   {
     "key": "head tilted",
     "source": "\"head tilted\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:362"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:368"
   },
   {
     "key": "head turned",
     "source": "\"head turned\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:361"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:367"
   },
   {
     "key": "iCloud Catalog",
@@ -21639,18 +21677,18 @@
   {
     "key": "keyboard key that sets this|Key %1$@",
     "source": "\"Key \\(String($0.key))\"",
-    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:309",
+    "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:315",
     "meaning": "keyboard key that sets this"
   },
   {
     "key": "light differs",
     "source": "\"light differs\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:365"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:371"
   },
   {
     "key": "light varies by %1$@",
     "source": "\"light varies by \\(Self.ev(high - low))\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:182"
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:188"
   },
   {
     "key": "live photo size|Large",
@@ -21703,7 +21741,7 @@
   {
     "key": "moved closer or further",
     "source": "\"moved closer or further\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:360"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:366"
   },
   {
     "key": "night sky|Stars",
@@ -21719,7 +21757,7 @@
   {
     "key": "not found in the base photo",
     "source": "\"not found in the base photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:358"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:364"
   },
   {
     "key": "one photo was just archived, as a short notice|Archived",
@@ -21811,9 +21849,9 @@
   {
     "key": "shot every %1$@",
     "source": "\"shot every \\(TimelapseDialog.duration(interval))\"",
-    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:184",
+    "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:190",
     "uses": [
-      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:184",
+      "Sources/CevicheMac/Tools/ExposureRampDialog.swift:190",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:61"
     ]
   },
@@ -21908,7 +21946,7 @@
   {
     "key": "verb|Stack",
     "source": "\"Stack\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:217",
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:223",
     "meaning": "verb"
   },
   {
@@ -21988,7 +22026,7 @@
   {
     "key": "← → to look through the frames; Make Key Photo to show another",
     "source": "\"← → to look through the frames; Make Key Photo to show another\"",
-    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:571"
+    "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:577"
   },
   {
     "key": "≈ %1$@",

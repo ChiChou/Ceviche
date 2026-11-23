@@ -164,7 +164,7 @@ final class FiltersModel: ObservableObject, ExportTarget {
         guard let catalog, let store = catalog.store else { return }
         let asset = request.assets[selected]
         task = Task {
-            guard let url = try? await catalog.resolveOriginal(asset) else { stage = .failed(L10n.tr("The original isn’t available.")); return }
+            guard let url = try? await catalog.resolveOriginal(asset) else { fail(L10n.tr("The original isn’t available.")); return }
             if url.startAccessingSecurityScopedResource() { access = url }
             do {
                 let (renderer, defaults) = try await Task.detached(priority: .userInitiated) { try RawRenderer.open(url) }.value
@@ -177,7 +177,7 @@ final class FiltersModel: ObservableObject, ExportTarget {
                 render()
                 renderThumbnails(library)
             } catch is CancellationError {
-            } catch { stage = .failed(error.localizedDescription) }
+            } catch { fail(error.localizedDescription) }
         }
     }
     /// What the file gets, less what a preview can't hold.
@@ -431,6 +431,12 @@ final class FiltersModel: ObservableObject, ExportTarget {
             close(catalog: catalog)
             catalog.export(job)
         }
+    }
+    /// The only photo couldn't be read: there is nothing to work with, so the tool closes and says why. With several,
+    /// the failure stays on that photo and the others can still be used.
+    private func fail(_ message: String) {
+        stage = .failed(message)
+        if request.assets.count == 1, let catalog { close(catalog: catalog); catalog.failure = Failure(L10n.tr("Can’t Filter This Photo"), message) }
     }
     func close(catalog: CatalogModel) {
         stop()

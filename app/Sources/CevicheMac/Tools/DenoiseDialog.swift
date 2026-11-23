@@ -84,9 +84,18 @@ final class DenoiseModel: ObservableObject {
                 self.previewer = previewer; overview = previewer.overview; stage = .ready
                 renderCrop()
             } catch {
-                if !Task.isCancelled { stage = .failed(error.localizedDescription) }
+                guard !Task.isCancelled else { return }
+                stage = .failed(error.localizedDescription)
+                if request.assets.count == 1 { close(with: Failure(L10n.tr("Couldn’t Reduce Noise"), error)) }
             }
         }
+    }
+
+    /// The only photo couldn't be read: there is nothing to work with, so the tool closes and says why. With several,
+    /// the failure stays on that photo and the others can still be used.
+    private func close(with failure: Failure) {
+        guard let catalog else { return }
+        stop(); catalog.denoise = nil; catalog.failure = failure
     }
 
     private func renderCrop() {
