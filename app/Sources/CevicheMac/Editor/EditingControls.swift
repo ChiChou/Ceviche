@@ -347,7 +347,7 @@ final class CurveControl: NSView {
     }
 }
 
-/// Two thumbs bound a span of one track, as Lightroom's hue-range controls. Dragging between them moves the span whole.
+/// Two thumbs bound a span of one track, as hue-range controls do. Dragging between them moves the span whole.
 struct RangeSlider: NSViewRepresentable {
     let low: Double
     let high: Double

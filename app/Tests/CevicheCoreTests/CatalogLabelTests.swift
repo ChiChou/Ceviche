@@ -25,12 +25,12 @@ final class CatalogLabelTests: XCTestCase {
         let after = try await store.history(assetID: "a").count
         XCTAssertEqual(after, before, "A label alone is culling, not History")
     }
-    func testLabelsReadAndWriteLightroomsXMPNames() throws {
+    func testLabelsReadAndWriteStandardXMPNames() throws {
         let xmp = XMPTests()
         let blue = try XMPCodec.apply(xmp.packet("xmp:Label=\"Blue\""), to: Adjustments())
         XCTAssertEqual(blue.metadata.label, .blue)
         let custom = try XMPCodec.apply(xmp.packet("xmp:Label=\"To Print\""), to: Adjustments())
-        XCTAssertNil(custom.metadata.label, "A label Lightroom gives no color is left out")
+        XCTAssertNil(custom.metadata.label, "A label with no standard color is left out")
         var metadata = CatalogMetadata(); metadata.label = .yellow
         let written = try XMPPacket(data: XMPCodec.encode(adjustments: Adjustments(), metadata: metadata))
         XCTAssertEqual(written.value("Label", namespace: XMPPacket.xmp), "Yellow")

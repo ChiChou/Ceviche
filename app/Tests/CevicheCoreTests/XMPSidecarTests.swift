@@ -18,7 +18,7 @@ final class XMPSidecarTests: XCTestCase {
     func foreignPacket(exposure: Double) -> Data {
         Data("""
         <x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="\(XMPPacket.rdf)">
-        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Adobe Photoshop Lightroom Classic" crs:Exposure2012="\(exposure)" xmp:Rating="4"/>
+        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Another Raw Editor" crs:Exposure2012="\(exposure)" xmp:Rating="4"/>
         </rdf:RDF></x:xmpmeta>
         """.utf8)
     }
@@ -51,7 +51,7 @@ final class XMPSidecarTests: XCTestCase {
         let first = try XMPSidecar.resolve(for: image)
         try first.write(adjustments: edit(exposure: 0.2), metadata: nil, defaults: Adjustments())
         let rewritten = String(decoding: try Data(contentsOf: first.writeURL), as: UTF8.self)
-            .replacingOccurrences(of: XMPCodec.creatorTool, with: "Capture One")
+            .replacingOccurrences(of: XMPCodec.creatorTool, with: "Second Raw Editor")
         try Data(rewritten.utf8).write(to: first.writeURL)
         let second = try XMPSidecar.resolve(for: image)
         XCTAssertEqual(second.readURL, first.writeURL)

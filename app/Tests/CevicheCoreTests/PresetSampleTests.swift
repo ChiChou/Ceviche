@@ -2,8 +2,8 @@ import XCTest
 import CevicheTestSupport
 @testable import CevicheCore
 
-/// Parses a small sample of third-party presets and profiles in the git-ignored `presets/` folder: Lightroom
-/// `.lrtemplate` and ACR `.xmp` develop presets, curves, and the Sony camera profiles they name.
+/// Parses a small sample of third-party presets and profiles in the git-ignored `presets/` folder: `.lrtemplate`
+/// and `.xmp` develop presets, curves, and the Sony camera profiles they name.
 final class PresetSampleTests: XCTestCase {
     func testSuppliedPresetsAndProfilesParse() throws {
         guard TestSamples.enabled else { throw XCTSkip("Sample files are off (CI or CEVICHE_SAMPLES=off)") }
@@ -23,7 +23,7 @@ final class PresetSampleTests: XCTestCase {
             } catch { failures.append("\(url.lastPathComponent): \(error.localizedDescription)") }
         }
         guard count > 0 else { throw XCTSkip("No presets in the local presets folder") }
-        XCTAssertGreaterThan(profiled, 0, "The presets that name a VSCO profile find it for the camera")
+        XCTAssertGreaterThan(profiled, 0, "The presets that name a third-party profile find it for the camera")
         XCTAssertEqual(failures, [])
     }
 }

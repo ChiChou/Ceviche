@@ -1475,7 +1475,6 @@
 "Container" = "Contenitore";
 "Frames" = "Fotogrammi";
 "MPEG-4 (.mp4)" = "MPEG-4 (.mp4)";
-"MPEG-4 plays on more devices and sites; QuickTime suits Final Cut Pro and other editors" = "MPEG-4 si riproduce su più dispositivi e siti; QuickTime è adatto a Final Cut Pro e ad altri editor";
 "ProRes is written as a QuickTime movie" = "ProRes viene scritto come filmato QuickTime";
 "QuickTime (.mov)" = "QuickTime (.mov)";
 "Remove %1$@ Frames" = "Rimuovi %1$@ fotogrammi";
@@ -3504,3 +3503,4 @@
 "Failures" = "Errori";
 "Can’t Deflicker These Photos" = "Impossibile eliminare lo sfarfallio da queste foto";
 "Couldn’t Make an ID Photo" = "Impossibile creare la foto tessera";
+"MPEG-4 plays on more devices and sites; QuickTime suits video editors" = "MPEG-4 si riproduce su più dispositivi e siti; QuickTime è adatto agli editor video";

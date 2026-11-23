@@ -132,7 +132,7 @@ public enum CatalogImporter {
         public var copyFolder: URL?
         /// For a latent image, which has no capture time of its own: the day of its sources, which files it by month.
         public var objectCaptureDay: String?
-        /// Counts development read from a sidecar (Lightroom's, say) as an edit, as Import XMP does, so the photo shows
+        /// Counts development read from a sidecar (another raw editor's, say) as an edit, as Import XMP does, so the photo shows
         /// as Edited. Off for the Folders index, where an edit is written back to the sidecar beside the original.
         public var marksSidecarEdits = false
         public init(mode: ImportMode = .reference, catalogRoot: URL? = nil, locator: AssetLocator? = nil, embeddedPreview: Bool = false, thumbnail: Bool = true) {

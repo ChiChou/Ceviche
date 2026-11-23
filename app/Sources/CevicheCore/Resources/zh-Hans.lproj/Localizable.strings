@@ -1475,7 +1475,6 @@
 "Container" = "封装格式";
 "Frames" = "帧";
 "MPEG-4 (.mp4)" = "MPEG-4 (.mp4)";
-"MPEG-4 plays on more devices and sites; QuickTime suits Final Cut Pro and other editors" = "MPEG-4 可在更多设备和网站上播放；QuickTime 更适合 Final Cut Pro 及其他剪辑软件";
 "ProRes is written as a QuickTime movie" = "ProRes 将写入为 QuickTime 影片";
 "QuickTime (.mov)" = "QuickTime (.mov)";
 "Remove %1$@ Frames" = "移除 %1$@ 帧";
@@ -3504,3 +3503,4 @@
 "Failures" = "失败项";
 "Can’t Deflicker These Photos" = "无法为这些照片去闪烁";
 "Couldn’t Make an ID Photo" = "无法制作证件照";
+"MPEG-4 plays on more devices and sites; QuickTime suits video editors" = "MPEG-4 可在更多设备和网站上播放；QuickTime 更适合剪辑软件";

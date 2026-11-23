@@ -25,7 +25,7 @@ struct VideoEncodingOptions: View {
                 ForEach(settings.codec.containers) { Text($0.title).tag($0) }
             }.labelsHidden().disabled(settings.codec.containers.count < 2)
                 .help(settings.codec.isProRes ? L10n.tr("ProRes is written as a QuickTime movie")
-                      : L10n.tr("MPEG-4 plays on more devices and sites; QuickTime suits Final Cut Pro and other editors"))
+                      : L10n.tr("MPEG-4 plays on more devices and sites; QuickTime suits video editors"))
         }
         ExportRow(L10n.tr("Color")) {
             FormSelect(L10n.tr("Color"), selection: Binding(get: { settings.fileColor }, set: { settings.color = $0 }), valueLabel: settings.fileColor.title) {

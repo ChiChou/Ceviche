@@ -22,7 +22,7 @@ extension CatalogLabel {
         case .purple: Color(nsColor: .systemPurple)
         }
     }
-    /// Lightroom's keys: 6 to 9, and none for Purple.
+    /// The usual keys: 6 to 9, and none for Purple.
     var key: String? {
         switch self {
         case .red: "6"

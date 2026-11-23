@@ -248,7 +248,7 @@ public enum XMPCodec {
             guard [-1.0, 0, 1].contains(pick) else { throw EditorError.invalidDocument(L10n.tr("Invalid XMP pick flag.")) }
             if pick != 0 || packet.value("Rating", namespace: XMPPacket.xmp) != "-1" { m.review = pick == 1 ? .accepted : pick == -1 ? .rejected : .unreviewed }
         }
-        // Lightroom's color names; another app's own label names have no color here and are left out.
+        // The usual XMP color names; an app's own label names have no color here and are left out.
         if let label = packet.value("Label", namespace: XMPPacket.xmp) { m.label = CatalogLabel(xmpName: label) }
         if let title = packet.value("title", namespace: XMPPacket.dc) { m.title = title }
         if let caption = packet.value("description", namespace: XMPPacket.dc) { m.caption = caption }

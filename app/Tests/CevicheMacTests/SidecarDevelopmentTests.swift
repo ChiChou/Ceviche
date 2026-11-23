@@ -46,7 +46,7 @@ final class SidecarDevelopmentTests: XCTestCase {
     @MainActor func testAnotherEditorsSidecarIsReadButNotOverwritten() async throws {
         let theirs = Data("""
         <x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="\(XMPPacket.rdf)">
-        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Adobe Photoshop Lightroom Classic" crs:Exposure2012="1.25" xmp:Rating="4"/>
+        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Another Raw Editor" crs:Exposure2012="1.25" xmp:Rating="4"/>
         </rdf:RDF></x:xmpmeta>
         """.utf8)
         try theirs.write(to: standard)
@@ -92,8 +92,8 @@ final class SidecarDevelopmentTests: XCTestCase {
             </rdf:RDF></x:xmpmeta>
             """.utf8)
         }
-        XCTAssertEqual(XMPCodec.sourceApplication(packet("Adobe Photoshop Lightroom Classic 13.0 (Macintosh)")), "Adobe Photoshop Lightroom Classic 13.0 (Macintosh)")
-        XCTAssertEqual(XMPCodec.sourceApplication(packet("Capture One")), "Capture One")
+        XCTAssertEqual(XMPCodec.sourceApplication(packet("Another Raw Editor 13.0 (Macintosh)")), "Another Raw Editor 13.0 (Macintosh)")
+        XCTAssertEqual(XMPCodec.sourceApplication(packet("Second Raw Editor")), "Second Raw Editor")
         XCTAssertNil(XMPCodec.sourceApplication(packet(XMPCodec.creatorTool)))
         XCTAssertNil(XMPCodec.sourceApplication(nil))
     }

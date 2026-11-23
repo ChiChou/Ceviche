@@ -70,7 +70,7 @@ public actor RawRenderer {
     }
     /// A TIFF or PNG decoded once into four channels in memory. Left to Core Image, every render re-reads the file
     /// (re-inflating its strips, over the network for a share) and converts 3-channel or big-endian 16-bit pixels
-    /// on the CPU: about 30 s per preview for a 385 MB Photoshop TIFF, against 0.1 s from this buffer.
+    /// on the CPU: about 30 s per preview for a 385 MB layered TIFF, against 0.1 s from this buffer.
     /// Float, PQ/HLG and non-RGB files stay with Core Image, which expands their HDR.
     static func decodedBitmap(_ source: CGImageSource, type: String?, properties: [String: Any]) -> CIImage? {
         decodedPixels(source, type: type, properties: properties).map { CIImage(cgImage: $0.image).oriented($0.orientation) }

@@ -20,7 +20,7 @@ public enum ImageDecode {
     /// the camera stored in the file is used when it is at least `minimum` on its long edge: ImageIO then reads only
     /// that preview, about 1 MB, where a RAW decoded at any size reads and demosaics the whole original (40 MB over a
     /// network share, and a gigabyte of memory at full size). Photos without such a preview are decoded at `pixelSize`:
-    /// a RAW (a Lightroom Enhanced-NR or panorama DNG with a 1024 px preview) through Core Image at that scale, 0.7 GB
+    /// a RAW (an enhanced-noise-reduction or panorama DNG from another editor, with a 1024 px preview) through Core Image at that scale, 0.7 GB
     /// where ImageIO took 2 GB for a 60 MP linear DNG; anything else through ImageIO. Either way one at a time: a
     /// layered 16-bit TIFF still takes 1.6 GB, and four such decodes together took a whole-library scan to 4 GB.
     /// `usesPreview` false decodes the photo itself, for a preview framed differently from it.

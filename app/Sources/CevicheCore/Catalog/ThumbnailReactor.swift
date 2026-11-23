@@ -195,7 +195,7 @@ public actor ThumbnailReactor {
     }
     /// Edited photos whose thumbnail does not show their edits, such as edits that arrived from another Mac or
     /// whose original was offline when they were made, at background priority. Only originals on this Mac's own disk:
-    /// a library on a network share or an external drive (thousands of Lightroom edits read in full over the network)
+    /// a library on a network share or an external drive (thousands of edited photos read in full over the network)
     /// gets its renders as the grid shows them, at `.visible`.
     @discardableResult
     public func catchUp() async -> Ticket? {

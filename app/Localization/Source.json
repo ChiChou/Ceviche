@@ -129,7 +129,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogMapView.swift:67",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogMapView.swift:67",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:468",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:471",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:205",
       "Sources/CevicheMac/Editor/DustSection.swift:49",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:126",
@@ -2382,7 +2382,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:259",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:259",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:595",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:598",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:35",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:44"
     ]
@@ -2849,8 +2849,8 @@
       "Sources/CevicheMac/App/PreferencesView.swift:34",
       "Sources/CevicheMac/App/PreferencesView.swift:35",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:45",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:568",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:568"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:571",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:571"
     ]
   },
   {
@@ -4952,9 +4952,9 @@
   {
     "key": "Collapse %1$@",
     "source": "\"Collapse \\(title)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:455",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:455",
       "Sources/CevicheMac/Editor/EditClipboard.swift:225"
     ]
   },
@@ -7595,9 +7595,9 @@
   {
     "key": "Expand %1$@",
     "source": "\"Expand \\(title)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:455",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:454",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:455",
       "Sources/CevicheMac/Editor/EditClipboard.swift:225"
     ]
   },
@@ -7879,7 +7879,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:100",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:109",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:171",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:593",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:596",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:126",
       "Sources/CevicheMac/Export/ExportSession.swift:65",
       "Sources/CevicheMac/Export/ExportSession.swift:129",
@@ -9796,7 +9796,7 @@
   {
     "key": "Import Photos (⇧⌘I)",
     "source": "\"Import Photos (⇧⌘I)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:538"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:541"
   },
   {
     "key": "Import Photos…",
@@ -9805,7 +9805,7 @@
     "uses": [
       "Sources/CevicheMac/App/WelcomeView.swift:107",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:91",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:535",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:538",
       "Sources/CevicheMac/Catalog/CatalogView.swift:68"
     ]
   },
@@ -9831,7 +9831,7 @@
   {
     "key": "Import from Camera, Photos, or Folder",
     "source": "\"Import from Camera, Photos, or Folder\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:545"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:548"
   },
   {
     "key": "Import from Camera…",
@@ -9856,7 +9856,7 @@
   {
     "key": "Import sources",
     "source": "\"Import sources\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:545"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:548"
   },
   {
     "key": "Import stopped",
@@ -9982,10 +9982,10 @@
   {
     "key": "Include Subfolders",
     "source": "\"Include Subfolders\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:508",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:505"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:508",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:508"
     ]
   },
   {
@@ -10119,10 +10119,10 @@
   {
     "key": "Indexing %1$@",
     "source": "\"Indexing \\((sync.path as NSString).lastPathComponent)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:513",
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:516",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:513",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:516"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:516",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519"
     ]
   },
   {
@@ -11619,8 +11619,8 @@
     "context": "Sources/CevicheCore/Export/TimelapseSettings.swift:48"
   },
   {
-    "key": "MPEG-4 plays on more devices and sites; QuickTime suits Final Cut Pro and other editors",
-    "source": "\"MPEG-4 plays on more devices and sites; QuickTime suits Final Cut Pro and other editors\"",
+    "key": "MPEG-4 plays on more devices and sites; QuickTime suits video editors",
+    "source": "\"MPEG-4 plays on more devices and sites; QuickTime suits video editors\"",
     "context": "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:28"
   },
   {
@@ -12511,7 +12511,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:279",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:279",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:603"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:606"
     ]
   },
   {
@@ -12691,7 +12691,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:260",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:260",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:600",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:603",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:36",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:45"
     ]
@@ -17004,7 +17004,7 @@
   {
     "key": "Select Photos",
     "source": "\"Select Photos\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:592"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:595"
   },
   {
     "key": "Select Sky",
@@ -17163,12 +17163,12 @@
   {
     "key": "Settings",
     "source": "\"Settings\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:566"
   },
   {
     "key": "Settings (⌘,)",
     "source": "\"Settings (⌘,)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:563"
+    "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:566"
   },
   {
     "key": "Shade",
@@ -18257,8 +18257,8 @@
     "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:244",
     "uses": [
       "Sources/CevicheMac/Catalog/ActivityCenter.swift:244",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:522",
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:522"
     ]
   },
   {

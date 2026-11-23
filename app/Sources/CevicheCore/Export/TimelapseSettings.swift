@@ -40,7 +40,7 @@ public enum VideoCodec: String, CaseIterable, Codable, Sendable, Identifiable {
 public enum VideoContainer: String, CaseIterable, Codable, Sendable, Identifiable {
     /// Plays on more devices and sites.
     case mp4
-    /// What Final Cut Pro and most editors take as a source, and the only home for ProRes.
+    /// What video editors take as a source, and the only home for ProRes.
     case mov
     public var id: String { rawValue }
     public var title: String {

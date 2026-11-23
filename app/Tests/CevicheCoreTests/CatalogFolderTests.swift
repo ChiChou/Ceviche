@@ -228,7 +228,7 @@ final class CatalogFolderTests: XCTestCase {
         for name in ["a.jpg", "b.jpg", "c.jpg"] { try fm.copyItem(at: photo, to: folder.appendingPathComponent(name)) }
         let theirs = Data("""
         <x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="\(XMPPacket.rdf)">
-        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Adobe Photoshop Lightroom Classic" crs:Exposure2012="1.25"/>
+        <rdf:Description xmlns:crs="\(XMPPacket.crs)" xmlns:xmp="\(XMPPacket.xmp)" xmp:CreatorTool="Another Raw Editor" crs:Exposure2012="1.25"/>
         </rdf:RDF></x:xmpmeta>
         """.utf8)
         try theirs.write(to: folder.appendingPathComponent("c.xmp"))

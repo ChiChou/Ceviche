@@ -32,15 +32,15 @@ public enum TestSamples {
     public static let idWarmWall = "id/warm-wall"
     /// A portrait whose background is sky.
     public static let idSkyWall = "id/sky-wall"
-    /// A RAW with an Adobe sidecar that sets HDR, masks and a look.
+    /// A RAW with another editor’s XMP sidecar that sets HDR, masks and a look.
     public static let hdrSidecar = "sidecar/hdr"
-    /// A RAW with an Adobe sidecar of plain development edits.
+    /// A RAW with another editor’s XMP sidecar of plain development edits.
     public static let developedSidecar = "sidecar/developed"
-    /// A RAW with an Adobe sidecar that sets a retouch spot and an Adobe Color look.
+    /// A RAW with another editor’s XMP sidecar that sets a retouch spot and an Adobe Color look.
     public static let retouchSidecar = "sidecar/retouch"
     /// A RAW and the camera's JPEG of the same frame.
     public static let rawJPEGPair = (raw: "raw-jpeg/raw", jpeg: "raw-jpeg/jpeg")
-    /// The folder of Adobe sidecars, read for parsing only.
+    /// The folder of other editors’ XMP sidecars, read for parsing only.
     public static let sidecars = "sidecar/all"
     /// A 24-patch chart in daylight a stop under, at normal exposure and a stop over; in tungsten at normal exposure
     /// and a stop under. Same camera, same chart.
@@ -123,7 +123,7 @@ public enum TestSamples {
         guard !urls.isEmpty else { throw XCTSkip("No photos in \(folder(role).path)") }
         return Array(urls.prefix(limit))
     }
-    /// The Adobe sidecar beside a role's photo, or a skip when it is missing.
+    /// The XMP sidecar beside a role's photo, or a skip when it is missing.
     public static func requireSidecar(_ role: String) throws -> URL {
         let url = try require(role).deletingPathExtension().appendingPathExtension("xmp")
         guard FileManager.default.fileExists(atPath: url.path) else { throw XCTSkip("No sidecar in \(folder(role).path)") }
