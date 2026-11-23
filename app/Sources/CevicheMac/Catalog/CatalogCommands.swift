@@ -425,27 +425,27 @@ struct CatalogCommands: Commands {
 
 /// What the menu bar and the filmstrip show of the editor. They observe this rather than the editor, which changes many
 /// times a second while a slider moves, so they are rebuilt only when one of these values changes.
-/// Tells the menu bar when the catalog changed, except while a menu is open: rebuilding the menus then closes the
-/// submenu being browsed (an import refreshes the library every few photos). What changed meanwhile is shown once
-/// the menu closes; the actions themselves check the catalog as it is when chosen.
+/// Tells the menu bar and the photo menu when the catalog changed, except while a menu is open: rebuilding a menu
+/// then closes the submenu being browsed (an import refreshes the library every few photos). What changed meanwhile
+/// is shown once the menu closes; the actions themselves check the catalog as it is when chosen.
 @MainActor final class CatalogMenuState: ObservableObject {
     private var subscriptions: Set<AnyCancellable> = []
-    private var tracking = false
+    private var tracking = 0
     private var held = false
     init(catalog: CatalogModel) {
         catalog.objectWillChange.sink { [weak self] _ in
             guard let self else { return }
-            if self.tracking { self.held = true } else { self.objectWillChange.send() }
+            if self.tracking > 0 { self.held = true } else { self.objectWillChange.send() }
         }.store(in: &subscriptions)
+        // Any menu: the menu bar and the context menus on photos.
         let center = NotificationCenter.default
-        center.publisher(for: NSMenu.didBeginTrackingNotification).sink { [weak self] note in
-            guard (note.object as? NSMenu) === NSApp.mainMenu else { return }
-            self?.tracking = true
+        center.publisher(for: NSMenu.didBeginTrackingNotification).sink { [weak self] _ in
+            self?.tracking += 1
         }.store(in: &subscriptions)
-        center.publisher(for: NSMenu.didEndTrackingNotification).sink { [weak self] note in
-            guard let self, (note.object as? NSMenu) === NSApp.mainMenu else { return }
-            self.tracking = false
-            if self.held { self.held = false; self.objectWillChange.send() }
+        center.publisher(for: NSMenu.didEndTrackingNotification).sink { [weak self] _ in
+            guard let self else { return }
+            self.tracking = max(0, self.tracking - 1)
+            if self.tracking == 0, self.held { self.held = false; self.objectWillChange.send() }
         }.store(in: &subscriptions)
     }
 }

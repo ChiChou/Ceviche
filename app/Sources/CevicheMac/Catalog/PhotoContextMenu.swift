@@ -5,9 +5,18 @@ import CevicheCore
 /// day sits at the top level; the tools, merges and culling passes the Tools menu lists in full fold into submenus.
 /// Actions apply to the whole selection when the clicked photo is part of it.
 struct PhotoContextMenu: View {
-    @ObservedObject var catalog: CatalogModel
+    /// Followed through `menuState`, which waits while the menu is open: an import changes the catalog several
+    /// times a second, and each rebuild closed the submenu being browsed.
+    let catalog: CatalogModel
     @ObservedObject var editor: EditorModel
     let asset: CatalogAsset
+    @ObservedObject private var menuState: CatalogMenuState
+    init(catalog: CatalogModel, editor: EditorModel, asset: CatalogAsset) {
+        self.catalog = catalog
+        self.editor = editor
+        self.asset = asset
+        menuState = catalog.menuState
+    }
     var body: some View {
         let targets = catalog.contextAssets(for: asset)
         let single = targets.count == 1

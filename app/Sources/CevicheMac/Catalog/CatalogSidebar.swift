@@ -287,25 +287,7 @@ struct CatalogSidebar: View {
     }
 
     private func photoGroupMenu(_ group: CatalogModel.SidebarPhotoGroup) -> some View {
-        Group {
-            Button(L10n.tr("Select Photos")) { photoGroupAction(.select, group: group) }
-            Button(L10n.tr("Export…")) { photoGroupAction(.export, group: group) }
-                .disabled(group.area == .trash)
-            Menu(L10n.tr("Add to Album")) {
-                ForEach(model.albums) { album in
-                    Button(album.album.name) { photoGroupAction(.addToAlbum(album.id), group: group) }
-                }
-                if !model.albums.isEmpty { Divider() }
-                Button(L10n.tr("New Album…")) { photoGroupAction(.newAlbum, group: group) }
-            }.disabled(group.area != .library)
-            Divider()
-            Button(L10n.tr("Move to Trash…"), role: .destructive) { photoGroupAction(.trash, group: group) }
-                .disabled(group.area == .trash)
-        }.disabled(!model.canStartJob || editor.busy)
-    }
-
-    private func photoGroupAction(_ action: CatalogModel.SidebarGroupAction, group: CatalogModel.SidebarPhotoGroup) {
-        Task { await model.actOnSidebarGroup(group, action: action, editor: editor) }
+        SidebarPhotoGroupMenu(model: model, editor: editor, group: group)
     }
 
     private func albumRow(_ summary: CatalogAlbumSummary) -> some View {
@@ -589,5 +571,40 @@ struct SettingsAndAppearanceButtons: View {
                 Toggle(choice.name, isOn: Binding(get: { appearance == choice.rawValue }, set: { _ in appearance = choice.rawValue }))
             }
         }
+    }
+}
+
+/// The menu on an import, a day or a date. It follows the catalog through `menuState`, which waits while the menu is
+/// open: the sidebar redraws on each import refresh, and a rebuild closed Add to Album while it was being browsed.
+private struct SidebarPhotoGroupMenu: View {
+    let model: CatalogModel
+    @ObservedObject var editor: EditorModel
+    let group: CatalogModel.SidebarPhotoGroup
+    @ObservedObject private var menuState: CatalogMenuState
+    init(model: CatalogModel, editor: EditorModel, group: CatalogModel.SidebarPhotoGroup) {
+        self.model = model
+        self.editor = editor
+        self.group = group
+        menuState = model.menuState
+    }
+    var body: some View {
+        Group {
+            Button(L10n.tr("Select Photos")) { act(.select) }
+            Button(L10n.tr("Export…")) { act(.export) }
+                .disabled(group.area == .trash)
+            Menu(L10n.tr("Add to Album")) {
+                ForEach(model.albums) { album in
+                    Button(album.album.name) { act(.addToAlbum(album.id)) }
+                }
+                if !model.albums.isEmpty { Divider() }
+                Button(L10n.tr("New Album…")) { act(.newAlbum) }
+            }.disabled(group.area != .library)
+            Divider()
+            Button(L10n.tr("Move to Trash…"), role: .destructive) { act(.trash) }
+                .disabled(group.area == .trash)
+        }.disabled(!model.canStartJob || editor.busy)
+    }
+    private func act(_ action: CatalogModel.SidebarGroupAction) {
+        Task { await model.actOnSidebarGroup(group, action: action, editor: editor) }
     }
 }
