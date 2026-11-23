@@ -48,7 +48,10 @@ extension CatalogModel {
     }
     func resetEdits(targets: [CatalogAsset], editor: EditorModel) async {
         await runEditBatch(targets, editor: editor, title: L10n.tr("Resetting edits"), cameraDefaults: true,
-                           inEditor: { editor.resetAllEdits() },
+                           inEditor: {
+                               // Awaited: a reset still running would find the editor saving, and leave the edits as they were.
+                               guard await editor.resetAllEditsNow() else { throw EditorError.invalidDocument(editor.error ?? L10n.tr("Couldn’t Reset Edits")) }
+                           },
                            develop: { _, _, defaults in defaults },
                            save: { store, settings, _, id in try await store.resetEdits(to: settings, assetID: id) }) { completed, total, failures in
             if completed > 0 { self.notice = completed == 1 ? L10n.tr("Edits reset") : L10n.tr("Edits reset on \(completed.formatted()) photos") }
@@ -74,7 +77,7 @@ extension CatalogModel {
     /// are stored with `save(store, settings, baseline, assetID)`. `defaults` is the camera's only with `cameraDefaults`
     /// or for a photo never edited; otherwise it is the saved edits, so the original need not be read.
     func runEditBatch(_ targets: [CatalogAsset], editor: EditorModel, title: String, cameraDefaults: Bool = false,
-                              inEditor: @escaping @MainActor () -> Void,
+                              inEditor: @escaping @MainActor () async throws -> Void,
                               develop: @escaping @Sendable (String, Adjustments?, Adjustments) throws -> Adjustments,
                               save: @escaping @Sendable (CatalogStore, Adjustments, Adjustments, String) async throws -> String,
                               finished: @escaping @MainActor (_ completed: Int, _ total: Int, _ failures: [String]) -> Void) async {
@@ -104,7 +107,7 @@ extension CatalogModel {
                 do {
                     let current = try await store.asset(asset.id)
                     guard current.inLibrary else { throw EditorError.invalidDocument(L10n.tr("Photo is in Trash.")) }
-                    inEditor()
+                    try await inEditor()
                     guard await editor.save() else { throw EditorError.invalidDocument(editor.error ?? L10n.tr("Could not save edits.")) }
                     await record(asset, nil)
                 } catch { await record(asset, error) }

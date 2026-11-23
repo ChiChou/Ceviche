@@ -2879,7 +2879,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogHistory.swift:40",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogHistory.swift:40",
-      "Sources/CevicheMac/Editor/EditorHistory.swift:56"
+      "Sources/CevicheMac/Editor/EditorHistory.swift:62"
     ]
   },
   {
@@ -5581,7 +5581,7 @@
   {
     "key": "Could not save edits.",
     "source": "\"Could not save edits.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:108"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:111"
   },
   {
     "key": "Couldn’t Add to Photos",
@@ -5832,7 +5832,11 @@
   {
     "key": "Couldn’t Reset Edits",
     "source": "\"Couldn’t Reset Edits\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:67"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:53",
+    "uses": [
+      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:53",
+      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:70"
+    ]
   },
   {
     "key": "Couldn’t Restore the Earlier Version",
@@ -7312,12 +7316,12 @@
   {
     "key": "Edits reset",
     "source": "\"Edits reset\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:54"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:57"
   },
   {
     "key": "Edits reset on %1$@ photos",
     "source": "\"Edits reset on \\(completed.formatted()) photos\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:54"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:57"
   },
   {
     "key": "Edits saved, but thumbnail refresh failed: %1$@",
@@ -14405,10 +14409,10 @@
   {
     "key": "Photo is in Trash.",
     "source": "\"Photo is in Trash.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:106",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:109",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:106",
-      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:145"
+      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:109",
+      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:148"
     ]
   },
   {
@@ -16352,7 +16356,7 @@
   {
     "key": "Reset edits on %1$@ of %2$@ photos.\n",
     "source": "\"Reset edits on \\(completed) of \\(total) photos.\\n\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:55"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:58"
   },
   {
     "key": "Reset geometry",
@@ -16379,7 +16383,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:50",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:50",
-      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:62"
+      "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:65"
     ]
   },
   {
@@ -17960,7 +17964,7 @@
   {
     "key": "Some Edits Weren’t Reset",
     "source": "\"Some Edits Weren’t Reset\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:55"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:58"
   },
   {
     "key": "Some Files Weren’t Imported",
@@ -19044,7 +19048,7 @@
   {
     "key": "The original has changed. Locate the original before pasting edits.",
     "source": "\"The original has changed. Locate the original before pasting edits.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:158"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:161"
   },
   {
     "key": "The original has changed. Relink the matching original or import the changed file separately.",
@@ -20447,7 +20451,7 @@
   {
     "key": "Unreadable edits reset",
     "source": "\"Unreadable edits reset\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:66"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Edits.swift:69"
   },
   {
     "key": "Unreadable: %1$@",

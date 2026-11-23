@@ -30,10 +30,16 @@ extension EditorModel: HistorySource {
     /// Back to the import development, without the settings an imported XMP carried; standalone documents reset as an
     /// undoable edit.
     func resetAllEdits() {
-        guard let info else { return }
+        guard info != nil else { return }
+        Task { await resetAllEditsNow() }
+    }
+    /// The same, for a caller that saves next and so must wait for the reset to land. Returns whether it did.
+    @discardableResult
+    func resetAllEditsNow() async -> Bool {
+        guard let info else { return false }
         xmpSourceData = nil; xmpReport = nil
-        guard keepsHistory else { edit { $0 = info.defaults }; return }
-        historyAction { store, id in
+        guard keepsHistory else { edit { $0 = info.defaults }; return true }
+        return await historyStep { store, id in
             try await store.resetEdits(to: info.defaults, assetID: id)
             return info.defaults
         }
