@@ -444,6 +444,7 @@ private struct SidebarRow<Icon: View>: View {
     let select: () -> Void
     @ViewBuilder let icon: Icon
     @State private var hovering = false
+    private static var iconWidth: CGFloat { 18 }
     var body: some View {
         HStack(spacing: 6) {
             Group {
@@ -453,11 +454,13 @@ private struct SidebarRow<Icon: View>: View {
                             .frame(width: 12, height: 18).contentShape(Rectangle())
                     }.buttonStyle(.plain).foregroundStyle(.tertiary).accessibilityLabel(expanded ? L10n.tr("Collapse \(title)") : L10n.tr("Expand \(title)"))
                 } else { Color.clear.frame(width: 12, height: 1) }
-            }.padding(.leading, CGFloat(depth) * 14)
+            // One icon and its spacing per level: a child's title starts where its parent's does.
+            }.padding(.leading, CGFloat(depth) * (Self.iconWidth + 6))
             // Selecting is the action of everything but the chevron, which keeps its own: expand. A stack, not a Group:
             // a Group hands its accessibility modifiers to each child, leaving the icon, title and count apart.
             HStack(spacing: 6) {
-                icon.font(.system(size: 12)).foregroundStyle(selected ? Theme.accent : .secondary).frame(minWidth: 16).accessibilityHidden(true)
+                // A fixed column, so titles line up whatever the symbol's width (two people are wider than a clock).
+                icon.font(.system(size: 12)).foregroundStyle(selected ? Theme.accent : .secondary).frame(width: Self.iconWidth).accessibilityHidden(true)
                 if let rename {
                     InlineRenameLabel(name: title, editing: renameEditing, semibold: selected, select: select, commit: rename)
                 } else {
