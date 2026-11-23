@@ -3499,3 +3499,6 @@
 "Tags" = "Etiquetas";
 "Connect a camera and turn it on. For a memory card, use Import from Folder…" = "Conecta una cámara y enciéndela. Para una tarjeta de memoria, usa Importar desde carpeta…";
 "No Camera Found" = "No se encontró ninguna cámara";
+"Reason" = "Motivo";
+"Copy All" = "Copiar todo";
+"Failures" = "Errores";

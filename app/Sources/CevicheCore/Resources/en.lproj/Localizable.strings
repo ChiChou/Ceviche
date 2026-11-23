@@ -839,6 +839,7 @@
 "Copied" = "Copied";
 "Copies" = "Copies";
 "Copy" = "Copy";
+"Copy All" = "Copy All";
 "Copy All Edits" = "Copy All Edits";
 "Copy All to Folder…" = "Copy All to Folder…";
 "Copy Changed Edits" = "Copy Changed Edits";
@@ -1264,6 +1265,7 @@
 "Faces appear here as photos are analyzed." = "Faces appear here as photos are analyzed.";
 "Facial Skin" = "Facial Skin";
 "Facing camera" = "Facing camera";
+"Failures" = "Failures";
 "Falloff" = "Falloff";
 "Far limit" = "Far limit";
 "Feather" = "Feather";
@@ -2413,6 +2415,7 @@
 "Reading photos…" = "Reading photos…";
 "Reading the photo" = "Reading the photo";
 "Ready" = "Ready";
+"Reason" = "Reason";
 "Rec. 2020 - SDR" = "Rec. 2020 - SDR";
 "Rec. 2100 HLG" = "Rec. 2100 HLG";
 "Rec. 2100 HLG - HDR" = "Rec. 2100 HLG - HDR";

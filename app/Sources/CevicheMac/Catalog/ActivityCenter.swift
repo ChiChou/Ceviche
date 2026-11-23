@@ -27,6 +27,8 @@ struct Activity: Identifiable, Equatable {
     var finished: Date?
     var outcome: Outcome?
     var result: Result?
+    /// The files that failed, to reopen their list from Recent. Kept for this session only, like Recent itself.
+    var failure: Failure?
 
     var fraction: Double? { progress ?? total.map { $0 > 0 ? Double(completed) / Double($0) : 0 } }
     /// Seconds left, from the pace so far; nil until there is enough to go on.
@@ -93,9 +95,9 @@ final class ActivityCenter: ObservableObject {
     }
     /// Records how the activity went, for Recent. The first outcome recorded wins.
     /// `title` replaces the running title for Recent, such as "Panorama merged".
-    func finish(_ id: UUID, title: String? = nil, outcome: Activity.Outcome, result: Activity.Result? = nil) {
+    func finish(_ id: UUID, title: String? = nil, outcome: Activity.Outcome, result: Activity.Result? = nil, failure: Failure? = nil) {
         guard let index = running.firstIndex(where: { $0.id == id }), running[index].outcome == nil else { return }
-        running[index].outcome = outcome; running[index].result = result
+        running[index].outcome = outcome; running[index].result = result; running[index].failure = failure
         if let title { running[index].title = title }
     }
     func end(_ id: UUID, outcome: Activity.Outcome = .done(""), keep: Bool = true) {
@@ -198,7 +200,9 @@ struct ActivityList: View {
                         }.buttonStyle(.plain).help(L10n.tr("Clear")).accessibilityLabel(L10n.tr("Clear"))
                     }
                     ForEach(center.recent) { activity in
-                        RecentRow(activity: activity, now: context.date) { center.show(activity) }
+                        RecentRow(activity: activity, now: context.date) { center.show(activity) } showFailure: {
+                            if let failure = activity.failure { FailurePresenter.shared.show(failure) {} }
+                        }
                     }
                 }
                 if center.running.isEmpty && center.recent.isEmpty {
@@ -252,6 +256,7 @@ private struct RecentRow: View {
     let activity: Activity
     let now: Date
     let show: () -> Void
+    let showFailure: () -> Void
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: icon).font(.system(size: 14)).foregroundStyle(tint).frame(width: 20).padding(.top, 1)
@@ -260,6 +265,7 @@ private struct RecentRow: View {
                 Text(summary).font(.caption).foregroundStyle(activity.failed ? Theme.error : .secondary).lineLimit(2)
             }
             Spacer(minLength: 0)
+            if activity.failure != nil { Button(L10n.tr("Failures"), action: showFailure).buttonStyle(.textLink).font(.caption) }
             if activity.result != nil { Button(L10n.tr("Show"), action: show).buttonStyle(.textLink).font(.caption) }
         }.padding(.horizontal, 14).padding(.vertical, 5).accessibilityElement(children: .combine)
     }

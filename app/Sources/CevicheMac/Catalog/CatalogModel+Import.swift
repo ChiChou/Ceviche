@@ -33,7 +33,7 @@ extension CatalogModel {
                 finished?(summary ?? ImportSummary(stopped: true))
             } catch {
                 self?.failure = Failure(L10n.tr("Couldn’t Import"), error)
-                finished?(ImportSummary(failures: [error.localizedDescription]))
+                finished?(ImportSummary(failures: [Failure.Detail(path: urls.map(\.path).joined(separator: ", "), reason: error.localizedDescription)]))
             }
         }
         return true
@@ -47,10 +47,20 @@ extension CatalogModel {
         var download: (@MainActor (@escaping @MainActor (Double) -> Void) async throws -> ImportedPhotoFile)? = nil
         var pairingPath: String { transferPath ?? locator?.string ?? url.map { AssetLocator.describing($0).string } ?? "" }
         var filename: String { transferPath.map { ($0 as NSString).lastPathComponent } ?? locator?.filename ?? url?.lastPathComponent ?? L10n.tr("Photo") }
+        /// Where the photo is, in full: its path on this Mac, else where it is on a volume, a share or a camera.
+        var fullPath: String {
+            if let url { return url.path }
+            guard let locator else { return transferPath ?? filename }
+            switch locator {
+            case .file(let path): return path
+            case .catalog(let path), .volume(_, let path), .smb(_, _, let path): return locator.storageDescription + "/" + path
+            }
+        }
     }
     struct ImportSummary {
         var imported = 0, duplicates = 0, inTrash = 0
-        var failures: [String] = []
+        /// Each failed file, in full, with why.
+        var failures: [Failure.Detail] = []
         var stopped = false
     }
     /// Shared by every importer. Copies skip photos the catalog already has by name and capture time.
@@ -60,7 +70,7 @@ extension CatalogModel {
         // Never into the cache that indexes folders: its copies would go when the cache does.
         guard !isFolderIndex || importFolder != nil else { NSSound.beep(); return ImportSummary(stopped: true) }
         let items = rawJPEGImport.keep(items)
-        var failures: [String] = []; var inTrash = 0; var duplicates = 0; var imported = 0; var lastImported: String?
+        var failures: [Failure.Detail] = []; var inTrash = 0; var duplicates = 0; var imported = 0; var lastImported: String?
         var importedAssets: [CatalogAsset] = []
         var claims: [String] = []
         defer { activity.release(claims) }
@@ -133,7 +143,7 @@ extension CatalogModel {
                     if imported == 1 { await showImportBatch(batchID, importedAt: inserted.importedAt, store: store) }
                 }
             } catch is CancellationError { break
-            } catch { failures.append("\(name): \(error.localizedDescription)") }
+            } catch { failures.append(Failure.Detail(path: item.fullPath, reason: error.localizedDescription, url: item.url)) }
             if item.download != nil { activity.update(job, progress: Double(index + 1) / Double(max(items.count, 1))) }
             if index % 20 == 0 { await refresh() }
         }
@@ -148,11 +158,12 @@ extension CatalogModel {
         if duplicates > 0 { summary.append(L10n.tr("\(duplicates.formatted()) already in the catalog")) }
         if inTrash > 0 { summary.append(L10n.tr("\(inTrash.formatted()) already in Trash")) }
         if stopped || !summary.isEmpty { notice = ((stopped ? [L10n.tr("Import stopped")] : []) + summary).joined(separator: " - ") }
-        if !failures.isEmpty { failure = Failure(L10n.tr("Some Files Weren’t Imported"), summary: (failures.count == 1 ? L10n.tr("\(failures.count) file couldn’t be imported.\n") : L10n.tr("\(failures.count) files couldn’t be imported.\n")).trimmingCharacters(in: .newlines), items: failures) }
+        let failed = failures.isEmpty ? nil : Failure(L10n.tr("Some Files Weren’t Imported"), summary: (failures.count == 1 ? L10n.tr("\(failures.count) file couldn’t be imported.\n") : L10n.tr("\(failures.count) files couldn’t be imported.\n")).trimmingCharacters(in: .newlines), details: failures)
+        if let failed { failure = failed }
         var outcome = [(imported == 1 ? L10n.tr("\(imported.formatted()) photo imported") : L10n.tr("\(imported.formatted()) photos imported"))] + summary
         if !failures.isEmpty { outcome.append(L10n.tr("\(failures.count.formatted()) failed")) }
         activity.finish(job, title: L10n.tr("Import"), outcome: imported == 0 && !failures.isEmpty ? .failed(outcome.joined(separator: " - ")) : stopped ? .stopped : .done(outcome.joined(separator: " - ")),
-                        result: lastImported.map { .photo($0) })
+                        result: lastImported.map { .photo($0) }, failure: failed)
         return ImportSummary(imported: imported, duplicates: duplicates, inTrash: inTrash, failures: failures, stopped: stopped)
     }
     /// The grid switches to the batch as its first photo lands, so new photos are culled apart from the catalog's

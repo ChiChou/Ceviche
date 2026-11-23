@@ -216,7 +216,7 @@
   {
     "key": "%1$@ - about %2$@ left",
     "source": "\"\\(elapsed) - about \\(Duration.seconds(left).localized(.units(allowed: [.hours, .minutes, .seconds], width: .abbreviated, maximumUnitCount: 2))) left\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:247"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:251"
   },
   {
     "key": "%1$@ - comparing",
@@ -306,17 +306,17 @@
   {
     "key": "%1$@ activities",
     "source": "\"\\(center.running.count) activities\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:145"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:147"
   },
   {
     "key": "%1$@ already in Trash",
     "source": "\"\\(inTrash.formatted()) already in Trash\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:149"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:159"
   },
   {
     "key": "%1$@ already in the catalog",
     "source": "\"\\(duplicates.formatted()) already in the catalog\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:148"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:158"
   },
   {
     "key": "%1$@ already in the folder",
@@ -519,9 +519,9 @@
   {
     "key": "%1$@ failed",
     "source": "\"\\(failures.count.formatted()) failed\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:153",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:164",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:153",
+      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:164",
       "Sources/CevicheMac/Export/CatalogExport.swift:113",
       "Sources/CevicheMac/Export/CatalogExport.swift:177",
       "Sources/CevicheMac/Export/EditIn.swift:173"
@@ -530,12 +530,12 @@
   {
     "key": "%1$@ file couldn’t be imported.\n",
     "source": "\"\\(failures.count) file couldn’t be imported.\\n\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:151"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:161"
   },
   {
     "key": "%1$@ files couldn’t be imported.\n",
     "source": "\"\\(failures.count) files couldn’t be imported.\\n\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:151"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:161"
   },
   {
     "key": "%1$@ folders",
@@ -833,9 +833,9 @@
   {
     "key": "%1$@ of %2$@ - %3$@",
     "source": "\"\\(index + 1) of \\(items.count) - \\(name)\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:77",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:87",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:77",
+      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:87",
       "Sources/CevicheMac/Export/CatalogExport.swift:98",
       "Sources/CevicheMac/Export/CatalogExport.swift:137",
       "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:45",
@@ -1007,7 +1007,7 @@
   {
     "key": "%1$@ photo imported",
     "source": "\"\\(imported.formatted()) photo imported\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:152"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:163"
   },
   {
     "key": "%1$@ photos",
@@ -1159,7 +1159,7 @@
   {
     "key": "%1$@ photos imported",
     "source": "\"\\(imported.formatted()) photos imported\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:152"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:163"
   },
   {
     "key": "%1$@ photos in %2$@",
@@ -2297,7 +2297,7 @@
   {
     "key": "Activity: %1$@",
     "source": "\"Activity: \\(lead.title)\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:146"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:148"
   },
   {
     "key": "Actual Size",
@@ -4500,7 +4500,7 @@
   {
     "key": "Choose an XMP file to apply. The current settings stay in History.",
     "source": "\"Choose an XMP file to apply. The current settings stay in History.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:177"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:188"
   },
   {
     "key": "Choose an export size of 200 megapixels or less.",
@@ -4674,8 +4674,8 @@
     "context": "Sources/CevicheMac/App/LicensesView.swift:98",
     "uses": [
       "Sources/CevicheMac/App/LicensesView.swift:98",
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:198",
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:198",
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:200",
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:200",
       "Sources/CevicheMac/Editor/DustSection.swift:62",
       "Sources/CevicheMac/Editor/GeometrySection.swift:113",
       "Sources/CevicheMac/Editor/ImageCanvas+FaceTags.swift:79",
@@ -5306,8 +5306,14 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:241",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:256",
+      "Sources/CevicheMac/Components/FailureAlert.swift:146",
       "Sources/CevicheMac/Editor/EditClipboard.swift:149"
     ]
+  },
+  {
+    "key": "Copy All",
+    "source": "\"Copy All\"",
+    "context": "Sources/CevicheMac/Components/FailureAlert.swift:153"
   },
   {
     "key": "Copy All Edits",
@@ -5651,9 +5657,9 @@
   {
     "key": "Couldn’t Export XMP",
     "source": "\"Couldn’t Export XMP\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:229",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:240",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:229",
+      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:240",
       "Sources/CevicheMac/Editor/EditorModel+Documents.swift:196"
     ]
   },
@@ -5675,9 +5681,9 @@
   {
     "key": "Couldn’t Import XMP",
     "source": "\"Couldn’t Import XMP\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:202",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:213",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:202",
+      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:213",
       "Sources/CevicheMac/Editor/EditorModel+Documents.swift:171"
     ]
   },
@@ -6752,7 +6758,7 @@
   {
     "key": "Done - %1$@",
     "source": "\"Done - \\(when)\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:279"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:285"
   },
   {
     "key": "Don’t Merge",
@@ -7776,7 +7782,7 @@
   {
     "key": "Exported ",
     "source": "\"Exported \"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:228"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:239"
   },
   {
     "key": "Exported %1$@",
@@ -8078,6 +8084,11 @@
     "context": "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:49"
   },
   {
+    "key": "Failures",
+    "source": "\"Failures\"",
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:268"
+  },
+  {
     "key": "Falloff",
     "source": "\"Falloff\"",
     "context": "Sources/CevicheMac/Tools/FiltersDialog.swift:355",
@@ -8113,7 +8124,7 @@
   {
     "key": "Fetching %1$@ from %2$@…",
     "source": "\"Fetching \\(name) from \\(locator.storageDescription)…\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:104"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:114"
   },
   {
     "key": "Few stars: cloud, haze or dew",
@@ -8126,6 +8137,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:91",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:91",
+      "Sources/CevicheMac/Components/FailureAlert.swift:138",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:189",
       "Sources/CevicheCore/Metadata/PhotoMetadata.swift:95"
     ]
@@ -9708,9 +9720,9 @@
   {
     "key": "Import",
     "source": "\"Import\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:154",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:165",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:154",
+      "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:165",
       "Sources/CevicheMac/Editor/LooksPanel.swift:265"
     ]
   },
@@ -9811,7 +9823,7 @@
   {
     "key": "Import stopped",
     "source": "\"Import stopped\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:150"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:160"
   },
   {
     "key": "Import the watermark image into the library before saving it.",
@@ -9878,7 +9890,7 @@
   {
     "key": "In Progress",
     "source": "\"In Progress\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:188"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:190"
   },
   {
     "key": "In Trash",
@@ -13504,7 +13516,7 @@
   {
     "key": "Nothing is running.",
     "source": "\"Nothing is running.\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:205"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:209"
   },
   {
     "key": "Nothing moved between the photos",
@@ -13528,7 +13540,7 @@
   {
     "key": "Nothing to import.",
     "source": "\"Nothing to import.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:108"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:118"
   },
   {
     "key": "Nothing was imported.",
@@ -13556,7 +13568,8 @@
     "uses": [
       "Sources/CevicheMac/App/SystemInfoView.swift:59",
       "Sources/CevicheMac/Catalog/CatalogOpenAlert.swift:26",
-      "Sources/CevicheMac/Components/FailureAlert.swift:64"
+      "Sources/CevicheMac/Components/FailureAlert.swift:80",
+      "Sources/CevicheMac/Components/FailureAlert.swift:155"
     ]
   },
   {
@@ -15314,6 +15327,11 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoIssues.swift:75"
   },
   {
+    "key": "Reason",
+    "source": "\"Reason\"",
+    "context": "Sources/CevicheMac/Components/FailureAlert.swift:141"
+  },
+  {
     "key": "Rec. 2020 - SDR",
     "source": "\"Rec. 2020 - SDR\"",
     "context": "Sources/CevicheCore/Export/TimelapseSettings.swift:64"
@@ -15360,7 +15378,7 @@
   {
     "key": "Recent",
     "source": "\"Recent\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:195"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:197"
   },
   {
     "key": "Recent Catalogs",
@@ -15379,10 +15397,10 @@
   {
     "key": "Recent activity",
     "source": "\"Recent activity\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:152",
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:154",
     "uses": [
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:152",
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:152"
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:154",
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:154"
     ]
   },
   {
@@ -17289,9 +17307,9 @@
   {
     "key": "Show",
     "source": "\"Show\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:263",
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:269",
     "uses": [
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:263",
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:269",
       "Sources/CevicheMac/Catalog/PeopleView.swift:295",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:151"
     ]
@@ -17494,6 +17512,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:275",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:72",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:168",
+      "Sources/CevicheMac/Components/FailureAlert.swift:147",
       "Sources/CevicheMac/Editor/LooksPanel.swift:124",
       "Sources/CevicheMac/Editor/LooksPanel.swift:124",
       "Sources/CevicheMac/Editor/LooksPanel.swift:405",
@@ -17899,7 +17918,7 @@
   {
     "key": "Some Files Weren’t Imported",
     "source": "\"Some Files Weren’t Imported\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:151"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:161"
   },
   {
     "key": "Some Negatives Weren’t Converted",
@@ -18197,9 +18216,9 @@
   {
     "key": "Stop",
     "source": "\"Stop\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:240",
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:244",
     "uses": [
-      "Sources/CevicheMac/Catalog/ActivityCenter.swift:240",
+      "Sources/CevicheMac/Catalog/ActivityCenter.swift:244",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:519"
     ]
@@ -18207,12 +18226,12 @@
   {
     "key": "Stop %1$@",
     "source": "\"Stop \\(activity.title)\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:240"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:244"
   },
   {
     "key": "Stop All",
     "source": "\"Stop All\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:189"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:191"
   },
   {
     "key": "Stop Download",
@@ -18251,7 +18270,7 @@
   {
     "key": "Stopped - %1$@",
     "source": "\"Stopped - \\(when)\"",
-    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:278"
+    "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:284"
   },
   {
     "key": "Story (9:16)",
@@ -21178,7 +21197,7 @@
   {
     "key": "XMP settings imported",
     "source": "\"XMP settings imported\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:200"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:211"
   },
   {
     "key": "XMP settings imported.",

@@ -3499,3 +3499,6 @@
 "Tags" = "标签";
 "Connect a camera and turn it on. For a memory card, use Import from Folder…" = "请连接相机并开机。存储卡请使用“从文件夹导入…”。";
 "No Camera Found" = "未找到相机";
+"Reason" = "原因";
+"Copy All" = "全部拷贝";
+"Failures" = "失败项";

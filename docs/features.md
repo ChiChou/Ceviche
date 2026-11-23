@@ -21,7 +21,8 @@ What the app ships today, by area. Names match the menus.
   preview, and photos whose XMP sidecar changes their look are rendered right after, or as they scroll into view when
   the originals are on a network share or another drive. Tagging and faces follow in the background without holding
   up the import. The grid switches to the new batch only from the whole catalog or a finished import's batch; a
-  search, filter, album or folder being shown stays put.
+  search, filter, album or folder being shown stays put. Files that fail to import are listed with their full path and why; the list can be copied, and
+  reopened from the import's entry in the activity center until the app quits.
 - **Organizing.** Ratings, pick and reject flags, color labels, albums and groups. Recently Added lists the last
   imports by day. Search covers text, tags, places and EXIF; the empty search field lists the most used keywords
   and automatic tags, or all of them, to add to the search with a click. The map shows geotagged photos. **Set Location…** in the Info panel's

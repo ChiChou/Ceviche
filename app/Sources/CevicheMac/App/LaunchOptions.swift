@@ -118,7 +118,7 @@ struct LaunchOptions: Equatable {
         if !summary.failures.isEmpty { line += ", \(summary.failures.count) failed" }
         if summary.stopped { line += ", stopped" }
         FileHandle.standardOutput.write(Data((line + "\n").utf8))
-        for failure in summary.failures { FileHandle.standardError.write(Data("Ceviche: \(failure)\n".utf8)) }
+        for failure in summary.failures { FileHandle.standardError.write(Data("Ceviche: \(failure.path): \(failure.reason)\n".utf8)) }
         quit(status: summary.failures.isEmpty && !summary.stopped ? 0 : 1)
     }
 
