@@ -32,6 +32,9 @@ final class CameraImportModel: NSObject, ObservableObject, @preconcurrency ICDev
     private var presence = CatalogPresence()
     private var started = false
     private var browsing = false
+    /// macOS has listed the cameras connected when discovery started (`deviceBrowserDidEnumerateLocalDevices`).
+    private var enumerated = false
+    private var enumerationWaiters: [CheckedContinuation<Void, Never>] = []
     /// Looking for cameras and cards, which is what makes macOS ask for access to a connected card.
     var isDiscovering: Bool { browsing }
     var requestedCamera: ICCameraDevice?
@@ -76,8 +79,26 @@ final class CameraImportModel: NSObject, ObservableObject, @preconcurrency ICDev
         browser.browsedDeviceTypeMask = ICDeviceTypeMask(rawValue: ICDeviceTypeMask.camera.rawValue | ICDeviceLocationTypeMask.local.rawValue)!
         browser.start()
     }
+    /// The cameras connected now, once macOS has listed them. Starts discovery if it hasn't started, which is what
+    /// makes macOS ask for access the first time.
+    func connectedCameras() async -> [ICCameraDevice] {
+        startDiscovery()
+        if !enumerated {
+            // Not every macOS release reports the end of the listing when access is refused: give up after a while.
+            Task { [weak self] in try? await Task.sleep(for: .seconds(10)); self?.resumeWaiters() }
+            await withCheckedContinuation { enumerationWaiters.append($0) }
+        }
+        return cameras
+    }
+    func deviceBrowserDidEnumerateLocalDevices(_ browser: ICDeviceBrowser) { finishEnumeration() }
+    private func finishEnumeration() { enumerated = true; resumeWaiters() }
+    private func resumeWaiters() {
+        let waiters = enumerationWaiters; enumerationWaiters = []
+        waiters.forEach { $0.resume() }
+    }
     func stopDiscovery() {
         stop()
+        finishEnumeration(); enumerated = false
         browsing = false
         browser.stop()
         cameras = []

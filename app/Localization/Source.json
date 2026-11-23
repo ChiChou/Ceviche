@@ -17,7 +17,7 @@
   {
     "key": " - %1$@ already in the catalog",
     "source": "\" - \\(present) already in the catalog\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:241"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:245"
   },
   {
     "key": " - %1$@ copies deleted",
@@ -27,7 +27,7 @@
   {
     "key": " - %1$@ deleted from it recently",
     "source": "\" - \\(deleted) deleted from it recently\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:242"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:246"
   },
   {
     "key": " - %1$@ failed",
@@ -56,7 +56,7 @@
   {
     "key": " - %1$@ selected",
     "source": "\" - \\(chosen) selected\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:244"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:248"
   },
   {
     "key": " - %1$@, every %2$@",
@@ -144,7 +144,7 @@
       "Sources/CevicheMac/Export/ExportButton.swift:75",
       "Sources/CevicheMac/Export/ExportButton.swift:79",
       "Sources/CevicheMac/Export/ExportButton.swift:82",
-      "Sources/CevicheMac/Import/CardImportView.swift:152",
+      "Sources/CevicheMac/Import/CardImportView.swift:155",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:199",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:240"
     ]
@@ -540,7 +540,7 @@
   {
     "key": "%1$@ folders",
     "source": "\"\\(urls.count) folders\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:383"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:392"
   },
   {
     "key": "%1$@ fps",
@@ -981,7 +981,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:279",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel.swift:279",
-      "Sources/CevicheMac/Import/CardImportView.swift:240"
+      "Sources/CevicheMac/Import/CardImportView.swift:244"
     ]
   },
   {
@@ -1023,7 +1023,7 @@
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:445",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:9",
       "Sources/CevicheMac/Export/ExportSession.swift:125",
-      "Sources/CevicheMac/Import/CardImportView.swift:240",
+      "Sources/CevicheMac/Import/CardImportView.swift:244",
       "Sources/CevicheMac/Tools/BestFacesView.swift:201",
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:170",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:180",
@@ -1675,12 +1675,12 @@
   {
     "key": ", already in catalog",
     "source": "\", already in catalog\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:315"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:319"
   },
   {
     "key": ", deleted from catalog recently",
     "source": "\", deleted from catalog recently\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:315"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:319"
   },
   {
     "key": "- Base",
@@ -2364,11 +2364,11 @@
   {
     "key": "Add photos by",
     "source": "\"Add photos by\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:402",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:411",
     "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:402",
-      "Sources/CevicheMac/Import/CardImportView.swift:213",
-      "Sources/CevicheMac/Import/CardImportView.swift:214"
+      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:411",
+      "Sources/CevicheMac/Import/CardImportView.swift:217",
+      "Sources/CevicheMac/Import/CardImportView.swift:218"
     ]
   },
   {
@@ -3820,7 +3820,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:23",
       "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:171",
-      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:390",
+      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:399",
       "Sources/CevicheMac/Catalog/CatalogModel+Trash.swift:13",
       "Sources/CevicheMac/Catalog/CatalogModel.swift:935"
     ]
@@ -3894,22 +3894,22 @@
   {
     "key": "Camera disconnected.",
     "source": "\"Camera disconnected.\"",
-    "context": "Sources/CevicheMac/Import/CameraImport.swift:68",
+    "context": "Sources/CevicheMac/Import/CameraImport.swift:71",
     "uses": [
-      "Sources/CevicheMac/Import/CameraImport.swift:68",
-      "Sources/CevicheMac/Import/CameraImport.swift:114",
-      "Sources/CevicheMac/Import/CameraImport.swift:160",
-      "Sources/CevicheMac/Import/CameraImport.swift:162",
-      "Sources/CevicheMac/Import/CameraImport.swift:181"
+      "Sources/CevicheMac/Import/CameraImport.swift:71",
+      "Sources/CevicheMac/Import/CameraImport.swift:135",
+      "Sources/CevicheMac/Import/CameraImport.swift:181",
+      "Sources/CevicheMac/Import/CameraImport.swift:183",
+      "Sources/CevicheMac/Import/CameraImport.swift:202"
     ]
   },
   {
     "key": "Camera download failed.",
     "source": "\"Camera download failed.\"",
-    "context": "Sources/CevicheMac/Import/CameraImport.swift:264",
+    "context": "Sources/CevicheMac/Import/CameraImport.swift:285",
     "uses": [
-      "Sources/CevicheMac/Import/CameraImport.swift:264",
-      "Sources/CevicheMac/Import/CameraImport.swift:268"
+      "Sources/CevicheMac/Import/CameraImport.swift:285",
+      "Sources/CevicheMac/Import/CameraImport.swift:289"
     ]
   },
   {
@@ -4426,7 +4426,7 @@
   {
     "key": "Choose a camera card or folder to scan.",
     "source": "\"Choose a camera card or folder to scan.\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:382"
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:391"
   },
   {
     "key": "Choose a different export destination; the original image cannot be overwritten.",
@@ -5161,6 +5161,11 @@
     "context": "Sources/CevicheMac/Tools/FocusStackView.swift:476"
   },
   {
+    "key": "Connect a camera and turn it on. For a memory card, use Import from Folder…",
+    "source": "\"Connect a camera and turn it on. For a memory card, use Import from Folder…\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:379"
+  },
+  {
     "key": "Connected - working",
     "source": "\"Connected - working\"",
     "context": "Sources/CevicheMac/App/PreferencesView.swift:149"
@@ -5851,12 +5856,12 @@
   {
     "key": "Counting photos…",
     "source": "\"Counting photos…\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:239"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:243"
   },
   {
     "key": "Counting… %1$@ so far",
     "source": "\"Counting… \\(model.foundCount) so far\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:239"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:243"
   },
   {
     "key": "Couplers",
@@ -6432,7 +6437,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:322",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel.swift:322",
-      "Sources/CevicheMac/Import/CardImportView.swift:284"
+      "Sources/CevicheMac/Import/CardImportView.swift:288"
     ]
   },
   {
@@ -6500,7 +6505,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:169",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:169",
-      "Sources/CevicheMac/Import/CardImportView.swift:209"
+      "Sources/CevicheMac/Import/CardImportView.swift:213"
     ]
   },
   {
@@ -8727,7 +8732,7 @@
   {
     "key": "Found %1$@ photos…",
     "source": "\"Found \\(model.foundCount) photos…\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:133"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:132"
   },
   {
     "key": "Four guides are already placed. Move an endpoint or delete a guide.",
@@ -9146,7 +9151,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:319",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:319",
-      "Sources/CevicheMac/Import/CardImportView.swift:227"
+      "Sources/CevicheMac/Import/CardImportView.swift:231"
     ]
   },
   {
@@ -9403,7 +9408,7 @@
   {
     "key": "Hide %1$@ files",
     "source": "\"Hide \\(entry.kind) files\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:182"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:186"
   },
   {
     "key": "Hide (⌥⌘Z)",
@@ -9712,12 +9717,12 @@
   {
     "key": "Import %1$@ Photos",
     "source": "\"Import \\(count.formatted()) Photos\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:194"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:198"
   },
   {
     "key": "Import 1 Photo",
     "source": "\"Import 1 Photo\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:194"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:198"
   },
   {
     "key": "Import Date",
@@ -9854,8 +9859,8 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:27",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:27",
-      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:391",
-      "Sources/CevicheMac/Import/CameraImport.swift:123",
+      "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:400",
+      "Sources/CevicheMac/Import/CameraImport.swift:144",
       "Sources/CevicheMac/Import/PhotosImport.swift:75",
       "Sources/CevicheMac/MCP/MCPController.swift:11"
     ]
@@ -9863,7 +9868,7 @@
   {
     "key": "In Catalog",
     "source": "\"In Catalog\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:284"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:288"
   },
   {
     "key": "In Print Proof, choose Other… in the profile list to add a printer’s ICC profile.",
@@ -11438,7 +11443,7 @@
   {
     "key": "Looking for photos…",
     "source": "\"Looking for photos…\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:133"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:132"
   },
   {
     "key": "Looking in iCloud…",
@@ -12833,6 +12838,11 @@
     "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:408"
   },
   {
+    "key": "No Camera Found",
+    "source": "\"No Camera Found\"",
+    "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:379"
+  },
+  {
     "key": "No Catalogs",
     "source": "\"No Catalogs\"",
     "context": "Sources/CevicheMac/App/WelcomeView.swift:144"
@@ -12925,7 +12935,7 @@
   {
     "key": "No Photos Found",
     "source": "\"No Photos Found\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:136"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:135"
   },
   {
     "key": "No Photos Yet",
@@ -13266,7 +13276,7 @@
   {
     "key": "No supported photos were found in %1$@.",
     "source": "\"No supported photos were found in \\(model.request.title).\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:136"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:135"
   },
   {
     "key": "No templates yet. Start one from a built-in document and change what differs.",
@@ -15114,10 +15124,10 @@
   {
     "key": "RAW + JPEG",
     "source": "\"RAW + JPEG\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:222",
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:226",
     "uses": [
-      "Sources/CevicheMac/Import/CardImportView.swift:222",
-      "Sources/CevicheMac/Import/CardImportView.swift:223"
+      "Sources/CevicheMac/Import/CardImportView.swift:226",
+      "Sources/CevicheMac/Import/CardImportView.swift:227"
     ]
   },
   {
@@ -16912,13 +16922,13 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditClipboard.swift:126",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:68",
-      "Sources/CevicheMac/Import/CardImportView.swift:154"
+      "Sources/CevicheMac/Import/CardImportView.swift:157"
     ]
   },
   {
     "key": "Select All",
     "source": "\"Select All\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:208"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:212"
   },
   {
     "key": "Select Background",
@@ -16928,7 +16938,7 @@
   {
     "key": "Select New",
     "source": "\"Select New\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:210"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:214"
   },
   {
     "key": "Select Object",
@@ -17294,7 +17304,7 @@
   {
     "key": "Show %1$@ files",
     "source": "\"Show \\(entry.kind) files\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:182"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:186"
   },
   {
     "key": "Show %1$@ star or more",
@@ -17453,7 +17463,7 @@
   {
     "key": "Show already imported",
     "source": "\"Show already imported\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:186"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:190"
   },
   {
     "key": "Show each photo",
@@ -18220,7 +18230,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:94",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:94",
-      "Sources/CevicheMac/Import/CardImportView.swift:191"
+      "Sources/CevicheMac/Import/CardImportView.swift:195"
     ]
   },
   {
@@ -18938,7 +18948,7 @@
   {
     "key": "The library shows each such shot as one tile, its RAW, with the JPEG inside the group",
     "source": "\"The library shows each such shot as one tile, its RAW, with the JPEG inside the group\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:228"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:232"
   },
   {
     "key": "The light the profile is for: the white balance that makes the chart’s greys neutral. It suits photos developed near it.",
@@ -20352,7 +20362,7 @@
   {
     "key": "Unlock the device and allow access to its photos.",
     "source": "\"Unlock the device and allow access to its photos.\"",
-    "context": "Sources/CevicheMac/Import/CameraImport.swift:199"
+    "context": "Sources/CevicheMac/Import/CameraImport.swift:220"
   },
   {
     "key": "Unnamed",
@@ -20899,7 +20909,7 @@
   {
     "key": "What to import when a shot was saved as both a RAW and a JPEG or HEIF file",
     "source": "\"What to import when a shot was saved as both a RAW and a JPEG or HEIF file\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:225"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:229"
   },
   {
     "key": "Where the exposures disagree because something moved, takes that area from the base exposure alone. Higher settings catch smaller changes.",
@@ -21605,7 +21615,7 @@
   {
     "key": "into %1$@",
     "source": "\"into \\((root.appendingPathComponent(\"Originals\").path as NSString).abbreviatingWithTildeInPath)\"",
-    "context": "Sources/CevicheMac/Import/CardImportView.swift:218"
+    "context": "Sources/CevicheMac/Import/CardImportView.swift:222"
   },
   {
     "key": "keyboard key that sets this|Key %1$@",

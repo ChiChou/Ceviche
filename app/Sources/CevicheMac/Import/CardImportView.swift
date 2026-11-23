@@ -125,38 +125,42 @@ struct CardImportView: View {
         VStack(spacing: 0) {
             header
             Rule()
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 18, pinnedViews: .sectionHeaders) {
-                    if model.candidates.isEmpty && model.scanning {
-                        VStack(spacing: 10) {
-                            ProgressView().controlSize(.regular)
-                            Text(model.foundCount == 0 ? L10n.tr("Looking for photos…") : L10n.tr("Found \(model.foundCount) photos…")).font(.callout).foregroundStyle(.secondary).monospacedDigit()
-                        }.frame(maxWidth: .infinity).padding(60)
-                    } else if model.candidates.isEmpty && !model.scanning {
-                        ContentUnavailableView(L10n.tr("No Photos Found"), systemImage: "sdcard", description: Text(L10n.tr("No supported photos were found in \(model.request.title)."))).padding(40)
-                    } else if model.shown.isEmpty && !model.scanning {
-                        ContentUnavailableView(L10n.tr("Nothing to Show"), systemImage: "line.3.horizontal.decrease.circle", description: Text(L10n.tr("Every photo is hidden by the filters above."))).padding(40)
-                    }
-                    ForEach(model.groups, id: \.title) { group in
-                        Section {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: tileSize, maximum: tileSize * 1.4), spacing: 12)], spacing: 12) {
-                                ForEach(group.items) { candidate in
-                                    CandidateTile(candidate: candidate, selected: model.selected.contains(candidate.id), cameraFile: model.cameraFile(for: candidate))
-                                        .onTapGesture { if !model.importing { toggle(candidate) } }
-                                        .accessibilityAddTraits(.isButton).accessibilityAction { if !model.importing { toggle(candidate) } }
-                                }
-                            }.padding(.horizontal, 16)
-                        } header: {
-                            HStack {
-                                Text(title(for: group.title)).font(.headline)
-                                Text(L10n.tr("\(group.items.count)")).foregroundStyle(.secondary).monospacedDigit()
-                                Spacer()
-                                Button(L10n.tr("Select")) { model.selected.formUnion(group.items.map(\.id)) }.disabled(model.importing).buttonStyle(.textLink).font(.caption)
-                            }.padding(.horizontal, 16).padding(.vertical, 6).background(Theme.canvas)
+            // Searching and the empty states sit in the middle of the window, outside the scrolling album.
+            if model.candidates.isEmpty && model.scanning {
+                VStack(spacing: 10) {
+                    ProgressView().controlSize(.regular)
+                    Text(model.foundCount == 0 ? L10n.tr("Looking for photos…") : L10n.tr("Found \(model.foundCount) photos…")).font(.callout).foregroundStyle(.secondary).monospacedDigit()
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if model.candidates.isEmpty {
+                ContentUnavailableView(L10n.tr("No Photos Found"), systemImage: "sdcard", description: Text(L10n.tr("No supported photos were found in \(model.request.title).")))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if model.shown.isEmpty && !model.scanning {
+                ContentUnavailableView(L10n.tr("Nothing to Show"), systemImage: "line.3.horizontal.decrease.circle", description: Text(L10n.tr("Every photo is hidden by the filters above.")))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 18, pinnedViews: .sectionHeaders) {
+                        ForEach(model.groups, id: \.title) { group in
+                            Section {
+                                LazyVGrid(columns: [GridItem(.adaptive(minimum: tileSize, maximum: tileSize * 1.4), spacing: 12)], spacing: 12) {
+                                    ForEach(group.items) { candidate in
+                                        CandidateTile(candidate: candidate, selected: model.selected.contains(candidate.id), cameraFile: model.cameraFile(for: candidate))
+                                            .onTapGesture { if !model.importing { toggle(candidate) } }
+                                            .accessibilityAddTraits(.isButton).accessibilityAction { if !model.importing { toggle(candidate) } }
+                                    }
+                                }.padding(.horizontal, 16)
+                            } header: {
+                                HStack {
+                                    Text(title(for: group.title)).font(.headline)
+                                    Text(L10n.tr("\(group.items.count)")).foregroundStyle(.secondary).monospacedDigit()
+                                    Spacer()
+                                    Button(L10n.tr("Select")) { model.selected.formUnion(group.items.map(\.id)) }.disabled(model.importing).buttonStyle(.textLink).font(.caption)
+                                }.padding(.horizontal, 16).padding(.vertical, 6).background(Theme.canvas)
+                            }
                         }
-                    }
-                }.padding(.vertical, 12)
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }.padding(.vertical, 12)
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
             Rule()
             footer
         }

@@ -369,10 +369,19 @@ extension CatalogModel {
 
     // MARK: Importers
     /// Device discovery starts, and sessions open, only after the user chooses an import source (`CameraImportModel.start`).
+    /// With no camera connected there is nothing to show: an alert says so instead of an empty importer.
     func requestCameraImport() {
         guard store != nil, canStartJob else { return }
-        cameraImporter.requestedCamera = nil
-        showingCameraImport = true
+        Task {
+            let cameras = await cameraImporter.connectedCameras()
+            guard store != nil, canStartJob else { return }
+            guard !cameras.isEmpty else {
+                failure = Failure(L10n.tr("No Camera Found"), L10n.tr("Connect a camera and turn it on. For a memory card, use Import from Folder…"))
+                return
+            }
+            cameraImporter.requestedCamera = nil
+            showingCameraImport = true
+        }
     }
     /// Scan only a folder explicitly chosen by the user; never probe mounted volumes.
     func requestFolderImport() {

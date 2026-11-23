@@ -816,6 +816,7 @@
 "Compression" = "Compression";
 "Condenser" = "Condenser";
 "Confidence" = "Confidence";
+"Connect a camera and turn it on. For a memory card, use Import from Folder…" = "Connect a camera and turn it on. For a memory card, use Import from Folder…";
 "Connected - working" = "Connected - working";
 "Connecting…" = "Connecting…";
 "Connection" = "Connection";
@@ -2022,6 +2023,7 @@
 "No AI fill yet; a patch fills it" = "No AI fill yet; a patch fills it";
 "No Access" = "No Access";
 "No Bursts" = "No Bursts";
+"No Camera Found" = "No Camera Found";
 "No Catalogs" = "No Catalogs";
 "No Chart Profiles" = "No Chart Profiles";
 "No Closed Eyes" = "No Closed Eyes";
