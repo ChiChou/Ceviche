@@ -76,8 +76,8 @@ Closing a tool stops measuring the photos it asked for. Their large preview show
   in one step. Timelapse and night-sky sequences shot at a steady interval show as Timelapse, with the interval and any
   missing frames, and are grouped rather than picked from. Merge with Above joins a group to the one before it; Split
   undoes it.
-- **Check Faces.** Lays out a series of group shots with a column per person and a row per frame, faces cut from the
-  original and closed eyes marked, to find the frame where everyone is at their best; Photos shows each photo as a card
+- **Check Faces.** Lays out every series of group shots one after another, each with a column per person and a row per
+  frame, faces shown at once from the camera preview and cut from the original where they are small, closed eyes marked, to find the frame where everyone is at their best; Photos shows each photo as a card
   of its faces instead. Photos with people are looked at again more closely, which finds the small faces of a group the
   culling measure misses. The chosen photo stays open beside them with its faces in a strip below; a face or its number
   zooms to it at actual pixels. Pick and Reject are set as you go and applied together.

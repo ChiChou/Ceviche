@@ -2574,7 +2574,6 @@
 "1 photo changes" = "1 foto cambia";
 "1 photo couldn’t be matched" = "Impossibile uniformare 1 foto";
 "1 photo matched" = "1 foto uniformata";
-"100%" = "100%";
 "Back to Stack" = "Restituisci allo stack";
 "Back to Stack: paint to give an area back to the stack" = "Restituisci allo stack: dipingi per restituire un’area allo stack";
 "Balance each roll on its own. Rolls are told apart by capture order, camera settings and film base." = "Bilancia ogni rullino separatamente. I rullini si distinguono per ordine di scatto, impostazioni della fotocamera e base della pellicola.";
@@ -3263,11 +3262,9 @@
 "Go to Date" = "Vai alla data";
 "Group by Date" = "Raggruppa per data";
 "No dated photos." = "Nessuna foto con data.";
-"%1$@ of %2$@ photos in %3$@ have faces" = "%1$@ di %2$@ foto in %3$@ hanno volti";
 "1 face" = "1 volto";
 "All Faces" = "Tutti i volti";
 "Eyes look closed" = "Gli occhi sembrano chiusi";
-"Finding faces in %1$@ of %2$@ photos in %3$@…" = "Ricerca dei volti in %1$@ di %2$@ foto in %3$@…";
 "Loading the original for full detail…" = "Caricamento dell’originale per il pieno dettaglio…";
 "Looking for Faces…" = "Ricerca dei volti…";
 "No Closed Eyes" = "Nessun occhio chiuso";
@@ -3505,3 +3502,5 @@
 "Couldn’t Make an ID Photo" = "Impossibile creare la foto tessera";
 "MPEG-4 plays on more devices and sites; QuickTime suits video editors" = "MPEG-4 si riproduce su più dispositivi e siti; QuickTime è adatto agli editor video";
 "Show Photos from Same Day" = "Mostra foto dello stesso giorno";
+"%1$@ of %2$@ photos have faces" = "%1$@ di %2$@ foto hanno volti";
+"Finding faces in %1$@ of %2$@ photos…" = "Ricerca dei volti in %1$@ di %2$@ foto…";

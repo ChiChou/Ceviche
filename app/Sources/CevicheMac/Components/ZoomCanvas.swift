@@ -175,13 +175,13 @@ struct ZoomCanvas<Overlay: View>: View {
     private var zoomControls: some View {
         HStack(spacing: 6) {
             Button { step(1 / 1.5) } label: { Image(systemName: "minus.magnifyingglass") }.disabled(zoom <= 1).help(L10n.tr("Zoom Out"))
-            Text(L10n.tr("\(Int((pixelZoom * 100).rounded()))%")).monospacedDigit().frame(minWidth: 40)
+            // The readout is also the way to actual pixels: a separate 100% button beside it only said the same twice.
+            Button { withAnimation(.easeOut(duration: 0.15)) { setZoom(actualSize, at: pointer ?? center, from: (zoom, pan)) } } label: {
+                Text(L10n.tr("\(Int((pixelZoom * 100).rounded()))%")).monospacedDigit().frame(minWidth: 40)
+            }
+            .allowsHitTesting(actualSize > 1.05).help(L10n.tr("Actual Size"))
             Button { step(1.5) } label: { Image(systemName: "plus.magnifyingglass") }.disabled(zoom >= maxZoom).help(L10n.tr("Zoom In"))
             Button(L10n.tr("Fit")) { withAnimation(.easeOut(duration: 0.15)) { zoom = 1; pan = .zero } }.disabled(zoom == 1)
-            if actualSize > 1.05 {
-                Button(L10n.tr("100%")) { withAnimation(.easeOut(duration: 0.15)) { setZoom(actualSize, at: pointer ?? center, from: (zoom, pan)) } }
-                    .disabled(abs(pixelZoom - 1) < 0.01)
-            }
         }
         .buttonStyle(.borderless).font(.callout).foregroundStyle(.white)
         .padding(.horizontal, 10).padding(.vertical, 5)

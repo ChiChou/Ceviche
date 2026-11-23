@@ -499,10 +499,10 @@
   {
     "key": "%1$@ faces",
     "source": "\"\\(faces.count.formatted()) faces\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:497",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:621",
     "uses": [
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:497",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:506",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:621",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:630",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:32"
     ]
   },
@@ -824,7 +824,7 @@
       "Sources/CevicheMac/Tools/BestFacesView.swift:237",
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:198",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:434",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:596",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:702",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:164",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:235",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:520"
@@ -892,9 +892,9 @@
     "context": "Sources/CevicheMac/Tools/PanoramaMergeView.swift:285"
   },
   {
-    "key": "%1$@ of %2$@ photos in %3$@ have faces",
-    "source": "\"\\(found) of \\(total) photos in \\(model.request.title) have faces\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:367"
+    "key": "%1$@ of %2$@ photos have faces",
+    "source": "\"\\(found) of \\(total) photos have faces\"",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:482"
   },
   {
     "key": "%1$@ of %2$@ photos stacked",
@@ -1133,7 +1133,7 @@
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
       "Sources/CevicheMac/Culling/ProblemPhotosView.swift:325",
       "Sources/CevicheMac/Culling/TidyPairsView.swift:452",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:439"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:556"
     ]
   },
   {
@@ -1459,7 +1459,7 @@
     "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:392",
     "uses": [
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:392",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:373"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:488"
     ]
   },
   {
@@ -1468,7 +1468,7 @@
     "context": "Sources/CevicheMac/Culling/CullingAssistantView.swift:391",
     "uses": [
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:391",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:374"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:489"
     ]
   },
   {
@@ -1526,7 +1526,7 @@
     "context": "Sources/CevicheMac/Components/ToolChrome.swift:108",
     "uses": [
       "Sources/CevicheMac/Components/ToolChrome.swift:108",
-      "Sources/CevicheMac/Components/ZoomCanvas.swift:178",
+      "Sources/CevicheMac/Components/ZoomCanvas.swift:180",
       "Sources/CevicheMac/Export/ExportOptions.swift:102",
       "Sources/CevicheMac/Export/WatermarkEditor.swift:216",
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:158",
@@ -1734,7 +1734,7 @@
   {
     "key": "1 face",
     "source": "\"1 face\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:506"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:630"
   },
   {
     "key": "1 face from another photo",
@@ -1842,7 +1842,7 @@
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:396",
       "Sources/CevicheMac/Culling/ProblemPhotosView.swift:325",
       "Sources/CevicheMac/Culling/TidyPairsView.swift:452",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:439"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:556"
     ]
   },
   {
@@ -1949,11 +1949,6 @@
       "Sources/CevicheCore/Metadata/PhotoMetadata.swift:117",
       "Sources/CevicheCore/Rendering/RawRenderer.swift:154"
     ]
-  },
-  {
-    "key": "100%",
-    "source": "\"100%\"",
-    "context": "Sources/CevicheMac/Components/ZoomCanvas.swift:182"
   },
   {
     "key": "120 Film",
@@ -2302,7 +2297,11 @@
   {
     "key": "Actual Size",
     "source": "\"Actual Size\"",
-    "context": "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:192"
+    "context": "Sources/CevicheMac/Components/ZoomCanvas.swift:182",
+    "uses": [
+      "Sources/CevicheMac/Components/ZoomCanvas.swift:182",
+      "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:192"
+    ]
   },
   {
     "key": "Actual size: the print as large as it will be on paper",
@@ -2623,7 +2622,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:66",
       "Sources/CevicheMac/Catalog/PeopleView.swift:97",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:339"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:450"
     ]
   },
   {
@@ -2912,7 +2911,7 @@
       "Sources/CevicheMac/Editor/ImageCanvas+Framing.swift:44",
       "Sources/CevicheMac/Editor/LooksPanel.swift:448",
       "Sources/CevicheMac/Editor/LooksPanel.swift:490",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:355",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:470",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:214"
     ]
   },
@@ -4334,18 +4333,18 @@
   {
     "key": "Check Faces",
     "source": "\"Check Faces\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:330"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:441"
   },
   {
     "key": "Check Faces layout|People",
     "source": "\"People\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:333",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:444",
     "meaning": "Check Faces layout"
   },
   {
     "key": "Check Faces layout|Photos",
     "source": "\"Photos\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:334",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:445",
     "meaning": "Check Faces layout"
   },
   {
@@ -4704,7 +4703,7 @@
       "Sources/CevicheMac/Editor/DustSection.swift:62",
       "Sources/CevicheMac/Editor/GeometrySection.swift:113",
       "Sources/CevicheMac/Editor/ImageCanvas+FaceTags.swift:79",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:435",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:552",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:77",
       "Sources/CevicheMac/Tools/NightSkyView.swift:288"
     ]
@@ -7991,9 +7990,9 @@
   {
     "key": "Eyes Closed",
     "source": "\"Eyes Closed\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:340",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:451",
     "uses": [
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:340",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:451",
       "Sources/CevicheCore/Analysis/Culling.swift:19"
     ]
   },
@@ -8003,10 +8002,10 @@
     "context": "Sources/CevicheMac/Tools/BestFacesView.swift:353",
     "uses": [
       "Sources/CevicheMac/Tools/BestFacesView.swift:353",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:549",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:691",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:740",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:795"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:671",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:797",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:900",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:941"
     ]
   },
   {
@@ -8371,9 +8370,9 @@
     "context": "Sources/CevicheMac/Editor/RetouchPanel.swift:755"
   },
   {
-    "key": "Finding faces in %1$@ of %2$@ photos in %3$@…",
-    "source": "\"Finding faces in \\(done.formatted()) of \\(total.formatted()) photos in \\(model.request.title)…\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:362"
+    "key": "Finding faces in %1$@ of %2$@ photos…",
+    "source": "\"Finding faces in \\(done.formatted()) of \\(total.formatted()) photos…\"",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:477"
   },
   {
     "key": "Finding faces in %1$@…",
@@ -8475,7 +8474,7 @@
     "context": "Sources/CevicheMac/App/SecondaryWindow.swift:72",
     "uses": [
       "Sources/CevicheMac/App/SecondaryWindow.swift:72",
-      "Sources/CevicheMac/Components/ZoomCanvas.swift:180",
+      "Sources/CevicheMac/Components/ZoomCanvas.swift:184",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:64",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:72",
       "Sources/CevicheMac/Tools/FocusStackView.swift:429",
@@ -10920,7 +10919,7 @@
     "context": "Sources/CevicheMac/Export/WatermarkEditor.swift:67",
     "uses": [
       "Sources/CevicheMac/Export/WatermarkEditor.swift:67",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:332"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:443"
     ]
   },
   {
@@ -11477,7 +11476,7 @@
   {
     "key": "Looking closer at faces in %1$@ of %2$@ photos…",
     "source": "\"Looking closer at faces in \\(looked.formatted()) of \\(all.formatted()) photos…\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:366"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:481"
   },
   {
     "key": "Looking for Bursts…",
@@ -11487,7 +11486,7 @@
   {
     "key": "Looking for Faces…",
     "source": "\"Looking for Faces…\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:402"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:517"
   },
   {
     "key": "Looking for Flaws…",
@@ -12909,7 +12908,7 @@
   {
     "key": "No Closed Eyes",
     "source": "\"No Closed Eyes\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:384"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:499"
   },
   {
     "key": "No Copies",
@@ -12929,7 +12928,7 @@
   {
     "key": "No Faces Found",
     "source": "\"No Faces Found\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:384"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:499"
   },
   {
     "key": "No Faces Found Yet",
@@ -13779,7 +13778,7 @@
   {
     "key": "Only photos with a face whose eyes look closed",
     "source": "\"Only photos with a face whose eyes look closed\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:341"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:452"
   },
   {
     "key": "Only the subject found",
@@ -14520,9 +14519,9 @@
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:39",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:685",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:433",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:509",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:837"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:550",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:633",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:969"
     ]
   },
   {
@@ -14533,7 +14532,7 @@
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:187",
       "Sources/CevicheMac/Catalog/CatalogView.swift:286",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:684",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:836"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:968"
     ]
   },
   {
@@ -15704,9 +15703,9 @@
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:40",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:685",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:434",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:510",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:837"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:551",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:634",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:969"
     ]
   },
   {
@@ -15722,7 +15721,7 @@
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:187",
       "Sources/CevicheMac/Catalog/CatalogView.swift:286",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:684",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:836"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:968"
     ]
   },
   {
@@ -17152,7 +17151,7 @@
   {
     "key": "Set the flags shown here",
     "source": "\"Set the flags shown here\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:356"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:471"
   },
   {
     "key": "Set the light sliders from the photo",
@@ -19128,7 +19127,7 @@
   {
     "key": "The people of a series side by side, frame under frame, or each photo as a card",
     "source": "\"The people of a series side by side, frame under frame, or each photo as a card\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:337"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:448"
   },
   {
     "key": "The photo and its file are deleted, with its edits and history.",
@@ -21363,7 +21362,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:233",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:233",
-      "Sources/CevicheMac/Components/ZoomCanvas.swift:179",
+      "Sources/CevicheMac/Components/ZoomCanvas.swift:183",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:191"
     ]
   },
@@ -21385,7 +21384,7 @@
   {
     "key": "Zoom to Face",
     "source": "\"Zoom to Face\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:436"
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:553"
   },
   {
     "key": "Zoom to Fit",
@@ -21404,11 +21403,11 @@
   {
     "key": "Zoom to this face at actual pixels",
     "source": "\"Zoom to this face at actual pixels\"",
-    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:631",
+    "context": "Sources/CevicheMac/Tools/FaceCheckView.swift:737",
     "uses": [
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:631",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:691",
-      "Sources/CevicheMac/Tools/FaceCheckView.swift:795"
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:737",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:797",
+      "Sources/CevicheMac/Tools/FaceCheckView.swift:941"
     ]
   },
   {

@@ -149,7 +149,7 @@
 "%1$@ of %2$@ photos - %3$@" = "%1$@ of %2$@ photos - %3$@";
 "%1$@ of %2$@ photos can be corrected" = "%1$@ of %2$@ photos can be corrected";
 "%1$@ of %2$@ photos couldn’t be merged: %3$@" = "%1$@ of %2$@ photos couldn’t be merged: %3$@";
-"%1$@ of %2$@ photos in %3$@ have faces" = "%1$@ of %2$@ photos in %3$@ have faces";
+"%1$@ of %2$@ photos have faces" = "%1$@ of %2$@ photos have faces";
 "%1$@ of %2$@ photos stacked" = "%1$@ of %2$@ photos stacked";
 "%1$@ of %2$@ photos, %3$@ overlapping regions left out" = "%1$@ of %2$@ photos, %3$@ overlapping regions left out";
 "%1$@ of %2$@ photos, 1 overlapping region left out" = "%1$@ of %2$@ photos, 1 overlapping region left out";
@@ -322,7 +322,6 @@
 "1 star" = "1 star";
 "1.85:1 Flat" = "1.85:1 Flat";
 "1/%1$@ s" = "1/%1$@ s";
-"100%" = "100%";
 "120 Film" = "120 Film";
 "16 colors maximum" = "16 colors maximum";
 "16 mm" = "16 mm";
@@ -1304,7 +1303,7 @@
 "Find Photos" = "Find Photos";
 "Find blemishes" = "Find blemishes";
 "Finding blemishes…" = "Finding blemishes…";
-"Finding faces in %1$@ of %2$@ photos in %3$@…" = "Finding faces in %1$@ of %2$@ photos in %3$@…";
+"Finding faces in %1$@ of %2$@ photos…" = "Finding faces in %1$@ of %2$@ photos…";
 "Finding faces in %1$@…" = "Finding faces in %1$@…";
 "Finding features" = "Finding features";
 "Finding hot pixels…" = "Finding hot pixels…";

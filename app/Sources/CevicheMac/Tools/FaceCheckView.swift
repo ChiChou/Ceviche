@@ -25,7 +25,10 @@ final class FaceCheckModel: ObservableObject {
     /// Photos that could not be measured, and why.
     @Published private(set) var unmeasured: [String: String] = [:]
     /// Only photos with a face whose eyes look closed.
-    @Published var closedOnly = false
+    @Published var closedOnly = false { didSet { closedKept = []; keepClosed() } }
+    /// What Eyes Closed lists: photos join as their eyes are found closed and stay until the filter is turned off, so
+    /// a closer look that opens a pair of eyes doesn't pull the photo away while it is being looked at.
+    private var closedKept: Set<String> = []
     /// Flags set here, applied together.
     @Published private(set) var flags: [String: ReviewState] = [:]
     /// The photo the arrows move, the keys flag and the preview panel shows.
@@ -76,6 +79,7 @@ final class FaceCheckModel: ObservableObject {
         let done = request.assets.filter { reports[$0.id] != nil || unmeasured[$0.id] != nil }.count
         stage = done < request.assets.count ? .measuring(done, request.assets.count) : .ready
         if stage == .ready { scanner?.urgent = false }
+        keepClosed()
         if focus == nil || !shown.contains(where: { $0.id == focus }) { focus = shown.first?.id }
         lookCloser()
     }
@@ -112,7 +116,7 @@ final class FaceCheckModel: ObservableObject {
                 let pending = self.withFaces.filter { self.found[$0.id] == nil && !self.unread.contains($0.id) }
                 guard let next = pending.first(where: { $0.id == self.focus }) ?? pending.first else { break }
                 let key = FaceFinderCache.key(next)
-                if let cached = FaceFinderCache.faces.object(forKey: key) { self.found[next.id] = cached.faces; continue }
+                if let cached = FaceFinderCache.faces.object(forKey: key) { self.found[next.id] = cached.faces; self.keepClosed(); continue }
                 guard case .available(let url) = next.availability(catalog: self.root) else { self.unread.insert(next.id); continue }
                 let faces = await Task.detached(priority: .userInitiated) { () -> [PhotoQualityReport.Face]? in
                     let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
@@ -122,6 +126,7 @@ final class FaceCheckModel: ObservableObject {
                 if let faces {
                     FaceFinderCache.faces.setObject(.init(faces), forKey: key)
                     self.found[next.id] = faces
+                    self.keepClosed()
                 } else {
                     self.unread.insert(next.id)
                 }
@@ -130,32 +135,41 @@ final class FaceCheckModel: ObservableObject {
         }
     }
     var closedCount: Int { withFaces.filter { faces($0.id).contains(where: eyesClosed) }.count }
-    var shown: [CatalogAsset] { closedOnly ? withFaces.filter { faces($0.id).contains(where: eyesClosed) } : withFaces }
+    private func keepClosed() {
+        guard closedOnly else { return }
+        closedKept.formUnion(withFaces.filter { faces($0.id).contains(where: eyesClosed) }.map(\.id))
+    }
+    /// The photos in the grid; People always shows them all.
+    var shown: [CatalogAsset] { closedOnly && layout == .photos ? withFaces.filter { closedKept.contains($0.id) } : withFaces }
+    /// The order the arrows and the panel's count follow: People's is capture order, series after series.
+    var sequence: [CatalogAsset] { layout == .people ? captureOrdered : shown }
     var focusedAsset: CatalogAsset? { focus.flatMap { byID[$0] } }
 
     // MARK: Series
     /// Frames this far apart or closer can be one series: a group shot again and again.
     static let seriesGap = 60.0
-    /// The photos shot with this one, in capture order: neighbours no more than `seriesGap` apart whose faces mostly
-    /// stand where the other's do, so the same group re-arranged a minute later is a series of its own.
-    func series(of id: String) -> [CatalogAsset] {
-        // Every frame of it, whatever the filter shows.
-        let photos = withFaces.enumerated().sorted { a, b in
+    /// The photos with faces in capture order, the order People shows them in.
+    var captureOrdered: [CatalogAsset] {
+        withFaces.enumerated().sorted { a, b in
             let (ta, tb) = (reports[a.element.id]?.captureDate, reports[b.element.id]?.captureDate)
             if let ta, let tb, ta != tb { return ta < tb }
             return a.offset < b.offset
         }.map(\.element)
-        guard let index = photos.firstIndex(where: { $0.id == id }) else { return [] }
-        func together(_ a: Int, _ b: Int) -> Bool {
-            guard let ta = reports[photos[a].id]?.captureDate, let tb = reports[photos[b].id]?.captureDate, abs(tb - ta) <= Self.seriesGap else { return false }
-            let (fa, fb) = (faces(photos[a].id), faces(photos[b].id))
+    }
+    /// Every series, in capture order: neighbours no more than `seriesGap` apart whose faces mostly stand where the
+    /// other's do, so the same group re-arranged a minute later is a series of its own. A photo alone is its own.
+    func allSeries() -> [[CatalogAsset]] {
+        func together(_ a: CatalogAsset, _ b: CatalogAsset) -> Bool {
+            guard let ta = reports[a.id]?.captureDate, let tb = reports[b.id]?.captureDate, abs(tb - ta) <= Self.seriesGap else { return false }
+            let (fa, fb) = (faces(a.id), faces(b.id))
             // Most of everyone, not most of the smaller frame: a pair of people shot before a group of five isn't its series.
             return Double(Self.match(fa, fb).count) >= 0.8 * Double(max(fa.count, fb.count))
         }
-        var first = index, last = index
-        while first > 0, together(first - 1, first) { first -= 1 }
-        while last < photos.count - 1, together(last, last + 1) { last += 1 }
-        return Array(photos[first...last])
+        var series: [[CatalogAsset]] = []
+        for photo in captureOrdered {
+            if let last = series.last?.last, together(last, photo) { series[series.count - 1].append(photo) } else { series.append([photo]) }
+        }
+        return series
     }
 
     /// Faces of one frame paired with those of the next, by where they stand once the group's shift between the frames
@@ -208,7 +222,7 @@ final class FaceCheckModel: ObservableObject {
     var changes: [String: ReviewState] { flags }
 
     func move(_ step: Int) {
-        let ids = shown.map(\.id)
+        let ids = sequence.map(\.id)
         guard !ids.isEmpty else { return }
         let index = focus.flatMap { ids.firstIndex(of: $0) }
         focus = ids[index.map { min(max($0 + step, 0), ids.count - 1) } ?? 0]
@@ -229,28 +243,117 @@ enum FaceFinderCache {
     static func key(_ asset: CatalogAsset) -> NSString { "\(asset.id)/\(asset.originalUpdatedAt.timeIntervalSince1970)" as NSString }
 }
 
-/// Faces cut for the cards, kept while they may be scrolled back to.
+/// Faces cut for Check Faces, shared by the cards, the People rows and the strip under the photo. A quick cut from the
+/// camera's embedded preview (or a small decode) shows at once, and is all a face needs when it is large in the
+/// photo; the original is read, a few photos at a time, only for faces the preview is too small for. Each photo's cut is
+/// kept at the largest size asked, so a smaller view reuses it. The photo being looked at goes to the front of the queue,
+/// and a cut nobody waits for any more (scrolled past) is skipped.
 @MainActor
-enum FaceCropCache {
-    final class Box { let images: [CGImage?]; init(_ images: [CGImage?]) { self.images = images } }
-    static let tiles: NSCache<NSString, Box> = { let cache = NSCache<NSString, Box>(); cache.totalCostLimit = 192 << 20; return cache }()
-    /// Which faces were cut: the measure's and the closer look's differ.
-    static func key(_ faces: [PhotoQualityReport.Face]) -> String {
-        faces.map { String(format: "%.3f,%.3f", $0.bounds.midX, $0.bounds.midY) }.joined(separator: ";")
+enum FaceTiles {
+    final class Box {
+        let images: [CGImage?]
+        /// Side, in pixels, the faces are good for.
+        let pixels: Int
+        init(_ images: [CGImage?], pixels: Int) { self.images = images; self.pixels = pixels }
     }
-    static func cost(_ images: [CGImage?]) -> Int { images.compactMap { $0.map { $0.bytesPerRow * $0.height } }.reduce(0, +) }
-    /// Originals read at once: each renders only its face regions.
-    static let gate = DecodeGate(3)
+    private static let cache: NSCache<NSString, Box> = { let cache = NSCache<NSString, Box>(); cache.totalCostLimit = 256 << 20; return cache }()
+    private static var cutting: [String: (pixels: Int, task: Task<[CGImage?]?, Never>)] = [:]
+    /// Who waits for each cut, so one nobody waits for is skipped.
+    private static var waiting: [String: Set<UUID>] = [:]
+    private static let previewGate = DecodeGate(4)
+    /// Originals read at once: each renders only its face regions, but a RAW still takes 150–300 MB doing it.
+    private static let originalGate = DecodeGate(3)
+
+    /// The same faces of the same file: the measure's and the closer look's differ.
+    static func key(_ asset: CatalogAsset, _ faces: [PhotoQualityReport.Face]) -> String {
+        "\(asset.id)/\(asset.originalUpdatedAt.timeIntervalSince1970)/" + faces.map { String(format: "%.3f,%.3f", $0.bounds.midX, $0.bounds.midY) }.joined(separator: ";")
+    }
+    private static func good(_ box: Box?, for pixels: Int) -> Bool { (box?.pixels ?? 0) * 4 >= pixels * 3 }
+    private static func cost(_ images: [CGImage?]) -> Int { images.compactMap { $0.map { $0.bytesPerRow * $0.height } }.reduce(0, +) }
+
+    /// Shows the faces as soon as there are any, then sharper ones if the first were too small for `pixels`.
+    static func load(_ asset: CatalogAsset, faces: [PhotoQualityReport.Face], pixels: Int, root: URL?, first: Bool,
+                     show: ([CGImage?]) -> Void) async {
+        guard !faces.isEmpty else { return }
+        let key = key(asset, faces), quickKey = "\(key)/preview" as NSString
+        let sharp = cache.object(forKey: key as NSString)
+        if good(sharp, for: pixels), let sharp { show(sharp.images); return }
+        guard case .available(let url) = asset.availability(catalog: root) else { if let sharp { show(sharp.images) }; return }
+        var quick = cache.object(forKey: quickKey)
+        if quick == nil {
+            if let sharp { show(sharp.images) }
+            await previewGate.enter(first: first)
+            guard !Task.isCancelled else { await previewGate.leave(); return }
+            let bounds = faces.map(\.bounds)
+            let made = await Task.detached(priority: .userInitiated) { fromPreview(url, faces: bounds) }.value
+            await previewGate.leave()
+            if let made { quick = Box(made.images, pixels: made.pixels); cache.setObject(quick!, forKey: quickKey, cost: cost(made.images)) }
+        }
+        // The better of what is at hand.
+        if let best = [sharp, quick].compactMap({ $0 }).max(by: { $0.pixels < $1.pixels }) { show(best.images) }
+        guard !good(quick, for: pixels), !Task.isCancelled else { return }
+        if let cut = await original(key, url: url, faces: faces.map(\.bounds), pixels: pixels, first: first) { show(cut) }
+    }
+
+    private static func original(_ key: String, url: URL, faces: [CGRect], pixels: Int, first: Bool) async -> [CGImage?]? {
+        let me = UUID()
+        waiting[key, default: []].insert(me)
+        defer { leave(key, me) }
+        let task: Task<[CGImage?]?, Never>
+        if let running = cutting[key], running.pixels * 4 >= pixels * 3 { task = running.task } else {
+            task = Task {
+                await originalGate.enter(first: first)
+                // Scrolled past while queued: cut when it comes back.
+                guard !(waiting[key]?.isEmpty ?? true) else {
+                    await originalGate.leave()
+                    if cutting[key]?.pixels == pixels { cutting[key] = nil }
+                    return nil
+                }
+                let cut = await Task.detached(priority: .userInitiated) { () -> [CGImage?] in
+                    let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
+                    return autoreleasepool { FaceCrops.tiles(at: url, faces: faces, pixels: pixels) }
+                }.value
+                await originalGate.leave()
+                if (cache.object(forKey: key as NSString)?.pixels ?? 0) < pixels { cache.setObject(Box(cut, pixels: pixels), forKey: key as NSString, cost: cost(cut)) }
+                if cutting[key]?.pixels == pixels { cutting[key] = nil }
+                return cut
+            }
+            cutting[key] = (pixels, task)
+        }
+        return await withTaskCancellationHandler { await task.value } onCancel: { Task { @MainActor in leave(key, me) } }
+    }
+    private static func leave(_ key: String, _ id: UUID) {
+        waiting[key]?.remove(id)
+        if waiting[key]?.isEmpty == true { waiting[key] = nil }
+    }
+
+    /// The faces cut from the photo's preview, each copied out so the preview can go, and the side the smallest is
+    /// good for.
+    nonisolated private static func fromPreview(_ url: URL, faces: [CGRect]) -> (images: [CGImage?], pixels: Int)? {
+        let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
+        return autoreleasepool {
+            guard let preview = FaceCrops.preview(at: url, longEdge: 2048) else { return nil }
+            let images = faces.map { FaceCrops.tile(from: preview, face: $0).flatMap(copy) }
+            let pixels = images.map { $0?.width ?? 0 }.min() ?? 0
+            return (images, pixels)
+        }
+    }
+    nonisolated private static func copy(_ image: CGImage) -> CGImage? {
+        guard let context = CGContext(data: nil, width: image.width, height: image.height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue) else { return nil }
+        context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
+        return context.makeImage()
+    }
 }
 
-/// At most `limit` holders at once; the rest wait in order.
+/// At most `limit` holders at once; the rest wait in order, those that go first ahead of the others.
 actor DecodeGate {
     private var free: Int
     private var waiting: [CheckedContinuation<Void, Never>] = []
     init(_ limit: Int) { free = limit }
-    func enter() async {
+    func enter(first: Bool = false) async {
         if free > 0 { free -= 1; return }
-        await withCheckedContinuation { waiting.append($0) }
+        await withCheckedContinuation { if first { waiting.insert($0, at: 0) } else { waiting.append($0) } }
     }
     func leave() {
         if waiting.isEmpty { free += 1 } else { waiting.removeFirst().resume() }
@@ -266,6 +369,10 @@ struct FaceCheckView: View {
     @FocusState private var keyFocus: Bool
     @AppStorage("faceCheckCardSize") private var cardWidth = 280.0
     @AppStorage("faceCheckPanelWidth") private var panelWidth = 560.0
+    /// People's own: its rows are a few faces wide, so the photo beside them gets most of the window. 0 until resized.
+    @AppStorage("faceCheckPeoplePanelWidth") private var peoplePanelWidth = 0.0
+    /// What People's rows get by default: the names and five or six faces.
+    private static let peopleListWidth = 520.0
     private static let spacing: CGFloat = 14
 
     init(catalog: CatalogModel, request: CullingAssistantRequest) {
@@ -280,12 +387,16 @@ struct FaceCheckView: View {
             GeometryReader { geometry in
                 // The grid keeps at least 320 points beside the panel.
                 let range = 320.0...max(320.0, Double(geometry.size.width) - 320)
+                let peopleDefault = max(560, Double(geometry.size.width) - Self.peopleListWidth)
+                let width = model.layout == .people
+                    ? Binding(get: { peoplePanelWidth > 0 ? peoplePanelWidth : peopleDefault }, set: { peoplePanelWidth = $0 })
+                    : $panelWidth
                 HStack(spacing: 0) {
                     content.frame(maxWidth: .infinity, maxHeight: .infinity)
                     if let asset = model.focusedAsset {
-                        SidebarResizeHandle(width: $panelWidth, range: range, defaultWidth: 560, panelOnRight: true)
+                        SidebarResizeHandle(width: width, range: range, defaultWidth: model.layout == .people ? peopleDefault : 560, panelOnRight: true)
                         FacePreviewPanel(asset: asset, faces: model.faces(asset.id), model: model, catalog: catalog)
-                            .frame(width: min(max(panelWidth, range.lowerBound), range.upperBound))
+                            .frame(width: min(max(width.wrappedValue, range.lowerBound), range.upperBound))
                     }
                 }
             }
@@ -340,17 +451,21 @@ struct FaceCheckView: View {
                 FilterChip(title: L10n.tr("Eyes Closed"), count: model.closedCount, symbol: "eye.slash", isOn: model.closedOnly) { model.closedOnly = true }
                     .help(L10n.tr("Only photos with a face whose eyes look closed"))
                 }
-                .disabled(model.layout == .people)
+                // People shows every photo: the filter keeps its place, so the switch beside it doesn't move.
+                .opacity(model.layout == .photos ? 1 : 0).allowsHitTesting(model.layout == .photos).accessibilityHidden(model.layout != .photos)
             }.fixedSize()
         } actions: {
-            if case .measuring(let done, let total) = model.stage, total > 0 {
-                CountRing(done: done, total: total).equatable()
-            } else if model.lookedAt < model.toLookAt {
-                CountRing(done: model.lookedAt, total: model.toLookAt).equatable()
-            } else {
-                ActivityIndicator(center: catalog.activity)
+            // One slot, whatever shows in it, so the middle of the bar doesn't move when the ring goes.
+            Group {
+                if case .measuring(let done, let total) = model.stage, total > 0 {
+                    CountRing(done: done, total: total).equatable()
+                } else if model.lookedAt < model.toLookAt {
+                    CountRing(done: model.lookedAt, total: model.toLookAt).equatable()
+                } else {
+                    ActivityIndicator(center: catalog.activity)
+                }
             }
-            summary
+            .frame(width: 30, height: 30)
             ToolCancelButton(action: cancel)
             ToolPrimaryButton(title: L10n.tr("Apply")) { model.apply(catalog: catalog) }.disabled(model.changes.isEmpty)
                 .help(L10n.tr("Set the flags shown here"))
@@ -359,12 +474,12 @@ struct FaceCheckView: View {
     private var status: String {
         let total = model.request.assets.count.formatted(), found = model.withFaces.count.formatted()
         switch model.stage {
-        case .measuring(let done, let total): return L10n.tr("Finding faces in \(done.formatted()) of \(total.formatted()) photos in \(model.request.title)…")
+        case .measuring(let done, let total): return L10n.tr("Finding faces in \(done.formatted()) of \(total.formatted()) photos…")
         case .failed(let message): return message
         case .ready:
             let looked = model.lookedAt, all = model.toLookAt
             if looked < all { return L10n.tr("Looking closer at faces in \(looked.formatted()) of \(all.formatted()) photos…") }
-            return L10n.tr("\(found) of \(total) photos in \(model.request.title) have faces")
+            return L10n.tr("\(found) of \(total) photos have faces")
         }
     }
     private var summary: some View {
@@ -387,8 +502,8 @@ struct FaceCheckView: View {
             } else {
                 looking
             }
-        } else if model.layout == .people, let focus = model.focus {
-            PeopleCompare(model: model, catalog: catalog, frames: model.series(of: focus)) { keyFocus = true }
+        } else if model.layout == .people {
+            PeopleCompare(model: model, catalog: catalog) { keyFocus = true }
         } else {
             grid
         }
@@ -421,6 +536,8 @@ struct FaceCheckView: View {
                     }.padding(16)
                 }
                 .onChange(of: model.focus) { _, id in if let id { withAnimation(.easeOut(duration: 0.15)) { proxy.scrollTo(id) } } }
+                // Back from People, on the photo chosen there.
+                .onAppear { if let id = model.focus { DispatchQueue.main.async { proxy.scrollTo(id, anchor: .center) } } }
             }
             .onAppear { model.columns = columns }
             .onChange(of: columns) { _, value in model.columns = value }
@@ -440,6 +557,7 @@ struct FaceCheckView: View {
                            + model.unmeasured.prefix(8).map { (model.byID[$0.key]?.filename ?? "") + ": " + $0.value }).joined(separator: "\n"))
             }
             Spacer(minLength: 0)
+            summary
             ThumbnailSizeSlider(size: $cardWidth, range: 200...520)
         }
     }
@@ -468,7 +586,8 @@ private struct FaceCard: View {
     let root: URL?
     let partner: Bool
     @Environment(\.displayScale) private var displayScale
-    @State private var images: [CGImage?] = []
+    @State private var cut: (key: String, images: [CGImage?])?
+    private var images: [CGImage?] { cut?.key == FaceTiles.key(asset, faces) ? cut!.images : [] }
 
     /// Columns and rows for the faces: as square as the 4:3 card allows.
     private var layout: (columns: Int, rows: Int) {
@@ -482,7 +601,12 @@ private struct FaceCard: View {
         VStack(alignment: .leading, spacing: 6) {
             GeometryReader { geometry in
                 faceGrid(size: geometry.size)
-                    .task(id: "\(FaceCropCache.key(faces))/\(pixels(geometry.size))") { await load(pixels(geometry.size)) }
+                    // One spinner for the card, not one per face.
+                    .overlay { if images.isEmpty, !faces.isEmpty { ProgressView().controlSize(.small) } }
+                    .task(id: "\(FaceTiles.key(asset, faces))/\(pixels(geometry.size))") {
+                        let key = FaceTiles.key(asset, faces)
+                        await FaceTiles.load(asset, faces: faces, pixels: pixels(geometry.size), root: root, first: model.focus == asset.id) { cut = (key, $0) }
+                    }
             }
             .aspectRatio(4 / 3, contentMode: .fit)
             .background(Theme.imageSurround)
@@ -537,8 +661,6 @@ private struct FaceCard: View {
             ZStack {
                 if index < images.count, let image = images[index] {
                     Image(decorative: image, scale: displayScale).resizable().interpolation(.high).scaledToFill()
-                } else {
-                    ProgressView().controlSize(.small)
                 }
             }
             .overlay { if model.eyesClosed(faces[index]) { Rectangle().strokeBorder(Theme.reject, lineWidth: 2) } }
@@ -552,23 +674,6 @@ private struct FaceCard: View {
         } else {
             Color.clear
         }
-    }
-
-    private func load(_ pixels: Int) async {
-        let key = "\(asset.id)/\(FaceCropCache.key(faces))/\(pixels)" as NSString
-        if let cached = FaceCropCache.tiles.object(forKey: key) { images = cached.images; return }
-        guard case .available(let url) = asset.availability(catalog: root) else { return }
-        let bounds = faces.map(\.bounds)
-        await FaceCropCache.gate.enter()
-        // Scrolled past while waiting: cut when it comes back.
-        guard !Task.isCancelled else { await FaceCropCache.gate.leave(); return }
-        let cut = await Task.detached(priority: .userInitiated) { () -> [CGImage?] in
-            let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
-            return autoreleasepool { FaceCrops.tiles(at: url, faces: Array(bounds), pixels: pixels) }
-        }.value
-        await FaceCropCache.gate.leave()
-        FaceCropCache.tiles.setObject(.init(cut), forKey: key, cost: FaceCropCache.cost(cut))
-        images = cut
     }
 }
 
@@ -592,8 +697,9 @@ private struct FacePreviewPanel: View {
             HStack(spacing: 8) {
                 Text(asset.filename).font(.system(size: 12, weight: .medium)).lineLimit(1).truncationMode(.middle)
                 FlagButtons(id: asset.id, model: model, size: 13)
-                if let index = model.shown.firstIndex(where: { $0.id == asset.id }) {
-                    Text(L10n.tr("\((index + 1).formatted()) of \(model.shown.count.formatted())")).font(.system(size: 11)).foregroundStyle(.secondary).monospacedDigit()
+                let sequence = model.sequence
+                if let index = sequence.firstIndex(where: { $0.id == asset.id }) {
+                    Text(L10n.tr("\((index + 1).formatted()) of \(sequence.count.formatted())")).font(.system(size: 11)).foregroundStyle(.secondary).monospacedDigit()
                 }
                 Spacer(minLength: 0)
             }
@@ -668,7 +774,7 @@ private struct FaceStrip: View {
     private static let side: CGFloat = 68
 
     var body: some View {
-        let key = "\(asset.id)/\(FaceCropCache.key(faces))"
+        let key = FaceTiles.key(asset, faces)
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
                 ForEach(Array(faces.enumerated()), id: \.offset) { index, face in
@@ -694,73 +800,113 @@ private struct FaceStrip: View {
             .padding(.horizontal, 12)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .overlay { if images?.key != key, !faces.isEmpty { ProgressView().controlSize(.small) } }
+        // The photo being looked at: ahead of the grid's queue.
         .task(id: key) {
-            let pixels = Int(Self.side * displayScale)
-            let cacheKey = "\(key)/\(pixels)" as NSString
-            if let cached = FaceCropCache.tiles.object(forKey: cacheKey) { images = (key, cached.images); return }
-            guard case .available(let url) = asset.availability(catalog: root) else { return }
-            let bounds = faces.map(\.bounds)
-            let cut = await Task.detached(priority: .userInitiated) { () -> [CGImage?] in
-                let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
-                return autoreleasepool { FaceCrops.tiles(at: url, faces: bounds, pixels: pixels) }
-            }.value
-            guard !Task.isCancelled else { return }
-            FaceCropCache.tiles.setObject(.init(cut), forKey: cacheKey, cost: FaceCropCache.cost(cut))
-            images = (key, cut)
+            await FaceTiles.load(asset, faces: faces, pixels: Int(Self.side * displayScale), root: root, first: true) { images = (key, $0) }
         }
     }
 }
 
-/// The people of one series side by side, a column each, and its frames one under another, so each person's eyes and
-/// focus are compared frame by frame and the frame where everyone is at their best stands out. A click on a frame
-/// shows it beside; a click on a face also zooms to it. Faces whose eyes look closed are marked.
+/// Every series of photos, one block after another in capture order: the people of a series side by side, a column
+/// each, and its frames one under another, so each person's eyes and focus are compared frame by frame and the frame
+/// where everyone is at their best stands out. A photo shot alone is a block of one row. A click on a frame shows it
+/// beside; a click on a face also zooms to it. Faces whose eyes look closed are marked.
 private struct PeopleCompare: View {
     @ObservedObject var model: FaceCheckModel
     @ObservedObject var catalog: CatalogModel
-    let frames: [CatalogAsset]
     let focused: () -> Void
-    private static let side: CGFloat = 76
+    @State private var shownBlock: String?
+    static let side: CGFloat = 76
 
     var body: some View {
-        let people = model.people(in: frames)
+        let series = model.allSeries()
         ScrollViewReader { proxy in
-            ScrollView([.horizontal, .vertical]) {
-                VStack(alignment: .leading, spacing: 4) {
-                    ForEach(Array(frames.enumerated()), id: \.element.id) { row, frame in
-                        let current = model.focus == frame.id, flag = model.flag(frame.id)
-                        HStack(spacing: 4) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(frame.filename).font(.system(size: 11)).lineLimit(1).truncationMode(.middle)
-                                    .foregroundStyle(current ? Color.primary : Color.secondary)
-                                HStack(spacing: 4) {
-                                    FlagButtons(id: frame.id, model: model, size: 11)
-                                    let closed = model.faces(frame.id).filter(model.eyesClosed).count
-                                    if closed > 0 {
-                                        Label(closed.formatted(), systemImage: "eye.slash").font(.system(size: 10, weight: .medium)).foregroundStyle(Theme.reject)
-                                            .help(L10n.tr("Eyes look closed"))
-                                    }
-                                }
-                            }
-                            .frame(width: 110, alignment: .leading)
-                            FrameFaces(asset: frame, faces: model.faces(frame.id), slots: row < people.count ? people[row] : [], model: model,
-                                       root: catalog.root, side: Self.side) { face in
-                                model.focus = frame.id
-                                if let face { model.faceZoom = .init(face: face) }
-                                focused()
-                            }
-                        }
-                        .padding(6)
-                        .background(current ? Theme.accent.opacity(0.18) : Color.clear, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
-                        .opacity(flag == .rejected ? 0.5 : 1)
-                        .contentShape(Rectangle())
-                        .onTapGesture { model.focus = frame.id; focused() }
-                        .id(frame.id)
+            ScrollView(.vertical) {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(Array(series.enumerated()), id: \.element[0].id) { number, frames in
+                        if number > 0 { Rule().padding(.vertical, 10) }
+                        SeriesBlock(model: model, catalog: catalog, frames: frames, focused: focused)
                     }
                 }
                 .padding(12)
             }
-            .onChange(of: model.focus) { _, id in if let id { withAnimation(.easeOut(duration: 0.15)) { proxy.scrollTo(id) } } }
+            .onAppear { reveal(series, proxy: proxy, animated: false) }
+            .onChange(of: model.focus) { _, _ in reveal(model.allSeries(), proxy: proxy, animated: true) }
         }
+    }
+
+    /// The focused frame on screen: its block first, which a lazy stack may not have made yet, then the row in it.
+    private func reveal(_ series: [[CatalogAsset]], proxy: ScrollViewProxy, animated: Bool) {
+        guard let focus = model.focus, let block = series.first(where: { $0.contains { $0.id == focus } })?.first?.id else { return }
+        let changed = block != shownBlock
+        shownBlock = block
+        // The stack only knows the rows it has made, so the row is scrolled to again once its block is there.
+        if !changed { if animated { withAnimation(.easeOut(duration: 0.15)) { proxy.scrollTo(focus) } } else { proxy.scrollTo(focus) }; return }
+        DispatchQueue.main.async {
+            proxy.scrollTo(block, anchor: .top)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { proxy.scrollTo(focus, anchor: .center) }
+        }
+    }
+}
+
+/// One series: the frames' names and flags stay put on the left while a wide group's faces scroll sideways.
+private struct SeriesBlock: View {
+    @ObservedObject var model: FaceCheckModel
+    @ObservedObject var catalog: CatalogModel
+    let frames: [CatalogAsset]
+    let focused: () -> Void
+    private var side: CGFloat { PeopleCompare.side }
+    private static let gap: CGFloat = 4, inset: CGFloat = 6
+
+    var body: some View {
+        let people = model.people(in: frames)
+        HStack(alignment: .top, spacing: 0) {
+            VStack(alignment: .leading, spacing: Self.gap) {
+                ForEach(frames, id: \.id) { frame in label(frame).id(frame.id) }
+            }
+            ScrollView(.horizontal, showsIndicators: people.first.map { $0.count > 6 } ?? false) {
+                VStack(alignment: .leading, spacing: Self.gap) {
+                    ForEach(Array(frames.enumerated()), id: \.element.id) { row, frame in
+                        FrameFaces(asset: frame, faces: model.faces(frame.id), slots: row < people.count ? people[row] : [], model: model,
+                                   root: catalog.root, side: side) { face in
+                            model.focus = frame.id
+                            if let face { model.faceZoom = .init(face: face) }
+                            focused()
+                        }
+                        .padding(Self.inset)
+                        .background(rowFill(frame), in: UnevenRoundedRectangle(bottomTrailingRadius: Theme.Radius.control, topTrailingRadius: Theme.Radius.control))
+                        .opacity(model.flag(frame.id) == .rejected ? 0.5 : 1)
+                        .contentShape(Rectangle())
+                        .onTapGesture { model.focus = frame.id; focused() }
+                    }
+                }
+            }
+        }
+    }
+
+    private func rowFill(_ frame: CatalogAsset) -> Color { model.focus == frame.id ? Theme.accent.opacity(0.18) : .clear }
+
+    private func label(_ frame: CatalogAsset) -> some View {
+        let current = model.focus == frame.id
+        return VStack(alignment: .leading, spacing: 4) {
+            Text(frame.filename).font(.system(size: 11)).lineLimit(1).truncationMode(.middle)
+                .foregroundStyle(current ? Color.primary : Color.secondary)
+            HStack(spacing: 4) {
+                FlagButtons(id: frame.id, model: model, size: 11)
+                let closed = model.faces(frame.id).filter(model.eyesClosed).count
+                if closed > 0 {
+                    Label(closed.formatted(), systemImage: "eye.slash").font(.system(size: 10, weight: .medium)).foregroundStyle(Theme.reject)
+                        .help(L10n.tr("Eyes look closed"))
+                }
+            }
+        }
+        .frame(width: 110, height: side, alignment: .leading)
+        .padding(Self.inset)
+        .background(rowFill(frame), in: UnevenRoundedRectangle(topLeadingRadius: Theme.Radius.control, bottomLeadingRadius: Theme.Radius.control))
+        .opacity(model.flag(frame.id) == .rejected ? 0.5 : 1)
+        .contentShape(Rectangle())
+        .onTapGesture { model.focus = frame.id; focused() }
     }
 }
 
@@ -777,7 +923,7 @@ private struct FrameFaces: View {
     @State private var images: (key: String, cut: [CGImage?])?
 
     var body: some View {
-        let key = "\(asset.id)/\(FaceCropCache.key(faces))"
+        let key = FaceTiles.key(asset, faces)
         HStack(spacing: 3) {
             ForEach(Array(slots.enumerated()), id: \.offset) { _, slot in
                 if let index = slot, index < faces.count {
@@ -799,21 +945,7 @@ private struct FrameFaces: View {
             }
         }
         .task(id: key) {
-            let pixels = Int(side * displayScale)
-            let cacheKey = "\(key)/\(pixels)" as NSString
-            if let cached = FaceCropCache.tiles.object(forKey: cacheKey) { images = (key, cached.images); return }
-            guard case .available(let url) = asset.availability(catalog: root) else { return }
-            let bounds = faces.map(\.bounds)
-            await FaceCropCache.gate.enter()
-            guard !Task.isCancelled else { await FaceCropCache.gate.leave(); return }
-            let cut = await Task.detached(priority: .userInitiated) { () -> [CGImage?] in
-                let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
-                return autoreleasepool { FaceCrops.tiles(at: url, faces: bounds, pixels: pixels) }
-            }.value
-            await FaceCropCache.gate.leave()
-            guard !Task.isCancelled else { return }
-            FaceCropCache.tiles.setObject(.init(cut), forKey: cacheKey, cost: FaceCropCache.cost(cut))
-            images = (key, cut)
+            await FaceTiles.load(asset, faces: faces, pixels: Int(side * displayScale), root: root, first: model.focus == asset.id) { images = (key, $0) }
         }
     }
 }
