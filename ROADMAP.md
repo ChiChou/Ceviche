@@ -71,9 +71,9 @@ the merges, Convert Negative, Merge Best Faces, Timelapse, Creative Filters and 
 
 | | What | Notes |
 |---|---|---|
-| 9a | **Portrait, and the rest of Retouch** | Retouch has its brushes and dust spots. Left: Object (tap to remove), Distraction Removal and Find People, Visualize Spots and Dodge/Burn checked by touch, then Portrait's panels. AI fill, Find blemishes and Even tone need their models on the device (9c). |
+| 9a | **Portrait, and the rest of Retouch** | Retouch has its brushes and dust spots. Left: Object (tap to remove), Distraction Removal and Find People, Visualize Spots and Dodge/Burn checked by touch, then Portrait's panels. Find blemishes and Even tone have no screen yet; their models are not listed in Models until they do. |
 | 9b | **The remaining culling views** | Check Faces and Tidy RAW + JPEG Pairs need layouts of their own for a small screen. People and the Map are there; the Faces wall and Duplicates are not. |
-| 9c | **Models** | Nothing downloads models on iOS yet, so Sky, Depth and Scene masks, AI Noise Reduction and AI fill are unavailable there. The App Store build is to get them through Background Assets. The built-in face models are in the app already. |
+| 9c | **Models** | About › Models downloads the pinned set's models, or adds them from a file, and Sky, Depth and Scene masks, AI fill and the two model filters turn on with them. Left: their peaks measured on a device (`CEVICHE_BENCHMARK=models`) and set in `MobileFeatures` (AI Noise Reduction has an estimate), downloads that continue in the background, and Background Assets for the App Store build. |
 | 9d | **The other tools** | Live Photo and Star Trails video, Wide-Angle Faces, Match Series, Chart Profile, ID Photo, Print Proof, Guided Upright, and in the tools that are there: dragging a negative's frame corners, the filters' on-photo handles. Each is CevicheCore plus a Mac window; each needs a touch layout and a memory figure in `MobileFeatures`. Merge Pixel Shift stays the Mac's. |
 | 9e | **Catalogs** | One local catalog with copied originals. iCloud catalogs (the entitlements and container are the Mac's), opening a catalog from Files, and referenced originals on an external drive are not there. |
 

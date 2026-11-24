@@ -306,14 +306,14 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Hold the half-filled circle to see the photo as it opened. The menu has Filmstrip, Histogram, Info, History and
   Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,
   caption and keywords.
-- **Masks.** Subject, Background, People, Brush, Linear gradient, Radial gradient and Color range (Sky, Depth and
-  Scene need models that are not on the device yet). A gradient is drawn with a drag and changed by its handles; the
+- **Masks.** Subject, Background, People, Brush, Linear gradient, Radial gradient and Color range, and Sky, Depth and
+  Scene once their models are installed in Models. A gradient is drawn with a drag and changed by its handles; the
   brush paints with one finger or Apple Pencil while two fingers move and zoom the photo. Each mask has the
   adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it.
 - **Retouch.** Remove, Heal and Clone brushes painted with one finger or Apple Pencil, two fingers moving and
   zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
-  clear all. Find Dust marks sensor dust as circles to drop or heal. AI fill needs a model that is not on the device
-  yet, so Remove fills from the surroundings.
+  clear all. Find Dust marks sensor dust as circles to drop or heal. With its model installed in Models, AI fill fills
+  Remove strokes; without it Remove fills from the surroundings.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
   Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, Transform has the manual
   perspective, rotation, aspect, scale and offsets, and Constrain Crop keeps the crop inside the corrected photo.
@@ -332,10 +332,13 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Negative, each scan inverted with its frame found, film, film base, orientation and roll balance as on the Mac, saved
   as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing with Stabilize and
   Deflicker, written as a job and then played to share; and Creative Filters, the Mac's filter stack on the photo,
-  applied by Export (AI Noise Reduction and Polarizer need models that are not on the device). Each refuses photos
+  applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, handed to the share sheet to save
   to Files or Photos or send to another app.
+- **Models.** About › Models lists the models the touch app uses, each with its size and state; a tap downloads one
+  from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
+  as it is installed. The face models are built in.
 
 ## Automation
 
