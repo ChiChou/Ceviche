@@ -26,6 +26,9 @@ struct PanoramaDNGWriter {
     var floatingPoint = true
     /// EXIF orientation of the stored pixels, for a merge made from the sensor's own samples; the preview is stored the same way.
     var orientation = 1
+    /// A file read once and thrown away (a video's frame): the same pixels, packed fast rather than small, with a
+    /// token preview.
+    var scratch = false
 
     /// The longest side Apple's decoder develops in a DNG: past it the whole picture comes out transparent (measured on
     /// macOS 27, between 19968 and 19990, the 78th and 79th 256-pixel tile). Larger merges are kept as TIFF or JPEG.
@@ -101,7 +104,7 @@ struct PanoramaDNGWriter {
 
         // IFD 0: the preview and the DNG color description. Apple's decoder rejects compressed raw data behind a
         // placeholder preview, so there is always a real one.
-        let picture = (preview ?? PanoramaFinishing.picture(image, maxDimension: 1024)).flatMap(Self.rgbBytes)
+        let picture = (preview ?? PanoramaFinishing.picture(image, maxDimension: scratch ? 96 : 1024)).flatMap(Self.rgbBytes)
         let previewWidth = picture?.width ?? 1, previewHeight = picture?.height ?? 1
         let stripOffset = try file.append(Data(picture?.bytes ?? [0, 0, 0]))
         let camera = [metadata.make, metadata.model].filter { !$0.isEmpty }.joined(separator: " ")
@@ -204,7 +207,7 @@ struct PanoramaDNGWriter {
                         switch codec {
                         case .deflate:
                             var out = [UInt8](repeating: 0, count: cdng_deflate_bound(tileBytes))
-                            let size = cdng_deflate(tile, tileBytes, &out, out.count, 6)
+                            let size = cdng_deflate(tile, tileBytes, &out, out.count, scratch ? 1 : 6)
                             encodedOut[column] = Data(out.prefix(size))
                         case .losslessJPEG:
                             // The tile bytes are little-endian 16-bit samples, the host order.

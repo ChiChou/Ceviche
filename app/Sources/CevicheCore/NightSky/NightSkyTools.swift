@@ -477,7 +477,9 @@ public final class StarTrailsMerger: @unchecked Sendable {
         let base = try plan(settings).base
         let metadata = analyzer.metadata[base].base.panorama, source = DNGSourceMetadata.merge(analyzer.urls[base], process: PanoramaDNGWriter.Kind.starTrails.rawValue)
         // A DNG for RAW photos, a TIFF for processed ones.
-        let writer = ToolResultWriter(dng: PanoramaDNGWriter(metadata: metadata, kind: .starTrails, source: source), source: analyzer.urls[base])
+        var writer = ToolResultWriter(dng: PanoramaDNGWriter(metadata: metadata, kind: .starTrails, source: source), source: analyzer.urls[base])
+        // A frame's file is read once by the caller and deleted.
+        writer.dng.scratch = true
         try await animationFrames(settings, trails: trails, glow: glow, meteorFade: meteorFade, longEdge: longEdge, lastLongEdge: lastLongEdge,
                                   frames: wanted, progress: progress) { index, raster in
             let url = directory.appendingPathComponent("\(index).\(writer.previewExtension)")
