@@ -447,6 +447,7 @@
 "All photos are analyzed." = "All photos are analyzed.";
 "All photos in this album will move to Trash, including photos in other albums. The album will be deleted." = "All photos in this album will move to Trash, including photos in other albums. The album will be deleted.";
 "Allow AI clients to use Ceviche" = "Allow AI clients to use Ceviche";
+"Allow Ceviche to add photos in Settings › Apps › Ceviche › Photos." = "Allow Ceviche to add photos in Settings › Apps › Ceviche › Photos.";
 "Allow Ceviche to add photos in System Settings › Privacy & Security › Photos." = "Allow Ceviche to add photos in System Settings › Privacy & Security › Photos.";
 "Already steady" = "Already steady";
 "Also delete the files from disk" = "Also delete the files from disk";
@@ -950,6 +951,7 @@
 "Cover" = "Cover";
 "Create" = "Create";
 "Create %1$@ mask" = "Create %1$@ mask";
+"Create Live Photo" = "Create Live Photo";
 "Create Live Photo…" = "Create Live Photo…";
 "Create Star Trails…" = "Create Star Trails…";
 "Create Timelapse Video…" = "Create Timelapse Video…";
@@ -1983,6 +1985,7 @@
 "Moderate" = "Moderate";
 "Modified" = "Modified";
 "Monochrome" = "Monochrome";
+"Months" = "Months";
 "More" = "More";
 "More Tools" = "More Tools";
 "More options" = "More options";
@@ -3344,6 +3347,7 @@
 "Use next time" = "Use next time";
 "Use the EXIF's %1$@ mm" = "Use the EXIF's %1$@ mm";
 "Usual" = "Usual";
+"Utilities" = "Utilities";
 "Variance" = "Variance";
 "Variation" = "Variation";
 "Vectorscope" = "Vectorscope";
@@ -3443,6 +3447,7 @@
 "XMP structures are too deeply nested." = "XMP structures are too deeply nested.";
 "Y" = "Y";
 "YYYY-MM-DD" = "YYYY-MM-DD";
+"Years" = "Years";
 "Yellow" = "Yellow";
 "You can recover photos from the Trash until it is emptied. Originals are not changed." = "You can recover photos from the Trash until it is emptied. Originals are not changed.";
 "YouTube" = "YouTube";
