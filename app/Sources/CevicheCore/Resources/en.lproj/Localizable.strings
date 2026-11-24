@@ -1017,8 +1017,10 @@
 "Delete" = "Delete";
 "Delete \"%1$@\"" = "Delete \"%1$@\"";
 "Delete %1$@" = "Delete %1$@";
+"Delete %1$@ Photos" = "Delete %1$@ Photos";
 "Delete %1$@ Photos Permanently?" = "Delete %1$@ Photos Permanently?";
 "Delete (Delete)" = "Delete (Delete)";
+"Delete 1 Photo" = "Delete 1 Photo";
 "Delete Album" = "Delete Album";
 "Delete Album…" = "Delete Album…";
 "Delete All" = "Delete All";

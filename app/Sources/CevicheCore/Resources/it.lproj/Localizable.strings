@@ -3590,3 +3590,5 @@
 "No lines found" = "Nessuna linea trovata";
 "Show Lines" = "Mostra linee";
 "The photos and their edits are removed from this device. This can’t be undone." = "Le foto e le loro modifiche vengono rimosse da questo dispositivo. L’operazione non può essere annullata.";
+"Delete %1$@ Photos" = "Elimina %1$@ foto";
+"Delete 1 Photo" = "Elimina 1 foto";
