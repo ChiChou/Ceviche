@@ -66,15 +66,15 @@ Open questions: whether Darkroom film printing should also move here as a filter
 
 ## 9. iPad and iPhone
 
-The touch app (`CevicheMobile`, docs/development/ios.md) has the library, Develop with masks and retouch, culling, the merges and
-export. These are what it still lacks from the Mac app, each to be measured on a device before it is offered there.
+The touch app (`CevicheMobile`, docs/development/ios.md) has the library with People and the Map, Develop with masks and retouch, culling,
+the merges, Convert Negative, Merge Best Faces, Timelapse, Creative Filters and export. These are what it still lacks from the Mac app, each to be measured on a device before it is offered there.
 
 | | What | Notes |
 |---|---|---|
 | 9a | **Portrait, and the rest of Retouch** | Retouch has its brushes and dust spots. Left: Object (tap to remove), Distraction Removal and Find People, Visualize Spots and Dodge/Burn checked by touch, then Portrait's panels. AI fill, Find blemishes and Even tone need their models on the device (9c). |
-| 9b | **People, Map and the remaining culling views** | The catalog already holds faces and places from background analysis. Check Faces and Tidy RAW + JPEG Pairs need layouts of their own for a small screen. |
+| 9b | **The remaining culling views** | Check Faces and Tidy RAW + JPEG Pairs need layouts of their own for a small screen. People and the Map are there; the Faces wall and Duplicates are not. |
 | 9c | **Models** | Nothing downloads models on iOS yet, so Sky, Depth and Scene masks, AI Noise Reduction and AI fill are unavailable there. The App Store build is to get them through Background Assets. The built-in face models are in the app already. |
-| 9d | **The other tools** | Timelapse and Live Photo, Creative Filters, Convert Negative, Merge Best Faces, Wide-Angle Faces, Match Series, Chart Profile, ID Photo, Print Proof. Each is CevicheCore plus a Mac window; each needs a touch layout and a memory figure in `MobileFeatures`. |
+| 9d | **The other tools** | Live Photo and Star Trails video, Wide-Angle Faces, Match Series, Chart Profile, ID Photo, Print Proof, Guided Upright, and in the tools that are there: dragging a negative's frame corners, the filters' on-photo handles. Each is CevicheCore plus a Mac window; each needs a touch layout and a memory figure in `MobileFeatures`. Merge Pixel Shift stays the Mac's. |
 | 9e | **Catalogs** | One local catalog with copied originals. iCloud catalogs (the entitlements and container are the Mac's), opening a catalog from Files, and referenced originals on an external drive are not there. |
 
 ## Order
