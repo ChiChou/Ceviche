@@ -298,7 +298,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   photos into pins; a pin lists its photos below the map and Show Photos opens them under the place's name.
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
 - **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
-  Darkroom, Retouch, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
+  Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
   the bar, the histogram and the filmstrip (on an iPhone held upright the tools and the panel sit below the photo), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. The bar also has the
   original while held, undo and redo, Info (flags, stars, title, caption, keywords and the photo's details, floating
@@ -320,6 +320,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
   clear all. Find Dust marks sensor dust as circles to drop or heal. With its model installed in Models, AI fill fills
   Remove strokes; without it Remove fills from the surroundings.
+- **Portrait.** The photo's faces are tagged on it and listed in the panel; a tap chooses one person, or the main
+  people. Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
+  set with a slider, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
   Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, or by Guided: Draw shows the
   photo uncorrected, and up to four guides are dragged along edges that should be vertical or level. Transform has
