@@ -3587,3 +3587,10 @@
 "Ceviche has to stay on screen while this runs." = "Ceviche deve restare sullo schermo mentre è in corso.";
 "Latent images can’t be corrected." = "Le immagini latenti non si possono correggere.";
 "Select Group" = "Seleziona gruppo";
+"Upgrade" = "Aggiorna";
+"Upgrade Catalog?" = "Aggiornare il catalogo?";
+"iCloud catalogs can’t be opened on this device." = "I cataloghi iCloud non si possono aprire su questo dispositivo.";
+"“%1$@” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog." = "“%1$@” viene aggiornato per aprirsi in questa versione di Ceviche e le versioni precedenti non potranno più aprirlo. Nel catalogo resta una copia com’era.";
+"“%1$@” isn’t reachable. The library on this device is open instead." = "“%1$@” non è raggiungibile. È aperta invece la libreria di questo dispositivo.";
+"No lines found" = "Nessuna linea trovata";
+"Show Lines" = "Mostra linee";

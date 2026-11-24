@@ -2121,6 +2121,7 @@
 "No iCloud catalogs were found for this Apple ID." = "No iCloud catalogs were found for this Apple ID.";
 "No iCloud catalogs yet" = "No iCloud catalogs yet";
 "No limit" = "No limit";
+"No lines found" = "No lines found";
 "No matches" = "No matches";
 "No meteors" = "No meteors";
 "No meteors or other lines were found in these photos." = "No meteors or other lines were found in these photos.";
@@ -2790,6 +2791,7 @@
 "Show Filmstrip" = "Show Filmstrip";
 "Show Grid" = "Show Grid";
 "Show Inspector" = "Show Inspector";
+"Show Lines" = "Show Lines";
 "Show Loupe" = "Show Loupe";
 "Show Mask Overlay (O)" = "Show Mask Overlay (O)";
 "Show Motion" = "Show Motion";
@@ -3328,6 +3330,8 @@
 "Updating catalog…" = "Updating catalog…";
 "Updating metadata" = "Updating metadata";
 "Updating thumbnails" = "Updating thumbnails";
+"Upgrade" = "Upgrade";
+"Upgrade Catalog?" = "Upgrade Catalog?";
 "Upload" = "Upload";
 "Upright" = "Upright";
 "Upright & transform" = "Upright & transform";
@@ -3507,6 +3511,7 @@
 "iCloud Drive" = "iCloud Drive";
 "iCloud Library" = "iCloud Library";
 "iCloud access is restricted. You can continue working with this catalog on this Mac." = "iCloud access is restricted. You can continue working with this catalog on this Mac.";
+"iCloud catalogs can’t be opened on this device." = "iCloud catalogs can’t be opened on this device.";
 "iCloud is temporarily unavailable. Your changes are saved on this Mac and sync will resume automatically." = "iCloud is temporarily unavailable. Your changes are saved on this Mac and sync will resume automatically.";
 "iCloud is temporarily unavailable. Your changes are saved on this Mac. %1$@" = "iCloud is temporarily unavailable. Your changes are saved on this Mac. %1$@";
 "iCloud is temporarily unavailable: %1$@ Your changes are saved on this Mac and will sync when iCloud is available." = "iCloud is temporarily unavailable: %1$@ Your changes are saved on this Mac and will sync when iCloud is available.";
@@ -3571,6 +3576,8 @@
 "“%1$@” is no longer at %2$@. It may have been moved, renamed, or be on a disconnected drive." = "“%1$@” is no longer at %2$@. It may have been moved, renamed, or be on a disconnected drive.";
 "“%1$@” is still downloading from iCloud Drive. The photo opens once it arrives." = "“%1$@” is still downloading from iCloud Drive. The photo opens once it arrives.";
 "“%1$@” is still open, so it was not deleted. Finish or save the current work, then try again." = "“%1$@” is still open, so it was not deleted. Finish or save the current work, then try again.";
+"“%1$@” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog." = "“%1$@” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog.";
+"“%1$@” isn’t reachable. The library on this device is open instead." = "“%1$@” isn’t reachable. The library on this device is open instead.";
 "“%1$@” was deleted from iCloud on another Mac, so it was closed and removed from this Mac." = "“%1$@” was deleted from iCloud on another Mac, so it was closed and removed from this Mac.";
 "“%1$@” will use %2$@ from now on. Edits, history and metadata stay; crops and masks line up only if the new file has the same dimensions." = "“%1$@” will use %2$@ from now on. Edits, history and metadata stay; crops and masks line up only if the new file has the same dimensions.";
 "← → to look through the frames; Make Key Photo to show another" = "← → to look through the frames; Make Key Photo to show another";

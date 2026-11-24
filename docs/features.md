@@ -283,8 +283,11 @@ The touch app shares the Mac app's catalog format, edit model and rendering, so 
 same on the other. Features that belong to the Mac's shell (Folders, Edit In, the command line, MCP, printing) and Merge
 Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is offered only when the photos chosen fit the device's memory.
 
-- **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
-  included, and they show as they land. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
+- **Library.** The device's own catalog, or another opened from Files with Utilities › Open Catalog… (a Mac's
+  `.cevichecatalog` on a drive, say), which opens again at the next launch until Close Catalog goes back to the
+  device's. A catalog from an earlier version is upgraded only after asking; one this version can't read, or an iCloud
+  catalog, is refused. Photos whose originals the Mac linked rather than copied show an offline mark. Import copies
+  photos in from Files (files or folders) or from Photos, RAW included, into the open catalog, and they show as they land. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
   which fold: Duplicates (each photo beside its copies, found by background analysis), Archived once something is
   in it, Trash and Models. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
   month shows as its first photo with its name and count, and a tap shows its photos. The
