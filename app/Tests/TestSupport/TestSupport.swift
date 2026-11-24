@@ -65,6 +65,8 @@ public enum TestSamples {
     public static let tripodSequence = "tripod-sequence"
     /// A portrait with strangers behind the subject.
     public static let distractingPeople = "people/distracting"
+    /// A phone DNG held upright that carries its own sky matte, with sky at the top.
+    public static let skyMatte = "sky-matte"
     /// Light-painting frames for a lighten stack.
     public static let lightPainting = "light-painting"
     /// Every RAW in the corpus: with `rawJPEGPair.jpeg` and the sidecars, all a test may read.

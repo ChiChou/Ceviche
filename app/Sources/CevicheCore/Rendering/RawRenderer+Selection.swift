@@ -16,7 +16,9 @@ extension RawRenderer {
         let matte: CIImage
         switch kind {
         case .sky:
-            if let sky = raw?.semanticSegmentationSkyMatte { matte = sky }
+            // The matte a RAW carries is laid out as the sensor was held, unlike the decoder's picture, which is already
+            // upright: turned the same way here, or a portrait photo's sky mask lies on its side.
+            if let raw, let sky = raw.semanticSegmentationSkyMatte { matte = sky.oriented(raw.orientation) }
             else {
                 let skyModel = try SkyMaskModel.loadBundled()
                 // The model's small probability map, refined against the photo at render time.
