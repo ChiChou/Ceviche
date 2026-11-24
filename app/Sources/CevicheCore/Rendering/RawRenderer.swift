@@ -25,7 +25,23 @@ public actor RawRenderer {
     public nonisolated let info: ImageInfo
     public nonisolated let gpuName: String
     public nonisolated let sourceURL: URL
+    /// Serves previews only: Core Image keeps every surface a context has used until the context goes, so renders
+    /// that reach the RAW decoder or the full frame get one of their own (`renderContext`, `makeContext`).
     let context: CIContext
+    let device: MTLDevice
+    /// The source as `DecodeCache` keys it; nil for bitmaps, which are not cached.
+    private let decodeIdentity: String?
+    /// Mapped decodes in use, most recent first.
+    private var decodes: [(settings: DecodeCache.Settings, image: CIImage)] = []
+    /// The last decode not found in the cache. Asked for again, it is written: a slider being dragged changes the
+    /// decoder's settings with each step, and those steps are not worth a file each.
+    private var lastMiss: DecodeCache.Settings?
+    enum DecodeUse { case off, normal, store }
+    /// `.store` writes a missing decode at once, for a render the view settles on; export reads the decoder itself.
+    var decodeUse = DecodeUse.normal
+    func setDecodeUse(_ use: DecodeUse) { decodeUse = use }
+    /// Whether the graph last built reads the RAW decoder rather than a mapped decode.
+    var liveDecode = false
     /// A RAW decoder, or a rendered image (JPEG, HEIC, TIFF and the like).
     enum Source { case raw(CIRAWFilter), bitmap(CIImage) }
     let source: Source
@@ -114,11 +130,8 @@ public actor RawRenderer {
         let filename = sourceURL.lastPathComponent
         guard let device = MTLCreateSystemDefaultDevice() else { throw EditorError.noGPU }
         gpuName = device.name
-        let context = CIContext(mtlDevice: device, options: [
-            .workingColorSpace: CGColorSpace(name: CGColorSpace.extendedLinearSRGB)!,
-            .workingFormat: CIFormat.RGBAf, .cacheIntermediates: true,
-            .name: "Ceviche RAW pipeline"
-        ])
+        self.device = device
+        let context = Self.makeContext(device, cacheIntermediates: true)
         self.context = context
         maskRenderer = MaskRenderer(context: context)
         retouchRenderer = RetouchRenderer(context: context)
@@ -167,6 +180,50 @@ public actor RawRenderer {
         info.focalLength35mm = exif[kCGImagePropertyExifFocalLenIn35mmFilm as String] as? Double
         self.info = info
         self.source = source
+        decodeIdentity = raw != nil ? DecodeCache.identity(of: sourceURL) : nil
+    }
+    static func makeContext(_ device: MTLDevice, cacheIntermediates: Bool) -> CIContext {
+        CIContext(mtlDevice: device, options: [
+            .workingColorSpace: CGColorSpace(name: CGColorSpace.extendedLinearSRGB)!,
+            .workingFormat: CIFormat.RGBAf, .cacheIntermediates: cacheIntermediates,
+            .name: "Ceviche RAW pipeline"
+        ])
+    }
+    /// The context for a graph just built: the shared one when it reads mapped pixels, `decoderContext` when it reaches
+    /// the RAW decoder.
+    func renderContext() -> CIContext {
+        guard liveDecode else { decoderContext = nil; return context }
+        if let decoderContext { return decoderContext }
+        let made = Self.makeContext(device, cacheIntermediates: true)
+        decoderContext = made
+        return made
+    }
+    /// Renders that read the decoder: kept while a white balance, exposure or noise slider is dragged, each step of
+    /// which decodes again and reuses the last one's work (60 ms a step against 460 ms in a new context), and let go
+    /// with the 1.5 GB or so of surfaces it holds once a render reads the cache again.
+    private var decoderContext: CIContext?
+    /// The decoder's output from `DecodeCache`, written first when `decodeUse` asks for it; nil to read the decoder.
+    private func cachedDecode(_ output: CIImage, decoder: CIRAWFilter, profile: CameraProfile?, cameraRendering: Bool) -> CIImage? {
+        guard decodeUse != .off, let decodeIdentity else { return nil }
+        let settings = DecodeCache.Settings(
+            scale: decoder.scaleFactor, temperature: decoder.neutralTemperature, tint: decoder.neutralTint, exposure: decoder.exposure,
+            extendedRange: decoder.extendedDynamicRangeAmount, boost: decoder.boostAmount,
+            luminanceNoise: decoder.isLuminanceNoiseReductionSupported ? decoder.luminanceNoiseReductionAmount : 0,
+            colorNoise: decoder.isColorNoiseReductionSupported ? decoder.colorNoiseReductionAmount : 0,
+            lensCorrection: decoder.isLensCorrectionSupported && decoder.isLensCorrectionEnabled, profile: profile, cameraRendering: cameraRendering)
+        if let index = decodes.firstIndex(where: { $0.settings == settings }) {
+            let hit = decodes.remove(at: index); decodes.insert(hit, at: 0)
+            return hit.image
+        }
+        guard let file = DecodeCache.file(identity: decodeIdentity, settings: settings) else { return nil }
+        var image = DecodeCache.read(file, extent: output.extent)
+        if image == nil, decodeUse == .store || lastMiss == settings {
+            image = DecodeCache.write(output, to: file, context: Self.makeContext(device, cacheIntermediates: false))
+        }
+        guard let image else { lastMiss = settings; return nil }
+        decodes.insert((settings, image), at: 0)
+        if decodes.count > 3 { decodes.removeLast() }
+        return image
     }
 
     /// Where a RAW's development starts: the camera's as-shot white balance and the noise reduction Apple sets for
@@ -301,7 +358,12 @@ public actor RawRenderer {
             if decoder.isLensCorrectionSupported { decoder.isLensCorrectionEnabled = a.lensCorrection }
             // A chart profile corrects the decoder's colour in scene-linear light, before the decoder's tone.
             decoder.linearSpaceFilter = a.cameraProfile.flatMap { $0.enabled ? ChartCalibrationFilter(profile: $0) : nil }
-            guard let output = decoder.outputImage else { throw EditorError.decode }
+            guard var output = decoder.outputImage else { throw EditorError.decode }
+            if !directDecode, let cached = cachedDecode(output, decoder: decoder, profile: a.cameraProfile.flatMap { $0.enabled ? $0 : nil }, cameraRendering: cameraRendering) {
+                output = cached
+            } else {
+                liveDecode = true
+            }
             image = maxDimension.map { Self.scaled(output, limit: $0) } ?? output
         case .bitmap(var output):
             if let maxDimension, let proxy = bitmapProxy(output, limit: maxDimension) { output = proxy } else { output = bitmapPixels(output) }
@@ -434,7 +496,9 @@ public actor RawRenderer {
             return hit.2
         }
         filmRenderer.yieldToPreview()
+        liveDecode = false
         let image = try pipeline(adjustments, maxDimension: 2200)
+        let context = renderContext()
         let hdr = adjustments.hdr.enabled
         let output = hdr ? HDRRenderer.output(image, settings: adjustments.hdr, context: context, sdr: sdr) : image
         guard let cg = context.cgImage(output, from: output.extent, format: hdr && !sdr ? .RGBAh : .RGBA16,
@@ -456,7 +520,9 @@ public actor RawRenderer {
     /// a ring-free one from its preview once the photo is opened.
     public func thumbnail(_ adjustments: Adjustments) throws -> Data {
         maskRenderer.prune(adjustments.masks)
+        liveDecode = false
         let image = try pipeline(adjustments, maxDimension: Double(CatalogImporter.thumbnailPixelSize), directDecode: true)
+        let context = renderContext()
         let small = adjustments.hdr.enabled ? HDRRenderer.output(image, settings: adjustments.hdr, context: context, sdr: true) : image
         guard let jpeg = context.jpegRepresentation(of: small, colorSpace: colorSpace, options: [kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.82]) else { throw EditorError.render }
         return jpeg
@@ -500,7 +566,11 @@ public actor RawRenderer {
     public func prepareDetail(_ adjustments: Adjustments, sdr: Bool = false, region: CGRect, photoWidth: Double? = nil, maxPixels: Int = 16_000_000) throws -> DetailRender? {
         // A tile's film development gives way to the next preview (`FilmSimulationRenderer.yieldToPreview`).
         filmRenderer.interruptible = true
-        defer { filmRenderer.interruptible = false }
+        // The view settles on this render: a decode it needs is worth keeping, and its full-size surfaces are not.
+        decodeUse = .store
+        decoderContext = nil
+        defer { filmRenderer.interruptible = false; decodeUse = .normal }
+        let context = Self.makeContext(device, cacheIntermediates: false)
         var level = 1.0
         var image: CIImage
         if let photoWidth, photoWidth <= Double(info.width) * Self.halfLevel {
@@ -536,14 +606,16 @@ public actor RawRenderer {
     static let halfLevel = 0.5
     /// Lets go of finished previews and Core Image's intermediates; the next render makes them again.
     public func releaseCaches() {
-        cached.removeAll(); redEyeFiltersCache.removeAll(); filmRenderer.releaseCaches()
+        cached.removeAll(); redEyeFiltersCache.removeAll(); decodes.removeAll(); decoderContext = nil; filmRenderer.releaseCaches()
         context.clearCaches()
     }
     /// Just the image, at `maxDimension` pixels on the long edge, for transient views such as hover previews:
     /// no histogram, thumbnail or cache entry.
     public func displayImage(_ adjustments: Adjustments, maxDimension: Double, sdr: Bool = false) throws -> CGImage {
         filmRenderer.yieldToPreview()
+        liveDecode = false
         let image = try pipeline(adjustments, maxDimension: max(64, min(2200, maxDimension)))
+        let context = renderContext()
         let hdr = adjustments.hdr.enabled
         let output = hdr ? HDRRenderer.output(image, settings: adjustments.hdr, context: context, sdr: sdr) : image
         try Task.checkCancellation()

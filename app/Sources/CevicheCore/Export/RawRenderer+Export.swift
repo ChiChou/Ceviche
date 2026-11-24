@@ -21,7 +21,11 @@ extension RawRenderer {
         let temporary = staging.appendingPathComponent("Export.\(settings.format.fileExtension)")
         guard !settings.hdr || adjustments.hdr.enabled else { throw EditorError.invalidDocument(L10n.tr("Enable HDR editing before exporting HDR.")) }
         let space = try settings.colorSpace()
+        // The file is developed from the decoder itself, at full precision, in a context of its own.
+        decodeUse = .off
+        defer { decodeUse = .normal }
         let image = try exportImage(adjustments, settings: settings, filters: filters, denoise: denoise)
+        let context = Self.makeContext(device, cacheIntermediates: false)
         // Float pixels keep the headroom `HDRRenderer.output` measured; the gain-map encoder needs it to size the map.
         let format: CIFormat = settings.floatingPoint ? .RGBAf : settings.halfFloat ? .RGBAh : settings.depth == 8 ? .RGBA8 : .RGBA16
         guard let cg = context.cgImage(image, from: image.extent, format: format, colorSpace: space, hdr: settings.hdr, calculateHDRStats: nil) else { throw EditorError.render }
@@ -179,7 +183,9 @@ extension RawRenderer {
     /// network's tiles from one preview to the next of the same picture.
     public func exportPreview(_ adjustments: Adjustments, settings: ExportSettings, maxDimension: Double = 2200, filters: CreativeFilterStack? = nil,
                               denoise: DenoiseRun? = nil) throws -> CGImage {
+        liveDecode = false
         let image = try exportImage(adjustments, settings: settings, maxDimension: maxDimension, filters: filters, denoise: denoise)
+        let context = renderContext()
         try Task.checkCancellation()
         let hdr = adjustments.hdr.enabled && settings.hdr
         guard let cg = context.cgImage(image, from: image.extent, format: hdr ? .RGBAh : .RGBA16, colorSpace: hdr ? HDRRenderer.space : try settings.resolvedProfile.colorSpace(),
@@ -191,6 +197,7 @@ extension RawRenderer {
     public func prepareExportDetail(_ adjustments: Adjustments, settings: ExportSettings, region: CGRect, maxPixels: Int = 16_000_000,
                                     filters: CreativeFilterStack? = nil) throws -> DetailRender? {
         let image = try exportImage(adjustments, settings: settings, filters: filters)
+        let context = Self.makeContext(device, cacheIntermediates: false)
         let full = image.extent
         let bounds = region.intersection(CGRect(x: 0, y: 0, width: 1, height: 1))
         guard !bounds.isEmpty, full.width > 0, full.height > 0 else { return nil }
