@@ -2671,6 +2671,7 @@
 "Save as Preset" = "Save as Preset";
 "Save the current development as a snapshot. Snapshots are kept until you delete them." = "Save the current development as a snapshot. Snapshots are kept until you delete them.";
 "Save this tool's settings as a new item in the catalog. You can open it anytime again to pick up where you left off." = "Save this tool's settings as a new item in the catalog. You can open it anytime again to pick up where you left off.";
+"Save to Photos" = "Save to Photos";
 "Saved" = "Saved";
 "Saved a corrected copy of %1$@" = "Saved a corrected copy of %1$@";
 "Saved a denoised copy of %1$@" = "Saved a denoised copy of %1$@";
