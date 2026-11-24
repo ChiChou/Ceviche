@@ -331,18 +331,21 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   archived JPEGs go to Archived, where Unarchive puts them back.
 - **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
-  and its main options. The result is written as the Mac app writes it and added to the catalog; progress shows in
+  and its main options. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
+  frame with the Mac's Trails, Glow and Meteors options. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting.
 - **Tools.** Merge Best Faces sits with the merges and adds its result to the catalog. The Tools menu has Convert
   Negative, each scan inverted with its frame found, film, film base, orientation and roll balance as on the Mac, saved
   as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing with Stabilize and
-  Deflicker, written as a job and then played to share; and Creative Filters, the Mac's filter stack on the photo,
+  Deflicker, written as a job and then played to share; Create Live Photo, the same screen with Output set to Live
+  Photo, which fits the frames into about 3 seconds at a size preset with a key photo as the still and adds it to
+  Photos; and Creative Filters, the Mac's filter stack on the photo,
   applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, handed to the share sheet to save
   to Files or Photos or send to another app.
-- **Models.** About › Models lists the models the touch app uses, each with its size and state; a tap downloads one
+- **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
   from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
   as it is installed. The face models are built in.
 
