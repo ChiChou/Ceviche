@@ -292,7 +292,10 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and EXIF. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
   Paste Edits, Set Location… and Trash. The version and Open Source Licenses are under Ceviche in the system's
-  Settings. On an iPhone the photos come first and the collections are a step back.
+  Settings. With a keyboard, Shift-tap selects the run from the last photo tapped and Command-tap adds or removes one;
+  ⌘A selects all, Esc ends selecting, P, X and U flag, 0 to 5 rate, ⌘G groups, ⌘E exports and ⌘⌫ moves to the Trash.
+  In Develop, ⌘Z and ⇧⌘Z undo and redo, the arrows step through the photos, ⇧⌘C and ⇧⌘V copy and paste edits,
+  \\ shows the original, ⌥1 to ⌥9 open the tools and Esc goes back. On an iPhone the photos come first and the collections are a step back.
 - **People and Map.** People shows a card per person, named first, then Ungrouped; a tap opens their photos, whose
   title names, renames or lists their faces, and touch and hold names, merges or ungroups. Map gathers geotagged
   photos into pins; a pin lists its photos below the map and Show Photos opens them under the place's name.
@@ -338,13 +341,15 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
 - **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
   and its main options. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
-  frame with the Mac's Trails, Glow and Meteors options. The result is written as the Mac app writes it and added to the catalog; progress shows in
+  frame with the Mac's Trails, Glow and Meteors options and the frame set on the preview; a video's Export… opens a
+  sheet with Encoder, Container, Color and Quality, then Save to Photos or Share…, which starts it. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting.
 - **Tools.** Merge Best Faces sits with the merges and adds its result to the catalog. The Tools menu has Convert
   Negative, each scan inverted with its frame found, film, film base, orientation and roll balance as on the Mac, saved
-  as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing with Stabilize and
-  Deflicker, written as a job and then played to share; Create Live Photo, the same screen with Output set to Live
+  as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing, size, rate and
+  pace with Stabilize and Deflicker, then Export…, a sheet with the encoding and Save to Photos or Share…, which
+  writes it as a job and adds it to Photos or opens the share sheet when done; Create Live Photo, the same screen with Output set to Live
   Photo, which fits the frames into about 3 seconds at a size preset with a key photo as the still and adds it to
   Photos; and Creative Filters, the Mac's filter stack on the photo,
   applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Wide-Angle Faces shows
@@ -353,8 +358,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   the photo chosen in the strip and applies the matched Exposure and White Balance as edits. Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
-  adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A finished
-  video offers the same two.
+  adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A video's
+  export sheet offers the same two.
 - **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
   from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
   as it is installed. The face models are built in.
