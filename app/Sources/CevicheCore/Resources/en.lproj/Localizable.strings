@@ -521,7 +521,6 @@
 "AutoLateralCA uses the RAW decoder's lens correction where the camera supports it." = "AutoLateralCA uses the RAW decoder's lens correction where the camera supports it.";
 "Automatic" = "Automatic";
 "Automatic (%1$@)" = "Automatic (%1$@)";
-"Automatic Tags" = "Automatic Tags";
 "Automatic tag" = "Automatic tag";
 "Average" = "Average";
 "Average %1$@ Photos" = "Average %1$@ Photos";
@@ -1302,7 +1301,6 @@
 "Few stars: cloud, haze or dew" = "Few stars: cloud, haze or dew";
 "File" = "File";
 "File Name" = "File Name";
-"File Size" = "File Size";
 "File Type" = "File Type";
 "Filed Carrier" = "Filed Carrier";
 "Filename" = "Filename";

@@ -3522,13 +3522,11 @@
 "Any Rating" = "任意评分";
 "Ascending" = "升序";
 "Auto Advance" = "自动前进";
-"Automatic Tags" = "自动标签";
 "Can’t Merge" = "无法合并";
 "Correct Breathing" = "校正呼吸效应";
 "Crop to Coverage" = "裁剪至覆盖范围";
 "Edit" = "编辑";
 "Export %1$@ Photos" = "导出 %1$@ 张照片";
-"File Size" = "文件大小";
 "Filename" = "文件名";
 "Filter" = "筛选";
 "From Files…" = "从“文件”…";

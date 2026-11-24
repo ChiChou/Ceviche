@@ -3522,13 +3522,11 @@
 "Any Rating" = "任意評等";
 "Ascending" = "遞增";
 "Auto Advance" = "自動前進";
-"Automatic Tags" = "自動標籤";
 "Can’t Merge" = "無法合併";
 "Correct Breathing" = "校正呼吸效應";
 "Crop to Coverage" = "裁切至涵蓋範圍";
 "Edit" = "編輯";
 "Export %1$@ Photos" = "輸出 %1$@ 張照片";
-"File Size" = "檔案大小";
 "Filename" = "檔案名稱";
 "Filter" = "篩選";
 "From Files…" = "從「檔案」…";
