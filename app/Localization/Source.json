@@ -596,7 +596,7 @@
   {
     "key": "%1$@ files couldn’t be imported.",
     "source": "\"\\(failed.count) files couldn’t be imported.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:219"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:203"
   },
   {
     "key": "%1$@ files couldn’t be imported.\n",
@@ -915,8 +915,8 @@
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:520",
       "Sources/CevicheMobile/App/ModelsView.swift:122",
       "Sources/CevicheMobile/Culling/CullMeasurer.swift:45",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:211",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:236",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:195",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:220",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:60",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:74",
       "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:82"
@@ -1265,7 +1265,7 @@
   {
     "key": "%1$@ photos couldn’t be imported.",
     "source": "\"\\(failed) photos couldn’t be imported.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:242"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:226"
   },
   {
     "key": "%1$@ photos couldn’t be matched",
@@ -1427,7 +1427,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Similar.swift:55",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Similar.swift:55",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:77"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:97"
     ]
   },
   {
@@ -2663,7 +2663,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:598",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:35",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:44",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:183"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:199"
     ]
   },
   {
@@ -2835,7 +2835,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogSidebar.swift:108",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:108",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:68"
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:66"
     ]
   },
   {
@@ -3358,7 +3358,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:205",
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:36",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:211",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:73",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:71",
       "Sources/CevicheMobile/Library/LibraryView.swift:81"
     ]
   },
@@ -4253,8 +4253,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:171",
       "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:399",
       "Sources/CevicheMac/Catalog/CatalogModel+Trash.swift:13",
-      "Sources/CevicheMac/Catalog/CatalogModel.swift:935",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:125"
+      "Sources/CevicheMac/Catalog/CatalogModel.swift:935"
     ]
   },
   {
@@ -4461,9 +4460,8 @@
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:88",
       "Sources/CevicheMobile/Export/ExportView.swift:62",
       "Sources/CevicheMobile/Export/VideoExport.swift:58",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:106",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:90",
       "Sources/CevicheMobile/Library/Map/LocationPicker.swift:66",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:150",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:131",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:136",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:169",
@@ -5382,8 +5380,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:117",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:117",
-      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:162",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:83"
+      "Sources/CevicheMac/Catalog/CatalogSidebar.swift:162"
     ]
   },
   {
@@ -5466,8 +5463,8 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:86",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:87",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:195",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:111",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:192"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:131",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:208"
     ]
   },
   {
@@ -6345,10 +6342,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel.swift:872",
       "Sources/CevicheMac/Catalog/CatalogModel.swift:916",
-      "Sources/CevicheMac/Catalog/CatalogModel.swift:933",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:50",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:71",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:125"
+      "Sources/CevicheMac/Catalog/CatalogModel.swift:933"
     ]
   },
   {
@@ -6530,7 +6524,7 @@
       "Sources/CevicheMac/Editor/SceneMaskChooser.swift:24",
       "Sources/CevicheMobile/Develop/HistoryView.swift:51",
       "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:67",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:107"
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:91"
     ]
   },
   {
@@ -6794,7 +6788,7 @@
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:334",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:93",
       "Sources/CevicheMobile/Culling/CullSession.swift:160",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:188"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:204"
     ]
   },
   {
@@ -7013,8 +7007,8 @@
       "Sources/CevicheMobile/Develop/HistoryView.swift:31",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:171",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:148",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:165",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:64"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:181",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:62"
     ]
   },
   {
@@ -7218,7 +7212,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:169",
       "Sources/CevicheMac/Import/CardImportView.swift:213",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:380",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:227",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:243",
       "Sources/CevicheMobile/Library/LibraryView.swift:60"
     ]
   },
@@ -7479,7 +7473,7 @@
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:191",
       "Sources/CevicheMobile/Develop/DevelopView.swift:73",
       "Sources/CevicheMobile/Develop/HistoryView.swift:46",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:101",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:85",
       "Sources/CevicheMobile/Library/LibraryView.swift:112",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:214",
       "Sources/CevicheMobile/Tools/LivePhoto/LivePhotoOutput.swift:81"
@@ -7802,7 +7796,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:193",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:204",
       "Sources/CevicheMobile/Culling/CullSession.swift:56",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:70",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:68",
       "Sources/CevicheMobile/Library/LibraryView.swift:82"
     ]
   },
@@ -8360,8 +8354,8 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:86",
       "Sources/CevicheMac/Catalog/CatalogModel+Stacks.swift:87",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:195",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:111",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:192"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:131",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:208"
     ]
   },
   {
@@ -8422,7 +8416,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:188",
       "Sources/CevicheMobile/Export/ExportView.swift:59",
       "Sources/CevicheMobile/Export/VideoExport.swift:55",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:243"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:259"
     ]
   },
   {
@@ -8652,8 +8646,8 @@
       "Sources/CevicheMac/Tools/FiltersModel.swift:382",
       "Sources/CevicheMobile/Develop/DevelopView.swift:117",
       "Sources/CevicheMobile/Develop/DevelopView.swift:193",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:160",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:206",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:176",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:222",
       "Sources/CevicheMobile/Library/LibraryView.swift:71",
       "Sources/CevicheMobile/Tools/Filters/FiltersView.swift:20",
       "Sources/CevicheMobile/Tools/MergeView.swift:75",
@@ -10097,9 +10091,9 @@
   {
     "key": "Group",
     "source": "\"Group\"",
-    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:189",
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:205",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:189",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:205",
       "Sources/CevicheMobile/Library/LibraryView.swift:69"
     ]
   },
@@ -10818,7 +10812,7 @@
   {
     "key": "Import from Files or Photos with +.",
     "source": "\"Import from Files or Photos with +.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:79"
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:99"
   },
   {
     "key": "Import from Folder…",
@@ -10888,11 +10882,11 @@
   {
     "key": "Importing",
     "source": "\"Importing\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:200",
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:184",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryModel.swift:200",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:230",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:254"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:184",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:214",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:238"
     ]
   },
   {
@@ -11869,7 +11863,7 @@
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:39",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:57",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:43",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:178",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:194",
       "Sources/CevicheMobile/Library/LibraryView.swift:159"
     ]
   },
@@ -12221,8 +12215,8 @@
       "Sources/CevicheMobile/Culling/CullReviewView.swift:68",
       "Sources/CevicheMobile/Develop/DevelopView.swift:119",
       "Sources/CevicheMobile/Develop/DevelopView.swift:157",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:87",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:54",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:74",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:52",
       "Sources/CevicheMobile/Library/LibraryView.swift:86",
       "Sources/CevicheCore/Catalog/CatalogManifest.swift:52"
     ]
@@ -12875,7 +12869,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel.swift:167",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:202",
       "Sources/CevicheMac/Catalog/PeopleView.swift:491",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:56",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:54",
       "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:33"
     ]
   },
@@ -13238,8 +13232,8 @@
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:179",
       "Sources/CevicheMac/Tools/NightSkyView.swift:37",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:257",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:204",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:241",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:220",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:257",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:167",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:171",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:18",
@@ -13581,7 +13575,7 @@
     "uses": [
       "Sources/CevicheMac/App/PreferencesView.swift:16",
       "Sources/CevicheMobile/App/ModelsView.swift:29",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:77"
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:75"
     ]
   },
   {
@@ -13618,7 +13612,7 @@
       "Sources/CevicheMac/Catalog/InspectorControls.swift:88",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:174",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:174",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:245"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:261"
     ]
   },
   {
@@ -13766,8 +13760,8 @@
       "Sources/CevicheMac/Editor/LooksPanel.swift:452",
       "Sources/CevicheMac/Editor/LooksPanel.swift:494",
       "Sources/CevicheMobile/Culling/CullSession.swift:189",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:162",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:208",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:178",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:224",
       "Sources/CevicheMobile/Library/LibraryView.swift:72"
     ]
   },
@@ -13870,7 +13864,7 @@
       "Sources/CevicheMac/Tools/FiltersDialog.swift:61",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:206",
       "Sources/CevicheMobile/Develop/HistoryView.swift:49",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:105",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:89",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:129",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:130"
     ]
@@ -13972,7 +13966,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Albums.swift:144",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:110",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:110",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:104"
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:88"
     ]
   },
   {
@@ -13984,7 +13978,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:603",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:36",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:45",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:66"
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:64"
     ]
   },
   {
@@ -14314,8 +14308,8 @@
       "Sources/CevicheMac/Catalog/CatalogView.swift:54",
       "Sources/CevicheMac/Catalog/CatalogView.swift:58",
       "Sources/CevicheMac/Tools/ChartProfileDialog.swift:159",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:79",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:81",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:99",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:101",
       "Sources/CevicheMobile/Library/LibraryPeriods.swift:113",
       "Sources/CevicheMobile/Library/Map/PlacesView.swift:40"
     ]
@@ -14444,7 +14438,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Similar.swift:54",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Similar.swift:54",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:76"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:96"
     ]
   },
   {
@@ -14790,9 +14784,9 @@
       "Sources/CevicheMac/Export/WatermarkControls.swift:65",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:482",
       "Sources/CevicheMobile/Develop/DevelopView.swift:371",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:169",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:176",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:237",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:185",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:192",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:253",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:72",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:77"
     ]
@@ -15260,9 +15254,7 @@
     "uses": [
       "Sources/CevicheMac/App/WelcomeView.swift:117",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:65",
-      "Sources/CevicheMac/Catalog/CatalogView.swift:33",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:82",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:87"
+      "Sources/CevicheMac/Catalog/CatalogView.swift:33"
     ]
   },
   {
@@ -15699,7 +15691,7 @@
       "Sources/CevicheMac/Editor/EditorViewControls.swift:169",
       "Sources/CevicheMobile/Develop/DevelopView.swift:114",
       "Sources/CevicheMobile/Develop/DevelopView.swift:200",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:200",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:216",
       "Sources/CevicheMobile/Library/LibraryView.swift:74"
     ]
   },
@@ -15782,7 +15774,7 @@
       "Sources/CevicheMac/Editor/RetouchPanel.swift:174",
       "Sources/CevicheMac/Tools/BestFacesView.swift:273",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:519",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:57",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:55",
       "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:32",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:69",
       "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:81",
@@ -16015,8 +16007,8 @@
       "Sources/CevicheMobile/Culling/CullReviewView.swift:178",
       "Sources/CevicheMobile/Develop/DevelopView.swift:106",
       "Sources/CevicheMobile/Develop/DevelopView.swift:363",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:172",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:233",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:188",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:249",
       "Sources/CevicheMobile/Library/LibraryView.swift:61"
     ]
   },
@@ -16130,9 +16122,9 @@
   {
     "key": "Picks",
     "source": "\"Picks\"",
-    "context": "Sources/CevicheMobile/Library/LibrarySidebar.swift:55",
+    "context": "Sources/CevicheMobile/Library/LibrarySidebar.swift:53",
     "uses": [
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:55",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:53",
       "Sources/CevicheMobile/Library/LibraryView.swift:85"
     ]
   },
@@ -16680,7 +16672,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:422",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:634",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:164"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:180"
     ]
   },
   {
@@ -16855,8 +16847,8 @@
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:33",
       "Sources/CevicheMobile/Develop/DevelopView.swift:110",
       "Sources/CevicheMobile/Develop/DevelopView.swift:380",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:171",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:239",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:187",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:255",
       "Sources/CevicheMobile/Library/LibraryView.swift:65",
       "Sources/CevicheMobile/Library/LibraryView.swift:149",
       "Sources/CevicheMobile/Library/LibraryView.swift:168",
@@ -17304,8 +17296,8 @@
       "Sources/CevicheMobile/Culling/FlawedPhotosView.swift:271",
       "Sources/CevicheMobile/Develop/DevelopView.swift:107",
       "Sources/CevicheMobile/Develop/DevelopView.swift:367",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:173",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:234",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:189",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:250",
       "Sources/CevicheMobile/Library/LibraryView.swift:62"
     ]
   },
@@ -17579,7 +17571,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:345",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:43",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:53",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:186"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:202"
     ]
   },
   {
@@ -18702,7 +18694,7 @@
     "uses": [
       "Sources/CevicheMac/Import/CardImportView.swift:212",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:380",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:229",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:245",
       "Sources/CevicheMobile/Library/LibraryView.swift:59"
     ]
   },
@@ -18714,7 +18706,7 @@
   {
     "key": "Select Group",
     "source": "\"Select Group\"",
-    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:194"
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:210"
   },
   {
     "key": "Select New",
@@ -18876,7 +18868,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:75",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:188",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:202"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:218"
     ]
   },
   {
@@ -20726,12 +20718,12 @@
   {
     "key": "The album couldn’t be created.",
     "source": "\"The album couldn’t be created.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:332"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:316"
   },
   {
     "key": "The album couldn’t be deleted.",
     "source": "\"The album couldn’t be deleted.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:342"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:326"
   },
   {
     "key": "The analysed correction is too extreme for this photo.",
@@ -20760,18 +20752,14 @@
   {
     "key": "The catalog couldn’t be opened.",
     "source": "\"The catalog couldn’t be opened.\"",
-    "context": "Sources/CevicheMobile/App/CevicheMobileApp.swift:38",
-    "uses": [
-      "Sources/CevicheMobile/App/CevicheMobileApp.swift:38",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:113"
-    ]
+    "context": "Sources/CevicheMobile/App/CevicheMobileApp.swift:33"
   },
   {
     "key": "The catalog couldn’t be read.",
     "source": "\"The catalog couldn’t be read.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:123",
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:107",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryModel.swift:123",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:107",
       "Sources/CevicheMobile/Library/Map/PlacesModel.swift:62",
       "Sources/CevicheMobile/Library/People/PeopleModel.swift:78"
     ]
@@ -20819,7 +20807,7 @@
   {
     "key": "The details couldn’t be saved.",
     "source": "\"The details couldn’t be saved.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:301"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:285"
   },
   {
     "key": "The development refers to mask data that is missing from this catalog.",
@@ -20921,7 +20909,7 @@
     "uses": [
       "Sources/CevicheMobile/Culling/CullSession.swift:112",
       "Sources/CevicheMobile/Culling/CullSession.swift:128",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:298"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:282"
     ]
   },
   {
@@ -20966,7 +20954,7 @@
   {
     "key": "The label couldn’t be saved.",
     "source": "\"The label couldn’t be saved.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:304"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:288"
   },
   {
     "key": "The latent image’s source catalog is not open.",
@@ -21141,7 +21129,7 @@
   {
     "key": "The photos couldn’t be added to the album.",
     "source": "\"The photos couldn’t be added to the album.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:335"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:319"
   },
   {
     "key": "The photos couldn’t be combined. %1$@",
@@ -21151,7 +21139,7 @@
   {
     "key": "The photos couldn’t be deleted.",
     "source": "\"The photos couldn’t be deleted.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:321"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:305"
   },
   {
     "key": "The photos couldn’t be focus stacked. %1$@",
@@ -21164,13 +21152,13 @@
     "context": "Sources/CevicheMobile/Culling/CullSession.swift:132",
     "uses": [
       "Sources/CevicheMobile/Culling/CullSession.swift:132",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:326"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:310"
     ]
   },
   {
     "key": "The photos couldn’t be imported.",
     "source": "\"The photos couldn’t be imported.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:216"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:200"
   },
   {
     "key": "The photos couldn’t be merged.",
@@ -21189,21 +21177,21 @@
   {
     "key": "The photos couldn’t be moved to the Trash.",
     "source": "\"The photos couldn’t be moved to the Trash.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:312"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:296"
   },
   {
     "key": "The photos couldn’t be put back.",
     "source": "\"The photos couldn’t be put back.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:308",
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:292",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryModel.swift:308",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:316"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:292",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:300"
     ]
   },
   {
     "key": "The photos couldn’t be removed from the album.",
     "source": "\"The photos couldn’t be removed from the album.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:338"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:322"
   },
   {
     "key": "The photos couldn’t be stacked. %1$@",
@@ -21213,7 +21201,7 @@
   {
     "key": "The photos couldn’t be ungrouped.",
     "source": "\"The photos couldn’t be ungrouped.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:329"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:313"
   },
   {
     "key": "The photos don’t overlap enough to be merged. Panoramas need about a third of each photo shared with its neighbour.",
@@ -21285,7 +21273,7 @@
     "context": "Sources/CevicheMobile/Culling/CullSession.swift:112",
     "uses": [
       "Sources/CevicheMobile/Culling/CullSession.swift:112",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:295"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:279"
     ]
   },
   {
@@ -21683,8 +21671,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:916",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel.swift:916",
-      "Sources/CevicheMac/Catalog/CatalogModel.swift:933",
-      "Sources/CevicheMobile/Library/MobileCatalogs.swift:78"
+      "Sources/CevicheMac/Catalog/CatalogModel.swift:933"
     ]
   },
   {
@@ -22087,9 +22074,9 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:356",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:237",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:205",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:241",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:242"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:221",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:257",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:258"
     ]
   },
   {
@@ -22188,7 +22175,7 @@
       "Sources/CevicheMac/Catalog/CatalogDeletionConfirmation.swift:95",
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:205",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:213",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:75",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:73",
       "Sources/CevicheMobile/Library/LibraryView.swift:80"
     ]
   },
@@ -22316,7 +22303,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:332",
       "Sources/CevicheMac/Catalog/CatalogModel+Archive.swift:33",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:157",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:159"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:175"
     ]
   },
   {
@@ -22453,7 +22440,7 @@
     "uses": [
       "Sources/CevicheMobile/Culling/CullReviewView.swift:180",
       "Sources/CevicheMobile/Develop/DevelopView.swift:108",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:174",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:190",
       "Sources/CevicheMobile/Library/LibraryView.swift:63"
     ]
   },
@@ -22492,7 +22479,7 @@
       "Sources/CevicheMac/Catalog/PeopleView.swift:162",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:201",
       "Sources/CevicheMac/Culling/CatalogModel+Culling.swift:107",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:197",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:213",
       "Sources/CevicheMobile/Library/LibraryView.swift:70",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:61",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:135"
@@ -22680,11 +22667,7 @@
   {
     "key": "Updating catalog…",
     "source": "\"Updating catalog…\"",
-    "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:820",
-    "uses": [
-      "Sources/CevicheMac/Catalog/CatalogModel.swift:820",
-      "Sources/CevicheMobile/App/CevicheMobileApp.swift:33"
-    ]
+    "context": "Sources/CevicheMac/Catalog/CatalogModel.swift:820"
   },
   {
     "key": "Updating metadata",
@@ -22695,16 +22678,6 @@
     "key": "Updating thumbnails",
     "source": "\"Updating thumbnails\"",
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Thumbnails.swift:26"
-  },
-  {
-    "key": "Upgrade",
-    "source": "\"Upgrade\"",
-    "context": "Sources/CevicheMobile/Library/MobileCatalogs.swift:151"
-  },
-  {
-    "key": "Upgrade Catalog?",
-    "source": "\"Upgrade Catalog?\"",
-    "context": "Sources/CevicheMobile/Library/MobileCatalogs.swift:148"
   },
   {
     "key": "Upload",
@@ -22828,7 +22801,7 @@
   {
     "key": "Utilities",
     "source": "\"Utilities\"",
-    "context": "Sources/CevicheMobile/Library/LibrarySidebar.swift:90"
+    "context": "Sources/CevicheMobile/Library/LibrarySidebar.swift:77"
   },
   {
     "key": "Variance",
@@ -23899,11 +23872,6 @@
     "context": "Sources/CevicheCore/Catalog/CloudSync.swift:365"
   },
   {
-    "key": "iCloud catalogs can’t be opened on this device.",
-    "source": "\"iCloud catalogs can’t be opened on this device.\"",
-    "context": "Sources/CevicheMobile/Library/MobileCatalogs.swift:83"
-  },
-  {
     "key": "iCloud is temporarily unavailable. Your changes are saved on this Mac and sync will resume automatically.",
     "source": "\"iCloud is temporarily unavailable. Your changes are saved on this Mac and sync will resume automatically.\"",
     "context": "Sources/CevicheCore/Catalog/CloudSync.swift:366"
@@ -24308,16 +24276,6 @@
     "key": "“%1$@” is still open, so it was not deleted. Finish or save the current work, then try again.",
     "source": "\"“\\(listing.name)” is still open, so it was not deleted. Finish or save the current work, then try again.\"",
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:175"
-  },
-  {
-    "key": "“%1$@” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog.",
-    "source": "\"“\\(pending.name)” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog.\"",
-    "context": "Sources/CevicheMobile/Library/MobileCatalogs.swift:153"
-  },
-  {
-    "key": "“%1$@” isn’t reachable. The library on this device is open instead.",
-    "source": "\"“\\(name)” isn’t reachable. The library on this device is open instead.\"",
-    "context": "Sources/CevicheMobile/Library/MobileCatalogs.swift:58"
   },
   {
     "key": "“%1$@” was deleted from iCloud on another Mac, so it was closed and removed from this Mac.",

@@ -3587,10 +3587,5 @@
 "Ceviche has to stay on screen while this runs." = "运行期间 Ceviche 必须保持在屏幕上。";
 "Latent images can’t be corrected." = "潜影无法校正。";
 "Select Group" = "选择编组";
-"Upgrade" = "升级";
-"Upgrade Catalog?" = "升级目录？";
-"iCloud catalogs can’t be opened on this device." = "无法在此设备上打开 iCloud 目录。";
-"“%1$@” is upgraded to open in this version of Ceviche, and earlier versions can’t open it afterwards. A copy as it was is kept in the catalog." = "“%1$@”将升级以在此版本的 Ceviche 中打开，之后较早的版本将无法打开它。目录中会保留一份原样副本。";
-"“%1$@” isn’t reachable. The library on this device is open instead." = "无法访问“%1$@”。已改为打开此设备上的图库。";
 "No lines found" = "未找到线条";
 "Show Lines" = "显示线条";
