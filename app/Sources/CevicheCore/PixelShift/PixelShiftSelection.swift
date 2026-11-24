@@ -1,3 +1,6 @@
+// Pixel Shift is the Mac app's alone: a sixteen-shot set peaks at 13.8 GB, more than iOS gives an app, so the iPad and
+// iPhone build leaves the whole tool out (docs/development/ios.md).
+#if os(macOS)
 import Foundation
 import CameraRaw
 
@@ -69,3 +72,4 @@ extension CameraRawError {
         }
     }
 }
+#endif

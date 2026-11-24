@@ -1,3 +1,6 @@
+// Pixel Shift is the Mac app's alone: a sixteen-shot set peaks at 13.8 GB, more than iOS gives an app, so the iPad and
+// iPhone build leaves the whole tool out (docs/development/ios.md).
+#if os(macOS)
 import Foundation
 
 /// One shot's sensor samples normalized to 0…1 per CFA position (black subtracted, divided by white − black).
@@ -126,3 +129,4 @@ enum PixelShiftAligner {
         return PixelShiftOffset(dx: dx, dy: dy, subX: Double(tx), subY: Double(ty), gain: gain, sigma: sigma)
     }
 }
+#endif
