@@ -347,7 +347,10 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Deflicker, written as a job and then played to share; Create Live Photo, the same screen with Output set to Live
   Photo, which fits the frames into about 3 seconds at a size preset with a key photo as the still and adds it to
   Photos; and Creative Filters, the Mac's filter stack on the photo,
-  applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Each refuses photos
+  applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Wide-Angle Faces shows
+  the photo corrected with a tag over each person to tap, Add for a missed head and the Mac's Lens, Strength, Bodies
+  and Straight Lines, and adds each copy to the catalog with the photo's edits. Match Series shows the reference beside
+  the photo chosen in the strip and applies the matched Exposure and White Balance as edits. Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
   adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A finished

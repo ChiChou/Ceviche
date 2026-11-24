@@ -258,7 +258,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:195",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:456",
-      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:293"
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:293",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:93"
     ]
   },
   {
@@ -268,7 +269,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/ChartProfileDialog.swift:209",
       "Sources/CevicheMac/Tools/ChartProfiles.swift:68",
-      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:294"
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:294",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:94"
     ]
   },
   {
@@ -916,7 +918,8 @@
       "Sources/CevicheMobile/Library/LibraryModel.swift:158",
       "Sources/CevicheMobile/Library/LibraryModel.swift:183",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:60",
-      "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:66"
+      "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:66",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:82"
     ]
   },
   {
@@ -930,7 +933,8 @@
       "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:45",
       "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:50",
       "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:42",
-      "Sources/CevicheMobile/Tools/Negative/NegativeModel.swift:315"
+      "Sources/CevicheMobile/Tools/Negative/NegativeModel.swift:315",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:186"
     ]
   },
   {
@@ -974,7 +978,11 @@
   {
     "key": "%1$@ of %2$@ photos can be corrected",
     "source": "\"\\(count) of \\(photos.count) photos can be corrected\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:234"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:234",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:234",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:37"
+    ]
   },
   {
     "key": "%1$@ of %2$@ photos couldn’t be merged: %3$@",
@@ -1223,7 +1231,11 @@
   {
     "key": "%1$@ photos change",
     "source": "\"\\(model.changes.count) photos change\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:42"
+    ]
   },
   {
     "key": "%1$@ photos could not be moved to the Trash.",
@@ -1258,7 +1270,11 @@
   {
     "key": "%1$@ photos couldn’t be matched",
     "source": "\"\\(unmatched) photos couldn’t be matched\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:41"
+    ]
   },
   {
     "key": "%1$@ photos couldn’t be measured",
@@ -1375,10 +1391,10 @@
   {
     "key": "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos.",
     "source": "\"\\(photos.count) photos of \\(megapixels) MP need about \\(gigabytes(needed)) GB of memory; this device has \\(gigabytes(available)) GB free for Ceviche. Try fewer photos.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:109",
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:113",
     "uses": [
-      "Sources/CevicheMobile/App/MobileFeatures.swift:109",
-      "Sources/CevicheMobile/App/MobileFeatures.swift:143"
+      "Sources/CevicheMobile/App/MobileFeatures.swift:113",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:156"
     ]
   },
   {
@@ -2050,7 +2066,11 @@
   {
     "key": "1 photo changes",
     "source": "\"1 photo changes\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:244",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:42"
+    ]
   },
   {
     "key": "1 photo couldn’t be deleted.\n",
@@ -2060,7 +2080,11 @@
   {
     "key": "1 photo couldn’t be matched",
     "source": "\"1 photo couldn’t be matched\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:243",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:41"
+    ]
   },
   {
     "key": "1 photo couldn’t be measured",
@@ -2244,7 +2268,11 @@
   {
     "key": "35 mm equivalent focal length",
     "source": "\"35 mm equivalent focal length\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:565"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:565",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:565",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:112"
+    ]
   },
   {
     "key": "35 mm equivalent, from the photo's EXIF; change it for a photo cropped from a wider frame",
@@ -2386,7 +2414,7 @@
   {
     "key": "A photo of %1$@ MP needs about %2$@ GB of memory; this device has %3$@ GB free for Ceviche.",
     "source": "\"A photo of \\(megapixels) MP needs about \\(gigabytes(needed)) GB of memory; this device has \\(gigabytes(available)) GB free for Ceviche.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:145"
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:158"
   },
   {
     "key": "A simpler profile: the chart didn’t support a finer one",
@@ -2563,6 +2591,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:182",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:182",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:85",
       "Sources/CevicheCore/Masks/Masks.swift:136"
     ]
   },
@@ -2680,7 +2709,8 @@
       "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:123",
       "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:119",
       "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:194",
-      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:119"
+      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:119",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:203"
     ]
   },
   {
@@ -3225,7 +3255,8 @@
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:214",
       "Sources/CevicheMobile/Culling/BurstsView.swift:175",
       "Sources/CevicheMobile/Culling/CheckFacesView.swift:24",
-      "Sources/CevicheMobile/Culling/TidyPairsView.swift:195"
+      "Sources/CevicheMobile/Culling/TidyPairsView.swift:195",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:21"
     ]
   },
   {
@@ -3755,7 +3786,10 @@
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:210",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:325",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:404",
-      "Sources/CevicheMac/Tools/WideAngleDialog.swift:442"
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:442",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:20",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:55",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:23"
     ]
   },
   {
@@ -4010,7 +4044,11 @@
   {
     "key": "Bodies",
     "source": "\"Bodies\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:525"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:525",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:525",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:93"
+    ]
   },
   {
     "key": "Body",
@@ -6021,12 +6059,20 @@
   {
     "key": "Correct %1$@ Photos",
     "source": "\"Correct \\(count) Photos\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:204"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:204",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:204",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:24"
+    ]
   },
   {
     "key": "Correct 1 Photo",
     "source": "\"Correct 1 Photo\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:204"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:204",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:204",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:24"
+    ]
   },
   {
     "key": "Correct Breathing",
@@ -6046,7 +6092,11 @@
   {
     "key": "Correct bodies",
     "source": "\"Correct bodies\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:528"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:528",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:528",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:92"
+    ]
   },
   {
     "key": "Correcting faces",
@@ -6060,12 +6110,20 @@
   {
     "key": "Correcting faces in %1$@",
     "source": "\"Correcting faces in \\(photos[0].filename)\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:225"
+    ]
   },
   {
     "key": "Correcting faces in %1$@ photos",
     "source": "\"Correcting faces in \\(photos.count.formatted()) photos\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:28",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:225"
+    ]
   },
   {
     "key": "Correcting focus breathing",
@@ -6122,7 +6180,8 @@
     "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:31",
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:31",
-      "Sources/CevicheMac/Tools/WideAngleDialog.swift:127"
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:127",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:52"
     ]
   },
   {
@@ -6942,6 +7001,7 @@
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:257",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:351",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:386",
+      "Sources/CevicheMobile/Develop/CurveEditor.swift:54",
       "Sources/CevicheMobile/Develop/HistoryView.swift:31",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:171",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:148",
@@ -7788,6 +7848,7 @@
     "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:560",
     "uses": [
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:560",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:115",
       "Sources/CevicheCore/Analysis/SeriesMatcher.swift:37"
     ]
   },
@@ -8600,6 +8661,7 @@
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:87",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:60",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:201",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:127",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:75"
     ]
   },
@@ -9178,7 +9240,11 @@
   {
     "key": "Finding people in %1$@…",
     "source": "\"Finding people in \\(model.asset.filename)…\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:291"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:291",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:291",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:51"
+    ]
   },
   {
     "key": "Finding people…",
@@ -9408,7 +9474,8 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:267",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:153",
-      "Sources/CevicheMac/Tools/WideAngleDialog.swift:555"
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:555",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:108"
     ]
   },
   {
@@ -9582,7 +9649,8 @@
       "Sources/CevicheMac/Export/ExportOptions.swift:18",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:537",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:538",
-      "Sources/CevicheMobile/Export/ExportView.swift:30"
+      "Sources/CevicheMobile/Export/ExportView.swift:30",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:98"
     ]
   },
   {
@@ -11871,6 +11939,11 @@
     ]
   },
   {
+    "key": "Latent images can’t be corrected.",
+    "source": "\"Latent images can’t be corrected.\"",
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:150"
+  },
+  {
     "key": "Layers",
     "source": "\"Layers\"",
     "context": "Sources/CevicheMac/Tools/FocusStackView.swift:529",
@@ -12015,6 +12088,7 @@
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:157",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:526",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:517",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:106",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:22"
     ]
   },
@@ -12825,7 +12899,12 @@
   {
     "key": "Match Automatically",
     "source": "\"Match Automatically\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:336"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:336",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:336",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:137",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:152"
+    ]
   },
   {
     "key": "Match Series",
@@ -12833,7 +12912,9 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:264",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:264",
-      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:214"
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:214",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:15",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:59"
     ]
   },
   {
@@ -12847,28 +12928,47 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:368",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:368",
-      "Sources/CevicheMac/Catalog/CatalogInspector.swift:264"
+      "Sources/CevicheMac/Catalog/CatalogInspector.swift:264",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:51"
     ]
   },
   {
     "key": "Match Skin",
     "source": "\"Match Skin\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:338"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:338",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:338",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:139",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:154"
+    ]
   },
   {
     "key": "Match This Photo",
     "source": "\"Match This Photo\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:340"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:340",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:340",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:134"
+    ]
   },
   {
     "key": "Match by EXIF",
     "source": "\"Match by EXIF\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:337"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:337",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:337",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:138",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:153"
+    ]
   },
   {
     "key": "Matched %1$@ of %2$@ photos.\n",
     "source": "\"Matched \\(completed) of \\(total) photos.\\n\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:41"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:41",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:41",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesModel.swift:233"
+    ]
   },
   {
     "key": "Matched on the scene it shares with the reference (%1$@%% of it agrees)",
@@ -12893,7 +12993,11 @@
   {
     "key": "Matching %1$@ of %2$@",
     "source": "\"Matching \\(done + 1) of \\(others)\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:240"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:240",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:240",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:38"
+    ]
   },
   {
     "key": "Matching exposure",
@@ -12907,12 +13011,20 @@
   {
     "key": "Matching series",
     "source": "\"Matching series\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:32"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:32",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:32",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesModel.swift:237"
+    ]
   },
   {
     "key": "Matching…",
     "source": "\"Matching…\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:288"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:288",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:288",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:88"
+    ]
   },
   {
     "key": "Matte",
@@ -14352,7 +14464,11 @@
   {
     "key": "No focal length in its EXIF",
     "source": "\"No focal length in its EXIF\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:61"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:61",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:61",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:68"
+    ]
   },
   {
     "key": "No focal length in the EXIF. Enter the lens's 35 mm equivalent.",
@@ -14457,7 +14573,8 @@
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:35",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:631",
       "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:24",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:75"
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:75",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:114"
     ]
   },
   {
@@ -15180,7 +15297,7 @@
     "context": "Sources/CevicheMac/Export/ExportOptions.swift:123",
     "uses": [
       "Sources/CevicheMac/Export/ExportOptions.swift:123",
-      "Sources/CevicheMobile/Tools/ToolSession.swift:96"
+      "Sources/CevicheMobile/Tools/ToolSession.swift:103"
     ]
   },
   {
@@ -15223,6 +15340,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:139",
       "Sources/CevicheMobile/Develop/DevelopView.swift:187",
       "Sources/CevicheMobile/Tools/Filters/FiltersView.swift:42",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:98",
       "Sources/CevicheCore/Adjustments/Geometry.swift:17",
       "Sources/CevicheCore/Export/ExportSizing.swift:7"
     ]
@@ -15613,6 +15731,7 @@
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:55",
       "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:32",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:69",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:81",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:26",
       "Sources/CevicheCore/Analysis/BundledModels.swift:109",
       "Sources/CevicheCore/Analysis/BundledModels.swift:109",
@@ -16580,7 +16699,8 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:215",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:215",
-      "Sources/CevicheMac/Editor/LooksPanel.swift:56"
+      "Sources/CevicheMac/Editor/LooksPanel.swift:56",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:149"
     ]
   },
   {
@@ -16742,6 +16862,8 @@
       "Sources/CevicheMac/Tools/PhotoStackView.swift:13",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:13",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesModel.swift:14",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:34",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:58",
       "Sources/CevicheCore/NightSky/NightSkyAnalyzer.swift:99",
       "Sources/CevicheCore/Panorama/HDRPanoramaMerger.swift:127",
       "Sources/CevicheCore/PixelShift/PixelShiftFusion.swift:72",
@@ -17039,7 +17161,9 @@
     "uses": [
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:255",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:256",
-      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:321"
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:321",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:53",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:113"
     ]
   },
   {
@@ -17654,7 +17778,7 @@
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:193",
-      "Sources/CevicheMobile/Develop/CurveEditor.swift:50",
+      "Sources/CevicheMobile/Develop/CurveEditor.swift:56",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:169",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:72",
       "Sources/CevicheMobile/Tools/Filters/FiltersView.swift:68",
@@ -18279,7 +18403,11 @@
   {
     "key": "Saved corrected copies of %1$@ of %2$@ photos.",
     "source": "\"Saved corrected copies of \\(made.count) of \\(photos.count) photos.\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:221"
+    ]
   },
   {
     "key": "Saved corrected copies of %1$@ photos",
@@ -18569,10 +18697,10 @@
   {
     "key": "Select at least two photos.",
     "source": "\"Select at least two photos.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:104",
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:108",
     "uses": [
-      "Sources/CevicheMobile/App/MobileFeatures.swift:104",
-      "Sources/CevicheMobile/App/MobileFeatures.swift:137"
+      "Sources/CevicheMobile/App/MobileFeatures.swift:108",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:148"
     ]
   },
   {
@@ -18975,7 +19103,11 @@
   {
     "key": "Show Grid",
     "source": "\"Show Grid\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:208"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:208",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:208",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:90"
+    ]
   },
   {
     "key": "Show Inspector",
@@ -19328,6 +19460,7 @@
     "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:219",
     "uses": [
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:219",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:129",
       "Sources/CevicheCore/Analysis/SeriesMatcher.swift:38"
     ]
   },
@@ -19596,13 +19729,18 @@
       "Sources/CevicheMac/Tools/CatalogModel+ExposureRamp.swift:70",
       "Sources/CevicheMac/Tools/CatalogModel+IDPhoto.swift:62",
       "Sources/CevicheMac/Tools/CatalogModel+MatchSeries.swift:41",
-      "Sources/CevicheMac/Tools/ChartProfileDialog.swift:51"
+      "Sources/CevicheMac/Tools/ChartProfileDialog.swift:51",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesModel.swift:232"
     ]
   },
   {
     "key": "Some Photos Weren’t Corrected",
     "source": "\"Some Photos Weren’t Corrected\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76",
+    "uses": [
+      "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:76",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:220"
+    ]
   },
   {
     "key": "Some Photos Weren’t Deleted",
@@ -19967,7 +20105,11 @@
   {
     "key": "Straight Lines",
     "source": "\"Straight Lines\"",
-    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:533"
+    "context": "Sources/CevicheMac/Tools/WideAngleDialog.swift:533",
+    "uses": [
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:533",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:95"
+    ]
   },
   {
     "key": "Straighten",
@@ -19994,7 +20136,8 @@
       "Sources/CevicheMac/Editor/DustSection.swift:38",
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:380",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:524",
-      "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:73"
+      "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:73",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:91"
     ]
   },
   {
@@ -21078,7 +21221,11 @@
   {
     "key": "The reference photo’s original isn’t available.",
     "source": "\"The reference photo’s original isn’t available.\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:96"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:96",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:96",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesModel.swift:95"
+    ]
   },
   {
     "key": "The reference shows no face",
@@ -22103,7 +22250,11 @@
   {
     "key": "Unchanged",
     "source": "\"Unchanged\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:291"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:291",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:291",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:91"
+    ]
   },
   {
     "key": "Undecided",
@@ -22552,7 +22703,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:386",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:444",
-      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:333"
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:333",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:144"
     ]
   },
   {
@@ -22961,7 +23113,11 @@
   {
     "key": "White Balance",
     "source": "\"White Balance\"",
-    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:217"
+    "context": "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:217",
+    "uses": [
+      "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:217",
+      "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:128"
+    ]
   },
   {
     "key": "White balance",
@@ -23023,7 +23179,8 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:271",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:271",
-      "Sources/CevicheMac/Tools/WideAngleDialog.swift:203"
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:203",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:18"
     ]
   },
   {
@@ -23034,7 +23191,8 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:359",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:271",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:80",
-      "Sources/CevicheMac/Editor/EditorInspector.swift:314"
+      "Sources/CevicheMac/Editor/EditorInspector.swift:314",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:50"
     ]
   },
   {
@@ -23753,7 +23911,8 @@
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:212",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:91",
-      "Sources/CevicheMac/Tools/WideAngleDialog.swift:558"
+      "Sources/CevicheMac/Tools/WideAngleDialog.swift:558",
+      "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:113"
     ]
   },
   {
