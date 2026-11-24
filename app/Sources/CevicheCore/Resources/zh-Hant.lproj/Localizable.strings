@@ -3514,7 +3514,6 @@
 "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos." = "%1$@ 張 %2$@ MP 的照片約需 %3$@ GB 記憶體；此裝置可供 Ceviche 使用的記憶體為 %4$@ GB。請減少照片數量。";
 "%1$@ photos, %2$@ EV" = "%1$@ 張照片，%2$@ EV";
 "%1$@ photos, %2$@ left out" = "%1$@ 張照片，%2$@ 張未使用";
-"All Sky" = "全部為天空";
 "Any Flag" = "任意旗標";
 "Any Label" = "任意色標";
 "Any Rating" = "任意評等";

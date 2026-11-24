@@ -3514,7 +3514,6 @@
 "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos." = "%1$@ fotos de %2$@ MP necesitan unos %3$@ GB de memoria; este dispositivo tiene %4$@ GB libres para Ceviche. Prueba con menos fotos.";
 "%1$@ photos, %2$@ EV" = "%1$@ fotos, %2$@ EV";
 "%1$@ photos, %2$@ left out" = "%1$@ fotos, %2$@ excluidas";
-"All Sky" = "Todo cielo";
 "Any Flag" = "Cualquier marca";
 "Any Label" = "Cualquier etiqueta";
 "Any Rating" = "Cualquier valoración";
