@@ -297,8 +297,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   puts one back. Looks lists the built-in presets by category, Ceviche's own and the open-source film packs, each
   shown on the photo. Light has Color or B&W, Auto, the tone curve and HDR; Color has the Color Mixer (the B&W mixer
   in black and white) and Color grading, a wheel for shadows, midtones, highlights or the whole photo; Detail has
-  Presence, Optics and Grain, and Darkroom prints the photo through a film stock with its Develop, Print and Texture
-  controls. A pinch or double tap zooms, and past the preview's pixels the part in view is developed from the file.
+  Presence, Optics and Grain, and Darkroom shows every film stock as a small print of the photo, by kind, and prints
+  the photo through the one touched, with its Develop, Print and Texture controls. A pinch or double tap zooms, and past the preview's pixels the part in view is developed from the file.
   Hold the half-filled circle to see the photo as it opened. The menu has Filmstrip, Histogram, Info, History and
   Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,
   caption and keywords.
