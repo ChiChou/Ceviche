@@ -3090,6 +3090,7 @@
 "The photo is no longer in the catalog." = "The photo is no longer in the catalog.";
 "The photo is removed from the library and its albums with its edits and history." = "The photo is removed from the library and its albums with its edits and history.";
 "The photograph has no valid export dimensions." = "The photograph has no valid export dimensions.";
+"The photos and their edits are removed from this device. This can’t be undone." = "The photos and their edits are removed from this device. This can’t be undone.";
 "The photos could not be aligned." = "The photos could not be aligned.";
 "The photos couldn’t be added to the album." = "The photos couldn’t be added to the album.";
 "The photos couldn’t be combined. %1$@" = "The photos couldn’t be combined. %1$@";
