@@ -61,7 +61,7 @@ final class PhotoStackGPU {
         encoder.setBytes(&parameters, length: MemoryLayout<StoreParameters>.stride, index: 1)
         dispatch(encoder, storePipeline, width: width, height: height)
         encoder.endEncoding()
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
     }
@@ -96,7 +96,7 @@ final class PhotoStackGPU {
             let w = reducePipeline.maxTotalThreadsPerThreadgroup
             encoder.dispatchThreads(MTLSize(width: pixels, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: w, height: 1, depth: 1))
             encoder.endEncoding()
-            commands.commit()
+            GPUForeground.wait(); commands.commit()
             commands.waitUntilCompleted()
             if let error = commands.error { throw error }
             rgba.withUnsafeMutableBytes { memcpy($0.baseAddress! + row * width * 16, result.contents(), pixels * 16) }

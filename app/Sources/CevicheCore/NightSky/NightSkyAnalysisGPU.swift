@@ -201,7 +201,7 @@ final class NightSkyAnalysisGPU {
     // MARK: Dispatch
 
     fileprivate func finish(_ commands: MTLCommandBuffer) throws {
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
     }

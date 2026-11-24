@@ -40,7 +40,7 @@ final class FocusStackRepairGPU {
         for (i,b) in buffers.enumerated() { e.setBuffer(b, offset: 0, index: i) }
         var p = parameters; e.setBytes(&p, length: MemoryLayout<Parameters>.stride, index: buffers.count)
         e.dispatchThreads(MTLSize(width: count, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: pipeline.threadExecutionWidth, height: 1, depth: 1))
-        e.endEncoding(); commands.commit(); commands.waitUntilCompleted()
+        e.endEncoding(); GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         if Task.isCancelled { throw CancellationError() }
     }

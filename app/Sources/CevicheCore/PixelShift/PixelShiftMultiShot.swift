@@ -82,7 +82,7 @@ final class PixelShiftMultiShot: @unchecked Sendable {
         let tw = pipeline.threadExecutionWidth, th = max(1, pipeline.maxTotalThreadsPerThreadgroup / tw)
         encoder.dispatchThreads(MTLSize(width: width, height: height, depth: 1), threadsPerThreadgroup: MTLSize(width: tw, height: th, depth: 1))
         encoder.endEncoding()
-        commands.commit(); commands.waitUntilCompleted()
+        GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         memcpy(target, output.contents(), width * height * 16)
     }

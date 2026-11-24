@@ -206,7 +206,7 @@ final class PanoramaCompositor {
         let blur = MPSImageGaussianBlur(device: device, sigma: Float(max(source.width, source.height)) * 0.01)
         blur.edgeMode = .clamp
         blur.encode(commandBuffer: command, sourceTexture: source, destinationTexture: low)
-        command.commit(); command.waitUntilCompleted()
+        GPUForeground.wait(); command.commit(); command.waitUntilCompleted()
         if let error = command.error { throw error }
         return low
     }
@@ -227,7 +227,7 @@ final class PanoramaCompositor {
         memset(sum.contents(), 0, sum.length)
         if let command = queue.makeCommandBuffer(), let blit = command.makeBlitCommandEncoder() {
             blit.fill(buffer: detail, range: 0..<detail.length, value: 0)
-            blit.endEncoding(); command.commit(); command.waitUntilCompleted()
+            blit.endEncoding(); GPUForeground.wait(); command.commit(); command.waitUntilCompleted()
         }
         for (done, index) in frames.enumerated() {
             if cancelled() { throw CancellationError() }
@@ -253,7 +253,7 @@ final class PanoramaCompositor {
                 encoder.setBytes(&parameters, length: MemoryLayout<WarpParameters>.stride, index: 1)
                 let w = accumulate.threadExecutionWidth, h = max(1, accumulate.maxTotalThreadsPerThreadgroup / w)
                 encoder.dispatchThreads(MTLSize(width: layout.width, height: layout.height, depth: 1), threadsPerThreadgroup: MTLSize(width: w, height: h, depth: 1))
-                encoder.endEncoding(); command.commit(); command.waitUntilCompleted()
+                encoder.endEncoding(); GPUForeground.wait(); command.commit(); command.waitUntilCompleted()
                 if let error = command.error { throw error }
             }
             progress(done + 1)
@@ -263,7 +263,7 @@ final class PanoramaCompositor {
         encoder.setComputePipelineState(normalize)
         encoder.setBuffer(sum, offset: 0, index: 0); encoder.setBuffer(detail, offset: 0, index: 2); encoder.setBytes(&total, length: 4, index: 1)
         encoder.dispatchThreads(MTLSize(width: count, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: normalize.maxTotalThreadsPerThreadgroup, height: 1, depth: 1))
-        encoder.endEncoding(); command.commit(); command.waitUntilCompleted()
+        encoder.endEncoding(); GPUForeground.wait(); command.commit(); command.waitUntilCompleted()
         if let error = command.error { throw error }
         let rgba = Array(UnsafeBufferPointer(start: sum.contents().bindMemory(to: Float.self, capacity: count * 4), count: count * 4))
         return PanoramaRaster(width: layout.width, height: layout.height, rgba: rgba)

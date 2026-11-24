@@ -84,7 +84,7 @@ final class FocusStackAnalysisGPU {
         func run(_ body: (MTLCommandBuffer) throws -> Void) throws {
             guard let commands = queue.makeCommandBuffer() else { throw fail() }
             try body(commands)
-            commands.commit(); commands.waitUntilCompleted()
+            GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
             if let error = commands.error { throw error }
         }
         var countValue = UInt32(n)
@@ -224,7 +224,7 @@ final class FocusStackAnalysisGPU {
         func run(_ body: (MTLCommandBuffer) throws -> Void) throws {
             guard let commands = queue.makeCommandBuffer() else { throw fail() }
             try body(commands)
-            commands.commit(); commands.waitUntilCompleted()
+            GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
             if let error = commands.error { throw error }
         }
 

@@ -94,7 +94,7 @@ final class PixelShiftGPU: PixelShiftEngine {
         encoder.setBuffer(output, offset: 0, index: 4)
         dispatch(encoder, "ps_finish", width: w, height: h)
         encoder.endEncoding()
-        commands.commit(); commands.waitUntilCompleted()
+        GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         return Array(UnsafeBufferPointer(start: output.contents().assumingMemoryBound(to: Float.self), count: pixels * 4))
     }

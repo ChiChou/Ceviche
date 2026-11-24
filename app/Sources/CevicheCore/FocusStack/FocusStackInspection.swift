@@ -73,7 +73,7 @@ public final class FocusStackInspectionRenderer {
         guard let commands = queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
         encoder.setComputePipelineState(pipeline); body(encoder)
         encoder.dispatchThreads(MTLSize(width: width, height: height, depth: 1), threadsPerThreadgroup: MTLSize(width: 16, height: 8, depth: 1))
-        encoder.endEncoding(); commands.commit(); commands.waitUntilCompleted()
+        encoder.endEncoding(); GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
     }
 

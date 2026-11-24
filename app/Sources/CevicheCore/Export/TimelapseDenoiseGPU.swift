@@ -59,7 +59,7 @@ final class TimelapseDenoiseGPU {
     }
     private func run(_ commands: MTLCommandBuffer) throws {
         try Task.checkCancellation()
-        commands.commit(); commands.waitUntilCompleted()
+        GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         try Task.checkCancellation()
     }

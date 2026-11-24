@@ -103,7 +103,7 @@ final class FocusStackGPU {
         try dispatch(commands, "fs_warp", layout.width, layout.height) { e in
             e.setTexture(texture, index: 0); e.setBuffer(out, offset: 0, index: 0); e.setBytes(&warp, length: MemoryLayout<Warp>.stride, index: 1)
         }
-        commands.commit(); commands.waitUntilCompleted()
+        GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         return out
     }
@@ -176,7 +176,7 @@ final class FocusStackGPU {
                 }
             }
         }
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
     }
@@ -220,7 +220,7 @@ final class FocusStackGPU {
             }
             result = fusion.levels[0].buffer
         }
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         let count = layout.width * layout.height * 4

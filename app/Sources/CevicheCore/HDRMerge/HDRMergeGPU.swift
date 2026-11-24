@@ -56,7 +56,7 @@ final class HDRMergeGPU {
         guard let sum = Accumulator(device: device, width: width, height: height, painted: painted) else { return nil }
         if let forced = sum.forced, let commands = queue.makeCommandBuffer(), let blit = commands.makeBlitCommandEncoder() {
             blit.fill(buffer: forced, range: 0..<forced.length, value: 0)
-            blit.endEncoding(); commands.commit(); commands.waitUntilCompleted()
+            blit.endEncoding(); GPUForeground.wait(); commands.commit(); commands.waitUntilCompleted()
         }
         return sum
     }
@@ -106,7 +106,7 @@ final class HDRMergeGPU {
         encoder.setBuffer(keepBuffer, offset: 0, index: 6)
         dispatch(encoder, accumulatePipeline, width: sum.width, height: sum.height)
         encoder.endEncoding()
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
     }
@@ -130,7 +130,7 @@ final class HDRMergeGPU {
         encoder.setBuffer(automaticBuffer, offset: 0, index: 3)
         dispatch(encoder, normalizePipeline, width: sum.width, height: sum.height)
         encoder.endEncoding()
-        commands.commit()
+        GPUForeground.wait(); commands.commit()
         commands.waitUntilCompleted()
         if let error = commands.error { throw error }
         let count = sum.width * sum.height * 4
