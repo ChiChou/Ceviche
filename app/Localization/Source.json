@@ -1339,10 +1339,10 @@
   {
     "key": "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos.",
     "source": "\"\\(photos.count) photos of \\(megapixels) MP need about \\(gigabytes(needed)) GB of memory; this device has \\(gigabytes(available)) GB free for Ceviche. Try fewer photos.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:100",
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:107",
     "uses": [
-      "Sources/CevicheMobile/App/MobileFeatures.swift:100",
-      "Sources/CevicheMobile/App/MobileFeatures.swift:129"
+      "Sources/CevicheMobile/App/MobileFeatures.swift:107",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:136"
     ]
   },
   {
@@ -2323,7 +2323,7 @@
   {
     "key": "A photo of %1$@ MP needs about %2$@ GB of memory; this device has %3$@ GB free for Ceviche.",
     "source": "\"A photo of \\(megapixels) MP needs about \\(gigabytes(needed)) GB of memory; this device has \\(gigabytes(available)) GB free for Ceviche.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:131"
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:138"
   },
   {
     "key": "A simpler profile: the chart didn’t support a finer one",
@@ -3507,7 +3507,7 @@
     "context": "Sources/CevicheMac/Catalog/PeopleView.swift:491",
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:491",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:99"
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:97"
     ]
   },
   {
@@ -3517,7 +3517,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:305",
       "Sources/CevicheMac/Catalog/PeopleView.swift:343",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:99"
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:97"
     ]
   },
   {
@@ -8649,7 +8649,7 @@
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:484",
       "Sources/CevicheMac/Catalog/PeopleView.swift:314",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:644",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:105",
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:104",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:55",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:195"
     ]
@@ -12512,8 +12512,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:202",
       "Sources/CevicheMac/Catalog/PeopleView.swift:491",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:49",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:31",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:97"
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:31"
     ]
   },
   {
@@ -13466,7 +13465,7 @@
     "context": "Sources/CevicheMac/Catalog/PeopleView.swift:152",
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:152",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:107",
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:106",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:56"
     ]
   },
@@ -15301,7 +15300,6 @@
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:519",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:50",
       "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:30",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:97",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:69",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:26",
       "Sources/CevicheCore/Analysis/BundledModels.swift:104",
@@ -15358,11 +15356,6 @@
     "key": "Permissions",
     "source": "\"Permissions\"",
     "context": "Sources/CevicheMac/App/PreferencesView.swift:103"
-  },
-  {
-    "key": "Person",
-    "source": "\"Person\"",
-    "context": "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:109"
   },
   {
     "key": "Person %1$@",
@@ -17216,7 +17209,7 @@
       "Sources/CevicheMac/Catalog/PeopleView.swift:152",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:92",
       "Sources/CevicheMac/Editor/MaskPanel.swift:107",
-      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:107",
+      "Sources/CevicheMobile/Library/People/LibraryBrowse.swift:106",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:56"
     ]
   },
@@ -18214,10 +18207,10 @@
   {
     "key": "Select at least two photos.",
     "source": "\"Select at least two photos.\"",
-    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:95",
+    "context": "Sources/CevicheMobile/App/MobileFeatures.swift:102",
     "uses": [
-      "Sources/CevicheMobile/App/MobileFeatures.swift:95",
-      "Sources/CevicheMobile/App/MobileFeatures.swift:123"
+      "Sources/CevicheMobile/App/MobileFeatures.swift:102",
+      "Sources/CevicheMobile/App/MobileFeatures.swift:130"
     ]
   },
   {

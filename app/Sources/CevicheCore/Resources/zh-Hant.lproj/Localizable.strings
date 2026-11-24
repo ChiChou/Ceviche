@@ -3575,7 +3575,6 @@
 "Strokes" = "筆觸";
 "Grouping faces" = "正在為人臉編組";
 "Merge With…" = "合併到…";
-"Person" = "人物";
 "The change couldn’t be saved." = "無法儲存更動。";
 "The faces couldn’t be grouped." = "無法為人臉編組。";
 "A photo of %1$@ MP needs about %2$@ GB of memory; this device has %3$@ GB free for Ceviche." = "一張 %1$@ MP 的照片約需 %2$@ GB 記憶體；此裝置可供 Ceviche 使用的記憶體為 %3$@ GB。";
