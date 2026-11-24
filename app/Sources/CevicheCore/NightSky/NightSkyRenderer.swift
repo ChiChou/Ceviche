@@ -243,7 +243,9 @@ extension NightSkyAnalyzer {
                 var c = previous.contribution
                 c.ground = false; c.isSkyPhoto = false
                 sums.texture = developed
-                try gpu.accumulate(nil, into: sums, maps: maps, context: context, contribution: c, base: base, analysis: (analysisWidth, analysisHeight))
+                try autoreleasepool {
+                    try gpu.accumulate(nil, into: sums, maps: maps, context: context, contribution: c, base: base, analysis: (analysisWidth, analysisHeight))
+                }
             }
             var c = original
             c.ground = false; c.isSkyPhoto = false; c.gap = nil
@@ -260,17 +262,23 @@ extension NightSkyAnalyzer {
                 meteors.removeAll { index - $0.start >= fading.fade.length }
             }
             guard wanted(index) else { continue }
-            ground.withUnsafeBytes { bytes in _ = memcpy(sums.ground.contents(), bytes.baseAddress!, bytes.count) }
-            try gpu.compose(sums, maps: maps, analysis: (analysisWidth, analysisHeight), minimumSkyWeight: 0, keepClean: false)
-            if !plan.regions.isEmpty {
-                try gpu.applyRegions(sums, map: Self.regionMap(plan.regions, width: analysisWidth, height: analysisHeight), analysis: (analysisWidth, analysisHeight))
+            // Composing a frame in a pool of its own: this loop runs on a Swift concurrency thread, where nothing else
+            // drains the Metal and Core Image objects each frame autoreleases, and a few hundred frames of them
+            // reached an iPad's memory limit.
+            let raster = try autoreleasepool { () -> PanoramaRaster in
+                ground.withUnsafeBytes { bytes in _ = memcpy(sums.ground.contents(), bytes.baseAddress!, bytes.count) }
+                try gpu.compose(sums, maps: maps, analysis: (analysisWidth, analysisHeight), minimumSkyWeight: 0, keepClean: false)
+                if !plan.regions.isEmpty {
+                    try gpu.applyRegions(sums, map: Self.regionMap(plan.regions, width: analysisWidth, height: analysisHeight), analysis: (analysisWidth, analysisHeight))
+                }
+                var raster = try gpu.output(sums)
+                repairHotPixels(&raster)
+                if let fading {
+                    for meteor in meteors { meteor.light.add(to: &raster, strength: fading.fade.strength(age: index - meteor.start)) }
+                }
+                try (index == peaks.count - 1 ? lastFinish : finish)?.apply(to: &raster)
+                return raster
             }
-            var raster = try gpu.output(sums)
-            repairHotPixels(&raster)
-            if let fading {
-                for meteor in meteors { meteor.light.add(to: &raster, strength: fading.fade.strength(age: index - meteor.start)) }
-            }
-            try (index == peaks.count - 1 ? lastFinish : finish)?.apply(to: &raster)
             try await frame(index, raster)
         }
     }

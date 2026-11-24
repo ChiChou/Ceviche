@@ -259,11 +259,14 @@ extension RawRenderer {
     /// Renders one frame into a writer's buffer, in the space the video is tagged with. An HDR video keeps the
     /// highlights of photos edited in HDR, up to their headroom; other photos sit at SDR white in it.
     public func renderTimelapseFrame(_ adjustments: Adjustments, crop: TimelapseCrop, ratio: Double, into frame: VideoFrameBuffer) throws {
-        let buffer = frame.pixels
-        let size = CGSize(width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer))
-        let image = try timelapseImage(adjustments, crop: crop, ratio: ratio, size: size, hdr: frame.colorSpace.isHDR)
-        try Task.checkCancellation()
-        context.render(image, to: buffer, bounds: CGRect(origin: .zero, size: size), colorSpace: frame.colorSpace)
+        // In a pool of its own: a video is hundreds of these in a row on a thread nothing else drains.
+        try autoreleasepool {
+            let buffer = frame.pixels
+            let size = CGSize(width: CVPixelBufferGetWidth(buffer), height: CVPixelBufferGetHeight(buffer))
+            let image = try timelapseImage(adjustments, crop: crop, ratio: ratio, size: size, hdr: frame.colorSpace.isHDR)
+            try Task.checkCancellation()
+            context.render(image, to: buffer, bounds: CGRect(origin: .zero, size: size), colorSpace: frame.colorSpace)
+        }
     }
 
     /// The frame as the video shows it, at `size`, for the dialog's preview of a paused frame.

@@ -482,7 +482,9 @@ public final class StarTrailsMerger: @unchecked Sendable {
                                   frames: wanted, progress: progress) { index, raster in
             let url = directory.appendingPathComponent("\(index).\(writer.previewExtension)")
             defer { try? FileManager.default.removeItem(at: url) }
-            try writer.write(raster, to: url, cancelled: { Task.isCancelled })
+            // Each frame's file is written inside a pool of its own: on a Swift concurrency thread nothing else
+            // drains what writing it autoreleases, and a few hundred frames end an iPad's app at its memory limit.
+            try autoreleasepool { try writer.write(raster, to: url, cancelled: { Task.isCancelled }) }
             try await frame(index, url)
         }
     }
