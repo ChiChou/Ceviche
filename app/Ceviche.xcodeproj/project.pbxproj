@@ -13,6 +13,7 @@
 		0C0000000000000000000052 /* CevicheKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0000000000000000000043 /* CevicheKit */; };
 		0C0000000000000000000053 /* CevicheIndexService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 0C0000000000000000000021 /* CevicheIndexService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C0000000000000000000054 /* ceviche-mcp in Embed Helpers */ = {isa = PBXBuildFile; fileRef = 0C0000000000000000000022 /* ceviche-mcp */; };
+		0C00000000000000000000A8 /* CevicheMobile in Frameworks */ = {isa = PBXBuildFile; productRef = 0C00000000000000000000A9 /* CevicheMobile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,9 @@
 		0C0000000000000000000034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Platforms/macOS/Info.plist; sourceTree = "<group>"; };
 		0C0000000000000000000035 /* IndexService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Platforms/macOS/IndexService-Info.plist"; sourceTree = "<group>"; };
 		0C0000000000000000000036 /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Platforms/macOS/Entitlements; sourceTree = "<group>"; };
+		0C00000000000000000000A0 /* Ceviche.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ceviche.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C00000000000000000000A1 /* App.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Platforms/iOS/Config/App.xcconfig; sourceTree = "<group>"; };
+		0C00000000000000000000A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +100,8 @@
 		0C0000000000000000000011 /* CevicheIndex */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/macOS/IndexService; sourceTree = "<group>"; };
 		0C0000000000000000000012 /* CevicheMCP */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/macOS/MCP; sourceTree = "<group>"; };
 		0C0000000000000000000013 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0C0000000000000000000014 /* Exceptions for "Resources" folder in "Ceviche" target */, ); path = Platforms/macOS/Resources; sourceTree = "<group>"; };
+		0C00000000000000000000A3 /* Launcher */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/iOS/Launcher; sourceTree = "<group>"; };
+		0C00000000000000000000A4 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/iOS/Resources; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C00000000000000000000A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C00000000000000000000A8 /* CevicheMobile in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -136,6 +150,7 @@
 				0C0000000000000000000034 /* Info.plist */,
 				0C0000000000000000000035 /* IndexService-Info.plist */,
 				0C0000000000000000000036 /* Entitlements */,
+				0C00000000000000000000AF /* iOS */,
 				0C0000000000000000000004 /* Config */,
 				0C0000000000000000000003 /* Products */,
 			);
@@ -147,6 +162,7 @@
 				0C0000000000000000000020 /* Ceviche.app */,
 				0C0000000000000000000021 /* CevicheIndexService.xpc */,
 				0C0000000000000000000022 /* ceviche-mcp */,
+				0C00000000000000000000A0 /* Ceviche.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +176,17 @@
 				0C0000000000000000000033 /* MCP.xcconfig */,
 			);
 			path = Platforms/macOS/Config;
+			sourceTree = "<group>";
+		};
+		0C00000000000000000000AF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0C00000000000000000000A3 /* Launcher */,
+				0C00000000000000000000A4 /* Resources */,
+				0C00000000000000000000A2 /* Info.plist */,
+				0C00000000000000000000A1 /* App.xcconfig */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +267,32 @@
 			productReference = 0C0000000000000000000022 /* ceviche-mcp */;
 			productType = "com.apple.product-type.tool";
 		};
+		0C00000000000000000000AA /* Ceviche-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C00000000000000000000AB /* Build configuration list for PBXNativeTarget "Ceviche-iOS" */;
+			buildPhases = (
+				0C00000000000000000000AE /* Check */,
+				0C00000000000000000000A5 /* Sources */,
+				0C00000000000000000000A6 /* Frameworks */,
+				0C00000000000000000000A7 /* Resources */,
+				0C00000000000000000000B0 /* Assemble */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0C00000000000000000000A3 /* Launcher */,
+				0C00000000000000000000A4 /* Resources */,
+			);
+			name = "Ceviche-iOS";
+			packageProductDependencies = (
+				0C00000000000000000000A9 /* CevicheMobile */,
+			);
+			productName = Ceviche;
+			productReference = 0C00000000000000000000A0 /* Ceviche.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -274,12 +327,20 @@
 				0C0000000000000000000070 /* Ceviche */,
 				0C0000000000000000000071 /* CevicheIndexService */,
 				0C0000000000000000000072 /* ceviche-mcp */,
+				0C00000000000000000000AA /* Ceviche-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0C0000000000000000000062 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C00000000000000000000A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -325,6 +386,38 @@
 			shellScript = "exec \"$SRCROOT/scripts/xcode-phase.sh\" assemble\n";
 			showEnvVarsInLog = 0;
 		};
+		0C00000000000000000000AE /* Check */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Check;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "exec \"$SRCROOT/scripts/xcode-phase.sh\" check\n";
+			showEnvVarsInLog = 0;
+		};
+		0C00000000000000000000B0 /* Assemble */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Assemble;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "exec \"$SRCROOT/scripts/xcode-phase.sh\" assemble_ios\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -343,6 +436,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0C000000000000000000006A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C00000000000000000000A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -421,6 +521,20 @@
 			};
 			name = Release;
 		};
+		0C00000000000000000000AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C00000000000000000000A1 /* App.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0C00000000000000000000AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C00000000000000000000A1 /* App.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -460,6 +574,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		0C00000000000000000000AB /* Build configuration list for PBXNativeTarget "Ceviche-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C00000000000000000000AC /* Debug */,
+				0C00000000000000000000AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
@@ -481,6 +604,10 @@
 		0C0000000000000000000043 /* CevicheKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CevicheKit;
+		};
+		0C00000000000000000000A9 /* CevicheMobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CevicheMobile;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

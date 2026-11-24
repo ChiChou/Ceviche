@@ -277,6 +277,52 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   Photo › Strip Unsupported XMP Settings forgets the imported settings Ceviche doesn’t apply, so their warning stops;
   the edits and the sidecar file are kept.
 
+## iPad and iPhone
+
+The touch app shares the Mac app's catalog format, edit model and rendering, so a photo developed on one looks the
+same on the other. Features that belong to the Mac's shell (Folders, Edit In, the command line, MCP, printing) and Merge
+Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is offered only when the photos chosen fit the device's memory.
+
+- **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
+  included, and they show as they land. Collections are All Photos, Picks, albums, capture months and Trash; the
+  filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
+  and EXIF. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
+  actions, or Select to work on several: Pick, Reject, Rating, Merge, Export, and More for labels, albums, Group,
+  Paste Edits and Trash. On an iPhone the photos come first and the collections are a step back.
+- **Develop.** The photo fills the screen, with a rail of tools along the edge: Looks, Light, Color, Detail,
+  Darkroom, Masks and Crop. A tool's controls open in a drawer that floats over the photo's edge, like the bar, the
+  histogram and the filmstrip (on an iPhone held upright the drawer sits below the photo), in sections that fold;
+  the lit tool, touched again, closes the drawer, and a tap on the photo hides everything.
+  Sliders move by how far the finger travels, finer with the finger pulled away from the track, and a double tap
+  puts one back. Looks lists the built-in presets by category, Ceviche's own and the open-source film packs, each
+  shown on the photo. Light has Color or B&W, Auto, the tone curve and HDR; Color has the Color Mixer (the B&W mixer
+  in black and white) and Color grading, a wheel for shadows, midtones, highlights or the whole photo; Detail has
+  Presence, Optics and Grain, and Darkroom prints the photo through a film stock with its Develop, Print and Texture
+  controls. A pinch or double tap zooms, and past the preview's pixels the part in view is developed from the file.
+  Hold the half-filled circle to see the photo as it opened. The menu has Filmstrip, Histogram, Info, History and
+  Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,
+  caption and keywords.
+- **Masks.** Subject, Background, People, Brush, Linear gradient, Radial gradient and Color range (Sky, Depth and
+  Scene need models that are not on the device yet). A gradient is drawn with a drag and changed by its handles; the
+  brush paints with one finger or Apple Pencil while two fingers move and zoom the photo. Each mask has the
+  adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it.
+- **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
+  Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, Transform has the manual
+  perspective, rotation, aspect, scale and offsets, and Constrain Crop keeps the crop inside the corrected photo.
+  Guided Upright, drawn on the photo, is on the Mac only.
+- **Culling.** The Culling menu has Review, a full-screen pass through the photos shown or selected with Pick,
+  Reject, Unflag and stars under the thumb, a swipe sideways to move, up to pick and down to reject, and Auto
+  Advance; Find Flawed Photos, which lists the suspects by problem to untick before rejecting them; Pick from Bursts,
+  which picks the best of each burst or sets it to Group or Skip; and Move Rejected Photos to Trash. As on the Mac,
+  they set only flags and groups.
+- **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
+  Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
+  and its main options. The result is written as the Mac app writes it and added to the catalog; progress shows in
+  the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
+  the app says so instead of starting.
+- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, handed to the share sheet to save
+  to Files or Photos or send to another app.
+
 ## Automation
 
 - **Command line.** Create or open a catalog and import into it at launch; `Ceviche --help` lists the options.

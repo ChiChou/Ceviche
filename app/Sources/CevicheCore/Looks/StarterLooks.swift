@@ -17,7 +17,8 @@ public enum StarterLooks {
     public struct Pack: Sendable {
         /// The folder in Presets, and the pack's name.
         public let folder: String
-        let items: Set<EditTransferItem>
+        /// The groups of settings every look of the pack sets, and so what applying one replaces.
+        public let items: Set<EditTransferItem>
         let prepare: @Sendable (inout Adjustments) -> Void
         public let looks: [Look]
         /// A look's settings on a fresh development.

@@ -28,7 +28,7 @@ Shared conventions for every tool:
 
 | | What | Notes |
 |---|---|---|
-| 6a | **CevicheUI** | A module between CevicheCore and `CevicheMac` for the app state an iPad app would share: `CatalogModel`, `EditorModel`, `DevelopmentStore`, `ActivityCenter`, `FolderBrowser`, `MCPController`, `FileChooser` and the portable components. Today only 7 of 187 files could move: the models reference view types (`SecondaryWindow`, `FileAccess`, `Eyedropper`, `ImageViewport`, dialogs) and use `NSImage`, `NSScreen`, `NSSound`, `NSAlert`. Cut those edges (callbacks or protocols the shell provides, a `PlatformImage` alias), then move the files and mark what the shell uses `package`. Check with an iOS Simulator build of the module. |
+| 6a | **CevicheUI** | A module between CevicheCore and the two apps for the state they could share: the Mac's `CatalogModel`, `EditorModel`, `DevelopmentStore`, `ActivityCenter` and the touch app's `LibraryModel`, `DevelopModel`, `MergeModel`, which today do the same work twice. On the Mac only 7 of 187 files could move as they are: the models reference view types (`SecondaryWindow`, `FileAccess`, `Eyedropper`, `ImageViewport`, dialogs) and use `NSImage`, `NSScreen`, `NSSound`, `NSAlert`. Cut those edges (callbacks or protocols the shell provides, a `PlatformImage` alias), move the files, mark what the shells use `package`, and have `CevicheMobile` take the shared models in place of its own. Check with an iOS build. |
 | 6b | **Split CevicheCore** | Imaging (pixel pipeline, merges; optimized in debug) and catalog (database, sync, indexing, MCP; unoptimized in debug) as parallel modules, to shorten the cold build. Looks, Analysis and Rendering reference Catalog types and Catalog references them back; cut that first. |
 
 ## 4. Creative filters, the rest
@@ -64,6 +64,19 @@ Open questions: whether Darkroom film printing should also move here as a filter
 | 8a | **Calibration frames** | Support dark, flat and bias frames. First test dark-frame correction on a real night sequence for hot pixels that survive RAW decoding. |
 | 8b | **Show Radiant** | In Composite Meteor Shower, show the likely radiant in a review-only overlay when enough selected meteor paths converge on the aligned sky. |
 
+## 9. iPad and iPhone
+
+The touch app (`CevicheMobile`, docs/development/ios.md) has the library, Develop with masks, culling, the merges and
+export. These are what it still lacks from the Mac app, each to be measured on a device before it is offered there.
+
+| | What | Notes |
+|---|---|---|
+| 9a | **Retouch and Portrait** | Remove, Heal and Clone brushes with the masks' paint overlay, dust spots, then Portrait's panels. AI fill, Find blemishes and Even tone need their models on the device (9c). |
+| 9b | **People, Map and the remaining culling views** | The catalog already holds faces and places from background analysis. Check Faces and Tidy RAW + JPEG Pairs need layouts of their own for a small screen. |
+| 9c | **Models** | Nothing downloads models on iOS yet, so Sky, Depth and Scene masks, AI Noise Reduction and AI fill are unavailable there. The App Store build is to get them through Background Assets. The built-in face models are in the app already. |
+| 9d | **The other tools** | Timelapse and Live Photo, Creative Filters, Convert Negative, Merge Best Faces, Wide-Angle Faces, Match Series, Chart Profile, ID Photo, Print Proof. Each is CevicheCore plus a Mac window; each needs a touch layout and a memory figure in `MobileFeatures`. |
+| 9e | **Catalogs** | One local catalog with copied originals. iCloud catalogs (the entitlements and container are the Mac's), opening a catalog from Files, and referenced originals on an external drive are not there. |
+
 ## Order
 
-1c is independent and uses the failure alert. 6a comes before any iPad work; 6b is independent. 5a is independent and can run in parallel with anything. 7a is independent. The filter items (4a–4e) are independent of each other.
+1c is independent and uses the failure alert. 6a and 6b are independent; the touch app's items (9a–9d) are independent of each other and don't wait for 6a. 5a is independent and can run in parallel with anything. 7a is independent. The filter items (4a–4e) are independent of each other.

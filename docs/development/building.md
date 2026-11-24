@@ -9,6 +9,7 @@ make            # release build into app/dist/Ceviche.app
 make run        # build and open it
 make dev        # debug build (seconds, not minutes, after an edit), then relaunch the app
 make xcode      # write Platforms/macOS/Config/Local.xcconfig from build.config and open app/Ceviche.xcodeproj
+make ios        # the iPad and iPhone app; DEVICE=<name or UDID> installs and launches it (see ios.md)
 make snapshot   # test build for internal testers: app/dist/snapshots/Ceviche-<version>-<build>-<commit>.zip
 make test       # the test suite: synthetic inputs and local photos, a couple of minutes
 make test-slow  # also GPU-vs-CPU comparisons, Core ML models and full-size RAW exports
@@ -18,8 +19,8 @@ make help       # every target and variable
 `make` wraps the scripts in `app/scripts`, which can also be run directly.
 
 The app is built by `app/Ceviche.xcodeproj` (Xcode 16+ synchronized folders: adding a file to a target's folder needs
-no project change), whose three targets are the launcher (`app/Platforms/macOS/Launcher`), the index service and
-`ceviche-mcp`. The app's code and everything it links stay in `app/Package.swift`, a local package the project links
+no project change), whose Mac targets are the launcher (`app/Platforms/macOS/Launcher`), the index service and
+`ceviche-mcp`; the fourth, `Ceviche-iOS`, is the iPad and iPhone app ([iPad and iPhone](ios.md)). The app's code and everything it links stay in `app/Package.swift`, a local package the project links
 as its dynamic `CevicheKit` product (`Contents/Frameworks/CevicheKit.framework`) and that `swift test` builds on its
 own. `build.sh` takes `release` (the default) or `debug` and does what `xcodebuild` cannot: it writes the build
 settings, builds the codec frameworks (`vendor.sh`; the package needs them before Xcode can resolve it), runs
@@ -46,7 +47,7 @@ git-ignored), then the defaults; no personal value is committed. They become the
 |---|---|
 | `CEVICHE_DISTRIBUTION` | `community` (default: macOS 15, no store) or `appstore` (macOS 26, Ceviche Pro, needs `CEVICHE_STORE_PRODUCTS` and the sandbox) |
 | `CEVICHE_SANDBOX` | `1` or `0`; on by default only for `appstore`. Off, the app keeps only its USB and Photos entitlements and the helpers are signed without any |
-| `CEVICHE_IOS` | `1` or `0` (default): also build the export codecs for iOS and the iOS Simulator and link them there |
+| `CEVICHE_IOS` | `1` or `0` (default): also build the export codecs for iOS and the iOS Simulator. `make ios` turns it on by itself, and once built the iOS slices are kept |
 | `CEVICHE_ICLOUD` | `1` or `0` (default): iCloud catalogs and iCloud Drive; `1` needs `CEVICHE_TEAM_ID` |
 | `CEVICHE_SIGN_IDENTITY` | a certificate name or SHA-1 hash; a Developer ID also gets the hardened runtime and a secure timestamp |
 | `CEVICHE_PROVISIONING_PROFILE` | an installed profile's name or UUID, for iCloud with `CEVICHE_SIGN_IDENTITY` |
@@ -92,9 +93,9 @@ Three GitHub Actions workflows in `.github/workflows` run on GitHub's `xcode-27`
 WebP and JPEG XL build through SwiftPM from pinned source dependencies in `app/Vendor/Package.swift`.
 `app/scripts/vendor.sh`, which `build.sh` and `test.sh` run first (`make vendor` before opening the project in Xcode), compiles them once with optimization, as
 static libraries for macOS on Apple silicon, into `app/Vendor/Frameworks` (git-ignored) as `CWebP.xcframework` and
-`CJXL.xcframework`. `CEVICHE_IOS=1` also builds iOS and iOS Simulator slices and links the codecs there, for
-iPhone and iPad builds of the package; it is off by default. Xcode caches the package manifest in its build folder and
-does not notice the variable change: after switching it, build for iOS into a fresh `-derivedDataPath` (or `make clean`). They are linked into `CevicheKit.framework`, so nothing else is embedded, the linker drops the
+`CJXL.xcframework`. `CEVICHE_IOS=1` (or `make ios`) also builds iOS and iOS Simulator slices, which the iPad and
+iPhone app links; `app/Package.swift` links them on iOS when the slices are there, read from disk because Xcode caches
+the evaluated manifest. On the Mac they are linked into `CevicheKit.framework`, so nothing else is embedded, the linker drops the
 code the app never calls, and debug app builds neither recompile the codecs nor run them unoptimized. They are rebuilt
 only when `app/Vendor/Package.swift`, its `Package.resolved` or `vendor.sh` changes.
 

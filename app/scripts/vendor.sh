@@ -11,7 +11,9 @@ VENDOR="$APP_ROOT/Vendor"
 OUT="$VENDOR/Frameworks"
 SCRATCH="$APP_ROOT/.build/vendor"
 source "$APP_ROOT/scripts/config.sh"
-# Package.resolved does not exist until the first build resolves the package. Turning CEVICHE_IOS on or off rebuilds.
+# iOS slices once built are kept: a Mac build after an iOS one (CEVICHE_IOS unset) must not rebuild without them.
+[[ -d "$OUT/CWebP.xcframework/ios-arm64" ]] && CEVICHE_IOS=1
+# Package.resolved does not exist until the first build resolves the package. Turning CEVICHE_IOS on rebuilds.
 stamp() { { cat "$VENDOR/Package.swift" "$0" $([[ -f "$VENDOR/Package.resolved" ]] && echo "$VENDOR/Package.resolved"); echo "ios=$CEVICHE_IOS"; } | shasum | cut -d' ' -f1; }
 [[ -f "$OUT/.stamp" && "$(cat "$OUT/.stamp")" == "$(stamp)" ]] && exit 0
 # triple:sdk for each slice; the minimum systems match app/Package.swift. The iOS slices add about 40 s.

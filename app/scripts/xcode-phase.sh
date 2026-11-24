@@ -2,6 +2,7 @@
 # The Ceviche target's script phases in Ceviche.xcodeproj; Xcode runs them with the build settings in the environment.
 #   check     before compiling: the build settings make sense, string tables and licence notices are complete.
 #   assemble  after the helpers are embedded: what the bundle needs beyond the targets' own products.
+#   assemble_ios  the same for the iPad and iPhone app, which needs far less.
 set -euo pipefail
 APP_ROOT="$SRCROOT"
 REPO_ROOT="$(cd "$APP_ROOT/.." && pwd)"
@@ -32,21 +33,26 @@ check() {
 # where every executable that loads it finds them; users download the rest in Settings › Models. A bundled model that
 # is missing is only a warning, and the app offers it as a download, unless CEVICHE_REQUIRE_BUNDLED_MODELS is 1, as it
 # is for snapshots and releases.
-bundle_models() { # destination
-    local models="$REPO_ROOT/models" model name compiled
+bundle_models() { # destination [platform]
+    local models="$REPO_ROOT/models" model name compiled platform="${2:-macos}"
+    # A compiled model is for one platform: the Mac's are in compiled, the iOS app's in compiled-ios.
+    local store="$models/build/compiled" options=()
+    [[ "$platform" == macos ]] || { store="$models/build/compiled-$platform"; options=(--platform "$platform" --deployment-target "$IPHONEOS_DEPLOYMENT_TARGET"); }
     source "$models/models.sh"
-    mkdir -p "$models/build/compiled"
+    mkdir -p "$store"
     for model in "$models"/build/*.mlpackage "$models"/build/*.mlmodel; do
         [[ -e "$model" && "$model" != *-INT8.* ]] || continue
         name="$(basename "${model%.*}")"
-        compiled="$models/build/compiled/$name.mlmodelc"
+        # Only the Mac build compiles every model, for debug builds to find; the others compile what they bundle.
+        [[ "$platform" == macos || " ${MODEL_BUNDLED[*]} " == *" $name "* ]] || continue
+        compiled="$store/$name.mlmodelc"
         if [[ ! -d "$compiled" || "$model" -nt "$compiled" ]]; then
-            rm -rf "${compiled:?}"; xcrun coremlcompiler compile "$model" "$models/build/compiled" >/dev/null
+            rm -rf "${compiled:?}"; xcrun coremlcompiler compile "$model" "$store" ${options[@]+"${options[@]}"} >/dev/null
         fi
     done
     rm -rf "${1:?}"
     for name in "${MODEL_BUNDLED[@]}"; do
-        compiled="$models/build/compiled/$name.mlmodelc"
+        compiled="$store/$name.mlmodelc"
         if [[ ! -d "$compiled" ]]; then
             [[ "${CEVICHE_REQUIRE_BUNDLED_MODELS:-0}" != 1 ]] || fail "$name is not in models/build; run make models-prebuilt (or make models) first."
             printf 'warning: %s is not in models/build, so the app will offer it as a download; run make models-prebuilt (or make models) to bundle it.\n' "$name"
@@ -125,6 +131,17 @@ assemble() {
     mkdir -p "$DERIVED_FILE_DIR"; cp "$BUILT_PRODUCTS_DIR/ceviche-mcp" "$schema"
     codesign --force --sign - "$schema" 2>/dev/null
     DYLD_FRAMEWORK_PATH="$BUILT_PRODUCTS_DIR/PackageFrameworks:$BUILT_PRODUCTS_DIR" "$schema" --schema > "$resources/d.json"
+}
+
+# The iPad and iPhone app is one flat bundle: the package's resource bundles are already at its top, where
+# `Bundle.module` and the model lookup (`BundledModel.builtInDirectory`) find them.
+assemble_ios() {
+    bundle_models "$APP/Models" ios
+    # The Looks tool's built-in presets, as in the Mac app: Ceviche's own and the open-source packs, each pack's
+    # LICENSE beside its folders (`LookLibrary.builtInPresets`).
+    "$REPO_ROOT/presets/fetch-presets.sh" >/dev/null
+    python3 -I "$REPO_ROOT/presets/bundle-presets.py" "$REPO_ROOT/presets" "$APP/Presets" >/dev/null
+    cp "$REPO_ROOT/LICENSE" "$APP/LICENSE"
 }
 
 "$1"

@@ -83,7 +83,7 @@ def message_key(parts):
 
 def inventory():
     entries = {}
-    for folder in ("CevicheMac", "CevicheCore"):
+    for folder in ("CevicheMac", "CevicheMobile", "CevicheCore"):
         for path in sorted((APP / "Sources" / folder).rglob("*.swift")):
             if path.name == "Localization.swift":
                 continue
