@@ -82,6 +82,11 @@ final class BundledModelCache: @unchecked Sendable {
             if let model = functions[kind]?[function] { return model }
             guard let url = kind.url else { throw EditorError.invalidDocument(L10n.tr("The \(kind.feature) model is not installed. Install it in Settings › Models.")) }
             let configuration = MLModelConfiguration(); configuration.functionName = function
+            #if os(iOS)
+            // With the Neural Engine allowed, iPadOS 26 spends 20 s on the load and then refuses the function name
+            // ("must be nil unless the model type is ML Program"); on the GPU a 1024-pixel window takes a few seconds.
+            configuration.computeUnits = .cpuAndGPU
+            #endif
             let model = try MLModel(contentsOf: url, configuration: configuration)
             functions[kind, default: [:]][function] = model
             return model
