@@ -284,7 +284,8 @@ same on the other. Features that belong to the Mac's shell (Folders, Edit In, th
 Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is offered only when the photos chosen fit the device's memory.
 
 - **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
-  included, and they show as they land. Collections are All Photos, Picks, albums, capture months and Trash; the
+  included, and they show as they land. Collections are All Photos, Picks, Duplicates (each photo beside its copies,
+  found by background analysis), albums, capture months, Archived once something is in it, and Trash; the
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
   and EXIF. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
@@ -315,14 +316,17 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   clear all. Find Dust marks sensor dust as circles to drop or heal. With its model installed in Models, AI fill fills
   Remove strokes; without it Remove fills from the surroundings.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
-  Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, Transform has the manual
-  perspective, rotation, aspect, scale and offsets, and Constrain Crop keeps the crop inside the corrected photo.
-  Guided Upright, drawn on the photo, is on the Mac only.
+  Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, or by Guided: Draw shows the
+  photo uncorrected, and up to four guides are dragged along edges that should be vertical or level. Transform has
+  the manual perspective, rotation, aspect, scale and offsets, and Constrain Crop keeps the crop inside the corrected photo.
 - **Culling.** The Culling menu has Review, a full-screen pass through the photos shown or selected with Pick,
   Reject, Unflag and stars under the thumb, a swipe sideways to move, up to pick and down to reject, and Auto
   Advance; Find Flawed Photos, which lists the suspects by problem to untick before rejecting them; Pick from Bursts,
-  which picks the best of each burst or sets it to Group or Skip; and Move Rejected Photos to Trash. As on the Mac,
-  they set only flags and groups.
+  which picks the best of each burst or sets it to Group or Skip; Check Faces, each series' faces person by person
+  and frame under frame, or a card of faces per photo, where a face zooms the photo to it at actual pixels; Tidy RAW +
+  JPEG Pairs, one suggested decision per shot (Archive JPEG, Keep JPEG, Keep RAW, Reject Both) changed pair by pair
+  or for a selection; and Move Rejected Photos to Trash. As on the Mac, they set only flags and groups, and Tidy's
+  archived JPEGs go to Archived, where Unarchive puts them back.
 - **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
   and its main options. The result is written as the Mac app writes it and added to the catalog; progress shows in
