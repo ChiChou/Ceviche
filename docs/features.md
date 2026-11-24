@@ -293,9 +293,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   title names, renames or lists their faces, and touch and hold names, merges or ungroups. Map gathers geotagged
   photos into pins; a pin lists its photos below the map and Show Photos opens them under the place's name.
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
-- **Develop.** The photo fills the screen, with a rail of tools along the edge: Looks, Light, Color, Detail,
-  Darkroom, Masks and Crop. A tool's controls open in a drawer that floats over the photo's edge in Liquid Glass, like
-  the bar, the histogram and the filmstrip (on an iPhone held upright the drawer sits below the photo), in sections that fold;
+- **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
+  Darkroom, Retouch, Masks and Crop. A tool's controls open in a drawer that floats over the photo's edge in Liquid Glass, like
+  the bar, the histogram and the filmstrip (on an iPhone held upright the tools and the drawer sit below the photo), in sections that fold;
   the lit tool, touched again, closes the drawer, and a tap on the photo hides everything.
   Sliders move by how far the finger travels, finer with the finger pulled away from the track, and a double tap
   puts one back. Looks lists the built-in presets by category, Ceviche's own and the open-source film packs, each
