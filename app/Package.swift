@@ -44,7 +44,7 @@ let package = Package(
         .target(name: "CevicheMac", dependencies: ["CevicheCore"], resources: [.copy("Resources/OpenSourceLicenses")]),
         // The touch app for iPadOS and iOS, on the same core. Its files compile to nothing on macOS (`#if os(iOS)`),
         // so `swift build` and the tests still build the whole package.
-        .target(name: "CevicheMobile", dependencies: ["CevicheCore"], resources: [.copy("Resources/OpenSourceLicenses")]),
+        .target(name: "CevicheMobile", dependencies: ["CevicheCore"]),
         // The slow-tier switch, the sample corpus and shared fixtures, for both test targets.
         .target(name: "CevicheTestSupport", dependencies: ["CevicheCore"], path: "Tests/TestSupport"),
         .testTarget(name: "CevicheCoreTests", dependencies: ["CevicheCore", "CameraRaw", "DustRemoval", "CevicheTestSupport"]),

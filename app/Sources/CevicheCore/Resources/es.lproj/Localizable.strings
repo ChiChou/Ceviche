@@ -3504,7 +3504,6 @@
 "Show Photos from Same Day" = "Mostrar fotos del mismo día";
 "%1$@ of %2$@ photos have faces" = "%1$@ de %2$@ fotos tienen caras";
 "Finding faces in %1$@ of %2$@ photos…" = "Buscando caras en %1$@ de %2$@ fotos…";
-"%1$@ GB" = "%1$@ GB";
 "%1$@ Selected" = "%1$@ seleccionadas";
 "%1$@ Stars" = "%1$@ estrellas";
 "%1$@ couldn’t be developed." = "No se ha podido revelar %1$@.";
@@ -3515,7 +3514,6 @@
 "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos." = "%1$@ fotos de %2$@ MP necesitan unos %3$@ GB de memoria; este dispositivo tiene %4$@ GB libres para Ceviche. Prueba con menos fotos.";
 "%1$@ photos, %2$@ EV" = "%1$@ fotos, %2$@ EV";
 "%1$@ photos, %2$@ left out" = "%1$@ fotos, %2$@ excluidas";
-"About" = "Acerca de";
 "All Sky" = "Todo cielo";
 "Any Flag" = "Cualquier marca";
 "Any Label" = "Cualquier etiqueta";
@@ -3535,7 +3533,6 @@
 "Import from Files or Photos with +." = "Importa desde Archivos o Fotos con +.";
 "Importing" = "Importando";
 "Include Location" = "Incluir ubicación";
-"Memory" = "Memoria";
 "New Snapshot" = "Nueva instantánea";
 "Nothing running" = "Nada en curso";
 "Paste Edits from %1$@" = "Pegar ediciones de %1$@";
@@ -3568,7 +3565,6 @@
 "The rating couldn’t be saved." = "No se ha podido guardar la valoración.";
 "The snapshot couldn’t be saved." = "No se ha podido guardar la instantánea.";
 "Unflag" = "Quitar marca";
-"Version" = "Versión";
 "Histogram" = "Histograma";
 "Strokes" = "Trazos";
 "Grouping faces" = "Agrupando caras";

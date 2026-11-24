@@ -142,6 +142,8 @@ assemble_ios() {
     "$REPO_ROOT/presets/fetch-presets.sh" >/dev/null
     python3 -I "$REPO_ROOT/presets/bundle-presets.py" "$REPO_ROOT/presets" "$APP/Presets" >/dev/null
     cp "$REPO_ROOT/LICENSE" "$APP/LICENSE"
+    # The version and the open-source notices are in the system's Settings, under Ceviche, not in the app.
+    python3 -I "$APP_ROOT/scripts/ios-settings.py" "$APP_ROOT/Sources/CevicheMac/Resources/OpenSourceLicenses" "$APP/Settings.bundle" "${MARKETING_VERSION:-}"
 }
 
 "$1"

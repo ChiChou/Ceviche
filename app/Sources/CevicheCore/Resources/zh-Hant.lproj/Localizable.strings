@@ -3504,7 +3504,6 @@
 "Show Photos from Same Day" = "顯示同一天的照片";
 "%1$@ of %2$@ photos have faces" = "%2$@ 張照片裡有 %1$@ 張有人臉";
 "Finding faces in %1$@ of %2$@ photos…" = "正在 %2$@ 張照片中尋找人臉（已完成 %1$@ 張）…";
-"%1$@ GB" = "%1$@ GB";
 "%1$@ Selected" = "已選取 %1$@ 張";
 "%1$@ Stars" = "%1$@ 星";
 "%1$@ couldn’t be developed." = "無法沖印 %1$@。";
@@ -3515,7 +3514,6 @@
 "%1$@ photos of %2$@ MP need about %3$@ GB of memory; this device has %4$@ GB free for Ceviche. Try fewer photos." = "%1$@ 張 %2$@ MP 的照片約需 %3$@ GB 記憶體；此裝置可供 Ceviche 使用的記憶體為 %4$@ GB。請減少照片數量。";
 "%1$@ photos, %2$@ EV" = "%1$@ 張照片，%2$@ EV";
 "%1$@ photos, %2$@ left out" = "%1$@ 張照片，%2$@ 張未使用";
-"About" = "關於";
 "All Sky" = "全部為天空";
 "Any Flag" = "任意旗標";
 "Any Label" = "任意色標";
@@ -3535,7 +3533,6 @@
 "Import from Files or Photos with +." = "使用 + 從「檔案」或「照片」輸入。";
 "Importing" = "正在輸入";
 "Include Location" = "包含位置";
-"Memory" = "記憶體";
 "New Snapshot" = "新增快照";
 "Nothing running" = "沒有正在進行的工作";
 "Paste Edits from %1$@" = "貼上 %1$@ 的編輯";
@@ -3568,7 +3565,6 @@
 "The rating couldn’t be saved." = "無法儲存評等。";
 "The snapshot couldn’t be saved." = "無法儲存快照。";
 "Unflag" = "取消旗標";
-"Version" = "版本";
 "Histogram" = "直方圖";
 "Strokes" = "筆觸";
 "Grouping faces" = "正在為人臉編組";
