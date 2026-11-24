@@ -306,6 +306,10 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Scene need models that are not on the device yet). A gradient is drawn with a drag and changed by its handles; the
   brush paints with one finger or Apple Pencil while two fingers move and zoom the photo. Each mask has the
   adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it.
+- **Retouch.** Remove, Heal and Clone brushes painted with one finger or Apple Pencil, two fingers moving and
+  zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
+  clear all. Find Dust marks sensor dust as circles to drop or heal. AI fill needs a model that is not on the device
+  yet, so Remove fills from the surroundings.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
   Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, Transform has the manual
   perspective, rotation, aspect, scale and offsets, and Constrain Crop keeps the crop inside the corrected photo.

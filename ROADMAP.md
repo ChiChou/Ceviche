@@ -66,12 +66,12 @@ Open questions: whether Darkroom film printing should also move here as a filter
 
 ## 9. iPad and iPhone
 
-The touch app (`CevicheMobile`, docs/development/ios.md) has the library, Develop with masks, culling, the merges and
+The touch app (`CevicheMobile`, docs/development/ios.md) has the library, Develop with masks and retouch, culling, the merges and
 export. These are what it still lacks from the Mac app, each to be measured on a device before it is offered there.
 
 | | What | Notes |
 |---|---|---|
-| 9a | **Retouch and Portrait** | Remove, Heal and Clone brushes with the masks' paint overlay, dust spots, then Portrait's panels. AI fill, Find blemishes and Even tone need their models on the device (9c). |
+| 9a | **Portrait, and the rest of Retouch** | Retouch has its brushes and dust spots. Left: Object (tap to remove), Distraction Removal and Find People, Visualize Spots and Dodge/Burn checked by touch, then Portrait's panels. AI fill, Find blemishes and Even tone need their models on the device (9c). |
 | 9b | **People, Map and the remaining culling views** | The catalog already holds faces and places from background analysis. Check Faces and Tidy RAW + JPEG Pairs need layouts of their own for a small screen. |
 | 9c | **Models** | Nothing downloads models on iOS yet, so Sky, Depth and Scene masks, AI Noise Reduction and AI fill are unavailable there. The App Store build is to get them through Background Assets. The built-in face models are in the app already. |
 | 9d | **The other tools** | Timelapse and Live Photo, Creative Filters, Convert Negative, Merge Best Faces, Wide-Angle Faces, Match Series, Chart Profile, ID Photo, Print Proof. Each is CevicheCore plus a Mac window; each needs a touch layout and a memory figure in `MobileFeatures`. |
