@@ -6,6 +6,8 @@ import simd
 /// The analysis's per-pixel work on the GPU: warping each photo's planes onto the anchor's sky, and the search for hot
 /// pixels at full size. Registration itself stays on the CPU: it works on a few hundred stars, one step after another.
 /// The kernels mirror the CPU code in `NightSkyAnalyzer` in 32-bit float, compiled without fast math.
+/// Each call drains its own autorelease pool: a command buffer is autoreleased and keeps its buffers alive, and the
+/// analysis calls these hundreds of times from one thread, which would hold every photo's planes until it ends.
 final class NightSkyAnalysisGPU {
     let device: MTLDevice
     private let queue: MTLCommandQueue
@@ -54,29 +56,31 @@ final class NightSkyAnalysisGPU {
 
         /// `plane` (`channels` interleaved, at this size) on the anchor's sky, NaN where the photo has no sky sample.
         func warp(_ plane: [Float], channels: Int, alignment: NightSkyAlignment) throws -> [Float] {
-            let count = width * height * channels
-            guard plane.count == count, let source = gpu.device.makeBuffer(bytes: plane, length: count * 4, options: .storageModeShared),
-                  let out = gpu.device.makeBuffer(length: count * 4, options: .storageModeShared),
-                  let commands = gpu.queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw NightSkyAnalysisGPU.failure() }
-            var p = [Float](repeating: 0, count: 40)
-            p[0] = Float(width); p[1] = Float(height); p[2] = Float(analysis.0); p[3] = Float(analysis.1)
-            p[4] = Float(Double(analysis.0) / Double(width)); p[5] = Float(channels); p[6] = threshold
-            let inverse = alignment.inverse.normalized
-            for k in 0..<9 { p[11 + k] = Float(inverse.m[k]) }
-            if let morph = alignment.morph {
-                p[7] = 1; p[10] = Float(morph.scale)
-                for k in 0..<10 { p[20 + k] = Float(morph.x[k]); p[30 + k] = Float(morph.y[k]) }
+            try autoreleasepool {
+                let count = width * height * channels
+                guard plane.count == count, let source = gpu.device.makeBuffer(bytes: plane, length: count * 4, options: .storageModeShared),
+                      let out = gpu.device.makeBuffer(length: count * 4, options: .storageModeShared),
+                      let commands = gpu.queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw NightSkyAnalysisGPU.failure() }
+                var p = [Float](repeating: 0, count: 40)
+                p[0] = Float(width); p[1] = Float(height); p[2] = Float(analysis.0); p[3] = Float(analysis.1)
+                p[4] = Float(Double(analysis.0) / Double(width)); p[5] = Float(channels); p[6] = threshold
+                let inverse = alignment.inverse.normalized
+                for k in 0..<9 { p[11 + k] = Float(inverse.m[k]) }
+                if let morph = alignment.morph {
+                    p[7] = 1; p[10] = Float(morph.scale)
+                    for k in 0..<10 { p[20 + k] = Float(morph.x[k]); p[30 + k] = Float(morph.y[k]) }
+                }
+                encoder.setComputePipelineState(gpu.warpPipeline)
+                encoder.setBuffer(out, offset: 0, index: 0)
+                encoder.setBuffer(source, offset: 0, index: 1)
+                encoder.setBuffer(mask, offset: 0, index: 2)
+                encoder.setBuffer(valid, offset: 0, index: 3)
+                encoder.setBytes(p, length: p.count * 4, index: 4)
+                gpu.dispatch(encoder, gpu.warpPipeline, width: width, height: height)
+                encoder.endEncoding()
+                try gpu.finish(commands)
+                return [Float](UnsafeBufferPointer(start: out.contents().bindMemory(to: Float.self, capacity: count), count: count))
             }
-            encoder.setComputePipelineState(gpu.warpPipeline)
-            encoder.setBuffer(out, offset: 0, index: 0)
-            encoder.setBuffer(source, offset: 0, index: 1)
-            encoder.setBuffer(mask, offset: 0, index: 2)
-            encoder.setBuffer(valid, offset: 0, index: 3)
-            encoder.setBytes(p, length: p.count * 4, index: 4)
-            gpu.dispatch(encoder, gpu.warpPipeline, width: width, height: height)
-            encoder.endEncoding()
-            try gpu.finish(commands)
-            return [Float](UnsafeBufferPointer(start: out.contents().bindMemory(to: Float.self, capacity: count), count: count))
         }
     }
 
@@ -84,61 +88,65 @@ final class NightSkyAnalysisGPU {
 
     /// `NightSkyAnalyzer.spikes` of a photo developed straight into GPU memory; nil when there are too many to be defects.
     func spikes(_ image: CIImage, context: CIContext) throws -> [Int]? {
-        let w = Int(image.extent.width.rounded(.down)), h = Int(image.extent.height.rounded(.down))
-        guard w > 8, h > 8 else { return [] }
-        let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: w, height: h, mipmapped: false)
-        descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
-        guard let texture = device.makeTexture(descriptor: descriptor) else { throw Self.failure() }
-        // The CPU's noise sample: every 41st column and 37th row, four pixels in from the edges.
-        let columns = (w - 8 + 40) / 41, rows = (h - 8 + 36) / 37
-        guard let samples = device.makeBuffer(length: columns * rows * 4, options: .storageModeShared),
-              let commands = queue.makeCommandBuffer() else { throw Self.failure() }
-        // Core Image's origin is the bottom left; flip so texture row 0 is the photo's top row, as on the CPU.
-        let flipped = image.transformed(by: CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(h)))
-        context.render(flipped, to: texture, commandBuffer: commands, bounds: CGRect(x: 0, y: 0, width: w, height: h), colorSpace: PanoramaDecoder.space)
-        guard let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
-        encoder.setComputePipelineState(excessPipeline)
-        encoder.setTexture(texture, index: 0)
-        encoder.setBuffer(samples, offset: 0, index: 0)
-        dispatch(encoder, excessPipeline, width: columns, height: rows)
-        encoder.endEncoding()
-        try finish(commands)
-        let sample = UnsafeBufferPointer(start: samples.contents().bindMemory(to: Float.self, capacity: columns * rows), count: columns * rows).map(Double.init)
-        var sigma = NightSkyAnalyzer.spikeNoise(sample)
+        try autoreleasepool {
+            let w = Int(image.extent.width.rounded(.down)), h = Int(image.extent.height.rounded(.down))
+            guard w > 8, h > 8 else { return [] }
+            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: w, height: h, mipmapped: false)
+            descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
+            guard let texture = device.makeTexture(descriptor: descriptor) else { throw Self.failure() }
+            // The CPU's noise sample: every 41st column and 37th row, four pixels in from the edges.
+            let columns = (w - 8 + 40) / 41, rows = (h - 8 + 36) / 37
+            guard let samples = device.makeBuffer(length: columns * rows * 4, options: .storageModeShared),
+                  let commands = queue.makeCommandBuffer() else { throw Self.failure() }
+            // Core Image's origin is the bottom left; flip so texture row 0 is the photo's top row, as on the CPU.
+            let flipped = image.transformed(by: CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(h)))
+            context.render(flipped, to: texture, commandBuffer: commands, bounds: CGRect(x: 0, y: 0, width: w, height: h), colorSpace: PanoramaDecoder.space)
+            guard let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
+            encoder.setComputePipelineState(excessPipeline)
+            encoder.setTexture(texture, index: 0)
+            encoder.setBuffer(samples, offset: 0, index: 0)
+            dispatch(encoder, excessPipeline, width: columns, height: rows)
+            encoder.endEncoding()
+            try finish(commands)
+            let sample = UnsafeBufferPointer(start: samples.contents().bindMemory(to: Float.self, capacity: columns * rows), count: columns * rows).map(Double.init)
+            var sigma = NightSkyAnalyzer.spikeNoise(sample)
 
-        // Far more than a sensor has defects: a frame this noisy is left alone, as on the CPU it would match nothing.
-        let capacity = 1 << 22
-        guard let found = device.makeBuffer(length: capacity * 4, options: .storageModeShared),
-              let counter = device.makeBuffer(length: 4, options: .storageModeShared),
-              let commands = queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
-        memset(counter.contents(), 0, 4)
-        var limit = UInt32(capacity)
-        encoder.setComputePipelineState(spikesPipeline)
-        encoder.setTexture(texture, index: 0)
-        encoder.setBuffer(found, offset: 0, index: 0)
-        encoder.setBuffer(counter, offset: 0, index: 1)
-        encoder.setBytes(&sigma, length: 4, index: 2)
-        encoder.setBytes(&limit, length: 4, index: 3)
-        dispatch(encoder, spikesPipeline, width: w, height: h)
-        encoder.endEncoding()
-        try finish(commands)
-        let n = Int(counter.contents().load(as: UInt32.self))
-        guard n <= capacity else { return nil }
-        return UnsafeBufferPointer(start: found.contents().bindMemory(to: Int32.self, capacity: n), count: n).map(Int.init).sorted()
+            // Far more than a sensor has defects: a frame this noisy is left alone, as on the CPU it would match nothing.
+            let capacity = 1 << 22
+            guard let found = device.makeBuffer(length: capacity * 4, options: .storageModeShared),
+                  let counter = device.makeBuffer(length: 4, options: .storageModeShared),
+                  let commands = queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
+            memset(counter.contents(), 0, 4)
+            var limit = UInt32(capacity)
+            encoder.setComputePipelineState(spikesPipeline)
+            encoder.setTexture(texture, index: 0)
+            encoder.setBuffer(found, offset: 0, index: 0)
+            encoder.setBuffer(counter, offset: 0, index: 1)
+            encoder.setBytes(&sigma, length: 4, index: 2)
+            encoder.setBytes(&limit, length: 4, index: 3)
+            dispatch(encoder, spikesPipeline, width: w, height: h)
+            encoder.endEncoding()
+            try finish(commands)
+            let n = Int(counter.contents().load(as: UInt32.self))
+            guard n <= capacity else { return nil }
+            return UnsafeBufferPointer(start: found.contents().bindMemory(to: Int32.self, capacity: n), count: n).map(Int.init).sorted()
+        }
     }
 
     // MARK: Filters
 
     /// `HDRMerger.boxBlur`, or `minFilter` with `minimum`: rows, then columns, the window clamped at the edges.
     func filter(_ values: [Float], width w: Int, height h: Int, radius: Int, minimum: Bool = false) throws -> [Float] {
-        let count = w * h, bytes = count * 4
-        guard values.count == count, count > 0, let input = device.makeBuffer(bytes: values, length: bytes, options: .storageModeShared),
-              let scratch = device.makeBuffer(length: bytes, options: .storageModeShared), let output = device.makeBuffer(length: bytes, options: .storageModeShared),
-              let commands = queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
-        encodeFilter(encoder, from: input, through: scratch, to: output, width: w, height: h, radius: radius, minimum: minimum)
-        encoder.endEncoding()
-        try finish(commands)
-        return [Float](UnsafeBufferPointer(start: output.contents().bindMemory(to: Float.self, capacity: count), count: count))
+        try autoreleasepool {
+            let count = w * h, bytes = count * 4
+            guard values.count == count, count > 0, let input = device.makeBuffer(bytes: values, length: bytes, options: .storageModeShared),
+                  let scratch = device.makeBuffer(length: bytes, options: .storageModeShared), let output = device.makeBuffer(length: bytes, options: .storageModeShared),
+                  let commands = queue.makeCommandBuffer(), let encoder = commands.makeComputeCommandEncoder() else { throw Self.failure() }
+            encodeFilter(encoder, from: input, through: scratch, to: output, width: w, height: h, radius: radius, minimum: minimum)
+            encoder.endEncoding()
+            try finish(commands)
+            return [Float](UnsafeBufferPointer(start: output.contents().bindMemory(to: Float.self, capacity: count), count: count))
+        }
     }
 
     private func encodeFilter(_ encoder: MTLComputeCommandEncoder, from input: MTLBuffer, through scratch: MTLBuffer, to output: MTLBuffer,
@@ -160,7 +168,7 @@ final class NightSkyAnalysisGPU {
     func lineHighPass(frame: [Float], neighbors: [[Float]], interior: [Float], width w: Int, height h: Int) throws -> (high: [Float], inside: [Float]) {
         let count = w * h, bytes = count * 4
         precondition(frame.count == count && interior.count == count && (1...8).contains(neighbors.count) && neighbors.allSatisfy { $0.count == count })
-        return try lineLock.withLock {
+        return try lineLock.withLock { try autoreleasepool {
             func make() throws -> MTLBuffer {
                 guard let buffer = device.makeBuffer(length: bytes, options: .storageModeShared) else { throw Self.failure() }
                 return buffer
@@ -187,7 +195,7 @@ final class NightSkyAnalysisGPU {
             try finish(commands)
             func array(_ buffer: MTLBuffer) -> [Float] { [Float](UnsafeBufferPointer(start: buffer.contents().bindMemory(to: Float.self, capacity: count), count: count)) }
             return (array(high), array(inside))
-        }
+        } }
     }
 
     // MARK: Dispatch
