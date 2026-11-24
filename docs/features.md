@@ -284,12 +284,15 @@ same on the other. Features that belong to the Mac's shell (Folders, Edit In, th
 Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is offered only when the photos chosen fit the device's memory.
 
 - **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
-  included, and they show as they land. Collections are All Photos, Picks, Duplicates (each photo beside its copies,
-  found by background analysis), albums, capture months, Archived once something is in it, and Trash; the
+  included, and they show as they land. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
+  which fold: Duplicates (each photo beside its copies, found by background analysis), Archived once something is
+  in it, Trash and Models. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
+  month shows as its first photo with its name and count, and a tap shows its photos. The
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
   and EXIF. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
-  Paste Edits, Set Location… and Trash. On an iPhone the photos come first and the collections are a step back.
+  Paste Edits, Set Location… and Trash. The version and Open Source Licenses are under Ceviche in the system's
+  Settings. On an iPhone the photos come first and the collections are a step back.
 - **People and Map.** People shows a card per person, named first, then Ungrouped; a tap opens their photos, whose
   title names, renames or lists their faces, and touch and hold names, merges or ungroups. Map gathers geotagged
   photos into pins; a pin lists its photos below the map and Show Photos opens them under the place's name.
@@ -343,8 +346,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Photos; and Creative Filters, the Mac's filter stack on the photo,
   applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Each refuses photos
   that would not fit the device's memory.
-- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, handed to the share sheet to save
-  to Files or Photos or send to another app.
+- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
+  adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A finished
+  video offers the same two.
 - **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
   from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
   as it is installed. The face models are built in.
