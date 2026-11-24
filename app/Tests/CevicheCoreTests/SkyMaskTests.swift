@@ -51,4 +51,23 @@ final class SkyMaskTests: XCTestCase {
         XCTAssertGreaterThan(value(0.5, 0.95), 0.8, "Sky at the top is selected")
         XCTAssertLessThan(value(0.5, 0.05), 0.2, "The ground at the bottom is not")
     }
+
+    func testSkyMaskThumbnailShowsTheSelection() async throws {
+        let sample = try TestSamples.require(TestSamples.skyMatte)
+        let renderer = try RawRenderer(sourceURL: sample)
+        guard await renderer.hasEmbeddedSkyMatte else { throw XCTSkip("The sample carries no sky matte") }
+        let mask = try await renderer.selection(.sky)
+        var settings = await renderer.info.defaults; settings.masks = [mask]
+        let made = try await renderer.maskThumbnails([mask], adjustments: settings)
+        let thumbnail = try XCTUnwrap(made[mask.id])
+        let image = CIImage(cgImage: thumbnail), e = image.extent
+        XCTAssertGreaterThan(e.height, e.width, "The thumbnail has the photo's shape")
+        func value(_ x: Double, _ y: Double) -> Float {
+            var pixel = [Float](repeating: 0, count: 4)
+            pixel.withUnsafeMutableBytes { CIContext().render(image, toBitmap: $0.baseAddress!, rowBytes: 16, bounds: CGRect(x: e.minX + x * e.width, y: e.minY + y * e.height, width: 1, height: 1), format: .RGBAf, colorSpace: nil) }
+            return pixel[0]
+        }
+        XCTAssertGreaterThan(value(0.5, 0.95), 0.8, "Sky at the top is white")
+        XCTAssertLessThan(value(0.5, 0.05), 0.2, "The ground at the bottom is black")
+    }
 }
