@@ -304,7 +304,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
 - **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
-  the bar, the histogram and the filmstrip (not on an iPhone, whose screen is too small: upright the tools sit below the photo, which moves up above the open panel, and on its side they are docked in a column at the right, with the chosen scope across the top of Light), in cards that fold;
+  the bar, the histogram and the filmstrip (not on an iPhone, whose screen is too small: upright the tools sit below the photo, which moves up above the open panel, and on its side they are docked in a column at the right, with the chosen scope across the top of Light, and no filmstrip), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
   in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. More › Move to Trash… (⌘⌫) asks first, then shows the next photo. Shaking the device offers to undo the last edit or Move to Trash, whichever came last; in the Library it puts back the photos last moved to the Trash. On an iPad the panel's grabber drags it to the
   other side and the scope card can be dragged to any corner, as Photos moves its Info. The card in the corner shows one
