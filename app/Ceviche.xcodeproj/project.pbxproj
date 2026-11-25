@@ -14,6 +14,7 @@
 		0C0000000000000000000053 /* CevicheIndexService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 0C0000000000000000000021 /* CevicheIndexService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C0000000000000000000054 /* ceviche-mcp in Embed Helpers */ = {isa = PBXBuildFile; fileRef = 0C0000000000000000000022 /* ceviche-mcp */; };
 		0C00000000000000000000A8 /* CevicheMobile in Frameworks */ = {isa = PBXBuildFile; productRef = 0C00000000000000000000A9 /* CevicheMobile */; };
+		0C00000000000000000000B1 /* ModelDownloader.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0C00000000000000000000B2 /* ModelDownloader.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +31,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0C0000000000000000000072;
 			remoteInfo = "ceviche-mcp";
+		};
+		0C00000000000000000000B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C00000000000000000000B4;
+			remoteInfo = ModelDownloader;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -67,6 +75,17 @@
 			name = "Embed Helpers";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C00000000000000000000B5 /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				0C00000000000000000000B1 /* ModelDownloader.appex in Embed ExtensionKit Extensions */,
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +102,9 @@
 		0C00000000000000000000A0 /* Ceviche.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ceviche.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00000000000000000000A1 /* App.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Platforms/iOS/Config/App.xcconfig; sourceTree = "<group>"; };
 		0C00000000000000000000A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
+		0C00000000000000000000B2 /* ModelDownloader.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = ModelDownloader.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C00000000000000000000B6 /* Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Platforms/iOS/AssetDownloader/Extension.xcconfig; sourceTree = "<group>"; };
+		0C00000000000000000000B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Platforms/iOS/AssetDownloader/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -102,6 +124,7 @@
 		0C0000000000000000000013 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0C0000000000000000000014 /* Exceptions for "Resources" folder in "Ceviche" target */, ); path = Platforms/macOS/Resources; sourceTree = "<group>"; };
 		0C00000000000000000000A3 /* Launcher */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/iOS/Launcher; sourceTree = "<group>"; };
 		0C00000000000000000000A4 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/iOS/Resources; sourceTree = "<group>"; };
+		0C00000000000000000000B8 /* ModelDownloader */ = {isa = PBXFileSystemSynchronizedRootGroup; path = Platforms/iOS/AssetDownloader/Sources; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +160,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C00000000000000000000B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -163,6 +193,7 @@
 				0C0000000000000000000021 /* CevicheIndexService.xpc */,
 				0C0000000000000000000022 /* ceviche-mcp */,
 				0C00000000000000000000A0 /* Ceviche.app */,
+				0C00000000000000000000B2 /* ModelDownloader.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,8 +216,19 @@
 				0C00000000000000000000A4 /* Resources */,
 				0C00000000000000000000A2 /* Info.plist */,
 				0C00000000000000000000A1 /* App.xcconfig */,
+				0C00000000000000000000BA /* AssetDownloader */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		0C00000000000000000000BA /* AssetDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				0C00000000000000000000B8 /* ModelDownloader */,
+				0C00000000000000000000B7 /* Info.plist */,
+				0C00000000000000000000B6 /* Extension.xcconfig */,
+			);
+			name = AssetDownloader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,11 +317,13 @@
 				0C00000000000000000000A5 /* Sources */,
 				0C00000000000000000000A6 /* Frameworks */,
 				0C00000000000000000000A7 /* Resources */,
+				0C00000000000000000000B5 /* Embed ExtensionKit Extensions */,
 				0C00000000000000000000B0 /* Assemble */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0C00000000000000000000BB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0C00000000000000000000A3 /* Launcher */,
@@ -292,6 +336,25 @@
 			productName = Ceviche;
 			productReference = 0C00000000000000000000A0 /* Ceviche.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0C00000000000000000000B4 /* ModelDownloader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C00000000000000000000BC /* Build configuration list for PBXNativeTarget "ModelDownloader" */;
+			buildPhases = (
+				0C00000000000000000000BD /* Sources */,
+				0C00000000000000000000B9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0C00000000000000000000B8 /* ModelDownloader */,
+			);
+			name = ModelDownloader;
+			productName = ModelDownloader;
+			productReference = 0C00000000000000000000B2 /* ModelDownloader.appex */;
+			productType = "com.apple.product-type.extensionkit-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -328,6 +391,7 @@
 				0C0000000000000000000071 /* CevicheIndexService */,
 				0C0000000000000000000072 /* ceviche-mcp */,
 				0C00000000000000000000AA /* Ceviche-iOS */,
+				0C00000000000000000000B4 /* ModelDownloader */,
 			);
 		};
 /* End PBXProject section */
@@ -449,6 +513,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C00000000000000000000BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -461,6 +532,11 @@
 			isa = PBXTargetDependency;
 			target = 0C0000000000000000000072 /* ceviche-mcp */;
 			targetProxy = 0C0000000000000000000076 /* PBXContainerItemProxy */;
+		};
+		0C00000000000000000000BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C00000000000000000000B4 /* ModelDownloader */;
+			targetProxy = 0C00000000000000000000B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -535,6 +611,20 @@
 			};
 			name = Release;
 		};
+		0C00000000000000000000BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C00000000000000000000B6 /* Extension.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0C00000000000000000000BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C00000000000000000000B6 /* Extension.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -579,6 +669,15 @@
 			buildConfigurations = (
 				0C00000000000000000000AC /* Debug */,
 				0C00000000000000000000AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C00000000000000000000BC /* Build configuration list for PBXNativeTarget "ModelDownloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C00000000000000000000BE /* Debug */,
+				0C00000000000000000000BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

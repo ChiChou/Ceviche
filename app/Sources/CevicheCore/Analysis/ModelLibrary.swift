@@ -10,10 +10,11 @@ import System
 /// has it, `<Name>/`, with the model compiled by Core ML (`<Name>/<Name>.mlmodelc`, the source is not kept), the
 /// `LICENSE` packed with it and a `<Name>.json` record of where it came from. Models can also be added from files (a
 /// release `.aar`, an `.mlpackage`, an `.mlmodel` or a compiled `.mlmodelc`), which are installed the same way. A build
-/// without downloads (`allowsDownloads` false: the App Store build, until it gets Apple-hosted assets) relies on those, or on a release archive unpacked
+/// without downloads (`allowsDownloads` false: the Mac App Store build) relies on those, or on a release archive unpacked
 /// into the folder by hand: `<Name>/<Name>.mlpackage` (or `.mlmodel`), or the bare file beside the folders, is
 /// compiled in on the next `rescan`. Libraries from before the folders kept `<Name>.mlmodelc` and `<Name>.json` at the
-/// top; those still count until the model is installed again. A missing model disables only its feature;
+/// top; those still count until the model is installed again. The iPad and iPhone App Store build downloads the same
+/// archives as Apple-hosted asset packs instead (`delivery`, `ModelAssetPacks`). A missing model disables only its feature;
 /// `BundledModel` finds installed ones through `searchDirectories`.
 @MainActor
 public final class ModelLibrary: ObservableObject {
@@ -58,8 +59,12 @@ public final class ModelLibrary: ObservableObject {
     @Published public private(set) var failures: [BundledModel: String] = [:]
     /// The model a tool asked for when it opened the manager, which highlights it.
     @Published public var requested: BundledModel?
-    /// False in the App Store build for now: no GitHub downloads, models come from files until Apple-hosted assets.
+    /// False in the Mac App Store build: no GitHub downloads, models come from files.
     public var allowsDownloads = true
+    /// Where downloads come from: the model set's GitHub release, or, in the iPad and iPhone App Store build, the same
+    /// archives as Apple-hosted asset packs.
+    public enum Delivery: Sendable { case release, assetPacks }
+    public var delivery = Delivery.release
     private var tasks: [BundledModel: Task<Void, Never>] = [:]
     private let session: URLSession
     private var release: GitHubRelease?
@@ -166,6 +171,10 @@ public final class ModelLibrary: ObservableObject {
                 self.transfers[model] = .installing
                 let record = Installed(source: .download, tag: self.set.tag, sha256: asset.sha256, bytes: asset.bytes, installedAt: Date(), variant: variant)
                 try await self.install(model, archive: archive, record: record)
+                // The installed copy is what the app uses; the pack's archive need not stay as well.
+                #if canImport(BackgroundAssets)
+                if self.delivery == .assetPacks, #available(iOS 26, macOS 26, *) { await ModelAssetPacks.discard(asset) }
+                #endif
             } catch is CancellationError {
             } catch let error as URLError where error.code == .cancelled {
             } catch let error as URLError where ModelLibraryError.isOffline(error) {
@@ -183,10 +192,22 @@ public final class ModelLibrary: ObservableObject {
     public func cancelAll() { tasks.values.forEach { $0.cancel() } }
     public func clearFailure(_ model: BundledModel) { failures[model] = nil }
 
-    /// Downloads `asset` into a temporary file and verifies its SHA-256 against the pin.
+    /// Downloads `asset` into a temporary file, from the release or its asset pack, and verifies its SHA-256 against
+    /// the pin: a pack holds the very archive the release has.
     private func fetch(_ asset: ModelSet.Asset, progress: @escaping @Sendable (Int64, Int64?) -> Void) async throws -> URL {
-        let url = try await assetURL(asset)
-        let file = try await ModelInstaller.download(url, session: session, expected: asset.bytes, progress: progress)
+        let file: URL
+        switch delivery {
+        case .release:
+            let url = try await assetURL(asset)
+            file = try await ModelInstaller.download(url, session: session, expected: asset.bytes, progress: progress)
+        case .assetPacks:
+            guard #available(iOS 26, macOS 26, *) else { throw ModelLibraryError.notPinned }
+            #if canImport(BackgroundAssets)
+            file = try await ModelAssetPacks.fetch(asset, progress: progress)
+            #else
+            throw ModelLibraryError.notPinned
+            #endif
+        }
         do { try ModelInstaller.verify(file, sha256: asset.sha256) } catch { try? FileManager.default.removeItem(at: file); throw error }
         return file
     }

@@ -15,6 +15,7 @@ samples/
 notes/
 build.config
 models/dist/
+models/asset-packs/
 app/Platforms/macOS/Config/Local.xcconfig
 app/Ceviche.xcodeproj/project.xcworkspace/
 

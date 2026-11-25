@@ -144,6 +144,14 @@ assemble() {
 # `Bundle.module` and the model lookup (`BundledModel.builtInDirectory`) find them.
 assemble_ios() {
     bundle_models "$APP/Models" ios
+    # The App Store build fetches its models as Apple-hosted asset packs (ModelAssetPacks), through the downloader
+    # extension embedded in every build and the App Group both join in that build alone.
+    if [[ "$CEVICHE_DISTRIBUTION" == appstore ]]; then
+        local info="$APP/Info.plist"
+        plutil -replace BAAppGroupID -string "$CEVICHE_APP_GROUP" "$info"
+        plutil -replace BAHasManagedAssetPacks -bool YES "$info"
+        plutil -replace BAUsesAppleHosting -bool YES "$info"
+    fi
     # The Looks tool's built-in presets, as in the Mac app: Ceviche's own and the open-source packs, each pack's
     # LICENSE beside its folders (`LookLibrary.builtInPresets`).
     "$REPO_ROOT/presets/fetch-presets.sh" >/dev/null
