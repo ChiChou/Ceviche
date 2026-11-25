@@ -243,12 +243,17 @@ extension RawRenderer {
     /// RAW's decoder setting, a bitmap's neutral) moves in mireds, which respond evenly across the range; Warmth only
     /// works inside masks, so it isn't used.
     func idPhotoBalance(_ adjustments: Adjustments, region: CGRect, target: SIMD2<Double>) throws -> Adjustments? {
+        try solveBalance(adjustments) { try idPhotoCast($0, region: region).map { $0 - target } }
+    }
+
+    /// Temperature and tint that bring `cast` (log red over blue, log green over the mean of the two) to zero: its
+    /// response to each control measured once, then a few Newton steps.
+    func solveBalance(_ adjustments: Adjustments, cast: (Adjustments) throws -> SIMD2<Double>?) throws -> Adjustments? {
         func get(_ a: Adjustments) -> SIMD2<Double> { SIMD2(1e6 / max(1, a.temperature), a.tint) }
         func set(_ a: inout Adjustments, _ value: SIMD2<Double>) {
             a.temperature = (1e6 / min(500, max(20, value.x))).rounded()
             a.tint = min(150, max(-150, value.y)).rounded()
         }
-        func cast(_ a: Adjustments) throws -> SIMD2<Double>? { try idPhotoCast(a, region: region).map { $0 - target } }
         var current = adjustments
         guard var error = try cast(current) else { return nil }
         let start = get(current), step = SIMD2<Double>(15, 10)

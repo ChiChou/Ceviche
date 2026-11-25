@@ -307,7 +307,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
   in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. More › Tools opens the tools that work on one photo on the photo being developed. The card in the corner shows one
   scope at a time, Histogram, Waveform, Parade or Vectorscope: a tap moves to the next, More › Scope chooses or turns it off. The
-  tone curve's channels are drawn in their own colours. The bar also has the
+  tone curve's channels are drawn in their own colours and chosen by coloured dots. The bar also has the
   original while held, undo and redo, Info (flags, stars, title, caption, keywords and the photo's details, floating
   where the tool's panel does), Export and More.
   Sliders move by how far the finger travels, finer with the finger pulled away from the track, and a double tap
@@ -317,7 +317,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Presence, Optics and Grain, and Darkroom shows every film stock as a small print of the photo, by kind, and prints
   the photo through the one touched, with its Develop, Print and Texture controls. A pinch or double tap zooms, and past the preview's pixels the part in view is developed from the file.
   The eyedroppers beside white balance and the Color Mixer show a loupe while the finger is on the photo and pick
-  where it lifts: a neutral spot sets Temperature and Tint, a color picks its band, which a vertical drag on the
+  where it lifts: a neutral spot, averaged over the square in the loupe, sets Temperature and Tint, a color picks its band, which a vertical drag on the
   photo then moves by Hue, Saturation or Luminance; touched again, an eyedropper is put down.
   Hold the half-filled circle to see the photo as it opened. The menu has Filmstrip, Histogram, Info, History and
   Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,

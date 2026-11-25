@@ -174,6 +174,25 @@ extension RawRenderer {
         guard temperature.isFinite, tint.isFinite else { return nil }
         return (min(50000, max(2000, temperature)), min(150, max(-150, tint)))
     }
+    /// White balance that makes the area within `radius` (a fraction of the photo's long side) of `point` neutral, the
+    /// spot averaged rather than one pixel read, solved on small renders so it works for every kind of photo. Global
+    /// adjustments only. Nil when the balance doesn't respond.
+    public func neutralWhiteBalance(around point: MaskPoint, radius: Double, adjustments: Adjustments) throws -> (temperature: Double, tint: Double)? {
+        var global = adjustments; global.masks = []; global.quarterTurns = 0; global.geometry = GeometryAdjustments()
+        let solved = try solveBalance(global) { a in
+            let rendered = try pipeline(a, maxDimension: 800)
+            let image = a.hdr.enabled ? HDRRenderer.normalized(rendered) : rendered
+            let e = rendered.extent, r = max(1, radius * max(e.width, e.height))
+            let rect = CGRect(x: e.minX + point.x * e.width - r, y: e.minY + point.y * e.height - r, width: 2 * r, height: 2 * r).integral.intersection(e)
+            guard rect.width >= 1, rect.height >= 1 else { return nil }
+            var pixel = [Float](repeating: 0, count: 4)
+            let mean = image.cropped(to: rect).applyingFilter("CIAreaAverage", parameters: [kCIInputExtentKey: CIVector(cgRect: rect)])
+            pixel.withUnsafeMutableBytes { context.render(mean, toBitmap: $0.baseAddress!, rowBytes: 16, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBAf, colorSpace: RGBProfile.sRGB.space) }
+            let red = max(1e-3, Double(pixel[0])), green = max(1e-3, Double(pixel[1])), blue = max(1e-3, Double(pixel[2]))
+            return SIMD2(log(red / blue), log(green / (red * blue).squareRoot()))
+        }
+        return solved.map { ($0.temperature, $0.tint) }
+    }
     /// The developed color at a point, averaged over `radius` pixels of the 2200-pixel working image
     /// (radius 0 returns one real pixel). Global adjustments only, in sRGB.
     public func sampleColor(at point: MaskPoint, adjustments: Adjustments, radius: Int = 0) throws -> [Double] {
