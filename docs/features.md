@@ -23,7 +23,7 @@ What the app ships today, by area. Names match the menus.
   up the import. The grid switches to the new batch only from the whole catalog or a finished import's batch; a
   search, filter, album or folder being shown stays put. Files that fail to import are listed with their full path and why; the list can be copied, and
   reopened from the import's entry in the activity center until the app quits.
-- **Organizing.** Ratings, pick and reject flags, color labels, albums and groups. Recently Added lists the last
+- **Organizing.** Ratings, pick and reject flags, color labels, albums and groups. Moving a folded group to the Trash moves all its photos; a photo moved to the Trash leaves its group, and Undo puts it back in. Recently Added lists the last
   imports by day. Search covers text, tags, places and EXIF; the empty search field lists the most used keywords
   and automatic tags, or all of them, to add to the search with a click. The map shows geotagged photos. **Set Location…** in the Info panel's
   Place section places one photo or a selection on a map, by search, coordinates or a click; a location set this way
@@ -292,7 +292,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
   and EXIF, offering popular tags while the field is empty and matching tags while typing, as on the Mac. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
-  Paste Edits, Set Location… and Trash; in the Trash the bar has Put Back and Delete (which asks first) and no rating filter, in the archive
+  Paste Edits, Set Location… and Trash (a folded group's photos all go, an expanded group's only those chosen; a touch on a group's corner badge folds or unfolds it); in the Trash the bar has Put Back and Delete (which asks first) and no rating filter, in the archive
   Unarchive, Export and Move to Trash, and selecting ends once the photos have left. The version and Open Source Licenses are under Ceviche in the system's
   Settings. With a keyboard, Shift-tap selects the run from the last photo tapped and Command-tap adds or removes one;
   ⌘A selects all, Esc ends selecting, P, X and U flag, 0 to 5 rate, ⌘G groups, ⌘E exports and ⌘⌫ moves to the Trash.

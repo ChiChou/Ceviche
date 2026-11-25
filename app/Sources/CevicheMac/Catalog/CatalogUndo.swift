@@ -110,9 +110,10 @@ extension CatalogModel {
             try await store.addKeywords(added, assetIDs: ids)
         })
     }
-    func registerTrashUndo(_ ids: [String], movedToTrash: Bool) {
+    /// `groups`: the groups the photos were in before they went to the Trash, put back with them.
+    func registerTrashUndo(_ ids: [String], movedToTrash: Bool, groups: [String: String?] = [:]) {
         registerUndo(movedToTrash ? L10n.tr("Move to Trash") : L10n.tr("Recover"), undo: { store in
-            if movedToTrash { try await store.recoverFromTrash(ids) } else { try await store.moveToTrash(ids) }
+            if movedToTrash { try await store.recoverFromTrash(ids); try await store.restoreStacks(groups) } else { try await store.moveToTrash(ids) }
         }, redo: { store in
             if movedToTrash { try await store.moveToTrash(ids) } else { try await store.recoverFromTrash(ids) }
         })

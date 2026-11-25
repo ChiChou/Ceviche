@@ -52,21 +52,34 @@ private func originalSize(_ url: URL) throws -> UInt64? {
 
 extension CatalogStore {
     public func moveToTrash(_ assetID: String) throws { try moveToTrash([assetID]) }
-    public func moveToTrash(_ assetIDs: [String]) throws {
+    /// Moves the photos to the Trash. Each leaves its group, so it comes back on its own; the group keeps the rest, with
+    /// a new cover if its cover went. Returns the groups as they were, for an undo to give to `restoreStacks` once the
+    /// photos are back.
+    @discardableResult
+    public func moveToTrash(_ assetIDs: [String]) throws -> [String: String?] {
         try database.write { db in try Self.moveToTrash(assetIDs, db: db) }
     }
-    static func moveToTrash(_ assetIDs: [String], db: Database) throws {
+    @discardableResult
+    static func moveToTrash(_ assetIDs: [String], db: Database) throws -> [String: String?] {
         var groups: Set<String> = []
+        var before: [String: String?] = [:]
         for assetID in Set(assetIDs) {
             // Already gone (sync, another window): nothing left to move.
             guard let asset = try CatalogAsset.fetchOne(db, key: assetID), asset.trashedAt == nil else { continue }
-            if let group = asset.stackID { groups.insert(group) }
-            try CatalogAsset.filter(key: assetID).updateAll(db, CatalogAsset.Columns.trashedAt.set(to: Date()), CatalogAsset.Columns.updatedAt.set(to: Date()))
+            if let group = asset.stackID {
+                if !groups.contains(group) {
+                    for member in try CatalogAsset.filter(CatalogAsset.Columns.stackID == group).fetchAll(db) { before[member.id] = member.stackID }
+                }
+                groups.insert(group)
+            }
+            try CatalogAsset.filter(key: assetID).updateAll(db, CatalogAsset.Columns.trashedAt.set(to: Date()), CatalogAsset.Columns.stackID.set(to: nil),
+                                                             CatalogAsset.Columns.updatedAt.set(to: Date()))
             // Removing the lease also rejects a late result from a worker already in flight.
             try CatalogAnalysisJob.deleteOne(db, key: assetID)
             try Self.analysisChanged(db)
         }
         try tidyStacks(groups, db: db)
+        return before
     }
     public func recoverFromTrash(_ assetID: String) throws { try recoverFromTrash([assetID]) }
     public func recoverFromTrash(_ assetIDs: [String]) throws {

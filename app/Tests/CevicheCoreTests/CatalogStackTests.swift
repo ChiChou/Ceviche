@@ -55,12 +55,16 @@ final class CatalogStackTests: XCTestCase {
         try await store.updateMetadata(metadata, assetID: ids[2])
         var rated = CatalogFilter(); rated.minimumRating = 4
         result = try await shown(rated); XCTAssertEqual(result, [ids[2]])
-        // A cover moved to the Trash hands the group to its earliest remaining photo, and comes back into it.
-        try await store.moveToTrash(ids[1])
+        // A cover moved to the Trash leaves the group, which its earliest remaining photo now covers, and comes back on
+        // its own; an undo puts the groups back as they were.
+        let before = try await store.moveToTrash([ids[1]])
         result = try await shown(); XCTAssertEqual(result, [ids[0], ids[2]])
         let handed = try await store.stackSizes(); XCTAssertEqual(handed, [ids[2]: 2])
+        let trashed = try await store.asset(ids[1]); XCTAssertNil(trashed.stackID)
         try await store.recoverFromTrash(ids[1])
-        let back = try await store.stackSizes(); XCTAssertEqual(back, [ids[2]: 3])
+        let alone = try await store.stackSizes(); XCTAssertEqual(alone, [ids[2]: 2])
+        try await store.restoreStacks(before)
+        let back = try await store.stackSizes(); XCTAssertEqual(back, [ids[1]: 3])
 
         // Grouping a photo with a member joins the whole group; the earliest becomes the cover.
         let joined = try await store.stack([ids[0], ids[3]])

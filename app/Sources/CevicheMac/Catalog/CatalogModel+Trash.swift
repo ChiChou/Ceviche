@@ -52,8 +52,8 @@ extension CatalogModel {
                     throw EditorError.invalidDocument(L10n.tr("\(ids.count - trashed.count) photos could not be moved to the Trash."))
                 }
             } else {
-                try await store.moveToTrash(Array(ids))
-                registerTrashUndo(Array(ids), movedToTrash: true)
+                let groups = try await store.moveToTrash(Array(ids))
+                registerTrashUndo(Array(ids), movedToTrash: true, groups: groups)
             }
             if let selected, ids.contains(selected.id) { clearSelection() }
             if keepDevelop { browsingAssets = sequence.filter { !ids.contains($0.id) } }
