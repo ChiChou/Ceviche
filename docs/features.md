@@ -365,7 +365,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Options), undo and redo, then Outlines (and Crop for a movie) in the bar with what the result is made of, Merge in words at the far end, and As Captured for meteors.
   Objects lists the lines found as the Mac does, with kept and left-out counts, All, Aircraft or Meteors, and an
   aircraft's pieces under it; Sky has Sky Edge, Add to Sky, Remove from Sky and Use Photo Here, then Everything Is Sky and Revert to Detected, in a
-  labelled palette at the foot of the picture, with a slider over it for the edge or the brush size; Photos shows each photo's time with Base and a check that leaves it
+  palette at the foot of the picture (labelled on an iPad, round icons on an iPhone, whose modes run along the foot as Develop's tools do), with a slider over it for the edge or the brush size; Photos shows each photo's time with Base and a check that leaves it
   out, touch and hold for Use as Base or Leave Out, and Include All or Leave Out Flagged in a palette over the strip. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting. Where iOS gives the app less than 8 GB, as on an iPhone, a merge takes a short
