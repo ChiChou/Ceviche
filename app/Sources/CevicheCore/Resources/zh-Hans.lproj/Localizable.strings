@@ -3595,3 +3595,4 @@
 "The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "缓存保留已解码的 RAW，以便更快打开最近的照片。超过缩略图上限时，最久未查看的照片的缩略图会被丢弃，并在再次滚动到可见区域时重新生成。";
 "Include All" = "全部包含";
 "Leave Out Flagged" = "排除有问题的";
+"Drag the frame or a corner." = "拖移画框或其一角。";
