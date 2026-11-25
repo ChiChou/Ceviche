@@ -2279,6 +2279,7 @@
 "Paint over what should go; an inpainting model redraws it from its surroundings." = "Paint over what should go; an inpainting model redraws it from its surroundings.";
 "Paint over what should go; it is filled from a matching area nearby." = "Paint over what should go; it is filled from a matching area nearby.";
 "Painted with the layer brushes" = "Painted with the layer brushes";
+"Panel height" = "Panel height";
 "Panorama Merge" = "Panorama Merge";
 "Panorama merge stopped" = "Panorama merge stopped";
 "Panorama merged" = "Panorama merged";
@@ -2774,6 +2775,7 @@
 "Shift-click or drag a box to select several; Delete removes them. Drag a circle to move it, its edge to resize it; click to add one." = "Shift-click or drag a box to select several; Delete removes them. Drag a circle to move it, its edge to resize it; click to add one.";
 "Shortcut: %1$@" = "Shortcut: %1$@";
 "Shorten long pauses" = "Shorten long pauses";
+"Shorter" = "Shorter";
 "Shot" = "Shot";
 "Shot at %1$@ mm; only %2$@ mm and wider stretch faces" = "Shot at %1$@ mm; only %2$@ mm and wider stretch faces";
 "Shot at a steady interval: grouped rather than picked from, so every frame stays for the timelapse or star trails" = "Shot at a steady interval: grouped rather than picked from, so every frame stays for the timelapse or star trails";
@@ -2990,6 +2992,7 @@
 "Take the ground and the stars’ positions from this photo" = "Take the ground and the stars’ positions from this photo";
 "Takes each photo’s darker areas over the base" = "Takes each photo’s darker areas over the base";
 "Takes each trail’s color whole from the photo where it was brightest, instead of each color channel’s brightest value" = "Takes each trail’s color whole from the photo where it was brightest, instead of each color channel’s brightest value";
+"Taller" = "Taller";
 "Tap inside the object to select it." = "Tap inside the object to select it.";
 "Tap or drag a box over strokes to select them." = "Tap or drag a box over strokes to select them.";
 "Tape Corners" = "Tape Corners";
