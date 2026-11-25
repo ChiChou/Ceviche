@@ -17,7 +17,12 @@ enum DecodeCache {
         var profile: CameraProfile?
         var cameraRendering: Bool
     }
+    /// A RAW's decode is a quarter of a gigabyte: 1 GB holds a few on iPad and iPhone, where storage is short.
+    #if os(iOS)
+    static let limit: Int64 = 1 << 30
+    #else
     static let limit: Int64 = 4 << 30
+    #endif
     static let bytesPerPixel = 8
     private static let space = CGColorSpace(name: CGColorSpace.extendedLinearSRGB)!
     private static let lock = NSLock()

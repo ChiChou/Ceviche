@@ -126,6 +126,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
         NSApp.setActivationPolicy(.regular); NSApp.activate(ignoringOtherApps: true)
         ExternalEditors.shared.refresh()
         Pro.shared.start()
+        TemporaryFiles.sweepLeftovers()
     }
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard let model else { return .terminateNow }

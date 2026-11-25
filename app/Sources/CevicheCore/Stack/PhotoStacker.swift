@@ -695,11 +695,13 @@ final class PhotoStackStore {
         if fileBacked {
             let url = FileManager.default.temporaryDirectory.appendingPathComponent("Ceviche Stack \(UUID().uuidString)")
             let descriptor = open(url.path, O_RDWR | O_CREAT | O_EXCL, 0o600)
+            // Nameless from the start: the space comes back when the descriptor closes, even if the app is stopped.
+            unlink(url.path)
             guard descriptor >= 0, ftruncate(descriptor, off_t(length)) == 0,
                   let mapped = mmap(nil, length, PROT_READ | PROT_WRITE, MAP_SHARED, descriptor, 0), mapped != MAP_FAILED else {
+                if descriptor >= 0 { close(descriptor) }
                 throw PanoramaError.message(L10n.tr("There isn’t enough disk space to stack these photos."))
             }
-            unlink(url.path)
             base = mapped; file = (descriptor, url)
         } else {
             guard let mapped = mmap(nil, length, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0), mapped != MAP_FAILED else {
