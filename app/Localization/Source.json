@@ -205,7 +205,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:384",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:384",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:117"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:144"
     ]
   },
   {
@@ -501,7 +501,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:104"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:131"
     ]
   },
   {
@@ -2035,7 +2035,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:104"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:131"
     ]
   },
   {
@@ -3297,7 +3297,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:375",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:375",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:108"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:135"
     ]
   },
   {
@@ -3557,6 +3557,7 @@
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:473",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:46",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:165",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:91",
       "Sources/CevicheCore/Adjustments/FilmSimulation.swift:143",
       "Sources/CevicheCore/Adjustments/Geometry.swift:44",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:114",
@@ -4582,7 +4583,7 @@
       "Sources/CevicheMobile/Library/People/PeopleView.swift:136",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:169",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:175",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:360",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:381",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:98"
     ]
   },
@@ -4998,8 +4999,9 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:286",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:286",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:271",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:280"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:95",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:298",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:308"
     ]
   },
   {
@@ -6388,7 +6390,7 @@
       "Sources/CevicheMac/Export/EditIn.swift:265",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:202",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:223",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:185"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:212"
     ]
   },
   {
@@ -6565,7 +6567,7 @@
   {
     "key": "Couldn’t Save",
     "source": "\"Couldn’t Save\"",
-    "context": "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:168"
+    "context": "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:195"
   },
   {
     "key": "Couldn’t Save Edits",
@@ -6906,8 +6908,9 @@
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:286",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:206",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:271",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:280"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:94",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:298",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:308"
     ]
   },
   {
@@ -7592,7 +7595,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:568",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:70",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:358"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:379"
     ]
   },
   {
@@ -10506,7 +10509,8 @@
       "Sources/CevicheMac/Editor/FilmPanel.swift:98",
       "Sources/CevicheMac/Editor/FilmPanel.swift:98",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:438",
-      "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:205"
+      "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:205",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:89"
     ]
   },
   {
@@ -10876,7 +10880,7 @@
       "Sources/CevicheMac/Tools/CatalogModel+IDPhoto.swift:49",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:33",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:18",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:235"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:262"
     ]
   },
   {
@@ -13427,7 +13431,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:350",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:350",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:86"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:113"
     ]
   },
   {
@@ -18064,7 +18068,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:127",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:127",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:73"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:75"
     ]
   },
   {
@@ -18790,7 +18794,7 @@
   {
     "key": "Saved to Photos",
     "source": "\"Saved to Photos\"",
-    "context": "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:166"
+    "context": "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:193"
   },
   {
     "key": "Saved “%1$@” and applied it to %2$@ photos",
@@ -18908,7 +18912,7 @@
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:236",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:66",
       "Sources/CevicheMobile/Library/LibraryView.swift:77",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:357"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:378"
     ]
   },
   {
@@ -19272,7 +19276,7 @@
       "Sources/CevicheMac/Export/PhotoShare.swift:74",
       "Sources/CevicheMobile/Export/ExportView.swift:54",
       "Sources/CevicheMobile/Export/VideoExport.swift:47",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:154"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:181"
     ]
   },
   {
