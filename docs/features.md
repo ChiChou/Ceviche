@@ -303,8 +303,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
 - **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
-  the bar, the histogram and the filmstrip (on an iPhone held upright the tools and the panel sit below the photo), in cards that fold;
-  the lit tool, touched again, closes the panel, and a tap on the photo hides everything. The bar also has the
+  the bar, the histogram and the filmstrip (on an iPhone held upright the tools sit below the photo and the panel rises over it), in cards that fold;
+  the lit tool, touched again, closes the panel, and a tap on the photo hides everything. The photo stays where it is
+  as panels open and close. More › Tools opens the tools that work on one photo on the photo being developed. The bar also has the
   original while held, undo and redo, Info (flags, stars, title, caption, keywords and the photo's details, floating
   where the tool's panel does), Export and More.
   Sliders move by how far the finger travels, finer with the finger pulled away from the track, and a double tap
@@ -352,7 +353,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Revert to Detected on a dial over the photo; Photos shows each photo's time with Base and a check that leaves it
   out. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
-  the app says so instead of starting.
+  the app says so instead of starting. Where iOS gives the app less than 8 GB, as on an iPhone, a merge takes a short
+  series: up to 5 photos for HDR, 12 for a panorama, 15 for a focus stack and 30 for a stack or a night-sky merge.
 - **Tools.** Merge Best Faces sits with the merges and adds its result to the catalog. The Tools menu has Convert
   Negative, each scan inverted with its frame found, film, film base, orientation and roll balance as on the Mac, saved
   as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing, size, rate and
