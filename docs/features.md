@@ -335,7 +335,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   AI fill fills Remove strokes; without it Remove fills from the surroundings.
 - **Portrait.** The photo's faces are tagged on it and listed in the panel; a tap chooses one person, or the main
   people. Even tone (with its model installed in Models), Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
-  set with a slider, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.
+  set with a slider, Find blemishes (with its model installed) heals the spots on their faces at a chosen Sensitivity,
+  listed as Face spots in Retouch, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
   Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, or by Guided: Draw shows the
   photo uncorrected, and up to four guides are dragged along edges that should be vertical or level. Transform has
