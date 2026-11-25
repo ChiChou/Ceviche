@@ -305,7 +305,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
   the bar, the histogram and the filmstrip (on an iPhone held upright the tools sit below the photo and the photo moves up above the open panel), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
-  in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. More › Tools opens the tools that work on one photo on the photo being developed. The card in the corner shows one
+  in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. The card in the corner shows one
   scope at a time, Histogram, Waveform, Parade or Vectorscope: a tap moves to the next, More › Scope chooses or turns it off. The
   tone curve's channels are drawn in their own colours and chosen by coloured dots. The bar also has the
   original while held, undo and redo, Info (flags, stars, title, caption, keywords and the photo's details, floating
@@ -325,7 +325,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
 - **Masks.** Subject, Background, People, Brush, Linear gradient, Radial gradient and Color range, and Sky, Depth and
   Scene once their models are installed in Models. A gradient is drawn with a drag and changed by its handles; the
   brush paints with one finger or Apple Pencil while two fingers move and zoom the photo. Each mask has the
-  adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it.
+  adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it. Once the photo has a mask, a Target menu at the top of Light, Color and Detail
+  chooses Global or a mask, and the panel's sliders, tone curve, mixers and grading then edit that mask, as on the Mac.
 - **Retouch.** Remove, Heal and Clone brushes painted with one finger or Apple Pencil, two fingers moving and
   zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
   clear all. In Remove a tap outlines the object or wire under it, and Remove or a second tap takes it out. Find Dust
@@ -369,7 +370,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   writes it as a job and adds it to Photos or opens the share sheet when done; Create Live Photo, the same screen with Output set to Live
   Photo, which fits the frames into about 3 seconds at a size preset with a key photo as the still and adds it to
   Photos; and Creative Filters, the Mac's filter stack on the photo,
-  applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Wide-Angle Faces shows
+  applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). AI Noise Reduction
+  shows a part of a RAW at full size, Before and After either side of a divider, with Strength, and adds a denoised DNG
+  of each photo to the catalog with its edits. Wide-Angle Faces shows
   the photo corrected with a tag over each person to tap, Add for a missed head and the Mac's Lens, Strength, Bodies
   and Straight Lines, and adds each copy to the catalog with the photo's edits. Match Series shows the reference beside
   the photo chosen in the strip and applies the matched Exposure and White Balance as edits. ID Photo frames one
