@@ -39,19 +39,26 @@ bundle_models() { # destination [platform]
     local store="$models/build/compiled" options=()
     [[ "$platform" == macos ]] || { store="$models/build/compiled-$platform"; options=(--platform "$platform" --deployment-target "$IPHONEOS_DEPLOYMENT_TARGET"); }
     source "$models/models.sh"
+    # A test build of the iPad and iPhone app (Debug, CEVICHE_BUNDLE_ALL_MODELS=1 by default) carries every model, so
+    # it needs no download: the App Store's asset packs only reach TestFlight and Store builds, and the release's
+    # downloads aren't what a test should depend on. CEVICHE_BUNDLE_ALL_MODELS=0 makes it carry only MODEL_BUNDLED.
+    local bundled=("${MODEL_BUNDLED[@]}")
+    if [[ "$platform" != macos && "${CEVICHE_BUNDLE_ALL_MODELS:-$([[ "${CONFIGURATION:-}" == Debug ]] && echo 1 || echo 0)}" == 1 ]]; then
+        bundled=("${MODEL_NAMES[@]%.*}")
+    fi
     mkdir -p "$store"
     for model in "$models"/build/*.mlpackage "$models"/build/*.mlmodel; do
         [[ -e "$model" && "$model" != *-INT8.* ]] || continue
         name="$(basename "${model%.*}")"
         # Only the Mac build compiles every model, for debug builds to find; the others compile what they bundle.
-        [[ "$platform" == macos || " ${MODEL_BUNDLED[*]} " == *" $name "* ]] || continue
+        [[ "$platform" == macos || " ${bundled[*]} " == *" $name "* ]] || continue
         compiled="$store/$name.mlmodelc"
         if [[ ! -d "$compiled" || "$model" -nt "$compiled" ]]; then
             rm -rf "${compiled:?}"; xcrun coremlcompiler compile "$model" "$store" ${options[@]+"${options[@]}"} >/dev/null
         fi
     done
     rm -rf "${1:?}"
-    for name in "${MODEL_BUNDLED[@]}"; do
+    for name in "${bundled[@]}"; do
         compiled="$store/$name.mlmodelc"
         if [[ ! -d "$compiled" ]]; then
             [[ "${CEVICHE_REQUIRE_BUNDLED_MODELS:-0}" != 1 ]] || fail "$name is not in models/build; run make models-prebuilt (or make models) first."
