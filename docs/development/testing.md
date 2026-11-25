@@ -33,6 +33,18 @@ The package's tests run on the Mac and cover the core both apps share. The touch
 flows are tried in an iOS Simulator, and time and memory are measured on a device with `DeviceBenchmark`
 (`CEVICHE_BENCHMARK`), whose figures set what `MobileFeatures` offers. See [iPad and iPhone](ios.md).
 
+## Meteor Shower review
+
+For a Meteor Shower background comparison, run `NightSkySampleTests/testMeteorBackgroundMatching` with
+`CEVICHE_NIGHT_SKY_SAMPLES` naming the source folder and `CEVICHE_NIGHT_SKY_OUTPUT` a separate local output folder.
+`CEVICHE_NIGHT_SKY_BASE` optionally picks a base filename. It writes the base, the former blend and the corrected
+preview, and saves analysis locally for repeat runs. `NightSkyTests/testMeteorRestorationDoesNotCopyBrighterSkyInsideItsFootprint`
+checks a changing coloured sky against preview, CPU and Metal output on synthetic photos.
+`testMeteorBackgroundPreservesWideTrails` checks that sky matching preserves the core and wings for measured widths
+of 2–24 analysis pixels. `NightSkySampleTests/testMeteorWidthSweep`, with `CEVICHE_METEOR_WIDTH_REVIEW` set to a local
+output folder, writes synthetic trails and a detection report across Gaussian widths; it does not establish real
+fireball detection accuracy.
+
 ## Defringe review
 
 Two `ReviewTools` tests write comparison images for a RAW with fringing:

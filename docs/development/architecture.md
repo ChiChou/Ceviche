@@ -68,6 +68,14 @@ serves every photo; all other masks derive from it and the sky corrections. A ca
 Timelapse, and a tracking mount needs no alignment, so plain stacking covers it. Supporting a tracking mount whose
 ground turns on purpose would add a ground transform per photo, the inverse of the sky's rotation, not a mask per photo.
 
+Meteor Shower restores source pixels after subtracting the local source-minus-composite sky difference. Robust RGB
+profiles measured outside both sides of each line's footprint follow the glow along and across it, excluding other
+selected lines. Preview, CPU and Metal export share the preview-sized estimate; missing samples interpolate from
+supported stations, and a line with no measurable surrounding sky is skipped.
+Detection still seeds only streaks with measured width at most 6 analysis pixels, length at least 18 pixels and
+length/width at least 6 (analysis is capped at 3200 pixels on the long edge). Tracing and joining can widen a seed,
+but a broad fireball without a qualifying narrow seed can be missed; sky matching does not remove that limitation.
+
 A latent image is a concept of Ceviche's own, named for film's latent image: exposed but invisible until developed.
 It is saved tool work, everything one output picture is made from except pixels: references to the catalog's source
 photos, the tool's settings and hand choices, and what analysis found. Outputs (Merge, Render Video) develop it into

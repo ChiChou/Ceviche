@@ -19,6 +19,7 @@ private struct SyntheticNight {
     static let rate = 0.0002
     static let interval = 20.0
     let count: Int
+    var meteorGlow: Float = 0
     let stars: [(position: SIMD2<Double>, flux: Float, color: SIMD3<Float>)]
     let meteorFrame = 2
     let meteor = (start: SIMD2<Double>(200, 150), end: SIMD2<Double>(330, 235))
@@ -65,6 +66,9 @@ private struct SyntheticNight {
             let sky = Double(y) < Self.skyline(Double(x))
             image[y * w + x] = sky ? SIMD3(0.030, 0.032, 0.040) * Float(1 + 0.3 * Double(y) / Double(h))
                                    : SIMD3(0.012, 0.010, 0.008) * Float(1.2 + 0.8 * sin(Double(x) / 7) * cos(Double(y) / 5))
+            if sky, frame == meteorFrame {
+                image[y * w + x] += SIMD3(0.7, 1, 0.5) * meteorGlow * Float(0.5 + Double(y) / Double(h) + 0.2 * Double(x) / Double(w))
+            }
         }}
         func splat(_ center: SIMD2<Double>, _ flux: Float, _ color: SIMD3<Float>, sigma: Double = 1.1) {
             let x0 = Int(center.x) - 4, y0 = Int(center.y) - 4
@@ -1019,22 +1023,96 @@ final class NightSkyTests: XCTestCase {
         XCTAssertEqual(settings.choices, [:], "id 0 now names another line")
     }
 
-    /// A line is restored as its light above its own photo's sky, read beside it: outside the footprint, on both
-    /// sides, with a star under one probe left out.
-    func testALinesOwnSkyIsReadBesideIt() {
-        let line = NightSkyLine(frame: 0, start: SIMD2(100, 100), end: SIMD2(100, 300), width: 4, pixels: 0, peak: 1)
-        let probes = line.skyProbes(SIMD2(103, 200))
-        XCTAssertEqual(probes.count, 6)
-        for probe in probes {
-            XCTAssertEqual(probe.y, 200, accuracy: 0.001, "level with the pixel")
-            XCTAssertGreaterThan(abs(probe.x - 100), line.radius, "outside the footprint")
-            XCTAssertEqual(line.coverage(probe), 0)
+    func testMeteorBackgroundFollowsColorGradientsWithoutMeasuringTheLine() throws {
+        let line = NightSkyLine(frame: 0, start: SIMD2(40, 30), end: SIMD2(160, 120), width: 4, pixels: 100, peak: 10)
+        for sign: Float in [-1, 1] {
+            func glow(_ p: SIMD2<Double>) -> SIMD3<Float> {
+                sign * (SIMD3(0.1, 0.2, 0.05) + SIMD3(0.0004, 0.0002, -0.0001) * Float(p.x)
+                    + SIMD3(0.0001, 0.0003, 0.0002) * Float(p.y))
+            }
+            var samples = 0
+            let background = try XCTUnwrap(NightSkyLineBackground(line: line) { p in
+                XCTAssertGreaterThan(line.distance(p), line.radius)
+                samples += 1
+                // Bright stars in a few samples must not lift the estimated sky.
+                return glow(p) + (samples % 13 == 0 ? SIMD3(repeating: 2) : .zero)
+            })
+            for t in stride(from: 0.0, through: 1.0, by: 0.1) {
+                for offset in [-0.9, 0, 0.9] {
+                    let direction = simd_normalize(line.end - line.start)
+                    let p = line.start + (line.end - line.start) * t + SIMD2(-direction.y, direction.x) * line.radius * offset
+                    let v = background.value(at: p), expected = glow(p)
+                    for c in 0..<3 { XCTAssertEqual(v[c], expected[c], accuracy: 0.001) }
+                }
+            }
         }
-        XCTAssertEqual(Set(probes.map { $0.x < 100 }).count, 2, "both sides")
-        // A gradient across the line reads as its value at the line; one probe on a star changes nothing.
-        let sky: [SIMD3<Float>] = [SIMD3(repeating: 0.30), SIMD3(repeating: 0.50), SIMD3(repeating: 0.32), SIMD3(repeating: 0.48), SIMD3(repeating: 0.34), SIMD3(repeating: 3)]
-        XCTAssertEqual(NightSkyLine.localSky(sky)?.x ?? 0, 0.41, accuracy: 0.08)
-        XCTAssertNil(NightSkyLine.localSky(Array(sky.prefix(2))), "too little sky to go by")
+        XCTAssertNil(NightSkyLineBackground(line: line) { _ in nil })
+        XCTAssertNil(NightSkyLineBackground(line: line) { _ in SIMD3(repeating: .nan) })
+        let clipped = try XCTUnwrap(NightSkyLineBackground(line: line) { p in p.x < 90 ? SIMD3(0.1, 0.2, 0.3) : nil })
+        XCTAssertEqual(clipped.value(at: line.end), SIMD3(0.1, 0.2, 0.3))
+    }
+
+    func testMeteorBackgroundPreservesWideTrails() throws {
+        for width in [2.0, 6, 12, 24] {
+            let line = NightSkyLine(frame: 0, start: SIMD2(100, 100), end: SIMD2(500, 300), width: width, pixels: 400, peak: 100)
+            let direction = simd_normalize(line.end - line.start), normal = SIMD2(-direction.y, direction.x)
+            let sigma = width / 2.355
+            func glow(_ p: SIMD2<Double>) -> SIMD3<Float> { SIMD3(0.05, 0.08, 0.03) * Float(1 + p.y / 1000) }
+            func meteor(_ p: SIMD2<Double>) -> SIMD3<Float> {
+                SIMD3(0.7, 1, 0.5) * Float(exp(-pow(line.distance(p) / sigma, 2) / 2))
+            }
+            let background = try XCTUnwrap(NightSkyLineBackground(line: line) { glow($0) + meteor($0) })
+            for t in [0.1, 0.5, 0.9] { for offset in [-width / 2, 0, width / 2] {
+                let p = line.start + (line.end - line.start) * t + normal * offset
+                let kept = glow(p) + meteor(p) - background.value(at: p)
+                for c in 0..<3 { XCTAssertEqual(kept[c], meteor(p)[c], accuracy: 0.0001, "width \(width), offset \(offset)") }
+            }}
+        }
+    }
+
+    func testMeteorRestorationDoesNotCopyBrighterSkyInsideItsFootprint() throws {
+        guard MTLCreateSystemDefaultDevice() != nil else { throw XCTSkip("Metal required") }
+        let directory = Self.directory.appendingPathComponent("meteor-glow")
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        var scene = SyntheticNight(); scene.meteorGlow = 0.12
+        let analyzer = try NightSkyAnalyzer(urls: scene.write(to: directory), space: .sky)
+        try analyzer.analyze { _, _ in }
+        let base = 5, frame = scene.meteorFrame
+        let clearPlan = NightSkyAnalyzer.Plan(base: base, ground: [base])
+        let clean = try analyzer.preview(clearPlan)
+        let w = analyzer.previewWidth
+        for asCaptured in [false, true] {
+            var plan = clearPlan
+            func mapped(_ p: SIMD2<Double>, to target: Int) -> SIMD2<Double> { SyntheticNight.map(p, from: frame, to: target) }
+            let line = NightSkyLine(frame: frame, start: mapped(scene.meteor.start, to: analyzer.anchor),
+                                    end: mapped(scene.meteor.end, to: analyzer.anchor), width: 6, pixels: 100, peak: 10)
+            var restored = line
+            if asCaptured { restored.start = scene.meteor.start; restored.end = scene.meteor.end }
+            plan.restore = [restored]; plan.restoreAsCaptured = asCaptured
+            let preview = try analyzer.preview(plan)
+            let gpu = try analyzer.render(plan, engine: .gpu, progress: { _, _ in })
+            let cpu = try analyzer.render(plan, engine: .cpu, progress: { _, _ in })
+            let direction = simd_normalize(scene.meteor.end - scene.meteor.start), normal = SIMD2(-direction.y, direction.x)
+            var excess: [Float] = [], core: [Float] = [], engineError: [Float] = []
+            for t in stride(from: 0.15, through: 0.85, by: 0.025) {
+                for distance in [-6.0, 0, 6.0] {
+                    let source = scene.meteor.start + (scene.meteor.end - scene.meteor.start) * t + normal * distance
+                    let p = asCaptured ? source : mapped(source, to: base)
+                    let i = Int(p.y.rounded()) * w + Int(p.x.rounded())
+                    let delta = preview[i * 3 + 1] - clean[i * 3 + 1]
+                    if distance == 0 { core.append(delta) } else { excess.append(delta) }
+                    for c in 0..<3 {
+                        engineError.append(abs(gpu.rgba[i * 4 + c] - cpu.rgba[i * 4 + c]))
+                        // The cached preview resamples the narrow core twice; the surrounding sky must still agree.
+                        if distance != 0 { XCTAssertEqual(gpu.rgba[i * 4 + c], preview[i * 3 + c], accuracy: 0.02) }
+                    }
+                }
+            }
+            XCTAssertLessThan(excess.sorted()[excess.count / 2], 0.008, "The surrounding glow must not fill the mask")
+            XCTAssertGreaterThan(core.sorted()[core.count / 2], 0.08, "The meteor must keep its light")
+            // Half-float development can flip the keep/skip decision for noise with nearly zero luminance.
+            XCTAssertLessThan(engineError.reduce(0, +) / Float(engineError.count), 0.0005)
+        }
     }
 
     func testMeteorShowerFindsTheMeteorAndPlacesItOnTheBaseSky() throws {
