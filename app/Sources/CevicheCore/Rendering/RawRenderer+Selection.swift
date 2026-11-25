@@ -163,17 +163,6 @@ extension RawRenderer {
         return image
     }
 
-    /// White balance that makes the picked spot neutral, solved by Apple's RAW decoder (`neutralLocation`).
-    /// `point` is normalized source coordinates (bottom-left, before crop and rotation). Nil for rendered images.
-    public func neutralWhiteBalance(at point: MaskPoint, adjustments: Adjustments) throws -> (temperature: Double, tint: Double)? {
-        guard let raw else { return nil }
-        _ = try pipeline(adjustments, maxDimension: nil)
-        let size = Self.orientedRAWSize(raw)
-        raw.neutralLocation = CGPoint(x: min(size.width - 1, max(0, point.x * size.width)), y: min(size.height - 1, max(0, point.y * size.height)))
-        let temperature = Double(raw.neutralTemperature), tint = Double(raw.neutralTint)
-        guard temperature.isFinite, tint.isFinite else { return nil }
-        return (min(50000, max(2000, temperature)), min(150, max(-150, tint)))
-    }
     /// White balance that makes the area within `radius` (a fraction of the photo's long side) of `point` neutral, the
     /// spot averaged rather than one pixel read, solved on small renders so it works for every kind of photo. Global
     /// adjustments only. Nil when the balance doesn't respond.

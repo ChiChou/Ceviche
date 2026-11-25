@@ -774,7 +774,9 @@ final class EditorModel: ObservableObject {
             do {
                 switch target {
                 case .whiteBalance:
-                    guard let balance = try await renderer.neutralWhiteBalance(at: point, adjustments: snapshot), self.renderer === renderer else { return }
+                    // The spot round the click, averaged and solved on renders: CevicheCore's, as on iPad and iPhone, and for
+                    // every kind of photo, not only RAW.
+                    guard let balance = try await renderer.neutralWhiteBalance(around: point, radius: 0.004, adjustments: snapshot), self.renderer === renderer else { return }
                     edit { $0.temperature = balance.temperature.rounded(); $0.tint = balance.tint.rounded() }
                 case .printBalance:
                     guard let filtration = try await renderer.filmNeutralFiltration(at: point, adjustments: snapshot), self.renderer === renderer else { return }

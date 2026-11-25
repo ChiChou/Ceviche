@@ -87,7 +87,7 @@ struct EditorInspector: View {
                 HStack {
                     Text(L10n.tr("White balance")).foregroundStyle(.secondary)
                     Spacer()
-                    if model.info?.isRAW == true { EyedropperButton(model: model, target: .whiteBalance) }
+                    EyedropperButton(model: model, target: .whiteBalance)
                     Menu(L10n.tr("Preset")) {
                         Button(L10n.tr("As shot")) { model.whiteBalance(nil) }
                         Button(L10n.tr("Daylight - 5500 K")) { model.whiteBalance(5500) }

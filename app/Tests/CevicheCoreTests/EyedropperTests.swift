@@ -15,11 +15,29 @@ final class EyedropperTests: XCTestCase {
         let point = MaskPoint(x: 0.5, y: 0.5)
         func spread(_ rgb: [Double]) -> Double { (rgb.max()! - rgb.min()!) / max(0.001, rgb.reduce(0, +) / 3) }
         let before = try await renderer.sampleColor(at: point, adjustments: adjustments, radius: 2)
-        let balance = try await renderer.neutralWhiteBalance(at: point, adjustments: adjustments)
+        let balance = try await renderer.neutralWhiteBalance(around: point, radius: 0.004, adjustments: adjustments)
         let picked = try XCTUnwrap(balance.map { (temperature: $0.temperature, tint: $0.tint) })
         adjustments.temperature = picked.temperature; adjustments.tint = picked.tint
         let after = try await renderer.sampleColor(at: point, adjustments: adjustments, radius: 2)
         XCTAssertLessThan(spread(after), max(0.06, spread(before) * 0.5), "before \(before) after \(after) wb \(picked)")
+    }
+
+    /// A photo from a phone's camera roll is no RAW: a warm grey picked there still comes out neutral.
+    func testPickedWhiteBalanceNeutralizesABitmap() async throws {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).png")
+        defer { try? FileManager.default.removeItem(at: url) }
+        let warm = CIImage(color: CIColor(red: 0.62, green: 0.5, blue: 0.38)).cropped(to: CGRect(x: 0, y: 0, width: 400, height: 300))
+        try CIContext().writePNGRepresentation(of: warm, to: url, format: .RGBA8, colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!)
+        let renderer = try RawRenderer(sourceURL: url)
+        var adjustments = renderer.info.defaults
+        let point = MaskPoint(x: 0.5, y: 0.5)
+        func spread(_ rgb: [Double]) -> Double { (rgb.max()! - rgb.min()!) / max(0.001, rgb.reduce(0, +) / 3) }
+        let before = try await renderer.sampleColor(at: point, adjustments: adjustments, radius: 2)
+        let solved = try await renderer.neutralWhiteBalance(around: point, radius: 0.02, adjustments: adjustments)
+        let picked = try XCTUnwrap(solved)
+        adjustments.temperature = picked.temperature; adjustments.tint = picked.tint
+        let after = try await renderer.sampleColor(at: point, adjustments: adjustments, radius: 2)
+        XCTAssertLessThan(spread(after), spread(before) * 0.3, "before \(before) after \(after) wb \(picked)")
     }
 
     func testDefringePicksNativeRimBeforeCorrection() async throws {
