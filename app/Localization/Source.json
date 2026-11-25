@@ -229,7 +229,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:126",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:126",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:222"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:223"
     ]
   },
   {
@@ -364,7 +364,7 @@
     "uses": [
       "Sources/CevicheMobile/Culling/CullReviewView.swift:118",
       "Sources/CevicheMobile/Culling/CullReviewView.swift:156",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:448"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:471"
     ]
   },
   {
@@ -1086,7 +1086,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:111",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:111",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:214"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:215"
     ]
   },
   {
@@ -3125,7 +3125,7 @@
       "Sources/CevicheMac/Editor/LooksPanel.swift:359",
       "Sources/CevicheMac/Editor/MaskPanel.swift:130",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:38",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:134",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:135",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:252",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:97"
     ]
@@ -3205,7 +3205,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:46",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:46",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:186"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:187"
     ]
   },
   {
@@ -3225,7 +3225,7 @@
   {
     "key": "Analyzing tones locally…",
     "source": "\"Analyzing tones locally…\"",
-    "context": "Sources/CevicheMac/Editor/EditorModel.swift:894"
+    "context": "Sources/CevicheMac/Editor/EditorModel.swift:896"
   },
   {
     "key": "Angle",
@@ -3243,17 +3243,17 @@
   {
     "key": "Any Flag",
     "source": "\"Any Flag\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:224"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:238"
   },
   {
     "key": "Any Label",
     "source": "\"Any Label\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:230"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:244"
   },
   {
     "key": "Any Rating",
     "source": "\"Any Rating\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:220"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:234"
   },
   {
     "key": "Aperture",
@@ -3524,7 +3524,7 @@
   {
     "key": "Ascending",
     "source": "\"Ascending\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:240"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:254"
   },
   {
     "key": "Aspect",
@@ -3534,7 +3534,7 @@
       "Sources/CevicheMac/Editor/CropPanel.swift:18",
       "Sources/CevicheMac/Editor/CropPanel.swift:19",
       "Sources/CevicheMac/Editor/GeometrySection.swift:84",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:197",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:198",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyInspector.swift:82",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:116",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:120"
@@ -3558,7 +3558,7 @@
       "Sources/CevicheMac/Editor/FacePanel.swift:116",
       "Sources/CevicheMac/Editor/ImageCanvas+FaceParts.swift:77",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:473",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:46",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:47",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:165",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:105",
       "Sources/CevicheCore/Adjustments/FilmSimulation.swift:143",
@@ -3673,7 +3673,7 @@
       "Sources/CevicheMac/Editor/EditHeaderPanel.swift:12",
       "Sources/CevicheMac/Editor/FilmPanel.swift:63",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:112",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:43",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:44",
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:11"
     ]
   },
@@ -3683,7 +3683,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:191",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:191",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:103",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:104",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:18"
     ]
   },
@@ -4029,7 +4029,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditingControls.swift:8",
       "Sources/CevicheMac/Editor/EditorInspector.swift:76",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:66",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:67",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:206",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:80"
     ]
@@ -4137,7 +4137,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:149",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:149",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:123",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:124",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:218",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:54"
     ]
@@ -4733,7 +4733,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:105",
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:51",
-      "Sources/CevicheMobile/Library/LibraryView.swift:235",
+      "Sources/CevicheMobile/Library/LibraryView.swift:249",
       "Sources/CevicheCore/Catalog/CatalogRecords.swift:300"
     ]
   },
@@ -5310,7 +5310,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:147",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:147",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:121",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:122",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:214",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:85",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:21"
@@ -5335,7 +5335,7 @@
       "Sources/CevicheMac/Tools/FaceCheckView.swift:552",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:70",
       "Sources/CevicheMac/Tools/NightSkyView.swift:288",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:216",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:217",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:166",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:201",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:227",
@@ -5508,7 +5508,7 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:101",
       "Sources/CevicheMobile/Culling/CheckFacesView.swift:384",
       "Sources/CevicheMobile/Culling/CullCanvas.swift:197",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:339"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:362"
     ]
   },
   {
@@ -5631,8 +5631,8 @@
       "Sources/CevicheMac/Editor/PointColorPanel.swift:17",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:30",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:31",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:42",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:402",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:43",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:425",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:207",
       "Sources/CevicheMobile/Export/VideoExport.swift:29",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
@@ -5652,7 +5652,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:112",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:112",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:105",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:106",
       "Sources/CevicheMobile/Develop/Pickers/DevelopModel+Pickers.swift:67"
     ]
   },
@@ -5673,7 +5673,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:214",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:169",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:107",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:108",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:64",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:19"
     ]
@@ -5880,7 +5880,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:40",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:40",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:201"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:202"
     ]
   },
   {
@@ -5899,7 +5899,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:72",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:72",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:62",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:63",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:202",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:76",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:23",
@@ -6060,8 +6060,8 @@
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:58",
       "Sources/CevicheMac/Editor/EditClipboard.swift:122",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:165",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:152",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:252"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:175",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:275"
     ]
   },
   {
@@ -6831,7 +6831,7 @@
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:82",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:98",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:408"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:431"
     ]
   },
   {
@@ -7046,7 +7046,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel.swift:12",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:404"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:427"
     ]
   },
   {
@@ -7126,7 +7126,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:148",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:148",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:122",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:123",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:215",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:87"
     ]
@@ -7154,6 +7154,7 @@
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:111",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:250",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:192",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:266",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:62"
     ]
   },
@@ -7174,7 +7175,11 @@
   {
     "key": "Delete %1$@ Photos",
     "source": "\"Delete \\(count.formatted()) Photos\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:165"
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:270",
+    "uses": [
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:270",
+      "Sources/CevicheMobile/Library/LibraryView.swift:165"
+    ]
   },
   {
     "key": "Delete %1$@ Photos Permanently?",
@@ -7189,7 +7194,11 @@
   {
     "key": "Delete 1 Photo",
     "source": "\"Delete 1 Photo\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:165"
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:270",
+    "uses": [
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:270",
+      "Sources/CevicheMobile/Library/LibraryView.swift:165"
+    ]
   },
   {
     "key": "Delete Album",
@@ -7252,7 +7261,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:129",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:129",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:225"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:226"
     ]
   },
   {
@@ -7377,7 +7386,7 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:169",
       "Sources/CevicheMac/Import/CardImportView.swift:213",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:383",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:254",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:257",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:136"
     ]
   },
@@ -7391,7 +7400,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel.swift:403",
       "Sources/CevicheMac/Editor/EditorInspector.swift:137",
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:403",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:426",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:212",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:321"
@@ -7644,7 +7653,7 @@
       "Sources/CevicheMac/Editor/CropPanel.swift:50",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:296",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:199",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:80",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:105",
       "Sources/CevicheMobile/Develop/HistoryView.swift:46",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:85",
       "Sources/CevicheMobile/Library/LibraryView.swift:178",
@@ -7859,7 +7868,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:108",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:108",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:210"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:211"
     ]
   },
   {
@@ -8610,12 +8619,13 @@
       "Sources/CevicheMac/Tools/FiltersModel.swift:421",
       "Sources/CevicheMac/Tools/FiltersModel.swift:426",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:190",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:230",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:236",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:253",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:259",
       "Sources/CevicheMobile/Export/ExportView.swift:53",
       "Sources/CevicheMobile/Export/ExportView.swift:127",
       "Sources/CevicheMobile/Export/VideoExport.swift:45",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:270"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:276",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:290"
     ]
   },
   {
@@ -8847,8 +8857,8 @@
       "Sources/CevicheMac/Export/ExportSession.swift:129",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:22",
       "Sources/CevicheMac/Tools/FiltersModel.swift:382",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:157",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:247",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:180",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:270",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:187",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:233",
       "Sources/CevicheMobile/Library/LibraryView.swift:123",
@@ -8873,7 +8883,7 @@
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:437",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:216",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:87",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:61",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:62",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:201",
       "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:129",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:75",
@@ -9209,7 +9219,7 @@
   {
     "key": "Filename",
     "source": "\"Filename\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:237"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:251"
   },
   {
     "key": "Files",
@@ -9313,7 +9323,7 @@
       "Sources/CevicheMac/Editor/EditorViewControls.swift:197",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:256",
       "Sources/CevicheMobile/Culling/CullReviewView.swift:79",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:249"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:272"
     ]
   },
   {
@@ -9333,7 +9343,7 @@
   {
     "key": "Filter",
     "source": "\"Filter\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:242"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:256"
   },
   {
     "key": "Filters",
@@ -9615,7 +9625,7 @@
       "Sources/CevicheMac/Catalog/CatalogView.swift:141",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:19",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:38",
-      "Sources/CevicheMobile/Library/LibraryView.swift:223"
+      "Sources/CevicheMobile/Library/LibraryView.swift:237"
     ]
   },
   {
@@ -9663,7 +9673,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:30",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:573",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:166",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:167",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:115"
     ]
   },
@@ -9674,7 +9684,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:31",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:576",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:167",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:168",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:116"
     ]
   },
@@ -10219,7 +10229,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/FilmPanel.swift:112",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:100",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:133",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:134",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:67"
     ]
   },
@@ -10411,7 +10421,7 @@
       "Sources/CevicheMac/Editor/HistogramView.swift:73",
       "Sources/CevicheMac/Export/ExportOptions.swift:44",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:329",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:52",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:53",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:38",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:17"
     ]
@@ -10445,7 +10455,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:206",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:206",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:71"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:72"
     ]
   },
   {
@@ -10748,7 +10758,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:165",
       "Sources/CevicheMac/Editor/EditorInspector.swift:178",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:79",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:63",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:64",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:203",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:77",
       "Sources/CevicheCore/Analysis/PairTriage.swift:31",
@@ -10773,7 +10783,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:103",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:251",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:274",
       "Sources/CevicheMobile/Develop/HistoryView.swift:41"
     ]
   },
@@ -10822,7 +10832,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:82",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:82",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:195",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:196",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyInspector.swift:92",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:138",
       "Sources/CevicheCore/Adjustments/Geometry.swift:31",
@@ -10891,7 +10901,7 @@
   {
     "key": "ICC profiles must be smaller than 4 MB.",
     "source": "\"ICC profiles must be smaller than 4 MB.\"",
-    "context": "Sources/CevicheMac/Editor/EditorModel.swift:910"
+    "context": "Sources/CevicheMac/Editor/EditorModel.swift:912"
   },
   {
     "key": "ID Card",
@@ -10971,9 +10981,9 @@
   {
     "key": "Import Date",
     "source": "\"Import Date\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:236",
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:250",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryView.swift:236",
+      "Sources/CevicheMobile/Library/LibraryView.swift:250",
       "Sources/CevicheCore/Catalog/CatalogRecords.swift:302"
     ]
   },
@@ -11381,11 +11391,11 @@
     "context": "Sources/CevicheMac/Editor/EditorModel.swift:12",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:79",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:156",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:227",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:246",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:369"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:104",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:179",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:250",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:269",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:392"
     ]
   },
   {
@@ -12105,7 +12115,7 @@
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:57",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:43",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:205",
-      "Sources/CevicheMobile/Library/LibraryView.swift:229"
+      "Sources/CevicheMobile/Library/LibraryView.swift:243"
     ]
   },
   {
@@ -12379,7 +12389,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:34",
       "Sources/CevicheMac/Editor/EditorInspector.swift:244",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:128",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:129",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:44",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:23"
     ]
@@ -12458,7 +12468,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:44",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:136",
       "Sources/CevicheMobile/Culling/CullReviewView.swift:67",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:196",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:219",
       "Sources/CevicheMobile/Library/LibraryModel.swift:105",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:52",
       "Sources/CevicheMobile/Library/LibraryView.swift:138",
@@ -12485,7 +12495,7 @@
       "Sources/CevicheMac/Editor/FilmPanel.swift:75",
       "Sources/CevicheMac/Editor/FilmPanel.swift:75",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:224",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:401",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:424",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:22",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:17",
@@ -12880,7 +12890,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Editor/LooksPanel.swift:107",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:400"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:423"
     ]
   },
   {
@@ -13158,7 +13168,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Editor/MaskPanel.swift:25",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:407",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:430",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:112",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:72",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:8",
@@ -13482,7 +13492,7 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:37",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:257",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:231",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:268",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:288",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:167",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:171",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:18",
@@ -13867,7 +13877,7 @@
       "Sources/CevicheMobile/Culling/BurstsView.swift:189",
       "Sources/CevicheMobile/Culling/FlawedPhotosView.swift:136",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:202",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:272"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:292"
     ]
   },
   {
@@ -14015,9 +14025,10 @@
       "Sources/CevicheMac/Editor/LooksPanel.swift:452",
       "Sources/CevicheMac/Editor/LooksPanel.swift:494",
       "Sources/CevicheMobile/Culling/CullSession.swift:190",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:120",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:143",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:189",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:235",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:277",
       "Sources/CevicheMobile/Library/LibraryView.swift:124"
     ]
   },
@@ -14028,8 +14039,8 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:279",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:606",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:146",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:258"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:169",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:281"
     ]
   },
   {
@@ -14040,7 +14051,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Folders.swift:268",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:14",
       "Sources/CevicheMobile/Culling/CullSession.swift:189",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:119"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:142"
     ]
   },
   {
@@ -14347,7 +14358,7 @@
     "uses": [
       "Sources/CevicheMac/App/WelcomeView.swift:61",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:408",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:142"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:165"
     ]
   },
   {
@@ -15005,7 +15016,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:140",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:140",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:117",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:118",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:217",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:230"
     ]
@@ -15042,11 +15053,11 @@
       "Sources/CevicheMac/Export/WatermarkControls.swift:61",
       "Sources/CevicheMac/Export/WatermarkControls.swift:62",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:482",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:432",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:455",
       "Sources/CevicheMobile/Export/ExportView.swift:45",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:196",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:203",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:264",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:284",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:72",
       "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:77"
     ]
@@ -15235,7 +15246,7 @@
   {
     "key": "Nothing running",
     "source": "\"Nothing running\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:277"
+    "context": "Sources/CevicheMobile/Library/LibraryView.swift:291"
   },
   {
     "key": "Nothing to Show",
@@ -15385,7 +15396,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:86",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:86",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:199"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:200"
     ]
   },
   {
@@ -15394,7 +15405,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:87",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:87",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:200"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:201"
     ]
   },
   {
@@ -15593,7 +15604,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:240",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:240",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:127",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:128",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7"
     ]
   },
@@ -15650,9 +15661,9 @@
       "Sources/CevicheMac/Editor/EditorView.swift:68",
       "Sources/CevicheMac/Editor/HistoryPanel.swift:154",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:460",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:158",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:215",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:282",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:181",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:238",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:305",
       "Sources/CevicheMobile/Tools/Filters/FiltersView.swift:42",
       "Sources/CevicheMobile/Tools/WideAngle/WideAngleView.swift:81",
       "Sources/CevicheCore/Adjustments/Geometry.swift:17",
@@ -15967,8 +15978,8 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:275",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:59",
       "Sources/CevicheMac/Editor/EditorViewControls.swift:169",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:154",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:254",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:177",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:277",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:227",
       "Sources/CevicheMobile/Library/LibraryView.swift:126"
     ]
@@ -16294,10 +16305,10 @@
       "Sources/CevicheMobile/Culling/BurstsView.swift:293",
       "Sources/CevicheMobile/Culling/CheckFacesView.swift:352",
       "Sources/CevicheMobile/Culling/CullReviewView.swift:177",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:145",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:424",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:168",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:447",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:199",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:260",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:280",
       "Sources/CevicheMobile/Library/LibraryView.swift:113"
     ]
   },
@@ -16408,7 +16419,7 @@
       "Sources/CevicheMac/Catalog/InspectorControls.swift:22",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:550",
       "Sources/CevicheMac/Editor/CompareView.swift:75",
-      "Sources/CevicheMobile/Library/LibraryView.swift:225",
+      "Sources/CevicheMobile/Library/LibraryView.swift:239",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
   },
@@ -16585,7 +16596,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel.swift:12",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:406"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:429"
     ]
   },
   {
@@ -16691,7 +16702,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:145",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:145",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:119"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:120"
     ]
   },
   {
@@ -16763,7 +16774,7 @@
     "uses": [
       "Sources/CevicheMac/App/WelcomeView.swift:61",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:406",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:141"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:164"
     ]
   },
   {
@@ -16961,7 +16972,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:422",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:634",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:191"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:191",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:265"
     ]
   },
   {
@@ -17066,7 +17078,7 @@
   {
     "key": "RGB ICC profile",
     "source": "\"RGB ICC profile\"",
-    "context": "Sources/CevicheMac/Editor/EditorModel.swift:906"
+    "context": "Sources/CevicheMac/Editor/EditorModel.swift:908"
   },
   {
     "key": "Radial",
@@ -17135,13 +17147,13 @@
       "Sources/CevicheMac/Catalog/CatalogUndo.swift:57",
       "Sources/CevicheMac/Catalog/InspectorControls.swift:12",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:33",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:150",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:441",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:173",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:464",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:198",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:266",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:286",
       "Sources/CevicheMobile/Library/LibraryView.swift:117",
-      "Sources/CevicheMobile/Library/LibraryView.swift:219",
-      "Sources/CevicheMobile/Library/LibraryView.swift:238",
+      "Sources/CevicheMobile/Library/LibraryView.swift:233",
+      "Sources/CevicheMobile/Library/LibraryView.swift:252",
       "Sources/CevicheCore/Catalog/CatalogRecords.swift:303"
     ]
   },
@@ -17416,8 +17428,8 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:10",
       "Sources/CevicheMac/Tools/NightSkyView.swift:262",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:311",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:140",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:219",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:163",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:242",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:107"
     ]
   },
@@ -17583,10 +17595,10 @@
       "Sources/CevicheMobile/Culling/FlawedPhotosView.swift:142",
       "Sources/CevicheMobile/Culling/FlawedPhotosView.swift:246",
       "Sources/CevicheMobile/Culling/FlawedPhotosView.swift:276",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:147",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:428",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:170",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:451",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:200",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:261",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:281",
       "Sources/CevicheMobile/Library/LibraryView.swift:114"
     ]
   },
@@ -17650,7 +17662,7 @@
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:550",
       "Sources/CevicheMac/Editor/CompareView.swift:76",
       "Sources/CevicheMobile/Culling/BurstsView.swift:319",
-      "Sources/CevicheMobile/Library/LibraryView.swift:226",
+      "Sources/CevicheMobile/Library/LibraryView.swift:240",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
   },
@@ -18212,7 +18224,7 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Viewing.swift:67",
       "Sources/CevicheMac/Catalog/CatalogWorkspace.swift:92",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:256"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:279"
     ]
   },
   {
@@ -18291,7 +18303,7 @@
     "context": "Sources/CevicheMac/Editor/CropPanel.swift:15",
     "uses": [
       "Sources/CevicheMac/Editor/CropPanel.swift:15",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:171"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:172"
     ]
   },
   {
@@ -18413,7 +18425,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel.swift:12",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:405",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:428",
       "Sources/CevicheMobile/Develop/Retouch/DevelopModel+Distractions.swift:48",
       "Sources/CevicheMobile/Develop/Retouch/DevelopModel+Distractions.swift:91",
       "Sources/CevicheMobile/Develop/Retouch/DevelopModel+Retouch.swift:133",
@@ -18495,7 +18507,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:83",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:83",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:196"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:197"
     ]
   },
   {
@@ -18504,7 +18516,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:280",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:280",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:164"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:165"
     ]
   },
   {
@@ -18513,7 +18525,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:281",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:281",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:165"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:166"
     ]
   },
   {
@@ -18551,7 +18563,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:267",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:267",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:137"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:138"
     ]
   },
   {
@@ -18666,7 +18678,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:121",
       "Sources/CevicheMac/Editor/PointColorPanel.swift:19",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:42",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:99",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:100",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:211",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:84",
       "Sources/CevicheCore/Adjustments/SelectiveColor.swift:70",
@@ -18881,7 +18893,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:85",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:85",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:198"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:199"
     ]
   },
   {
@@ -18925,7 +18937,7 @@
   {
     "key": "Scope",
     "source": "\"Scope\"",
-    "context": "Sources/CevicheMobile/Develop/Scopes/DevelopScopes.swift:133"
+    "context": "Sources/CevicheMobile/Develop/Scopes/DevelopScopes.swift:145"
   },
   {
     "key": "Scopes",
@@ -19023,7 +19035,7 @@
     "uses": [
       "Sources/CevicheMac/Import/CardImportView.swift:212",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:383",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:256",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:259",
       "Sources/CevicheMobile/Library/LibraryView.swift:112"
     ]
   },
@@ -19286,7 +19298,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:74",
       "Sources/CevicheMac/Editor/EditorInspector.swift:181",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:77",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:64",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:65",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:204",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:78",
       "Sources/CevicheCore/Analysis/PairTriage.swift:32",
@@ -19336,7 +19348,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:134",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:134",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:116",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:117",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:216",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:21",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:230"
@@ -19829,7 +19841,7 @@
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:82",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:92",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:93",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:136",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:137",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:236",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:63",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:262",
@@ -20193,7 +20205,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:55",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:55",
-      "Sources/CevicheMobile/Library/LibraryView.swift:234"
+      "Sources/CevicheMobile/Library/LibraryView.swift:248"
     ]
   },
   {
@@ -20521,7 +20533,7 @@
       "Sources/CevicheMac/Editor/CropPanel.swift:74",
       "Sources/CevicheMac/Editor/CropPanel.swift:77",
       "Sources/CevicheMac/Editor/CropPanel.swift:77",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:161"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:162"
     ]
   },
   {
@@ -20666,7 +20678,7 @@
     "context": "Sources/CevicheMac/Editor/CompareView.swift:33",
     "uses": [
       "Sources/CevicheMac/Editor/CompareView.swift:33",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:168"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:169"
     ]
   },
   {
@@ -20865,7 +20877,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:99",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:479",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:95",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:96",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:81"
     ]
   },
@@ -20918,7 +20930,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:146",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:99",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:120",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:121",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:213",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:86",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:152"
@@ -21067,12 +21079,12 @@
   {
     "key": "The album couldn’t be created.",
     "source": "\"The album couldn’t be created.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:367"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:371"
   },
   {
     "key": "The album couldn’t be deleted.",
     "source": "\"The album couldn’t be deleted.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:377"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:381"
   },
   {
     "key": "The analysed correction is too extreme for this photo.",
@@ -21477,7 +21489,11 @@
   {
     "key": "The photos and their edits are removed from this device. This can’t be undone.",
     "source": "\"The photos and their edits are removed from this device. This can’t be undone.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryView.swift:162"
+    "context": "Sources/CevicheMobile/Library/LibraryGrid.swift:267",
+    "uses": [
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:267",
+      "Sources/CevicheMobile/Library/LibraryView.swift:162"
+    ]
   },
   {
     "key": "The photos could not be aligned.",
@@ -21487,7 +21503,7 @@
   {
     "key": "The photos couldn’t be added to the album.",
     "source": "\"The photos couldn’t be added to the album.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:370"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:374"
   },
   {
     "key": "The photos couldn’t be combined. %1$@",
@@ -21497,7 +21513,7 @@
   {
     "key": "The photos couldn’t be deleted.",
     "source": "\"The photos couldn’t be deleted.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:356"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:360"
   },
   {
     "key": "The photos couldn’t be focus stacked. %1$@",
@@ -21510,7 +21526,7 @@
     "context": "Sources/CevicheMobile/Culling/CullSession.swift:132",
     "uses": [
       "Sources/CevicheMobile/Culling/CullSession.swift:132",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:361"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:365"
     ]
   },
   {
@@ -21535,22 +21551,22 @@
   {
     "key": "The photos couldn’t be moved to the Trash.",
     "source": "\"The photos couldn’t be moved to the Trash.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:329"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:331"
   },
   {
     "key": "The photos couldn’t be put back.",
     "source": "\"The photos couldn’t be put back.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:324",
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:325",
     "uses": [
-      "Sources/CevicheMobile/Library/LibraryModel.swift:324",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:338",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:351"
+      "Sources/CevicheMobile/Library/LibraryModel.swift:325",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:340",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:354"
     ]
   },
   {
     "key": "The photos couldn’t be removed from the album.",
     "source": "\"The photos couldn’t be removed from the album.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:373"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:377"
   },
   {
     "key": "The photos couldn’t be stacked. %1$@",
@@ -21560,7 +21576,7 @@
   {
     "key": "The photos couldn’t be ungrouped.",
     "source": "\"The photos couldn’t be ungrouped.\"",
-    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:364"
+    "context": "Sources/CevicheMobile/Library/LibraryModel.swift:368"
   },
   {
     "key": "The photos don’t overlap enough to be merged. Panoramas need about a third of each photo shared with its neighbour.",
@@ -22251,7 +22267,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:101",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:485",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:97",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:98",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:209",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:82"
     ]
@@ -22350,7 +22366,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:79",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:79",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:68",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:69",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:17"
     ]
   },
@@ -22435,10 +22451,10 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:356",
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:237",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:243",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:266",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:232",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:268",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:269"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:288",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:289"
     ]
   },
   {
@@ -22497,7 +22513,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:74",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:74",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:193"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:194"
     ]
   },
   {
@@ -22666,7 +22682,8 @@
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:332",
       "Sources/CevicheMac/Catalog/CatalogModel+Archive.swift:33",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:157",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:186"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:186",
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:275"
     ]
   },
   {
@@ -22724,8 +22741,8 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:260",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:309",
       "Sources/CevicheMobile/Components/ShakeToUndo.swift:39",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:139",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:217",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:162",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:240",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:106"
     ]
   },
@@ -22746,15 +22763,15 @@
   {
     "key": "Undo Edit",
     "source": "\"Undo Edit\"",
-    "context": "Sources/CevicheMobile/Develop/DevelopView.swift:102"
+    "context": "Sources/CevicheMobile/Develop/DevelopView.swift:125"
   },
   {
     "key": "Undo Move to Trash",
     "source": "\"Undo Move to Trash\"",
-    "context": "Sources/CevicheMobile/Develop/DevelopView.swift:99",
+    "context": "Sources/CevicheMobile/Develop/DevelopView.swift:122",
     "uses": [
-      "Sources/CevicheMobile/Develop/DevelopView.swift:99",
-      "Sources/CevicheMobile/Library/LibraryModel.swift:347"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:122",
+      "Sources/CevicheMobile/Library/LibraryModel.swift:349"
     ]
   },
   {
@@ -22818,7 +22835,7 @@
     "context": "Sources/CevicheMobile/Culling/CullReviewView.swift:179",
     "uses": [
       "Sources/CevicheMobile/Culling/CullReviewView.swift:179",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:148",
+      "Sources/CevicheMobile/Develop/DevelopView.swift:171",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:201",
       "Sources/CevicheMobile/Library/LibraryView.swift:115"
     ]
@@ -22844,7 +22861,7 @@
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:41",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:586",
       "Sources/CevicheMobile/Culling/BurstsView.swift:295",
-      "Sources/CevicheMobile/Library/LibraryView.swift:227",
+      "Sources/CevicheMobile/Library/LibraryView.swift:241",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:26"
     ]
   },
@@ -23035,7 +23052,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:48",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:48",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:188"
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:189"
     ]
   },
   {
@@ -23071,7 +23088,7 @@
   {
     "key": "Upright",
     "source": "\"Upright\"",
-    "context": "Sources/CevicheMobile/Develop/DevelopPanels.swift:173"
+    "context": "Sources/CevicheMobile/Develop/DevelopPanels.swift:174"
   },
   {
     "key": "Upright & transform",
@@ -23235,7 +23252,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:81",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:81",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:194",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:195",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyInspector.swift:93",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:140",
       "Sources/CevicheCore/Adjustments/Geometry.swift:31",
@@ -23261,7 +23278,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:102",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:102",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:98",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:99",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:210",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:83"
     ]
@@ -23323,7 +23340,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:160",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:160",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:130",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:131",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:90",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:22"
     ]
@@ -23427,7 +23444,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:100",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:100",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:93",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:94",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:208",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:53"
     ]
@@ -23608,7 +23625,7 @@
       "Sources/CevicheMac/Editor/FacePanel.swift:99",
       "Sources/CevicheMac/Editor/FacePanel.swift:375",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:465",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:85",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:86",
       "Sources/CevicheMobile/Develop/Pickers/DevelopModel+Pickers.swift:54",
       "Sources/CevicheMobile/Develop/Portrait/DevelopModel+Portrait.swift:183",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:97",
@@ -23639,7 +23656,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditingControls.swift:8",
       "Sources/CevicheMac/Editor/EditorInspector.swift:75",
-      "Sources/CevicheMobile/Develop/DevelopPanels.swift:65",
+      "Sources/CevicheMobile/Develop/DevelopPanels.swift:66",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:205",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:79"
     ]
