@@ -278,18 +278,15 @@ final class EditorModel: ObservableObject {
     /// The stroke under the pointer in the stroke list, pointed out on the photo.
     @Published var hoveredRetouchID: UUID?
     /// Sources a stroke had before Refresh, so the next pick moves elsewhere. Kept only for this session.
-    var refusedRetouchSources: [UUID: [MaskPoint]] = [:]
+    var retouchSourceHistory = RetouchSourceHistory()
     /// Whether the next Remove stroke asks for an AI fill (when the model is installed).
     @Published var retouchGenerative = true { didSet { preferences.set(retouchGenerative, forKey: "retouchGenerative") } }
-    /// Remove strokes waiting for their AI fill; they are made in stroke order, one at a time.
-    @Published var pendingFills: [UUID] = []
+    /// Remove strokes waiting for their AI fill, made in stroke order one at a time; why a fill could not be made and
+    /// how often each was refreshed this session.
+    @Published var fillQueue = RetouchFillQueue()
     var fillTask: Task<Void, Never>?
     /// The windows done and the total for the fill being made, when it takes more than one (a long or wide stroke).
     @Published var fillProgress: (done: Int, total: Int)?
-    /// Why a fill could not be made, by stroke and footprint (`fillKey`), so it is not tried again until the stroke changes.
-    @Published var fillFailures: [String: String] = [:]
-    /// How often each stroke's fill was refreshed this session; each refresh shows the network other windows.
-    var fillVariants: [UUID: Int] = [:]
     @Published var blemishSensitivity = 0.5
     @Published var faceRegion: CGRect?
     /// The detected face's placement for Face Liquify before any control is set.
@@ -402,10 +399,7 @@ final class EditorModel: ObservableObject {
     @Published var selectedFaceID: Int?
     /// The main people: faces at least 0.4 the width of the largest. Smaller ones are usually passers-by, picked one
     /// at a time if at all.
-    var mainFaceIDs: Set<Int> {
-        let largest = portraitFaces.map(\.box.width).max() ?? 0
-        return Set(portraitFaces.filter { $0.box.width >= largest * 0.4 }.map(\.id))
-    }
+    var mainFaceIDs: Set<Int> { PortraitFace.mainIDs(portraitFaces) }
     /// Whom the corrections are for: the selected person, or Everyone's main people.
     var chosenFaceIDs: Set<Int> { selectedFaceID.map { [$0] } ?? mainFaceIDs }
     /// The face under the pointer in a row of faces, outlined on the photo so a picture can be told apart.
@@ -429,7 +423,7 @@ final class EditorModel: ObservableObject {
     var framingAspect: CropAspect { framingAspectChoice.flatMap { framingAspects.contains($0) ? $0 : nil } ?? framingAspects[0] }
     @Published var framingFrames: [FramingCandidate] = []
     /// The ticked faces' boxes; nil before the faces are known, so a correction then covers everyone.
-    var chosenFaces: [CGRect]? { portraitFaces.isEmpty ? nil : portraitFaces.filter { chosenFaceIDs.contains($0.id) }.map(\.box) }
+    var chosenFaces: [CGRect]? { PortraitFace.boxes(portraitFaces, ids: chosenFaceIDs) }
     /// The brush stroke being painted, not yet part of its mask; nil between strokes. Not published: the canvas redraws
     /// itself as the pointer moves, and nothing else needs to hear of every point.
     var liveStroke: MaskStroke?

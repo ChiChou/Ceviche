@@ -121,15 +121,11 @@ extension EditorModel {
     /// Moves or resizes a found spot, or a healed one's stroke (inside the drag's gesture, so one undo step).
     func updateDustSpot(_ id: UUID, center: MaskPoint? = nil, radius: Double? = nil) {
         if isHealedDust(id) {
-            updateRetouch(id) { stroke in
-                if let center { stroke.points = [MaskPoint(x: min(1, max(0, center.x)), y: min(1, max(0, center.y)))] }
-                if let radius { stroke.radius = min(0.15, max(0.001, radius)) }
-            }
+            updateRetouch(id) { $0.moveDustSpot(to: center, radius: radius) }
             return
         }
         guard let index = dustSpots.firstIndex(where: { $0.id == id }) else { return }
-        if let center { dustSpots[index].center = MaskPoint(x: min(1, max(0, center.x)), y: min(1, max(0, center.y))) }
-        if let radius { dustSpots[index].radius = min(0.15, max(0.001, radius)) }
+        dustSpots[index].move(to: center, radius: radius)
     }
     var healedDustCount: Int { adjustments.retouch.lazy.filter(\.suggested).count }
     /// Healed dust as handles on the photo, each with its heal stroke's id, while Healed is shown.
@@ -146,11 +142,11 @@ extension EditorModel {
     func healDustSpots() { repairDustSpots(tonal: false) }
     func repairDustSpots(tonal: Bool) {
         guard let renderer, !busy, !dustWorking else { return }
-        let room = DustFinder.strokeLimit - adjustments.retouch.count
+        let room = adjustments.retouchRoom
         guard room > 0 else { dustReport = L10n.tr("The retouch list already holds \(DustFinder.strokeLimit) strokes."); return }
-        let spots = Array(dustSpots.prefix(room))
+        let (spots, skipped) = DustRepair.batch(dustSpots, room: room)
         guard !spots.isEmpty else { return }
-        let settings = adjustments, skipped = dustSpots.count - spots.count
+        let settings = adjustments
         dustWorking = true; dustReport = nil
         dustTask = Task {
             defer { if self.renderer === renderer { dustWorking = false } }
@@ -158,10 +154,9 @@ extension EditorModel {
                 let strokes = try await renderer.dustStrokes(spots, settings: settings, tonal: tonal)
                 guard self.renderer === renderer, !Task.isCancelled else { return }
                 // Strokes added meanwhile take room first; spots removed meanwhile stay removed.
-                let current = Set(dustSpots.map(\.id))
-                let added = Array(zip(spots, strokes).filter { current.contains($0.0.id) }.prefix(DustFinder.strokeLimit - adjustments.retouch.count))
-                edit { $0.retouch += added.map(\.1) }
-                let healed = Set(added.map(\.0.id))
+                let added = DustRepair.accepted(spots, strokes: strokes, current: dustSpots, room: adjustments.retouchRoom)
+                edit { $0.retouch += added.map(\.stroke) }
+                let healed = Set(added.map(\.spot.id))
                 dustSpots.removeAll { healed.contains($0.id) }; selectedRetouchIDs.subtract(healed)
                 // The stroke list says how many; only what was left out needs saying.
                 dustReport = skipped > 0 ? L10n.tr(" \(skipped) did not fit in the retouch list.").trimmingCharacters(in: .whitespaces) : nil

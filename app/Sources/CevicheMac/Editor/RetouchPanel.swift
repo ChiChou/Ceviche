@@ -430,10 +430,9 @@ extension EditorModel {
     }
     /// Refresh (⇧R): another AI fill for each stroke that has one, another source for the others.
     func refreshRetouch(_ ids: Set<UUID>) {
-        let strokes = adjustments.retouch.filter { ids.contains($0.id) }
-        let filled = Set(strokes.filter { $0.mode == .remove && $0.generative }.map(\.id))
+        let (filled, others) = RetouchFillQueue.refreshing(adjustments.retouch.filter { ids.contains($0.id) }, fillAvailable: BundledModel.inpaint.isAvailable)
         if !filled.isEmpty { refreshFills(filled) }
-        chooseRetouchSources(Set(strokes.map(\.id)).subtracting(filled), refresh: true)
+        chooseRetouchSources(others, refresh: true)
     }
     func refreshRetouch(_ id: UUID) { refreshRetouch([id]) }
     func chooseRetouchSource(_ id: UUID, refresh: Bool = false) { chooseRetouchSources([id], refresh: refresh) }
@@ -443,29 +442,12 @@ extension EditorModel {
     func chooseRetouchSources(_ ids: Set<UUID>, refresh: Bool = false) {
         let strokes = adjustments.retouch.filter { ids.contains($0.id) }
         guard let renderer, !strokes.isEmpty else { return }
-        for stroke in strokes {
-            if refresh { refusedRetouchSources[stroke.id, default: []].append(stroke.source) } else { refusedRetouchSources[stroke.id] = nil }
-        }
-        let settings = adjustments, refused = refusedRetouchSources.filter { ids.contains($0.key) }
+        let settings = adjustments, refused = retouchSourceHistory.choosing(strokes, refresh: refresh)
         Task {
             do {
-                let tonal = strokes.filter { $0.mode == .tone }
-                let patches = strokes.filter { $0.mode != .tone }
-                let exposures = try await renderer.spotExposures(for: tonal, settings: settings)
-                let sources = patches.isEmpty ? [:] : try await renderer.retouchSources(for: patches, settings: settings, refused: refused)
+                let choice = try await renderer.retouchSourceChoice(for: strokes, settings: settings, refused: refused)
                 guard self.renderer === renderer else { return }
-                let update: (inout Adjustments) -> Void = { a in
-                    for stroke in strokes {
-                        if let ev = exposures[stroke.id], let i = a.retouch.firstIndex(where: { $0 == stroke }) {
-                            a.retouch[i].exposure = ev
-                        }
-                        if let source = sources[stroke.id],
-                           let i = a.retouch.firstIndex(where: { $0.id == stroke.id && $0.mode == stroke.mode && $0.source == stroke.source && $0.points == stroke.points && $0.radius == stroke.radius }) {
-                            a.retouch[i].source = source
-                        }
-                    }
-                }
-                if refresh { edit(update) } else { editSilently(update) }
+                if refresh { edit { $0.apply(choice) } } else { editSilently { $0.apply(choice) } }
             } catch is CancellationError {
             } catch { if self.renderer === renderer { self.error = error.localizedDescription } }
         }
@@ -505,7 +487,7 @@ extension EditorModel {
     /// Removes strokes in one undoable edit, and found dust spots, which are not part of the edit yet.
     func removeRetouch(_ ids: Set<UUID>) {
         dustSpots.removeAll { ids.contains($0.id) }
-        pendingFills.removeAll { ids.contains($0) }
+        fillQueue.drop(ids)
         if adjustments.retouch.contains(where: { ids.contains($0.id) }) { edit { $0.retouch.removeAll { ids.contains($0.id) } } }
         selectedRetouchIDs.subtract(ids)
     }
@@ -513,27 +495,26 @@ extension EditorModel {
 
     // MARK: AI fill
 
-    static func fillKey(_ stroke: RetouchStroke) -> String { "\(stroke.id) \(RetouchFill.footprint(of: stroke))" }
+    /// Remove strokes waiting for their AI fill.
+    var pendingFills: [UUID] { fillQueue.pending }
+    var fillFailures: [String: String] { fillQueue.failures }
     /// Why the stroke has no AI fill, when one was tried for its current footprint and could not be made.
-    func fillFailure(_ stroke: RetouchStroke) -> String? { stroke.needsFill ? fillFailures[Self.fillKey(stroke)] : nil }
+    func fillFailure(_ stroke: RetouchStroke) -> String? { fillQueue.failure(for: stroke) }
     /// Queues every stroke that asks for an AI fill and has none for its footprint: after it is drawn or moved, an undo,
     /// a paste, an agent's edit, or opening a photo whose fills were left out of XMP. Never in the middle of a gesture.
     func scheduleFills() {
-        guard renderer != nil, gestureStart == nil, BundledModel.inpaint.isAvailable, adjustments.retouch.contains(where: \.generative) else { return }
-        for stroke in adjustments.retouch where stroke.needsFill && !pendingFills.contains(stroke.id) && fillFailures[Self.fillKey(stroke)] == nil {
-            pendingFills.append(stroke.id)
-        }
-        if fillTask == nil, !pendingFills.isEmpty { fillTask = Task { await runFills() } }
+        guard renderer != nil, gestureStart == nil, BundledModel.inpaint.isAvailable else { return }
+        if fillQueue.schedule(adjustments.retouch), fillTask == nil { fillTask = Task { await runFills() } }
     }
     /// Makes the queued fills in stroke order, each from the photo with the strokes before it applied, so a later
     /// stroke's fill sees the earlier ones filled. A fill lands without an undo step of its own, and only on states of the
     /// photo where the stroke still has the footprint it was made for.
     private func runFills() async {
-        while !Task.isCancelled, let renderer, let stroke = adjustments.retouch.first(where: { pendingFills.contains($0.id) }) {
+        while !Task.isCancelled, let renderer, let stroke = fillQueue.next(in: adjustments.retouch) {
             let id = stroke.id
-            guard stroke.needsFill else { pendingFills.removeAll { $0 == id }; continue }
+            guard stroke.needsFill else { fillQueue.finish(id); continue }
             do {
-                let job = try await renderer.prepareInpaint(id, settings: adjustments, variant: fillVariants[id] ?? 0)
+                let job = try await renderer.prepareInpaint(id, settings: adjustments, variant: fillQueue.variant(id))
                 fillProgress = job.windows > 1 ? (0, job.windows) : nil
                 defer { fillProgress = nil }
                 // Off the main actor; cancelling this task stops the job between windows.
@@ -542,54 +523,40 @@ extension EditorModel {
                 }
                 let fill = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
                 guard !Task.isCancelled, self.renderer === renderer else { return }
-                editSilently { a in
-                    for i in a.retouch.indices where a.retouch[i].id == id && a.retouch[i].needsFill && RetouchFill.footprint(of: a.retouch[i]) == fill.footprint {
-                        a.retouch[i].fill = fill
-                    }
-                }
+                editSilently { $0.placeFill(fill, on: id) }
             } catch is CancellationError {
                 return
             } catch {
                 guard !Task.isCancelled, self.renderer === renderer else { return }
-                fillFailures[Self.fillKey(stroke)] = error.localizedDescription
+                fillQueue.fail(stroke, error.localizedDescription)
             }
-            pendingFills.removeAll { $0 == id }
+            fillQueue.finish(id)
         }
-        if !Task.isCancelled { fillTask = nil; pendingFills = [] }
+        if !Task.isCancelled { fillTask = nil; fillQueue.cancel() }
     }
     /// Escape or Cancel: stops making fills. The strokes waiting turn to patch fills, as one undoable edit, so Undo asks
     /// for their fills again.
     @discardableResult func cancelFills() -> Bool {
-        guard !pendingFills.isEmpty else { return false }
-        let ids = Set(pendingFills)
-        fillTask?.cancel(); fillTask = nil; pendingFills = []; fillProgress = nil
-        edit { a in for i in a.retouch.indices where ids.contains(a.retouch[i].id) { a.retouch[i].generative = false } }
+        guard !fillQueue.isEmpty else { return false }
+        let ids = fillQueue.cancel()
+        fillTask?.cancel(); fillTask = nil; fillProgress = nil
+        edit { $0.patchInstead(ids) }
         return true
     }
     func resetFills() {
-        fillTask?.cancel(); fillTask = nil; pendingFills = []; fillProgress = nil; fillFailures = [:]; fillVariants = [:]
+        fillTask?.cancel(); fillTask = nil; fillProgress = nil; fillQueue.reset()
     }
     /// The AI fill toggle of Remove strokes; off drops their fills and uses a patch.
     func setGenerative(_ ids: Set<UUID>, _ on: Bool) {
-        if on { ids.forEach(forgetFillFailures) }
-        // A fill already being made is dropped when it lands, since the stroke no longer asks for one.
-        if !on { pendingFills.removeAll { ids.contains($0) } }
-        edit { a in
-            for i in a.retouch.indices where ids.contains(a.retouch[i].id) && a.retouch[i].mode == .remove {
-                a.retouch[i].generative = on; if !on { a.retouch[i].fill = nil }
-            }
-        }
+        if on { fillQueue.forgetFailures(ids) } else { fillQueue.drop(ids) }
+        edit { $0.setGenerative(on, ids) }
     }
     func setGenerative(_ id: UUID, _ on: Bool) { setGenerative([id], on) }
     /// Other fills from other windows around the strokes; Undo brings back the ones they replace.
     func refreshFills(_ ids: Set<UUID>) {
-        for id in ids { fillVariants[id, default: 0] += 1; forgetFillFailures(id) }
-        edit { a in for i in a.retouch.indices where ids.contains(a.retouch[i].id) { a.retouch[i].fill = nil } }
+        fillQueue.refresh(ids)
+        edit { $0.dropFills(ids) }
         scheduleFills()
-    }
-    private func forgetFillFailures(_ id: UUID) {
-        let prefix = id.uuidString + " "
-        fillFailures = fillFailures.filter { !$0.key.hasPrefix(prefix) }
     }
 }
 
@@ -687,7 +654,7 @@ extension EditorModel {
         let picks = objectSelection + more
         objectSelection = []
         let made = picks.flatMap(\.strokes)
-        let strokes = Array(made.prefix(max(0, DustFinder.strokeLimit - adjustments.retouch.count)))
+        let strokes = adjustments.fittingRetouch(made)
         guard !strokes.isEmpty else { return }
         edit { $0.retouch += strokes }
         // Every stroke gets a source nearby: a patch fills from it, and an AI fill shown finer than it was made takes its
@@ -756,7 +723,7 @@ extension EditorModel {
             let (faces, found) = try await renderer.blemishStrokes(settings, modelURL: url, sensitivity: sensitivity, region: region, faces: region == nil ? faces : nil)
             try Task.checkCancellation()
             guard self.renderer === renderer else { return }
-            let strokes = Array(found.prefix(DustFinder.strokeLimit - adjustments.retouch.count))
+            let strokes = adjustments.fittingRetouch(found)
             if strokes.isEmpty {
                 blemishReport = faces == 0 ? L10n.tr("No face found") : L10n.tr("No new blemishes found")
             } else {
@@ -778,12 +745,7 @@ extension EditorModel {
     /// A group picture on Everyone: a face's shape is one person's, so there is none to show.
     var reshapesEveryone: Bool { isGroupPortrait && reshapeFace == nil }
     /// The reshaped person's warp on the photo: in a group picture the one placed on their face.
-    var reshapeWarp: FaceLiquify? {
-        if reshapesEveryone { return nil }
-        guard let face = reshapeFace else { return adjustments.faceLiquify }
-        let centre = CGPoint(x: face.box.midX, y: face.box.midY)
-        return adjustments.faceLiquifies.first { $0.region.contains(centre) }
-    }
+    var reshapeWarp: FaceLiquify? { reshapesEveryone ? nil : adjustments.faceWarp(on: reshapeFace?.box) }
     /// Where the reshaped person's warp goes while nothing is changed yet.
     var reshapeBase: FaceLiquify? {
         get { reshapesEveryone ? nil : reshapeFace.map { groupPlacements[$0.id] } ?? liquifyBase }
@@ -792,17 +754,7 @@ extension EditorModel {
     /// Puts the reshaped person's warp on the photo (nil takes it out), leaving everyone else's.
     func storeReshapeWarp(_ warp: FaceLiquify?) {
         if reshapesEveryone { return }
-        guard let face = reshapeFace else {
-            if warp != nil || adjustments.faceLiquify != nil { edit { $0.faceLiquify = warp } }
-            return
-        }
-        let centre = CGPoint(x: face.box.midX, y: face.box.midY)
-        let index = adjustments.faceLiquifies.firstIndex { $0.region.contains(centre) }
-        guard warp != nil || index != nil else { return }
-        edit { a in
-            if let index { if let warp { a.faceLiquifies[index] = warp } else { a.faceLiquifies.remove(at: index) } }
-            else if let warp, a.faceLiquifies.count < 20 { a.faceLiquifies.append(warp) }
-        }
+        if let change = adjustments.faceWarpEdit(warp, on: reshapeFace?.box) { edit(change) }
     }
 
     var currentFaceRegion: CGRect? { reshapesEveryone ? nil : faceRegion ?? reshapeWarp?.region ?? reshapeBase?.region }
@@ -826,8 +778,7 @@ extension EditorModel {
     /// Several controls at once, as a handle that moves two (a mouth corner: width and smile) sets them.
     func setLiquify(_ values: [(WritableKeyPath<FaceLiquify, Double>, Double)]) {
         guard currentFaceRegion != nil else { return }
-        var warp = liquify
-        for (path, value) in values { warp[keyPath: path] = min(1, max(-1, value)) }
+        let warp = liquify.setting(values)
         faceRegion = nil
         if warp.isIdentity {
             reshapeBase = warp
@@ -883,13 +834,7 @@ extension EditorModel {
             guard self.renderer === renderer else { return }
             guard !made.isEmpty else { editingFaceRegion = true; blemishReport = L10n.tr("No face found"); return }
             editingFaceRegion = false; blemishReport = nil
-            edit { a in
-                let replaced = { (m: PhotoMask) in m.portraitCorrection == kind && (region != nil || PortraitFace.covers(m.face, faces ?? [])) || (m.portraitCorrection == kind && faces == nil) }
-                let opacity = a.masks.first(where: replaced)?.opacity
-                a.masks.removeAll(where: replaced)
-                guard a.masks.count + made.count <= PhotoMask.maxCount else { return }
-                a.masks += made.map { var m = $0; if let opacity { m.opacity = opacity }; return m }
-            }
+            edit { $0.placePortraitCorrection(kind, made, faces: faces, region: region) }
         }
     }
 }
