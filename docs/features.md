@@ -296,7 +296,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Settings. With a keyboard, Shift-tap selects the run from the last photo tapped and Command-tap adds or removes one;
   ⌘A selects all, Esc ends selecting, P, X and U flag, 0 to 5 rate, ⌘G groups, ⌘E exports and ⌘⌫ moves to the Trash.
   In Develop, ⌘Z and ⇧⌘Z undo and redo, the arrows step through the photos, ⇧⌘C and ⇧⌘V copy and paste edits,
-  \\ shows the original, ⌥1 to ⌥9 open the tools and Esc goes back. On an iPhone the photos come first and the collections are a step back.
+  \\ shows the original, ⌘1 to ⌘9 open the tools and Esc goes back. On an iPhone the photos come first and the collections are a step back.
 - **People and Map.** People shows a card per person, named first, then Ungrouped; a tap opens their photos, whose
   title names, renames or lists their faces, and touch and hold names, merges or ungroups. Map gathers geotagged
   photos into pins; a pin lists its photos below the map and Show Photos opens them under the place's name.
