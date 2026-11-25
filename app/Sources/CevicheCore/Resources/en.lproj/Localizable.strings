@@ -1593,6 +1593,7 @@
 "In the result. Click to leave it out." = "In the result. Click to leave it out.";
 "Include" = "Include";
 "Include %1$@ Lines in Result" = "Include %1$@ Lines in Result";
+"Include All" = "Include All";
 "Include GPS" = "Include GPS";
 "Include Location" = "Include Location";
 "Include Subfolders" = "Include Subfolders";
@@ -1755,6 +1756,7 @@
 "Layout" = "Layout";
 "Leave Out" = "Leave Out";
 "Leave Out %1$@" = "Leave Out %1$@";
+"Leave Out Flagged" = "Leave Out Flagged";
 "Leave Out and Continue" = "Leave Out and Continue";
 "Leave Out of Merge" = "Leave Out of Merge";
 "Leave Out of Stack" = "Leave Out of Stack";

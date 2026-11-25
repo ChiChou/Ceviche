@@ -3593,3 +3593,5 @@
 "Previews" = "Anteprime";
 "Storage" = "Spazio";
 "The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "La cache conserva i RAW decodificati perché le foto recenti si aprano prima. Oltre il limite delle miniature, quelle delle foto che non guardi da più tempo vengono scartate e ricreate quando tornano in vista.";
+"Include All" = "Includi tutte";
+"Leave Out Flagged" = "Escludi segnalate";

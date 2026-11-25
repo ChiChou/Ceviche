@@ -3593,3 +3593,5 @@
 "Previews" = "預覽";
 "Storage" = "儲存空間";
 "The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "快取保留已解碼的 RAW，以便更快打開最近的照片。超過縮圖上限時，最久未檢視的照片的縮圖會被捨棄，並在再次捲動到可見範圍時重新產生。";
+"Include All" = "全部包含";
+"Leave Out Flagged" = "排除有問題的";

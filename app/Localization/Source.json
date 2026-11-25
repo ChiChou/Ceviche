@@ -62,7 +62,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:266",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:266",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:256"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:279"
     ]
   },
   {
@@ -94,7 +94,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:266",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:266",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:256"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:279"
     ]
   },
   {
@@ -103,7 +103,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:243"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:266"
     ]
   },
   {
@@ -117,7 +117,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:263",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:263",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:254"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:277"
     ]
   },
   {
@@ -151,7 +151,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:243"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:266"
     ]
   },
   {
@@ -160,7 +160,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:243"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:266"
     ]
   },
   {
@@ -420,7 +420,7 @@
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:152",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:53",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:59",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:319",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:315",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:49",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:54"
     ]
@@ -575,7 +575,7 @@
   {
     "key": "%1$@ didn’t finish.",
     "source": "\"\\(title) didn’t finish.\"",
-    "context": "Sources/CevicheMobile/Tools/MergeModel.swift:450"
+    "context": "Sources/CevicheMobile/Tools/MergeModel.swift:446"
   },
   {
     "key": "%1$@ does not contain a Core ML model.",
@@ -671,7 +671,7 @@
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:52",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:58",
       "Sources/CevicheMac/Tools/TimelapseFilmstrip.swift:90",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:319",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:315",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:49",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:53"
     ]
@@ -778,7 +778,7 @@
   {
     "key": "%1$@ is not reachable from this Mac, so there is no preview. The export still runs for every photo it can read.",
     "source": "\"\\(current.filename) is not reachable from this Mac, so there is no preview. The export still runs for every photo it can read.\"",
-    "context": "Sources/CevicheMac/Export/ExportSession.swift:104"
+    "context": "Sources/CevicheMac/Export/ExportSession.swift:107"
   },
   {
     "key": "%1$@ is not recalculated; the recorded values are used.",
@@ -881,7 +881,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:242"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:265"
     ]
   },
   {
@@ -890,7 +890,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyObjects.swift:196",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:196",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:138"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:162"
     ]
   },
   {
@@ -1028,7 +1028,7 @@
       "Sources/CevicheMac/Tools/FocusStackView.swift:350",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:118",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:250",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:247"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:270"
     ]
   },
   {
@@ -1057,7 +1057,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+PhotoStack.swift:31",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:261",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:253"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:276"
     ]
   },
   {
@@ -1193,7 +1193,7 @@
       "Sources/CevicheMac/Catalog/PeopleView.swift:494",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:420",
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:9",
-      "Sources/CevicheMac/Export/ExportSession.swift:125",
+      "Sources/CevicheMac/Export/ExportSession.swift:132",
       "Sources/CevicheMac/Import/CardImportView.swift:244",
       "Sources/CevicheMac/Tools/BestFacesView.swift:207",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:186",
@@ -1234,7 +1234,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:202",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:202",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:324"
+      "Sources/CevicheMobile/Tools/MergeModel.swift:320"
     ]
   },
   {
@@ -1823,7 +1823,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:370",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:370",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:112"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:129"
     ]
   },
   {
@@ -1832,7 +1832,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:120",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:120",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:249"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:272"
     ]
   },
   {
@@ -1997,7 +1997,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:370",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:370",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:112"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:129"
     ]
   },
   {
@@ -2097,7 +2097,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:242"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:265"
     ]
   },
   {
@@ -2106,7 +2106,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyObjects.swift:196",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:196",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:138"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:162"
     ]
   },
   {
@@ -2790,7 +2790,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:304",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:304",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:83"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:86"
     ]
   },
   {
@@ -2801,7 +2801,7 @@
       "Sources/CevicheMac/Tools/CatalogModel+LivePhoto.swift:51",
       "Sources/CevicheMac/Tools/CatalogModel+StarTrailAnimation.swift:81",
       "Sources/CevicheMobile/Export/VideoExport.swift:81",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:382",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:378",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:336"
     ]
   },
@@ -3411,7 +3411,7 @@
       "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:120",
       "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:57",
       "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:111",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:441"
+      "Sources/CevicheMobile/Tools/MergeModel.swift:437"
     ]
   },
   {
@@ -3489,7 +3489,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:121"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:144"
     ]
   },
   {
@@ -3861,7 +3861,7 @@
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:55",
       "Sources/CevicheMobile/Tools/MergeView.swift:107",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:158",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:51",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:68",
       "Sources/CevicheCore/Stack/PhotoStackTypes.swift:111"
     ]
   },
@@ -4302,7 +4302,11 @@
   {
     "key": "Brush Size",
     "source": "\"Brush Size\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:236"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:236",
+    "uses": [
+      "Sources/CevicheMac/Tools/NightSkyView.swift:236",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:111"
+    ]
   },
   {
     "key": "Brush size, in points on screen; [ and ] make it smaller and larger",
@@ -4596,7 +4600,7 @@
       "Sources/CevicheMobile/Library/People/PeopleView.swift:169",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:175",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:343",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:98"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:112"
     ]
   },
   {
@@ -4658,7 +4662,7 @@
     "context": "Sources/CevicheMobile/Tools/MergeView.swift:91",
     "uses": [
       "Sources/CevicheMobile/Tools/MergeView.swift:91",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:166"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:204"
     ]
   },
   {
@@ -5029,7 +5033,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Archive.swift:47",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogModel+Archive.swift:47",
-      "Sources/CevicheMac/Export/ExportSession.swift:133",
+      "Sources/CevicheMac/Export/ExportSession.swift:140",
       "Sources/CevicheMac/Export/WatermarkControls.swift:24"
     ]
   },
@@ -5252,7 +5256,7 @@
   {
     "key": "Choose the folder exported photos go to.",
     "source": "\"Choose the folder exported photos go to.\"",
-    "context": "Sources/CevicheMac/Export/ExportSession.swift:133"
+    "context": "Sources/CevicheMac/Export/ExportSession.swift:140"
   },
   {
     "key": "Choose the original file for this photo.",
@@ -5348,7 +5352,7 @@
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:201",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:227",
       "Sources/CevicheMobile/Library/Map/LocationPicker.swift:85",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:94"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:99"
     ]
   },
   {
@@ -6358,7 +6362,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+LivePhoto.swift:58",
       "Sources/CevicheMac/Tools/CatalogModel+StarTrailAnimation.swift:88",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:393",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:389",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:348"
     ]
   },
@@ -6369,7 +6373,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+Timelapse.swift:57",
       "Sources/CevicheMac/Tools/CatalogModel+Timelapse.swift:78",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:371",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:367",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:304"
     ]
   },
@@ -6699,9 +6703,9 @@
   {
     "key": "Create Live Photo",
     "source": "\"Create Live Photo\"",
-    "context": "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:91",
+    "context": "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:105",
     "uses": [
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:91",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:105",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:19"
     ]
   },
@@ -6763,7 +6767,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+LivePhoto.swift:28",
       "Sources/CevicheMac/Tools/CatalogModel+StarTrailAnimation.swift:48",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:385",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:381",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:339"
     ]
   },
@@ -6800,7 +6804,7 @@
     "context": "Sources/CevicheMac/Tools/CatalogModel+Timelapse.swift:52",
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+Timelapse.swift:52",
-      "Sources/CevicheMobile/Tools/MergeModel.swift:365",
+      "Sources/CevicheMobile/Tools/MergeModel.swift:361",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:296"
     ]
   },
@@ -6851,7 +6855,8 @@
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:82",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:98",
-      "Sources/CevicheMobile/Develop/DevelopView.swift:514"
+      "Sources/CevicheMobile/Develop/DevelopView.swift:514",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:128"
     ]
   },
   {
@@ -7412,7 +7417,7 @@
       "Sources/CevicheMac/Import/CardImportView.swift:213",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:339",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:264",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:136"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:160"
     ]
   },
   {
@@ -8516,7 +8521,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:309",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:309",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:86"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:91"
     ]
   },
   {
@@ -8535,7 +8540,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyObjects.swift:200",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:200",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:142",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:166",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:85"
     ]
   },
@@ -8560,7 +8565,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:397",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:167",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:79"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:100"
     ]
   },
   {
@@ -8645,7 +8650,7 @@
       "Sources/CevicheMac/Export/ExportButton.swift:27",
       "Sources/CevicheMac/Export/ExportButton.swift:30",
       "Sources/CevicheMac/Export/ExportDialog.swift:49",
-      "Sources/CevicheMac/Export/ExportSession.swift:129",
+      "Sources/CevicheMac/Export/ExportSession.swift:136",
       "Sources/CevicheMac/Tools/FiltersModel.swift:421",
       "Sources/CevicheMac/Tools/FiltersModel.swift:426",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:190",
@@ -8884,7 +8889,7 @@
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:596",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:126",
       "Sources/CevicheMac/Export/ExportSession.swift:65",
-      "Sources/CevicheMac/Export/ExportSession.swift:129",
+      "Sources/CevicheMac/Export/ExportSession.swift:136",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:22",
       "Sources/CevicheMac/Tools/FiltersModel.swift:382",
       "Sources/CevicheMobile/Develop/DevelopView.swift:205",
@@ -8893,7 +8898,7 @@
       "Sources/CevicheMobile/Library/LibraryGrid.swift:240",
       "Sources/CevicheMobile/Library/LibraryView.swift:124",
       "Sources/CevicheMobile/Tools/Filters/FiltersView.swift:20",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:90",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:104",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseView.swift:22"
     ]
   },
@@ -11225,14 +11230,20 @@
     "context": "Sources/CevicheMac/Tools/NightSkyObjects.swift:199",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:199",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:141",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:87"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:165",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:87",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:84"
     ]
   },
   {
     "key": "Include %1$@ Lines in Result",
     "source": "\"Include \\(lines.count) Lines in Result\"",
     "context": "Sources/CevicheMac/Tools/NightSkyObjects.swift:52"
+  },
+  {
+    "key": "Include All",
+    "source": "\"Include All\"",
+    "context": "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:18"
   },
   {
     "key": "Include GPS",
@@ -11322,7 +11333,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:472",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:472",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:78"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:99"
     ]
   },
   {
@@ -11341,7 +11352,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:397",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:167",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:79"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:100"
     ]
   },
   {
@@ -12277,13 +12288,19 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:423",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:423",
-      "Sources/CevicheMac/Tools/IDPhotoDialog.swift:634"
+      "Sources/CevicheMac/Tools/IDPhotoDialog.swift:634",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:84"
     ]
   },
   {
     "key": "Leave Out %1$@",
     "source": "\"Leave Out \\(photo.asset.filename)\"",
     "context": "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:117"
+  },
+  {
+    "key": "Leave Out Flagged",
+    "source": "\"Leave Out Flagged\"",
+    "context": "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:21"
   },
   {
     "key": "Leave Out and Continue",
@@ -13531,8 +13548,8 @@
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:18",
       "Sources/CevicheMobile/Tools/BestFaces/BestFacesView.swift:35",
       "Sources/CevicheMobile/Tools/MergeView.swift:67",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:87",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:89"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:101",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:103"
     ]
   },
   {
@@ -15805,7 +15822,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:354",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:354",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:104"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:125"
     ]
   },
   {
@@ -17468,7 +17485,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:188",
       "Sources/CevicheMobile/Develop/DevelopView.swift:269",
       "Sources/CevicheMobile/Develop/DevelopView.swift:304",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:107"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:119"
     ]
   },
   {
@@ -17988,7 +18005,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:306",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:306",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:84"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:87"
     ]
   },
   {
@@ -18482,9 +18499,9 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:311",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:311",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:87",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:89",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:91"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:92",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:94",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:96"
     ]
   },
   {
@@ -19956,7 +19973,8 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:365",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:365",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:82"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:84",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:111"
     ]
   },
   {
@@ -21125,7 +21143,7 @@
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:115",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:258",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:366",
-      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:236"
+      "Sources/CevicheMobile/Tools/NightSky/MergeModel+NightSky.swift:259"
     ]
   },
   {
@@ -22806,7 +22824,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:187",
       "Sources/CevicheMobile/Develop/DevelopView.swift:267",
       "Sources/CevicheMobile/Develop/DevelopView.swift:303",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:106"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:118"
     ]
   },
   {
@@ -23198,8 +23216,8 @@
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:278",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyView.swift:278",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:85",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:94"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:88",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:99"
     ]
   },
   {
@@ -23235,9 +23253,10 @@
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:102",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:379",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:377",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:140",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:164",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:92",
-      "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:101"
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyObjects.swift:101",
+      "Sources/CevicheMobile/Tools/NightSky/NightSkyStrip.swift:83"
     ]
   },
   {
@@ -23374,7 +23393,8 @@
     "context": "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:206",
     "uses": [
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:206",
-      "Sources/CevicheMac/Tools/TimelapseDialog.swift:235"
+      "Sources/CevicheMac/Tools/TimelapseDialog.swift:235",
+      "Sources/CevicheMobile/Tools/NightSky/StarTrailFrame.swift:63"
     ]
   },
   {

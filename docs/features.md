@@ -359,14 +359,14 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   burnt in, the preview shows the result with the base photo's edits and the result takes them; HDR, Focus Stack and
   Stack show the photos in a strip, where a tap makes one the base. Merges, tools and culling screens share
   Photos' editing bar: close at one end, the screen's name and progress in the middle, its action at the other. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
-  frame with the Mac's Trails, Glow and Meteors options and the frame set on the preview; a video's Export… opens a
+  frame with the Mac's Trails, Glow and Meteors options; the movie's frame is drawn on the whole preview, and Crop in the bar lets it be moved, resized from a corner or reset with a double tap; a video's Export… opens a
   sheet with Encoder, Container, Color and Quality, then Save or Share, which starts it. The three
   night-sky merges are laid out like the editor in Photos: a rail of modes at the side (Objects, Sky, Photos,
-  Options), undo and redo and Outlines in the bar with what the result is made of, and As Captured for meteors.
+  Options), undo and redo, then Outlines (and Crop for a movie) in the bar with what the result is made of, Merge in words at the far end, and As Captured for meteors.
   Objects lists the lines found as the Mac does, with kept and left-out counts, All, Aircraft or Meteors, and an
-  aircraft's pieces under it; Sky has Sky Edge, Add to Sky, Remove from Sky, Use Photo Here, Everything Is Sky and
-  Revert to Detected on a dial over the photo; Photos shows each photo's time with Base and a check that leaves it
-  out. The result is written as the Mac app writes it and added to the catalog; progress shows in
+  aircraft's pieces under it; Sky has Sky Edge on its own, the Add to Sky, Remove from Sky and Use Photo Here brushes together, and Everything Is Sky
+  and Revert to Detected together, with a card naming what its dial sets; Photos shows each photo's time with Base and a check that leaves it
+  out, touch and hold for Use as Base or Leave Out, and Include All or Leave Out Flagged over the strip. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting. Where iOS gives the app less than 8 GB, as on an iPhone, a merge takes a short
   series: up to 5 photos for HDR, 12 for a panorama, 15 for a focus stack and 30 for a stack or a night-sky merge.
