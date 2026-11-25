@@ -153,7 +153,6 @@
 "%1$@ of %2$@ photo" = "%1$@ of %2$@ photo";
 "%1$@ of %2$@ photos" = "%1$@ of %2$@ photos";
 "%1$@ of %2$@ photos - %3$@" = "%1$@ of %2$@ photos - %3$@";
-"%1$@ of %2$@ photos can be corrected" = "%1$@ of %2$@ photos can be corrected";
 "%1$@ of %2$@ photos couldn’t be merged: %3$@" = "%1$@ of %2$@ photos couldn’t be merged: %3$@";
 "%1$@ of %2$@ photos have faces" = "%1$@ of %2$@ photos have faces";
 "%1$@ of %2$@ photos stacked" = "%1$@ of %2$@ photos stacked";
@@ -886,9 +885,8 @@
 "Core requirements met" = "Core requirements met";
 "Corner" = "Corner";
 "Corners" = "Corners";
-"Correct %1$@ Photos" = "Correct %1$@ Photos";
-"Correct 1 Photo" = "Correct 1 Photo";
 "Correct Breathing" = "Correct Breathing";
+"Correct Faces" = "Correct Faces";
 "Correct Focus Breathing" = "Correct Focus Breathing";
 "Correct along guides drawn on the photo" = "Correct along guides drawn on the photo";
 "Correct bodies" = "Correct bodies";
@@ -1285,7 +1283,6 @@
 "Face" = "Face";
 "Face Liquify" = "Face Liquify";
 "Face correction stopped" = "Face correction stopped";
-"Face correction stopped after %1$@ of %2$@ photos" = "Face correction stopped after %1$@ of %2$@ photos";
 "Face exposure" = "Face exposure";
 "Face spots" = "Face spots";
 "Face width" = "Face width";
@@ -2054,7 +2051,6 @@
 "Newest First" = "Newest First";
 "Next Photo" = "Next Photo";
 "Next frame" = "Next frame";
-"Next photo" = "Next photo";
 "Night" = "Night";
 "Night Sky" = "Night Sky";
 "Night Sky Noise Reduction" = "Night Sky Noise Reduction";
@@ -2152,7 +2148,6 @@
 "Noise Reduction" = "Noise Reduction";
 "Noise reduction" = "Noise reduction";
 "Noise reduction stopped" = "Noise reduction stopped";
-"Noise reduction stopped after %1$@ of %2$@ photos" = "Noise reduction stopped after %1$@ of %2$@ photos";
 "Noise reduction strength" = "Noise reduction strength";
 "None" = "None";
 "None found" = "None found";
@@ -2402,7 +2397,6 @@
 "Preview: first 4 of 16" = "Preview: first 4 of 16";
 "Previous Photo" = "Previous Photo";
 "Previous frame" = "Previous frame";
-"Previous photo" = "Previous photo";
 "Primary calibration" = "Primary calibration";
 "Print" = "Print";
 "Print Proof" = "Print Proof";
@@ -2495,12 +2489,10 @@
 "Redo (⇧⌘Z)" = "Redo (⇧⌘Z)";
 "Redoes what Undo took back (⇧⌘Z)" = "Redoes what Undo took back (⇧⌘Z)";
 "Redraw" = "Redraw";
-"Reduce Noise for %1$@ Photos" = "Reduce Noise for %1$@ Photos";
-"Reduce Noise for 1 Photo" = "Reduce Noise for 1 Photo";
+"Reduce Noise" = "Reduce Noise";
 "Reduce shine" = "Reduce shine";
 "Reducing noise" = "Reducing noise";
 "Reducing noise for %1$@" = "Reducing noise for %1$@";
-"Reducing noise for %1$@ photos" = "Reducing noise for %1$@ photos";
 "Reducing noise in the night sky" = "Reducing noise in the night sky";
 "Ref" = "Ref";
 "Reference" = "Reference";
@@ -2679,9 +2671,6 @@
 "Saved a positive of %1$@" = "Saved a positive of %1$@";
 "Saved and imported looks appear here." = "Saved and imported looks appear here.";
 "Saved corrected copies of %1$@ of %2$@ photos." = "Saved corrected copies of %1$@ of %2$@ photos.";
-"Saved corrected copies of %1$@ photos" = "Saved corrected copies of %1$@ photos";
-"Saved denoised copies of %1$@ of %2$@ photos.\n" = "Saved denoised copies of %1$@ of %2$@ photos.\n";
-"Saved denoised copies of %1$@ photos" = "Saved denoised copies of %1$@ photos";
 "Saved development" = "Saved development";
 "Saved on This Mac" = "Saved on This Mac";
 "Saved positives of %1$@ negatives" = "Saved positives of %1$@ negatives";
@@ -2689,9 +2678,9 @@
 "Saved “%1$@” and applied it to %2$@ photos" = "Saved “%1$@” and applied it to %2$@ photos";
 "Saved “%1$@” and applied it to 1 photo" = "Saved “%1$@” and applied it to 1 photo";
 "Saved “%1$@”. Choose it under Camera Profile in Develop." = "Saved “%1$@”. Choose it under Camera Profile in Develop.";
-"Saves a DNG beside each original." = "Saves a DNG beside each original.";
-"Saves a DNG of each photo." = "Saves a DNG of each photo.";
-"Saves a copy beside each original." = "Saves a copy beside each original.";
+"Saves a DNG beside the original." = "Saves a DNG beside the original.";
+"Saves a DNG of the photo." = "Saves a DNG of the photo.";
+"Saves a copy beside the original." = "Saves a copy beside the original.";
 "Saving %1$@" = "Saving %1$@";
 "Saving…" = "Saving…";
 "Scale" = "Scale";
@@ -2886,7 +2875,6 @@
 "Some Photos Weren’t Changed" = "Some Photos Weren’t Changed";
 "Some Photos Weren’t Corrected" = "Some Photos Weren’t Corrected";
 "Some Photos Weren’t Deleted" = "Some Photos Weren’t Deleted";
-"Some Photos Weren’t Denoised" = "Some Photos Weren’t Denoised";
 "Some Photos Weren’t Duplicated" = "Some Photos Weren’t Duplicated";
 "Some Photos Weren’t Exported" = "Some Photos Weren’t Exported";
 "Some Photos Weren’t Moved" = "Some Photos Weren’t Moved";

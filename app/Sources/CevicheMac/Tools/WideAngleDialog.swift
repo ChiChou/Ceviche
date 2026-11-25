@@ -1,18 +1,14 @@
 import SwiftUI
-import ImageIO
 import CevicheCore
 
-/// What the Wide-Angle Faces dialog shows: one of the photos corrected, beside or split against the photo as shot, with
-/// a tag over each person to leave them as shot, and a click on someone missed adding them. The people and their tags
-/// are kept per photo while the dialog is open; the settings are shared and remembered.
+/// What the Wide-Angle Faces dialog shows: the photo corrected, beside or split against the photo as shot, with a tag
+/// over each person to leave them as shot, and a click on someone missed adding them. The settings are remembered.
 @MainActor
 final class WideAngleModel: ObservableObject {
     enum Stage: Equatable { case loading, ready, refused(String), failed(String) }
 
     let request: WideAngleRequest
     @Published private(set) var stage = Stage.loading
-    /// The photo previewed, by position in the request.
-    @Published var index = 0 { didSet { if index != oldValue { load() } } }
     @Published private(set) var before: CGImage?
     @Published private(set) var after: CGImage?
     @Published private(set) var mesh: WideAngleMesh?
@@ -24,15 +20,14 @@ final class WideAngleModel: ObservableObject {
             render()
         }
     }
-    /// Each photo's people as the dialog has them, by asset ID, for the photos it has shown.
-    @Published private(set) var people: [String: [WideAnglePerson]] = [:]
-    /// Focal lengths typed in the dialog (35 mm equivalent), by asset ID; they replace the EXIF's.
-    @Published private(set) var typedFocal: [String: Double] = [:]
-    /// The EXIF's 35 mm equivalent as read from the file, by asset ID: nil inside when the file has none.
-    private var readFocal: [String: Double?] = [:]
-    @Published private(set) var thumbnails: [Int: CGImage] = [:]
+    /// The people as the dialog has them, once found.
+    @Published private(set) var people: [WideAnglePerson]?
+    /// A focal length typed in the dialog (35 mm equivalent); it replaces the EXIF's.
+    @Published private(set) var typedFocal: Double?
+    /// The EXIF's 35 mm equivalent as read from the file: nil inside when the file has none.
+    private var readFocal: Double??
     private weak var catalog: CatalogModel?
-    private var previewers: [String: WideAnglePreviewer] = [:]
+    private var previewer: WideAnglePreviewer?
     private var access: URL?
     private var loadTask: Task<Void, Never>?
     private var renderTask: Task<Void, Never>?
@@ -43,88 +38,63 @@ final class WideAngleModel: ObservableObject {
         settings = UserDefaults.standard.data(forKey: Self.preferenceKey).flatMap { try? JSONDecoder().decode(WideAngleSettings.self, from: $0) } ?? WideAngleSettings()
     }
 
-    var asset: CatalogAsset { request.assets[index] }
+    var asset: CatalogAsset { request.asset }
     /// The EXIF's 35 mm equivalent focal length: the file's once read, else the catalog's.
-    func exifFocal(_ asset: CatalogAsset) -> Double? {
-        if let read = readFocal[asset.id] { return read }
+    var exifFocal: Double? {
+        if let readFocal { return readFocal }
         return asset.focalLength35mm.flatMap { $0 > 0 ? $0 : nil }
     }
-    func focal(_ asset: CatalogAsset) -> Double? { typedFocal[asset.id] ?? exifFocal(asset) }
+    var focal: Double? { typedFocal ?? exifFocal }
     /// Known to have no 35 mm equivalent: the file was read, or the catalog has no focal length at all.
-    private func lacksFocal(_ asset: CatalogAsset) -> Bool {
-        exifFocal(asset) == nil && (readFocal[asset.id] != nil || asset.focalLength == nil)
-    }
-    /// Why a photo can't be corrected: no focal length, or one too long. A photo with an actual focal length but no
+    private var lacksFocal: Bool { exifFocal == nil && (readFocal != nil || asset.focalLength == nil) }
+    /// Why the photo can't be corrected: no focal length, or one too long. A photo with an actual focal length but no
     /// equivalent in the catalog is tried, as the file's sensor size may give one.
-    func refusal(_ asset: CatalogAsset) -> String? {
-        if let focal = focal(asset) { return WideAngleFaces.refusal(focal: focal) }
-        return lacksFocal(asset) ? L10n.tr("No focal length in its EXIF") : nil
+    var refusal: String? {
+        if let focal { return WideAngleFaces.refusal(focal: focal) }
+        return lacksFocal ? L10n.tr("No focal length in its EXIF") : nil
     }
-    /// Sets the current photo's focal length, nil or the EXIF's to use the EXIF's. A photo without one in its EXIF
-    /// passes it to the others without one, as they were most likely shot with the same lens.
+    /// Sets the focal length, nil or the EXIF's to use the EXIF's.
     func setFocal(_ value: Double?) {
         let value = value.flatMap { $0 > 0 ? $0 : nil }
-        let exif = exifFocal(asset)
-        typedFocal[asset.id] = value == exif ? nil : value
-        if exif == nil, let value { for other in request.assets where other.id != asset.id && lacksFocal(other) && typedFocal[other.id] == nil { typedFocal[other.id] = value } }
-        if previewers[asset.id] != nil { updateStage(); render() }
+        typedFocal = value == exifFocal ? nil : value
+        if previewer != nil { updateStage(); render() }
     }
-    /// What Correct runs on: photos it may correct, less those shown here with nobody to correct.
-    var eligible: [CatalogAsset] { request.assets.filter { refusal($0) == nil && people[$0.id].map { $0.contains(where: \.enabled) } != false } }
-    var shownPeople: [WideAnglePerson] { people[asset.id] ?? [] }
+    /// Whether Correct can run: a focal length it may correct, and somebody to correct once the people are found.
+    var canCorrect: Bool { refusal == nil && people.map { $0.contains(where: \.enabled) } != false }
+    var shownPeople: [WideAnglePerson] { people ?? [] }
 
     func start(catalog: CatalogModel) {
         guard self.catalog == nil else { return }
         self.catalog = catalog
         load()
-        guard request.assets.count > 1 else { return }
-        Task {
-            for (number, asset) in request.assets.enumerated() {
-                guard let data = try? await catalog.previews?.data(assetID: asset.id),
-                      let source = CGImageSourceCreateWithData(data as CFData, nil),
-                      let image = ImageDecode.thumbnail(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways: true,
-                          kCGImageSourceThumbnailMaxPixelSize: 240, kCGImageSourceCreateThumbnailWithTransform: true] as CFDictionary) else { continue }
-                thumbnails[number] = image
-            }
-        }
-    }
-    func step(_ offset: Int) {
-        let count = request.assets.count
-        guard count > 1 else { return }
-        index = ((index + offset) % count + count) % count
     }
     func stop() {
         loadTask?.cancel(); renderTask?.cancel()
         access?.stopAccessingSecurityScopedResource(); access = nil
-        previewers = [:]
+        previewer = nil
     }
 
     private func load() {
         guard let catalog else { return }
-        loadTask?.cancel(); renderTask?.cancel()
-        before = nil; after = nil; mesh = nil
         let asset = self.asset
-        if let previewer = previewers[asset.id] { show(previewer); return }
         stage = .loading
         loadTask = Task {
             do {
                 let url = try await catalog.resolveOriginal(asset)
-                access?.stopAccessingSecurityScopedResource(); access = nil
                 if url.startAccessingSecurityScopedResource() { access = url }
                 let exposure = await catalog.denoiseExposure(asset)
                 let retouch = await catalog.retouching(of: [asset], at: [url])[url] ?? []
                 let previewer = try await Task.detached(priority: .userInitiated) { try WideAnglePreviewer(url, exposure: exposure, retouch: retouch) }.value
                 guard !Task.isCancelled else { return }
-                // A few photos stay developed, so stepping back and forth doesn't develop them again.
-                if previewers.count >= 4, let oldest = previewers.keys.first(where: { $0 != asset.id }) { previewers[oldest] = nil }
-                previewers[asset.id] = previewer
-                readFocal[asset.id] = .some(previewer.focalLength)
-                if people[asset.id] == nil { people[asset.id] = previewer.analysis.people }
-                show(previewer)
+                self.previewer = previewer
+                readFocal = .some(previewer.focalLength)
+                people = previewer.analysis.people
+                before = previewer.before
+                updateStage()
+                render()
             } catch {
                 guard !Task.isCancelled else { return }
-                stage = .failed(error.localizedDescription)
-                if request.assets.count == 1 { close(with: Failure(L10n.tr("Couldn’t Correct Faces"), error)) }
+                close(with: Failure(L10n.tr("Couldn’t Correct Faces"), error))
             }
         }
     }
@@ -135,22 +105,17 @@ final class WideAngleModel: ObservableObject {
         catalog.wideAngle = nil; catalog.failure = failure
     }
 
-    private func show(_ previewer: WideAnglePreviewer) {
-        before = previewer.before
-        updateStage()
-        render()
-    }
     /// Ready, or why not: the focal length first, as the people can be fixed on the photo.
     private func updateStage() {
-        if let refusal = refusal(asset) { stage = .refused(refusal) }
+        if let refusal { stage = .refused(refusal) }
         else { stage = shownPeople.isEmpty ? .refused(L10n.tr("No people found. Click a head to add someone.")) : .ready }
     }
 
     /// The correction redrawn for the current people and settings; a newer change stops an older one.
     private func render() {
-        guard let previewer = previewers[asset.id] else { return }
+        guard let previewer else { return }
         renderTask?.cancel()
-        guard refusal(asset) == nil, let focal = focal(asset) else { mesh = nil; after = nil; rendering = false; return }
+        guard refusal == nil, let focal else { mesh = nil; after = nil; rendering = false; return }
         let people = shownPeople, settings = self.settings
         rendering = true
         renderTask = Task {
@@ -171,19 +136,19 @@ final class WideAngleModel: ObservableObject {
 
     /// Corrects or leaves as shot one person; one added by hand is taken away instead.
     func toggle(_ person: WideAnglePerson) {
-        guard var list = people[asset.id], let i = list.firstIndex(where: { $0.id == person.id }) else { return }
+        guard var list = people, let i = list.firstIndex(where: { $0.id == person.id }) else { return }
         if list[i].added { list.remove(at: i) } else { list[i].enabled.toggle() }
-        people[asset.id] = list
+        people = list
         updateStage()
         render()
     }
     /// Adds someone the search missed, with their head at `point` (fractions of the photo as shot).
     func add(at point: CGPoint) {
-        guard let previewer = previewers[asset.id] else { return }
-        var list = people[asset.id] ?? []
+        guard let previewer else { return }
+        var list = people ?? []
         let id = (list.map(\.id).max() ?? -1) + 1
         list.append(.placed(id: id, at: point, like: previewer.analysis.typicalHead, aspect: previewer.analysis.aspect))
-        people[asset.id] = list
+        people = list
         updateStage()
         render()
     }
@@ -199,68 +164,25 @@ struct WideAngleDialog: View {
     }
 
     var body: some View {
-        let count = model.eligible.count
-        ToolWorkspace(title: L10n.tr("Wide-Angle Faces"), status: summary, statusIsWarning: count < model.request.assets.count,
-                      primary: count == 1 ? L10n.tr("Correct 1 Photo") : L10n.tr("Correct \(count) Photos"),
-                      primaryDisabled: count == 0 || !catalog.canStartJob, cancel: close,
-                      action: { catalog.startWideAngle(model.eligible, settings: model.settings, people: model.people, focals: model.typedFocal); close() }) {
+        ToolWorkspace(title: L10n.tr("Wide-Angle Faces"), status: model.asset.filename, primary: L10n.tr("Correct Faces"),
+                      primaryDisabled: !model.canCorrect || !catalog.canStartJob, cancel: close,
+                      action: { catalog.startWideAngle(model.asset, settings: model.settings, people: model.people, focal: model.typedFocal); close() }) {
             FormSegments(title: L10n.tr("Compare"), selection: $compare, options: Compare.allCases, label: { $0.title }).labelsHidden().fixedSize()
             Toggle(L10n.tr("Show Grid"), isOn: $showGrid)
-            // \ shows the photo as shot, as in other RAW editors; the arrows step through the photos.
+            // \ shows the photo as shot, as in other RAW editors.
             Button(L10n.tr("Before")) { showBefore.toggle() }.keyboardShortcut("\\", modifiers: []).frame(width: 0, height: 0).opacity(0)
-            if model.request.assets.count > 1 {
-                Button(L10n.tr("Previous photo")) { model.step(-1) }.keyboardShortcut(.leftArrow, modifiers: []).frame(width: 0, height: 0).opacity(0)
-                Button(L10n.tr("Next photo")) { model.step(1) }.keyboardShortcut(.rightArrow, modifiers: []).frame(width: 0, height: 0).opacity(0)
-            }
         } content: {
             HStack(spacing: 0) {
                 // The photo runs to the edges on one surround; the name is in the title, so no bar repeats it.
-                VStack(spacing: 0) {
-                    preview.padding(12).frame(maxWidth: .infinity, maxHeight: .infinity)
-                    if model.request.assets.count > 1 { filmstrip.padding(.horizontal, 12).padding(.bottom, 10) }
-                }.background(Theme.imageSurround)
+                preview.padding(12).frame(maxWidth: .infinity, maxHeight: .infinity).background(Theme.imageSurround)
                 ToolSidePanel { options }
             }
         }
-        .onChange(of: model.index) { _, _ in resetZoom() }
         .onAppear { model.start(catalog: catalog); watchScrolling() }
         .onDisappear { model.stop(); if let scrollMonitor { NSEvent.removeMonitor(scrollMonitor) }; scrollMonitor = nil }
     }
 
     private func close() { model.stop(); catalog.wideAngle = nil }
-
-    private var summary: String {
-        let photos = model.request.assets, count = model.eligible.count
-        if count < photos.count { return L10n.tr("\(count) of \(photos.count) photos can be corrected") }
-        return photos.count == 1 ? photos[0].filename : "\(model.asset.filename) · \(L10n.tr("\(model.index + 1) of \(photos.count)"))"
-    }
-
-    // MARK: Photos
-
-    private var filmstrip: some View {
-        ScrollViewReader { reader in
-            ScrollView(.horizontal) {
-                LazyHStack(spacing: 6) {
-                    ForEach(model.request.assets.indices, id: \.self) { index in
-                        let asset = model.request.assets[index], refusal = model.refusal(asset)
-                        Rectangle().fill(Theme.ink.opacity(0.06))
-                            .overlay { if let image = model.thumbnails[index] { Image(decorative: image, scale: 1).resizable().scaledToFill().opacity(refusal == nil ? 1 : 0.35) } }
-                            .overlay(alignment: .topTrailing) {
-                                if refusal != nil { Image(systemName: "exclamationmark.triangle.fill").font(.system(size: 10)).foregroundStyle(.yellow).padding(4) }
-                            }
-                            .frame(width: 84, height: 56).clipped()
-                            .selectionRing(index == model.index ? Theme.accent : nil)
-                            .contentShape(Rectangle())
-                            .onTapGesture { model.index = index }
-                            .help(refusal.map { "\(asset.filename): \($0)" } ?? asset.filename)
-                            .id(index)
-                    }
-                }.padding(.vertical, 2)
-            }
-            .frame(height: 62)
-            .onChange(of: model.index) { _, index in withAnimation(.easeOut(duration: 0.15)) { reader.scrollTo(index, anchor: .center) } }
-        }
-    }
 
     // MARK: Preview
 
@@ -376,7 +298,6 @@ struct WideAngleDialog: View {
         let rect = viewport.imageRect(image: imageSize, canvas: canvas)
         return CGRect(x: -rect.minX, y: -rect.minY, width: canvas.width, height: canvas.height)
     }
-    private func resetZoom() { viewport.fit(); pinchStart = nil }
 
     private func fitted(_ aspect: CGFloat, in size: CGSize) -> CGSize {
         size.width / max(1, size.height) > aspect ? CGSize(width: size.height * aspect, height: size.height) : CGSize(width: size.width, height: size.width / aspect)
@@ -533,7 +454,7 @@ struct WideAngleDialog: View {
             ExportRow(L10n.tr("Straight Lines")) { percent($model.settings.straightLines, reset: 0.5) }
                 .help(L10n.tr("How firmly the background keeps its lines straight around the people"))
             // A RAW's copy is always a DNG, so the choice is only offered for the rest.
-            if model.request.assets.contains(where: { !CatalogModel.isRAW($0) }) {
+            if !CatalogModel.isRAW(model.asset) {
                 ExportRow(L10n.tr("Format")) {
                     Picker(L10n.tr("Format"), selection: $model.settings.format) {
                         Text(L10n.tr("Original")).tag(ProcessedFormat.original)
@@ -542,7 +463,7 @@ struct WideAngleDialog: View {
                 }
                 .help(L10n.tr("Original keeps HEIC, JPEG, TIFF and PNG and saves other formats as HEIC. TIFF is 16-bit. RAWs are always saved as DNG."))
             }
-            Text(L10n.tr("Saves a copy beside each original."))
+            Text(L10n.tr("Saves a copy beside the original."))
                 .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 .help(L10n.tr("The copy keeps the photo's EXIF and edits, and the HDR of a HEIC or JPEG, but not crops, masks or retouching."))
         }.font(.system(size: 12)).frame(maxWidth: .infinity, alignment: .leading)
@@ -550,18 +471,17 @@ struct WideAngleDialog: View {
 
     /// The 35 mm equivalent focal length, the EXIF's until another is typed; Correct waits for one when the EXIF has none.
     private var lens: some View {
-        let asset = model.asset, exif = model.exifFocal(asset)
+        let exif = model.exifFocal
         return HStack(spacing: 6) {
-            TextField(L10n.tr("Focal length"), value: Binding(get: { model.focal(asset) }, set: { model.setFocal($0) }),
+            TextField(L10n.tr("Focal length"), value: Binding(get: { model.focal }, set: { model.setFocal($0) }),
                       format: .number.precision(.fractionLength(0...1)))
                 .frame(width: 56).textFieldStyle(.formField).monospacedDigit()
             Text(L10n.tr("mm")).foregroundStyle(.secondary)
-            if model.typedFocal[asset.id] != nil, let exif {
+            if model.typedFocal != nil, let exif {
                 Button(L10n.tr("EXIF")) { model.setFocal(nil) }.buttonStyle(.secondaryAction).controlSize(.small)
                     .help(L10n.tr("Use the EXIF's \(Int(exif.rounded())) mm"))
             }
         }
-        .id(asset.id)
         .help(L10n.tr("35 mm equivalent focal length"))
     }
 

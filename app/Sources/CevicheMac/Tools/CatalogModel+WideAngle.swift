@@ -3,78 +3,56 @@ import CevicheCore
 
 struct WideAngleRequest: Identifiable {
     let id = UUID()
-    /// In capture order.
-    let assets: [CatalogAsset]
+    let asset: CatalogAsset
 }
 
 /// Wide-Angle Faces: people at the sides of a wide-angle group shot made their true shape again, written beside the
 /// photo with its EXIF, metadata and edits: a RAW as a linear DNG, a HEIC or JPEG in its own format, gain map included.
+/// One photo at a time, as each needs its own people and lens checked in the dialog.
 extension CatalogModel {
     func canCorrectWideAngle(_ targets: [CatalogAsset]) -> Bool {
-        store != nil && canStartJob && !toolOpen && !targets.isEmpty && targets.allSatisfy { $0.inLibrary && !$0.isLatent }
+        store != nil && canStartJob && !toolOpen && targets.count == 1 && targets[0].inLibrary && !targets[0].isLatent
     }
-    /// Opens the Wide-Angle Faces dialog for the selected photos. Photos it can't correct yet, without a focal length
-    /// or shot with a long lens, are shown there with why, and a focal length typed there makes them correctable.
+    /// Opens the Wide-Angle Faces dialog for the selected photo. A photo it can't correct yet, without a focal length
+    /// or shot with a long lens, is shown there with why, and a focal length typed there makes it correctable.
     func requestWideAngle(_ targets: [CatalogAsset]) {
         guard canCorrectWideAngle(targets) else { return }
-        wideAngle = WideAngleRequest(assets: targets.sorted { ($0.captureTime ?? "", $0.filename) < ($1.captureTime ?? "", $1.filename) })
+        wideAngle = WideAngleRequest(asset: targets[0])
     }
 
-    /// Corrects the photos one after another as one background job. `people` holds the dialog's people for the photos
-    /// it showed; the others are found anew. `focals` are the focal lengths typed there. Each DNG goes beside its photo when that folder is on this Mac and
-    /// writable, and is imported in place; otherwise it is copied into the catalog's originals.
-    func startWideAngle(_ photos: [CatalogAsset], settings: WideAngleSettings, people: [String: [WideAnglePerson]], focals: [String: Double]) {
-        guard let store, !photos.isEmpty else { return }
-        let title = photos.count == 1 ? L10n.tr("Correcting faces in \(photos[0].filename)") : L10n.tr("Correcting faces in \(photos.count.formatted()) photos")
-        var outputs: [PendingOutput] = []
-        do { for photo in photos { outputs.append(try reserveOutput(source: photo, title: L10n.tr("Correcting faces"), store: store)) } }
-        catch { outputs.forEach(finishOutput); self.failure = Failure(L10n.tr("Couldn’t Correct Faces"), error); return }
-        activity.start(.merging, title: title, detail: photos[0].filename, total: photos.count == 1 ? nil : photos.count) { job in
-            defer { outputs.forEach(self.finishOutput) }
-            var made: [CatalogAsset] = [], failures: [String] = []
-            for (number, photo) in photos.enumerated() {
-                guard !Task.isCancelled else { break }
-                ActivityCenter.shared.update(job, completed: number, detail: photo.filename)
-                let output = outputs[number]
-                guard !output.aborted else { self.finishOutput(output); continue }
-                do {
-                    let work = Task { try await self.correctWideAngle(photo, settings: settings, people: people[photo.id], focal: focals[photo.id], output: output, store: store) { fraction, step in
-                        let detail = photos.count == 1 ? step : L10n.tr("\(number + 1) of \(photos.count) - \(step)")
-                        Task { @MainActor in
-                            output.progress = fraction
-                            ActivityCenter.shared.update(job, progress: (Double(number) + fraction) / Double(photos.count), detail: detail)
-                        }
-                    } }
-                    output.cancel = { work.cancel() }
-                    made.append(try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() })
-                    if self.store === store { self.indexer.workAvailable(); await self.refresh() }
-                    self.finishOutput(output)
-                } catch is CancellationError {
-                    self.finishOutput(output)
-                    if Task.isCancelled { break }
-                } catch {
-                    self.finishOutput(output)
-                    failures.append("\(photo.filename): \(error.localizedDescription)")
-                }
-            }
-            if !made.isEmpty {
+    /// Corrects the photo as a background job. `people` are the dialog's people, nil to find them anew; `focal` is a
+    /// focal length typed there. The copy goes beside the photo when that folder is on this Mac and writable, and is
+    /// imported in place; otherwise it is copied into the catalog's originals.
+    func startWideAngle(_ photo: CatalogAsset, settings: WideAngleSettings, people: [WideAnglePerson]?, focal: Double?) {
+        guard let store else { return }
+        let output: PendingOutput
+        do { output = try reserveOutput(source: photo, title: L10n.tr("Correcting faces"), store: store) }
+        catch { self.failure = Failure(L10n.tr("Couldn’t Correct Faces"), error); return }
+        activity.start(.merging, title: L10n.tr("Correcting faces in \(photo.filename)"), detail: photo.filename) { job in
+            defer { self.finishOutput(output) }
+            do {
+                let work = Task { try await self.correctWideAngle(photo, settings: settings, people: people, focal: focal, output: output, store: store) { fraction, step in
+                    Task { @MainActor in
+                        output.progress = fraction
+                        ActivityCenter.shared.update(job, progress: fraction, detail: step)
+                    }
+                } }
+                output.cancel = { work.cancel() }
+                let made = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
+                if self.store === store { self.indexer.workAvailable(); await self.refresh() }
+                self.finishOutput(output)
                 self.indexer.workAvailable()
                 await self.refresh(); self.syncSoon()
-                if let shown = self.assets.first(where: { $0.id == made.last?.id }) { self.select(shown) }
-            }
-            // Errors outrank a stop: an aborted photo must not hide why another failed.
-            if failures.isEmpty, Task.isCancelled || outputs.contains(where: { $0.aborted }) {
-                ActivityCenter.shared.finish(job, outcome: .stopped)
-                self.notice = made.isEmpty ? L10n.tr("Face correction stopped") : L10n.tr("Face correction stopped after \(made.count) of \(photos.count) photos")
-                return
-            }
-            let done = made.count == 1 ? L10n.tr("Saved a corrected copy of \(made[0].filename)") : L10n.tr("Saved corrected copies of \(made.count.formatted()) photos")
-            if failures.isEmpty {
+                if let shown = self.assets.first(where: { $0.id == made.id }) { self.select(shown) }
+                let done = L10n.tr("Saved a corrected copy of \(made.filename)")
                 self.notice = done
-                ActivityCenter.shared.finish(job, title: done, outcome: .done(made.count == 1 ? made[0].filename : ""), result: made.last.map { .photo($0.id) })
-            } else {
-                self.failure = Failure(L10n.tr("Some Photos Weren’t Corrected"), summary: L10n.tr("Saved corrected copies of \(made.count) of \(photos.count) photos."), items: failures)
-                ActivityCenter.shared.finish(job, outcome: .failed(failures.joined(separator: "\n")))
+                ActivityCenter.shared.finish(job, title: done, outcome: .done(made.filename), result: .photo(made.id))
+            } catch is CancellationError {
+                ActivityCenter.shared.finish(job, outcome: .stopped)
+                self.notice = L10n.tr("Face correction stopped")
+            } catch {
+                self.failure = Failure(L10n.tr("Couldn’t Correct Faces"), error)
+                ActivityCenter.shared.finish(job, outcome: .failed(error.localizedDescription))
             }
         }
     }

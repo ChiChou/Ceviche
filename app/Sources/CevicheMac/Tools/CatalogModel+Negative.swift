@@ -23,7 +23,9 @@ struct NegativeChoice: Sendable {
 /// Convert Negative: a camera scan of a film negative, straightened, cropped and inverted into a linear DNG beside it.
 /// Dust and damage are left to retouching in Develop.
 extension CatalogModel {
-    func canConvertNegative(_ targets: [CatalogAsset]) -> Bool { canDenoise(targets) }
+    func canConvertNegative(_ targets: [CatalogAsset]) -> Bool {
+        store != nil && canStartJob && !toolOpen && !targets.isEmpty && targets.allSatisfy { $0.inLibrary && Self.isRAW($0) }
+    }
 
     func requestNegative(_ targets: [CatalogAsset]) {
         guard canConvertNegative(targets) else { return }

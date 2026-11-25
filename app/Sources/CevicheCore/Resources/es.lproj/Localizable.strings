@@ -2082,7 +2082,6 @@
 "AI noise reduction" = "Reducción de ruido por IA";
 "Night Sky Noise Reduction…" = "Reducción de ruido del cielo nocturno…";
 "Noise reduction stopped" = "Reducción de ruido detenida";
-"Noise reduction stopped after %1$@ of %2$@ photos" = "Reducción de ruido detenida tras %1$@ de %2$@ fotos";
 "Noise reduction strength" = "Intensidad de la reducción de ruido";
 "Reducing noise" = "Reduciendo el ruido";
 "Reducing noise in the night sky" = "Reduciendo el ruido del cielo nocturno";
@@ -2322,11 +2321,8 @@
 "Remove Keyframe" = "Quitar fotograma clave";
 "The reference keeps its Exposure; the others follow the target. Other edits stay as they are." = "La referencia conserva su exposición; las demás siguen el objetivo. Los demás ajustes no cambian.";
 "Use as Reference" = "Usar como referencia";
-"Next photo" = "Foto siguiente";
-"Previous photo" = "Foto anterior";
 "Remove All Keyframes" = "Quitar todos los fotogramas clave";
 "Drag to look around. \\ shows Before." = "Arrastra para recorrer la imagen. \\ muestra el antes.";
-"Saves a DNG beside each original." = "Guarda un DNG junto a cada original.";
 "Split" = "Dividida";
 "Include in Stack" = "Incluir en el apilado";
 "- Base" = "- Base";
@@ -2339,14 +2335,9 @@
 "Tints the areas taken from the base exposure alone" = "Tiñe las zonas tomadas solo de la exposición base";
 "Tints the areas taken from the base exposure alone (%1$@%% of the photo)" = "Tiñe las zonas tomadas solo de la exposición base (%1$@%% de la foto)";
 "Where the exposures disagree because something moved, takes that area from the base exposure alone. Higher settings catch smaller changes." = "Donde las exposiciones no coinciden porque algo se ha movido, toma esa zona solo de la exposición base. Los ajustes más altos detectan cambios más pequeños.";
-"Reduce Noise for %1$@ Photos" = "Reducir ruido para %1$@ fotos";
-"Reduce Noise for 1 Photo" = "Reducir ruido para 1 foto";
 "Reducing noise for %1$@" = "Reduciendo el ruido para %1$@";
-"Reducing noise for %1$@ photos" = "Reduciendo el ruido para %1$@ fotos";
 "Saved a denoised copy of %1$@" = "Se guardó una copia sin ruido de %1$@";
 "Saved a positive of %1$@" = "Se guardó un positivo de %1$@";
-"Saved denoised copies of %1$@ of %2$@ photos.\n" = "Se guardaron copias sin ruido de %1$@ de %2$@ fotos.\n";
-"Saved denoised copies of %1$@ photos" = "Se guardaron copias sin ruido de %1$@ fotos";
 "Saved positives of %1$@ negatives" = "Se guardaron positivos de %1$@ negativos";
 "Saved positives of %1$@ of %2$@ negatives.\n" = "Se guardaron positivos de %1$@ de %2$@ negativos.\n";
 "%1$@ faces" = "%1$@ caras";
@@ -3099,7 +3090,6 @@
 "Some Pairs Weren’t Tidied" = "Algunos pares no se han ordenado";
 "Some Photos Weren’t Changed" = "Algunas fotos no se han cambiado";
 "Some Photos Weren’t Deleted" = "Algunas fotos no se han eliminado";
-"Some Photos Weren’t Denoised" = "Algunas fotos no se han reducido de ruido";
 "Some Photos Weren’t Duplicated" = "Algunas fotos no se han duplicado";
 "Some Photos Weren’t Exported" = "Algunas fotos no se han exportado";
 "Some Photos Weren’t Moved" = "Algunas fotos no se han movido";
@@ -3321,11 +3311,8 @@
 "Similar to %1$@" = "Similares a %1$@";
 "This photo can’t be compared" = "Esta foto no se puede comparar";
 "Similar Photos" = "Fotos similares";
-"%1$@ of %2$@ photos can be corrected" = "Se pueden corregir %1$@ de %2$@ fotos";
 "Bodies" = "Cuerpos";
 "Click a tag to correct or leave that person. Click a head that has no tag to add it." = "Haz clic en una etiqueta para corregir o dejar a esa persona. Haz clic en una cabeza sin etiqueta para añadirla.";
-"Correct %1$@ Photos" = "Corregir %1$@ fotos";
-"Correct 1 Photo" = "Corregir 1 foto";
 "Correct bodies" = "Corregir cuerpos";
 "Correcting faces" = "Corrigiendo caras";
 "Correcting faces in %1$@" = "Corrigiendo caras en %1$@";
@@ -3333,7 +3320,6 @@
 "Couldn’t Correct Faces" = "No se pudieron corregir las caras";
 "Each body follows its head, so a corrected head doesn't sit on a stretched body" = "Cada cuerpo sigue a su cabeza, para que una cabeza corregida no quede sobre un cuerpo estirado";
 "Face correction stopped" = "Corrección de caras detenida";
-"Face correction stopped after %1$@ of %2$@ photos" = "Corrección de caras detenida tras %1$@ de %2$@ fotos";
 "Finding people" = "Buscando personas";
 "Finding people in %1$@…" = "Buscando personas en %1$@…";
 "How firmly the background keeps its lines straight around the people" = "Con qué firmeza mantiene el fondo sus líneas rectas alrededor de las personas";
@@ -3343,7 +3329,6 @@
 "No people to correct in %1$@." = "No hay personas que corregir en %1$@.";
 "Saved a corrected copy of %1$@" = "Copia corregida de %1$@ guardada";
 "Saved corrected copies of %1$@ of %2$@ photos." = "Copias corregidas de %1$@ de %2$@ fotos guardadas.";
-"Saved corrected copies of %1$@ photos" = "Copias corregidas de %1$@ fotos guardadas";
 "Shot at %1$@ mm; only %2$@ mm and wider stretch faces" = "Tomada a %1$@ mm; solo los objetivos de %2$@ mm o más angulares estiran las caras";
 "Show Grid" = "Mostrar cuadrícula";
 "Some Photos Weren’t Corrected" = "Algunas fotos no se corrigieron";
@@ -3351,7 +3336,6 @@
 "The photo couldn’t be read for faces." = "No se pudo leer la foto para buscar caras.";
 "Wide-Angle Faces" = "Caras en gran angular";
 "Wide-Angle Faces…" = "Caras en gran angular…";
-"Saves a copy beside each original." = "Guarda una copia junto a cada original.";
 "Saving %1$@" = "Guardando %1$@";
 "Undoes the stretch of people at the sides of a wide-angle shot into a new copy beside the photo" = "Deshace el estiramiento de las personas en los lados de una foto gran angular en una copia nueva junto a la foto";
 "Finding the object…" = "Buscando el objeto…";
@@ -3592,7 +3576,11 @@
 "Replace…" = "Sustituir…";
 "Select one photo." = "Selecciona una foto.";
 "Scope" = "Gráfico";
-"Saves a DNG of each photo." = "Guarda un DNG de cada foto.";
 "Undo Edit" = "Deshacer edición";
 "Undo Move to Trash" = "Deshacer Mover a la papelera";
 "Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure." = "Revelada con el balance de blancos de la foto y limpiada en este Mac; el DNG conserva los EXIF y las ediciones de la foto. La vista previa muestra la foto con su balance de blancos y su exposición.";
+"Correct Faces" = "Corregir caras";
+"Reduce Noise" = "Reducir ruido";
+"Saves a DNG beside the original." = "Guarda un DNG junto al original.";
+"Saves a DNG of the photo." = "Guarda un DNG de la foto.";
+"Saves a copy beside the original." = "Guarda una copia junto al original.";

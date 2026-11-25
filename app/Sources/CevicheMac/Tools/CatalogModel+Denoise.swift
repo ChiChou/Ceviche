@@ -3,19 +3,19 @@ import CevicheCore
 
 struct DenoiseRequest: Identifiable {
     let id = UUID()
-    /// In capture order.
-    let assets: [CatalogAsset]
+    let asset: CatalogAsset
 }
 
 /// Denoise: NAFNet over a whole RAW photo, written as a linear DNG beside it that keeps its EXIF, metadata and edits.
+/// One photo at a time, as each needs its own look in the dialog.
 extension CatalogModel {
     func canDenoise(_ targets: [CatalogAsset]) -> Bool {
-        store != nil && canStartJob && !toolOpen && !targets.isEmpty && targets.allSatisfy { $0.inLibrary && Self.isRAW($0) }
+        store != nil && canStartJob && !toolOpen && targets.count == 1 && targets[0].inLibrary && Self.isRAW(targets[0])
     }
-    /// Opens the Denoise dialog for the selected photos.
+    /// Opens the Denoise dialog for the selected photo.
     func requestDenoise(_ targets: [CatalogAsset]) {
         guard canDenoise(targets) else { return }
-        denoise = DenoiseRequest(assets: targets.sorted { ($0.captureTime ?? "", $0.filename) < ($1.captureTime ?? "", $1.filename) })
+        denoise = DenoiseRequest(asset: targets[0])
     }
 
     /// The photo's saved Exposure, which Denoise brightens it by before the network looks at it.
@@ -29,60 +29,38 @@ extension CatalogModel {
         return DenoiseDevelopment(saved)
     }
 
-    /// Denoises the photos one after another as one background job. Each DNG goes beside its photo when that folder is
-    /// on this Mac and writable, and is imported in place; otherwise it is copied into the catalog's originals.
-    func startDenoise(_ photos: [CatalogAsset], settings: DenoiseSettings) {
-        guard let store, !photos.isEmpty else { return }
-        let title = photos.count == 1 ? L10n.tr("Reducing noise for \(photos[0].filename)") : L10n.tr("Reducing noise for \(photos.count.formatted()) photos")
-        var outputs: [PendingOutput] = []
-        do { for photo in photos { outputs.append(try reserveOutput(source: photo, title: L10n.tr("Reducing noise"), store: store)) } }
-        catch { outputs.forEach(finishOutput); self.failure = Failure(L10n.tr("Couldn’t Reduce Noise"), error); return }
-        activity.start(.merging, title: title, detail: photos[0].filename, total: photos.count == 1 ? nil : photos.count) { job in
-            defer { outputs.forEach(self.finishOutput) }
-            var made: [CatalogAsset] = [], failures: [String] = []
-            for (number, photo) in photos.enumerated() {
-                guard !Task.isCancelled else { break }
-                ActivityCenter.shared.update(job, completed: number, detail: photo.filename)
-                let output = outputs[number]
-                guard !output.aborted else { self.finishOutput(output); continue }
-                do {
-                    let work = Task { try await self.denoise(photo, settings: settings, output: output, store: store) { fraction, step in
-                        let detail = photos.count == 1 ? step : L10n.tr("\(number + 1) of \(photos.count) - \(step)")
-                        Task { @MainActor in
-                            output.progress = fraction
-                            ActivityCenter.shared.update(job, progress: (Double(number) + fraction) / Double(photos.count), detail: detail)
-                        }
-                    } }
-                    output.cancel = { work.cancel() }
-                    made.append(try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() })
-                    if self.store === store { self.indexer.workAvailable(); await self.refresh() }
-                    self.finishOutput(output)
-                } catch is CancellationError {
-                    self.finishOutput(output)
-                    if Task.isCancelled { break }
-                } catch {
-                    self.finishOutput(output)
-                    failures.append("\(photo.filename): \(error.localizedDescription)")
-                }
-            }
-            if !made.isEmpty {
+    /// Denoises the photo as a background job. The DNG goes beside the photo when that folder is on this Mac and
+    /// writable, and is imported in place; otherwise it is copied into the catalog's originals.
+    func startDenoise(_ photo: CatalogAsset, settings: DenoiseSettings) {
+        guard let store else { return }
+        let output: PendingOutput
+        do { output = try reserveOutput(source: photo, title: L10n.tr("Reducing noise"), store: store) }
+        catch { self.failure = Failure(L10n.tr("Couldn’t Reduce Noise"), error); return }
+        activity.start(.merging, title: L10n.tr("Reducing noise for \(photo.filename)"), detail: photo.filename) { job in
+            defer { self.finishOutput(output) }
+            do {
+                let work = Task { try await self.denoise(photo, settings: settings, output: output, store: store) { fraction, step in
+                    Task { @MainActor in
+                        output.progress = fraction
+                        ActivityCenter.shared.update(job, progress: fraction, detail: step)
+                    }
+                } }
+                output.cancel = { work.cancel() }
+                let made = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
+                if self.store === store { self.indexer.workAvailable(); await self.refresh() }
+                self.finishOutput(output)
                 self.indexer.workAvailable()
                 await self.refresh(); self.syncSoon()
-                if let shown = self.assets.first(where: { $0.id == made.last?.id }) { self.select(shown) }
-            }
-            // Errors outrank a stop: an aborted photo must not hide why another failed.
-            if failures.isEmpty, Task.isCancelled || outputs.contains(where: { $0.aborted }) {
-                ActivityCenter.shared.finish(job, outcome: .stopped)
-                self.notice = made.isEmpty ? L10n.tr("Noise reduction stopped") : L10n.tr("Noise reduction stopped after \(made.count) of \(photos.count) photos")
-                return
-            }
-            let done = made.count == 1 ? L10n.tr("Saved a denoised copy of \(made[0].filename)") : L10n.tr("Saved denoised copies of \(made.count.formatted()) photos")
-            if failures.isEmpty {
+                if let shown = self.assets.first(where: { $0.id == made.id }) { self.select(shown) }
+                let done = L10n.tr("Saved a denoised copy of \(made.filename)")
                 self.notice = done
-                ActivityCenter.shared.finish(job, title: done, outcome: .done(made.count == 1 ? made[0].filename : ""), result: made.last.map { .photo($0.id) })
-            } else {
-                self.failure = Failure(L10n.tr("Some Photos Weren’t Denoised"), summary: L10n.tr("Saved denoised copies of \(made.count) of \(photos.count) photos.\n").trimmingCharacters(in: .newlines), items: failures)
-                ActivityCenter.shared.finish(job, outcome: .failed(failures.joined(separator: "\n")))
+                ActivityCenter.shared.finish(job, title: done, outcome: .done(made.filename), result: .photo(made.id))
+            } catch is CancellationError {
+                ActivityCenter.shared.finish(job, outcome: .stopped)
+                self.notice = L10n.tr("Noise reduction stopped")
+            } catch {
+                self.failure = Failure(L10n.tr("Couldn’t Reduce Noise"), error)
+                ActivityCenter.shared.finish(job, outcome: .failed(error.localizedDescription))
             }
         }
     }

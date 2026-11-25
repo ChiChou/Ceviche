@@ -194,7 +194,7 @@ take the photo's edits as they are. Each source's Remove
 strokes (dust, AI fills, objects, people, face spots) are burnt into the result in Merge to Panorama, Merge to HDR,
 Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligned as shot.
 
-- **Job progress.** Merges, AI Noise Reduction, Wide-Angle Faces and Convert Negative show each running job as a progress bar above the grid, with a button to abort it. The finished photo joins the grid where it sorts; a denoise batch has one bar per photo.
+- **Job progress.** Merges, AI Noise Reduction, Wide-Angle Faces and Convert Negative show each running job as a progress bar above the grid, with a button to abort it. The finished photo joins the grid where it sorts. AI Noise Reduction and Wide-Angle Faces work on one photo at a time, as each needs its own check in the tool.
 - **Latent images.** Named after the invisible picture on exposed film that only developing brings out, a latent
   image is a catalog item holding a tool's work on its source photos (settings, chosen lines and what analysis found)
   but no pixels of its own; **Merge** or **Render Video…** develops it into a photo or video, and it stays for the
@@ -245,7 +245,7 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   its framing, frame rate and timing at Small, iPhone or Large size, Make Key Photo above the frames picks the still, and Bounce
   plays them forward and back; when it runs far from 3 seconds, a button sets the frame rate that fits. The Live Photo is added to Photos.
 - **Wide-Angle Faces.** Undoes the stretch a lens 35 mm or wider gives people at the sides of a group shot: heads, and
-  with **Bodies** their bodies, take their true shape while the background keeps straight lines. A tag over each person
+  with **Bodies** their bodies, take their true shape while the background keeps straight lines. It opens on one selected photo. A tag over each person
   corrects them or leaves them as shot, and a click on a missed head adds it. A pinch zooms the preview and scrolling pans
   it, both photos together in Side by Side. **Lens** takes the 35 mm equivalent focal length from the EXIF, or one typed
   in when the EXIF lacks it or is wrong; Correct waits for one. The copy follows the same destination rules as merges. It is a DNG for
@@ -376,10 +376,11 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   its other edits carried over; the Mac's dialog works the same way. Started from Develop, it closes Develop, so the
   job's progress and then the copy show in the Library. Wide-Angle Faces shows
   the photo corrected with a tag over each person to tap, Add for a missed head and the Mac's Lens, Strength, Bodies
-  and Straight Lines, and adds each copy to the catalog with the photo's edits. Match Series shows the reference beside
+  and Straight Lines, and adds the copy to the catalog with the photo's edits; it and AI Noise Reduction open on one photo. Match Series shows the reference beside
   the photo chosen in the strip and applies the matched Exposure and White Balance as edits. ID Photo frames one
   portrait to a document picked from a searchable list, by country, from the face it finds: a pinch on the print sets
-  the head's size and a drag its height within the document's limits, the checks not met are listed with Fit, Auto
+  the head's size and a drag its height within the document's limits, the Crown and Chin handles move where the head
+  is taken to start and end, the checks not met are listed with Fit, Auto
   and Replace where the tool can fix them, and Save to Photos saves the photo at the document's upload size, the
   share button beside it hands the same file to the share sheet. Each refuses photos
   that would not fit the device's memory.

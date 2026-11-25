@@ -1,18 +1,14 @@
 import SwiftUI
-import ImageIO
 import CevicheCore
 
-/// What the AI Noise Reduction dialog shows: one of the photos as shot, and a full-size crop of it before and after
-/// the network, as big as the panes showing it, which a click on the photo moves. The crop stays put when another of
-/// the selected photos is shown, so the same spot can be compared across them.
+/// What the AI Noise Reduction dialog shows: the photo as shot, and a full-size crop of it before and after the
+/// network, as big as the panes showing it, which a click on the photo moves.
 @MainActor
 final class DenoiseModel: ObservableObject {
     enum Stage: Equatable { case loading, ready, failed(String) }
 
     let request: DenoiseRequest
     @Published private(set) var stage = Stage.loading
-    /// The photo previewed, by position in the request.
-    @Published var index = 0 { didSet { if index != oldValue { load() } } }
     @Published private(set) var overview: CGImage?
     @Published private(set) var crop: (before: CGImage, after: CGImage)? { didSet { cropVersion += 1 } }
     /// Counts crop updates, so the loupe knows when a pan has landed.
@@ -26,8 +22,6 @@ final class DenoiseModel: ObservableObject {
     @Published var settings: DenoiseSettings {
         didSet { if let data = try? JSONEncoder().encode(settings) { UserDefaults.standard.set(data, forKey: Self.preferenceKey) } }
     }
-    /// The Library thumbnails of the selected photos, for the filmstrip.
-    @Published private(set) var thumbnails: [Int: CGImage] = [:]
     private weak var catalog: CatalogModel?
     private var previewer: DenoisePreviewer?
     private var access: URL?
@@ -40,28 +34,12 @@ final class DenoiseModel: ObservableObject {
         settings = UserDefaults.standard.data(forKey: Self.preferenceKey).flatMap { try? JSONDecoder().decode(DenoiseSettings.self, from: $0) } ?? DenoiseSettings()
     }
 
-    var asset: CatalogAsset { request.assets[index] }
+    var asset: CatalogAsset { request.asset }
 
     func start(catalog: CatalogModel) {
         guard self.catalog == nil else { return }
         self.catalog = catalog
         load()
-        guard request.assets.count > 1 else { return }
-        Task {
-            for (number, asset) in request.assets.enumerated() {
-                guard let data = try? await catalog.previews?.data(assetID: asset.id),
-                      let source = CGImageSourceCreateWithData(data as CFData, nil),
-                      let image = ImageDecode.thumbnail(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways: true,
-                          kCGImageSourceThumbnailMaxPixelSize: 240, kCGImageSourceCreateThumbnailWithTransform: true] as CFDictionary) else { continue }
-                thumbnails[number] = image
-            }
-        }
-    }
-    /// Steps to the next or previous selected photo, wrapping around.
-    func step(_ offset: Int) {
-        let count = request.assets.count
-        guard count > 1 else { return }
-        index = ((index + offset) % count + count) % count
     }
     func stop() {
         loadTask?.cancel(); cropTask?.cancel()
@@ -70,9 +48,6 @@ final class DenoiseModel: ObservableObject {
 
     private func load() {
         guard let catalog else { return }
-        loadTask?.cancel(); cropTask?.cancel()
-        access?.stopAccessingSecurityScopedResource(); access = nil
-        previewer = nil; overview = nil; crop = nil; stage = .loading
         let asset = self.asset
         loadTask = Task {
             do {
@@ -85,14 +60,12 @@ final class DenoiseModel: ObservableObject {
                 renderCrop()
             } catch {
                 guard !Task.isCancelled else { return }
-                stage = .failed(error.localizedDescription)
-                if request.assets.count == 1 { close(with: Failure(L10n.tr("Couldn’t Reduce Noise"), error)) }
+                close(with: Failure(L10n.tr("Couldn’t Reduce Noise"), error))
             }
         }
     }
 
-    /// The only photo couldn't be read: there is nothing to work with, so the tool closes and says why. With several,
-    /// the failure stays on that photo and the others can still be used.
+    /// The photo couldn't be read: there is nothing to work with, so the tool closes and says why.
     private func close(with failure: Failure) {
         guard let catalog else { return }
         stop(); catalog.denoise = nil; catalog.failure = failure
@@ -149,11 +122,9 @@ struct DenoiseDialog: View {
     private var modelAvailable: Bool { _ = library.installed; return BundledModel.denoise.isAvailable }
 
     var body: some View {
-        let count = model.request.assets.count
-        ToolWorkspace(title: L10n.tr("AI Noise Reduction"), status: summary,
-                      primary: count == 1 ? L10n.tr("Reduce Noise for 1 Photo") : L10n.tr("Reduce Noise for \(count) Photos"),
+        ToolWorkspace(title: L10n.tr("AI Noise Reduction"), status: model.asset.filename, primary: L10n.tr("Reduce Noise"),
                       primaryDisabled: !modelAvailable || !catalog.canStartJob, cancel: close,
-                      action: { catalog.startDenoise(model.request.assets, settings: model.settings); close() }) {
+                      action: { catalog.startDenoise(model.asset, settings: model.settings); close() }) {
             FormSegments(title: L10n.tr("Compare"), selection: $compare, options: Compare.allCases, label: { $0.title }).labelsHidden().fixedSize()
             FormSegments(title: L10n.tr("Zoom"), selection: $zoom, options: [1, 2], label: { L10n.tr("\($0 * 100)%") }).labelsHidden().fixedSize()
             // \ shows the photo as shot, as in other RAW editors.
@@ -163,7 +134,6 @@ struct DenoiseDialog: View {
                 VStack(alignment: .leading, spacing: 10) {
                     photoBar
                     loupe.frame(maxWidth: .infinity, maxHeight: .infinity)
-                    if count > 1 { filmstrip }
                 }.padding(16)
                 ToolSidePanel { options }
             }
@@ -174,52 +144,15 @@ struct DenoiseDialog: View {
 
     private func close() { model.stop(); catalog.denoise = nil }
 
-    private var summary: String {
-        let photos = model.request.assets
-        return photos.count == 1 ? photos[0].filename : L10n.tr("\(photos.count) photos")
-    }
+    // MARK: Photo
 
-    // MARK: Photos
-
-    /// The photo shown, its capture settings, and with several photos its position and the arrows (← and → too).
+    /// The photo's name and capture settings.
     private var photoBar: some View {
-        let count = model.request.assets.count, asset = model.asset
+        let asset = model.asset
         return HStack(spacing: 10) {
-            if count > 1 {
-                Button { model.step(-1) } label: { Image(systemName: "chevron.left").frame(width: 22, height: 20) }
-                    .keyboardShortcut(.leftArrow, modifiers: []).help(L10n.tr("Previous photo"))
-                Button { model.step(1) } label: { Image(systemName: "chevron.right").frame(width: 22, height: 20) }
-                    .keyboardShortcut(.rightArrow, modifiers: []).help(L10n.tr("Next photo"))
-            }
             Text(asset.filename).font(.system(size: 12, weight: .semibold)).lineLimit(1).truncationMode(.middle)
             Text(asset.info.capture).font(.system(size: 11)).foregroundStyle(.secondary).lineLimit(1)
             Spacer(minLength: 8)
-            if count > 1 {
-                Text(L10n.tr("\(model.index + 1) of \(count)")).font(.system(size: 11)).foregroundStyle(.secondary).monospacedDigit()
-            }
-        }
-        .buttonStyle(.secondaryAction).controlSize(.small)
-    }
-
-    /// The selected photos; a click shows one.
-    private var filmstrip: some View {
-        ScrollViewReader { reader in
-            ScrollView(.horizontal) {
-                LazyHStack(spacing: 6) {
-                    ForEach(model.request.assets.indices, id: \.self) { index in
-                        Rectangle().fill(Theme.ink.opacity(0.06))
-                            .overlay { if let image = model.thumbnails[index] { Image(decorative: image, scale: 1).resizable().scaledToFill() } }
-                            .frame(width: 84, height: 56).clipped()
-                            .selectionRing(index == model.index ? Theme.accent : nil)
-                            .contentShape(Rectangle())
-                            .onTapGesture { model.index = index }
-                            .help(model.request.assets[index].filename)
-                            .id(index)
-                    }
-                }.padding(.vertical, 2)
-            }
-            .frame(height: 62)
-            .onChange(of: model.index) { _, index in withAnimation(.easeOut(duration: 0.15)) { reader.scrollTo(index, anchor: .center) } }
         }
     }
 
@@ -267,7 +200,6 @@ struct DenoiseDialog: View {
                 .onChanged { pan = $0.translation }
                 .onEnded { drag in land(drag.translation, paneWidth: compare == .split ? size.width : (size.width - 6) / 2) })
             .onChange(of: model.cropVersion) { pan = .zero }
-            .onChange(of: model.index) { pan = .zero }
             .onAppear { resize(size) }
             .onChange(of: size) { _, size in resize(size) }
             .onChange(of: compare) { resize(size) }
@@ -383,7 +315,7 @@ struct DenoiseDialog: View {
                     Text(L10n.tr("\(Int(model.settings.strength.rounded()))%")).monospacedDigit().frame(width: 36, alignment: .trailing)
                 }
             }
-            Text(L10n.tr("Saves a DNG beside each original."))
+            Text(L10n.tr("Saves a DNG beside the original."))
                 .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 .help(L10n.tr("Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure."))
             if !modelAvailable {
