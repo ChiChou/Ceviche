@@ -329,7 +329,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   chooses Global or a mask, and the panel's sliders, tone curve, mixers and grading then edit that mask, as on the Mac.
 - **Retouch.** Remove, Heal and Clone brushes painted with one finger or Apple Pencil, two fingers moving and
   zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
-  clear all. In Remove a tap outlines the object or wire under it, and Remove or a second tap takes it out. Find Dust
+  clear all. Select shows the hand-drawn strokes and face spots on the photo: a tap selects one and a drag on bare
+  photo boxes several, to hide, show or delete together; the Face spots row opens it with them selected. In Remove a tap outlines the object or wire under it, and Remove or a second tap takes it out. Find Dust
   marks sensor dust as circles: a tap selects one and a drag on bare photo boxes several, to heal, Dodge/Burn or
   remove just those; a tap on bare photo adds a spot. People finds everyone but the subject and outlines them; a tap keeps
   one, Remove takes the rest (offered where the photo fits the device's memory). With its model installed in Models,

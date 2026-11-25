@@ -2984,6 +2984,7 @@
 "Takes each photo’s darker areas over the base" = "Takes each photo’s darker areas over the base";
 "Takes each trail’s color whole from the photo where it was brightest, instead of each color channel’s brightest value" = "Takes each trail’s color whole from the photo where it was brightest, instead of each color channel’s brightest value";
 "Tap inside the object to select it." = "Tap inside the object to select it.";
+"Tap or drag a box over strokes to select them." = "Tap or drag a box over strokes to select them.";
 "Tape Corners" = "Tape Corners";
 "Target" = "Target";
 "Teeth" = "Teeth";
