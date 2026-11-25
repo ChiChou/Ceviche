@@ -373,7 +373,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). AI Noise Reduction
   shows a part of a RAW at full size at its white balance and Exposure from Develop, Before and After either side of
   a divider, with Strength, and adds a denoised DNG of each photo to the catalog, its white balance developed in and
-  its other edits carried over; the Mac's dialog works the same way. Wide-Angle Faces shows
+  its other edits carried over; the Mac's dialog works the same way. Develop shows the job's progress, then the
+  denoised copy in place of the original it was started from. Wide-Angle Faces shows
   the photo corrected with a tag over each person to tap, Add for a missed head and the Mac's Lens, Strength, Bodies
   and Straight Lines, and adds each copy to the catalog with the photo's edits. Match Series shows the reference beside
   the photo chosen in the strip and applies the matched Exposure and White Balance as edits. ID Photo frames one
