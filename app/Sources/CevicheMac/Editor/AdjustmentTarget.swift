@@ -4,15 +4,11 @@ import CevicheCore
 extension EditorModel {
     var targetMask: PhotoMask? { adjustments.masks.first { $0.id == adjustmentTargetID } }
     var isLocalTarget: Bool { targetMask != nil }
-    var targetAdjustments: Adjustments { targetMask?.adjustments.applying(to: Adjustments()) ?? adjustments }
+    var targetAdjustments: Adjustments { adjustments.target(adjustmentTargetID) }
     var targetDefaults: Adjustments { isLocalTarget ? Adjustments() : (info?.defaults ?? Adjustments()) }
     func editTarget(_ update: (inout Adjustments) -> Void) {
-        if let index = adjustments.masks.firstIndex(where: { $0.id == adjustmentTargetID }) {
-            edit { value in
-                var local = value.masks[index].adjustments.applying(to: Adjustments())
-                update(&local); value.masks[index].adjustments = local.pixels
-            }
-        } else { edit(update) }
+        let target = adjustmentTargetID
+        edit { $0.editTarget(target, update) }
     }
     func setAdjustmentTarget(_ id: UUID?) {
         endMask(); endGesture(); maskTool = nil
@@ -50,32 +46,21 @@ extension EditorModel {
         }
     }
     func addComponent(_ kind: MaskKind, operation: MaskOperation, scene: SceneCategory? = nil, people: PeopleSelection? = nil) {
-        guard let selectedMask, !busy else { return }
+        guard let selectedMask, !busy, adjustments.canAddComponent(to: selectedMask.id) else { return }
         pendingMaskOperation = operation; pendingMaskParentID = selectedMask.id
         if MaskKind.generatedOnPhoto.contains(kind) { generateSelection(kind, scene: scene, people: people); return }
         if kind == .object { maskTool = .object; comparing = false; _ = currentObjectPicker(); return }
         // Gradients are added where the first line is drawn; the pending operation waits for that drag.
-        if kind == .linear || kind == .radial { endMask(); selectedComponentID = nil; maskTool = kind; awaitingGradient = true; redrawGradient = false; comparing = false; return }
-        acceptSelection(PhotoMask(kind: kind), operation: operation, parentID: selectedMask.id)
+        if kind.isGradient { endMask(); selectedComponentID = nil; maskTool = kind; awaitingGradient = true; redrawGradient = false; comparing = false; return }
+        acceptSelection(.new(kind), operation: operation, parentID: selectedMask.id)
         pendingMaskOperation = nil; pendingMaskParentID = nil; maskTool = kind; comparing = false
     }
     func acceptSelection(_ mask: PhotoMask, operation: MaskOperation?, parentID: UUID?) {
         endMask()
-        if let operation, let parentID, let index = adjustments.masks.firstIndex(where: { $0.id == parentID }), adjustments.masks[index].components.count < PhotoMask.maxComponents {
-            let component = MaskComponent(operation: operation, selection: mask.selection)
-            edit { value in
-                if value.masks[index].components.isEmpty && value.masks[index].inverted {
-                    value.masks[index].selection.inverted.toggle(); value.masks[index].inverted = false
-                }
-                value.masks[index].components.append(component)
-            }
-            selectMask(parentID); selectedComponentID = component.id
-        } else if operation == nil, adjustments.masks.count < PhotoMask.maxCount {
-            var mask = mask
-            let count = adjustments.masks.filter { $0.kind == mask.kind }.count
-            if count > 0 { mask.name += " \(count+1)" }
-            edit { $0.masks.append(mask) }; selectMask(mask.id)
-        }
+        var placed: MaskPlacement?
+        edit { placed = $0.acceptSelection(mask, operation: operation, parentID: parentID) }
+        guard let placed else { return }
+        selectMask(placed.maskID); selectedComponentID = placed.componentID
     }
 }
 

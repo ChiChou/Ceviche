@@ -41,8 +41,6 @@ struct EyedropperButton: View {
 }
 
 extension MaskKind {
-    /// Masks computed from the whole photo when added (Object instead waits for a click).
-    static let generatedOnPhoto: Set<MaskKind> = [.subject, .background, .sky, .depth, .scene, .people]
     /// The downloadable model the kind runs on; Sky also works from a RAW's embedded matte without one.
     var model: BundledModel? {
         switch self { case .depth: return .depth; case .scene: return .scene; case .sky: return .sky; default: return nil }
