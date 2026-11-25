@@ -267,7 +267,7 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
 
 ## Output
 
-- **Export.** JPEG, PNG, TIFF, HEIF, AVIF, WebP and JPEG XL. Bit depth and HDR options depend on the format, including 10-bit HEIF and AVIF and 32-bit linear HDR TIFF. Resize, color profile,
+- **Export.** JPEG, PNG, TIFF, HEIF, AVIF, WebP and JPEG XL. Bit depth and HDR options depend on the format, including 10-bit HEIF and AVIF and 32-bit linear HDR TIFF; HDR is offered when a photo is developed in HDR, and in a Library export the photos without HDR edits go out in SDR. Resize, color profile,
   metadata, GPS, watermark and AI noise reduction at the output size. Settings can be saved as presets. GPS is the
   location the catalog has for the photo, so one set or removed in Ceviche is what the file carries.
 - **Print.** **File › Print** (⌘P) prints the open photo or library selection at full size, independently of export

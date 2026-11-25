@@ -73,12 +73,15 @@ final class CatalogExportSession: ObservableObject, Identifiable, ExportTarget {
     let assets: [CatalogAsset]
     private weak var catalog: CatalogModel?
     private let store: CatalogStore
-    /// Starts from the last export's settings; a Library export is always SDR and sized per photo.
+    /// Starts from the last export's settings, sized per photo. HDR is offered once a photo developed in HDR is found;
+    /// the photos without HDR edits go out in SDR.
     @Published var exportSettings: ExportSettings = {
         var settings = ExportSettings.lastUsed() ?? CatalogExportRequest(assets: []).settings
-        settings.setHDR(false); settings.sizing.longEdge = nil; settings.sizing.frame = nil
+        settings.sizing.longEdge = nil; settings.sizing.frame = nil
         return settings
     }()
+    /// One of the photos is developed in HDR.
+    @Published private(set) var hdrPhotos = false
     @Published var usesDevelopedProfile = true
     @Published var destination: URL?
     @Published var existing = ExistingFilePolicy.rename
@@ -113,6 +116,10 @@ final class CatalogExportSession: ObservableObject, Identifiable, ExportTarget {
                 renderer = loaded.0; sample = (loaded.0.info, loaded.1)
                 exportSettings.sizing.updateSource(outputSize ?? .zero)
                 loading = false
+                // Read from the catalog alone; stops at the first HDR photo.
+                for asset in assets where !Task.isCancelled {
+                    if (try? await store.savedAdjustments(of: asset))?.hdr.enabled == true { hdrPhotos = true; break }
+                }
             } catch { self?.loadError = error.localizedDescription; self?.loading = false }
         }
     }
@@ -133,11 +140,18 @@ final class CatalogExportSession: ObservableObject, Identifiable, ExportTarget {
                 message: L10n.tr("Choose the folder exported photos go to."), prompt: L10n.tr("Choose"), directory: destination)) { destination = url }
         }
     }
-    var hdrAvailable: Bool { false }
+    var hdrAvailable: Bool { hdrPhotos }
     var developedProfile: ColorProfile? { sample?.adjustments.colorProfile ?? ColorProfile() }
-    /// The dialog's settings with the profile each photo should get.
+    /// The dialog's settings as they reach the export: HDR only when a photo has it to keep.
+    private var chosenSettings: ExportSettings {
+        var settings = exportSettings
+        if !hdrPhotos { settings.setHDR(false) }
+        return settings
+    }
+    /// The settings the previewed photo gets, with the profile each photo should get.
     private var effectiveSettings: ExportSettings {
-        var settings = exportSettings; settings.hdr = false
+        var settings = chosenSettings
+        if sample?.adjustments.hdr.enabled != true { settings.setHDR(false) }
         if usesDevelopedProfile, let sample { settings.profile = sample.adjustments.colorProfile }
         return settings
     }
@@ -146,7 +160,7 @@ final class CatalogExportSession: ObservableObject, Identifiable, ExportTarget {
         return try await renderer.exportPreview(sample.adjustments, settings: effectiveSettings)
     }
     private var request: CatalogExportRequest {
-        CatalogExportRequest(assets: assets, settings: exportSettings, profile: usesDevelopedProfile ? nil : exportSettings.profile.preset, destination: destination, existing: existing)
+        CatalogExportRequest(assets: assets, settings: chosenSettings, profile: usesDevelopedProfile ? nil : exportSettings.profile.preset, destination: destination, existing: existing)
     }
     func dismissExport() { loadTask?.cancel(); catalog?.exportSession = nil }
     func performExport() { exportSettings.rememberAsLastUsed(); catalog?.export(request) }

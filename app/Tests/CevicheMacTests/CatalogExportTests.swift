@@ -43,6 +43,27 @@ final class CatalogExportTests: XCTestCase {
         XCTAssertEqual(framedProperties[kCGImagePropertyPixelWidth as String] as? Int, 45)
         XCTAssertEqual(framedProperties[kCGImagePropertyPixelHeight as String] as? Int, 80)
     }
+    /// A Library export with HDR on keeps HDR for a photo developed in HDR and writes any other in SDR.
+    @MainActor func testLibraryExportKeepsHDROnlyForPhotosDevelopedInHDR() async throws {
+        let (directory, model, _) = try await EditorFixtures.catalog()
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = try XCTUnwrap(model.store), asset = model.assets[0]
+        let folder = directory.appendingPathComponent("Exports")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        var settings = ExportSettings(); settings.select(.heif); settings.setHDR(true); settings.setHDREncoding(.pq)
+        func isPQ(_ url: URL) throws -> Bool {
+            let file = try XCTUnwrap(CGImageSourceCreateWithURL(url as CFURL, nil))
+            let image = try XCTUnwrap(CGImageSourceCreateImageAtIndex(file, 0, [kCGImageSourceShouldAllowFloat: true, kCGImageSourceDecodeRequest: kCGImageSourceDecodeToHDR] as CFDictionary))
+            return image.colorSpace.map(CGColorSpaceIsPQBased) ?? false
+        }
+        let sdrResult = try await CatalogModel.exportFile(asset, store: store, settings: settings, to: folder)
+        XCTAssertFalse(try isPQ(XCTUnwrap(sdrResult)), "A photo without HDR edits goes out in SDR")
+        var edits = try await store.savedAdjustments(of: asset) ?? Adjustments(); edits.hdr.enabled = true
+        try await store.saveEdits(edits, assetID: asset.id)
+        let hdrResult = try await CatalogModel.exportFile(asset, store: store, settings: settings, to: folder)
+        XCTAssertTrue(try isPQ(XCTUnwrap(hdrResult)), "A photo developed in HDR keeps it")
+    }
+
     @MainActor func testExistingFilePoliciesSkipOverwriteOrRename() async throws {
         let (directory, model, _) = try await EditorFixtures.catalog()
         defer { try? FileManager.default.removeItem(at: directory) }

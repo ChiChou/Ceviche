@@ -189,7 +189,9 @@ extension CatalogModel {
         let access = source.startAccessingSecurityScopedResource(); defer { if access { source.stopAccessingSecurityScopedResource() } }
         let (renderer, defaults) = try await Task.detached(priority: .userInitiated) { try RawRenderer.open(source, hdr: current.hdr) }.value
         let adjustments = try await store.savedAdjustments(of: current) ?? defaults
-        var output = settings; output.hdr = false
+        // HDR is kept for a photo developed in HDR; any other goes out in SDR.
+        var output = settings
+        if output.hdr && !adjustments.hdr.enabled { output.setHDR(false) }
         output.location = ExportGPS(latitude: current.latitude, longitude: current.longitude)
         // An ICC profile chosen for the export (the proof's printer profile) is already in the settings.
         if let profile { if profile != .custom || output.profile.iccData == nil { output.profile = ColorProfile(); output.profile.preset = profile } } else { output.profile = adjustments.colorProfile }
