@@ -556,10 +556,36 @@ final class NightSkyGPU {
         float3 sample;
         if (!bilinear(source, (s + 0.5f) * p[4] - 0.5f, sample)) return;
         float3 value = sample * p[5], background = clean[i].rgb;
-        float candidate = alpha * luminance(value - background);
+        // The line's light above its own photo's sky, read just outside the footprint on both sides (as
+        // NightSkyLine.skyProbes and localSky do on the CPU): its photo's sky, which near the horizon is seldom the
+        // base photo's, is not carried into the result with it.
+        float2 start = float2(lines[0], lines[1]), d = float2(lines[2], lines[3]) - start;
+        float len = length(d);
+        float3 local = background;
+        if (len > 0) {
+            float2 n = float2(-d.y, d.x) / len;
+            float2 axis = start + clamp(dot(a - start, d) / (len * len), 0.0f, 1.0f) * d;
+            float3 found[6]; float bright[6]; int count = 0;
+            for (int k = 0; k < 3; k++) {
+                for (int side = 0; side < 2; side++) {
+                    float2 probe = axis + n * (radius + 2.0f + 2.0f * float(k)) * (side == 0 ? 1.0f : -1.0f);
+                    float2 from = sourcePoint(probe, p);
+                    float3 sky;
+                    if (sampleMap(valid, from, p, true) <= 0.8f || !bilinear(source, (from + 0.5f) * p[4] - 0.5f, sky)) continue;
+                    sky *= p[5];
+                    // Kept in order of brightness, so the middle is at hand.
+                    float l = luminance(sky); int at = count;
+                    while (at > 0 && bright[at - 1] > l) { found[at] = found[at - 1]; bright[at] = bright[at - 1]; at--; }
+                    found[at] = sky; bright[at] = l; count++;
+                }
+            }
+            if (count >= 3) local = (found[(count - 1) / 2] + found[count / 2]) * 0.5f;
+        }
+        float3 light = value - local;
+        float candidate = alpha * luminance(light);
         if (candidate <= max(0.0f, score[i])) return;
         score[i] = candidate;
-        out[i] = float4(background + alpha * (value - background), 1);
+        out[i] = float4(background + alpha * light, 1);
     }
     """
 }

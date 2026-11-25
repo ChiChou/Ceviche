@@ -40,6 +40,26 @@ struct NightSkyLine: Codable, Sendable, Equatable {
         let t = max(0, min(1, simd_dot(p - start, d) / l2))
         return simd_distance(p, start + t * d)
     }
+    /// Where to read a line's own sky for a pixel at `p`: points just outside the footprint, on both sides of the
+    /// line, level with `p`. A line is restored as its light above these, so its photo's sky, which near the horizon
+    /// is seldom the base photo's, is not carried into the result with it.
+    func skyProbes(_ p: SIMD2<Double>) -> [SIMD2<Double>] {
+        let d = end - start, length = simd_length(d)
+        guard length > 0 else { return [] }
+        let n = SIMD2(-d.y, d.x) / length
+        // The point of the line's axis level with `p`, so both sides are read at the same distance from the line.
+        let t = simd_dot(p - start, d) / (length * length)
+        let axis = start + min(1, max(0, t)) * d
+        return [radius + 2, radius + 4, radius + 6].flatMap { [axis + n * $0, axis - n * $0] }
+    }
+    /// The sky from what `skyProbes` read: the middle of the samples by brightness, so a star under one probe or a
+    /// neighbouring line does not count.
+    static func localSky(_ samples: [SIMD3<Float>]) -> SIMD3<Float>? {
+        guard samples.count >= 3 else { return nil }
+        let sorted = samples.sorted { simd_dot($0, SIMD3(0.2126, 0.7152, 0.0722)) < simd_dot($1, SIMD3(0.2126, 0.7152, 0.0722)) }
+        let middle = sorted[(sorted.count - 1) / 2], other = sorted[sorted.count / 2]
+        return (middle + other) / 2
+    }
     /// How much of the line a pixel at `p` takes: 1 on the core, feathered to 0 at the footprint's edge.
     func coverage(_ p: SIMD2<Double>) -> Float {
         Float(max(0, min(1, (radius - distance(p)) / max(0.5, radius * 0.35))))

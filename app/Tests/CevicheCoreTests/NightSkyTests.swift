@@ -1019,6 +1019,24 @@ final class NightSkyTests: XCTestCase {
         XCTAssertEqual(settings.choices, [:], "id 0 now names another line")
     }
 
+    /// A line is restored as its light above its own photo's sky, read beside it: outside the footprint, on both
+    /// sides, with a star under one probe left out.
+    func testALinesOwnSkyIsReadBesideIt() {
+        let line = NightSkyLine(frame: 0, start: SIMD2(100, 100), end: SIMD2(100, 300), width: 4, pixels: 0, peak: 1)
+        let probes = line.skyProbes(SIMD2(103, 200))
+        XCTAssertEqual(probes.count, 6)
+        for probe in probes {
+            XCTAssertEqual(probe.y, 200, accuracy: 0.001, "level with the pixel")
+            XCTAssertGreaterThan(abs(probe.x - 100), line.radius, "outside the footprint")
+            XCTAssertEqual(line.coverage(probe), 0)
+        }
+        XCTAssertEqual(Set(probes.map { $0.x < 100 }).count, 2, "both sides")
+        // A gradient across the line reads as its value at the line; one probe on a star changes nothing.
+        let sky: [SIMD3<Float>] = [SIMD3(repeating: 0.30), SIMD3(repeating: 0.50), SIMD3(repeating: 0.32), SIMD3(repeating: 0.48), SIMD3(repeating: 0.34), SIMD3(repeating: 3)]
+        XCTAssertEqual(NightSkyLine.localSky(sky)?.x ?? 0, 0.41, accuracy: 0.08)
+        XCTAssertNil(NightSkyLine.localSky(Array(sky.prefix(2))), "too little sky to go by")
+    }
+
     func testMeteorShowerFindsTheMeteorAndPlacesItOnTheBaseSky() throws {
 
         try TestTier.requireSlow()

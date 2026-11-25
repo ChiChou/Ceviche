@@ -432,11 +432,18 @@ extension NightSkyAnalyzer {
                                                         : reader.bilinear(line.frame, 1, (a + 0.5) / k - 0.5)
                     guard alpha > 0, let s = sample else { continue }
                     let source = s * g, base = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
+                    // The line's light above its own photo's sky beside it, as the full-size result takes it.
+                    let probes = line.skyProbes(a).compactMap { probe -> SIMD3<Float>? in
+                        // As captured, the line and the probes are in the photo's own frame, which is the preview's.
+                        if plan.restoreAsCaptured { return isSky(probe) ? reader.bilinear(line.frame, 0, (probe + 0.5) / k - 0.5).map { $0 * g } : nil }
+                        return reader.bilinear(line.frame, 1, (probe + 0.5) / k - 0.5).map { $0 * g }
+                    }
+                    let light = source - (NightSkyLine.localSky(probes) ?? base)
                     // A meteor only adds light: a darker sample is the photo's own noise or edge, never restored.
-                    let candidate = alpha * simd_dot(source - base, SIMD3(0.2126, 0.7152, 0.0722))
+                    let candidate = alpha * simd_dot(light, SIMD3(0.2126, 0.7152, 0.0722))
                     guard candidate > max(0, score[p]) else { continue }
                     score[p] = candidate
-                    let v = base + alpha * (source - base)
+                    let v = base + alpha * light
                     out[p * 3] = v.x; out[p * 3 + 1] = v.y; out[p * 3 + 2] = v.z
                 }}
             }
