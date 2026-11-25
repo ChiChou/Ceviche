@@ -2690,6 +2690,7 @@
 "Saved “%1$@” and applied it to 1 photo" = "Saved “%1$@” and applied it to 1 photo";
 "Saved “%1$@”. Choose it under Camera Profile in Develop." = "Saved “%1$@”. Choose it under Camera Profile in Develop.";
 "Saves a DNG beside each original." = "Saves a DNG beside each original.";
+"Saves a DNG of each photo." = "Saves a DNG of each photo.";
 "Saves a copy beside each original." = "Saves a copy beside each original.";
 "Saving %1$@" = "Saving %1$@";
 "Saving…" = "Saving…";
