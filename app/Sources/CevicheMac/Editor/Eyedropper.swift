@@ -22,25 +22,6 @@ enum EyedropperTarget: Equatable {
         if case .defringe = self { return prompt }
         return L10n.tr("Pick color from photo")
     }
-    /// HSV hue in 0..<1 (0 for neutral colors).
-    static func hue(_ rgb: [Double]) -> Double {
-        guard rgb.count >= 3 else { return 0 }
-        let r = rgb[0], g = rgb[1], b = rgb[2], high = max(r, g, b), low = min(r, g, b), delta = high - low
-        guard delta > 1e-6 else { return 0 }
-        var h: Double
-        if high == r { h = (g - b) / delta } else if high == g { h = 2 + (b - r) / delta } else { h = 4 + (r - g) / delta }
-        h /= 6
-        return h < 0 ? h + 1 : h
-    }
-    /// The selective-color band whose center hue is circularly closest.
-    static func nearestBand(hue: Double) -> Int {
-        let centers = [0.0, 30, 60, 120, 180, 240, 270, 300]
-        let degrees = hue * 360
-        return centers.indices.min { a, b in
-            func distance(_ c: Double) -> Double { let d = abs(degrees - c).truncatingRemainder(dividingBy: 360); return min(d, 360 - d) }
-            return distance(centers[a]) < distance(centers[b])
-        } ?? 0
-    }
 }
 
 /// Arms the photo eyedropper for one tool; highlighted while waiting for the click.

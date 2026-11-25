@@ -38,19 +38,6 @@ enum RetouchTool: String, CaseIterable {
     }
 }
 
-/// The Color Mixer property a targeted drag on the photo adjusts.
-enum MixerProperty: String, CaseIterable {
-    var localizedTitle: String { L10n.key(rawValue) }
-
-    case hue = "Hue", saturation = "Saturation", luminance = "Luminance"
-    var key: WritableKeyPath<SelectiveColorAdjustment, Double> {
-        switch self { case .hue: return \.hue; case .saturation: return \.saturation; case .luminance: return \.luminance }
-    }
-    var range: ClosedRange<Double> { self == .hue ? -60...60 : -100...100 }
-    /// Units per dragged point: 200 points span saturation or luminance, 240 points span hue.
-    var unitsPerPoint: Double { self == .hue ? 0.5 : 1 }
-}
-
 @MainActor
 final class EditorModel: ObservableObject {
     /// Whether the display showing the photo can show HDR; `DisplayHDRObserver` keeps it current as the window moves.
@@ -219,7 +206,7 @@ final class EditorModel: ObservableObject {
             do {
                 let rgb = try await renderer.sampleColor(at: point, adjustments: snapshot, radius: 1)
                 guard mixerDragID == id, self.renderer === renderer else { return }
-                armMixerDrag(hue: EyedropperTarget.hue(rgb))
+                armMixerDrag(hue: SelectiveColor.hue(rgb))
             } catch { self.error = error.localizedDescription }
         }
     }
@@ -236,13 +223,8 @@ final class EditorModel: ObservableObject {
     }
     private func applyMixerDrag() {
         guard let property = targetedMixer, let (weights, start) = mixerDrag else { return }
-        let delta = mixerDragPoints * property.unitsPerPoint
-        editTarget { value in
-            for index in value.selectiveColors.indices where index < start.count && weights[index] > 0 {
-                let moved = start[index][keyPath: property.key] + delta * weights[index]
-                value.selectiveColors[index][keyPath: property.key] = min(property.range.upperBound, max(property.range.lowerBound, moved)).rounded()
-            }
-        }
+        let points = mixerDragPoints
+        editTarget { property.apply(points: points, weights: weights, from: start, to: &$0.selectiveColors) }
     }
     func endMixerDrag() { mixerDragID = nil; mixerDrag = nil; mixerDragPoints = 0; endGesture() }
     /// Room around the photo in Crop, in points, for the handles and the rotation ring outside the frame.
@@ -804,12 +786,12 @@ final class EditorModel: ObservableObject {
                 case .selectiveColor:
                     let rgb = try await renderer.sampleColor(at: point, adjustments: snapshot, radius: 0)
                     guard self.renderer === renderer else { return }
-                    selectiveColorBand = EyedropperTarget.nearestBand(hue: EyedropperTarget.hue(rgb))
+                    selectiveColorBand = SelectiveColor.nearestBand(hue: SelectiveColor.hue(rgb))
                 case .grading(let range):
                     let rgb = try await renderer.sampleColor(at: point, adjustments: snapshot, radius: 0)
                     guard self.renderer === renderer else { return }
                     editTarget {
-                        $0[keyPath: range.hue] = (EyedropperTarget.hue(rgb) * 360).rounded()
+                        $0[keyPath: range.hue] = (SelectiveColor.hue(rgb) * 360).rounded()
                         if $0[keyPath: range.saturation] == 0 { $0[keyPath: range.saturation] = 25 }
                     }
                 case .defringe: break

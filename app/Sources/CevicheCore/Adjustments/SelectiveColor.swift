@@ -38,9 +38,50 @@ public enum SelectiveColor {
         guard let peak = weights.max(), peak > 0 else { return weights }
         return weights.map { $0 / peak }
     }
+    /// HSV hue in 0..<1 of a sampled color (0 for neutral colors).
+    public static func hue(_ rgb: [Double]) -> Double {
+        guard rgb.count >= 3 else { return 0 }
+        let r = rgb[0], g = rgb[1], b = rgb[2], high = max(r, g, b), low = min(r, g, b), delta = high - low
+        guard delta > 1e-6 else { return 0 }
+        var h: Double
+        if high == r { h = (g - b) / delta } else if high == g { h = 2 + (b - r) / delta } else { h = 4 + (r - g) / delta }
+        h /= 6
+        return h < 0 ? h + 1 : h
+    }
+    /// The band whose center hue is circularly closest.
+    public static func nearestBand(hue: Double) -> Int {
+        let centers = [0.0, 30, 60, 120, 180, 240, 270, 300]
+        let degrees = hue * 360
+        return centers.indices.min { a, b in
+            func distance(_ c: Double) -> Double { let d = abs(degrees - c).truncatingRemainder(dividingBy: 360); return min(d, 360 - d) }
+            return distance(centers[a]) < distance(centers[b])
+        } ?? 0
+    }
     public static func cubeData(_ adjustments: [SelectiveColorAdjustment], dimension: Int = 64) -> Data {
         let mixer = ColorMixerTables(adjustments)
         return FilmMath.cube(dimension: dimension) { rgb in mixer.map { mixed(rgb, $0) } ?? rgb }
+    }
+}
+
+/// The Color Mixer property a targeted drag on the photo adjusts.
+public enum MixerProperty: String, CaseIterable, Sendable {
+    public var localizedTitle: String { L10n.key(rawValue) }
+
+    case hue = "Hue", saturation = "Saturation", luminance = "Luminance"
+    public var key: WritableKeyPath<SelectiveColorAdjustment, Double> {
+        switch self { case .hue: return \.hue; case .saturation: return \.saturation; case .luminance: return \.luminance }
+    }
+    public var range: ClosedRange<Double> { self == .hue ? -60...60 : -100...100 }
+    /// Units per dragged point: 200 points span saturation or luminance, 240 points span hue.
+    public var unitsPerPoint: Double { self == .hue ? 0.5 : 1 }
+    /// A targeted drag of `points` from the bands as they were at its start: each band moves by its weight
+    /// (`SelectiveColor.bandWeights`), within the property's range.
+    public func apply(points: Double, weights: [Double], from start: [SelectiveColorAdjustment], to bands: inout [SelectiveColorAdjustment]) {
+        let delta = points * unitsPerPoint
+        for index in bands.indices where index < start.count && index < weights.count && weights[index] > 0 {
+            let moved = start[index][keyPath: key] + delta * weights[index]
+            bands[index][keyPath: key] = min(range.upperBound, max(range.lowerBound, moved)).rounded()
+        }
     }
 }
 
