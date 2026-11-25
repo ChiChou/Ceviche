@@ -3586,8 +3586,6 @@
 "Ceviche has to stay on screen while this runs." = "运行期间 Ceviche 必须保持在屏幕上。";
 "Latent images can’t be corrected." = "潜影无法校正。";
 "Select Group" = "选择编组";
-"No lines found" = "未找到线条";
-"Show Lines" = "显示线条";
 "The photos and their edits are removed from this device. This can’t be undone." = "照片及其编辑将从此设备移除，且无法撤销。";
 "Delete %1$@ Photos" = "删除 %1$@ 张照片";
 "Delete 1 Photo" = "删除 1 张照片";

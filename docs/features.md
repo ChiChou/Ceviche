@@ -342,7 +342,13 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
   and its main options. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
   frame with the Mac's Trails, Glow and Meteors options and the frame set on the preview; a video's Export… opens a
-  sheet with Encoder, Container, Color and Quality, then Save to Photos or Share…, which starts it. The result is written as the Mac app writes it and added to the catalog; progress shows in
+  sheet with Encoder, Container, Color and Quality, then Save to Photos or Share…, which starts it. The three
+  night-sky merges are laid out like the editor in Photos: a rail of modes at the side (Objects, Sky, Photos,
+  Options), undo and redo and Outlines in the bar with what the result is made of, and As Captured for meteors.
+  Objects lists the lines found as the Mac does, with kept and left-out counts, All, Aircraft or Meteors, and an
+  aircraft's pieces under it; Sky has Sky Edge, Add to Sky, Remove from Sky, Use Photo Here, Everything Is Sky and
+  Revert to Detected on a dial over the photo; Photos shows each photo's time with Base and a check that leaves it
+  out. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting.
 - **Tools.** Merge Best Faces sits with the merges and adds its result to the catalog. The Tools menu has Convert
