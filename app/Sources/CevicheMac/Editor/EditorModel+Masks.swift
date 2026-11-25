@@ -19,19 +19,17 @@ extension EditorModel {
         scheduleRender()
     }
     func addMask(_ kind: MaskKind, scene: SceneCategory? = nil, people: PeopleSelection? = nil) {
-        guard hasImage, !busy, adjustments.masks.count < PhotoMask.maxCount else { return }
+        guard hasImage, !busy, adjustments.canAddMask else { return }
         endMask(); pendingMaskOperation = nil; pendingMaskParentID = nil; selectedComponentID = nil
         toolTab = .masks; comparing = false
         if MaskKind.generatedOnPhoto.contains(kind) { generateSelection(kind, scene: scene, people: people); return }
         if kind == .object { maskTool = .object; _ = currentObjectPicker(); return }
-        if kind == .linear || kind == .radial {
+        if kind.isGradient {
             // Choosing the tool creates nothing; the mask appears where the first line is drawn.
             selectedMaskID = nil; adjustmentTargetID = nil; selectedComponentID = nil; maskOverlay = nil
             maskTool = kind; awaitingGradient = true; redrawGradient = false; scheduleRender(); return
         }
-        var mask = PhotoMask(kind: kind)
-        if kind == .brush { mask.feather = 0 }
-        acceptSelection(mask, operation: nil, parentID: nil); maskTool = kind
+        acceptSelection(.new(kind), operation: nil, parentID: nil); maskTool = kind
     }
     /// Delete removes the selected component, or the selected mask when its base is selected.
     func deleteSelectedMaskOrComponent() {
@@ -39,13 +37,6 @@ extension EditorModel {
         if let component = selectedComponentID, mask.components.contains(where: { $0.id == component }) {
             endMask(); updateMask { $0.components.removeAll { $0.id == component } }; selectedComponentID = nil; maskTool = nil
         } else { deleteMask(mask.id) }
-    }
-    /// A new gradient: the mask or component is created at the mouse-down point inside the drag's gesture, so creating and drawing undo together.
-    static func gradientMask(_ kind: MaskKind, at point: MaskPoint) -> PhotoMask {
-        var mask = PhotoMask(kind: kind)
-        if kind == .radial { mask.feather = 0.125 }
-        mask.start = point; mask.end = point
-        return mask
     }
     func generateSelection(_ kind: MaskKind, point: MaskPoint? = nil, scene: SceneCategory? = nil, people: PeopleSelection? = nil) {
         guard let renderer, !busy else { return }
@@ -101,7 +92,7 @@ extension EditorModel {
             selectionTask = Task {
                 defer { isSelecting = false; selectionStatus = "" }
                 do {
-                    let color = try await renderer.sampleColor(at: point, adjustments: snapshot)
+                    let color = try await renderer.maskColor(at: point, adjustments: snapshot)
                     try Task.checkCancellation()
                     guard self.renderer === renderer, selectedMaskID == id else { return }
                     updateSelection { $0.color = color }
@@ -109,9 +100,10 @@ extension EditorModel {
             }
             return
         }
-        if awaitingGradient, tool == .linear || tool == .radial {
+        if awaitingGradient, tool.isGradient {
+            // The mask or component is created at the mouse-down point inside the drag's gesture, so creating and drawing undo together.
             beginGesture()
-            let mask = Self.gradientMask(tool, at: point), operation = pendingMaskOperation, parent = pendingMaskParentID
+            let mask = PhotoMask.gradient(tool, at: point), operation = pendingMaskOperation, parent = pendingMaskParentID
             pendingMaskOperation = nil; pendingMaskParentID = nil
             acceptSelection(mask, operation: operation, parentID: parent)
             // acceptSelection selects the result, which clears the tool; the drag that follows still draws it.
@@ -133,15 +125,9 @@ extension EditorModel {
         if maskTool == .brush {
             if let previous = liveStroke?.points.last, hypot(previous.x - point.x, previous.y - point.y) < 0.001 { return }
             liveStroke?.points.append(point)
-        } else if maskTool == .radial {
-            // The mouse-down point is the center; the drag sets the half-extents. Shift keeps it a circle.
-            var dx = abs(point.x - origin.x), dy = abs(point.y - origin.y)
-            if shift { dx = max(dx, dy); dy = dx }
-            updateSelection { $0.start = MaskPoint(x: origin.x - dx, y: origin.y - dy); $0.end = MaskPoint(x: origin.x + dx, y: origin.y + dy) }
         } else {
-            // Shift snaps a linear gradient to 45° steps.
-            let adjusted = shift && maskTool == .linear ? point.constrainedToCardinal(from: origin) : point
-            updateSelection { $0.end = adjusted }
+            // Shift snaps a line to 45° steps and keeps an ellipse a circle.
+            updateSelection { $0.drawGradient(from: origin, to: point, constrained: shift) }
         }
     }
     func endMask() {
@@ -150,7 +136,7 @@ extension EditorModel {
         // The painted stroke joins the mask: one edit, one render.
         if let stroke = liveStroke { liveStroke = nil; updateSelection { $0.strokes.append(stroke) } }
         // A click without a drag draws no gradient: remove the empty one and keep waiting for a line.
-        if let drawn = drawnGradientID, let selection = editableSelection, hypot(selection.end.x - selection.start.x, selection.end.y - selection.start.y) < 0.005 {
+        if let drawn = drawnGradientID, editableSelection?.isUndrawnGradient == true {
             if selectedComponentID == drawn { updateMask { $0.components.removeAll { $0.id == drawn } }; selectedComponentID = nil }
             else { edit { $0.masks.removeAll { $0.id == drawn } }; selectedMaskID = nil; adjustmentTargetID = nil; maskOverlay = nil }
             awaitingGradient = true
