@@ -165,32 +165,16 @@ extension CatalogModel {
 
     /// Sets the culling tools' flags, on both files of a RAW + JPEG shot (`partners`), and puts each of `groups` in a
     /// group under its cover, in one undoable step. Ratings, edits and files stay as they are.
-    func applyCulling(_ flags: [String: ReviewState], partners: [String: String] = [:], groups: [(members: [String], cover: String)] = []) async {
+    func applyCulling(_ flags: [String: ReviewState], partners: [String: String] = [:], groups: [CullingChanges.Group] = []) async {
         guard let store, !interactionBusy, await flushMetadata(), self.store === store else { return }
-        var flags = flags
-        for (shown, state) in flags { if let partner = partners[shown] { flags[partner] = state } }
-        var previous: [String: CatalogMetadata] = [:]
-        var grouped = 0
-        let grouping = groups.flatMap(\.members)
-        var stacksBefore: [String: String?] = [:], stacksAfter: [String: String?] = [:]
+        let changes = CullingChanges(flags: flags, partners: partners, groups: groups), flags = changes.flags
         // A step that fails is reported; the others still apply, and Undo covers what did.
-        for state in [ReviewState.rejected, .accepted, .unreviewed] {
-            let ids = flags.filter { $0.value == state }.map(\.key)
-            guard !ids.isEmpty else { continue }
-            do { previous.merge(try await store.updateQuickMetadata(assetIDs: ids, review: state)) { first, _ in first } }
-            catch { self.error = error.localizedDescription }
-        }
-        if !grouping.isEmpty, let before = try? await store.stackState(grouping) {
-            stacksBefore = before
-            for group in groups {
-                do { if try await store.stack(group.members, cover: group.cover) != nil { grouped += 1 } }
-                catch { self.error = error.localizedDescription }
-            }
-            stacksAfter = (try? await store.stackState(grouping)) ?? [:]
-        }
-        if !previous.isEmpty || grouped > 0 {
-            let applied = flags.filter { previous[$0.key] != nil }
-            let (before, after) = (stacksBefore, stacksAfter)
+        let outcome = await store.applyCulling(changes)
+        for error in outcome.flagErrors + outcome.groupErrors { self.error = error.localizedDescription }
+        let previous = outcome.previous, grouped = outcome.grouped
+        if outcome.changed {
+            let applied = outcome.applied
+            let (before, after) = (outcome.stacksBefore, outcome.stacksAfter)
             registerUndo(L10n.tr("Culling Assistant"), undo: { store in
                 if !before.isEmpty { try await store.restoreStacks(before) }
                 for (id, metadata) in previous { try await store.updateQuickMetadata(assetIDs: [id], review: metadata.review) }
@@ -214,12 +198,9 @@ extension CatalogModel {
 extension CullingAssistantRequest {
     /// The same photos with each RAW + JPEG pair as one shot, stood for by its JPEG.
     func shots() -> CullingAssistantRequest {
-        let pairs = RawJPEGPairs.pairs(assets)
-        guard !pairs.isEmpty else { return self }
-        let hidden = Set(pairs.map(\.raw.id))
-        var request = CullingAssistantRequest(assets: assets.filter { !hidden.contains($0.id) }, title: title)
-        request.oneGroup = oneGroup; request.stacks = stacks
-        request.partners = Dictionary(pairs.map { ($0.processed.id, $0.raw.id) }, uniquingKeysWith: { first, _ in first })
+        guard let shots = RawJPEGPairs.shots(assets) else { return self }
+        var request = CullingAssistantRequest(assets: shots.assets, title: title)
+        request.oneGroup = oneGroup; request.stacks = stacks; request.partners = shots.partners
         return request
     }
 }

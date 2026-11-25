@@ -30,14 +30,7 @@ extension CatalogModel {
     func setLocation(_ location: (latitude: Double, longitude: Double)?, assetIDs: [String]) async {
         guard let store, await flushMetadata(), self.store === store else { return }
         do {
-            var planned: [(id: String, old: CatalogMetadata, new: CatalogMetadata)] = []
-            for id in assetIDs {
-                let old = try await store.asset(id).metadata
-                var new = old
-                new.latitude = location?.latitude; new.longitude = location?.longitude
-                new.locationSource = location == nil ? nil : .assigned
-                if new != old { planned.append((id, old, new)) }
-            }
+            let planned = try await store.locationChanges(location, for: assetIDs)
             guard !planned.isEmpty else { return }
             try await store.updateMetadata(Dictionary(uniqueKeysWithValues: planned.map { ($0.id, $0.new) }))
             registerBatchMetadataUndo(planned, name: L10n.tr("Location"))
@@ -48,8 +41,6 @@ extension CatalogModel {
     }
     /// Where the picker opens for these photos: the first one's location, else the photo with one taken closest in time.
     func startingLocation(for assets: [CatalogAsset]) async -> (latitude: Double, longitude: Double)? {
-        if let located = assets.first(where: { $0.latitude != nil && $0.longitude != nil }), let latitude = located.latitude, let longitude = located.longitude { return (latitude, longitude) }
-        guard let store, let time = assets.compactMap(\.captureTime).first else { return nil }
-        return try? await store.nearestLocation(to: time)
+        await store?.startingLocation(for: assets)
     }
 }

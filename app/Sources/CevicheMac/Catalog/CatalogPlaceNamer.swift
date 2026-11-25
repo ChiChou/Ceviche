@@ -42,28 +42,14 @@ final class CatalogPlaceNamer {
     /// One round of lookups and inference; returns how long to wait before the next.
     private func pass() async -> Duration {
         guard Self.enabled, let catalog, let store = catalog.store, !store.isReadOnly else { return .seconds(300) }
-        let locale = L10n.locale
-        var changed = false
-        defer { if changed { Task { await catalog.placesChanged(in: store) } } }
-        do {
-            if try await store.applyKnownPlaces(locale: locale.identifier) > 0 { changed = true }
-            let cells = try await store.pendingPlaceCells(locale: locale.identifier, limit: 20)
-            for cell in cells {
-                guard Self.enabled, catalog.store === store, !Task.isCancelled else { return .seconds(300) }
-                let place = try await lookUp(cell, locale)
-                try await store.recordPlace(place, cell: cell.key, locale: locale.identifier)
-                changed = true
-                try await Task.sleep(for: pace)
-            }
-            if try await store.inferPlaces() > 0 { changed = true }
-            return cells.count == 20 ? .zero : .seconds(300)
-        } catch is CancellationError {
-            return .seconds(300)
-        } catch {
-            // Offline or throttled: what was found is kept, and the rest waits.
-            if (try? await store.inferPlaces()) ?? 0 > 0 { changed = true }
-            return .seconds(120)
-        }
+        let round = await store.namePlaces(locale: L10n.locale, pace: pace, proceed: { @MainActor [weak catalog] in
+            Self.enabled && catalog?.store === store
+        }, lookUp: lookUp)
+        if round.changed { Task { await catalog.placesChanged(in: store) } }
+        // Offline or throttled: what was found is kept, and the rest waits.
+        if round.stopped { return .seconds(300) }
+        if round.failed { return .seconds(120) }
+        return round.more ? .zero : .seconds(300)
     }
 
     /// Apple's geocoder; nil where there is nothing to name, such as open sea.

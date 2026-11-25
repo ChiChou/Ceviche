@@ -9,8 +9,7 @@ import CevicheCore
 @MainActor
 final class CullingAssistantModel: ObservableObject {
     enum Stage: Equatable { case measuring(Int, Int), ready, failed(String) }
-    /// What Apply does with a burst: flag its frames, group it under its cover, or leave it.
-    enum Action { case pick, group, skip }
+    typealias Action = BurstChoices.Action
 
     let request: CullingAssistantRequest
     let byID: [String: CatalogAsset]
@@ -19,25 +18,15 @@ final class CullingAssistantModel: ObservableObject {
     /// Photos that could not be measured, and why.
     @Published private(set) var unmeasured: [String: String] = [:]
     @Published var options: CullingPlan.Options { didSet { if options != oldValue { remember(); replan() } } }
-    @Published private(set) var plan = CullingPlan([], options: CullingPlan.Options())
-    /// The person's own choices; `unreviewed` means leave the photo's flag as it is.
-    @Published private(set) var overrides: [String: ReviewState] = [:]
-    /// Every frame of every burst.
-    @Published private(set) var burstMembers: Set<String> = []
+    /// The bursts and the person's choices on them, kept by frame since bursts are rebuilt as the options change.
+    @Published private(set) var choices: BurstChoices
+    var plan: CullingPlan { choices.plan }
+    var defaultAction: Action { choices.defaultAction }
     @Published var burstID: String?
     /// The photo in the preview.
     @Published var focusedID: String?
-    /// The action of every burst the person didn't set on its own: Pick, unless Group All or Skip All was chosen. A
-    /// timelapse is grouped instead of picked from: its frames are all kept, and one picked would reject the rest.
-    @Published private(set) var defaultAction = Action.pick
-    /// The person's action for single bursts, by frame, since bursts are rebuilt as the options change.
-    @Published private(set) var actions: [String: Action] = [:]
     /// First frames of bursts the person merged into the burst above, kept by frame as bursts are rebuilt.
     @Published private(set) var joins: Set<String> = [] { didSet { if joins != oldValue { replan() } } }
-    /// Frames the person made the cover of their burst.
-    @Published private(set) var chosenCovers: Set<String> = []
-    /// The burst each frame is in.
-    private var burstOf: [String: CullingPlan.Burst] = [:]
     private var task: Task<Void, Never>?
     private weak var scanner: CullingScanner?
     /// The photos this window queued for measuring, withdrawn again if it closes first.
@@ -52,6 +41,7 @@ final class CullingAssistantModel: ObservableObject {
         self.request = request
         byID = Dictionary(request.assets.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
         stage = .measuring(0, request.assets.count)
+        choices = BurstChoices(photos: request.assets, partners: request.partners, stacks: request.stacks, oneBurst: request.oneGroup)
         var options = preferences.data(forKey: "cullingOptions").flatMap { try? JSONDecoder().decode(CullingPlan.Options.self, from: $0) } ?? CullingPlan.Options()
         options.sensitivity = sensitivity
         self.options = options
@@ -116,8 +106,7 @@ final class CullingAssistantModel: ObservableObject {
         Task {
             let plan = await Task.detached(priority: .userInitiated) { CullingPlan(photos, options: options, oneBurst: oneBurst, joins: joins) }.value
             guard generation == planGeneration else { return }
-            self.plan = plan; burstMembers = Set(plan.bursts.flatMap(\.members))
-            burstOf = Dictionary(plan.bursts.flatMap { burst in burst.members.map { ($0, burst) } }, uniquingKeysWith: { first, _ in first })
+            choices.update(plan)
             if burstID == nil || !plan.bursts.contains(where: { $0.id == burstID }) { burstID = plan.bursts.first?.id }
             if let burst, focusedID.map({ !burst.members.contains($0) }) ?? true { focusedID = burst.best }
         }
@@ -127,45 +116,38 @@ final class CullingAssistantModel: ObservableObject {
     }
 
     // MARK: Flags
-    func current(_ id: String) -> ReviewState { byID[id]?.review ?? .unreviewed }
+    func current(_ id: String) -> ReviewState { choices.current(id) }
     /// The flag the photo will have after Apply: the person's choice, else the assistant's for frames of a burst. A
     /// burst to group or skip keeps its flags.
-    func flag(_ id: String) -> ReviewState {
-        if let burst = burstOf[id], action(burst) != .pick { return current(id) }
-        let decision = overrides[id] ?? (burstMembers.contains(id) ? plan.proposals[id] ?? .unreviewed : .unreviewed)
-        return decision == .unreviewed ? current(id) : decision
-    }
+    func flag(_ id: String) -> ReviewState { choices.flag(id) }
     /// Flagging a frame makes its burst one to pick from.
-    func set(_ id: String, _ state: ReviewState) {
-        if let burst = burstOf[id], action(burst) != .pick { setAction(burst, .pick) }
-        overrides[id] = state
-    }
+    func set(_ id: String, _ state: ReviewState) { choices.set(id, state) }
     /// Clicking the flag a photo will have leaves the photo's own flag instead.
     func toggle(_ id: String, _ state: ReviewState) { set(id, flag(id) == state ? .unreviewed : state) }
     /// Switches a frame between kept and rejected.
     func toggleKeep(_ id: String) { set(id, flag(id) == .accepted ? .rejected : .accepted) }
     /// Picks this frame of its burst, rejects the others and moves on to the next burst.
     func keepOnly(_ id: String) {
-        guard let burst = plan.bursts.first(where: { $0.members.contains(id) }) else { return }
-        setAction(burst, .pick)
-        for member in burst.members { overrides[member] = member == id ? .accepted : .rejected }
+        guard let burst = choices.burst(of: id) else { return }
+        choices.keepOnly(id)
         if burst.id == burstID { moveBurst(1) }
     }
     // MARK: Actions
-    func action(_ burst: CullingPlan.Burst) -> Action {
-        request.oneGroup ? .pick : burst.members.lazy.compactMap { self.actions[$0] }.first ?? (burst.series != nil && defaultAction == .pick ? .group : defaultAction)
-    }
+    func action(_ burst: CullingPlan.Burst) -> Action { choices.action(burst) }
     /// Group All and Skip All: every burst, also those that appear as the options change.
     func setAll(_ action: Action) {
-        actions = [:]; defaultAction = action
+        choices.setAll(action)
         if action == .group, let burst { focusedID = cover(of: burst) }
     }
     /// A burst's Group or Skip button: on, or back to Pick.
     func toggle(_ burst: CullingPlan.Burst, _ action: Action) { setAction(burst, self.action(burst) == action ? .pick : action) }
     func setAction(_ burst: CullingPlan.Burst, _ action: Action) {
-        for member in burst.members { actions[member] = action }
-        // A folded burst shows its cover.
-        if action == .group, let focusedID, burst.members.contains(focusedID) { self.focusedID = cover(of: burst) }
+        choices.setAction(burst, action)
+        if action == .group { showCover(burst) }
+    }
+    /// A folded burst shows its cover.
+    private func showCover(_ burst: CullingPlan.Burst) {
+        if let focusedID, burst.members.contains(focusedID) { self.focusedID = cover(of: burst) }
     }
     // MARK: Merge
     /// Every burst but the first can join the one above it.
@@ -181,15 +163,15 @@ final class CullingAssistantModel: ObservableObject {
     func split(_ burst: CullingPlan.Burst) { joins.subtract(burst.members) }
 
     /// The frame the burst's group shows: the one the person chose, else the best.
-    func cover(of burst: CullingPlan.Burst) -> String { burst.members.first { chosenCovers.contains($0) } ?? burst.best }
+    func cover(of burst: CullingPlan.Burst) -> String { choices.cover(of: burst) }
     func makeCover(_ id: String) {
-        guard let burst = burstOf[id] else { return }
-        chosenCovers.subtract(burst.members); chosenCovers.insert(id)
-        setAction(burst, .group)
+        guard let burst = choices.burst(of: id) else { return }
+        choices.makeCover(id)
+        showCover(burst)
     }
     /// Space: in a burst to pick from, keeps only this frame; in one to group, makes it the cover. Then the next burst.
     func choose(_ id: String) {
-        guard let burst = burstOf[id] else { return }
+        guard let burst = choices.burst(of: id) else { return }
         switch action(burst) {
         case .pick: keepOnly(id)
         case .group: makeCover(id); if burst.id == burstID { moveBurst(1) }
@@ -197,24 +179,11 @@ final class CullingAssistantModel: ObservableObject {
         }
     }
     /// Already exactly one group under its cover, both files of each RAW + JPEG shot included.
-    func isGrouped(_ burst: CullingPlan.Burst) -> Bool {
-        let members = Set(files(burst)), cover = cover(of: burst), group = request.partners[cover] ?? cover
-        return members.allSatisfy { request.stacks[$0] == group } && request.stacks.allSatisfy { $0.value != group || members.contains($0.key) }
-    }
-    private func files(_ burst: CullingPlan.Burst) -> [String] { burst.members.flatMap { [$0] + (request.partners[$0].map { [$0] } ?? []) } }
+    func isGrouped(_ burst: CullingPlan.Burst) -> Bool { choices.isGrouped(burst) }
     /// The bursts Apply groups, both files of a RAW + JPEG shot, under the cover (the RAW of a pair).
-    var groupChanges: [(members: [String], cover: String)] {
-        plan.bursts.filter { action($0) == .group && !isGrouped($0) }.map { burst in
-            let cover = cover(of: burst)
-            return (files(burst), request.partners[cover] ?? cover)
-        }
-    }
+    var groupChanges: [CullingChanges.Group] { choices.groupChanges }
     /// Every photo whose flag Apply would change, with its new flag.
-    var changes: [String: ReviewState] {
-        var result: [String: ReviewState] = [:]
-        for asset in request.assets where flag(asset.id) != current(asset.id) { result[asset.id] = flag(asset.id) }
-        return result
-    }
+    var changes: [String: ReviewState] { choices.changes }
     /// Flags can be applied while photos are still being measured; the rest keep measuring in the background.
     var canApply: Bool { !changes.isEmpty || !groupChanges.isEmpty }
 
@@ -738,8 +707,6 @@ extension CullingIssue {
         case .duplicate: "plus.square.on.square"
         }
     }
-    /// A frame of a burst not kept, rather than a fault of the photo itself.
-    var inBurst: Bool { self == .burstAlternate || self == .duplicate }
 }
 
 /// A larger look at one photo from its original, undeveloped, to zoom into and move around, with the subject and faces

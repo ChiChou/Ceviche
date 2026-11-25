@@ -9,7 +9,7 @@ import CevicheCore
 final class ProblemPhotosModel: ObservableObject {
     enum Stage: Equatable { case measuring(Int, Int), ready, failed(String) }
     /// The problems this tool looks for; a burst's alternate is Pick from Bursts' business.
-    static let kinds = CullingIssue.allCases.filter { !$0.inBurst }
+    static let kinds = CullingIssue.flaws
 
     let request: CullingAssistantRequest
     let byID: [String: CatalogAsset]
@@ -20,10 +20,8 @@ final class ProblemPhotosModel: ObservableObject {
     @Published var sensitivity: CullingSensitivity
     /// The problems that count; all of them unless the person turns some off.
     @Published var kinds = Set(ProblemPhotosModel.kinds)
-    /// Photos the person unticked: they keep their flag.
-    @Published private(set) var excluded: Set<String> = []
-    /// Photos the person had picked and then ticked here; picked photos otherwise start unticked.
-    @Published private(set) var overridden: Set<String> = []
+    /// The photos left ticked, which Reject rejects.
+    @Published private(set) var ticks = FlawTicks()
     private weak var scanner: CullingScanner?
     /// The photos this window queued for measuring, withdrawn again if it closes first.
     private var added: Set<String> = []
@@ -85,23 +83,11 @@ final class ProblemPhotosModel: ObservableObject {
     var found: [CatalogAsset] { request.assets.filter { !issues($0.id).isEmpty } }
     func count(of issue: CullingIssue) -> Int { request.assets.filter { reports[$0.id]?.issues(sensitivity, exposure: ExposureSettings($0)).contains(issue) == true }.count }
     /// Ticked photos are rejected; a photo the person picked starts unticked, so their pick stands unless they tick it.
-    func isIncluded(_ id: String) -> Bool { current(id) == .accepted ? overridden.contains(id) : !excluded.contains(id) }
-    func toggle(_ id: String) {
-        let picked = current(id) == .accepted
-        switch (isIncluded(id), picked) {
-        case (true, true): overridden.remove(id)
-        case (true, false): excluded.insert(id)
-        case (false, true): overridden.insert(id)
-        case (false, false): excluded.remove(id)
-        }
-    }
-    func setAll(_ included: Bool) {
-        let ids = found.map(\.id)
-        excluded = included ? [] : Set(ids)
-        overridden = included ? Set(ids.filter { current($0) == .accepted }) : []
-    }
+    func isIncluded(_ id: String) -> Bool { ticks.isIncluded(id, current: current(id)) }
+    func toggle(_ id: String) { ticks.toggle(id, current: current(id)) }
+    func setAll(_ included: Bool) { ticks.setAll(included, found) }
     /// Ticked photos that aren't rejected already.
-    var toReject: [String] { found.map(\.id).filter { isIncluded($0) && current($0) != .rejected } }
+    var toReject: [String] { ticks.toReject(found) }
 
     // MARK: Focus
     /// The photo the arrows move and Space previews.
