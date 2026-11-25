@@ -1044,6 +1044,7 @@
 "Depth estimation returned no result." = "Depth estimation returned no result.";
 "Depth masks" = "Depth masks";
 "Depth, scene and sky masks, AI noise reduction and AI fill. Each keeps its own license." = "Depth, scene and sky masks, AI noise reduction and AI fill. Each keeps its own license.";
+"Deselect" = "Deselect";
 "Deselect All" = "Deselect All";
 "Detail" = "Detail";
 "Detail (D)" = "Detail (D)";
@@ -2647,6 +2648,7 @@
 "SDR exposure" = "SDR exposure";
 "SDR tones on the left, stops above SDR white on the right. Drag left or right: Blacks - Shadows - Exposure - Highlights - Whites" = "SDR tones on the left, stops above SDR white on the right. Drag left or right: Blacks - Shadows - Exposure - Highlights - Whites";
 "SDR white" = "SDR white";
+"SELECTED" = "SELECTED";
 "SELECTED SPOT" = "SELECTED SPOT";
 "SELECTED STROKE" = "SELECTED STROKE";
 "SPOTS" = "SPOTS";

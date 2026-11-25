@@ -3585,3 +3585,5 @@
 "Saves a copy beside the original." = "在原片旁存储一个副本。";
 "Saved to Photos" = "已存储到“照片”";
 "Couldn’t Save" = "无法存储";
+"Deselect" = "取消选择";
+"SELECTED" = "已选择";
