@@ -117,20 +117,18 @@ struct FacePanel: View {
     }
     /// The selected people's Strengths of a Details correction.
     private func strengths(_ kind: PortraitCorrection) -> [Double] {
-        model.adjustments.masks.filter { $0.portraitCorrection == kind && model.isSelected($0.face) }.map(\.strength)
+        model.adjustments.portraitMasks(kind, faces: model.chosenFaces).map(\.strength)
     }
     /// A Details correction's Strength for the selected people, 0 to 200 % of what Auto measured, set on all of them.
     private func strength(_ kind: PortraitCorrection, _ first: PhotoMask) -> Binding<Double> {
         Binding(get: { first.strength }, set: { value in
-            model.edit { a in
-                for i in a.masks.indices where a.masks[i].portraitCorrection == kind && model.isSelected(a.masks[i].face) { a.masks[i].strength = value }
-            }
+            let faces = model.chosenFaces
+            model.edit { $0.setPortraitMasks(kind, \.strength, value, faces: faces) }
         })
     }
     /// The selected people's Amounts of a correction.
     private func opacities(_ kind: PortraitCorrection) -> [Double] {
-        let faces = model.chosenFaces
-        return model.adjustments.masks.filter { $0.portraitCorrection == kind && (faces == nil || PortraitFace.covers($0.face, faces ?? [])) }.map(\.opacity)
+        model.adjustments.portraitMasks(kind, faces: model.chosenFaces).map(\.opacity)
     }
     /// A percentage for the selected people, or a dash when they differ (Everyone, after one person was changed):
     /// moving the slider sets them all alike.
@@ -142,11 +140,7 @@ struct FacePanel: View {
     private func amount(_ kind: PortraitCorrection, _ first: PhotoMask) -> Binding<Double> {
         Binding(get: { first.opacity }, set: { value in
             let faces = model.chosenFaces
-            model.edit { a in
-                for i in a.masks.indices where a.masks[i].portraitCorrection == kind && (faces == nil || PortraitFace.covers(a.masks[i].face, faces ?? [])) {
-                    a.masks[i].opacity = value
-                }
-            }
+            model.edit { $0.setPortraitMasks(kind, \.opacity, value, faces: faces) }
         })
     }
     /// Red eye: on or off, no amount. Fix finds red pupils and neutralizes them, Remove takes that out; the report
@@ -158,8 +152,7 @@ struct FacePanel: View {
     }
     /// The correction's first mask for the ticked people; nil when none of them has it yet.
     private func mask(_ kind: PortraitCorrection) -> PhotoMask? {
-        let faces = model.chosenFaces
-        return model.adjustments.masks.first { $0.portraitCorrection == kind && (faces == nil || PortraitFace.covers($0.face, faces ?? [])) }
+        model.adjustments.portraitMasks(kind, faces: model.chosenFaces).first
     }
     /// In a group picture, said of a control that is the photo's, not the selected person's.
     private var wholePhoto: String? { model.isGroupPortrait ? L10n.tr("Whole photo") : nil }
@@ -227,10 +220,7 @@ extension EditorModel {
         }
     }
     /// Whether something tagged with a face (nil: everyone's) belongs to the people selected.
-    func isSelected(_ face: CGRect?) -> Bool {
-        guard let chosen = chosenFaces, let face else { return true }
-        return PortraitFace.covers(face, chosen)
-    }
+    func isSelected(_ face: CGRect?) -> Bool { PortraitFace.isChosen(face, chosenFaces) }
     /// A face's spots: tagged with it, or (found before spots were tagged) lying on it.
     private func isSpot(_ s: RetouchStroke, on face: CGRect) -> Bool {
         guard s.group == .face else { return false }
@@ -255,26 +245,16 @@ extension EditorModel {
     }
     /// Makes every face's Even tone layer from the photo as it is now, at `amount`, one undoable edit.
     /// The selected people's Even tone layers.
-    var chosenSkinTones: [SkinTone.Face] {
-        let chosen = chosenFaces
-        return (adjustments.skinTone?.faces ?? []).filter { chosen == nil || PortraitFace.covers($0.rect, chosen ?? []) }
-    }
+    var chosenSkinTones: [SkinTone.Face] { adjustments.skinTones(faces: chosenFaces) }
     /// Sets the selected people's Even tone Amount; the others keep theirs.
     func setSkinToneAmount(_ amount: Double) {
         let chosen = chosenFaces
-        edit { a in
-            guard var tone = a.skinTone else { return }
-            for i in tone.faces.indices where chosen == nil || PortraitFace.covers(tone.faces[i].rect, chosen ?? []) { tone.faces[i].amount = amount }
-            a.skinTone = tone
-        }
+        edit { $0.setSkinToneAmount(amount, faces: chosen) }
     }
     /// Takes the selected people's Even tone out; the others keep theirs.
     func removeSkinTone() {
         let chosen = chosenFaces
-        edit { a in
-            a.skinTone?.faces.removeAll { chosen == nil || PortraitFace.covers($0.rect, chosen ?? []) }
-            if a.skinTone?.faces.isEmpty == true { a.skinTone = nil }
-        }
+        edit { $0.removeSkinTone(faces: chosen) }
     }
     /// Makes Even tone's layer for the selected faces at `amount`, keeping the other faces' layers.
     func applySkinTone(amount: Double) {
@@ -285,10 +265,7 @@ extension EditorModel {
             guard self.renderer === renderer else { return }
             guard !faces.isEmpty else { blemishReport = L10n.tr("No face found"); return }
             blemishReport = nil
-            edit { a in
-                let kept = (chosen == nil ? [] : a.skinTone?.faces ?? []).filter { !PortraitFace.covers($0.rect, chosen ?? []) }
-                a.skinTone = SkinTone(faces: kept + faces.map { var f = $0; f.amount = amount; return f })
-            }
+            edit { $0.placeSkinTone(faces, amount: amount, faces: chosen) }
         }
     }
     /// The photo's faces for the people row, the larger ones ticked: small faces in the background usually aren't the
@@ -308,9 +285,8 @@ extension EditorModel {
     /// Takes the correction out for the ticked people; the others keep theirs.
     func removePortraitCorrection(_ kind: PortraitCorrection, faces only: [CGRect]? = nil) {
         let faces = only ?? chosenFaces
-        let mine = { (m: PhotoMask) in m.portraitCorrection == kind && (faces == nil || PortraitFace.covers(m.face, faces ?? [])) }
-        guard adjustments.masks.contains(where: mine) else { return }
-        edit { $0.masks.removeAll(where: mine) }
+        guard !adjustments.portraitMasks(kind, faces: faces).isEmpty else { return }
+        edit { $0.removePortraitCorrection(kind, faces: faces) }
     }
     /// The Light card's reset: the selected people's measured masks and Even tone. White balance is the photo's.
     func removePortraitCorrections() {
@@ -319,8 +295,7 @@ extension EditorModel {
         let chosen = chosenFaces
         edit { a in
             a.masks.removeAll(where: light)
-            a.skinTone?.faces.removeAll { chosen == nil || PortraitFace.covers($0.rect, chosen ?? []) }
-            if a.skinTone?.faces.isEmpty == true { a.skinTone = nil }
+            a.removeSkinTone(faces: chosen)
         }
     }
     /// The Details card's reset: the selected people's masks; on Everyone, Red eye too, which is the photo's.
@@ -344,24 +319,18 @@ extension EditorModel {
                 blemishReport = result.visible ? L10n.tr("\(kind.title) look fine") : L10n.tr("\(kind.title) not visible"); return
             }
             blemishReport = nil
-            edit { a in
-                let replaced = { (m: PhotoMask) in m.portraitCorrection == kind && (faces == nil || PortraitFace.covers(m.face, faces ?? [])) }
-                let strength = a.masks.first(where: replaced)?.strength ?? 1
-                a.masks.removeAll(where: replaced)
-                guard a.masks.count + made.count <= PhotoMask.maxCount else { return }
-                a.masks += made.map { var m = $0; m.strength = strength; return m }
-            }
+            edit { $0.placePortraitDetail(kind, made, faces: faces) }
         }
     }
     /// Every Shape control back to zero; the face stays found.
     /// Where each face's warp would go, measured once for the photo.
     func loadGroupPlacements() async {
-        let faces = portraitFaces.filter { groupPlacements[$0.id] == nil }
+        let faces = FaceLiquify.unplaced(portraitFaces, in: groupPlacements)
         guard let renderer, isGroupPortrait, !faces.isEmpty else { return }
         let settings = adjustments
         guard let found = try? await renderer.liquifyFaces(settings, faces: faces.map(\.box)), self.renderer === renderer else { return }
         // Faces the landmarks miss are tried again next time; the card says so meanwhile.
-        for (face, warp) in zip(faces, found) { if let warp, portraitFaces.contains(where: { $0.id == face.id && $0.box == face.box }) { groupPlacements[face.id] = warp } }
+        FaceLiquify.place(found, on: faces, current: portraitFaces, into: &groupPlacements)
         loadedPlacements = Set(portraitFaces.map(\.id))
     }
     func resetLiquify() {
@@ -377,7 +346,7 @@ extension EditorModel {
             try Task.checkCancellation()
             guard self.renderer === renderer else { return }
             guard let result else { blemishReport = L10n.tr("No face found"); return }
-            edit { $0.temperature = result.temperature; $0.tint = result.tint }
+            edit { $0.takeWhiteBalance(of: result) }
         }
     }
 }
