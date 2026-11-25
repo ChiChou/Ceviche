@@ -391,7 +391,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and Replace where the tool can fix them, and Save adds the photo at the document's upload size to Photos and
   closes the tool, a toast saying when it is there; Share beside it hands the same file to the share sheet. Each refuses photos
   that would not fit the device's memory.
-- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save, which closes
+- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality, color space and size, and for photos developed in HDR, HDR or SDR with the Mac's HDR encodings (an SDR photo in the batch goes out in SDR), then Save, which closes
   the sheet and adds the files to Photos as a job (in Develop a ring stands in Export's place meanwhile), a toast saying when they are there, or Share beside it, the share
   sheet for AirDrop, Files and other apps. A video's export sheet has the same Share and Save. Watermark stamps one watermark, a line of text or an image with transparency
   from Files, in one of nine places with its Size and Opacity, set on the photo being exported: a tap places it, a
