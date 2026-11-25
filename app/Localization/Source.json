@@ -2735,7 +2735,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:88",
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:88",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:118"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:120"
     ]
   },
   {
@@ -2834,7 +2834,7 @@
     "context": "Sources/CevicheMac/Editor/GeometrySection.swift:138",
     "uses": [
       "Sources/CevicheMac/Editor/GeometrySection.swift:138",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:193",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:195",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:106"
     ]
   },
@@ -3126,7 +3126,7 @@
       "Sources/CevicheMac/Editor/MaskPanel.swift:130",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:38",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:135",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:252",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:254",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:97"
     ]
   },
@@ -4030,7 +4030,7 @@
       "Sources/CevicheMac/Editor/EditingControls.swift:8",
       "Sources/CevicheMac/Editor/EditorInspector.swift:76",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:67",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:206",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:208",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:80"
     ]
   },
@@ -4138,7 +4138,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:149",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:124",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:218",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:220",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:54"
     ]
   },
@@ -4291,7 +4291,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:83",
       "Sources/CevicheMac/Editor/MaskPanel.swift:166",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:226",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:228",
       "Sources/CevicheCore/Masks/Masks.swift:8"
     ]
   },
@@ -4573,9 +4573,9 @@
       "Sources/CevicheMobile/Components/ShakeToUndo.swift:38",
       "Sources/CevicheMobile/Components/ToolChrome.swift:22",
       "Sources/CevicheMobile/Develop/HistoryView.swift:50",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:149",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:156",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:65",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:151",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:158",
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:27",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:79",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:136",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:186",
@@ -5311,7 +5311,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:147",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:122",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:214",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:216",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:85",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:21"
     ]
@@ -5633,7 +5633,7 @@
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:31",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:43",
       "Sources/CevicheMobile/Develop/DevelopView.swift:508",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:207",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:209",
       "Sources/CevicheMobile/Export/VideoExport.swift:29",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:18",
@@ -5900,7 +5900,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:72",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:63",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:202",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:204",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:76",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:23",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:121",
@@ -6667,7 +6667,7 @@
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:72",
       "Sources/CevicheMac/Editor/SceneMaskChooser.swift:24",
       "Sources/CevicheMobile/Develop/HistoryView.swift:51",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:67",
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:28",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:91"
     ]
   },
@@ -7127,7 +7127,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:148",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:123",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:215",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:217",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:87"
     ]
   },
@@ -7150,7 +7150,7 @@
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:379",
       "Sources/CevicheMobile/Develop/CurveEditor.swift:82",
       "Sources/CevicheMobile/Develop/HistoryView.swift:31",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:171",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:173",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:111",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:250",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:192",
@@ -7247,7 +7247,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:144",
       "Sources/CevicheMac/Editor/MaskPanel.swift:144",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:264"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:266"
     ]
   },
   {
@@ -7401,7 +7401,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:137",
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMobile/Develop/DevelopView.swift:509",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:212",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:214",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:7",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:321"
     ]
@@ -7796,7 +7796,7 @@
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:347",
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:347",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:154"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:156"
     ]
   },
   {
@@ -8376,7 +8376,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:177",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:177",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:238"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:240"
     ]
   },
   {
@@ -8404,7 +8404,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel+Masks.swift:46",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel+Masks.swift:46",
-      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:173"
+      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:175"
     ]
   },
   {
@@ -8884,7 +8884,7 @@
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:178",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:87",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:62",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:201",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:203",
       "Sources/CevicheMobile/Tools/MatchSeries/MatchSeriesView.swift:129",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:75",
       "Sources/CevicheCore/Catalog/CatalogTagSearch.swift:288"
@@ -9154,7 +9154,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:181",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:181",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:242"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:244"
     ]
   },
   {
@@ -9166,7 +9166,7 @@
       "Sources/CevicheMac/Editor/MaskPanel.swift:184",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:99",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:323",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:245",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:247",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:64",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:265"
     ]
@@ -9488,7 +9488,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:67",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:588",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:58"
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:68"
     ]
   },
   {
@@ -10759,7 +10759,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:178",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:79",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:64",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:203",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:205",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:77",
       "Sources/CevicheCore/Analysis/PairTriage.swift:31",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:118",
@@ -11773,7 +11773,7 @@
       "Sources/CevicheMac/Tools/NegativeDialog.swift:478",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:492",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:501",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:253",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:255",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:92",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:163",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:173"
@@ -11785,7 +11785,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:187",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:187",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:248"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:250"
     ]
   },
   {
@@ -13170,7 +13170,7 @@
       "Sources/CevicheMac/Editor/EditorModel.swift:12",
       "Sources/CevicheMac/Editor/MaskPanel.swift:25",
       "Sources/CevicheMobile/Develop/DevelopView.swift:513",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:112",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:114",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:72",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:8",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:25"
@@ -14175,7 +14175,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:167",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:167",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:227"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:229"
     ]
   },
   {
@@ -14184,7 +14184,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:180",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:180",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:241"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:243"
     ]
   },
   {
@@ -14894,8 +14894,8 @@
     "uses": [
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:35",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:598",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:24",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:74",
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:33",
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:89",
       "Sources/CevicheMobile/Develop/Retouch/DevelopModel+Distractions.swift:32",
       "Sources/CevicheMobile/Tools/WideAngle/WideAngleModel.swift:114"
     ]
@@ -15022,7 +15022,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:140",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:118",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:217",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:219",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:230"
     ]
   },
@@ -16107,7 +16107,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:155",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:155",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:102"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:104"
     ]
   },
   {
@@ -16138,7 +16138,7 @@
       "Sources/CevicheMac/Editor/FacePanel.swift:61",
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:45",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:175",
-      "Sources/CevicheMobile/Develop/Masks/PeopleMaskSheet.swift:35",
+      "Sources/CevicheMobile/Develop/Masks/PeopleMaskChooser.swift:44",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:58"
     ]
   },
@@ -16355,7 +16355,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:169",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:169",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:229"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:231"
     ]
   },
   {
@@ -18335,7 +18335,7 @@
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:91",
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:91",
       "Sources/CevicheMobile/Develop/Masks/DevelopModel+Target.swift:47",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:219"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:221"
     ]
   },
   {
@@ -18671,7 +18671,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel+Masks.swift:91",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel+Masks.swift:91",
-      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:239"
+      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:241"
     ]
   },
   {
@@ -18685,7 +18685,7 @@
       "Sources/CevicheMac/Editor/PointColorPanel.swift:19",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:42",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:100",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:211",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:213",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:84",
       "Sources/CevicheCore/Adjustments/SelectiveColor.swift:70",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:124",
@@ -19159,7 +19159,7 @@
     "context": "Sources/CevicheMac/Editor/EditorModel+Masks.swift:46",
     "uses": [
       "Sources/CevicheMac/Editor/EditorModel+Masks.swift:46",
-      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:173"
+      "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:175"
     ]
   },
   {
@@ -19305,7 +19305,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:181",
       "Sources/CevicheMobile/Develop/ColorPanels.swift:77",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:65",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:204",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:206",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:78",
       "Sources/CevicheCore/Analysis/PairTriage.swift:32",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:119"
@@ -19314,9 +19314,9 @@
   {
     "key": "Shape",
     "source": "\"Shape\"",
-    "context": "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:194",
+    "context": "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:196",
     "uses": [
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:194",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:196",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:129",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:132"
     ]
@@ -19355,7 +19355,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:134",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:117",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:216",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:218",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:21",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:230"
     ]
@@ -19581,7 +19581,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:50",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:50",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:115"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:117"
     ]
   },
   {
@@ -19848,7 +19848,7 @@
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:92",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:93",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:137",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:236",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:238",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:63",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:262",
       "Sources/CevicheMobile/Export/ExportView.swift:38",
@@ -20103,7 +20103,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:176",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:176",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:237"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:239"
     ]
   },
   {
@@ -20937,7 +20937,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:146",
       "Sources/CevicheMobile/Develop/DarkroomPanel.swift:99",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:121",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:213",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:215",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:86",
       "Sources/CevicheCore/Filters/CreativeFilter.swift:152"
     ]
@@ -21154,7 +21154,7 @@
   {
     "key": "The color couldn’t be sampled.",
     "source": "\"The color couldn’t be sampled.\"",
-    "context": "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:253"
+    "context": "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:255"
   },
   {
     "key": "The copy is missing from this Mac's catalog folder.",
@@ -21350,7 +21350,7 @@
   {
     "key": "The mask couldn’t be made.",
     "source": "\"The mask couldn’t be made.\"",
-    "context": "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:185"
+    "context": "Sources/CevicheMobile/Develop/Masks/DevelopModel+Masks.swift:187"
   },
   {
     "key": "The mask's SDR MainCurve was used; HDR curve anchors remain in the source XMP.",
@@ -22274,7 +22274,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:101",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:484",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:98",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:209",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:211",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:82"
     ]
   },
@@ -22321,7 +22321,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:142",
       "Sources/CevicheMac/Editor/MaskPanel.swift:142",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:262"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:264"
     ]
   },
   {
@@ -22333,7 +22333,7 @@
       "Sources/CevicheMac/Editor/AdjustmentTarget.swift:99",
       "Sources/CevicheMac/Editor/MaskPanel.swift:105",
       "Sources/CevicheMac/Editor/MaskPanel.swift:105",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:169"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:171"
     ]
   },
   {
@@ -22347,7 +22347,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:185",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:185",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:246"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:248"
     ]
   },
   {
@@ -22539,7 +22539,7 @@
     "context": "Sources/CevicheMac/Editor/MaskPanel.swift:182",
     "uses": [
       "Sources/CevicheMac/Editor/MaskPanel.swift:182",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:243"
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:245"
     ]
   },
   {
@@ -23287,7 +23287,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:102",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:99",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:210",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:212",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:83"
     ]
   },
@@ -23453,7 +23453,7 @@
     "uses": [
       "Sources/CevicheMac/Editor/EditorInspector.swift:100",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:94",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:208",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:210",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:53"
     ]
   },
@@ -23665,7 +23665,7 @@
       "Sources/CevicheMac/Editor/EditingControls.swift:8",
       "Sources/CevicheMac/Editor/EditorInspector.swift:75",
       "Sources/CevicheMobile/Develop/DevelopPanels.swift:66",
-      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:205",
+      "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:207",
       "Sources/CevicheCore/Adjustments/EditSummary.swift:79"
     ]
   },
