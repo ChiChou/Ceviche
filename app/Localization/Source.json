@@ -2800,7 +2800,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+LivePhoto.swift:82",
       "Sources/CevicheMac/Tools/CatalogModel+StarTrailAnimation.swift:81",
-      "Sources/CevicheMobile/Export/VideoExport.swift:82",
+      "Sources/CevicheMobile/Export/VideoExport.swift:81",
       "Sources/CevicheMobile/Tools/MergeModel.swift:345",
       "Sources/CevicheMobile/Tools/Timelapse/TimelapseModel.swift:343"
     ]
@@ -4577,7 +4577,7 @@
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:110",
       "Sources/CevicheMobile/Develop/Retouch/RetouchPanel.swift:144",
       "Sources/CevicheMobile/Export/ExportView.swift:56",
-      "Sources/CevicheMobile/Export/VideoExport.swift:58",
+      "Sources/CevicheMobile/Export/VideoExport.swift:48",
       "Sources/CevicheMobile/Library/LibrarySidebar.swift:90",
       "Sources/CevicheMobile/Library/Map/LocationPicker.swift:66",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:131",
@@ -8599,7 +8599,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:246",
       "Sources/CevicheMobile/Export/ExportView.swift:53",
       "Sources/CevicheMobile/Export/ExportView.swift:127",
-      "Sources/CevicheMobile/Export/VideoExport.swift:55",
+      "Sources/CevicheMobile/Export/VideoExport.swift:45",
       "Sources/CevicheMobile/Library/LibraryGrid.swift:270"
     ]
   },
@@ -18659,6 +18659,7 @@
       "Sources/CevicheMac/Tools/FiltersDialog.swift:62",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:241",
       "Sources/CevicheMobile/Export/ExportView.swift:63",
+      "Sources/CevicheMobile/Export/VideoExport.swift:56",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:132",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:24"
     ]
@@ -18716,11 +18717,6 @@
     "key": "Save this tool's settings as a new item in the catalog. You can open it anytime again to pick up where you left off.",
     "source": "\"Save this tool's settings as a new item in the catalog. You can open it anytime again to pick up where you left off.\"",
     "context": "Sources/CevicheMac/Components/LatentCheckbox.swift:20"
-  },
-  {
-    "key": "Save to Photos",
-    "source": "\"Save to Photos\"",
-    "context": "Sources/CevicheMobile/Export/VideoExport.swift:45"
   },
   {
     "key": "Saved",
@@ -18801,6 +18797,7 @@
     "context": "Sources/CevicheMobile/Export/ExportView.swift:121",
     "uses": [
       "Sources/CevicheMobile/Export/ExportView.swift:121",
+      "Sources/CevicheMobile/Export/VideoExport.swift:85",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:195"
     ]
   },
@@ -19283,7 +19280,7 @@
       "Sources/CevicheMac/Export/ExportButton.swift:87",
       "Sources/CevicheMac/Export/PhotoShare.swift:74",
       "Sources/CevicheMobile/Export/ExportView.swift:59",
-      "Sources/CevicheMobile/Export/VideoExport.swift:47",
+      "Sources/CevicheMobile/Export/VideoExport.swift:51",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:183"
     ]
   },

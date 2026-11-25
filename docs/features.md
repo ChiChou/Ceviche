@@ -354,7 +354,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and its main options in the inspector beside it (a sheet on an iPhone). Merges, tools and culling screens share
   Photos' editing bar: close at one end, the screen's name and progress in the middle, its action at the other. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
   frame with the Mac's Trails, Glow and Meteors options and the frame set on the preview; a video's Export… opens a
-  sheet with Encoder, Container, Color and Quality, then Save to Photos or Share…, which starts it. The three
+  sheet with Encoder, Container, Color and Quality, then Save or Share, which starts it. The three
   night-sky merges are laid out like the editor in Photos: a rail of modes at the side (Objects, Sky, Photos,
   Options), undo and redo and Outlines in the bar with what the result is made of, and As Captured for meteors.
   Objects lists the lines found as the Mac does, with kept and left-out counts, All, Aircraft or Meteors, and an
@@ -367,7 +367,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
 - **Tools.** Merge Best Faces sits with the merges and adds its result to the catalog. The Tools menu has Convert
   Negative, each scan inverted with its frame found, film, film base, orientation and roll balance as on the Mac, saved
   as new positives in the catalog; Create Timelapse Video, a frame previewed at the video's framing, size, rate and
-  pace with Stabilize and Deflicker, then Export…, a sheet with the encoding and Save to Photos or Share…, which
+  pace with Stabilize and Deflicker, then Export…, a sheet with the encoding and Save or Share, which
   writes it as a job and adds it to Photos or opens the share sheet when done; Create Live Photo, the same screen with Output set to Live
   Photo, which fits the frames into about 3 seconds at a size preset with a key photo as the still and adds it to
   Photos; and Creative Filters, the Mac's filter stack on the photo,
@@ -387,7 +387,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save, which closes
   the sheet and adds the files to Photos as a job, a toast saying when they are there, or Share beside it, the share
-  sheet for AirDrop, Files and other apps. A video's export sheet offers Save to Photos and Share…. Watermark stamps one watermark, a line of text or an image with transparency
+  sheet for AirDrop, Files and other apps. A video's export sheet has the same Share and Save. Watermark stamps one watermark, a line of text or an image with transparency
   from Files, in one of nine places with its Size and Opacity, set on the photo being exported: a tap places it, a
   pinch sizes it.
 - **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
