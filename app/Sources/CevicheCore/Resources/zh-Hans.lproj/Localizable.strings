@@ -3589,3 +3589,4 @@
 "The photos and their edits are removed from this device. This can’t be undone." = "照片及其编辑将从此设备移除，且无法撤销。";
 "Delete %1$@ Photos" = "删除 %1$@ 张照片";
 "Delete 1 Photo" = "删除 1 张照片";
+"Up to %1$@ photos on this device." = "此设备一次最多 %1$@ 张照片。";
