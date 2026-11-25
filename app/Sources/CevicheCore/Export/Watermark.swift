@@ -63,18 +63,44 @@ public struct Watermark: Codable, Hashable, Sendable, Identifiable {
         case tiled, corner
         public var title: String { self == .tiled ? L10n.tr("Tiled") : L10n.tr("Corner") }
     }
+    /// Where a placed watermark sits: a corner, or the middle of an edge or of the photo (the iPad and iPhone app's
+    /// nine-point grid; the Mac offers the corners).
     public enum Corner: String, Codable, CaseIterable, Sendable {
         case topLeft, topRight, bottomLeft, bottomRight
+        case top, left, center, right, bottom
+        /// The nine places row by row, top left first.
+        public static let grid: [Corner] = [.topLeft, .top, .topRight, .left, .center, .right, .bottomLeft, .bottom, .bottomRight]
         public var title: String {
             switch self {
             case .topLeft: return L10n.tr("Top left")
             case .topRight: return L10n.tr("Top right")
             case .bottomLeft: return L10n.tr("Bottom left")
             case .bottomRight: return L10n.tr("Bottom right")
+            case .top: return L10n.tr("Top")
+            case .left: return L10n.tr("Left")
+            case .center: return L10n.tr("Center")
+            case .right: return L10n.tr("Right")
+            case .bottom: return L10n.tr("Bottom")
             }
         }
-        public var isLeft: Bool { self == .topLeft || self == .bottomLeft }
-        public var isTop: Bool { self == .topLeft || self == .topRight }
+        public var isLeft: Bool { column == -1 }
+        public var isTop: Bool { row == 1 }
+        /// -1 left, 0 centred, 1 right.
+        public var column: Int {
+            switch self {
+            case .topLeft, .left, .bottomLeft: -1
+            case .top, .center, .bottom: 0
+            case .topRight, .right, .bottomRight: 1
+            }
+        }
+        /// 1 top, 0 middle, -1 bottom (y up, as Core Image has it).
+        public var row: Int {
+            switch self {
+            case .topLeft, .top, .topRight: 1
+            case .left, .center, .right: 0
+            case .bottomLeft, .bottom, .bottomRight: -1
+            }
+        }
     }
     public var id = UUID()
     public var name = ""
@@ -164,8 +190,8 @@ public struct Watermark: Codable, Hashable, Sendable, Identifiable {
         let width = mark.extent.width, height = mark.extent.height, gap = spacing * short
         switch layout {
         case .corner:
-            let x = corner.isLeft ? extent.minX + gap : extent.maxX - gap - width
-            let y = corner.isTop ? extent.maxY - gap - height : extent.minY + gap
+            let x = corner.column < 0 ? extent.minX + gap : corner.column > 0 ? extent.maxX - gap - width : extent.midX - width / 2
+            let y = corner.row > 0 ? extent.maxY - gap - height : corner.row < 0 ? extent.minY + gap : extent.midY - height / 2
             mark = mark.transformed(by: CGAffineTransform(translationX: x.rounded(), y: y.rounded()))
         case .tiled:
             // Two rows per tile, the second shifted half a cell, so the marks stagger; whole-pixel cells tile without seams.
@@ -185,6 +211,37 @@ public struct Watermark: Codable, Hashable, Sendable, Identifiable {
             mark = pattern.transformed(by: turn)
         }
         return mark.composited(over: photo).cropped(to: extent)
+    }
+}
+
+extension Watermark {
+    private static let previewContext = CIContext(options: [.workingColorSpace: CGColorSpace(name: CGColorSpace.extendedLinearSRGB)!])
+    /// A neutral 3:2 photo stand-in, light at the top left and dark at the bottom right, to judge a watermark on both.
+    private static let sample: CIImage = {
+        let gradient = CIFilter(name: "CILinearGradient", parameters: [
+            "inputPoint0": CIVector(x: 0, y: 400), "inputPoint1": CIVector(x: 600, y: 0),
+            "inputColor0": CIColor(red: 0.78, green: 0.8, blue: 0.82), "inputColor1": CIColor(red: 0.12, green: 0.13, blue: 0.15)])!
+        return gradient.outputImage!.cropped(to: CGRect(x: 0, y: 0, width: 600, height: 400))
+    }()
+
+    /// The watermark on `backdrop` (or a neutral sample), at most `longEdge` pixels on the long edge, with the code
+    /// and proportions export uses, for editors' previews.
+    public func preview(over backdrop: CGImage?, longEdge: Double = 640) throws -> CGImage {
+        var photo = backdrop.map { CIImage(cgImage: $0) } ?? Self.sample
+        let factor = min(1, longEdge / max(photo.extent.width, photo.extent.height))
+        photo = photo.transformed(by: CGAffineTransform(translationX: -photo.extent.minX, y: -photo.extent.minY))
+            .transformed(by: CGAffineTransform(scaleX: factor, y: factor), highQualityDownsample: true)
+        photo = photo.cropped(to: CGRect(x: 0, y: 0, width: photo.extent.width.rounded(.down), height: photo.extent.height.rounded(.down)))
+        let stamped = try composited(over: photo)
+        guard let image = Self.previewContext.createCGImage(stamped, from: stamped.extent, format: .RGBA8, colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!) else { throw EditorError.render }
+        return image
+    }
+}
+
+extension WatermarkText {
+    /// A copyright line for this year, with `owner` after it when there is one.
+    public static func copyright(owner: String = "") -> WatermarkText {
+        WatermarkText(string: "© \(Calendar.current.component(.year, from: Date()))" + (owner.isEmpty ? "" : " " + owner))
     }
 }
 

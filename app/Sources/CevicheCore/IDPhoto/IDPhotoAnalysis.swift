@@ -41,6 +41,8 @@ public struct IDPhotoAnalysis: Sendable {
     public var labels: [String: Double]
     /// Mean background colour (sRGB 0–1) and spread of its brightness, measured beside and above the person.
     public var background: (color: SIMD3<Double>, spread: Double)?
+    /// Nothing found: where Vision can't run (the iOS Simulator), so the tool still opens and its checks say so.
+    public static var nothing: IDPhotoAnalysis { IDPhotoAnalysis(faces: [], labels: [:], background: nil) }
 
     /// Plain wall to balance white on: above the head, or beside it when the head nearly touches the top.
     public var wallRegion: CGRect? {

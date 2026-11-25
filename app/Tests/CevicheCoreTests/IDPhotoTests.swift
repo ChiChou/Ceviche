@@ -18,6 +18,28 @@ final class IDPhotoTests: XCTestCase {
         XCTAssertNotNil(IDPhotoSpecs.spec("icao"))
     }
 
+    func testGroupsPutTemplatesFirstAndKeepCountriesWhole() {
+        let mine = IDPhotoSpecs.fallback.template(named: "Club Card")
+        let all = IDPhotoSpecs.groups(templates: [mine])
+        XCTAssertEqual(all.first?.specs, [mine])
+        XCTAssertEqual(all.dropFirst().reduce(0) { $0 + $1.specs.count }, IDPhotoSpecs.all.count)
+        let japan = IDPhotoSpecs.groups(templates: [mine], matching: "jap")
+        XCTAssertEqual(japan.count, 1)
+        XCTAssertTrue(japan[0].specs.allSatisfy { $0.country == "JP" })
+    }
+
+    func testIssuesAndReadiness() {
+        func check(_ id: String, _ status: IDPhotoCheck.Status, advisory: Bool = false) -> IDPhotoCheck {
+            var check = IDPhotoCheck(id: id, title: id, status: status, detail: ""); check.advisory = advisory; return check
+        }
+        XCTAssertEqual([check("head", .pass)].readiness, .ready)
+        let fixable = [check("ai-smile", .warning, advisory: true), check("head", .warning), check("cast", .failure)]
+        XCTAssertEqual(fixable.issues.map(\.id), ["cast", "head", "ai-smile"])
+        XCTAssertEqual(fixable[1].fix, .fitToSpec)
+        XCTAssertEqual(fixable.readiness, .needsFix, "An advisory retake that only warns can still be fixed")
+        XCTAssertEqual((fixable + [check("yaw", .failure)]).readiness, .retake)
+    }
+
     /// An upright head 1000 px tall in a 4000 × 6000 photo, centred at x = 2000.
     func testSearchMatchesCountriesAndDocuments() {
         func found(_ query: String) -> [IDPhotoSpec] { IDPhotoSpecs.all.filter { $0.matches(query) } }

@@ -27,14 +27,7 @@ final class IDPhotoTemplateStore: ObservableObject {
     /// The templates, then the bundled specs by country, each group in order; `filter` keeps a country's documents when
     /// it matches the country (all of them) or the document (that one), under the country's header either way.
     func groups(matching filter: String = "") -> [(name: String, specs: [IDPhotoSpec])] {
-        func matches(_ spec: IDPhotoSpec) -> Bool { spec.matches(filter) }
-        var groups: [(name: String, specs: [IDPhotoSpec])] = []
-        let custom = templates.filter(matches)
-        if !custom.isEmpty { groups.append((L10n.tr("Custom"), custom)) }
-        groups += Dictionary(grouping: IDPhotoSpecs.all.filter(matches), by: \.country)
-            .map { (name: $0.value[0].countryName, specs: $0.value) }
-            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
-        return groups
+        IDPhotoSpecs.groups(templates: templates, matching: filter)
     }
 }
 

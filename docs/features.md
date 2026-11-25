@@ -310,10 +310,13 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   where the tool's panel does), Export and More.
   Sliders move by how far the finger travels, finer with the finger pulled away from the track, and a double tap
   puts one back. Looks lists the built-in presets by category, Ceviche's own and the open-source film packs, each
-  shown on the photo. Light has Color or B&W, Auto, the tone curve and HDR; Color has the Color Mixer (the B&W mixer
-  in black and white) and Color grading, a wheel for shadows, midtones, highlights or the whole photo; Detail has
+  shown on the photo. Light has Color or B&W, Auto, the tone curve and HDR; Color has white balance with a picker for
+  RAW photos, the Color Mixer (the B&W mixer in black and white) and Color grading, a wheel for shadows, midtones, highlights or the whole photo; Detail has
   Presence, Optics and Grain, and Darkroom shows every film stock as a small print of the photo, by kind, and prints
   the photo through the one touched, with its Develop, Print and Texture controls. A pinch or double tap zooms, and past the preview's pixels the part in view is developed from the file.
+  The eyedroppers beside white balance and the Color Mixer show a loupe while the finger is on the photo and pick
+  where it lifts: a neutral spot sets Temperature and Tint, a color picks its band, which a vertical drag on the
+  photo then moves by Hue, Saturation or Luminance; touched again, an eyedropper is put down.
   Hold the half-filled circle to see the photo as it opened. The menu has Filmstrip, Histogram, Info, History and
   Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,
   caption and keywords.
@@ -326,7 +329,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   clear all. Find Dust marks sensor dust as circles to drop or heal. With its model installed in Models, AI fill fills
   Remove strokes; without it Remove fills from the surroundings.
 - **Portrait.** The photo's faces are tagged on it and listed in the panel; a tap chooses one person, or the main
-  people. Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
+  people. Even tone (with its model installed in Models), Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
   set with a slider, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
   Upright corrects by Auto, Level, Vertical or Full from an analysis of the photo, or by Guided: Draw shows the
@@ -365,11 +368,17 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   applied by Export (AI Noise Reduction and Polarizer appear once their models are installed). Wide-Angle Faces shows
   the photo corrected with a tag over each person to tap, Add for a missed head and the Mac's Lens, Strength, Bodies
   and Straight Lines, and adds each copy to the catalog with the photo's edits. Match Series shows the reference beside
-  the photo chosen in the strip and applies the matched Exposure and White Balance as edits. Each refuses photos
+  the photo chosen in the strip and applies the matched Exposure and White Balance as edits. ID Photo frames one
+  portrait to a document picked from a searchable list, by country, from the face it finds: a pinch on the print sets
+  the head's size and a drag its height within the document's limits, the checks not met are listed with Fit, Auto
+  and Replace where the tool can fix them, and Export saves the photo at the document's upload size, or a sheet of
+  copies filled to the chosen Paper, to Photos or the share sheet. Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
   adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A video's
-  export sheet offers the same two.
+  export sheet offers the same two. Watermark stamps one watermark, a line of text or an image with transparency
+  from Files, in one of nine places with its Size and Opacity, set on the photo being exported: a tap places it, a
+  pinch sizes it.
 - **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
   from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
   as it is installed. The face models are built in.

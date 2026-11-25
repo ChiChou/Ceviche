@@ -2590,6 +2590,7 @@
 "Replace the Original?" = "Replace the Original?";
 "Replaced" = "Replaced";
 "Replaced original with %1$@" = "Replaced original with %1$@";
+"Replace…" = "Replace…";
 "Requirements not met" = "Requirements not met";
 "Reset" = "Reset";
 "Reset %1$@" = "Reset %1$@";
@@ -2726,6 +2727,7 @@
 "Select a photo in the grid to see it here." = "Select a photo in the grid to see it here.";
 "Select at least two photos." = "Select at least two photos.";
 "Select by distance from the camera" = "Select by distance from the camera";
+"Select one photo." = "Select one photo.";
 "Select only one XMP sidecar per photo." = "Select only one XMP sidecar per photo.";
 "Select photos in All Photos, then choose Add to Album from their context menu." = "Select photos in All Photos, then choose Add to Album from their context menu.";
 "Select these frames" = "Select these frames";

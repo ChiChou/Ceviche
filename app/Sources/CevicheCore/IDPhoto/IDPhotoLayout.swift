@@ -41,6 +41,13 @@ public struct IDPhotoLayout: Equatable, Sendable {
 
     /// The frame on a photo `size` pixels big (any scale of the developed photo; the markers are fractions).
     public func frame(in size: CGSize) -> IDPhotoFrame { IDPhotoFrame(layout: self, size: size) }
+
+    /// The print's frame on a photo `size` pixels big, as fractions of it: the box around its (possibly turned) corners.
+    public func bounds(in size: CGSize) -> CGRect {
+        let corners = frame(in: size).corners
+        let xs = corners.map { $0.x / size.width }, ys = corners.map { $0.y / size.height }
+        return CGRect(x: xs.min()!, y: ys.min()!, width: xs.max()! - xs.min()!, height: ys.max()! - ys.min()!)
+    }
 }
 
 /// Where the print sits on the developed photo, in that photo's pixels (top-left origin), and where the head's lines fall on

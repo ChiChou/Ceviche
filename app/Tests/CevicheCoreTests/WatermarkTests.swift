@@ -108,6 +108,25 @@ final class WatermarkTests: XCTestCase {
         XCTAssertEqual(pixel(faded, x: 400 - 30, y: 300 - 20)[0], 0, accuracy: 0.01)
     }
 
+    func testEdgeAndCenterPlacesOfTheNinePointGrid() throws {
+        var watermark = Watermark(name: "Mark", image: try image("logo.png", width: 40, height: 20))
+        watermark.scale = 0.2; watermark.spacing = 0.05
+        XCTAssertEqual(Set(Watermark.Corner.grid), Set(Watermark.Corner.allCases))
+        // 60 × 30 px, 15 px from the edges it sits against, centred on the others.
+        watermark.corner = .center
+        XCTAssertEqual(pixel(try watermark.composited(over: photo), x: 200, y: 150)[0], 1, accuracy: 0.01)
+        watermark.corner = .top
+        let top = try watermark.composited(over: photo)
+        XCTAssertEqual(pixel(top, x: 200, y: 15 + 15)[0], 1, accuracy: 0.01)
+        XCTAssertEqual(pixel(top, x: 200, y: 150)[0], 0, accuracy: 0.01)
+        watermark.corner = .right
+        let right = try watermark.composited(over: photo)
+        XCTAssertEqual(pixel(right, x: 400 - 15 - 30, y: 150)[0], 1, accuracy: 0.01)
+        XCTAssertEqual(pixel(right, x: 400 - 10, y: 150)[0], 0, accuracy: 0.01, "The margin stays clear")
+        let preview = try watermark.preview(over: nil, longEdge: 300)
+        XCTAssertEqual(max(preview.width, preview.height), 300)
+    }
+
     func testTiledWatermarkCoversThePhotoFadedAndCentered() throws {
         var watermark = Watermark(name: "Pattern", image: try image("logo.png", width: 40, height: 20))
         watermark.setLayout(.tiled)

@@ -36,3 +36,18 @@ extension IDPhotoSpec {
         return copy
     }
 }
+
+extension IDPhotoSpecs {
+    /// The user's `templates`, then the bundled specs by country, each group in order; `filter` keeps a country's
+    /// documents when it matches the country (all of them) or the document (that one), under the country's header
+    /// either way.
+    public static func groups(templates: [IDPhotoSpec], matching filter: String = "") -> [(name: String, specs: [IDPhotoSpec])] {
+        var groups: [(name: String, specs: [IDPhotoSpec])] = []
+        let custom = templates.filter { $0.matches(filter) }
+        if !custom.isEmpty { groups.append((L10n.tr("Custom"), custom)) }
+        groups += Dictionary(grouping: all.filter { $0.matches(filter) }, by: \.country)
+            .map { (name: $0.value[0].countryName, specs: $0.value) }
+            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+        return groups
+    }
+}

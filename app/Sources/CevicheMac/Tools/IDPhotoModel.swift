@@ -252,10 +252,7 @@ final class IDPhotoModel: ObservableObject, Identifiable {
     }
     /// The print's frame on the photo, as fractions.
     private func frameBounds(_ layout: IDPhotoLayout, in preview: CGImage) -> CGRect {
-        let size = CGSize(width: preview.width, height: preview.height)
-        let corners = layout.frame(in: size).corners
-        let xs = corners.map { $0.x / size.width }, ys = corners.map { $0.y / size.height }
-        return CGRect(x: xs.min()!, y: ys.min()!, width: xs.max()! - xs.min()!, height: ys.max()! - ys.min()!)
+        layout.bounds(in: CGSize(width: preview.width, height: preview.height))
     }
 
     /// Turns the solid background on (in the spec's colour) or off.

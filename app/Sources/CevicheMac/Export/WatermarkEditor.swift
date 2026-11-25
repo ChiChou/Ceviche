@@ -310,25 +310,9 @@ private struct AngleDial: View {
 
 /// Renders the editor's preview and the thumbnails in Settings.
 enum WatermarkPreview {
-    private static let context = CIContext(options: [.workingColorSpace: CGColorSpace(name: CGColorSpace.extendedLinearSRGB)!])
-    /// A neutral 3:2 photo stand-in, light at the top left and dark at the bottom right, to judge a watermark on both.
-    private static let sample: CIImage = {
-        let gradient = CIFilter(name: "CILinearGradient", parameters: [
-            "inputPoint0": CIVector(x: 0, y: 400), "inputPoint1": CIVector(x: 600, y: 0),
-            "inputColor0": CIColor(red: 0.78, green: 0.8, blue: 0.82), "inputColor1": CIColor(red: 0.12, green: 0.13, blue: 0.15)])!
-        return gradient.outputImage!.cropped(to: CGRect(x: 0, y: 0, width: 600, height: 400))
-    }()
-
     /// `watermark` on the photo (or the sample), at most 640 pixels on the long edge.
     nonisolated static func render(_ watermark: Watermark, over backdrop: CGImage?) throws -> CGImage {
-        var photo = backdrop.map { CIImage(cgImage: $0) } ?? sample
-        let factor = min(1, 640 / max(photo.extent.width, photo.extent.height))
-        photo = photo.transformed(by: CGAffineTransform(translationX: -photo.extent.minX, y: -photo.extent.minY))
-            .transformed(by: CGAffineTransform(scaleX: factor, y: factor), highQualityDownsample: true)
-        photo = photo.cropped(to: CGRect(x: 0, y: 0, width: photo.extent.width.rounded(.down), height: photo.extent.height.rounded(.down)))
-        let stamped = try watermark.composited(over: photo)
-        guard let image = context.createCGImage(stamped, from: stamped.extent, format: .RGBA8, colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!) else { throw EditorError.render }
-        return image
+        try watermark.preview(over: backdrop)
     }
 
     /// The watermark alone, for lists: the image, or the text drawn small.

@@ -28,10 +28,7 @@ final class WatermarkStore: ObservableObject {
     }
     /// A text watermark to start from: a copyright line with this Mac user's name.
     func newWatermark() -> Watermark { Watermark(name: L10n.tr("Watermark \(watermarks.count + 1)"), text: Self.copyright()) }
-    static func copyright() -> WatermarkText {
-        let owner = NSFullUserName().isEmpty ? "" : " " + NSFullUserName()
-        return WatermarkText(string: "© \(Calendar.current.component(.year, from: Date()))\(owner)")
-    }
+    static func copyright() -> WatermarkText { .copyright(owner: NSFullUserName()) }
 }
 
 /// Which tab Settings shows; set before opening it on the Watermarks tab.
