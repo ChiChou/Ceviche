@@ -116,17 +116,10 @@ extension CatalogModel {
         copied = imported
         try output.recordGenerated(copied)
         let renderer = try await Task.detached { try RawRenderer(sourceURL: imported) }.value
-        var edit: Adjustments
-        // The white balance is in the DNG's pixels; the other edits carry over.
+        // The white balance is in the DNG's pixels; the other edits carry over, as on iPad (CevicheCore's rule for a copy).
+        progress(0.96, L10n.tr("Applying edits"))
         let carriedDevelopment = try development.map { try PhotoDenoiser.carried($0, source: source) }
-        if let carried = try await mergeDevelopment(from: photo, onto: renderer, sourceStore: store, development: .some(carriedDevelopment), progress: { progress(0.96, $0) }) {
-            edit = carried
-        } else {
-            // Unedited, it still looks as the photo does as shot, despite the generic file's milder tone response.
-            edit = renderer.info.defaults
-            let original = try await Task.detached { try RawRenderer(sourceURL: source) }.value
-            edit.exposure += try await Self.exposureMatching(renderer, edit, to: original, original.info.defaults)
-        }
+        var edit = try await MergeDevelopment.copied(from: photo, saved: carriedDevelopment, source: source, onto: renderer)
         // The noise is gone; the decoder's own noise reduction would only soften detail on top.
         edit.noiseReduction = 0
         if edit.colorNoiseReduction != nil { edit.colorNoiseReduction = 0 }

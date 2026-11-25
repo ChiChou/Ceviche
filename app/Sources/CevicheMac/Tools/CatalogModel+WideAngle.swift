@@ -106,20 +106,10 @@ extension CatalogModel {
         copied = imported
         try output.recordGenerated(copied)
         let renderer = try await Task.detached { try RawRenderer(sourceURL: imported) }.value
-        var edit: Adjustments
         // Edits placed on the picture (masks, crops) stay behind: the people moved under them. Its retouching is burnt in.
-        if !Self.isRAW(photo) {
-            // The copy has the photo's own rendering, tone and white balance included: its edits carry as they are, and
-            // matching brightness would only answer the change in composition.
-            edit = try development.map { try EditTransfer(sourceName: photo.filename, adjustments: $0, items: EditTransferItem.defaults).applying(to: renderer.info.defaults) }
-                ?? renderer.info.defaults
-        } else if let carried = try await mergeDevelopment(from: photo, onto: renderer, sourceStore: store, development: .some(development), progress: { progress(0.96, $0) }) {
-            edit = carried
-        } else {
-            edit = renderer.info.defaults
-            let original = try await Task.detached { try RawRenderer(sourceURL: source) }.value
-            edit.exposure += try await Self.exposureMatching(renderer, edit, to: original, original.info.defaults)
-        }
+        // CevicheCore's rule for a copy, shared with iPad.
+        progress(0.96, L10n.tr("Applying edits"))
+        let edit = try await MergeDevelopment.copied(from: photo, saved: development, source: source, onto: renderer)
         if edit != renderer.info.defaults {
             let rendered = try await renderer.preview(edit)
             asset.adjustmentsData = try JSONEncoder().encode(edit)

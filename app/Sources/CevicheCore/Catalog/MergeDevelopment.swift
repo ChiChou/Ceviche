@@ -28,23 +28,32 @@ public enum MergeDevelopment {
         return edit
     }
 
-    /// The edits a copy at `copy` takes from `photo` (its file at `source`, its saved edits `saved`) and the defaults
-    /// they are saved against; nil leaves the copy at its defaults. An unedited RAW's copy is still brought to the
-    /// photo's brightness as shot; an unedited processed photo's needs nothing.
-    public static func development(of photo: CatalogAsset, saved: Adjustments?, source: URL, copy: URL,
-                                   placed: Set<EditTransferItem> = []) async throws -> (Adjustments, Adjustments)? {
+    /// A merge result's edits from its base photo (`photo`, its file at `source`, its saved edits `saved`) for the result
+    /// at `copy`, and the defaults they are saved against. Nil when the base has no edits of its own (the result stays at
+    /// its defaults; Auto is one tap away in Develop) or they come to the defaults.
+    public static func merged(from photo: CatalogAsset, saved: Adjustments?, source: URL, copy: URL,
+                              placed: Set<EditTransferItem> = []) async throws -> (Adjustments, Adjustments)? {
+        guard let saved else { return nil }
         let renderer = try await Task.detached(priority: .userInitiated) { try RawRenderer(sourceURL: copy) }.value
+        let edit = try await carried(saved, sourceName: photo.filename, source: source, onto: renderer, placed: placed)
+        return edit == renderer.info.defaults ? nil : (edit, renderer.info.defaults)
+    }
+
+    /// The edits a corrected copy of one photo takes (Wide-Angle Faces, AI Noise Reduction), in `renderer` (the copy's).
+    /// A processed photo's copy has the photo's own rendering, tone and white balance: its edits carry as they are, lens
+    /// correction included, and matching brightness would only answer the change in composition. A RAW's carry as a
+    /// merge's do; an unedited RAW's copy is brought to the photo's brightness as shot. Edits placed on the picture
+    /// (masks, crops) stay behind.
+    public static func copied(from photo: CatalogAsset, saved: Adjustments?, source: URL, onto renderer: RawRenderer) async throws -> Adjustments {
         let defaults = renderer.info.defaults
-        let edit: Adjustments
-        if let saved {
-            edit = try await carried(saved, sourceName: photo.filename, source: source, onto: renderer, placed: placed)
-        } else if renderer.info.isRAW {
-            let original = try await Task.detached(priority: .userInitiated) { try RawRenderer(sourceURL: source) }.value
-            var unedited = defaults
-            unedited.exposure += try await exposureMatching(renderer, unedited, to: original, original.info.defaults)
-            edit = unedited
-        } else { return nil }
-        return edit == defaults ? nil : (edit, defaults)
+        if !CatalogImporter.rawExtensions.contains((photo.filename as NSString).pathExtension.lowercased()) {
+            return try saved.map { try EditTransfer(sourceName: photo.filename, adjustments: $0, items: EditTransferItem.defaults).applying(to: defaults) } ?? defaults
+        }
+        if let saved { return try await carried(saved, sourceName: photo.filename, source: source, onto: renderer) }
+        let original = try await Task.detached { try RawRenderer(sourceURL: source) }.value
+        var edit = defaults
+        edit.exposure += try await exposureMatching(renderer, edit, to: original, original.info.defaults)
+        return edit
     }
 
     /// The exposure change that brings `renderer`'s picture with `edit` to the mean brightness of `target` with `targetEdit`.
