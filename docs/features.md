@@ -305,7 +305,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
   the bar, the histogram and the filmstrip (on an iPhone held upright the tools sit below the photo and the photo moves up above the open panel), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
-  in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. The card in the corner shows one
+  in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. More › Move to Trash… (⌘⌫) asks first, then shows the next photo. Shaking the device offers to undo the last edit or Move to Trash, whichever came last; in the Library it puts back the photos last moved to the Trash. The card in the corner shows one
   scope at a time, Histogram, Waveform, Parade or Vectorscope: a tap moves to the next, More › Scope chooses or turns it off. The
   tone curve's channels are drawn in their own colours and chosen by coloured dots. The bar also has the
   original while held, undo and redo, Info (flags, stars, title, caption, keywords and the photo's details, floating

@@ -3594,3 +3594,5 @@
 "Select one photo." = "请选择一张照片。";
 "Scope" = "示波器";
 "Saves a DNG of each photo." = "为每张照片存储一个 DNG。";
+"Undo Edit" = "撤销编辑";
+"Undo Move to Trash" = "撤销移到废纸篓";

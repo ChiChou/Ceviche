@@ -3290,6 +3290,8 @@
 "Undo" = "Undo";
 "Undo %1$@" = "Undo %1$@";
 "Undo (⌘Z)" = "Undo (⌘Z)";
+"Undo Edit" = "Undo Edit";
+"Undo Move to Trash" = "Undo Move to Trash";
 "Undo the merges in this group" = "Undo the merges in this group";
 "Undo the stretch at the sides; verticals stay straight" = "Undo the stretch at the sides; verticals stay straight";
 "Undo the stretch at the top and bottom; horizontals stay straight" = "Undo the stretch at the top and bottom; horizontals stay straight";
