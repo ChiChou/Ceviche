@@ -15,7 +15,7 @@ final class BurstApplyTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(photos.count, 5)
         // One burst picked from (0, 1), another grouped under its second frame (2, 3, 4) with its flags left alone.
         await model.applyCulling([photos[0].id: .accepted, photos[1].id: .rejected],
-                                 groups: [(members: [photos[2].id, photos[3].id, photos[4].id], cover: photos[3].id)])
+                                 groups: [CullingChanges.Group(members: [photos[2].id, photos[3].id, photos[4].id], cover: photos[3].id)])
         XCTAssertEqual(model.notice, "Flags changed on 2 photos: 1 rejected, 1 picked; 1 burst grouped")
         var grouped = try await store.asset(photos[2].id)
         XCTAssertEqual(grouped.stackID, photos[3].id); XCTAssertEqual(grouped.review, photos[2].review)

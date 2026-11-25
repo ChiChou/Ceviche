@@ -171,43 +171,7 @@ final class TidyPairsModel: ObservableObject {
     var focused: Pair? { focus.flatMap { id in pairs.first { $0.id == id } } }
 
     // MARK: Apply
-    struct Plan {
-        var decisions = FileDecisions()
-        var archived = 0, picked = 0, rejectedFiles = 0
-        var rejectedBytes: Int64 = 0
-        var isEmpty: Bool { decisions.isEmpty }
-    }
-    var plan: Plan {
-        var plan = Plan()
-        func reject(_ asset: CatalogAsset) {
-            plan.decisions.set(asset.id, review: .rejected)
-            if asset.review != .rejected { plan.rejectedFiles += 1; plan.rejectedBytes += asset.fileSize ?? 0 }
-        }
-        /// Picks `kept`, which takes over what `other` was given, so the stars aren't lost with it.
-        func pick(_ kept: CatalogAsset, over other: CatalogAsset) {
-            var change = FileDecisions.Change(review: .accepted)
-            if kept.rating == 0, other.rating > 0 { change.rating = other.rating }
-            if kept.label == nil, let label = other.label { change.label = .some(label) }
-            if kept.review != .accepted || change.rating != nil || change.label != nil { plan.decisions.changes[kept.id] = change; plan.picked += 1 }
-        }
-        for pair in pairs {
-            switch decision(pair) {
-            case .undecided: break
-            case .archiveJPEG:
-                plan.decisions.archive.append(pair.processed); plan.archived += 1
-                reject(pair.raw)
-            case .keepJPEG:
-                pick(pair.processed, over: pair.raw)
-                reject(pair.raw)
-            case .keepRAW:
-                pick(pair.raw, over: pair.processed)
-                reject(pair.processed)
-            case .rejectBoth:
-                reject(pair.raw); reject(pair.processed)
-            }
-        }
-        return plan
-    }
+    var plan: TidyPairsPlan { TidyPairsPlan(pairs.map { ($0.raw, $0.processed, decision($0)) }) }
     func apply(catalog: CatalogModel, editor: EditorModel) {
         let plan = self.plan
         guard !plan.isEmpty, !working else { return }
@@ -458,7 +422,7 @@ struct TidyPairsView: View {
             ThumbnailSizeSlider(size: $tileWidth, range: 140...420)
         }
     }
-    private func summary(_ plan: TidyPairsModel.Plan) -> String {
+    private func summary(_ plan: TidyPairsPlan) -> String {
         guard !plan.isEmpty else { return L10n.tr("Nothing to change") }
         var parts: [String] = []
         if plan.archived > 0 { parts.append(L10n.tr("\(plan.archived.formatted()) archived")) }
