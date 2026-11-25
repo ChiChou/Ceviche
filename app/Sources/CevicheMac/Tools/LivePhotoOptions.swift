@@ -15,7 +15,7 @@ struct LivePhotoSizeRow: View {
         }
     }
     private func label(_ preset: LivePhotoSize) -> String {
-        let still = CatalogModel.livePhotoSizes(ratio: ratio, crop: settings.crop, preset: preset, photo: photo).still
+        let still = TimelapseLivePhoto.sizes(ratio: ratio, crop: settings.crop, preset: preset, photo: photo).still
         return "\(preset.title) - \(Int(still.width)) × \(Int(still.height))"
     }
 }

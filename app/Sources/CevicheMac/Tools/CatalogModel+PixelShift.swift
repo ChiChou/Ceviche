@@ -26,7 +26,7 @@ extension CatalogModel {
     func startPixelShift(_ merger: PixelShiftMerger, analysis: PixelShiftAnalysis, first: URL, editsFrom base: CatalogAsset? = nil, access: [URL], export: ExportFormat? = nil) {
         let count = analysis.shots
         let direct = analysis.developable ? nil : export ?? .tiff
-        runMergeJob(beside: first, suffix: "PixelShift", title: L10n.tr("Merging Pixel Shift"), editsFrom: direct == nil ? base : nil, placed: EditTransferItem.framed,
+        runMergeJob(beside: first, suffix: MergeOutput.pixelShift.suffix, title: L10n.tr("Merging Pixel Shift"), editsFrom: direct == nil ? base : nil, placed: EditTransferItem.framed,
                     access: access, export: direct ?? export, writesExport: direct != nil,
                     merge: { url, progress in
                         if let direct { try merger.export(to: url, format: direct, progress: progress) } else { try merger.merge(to: url, progress: progress) }

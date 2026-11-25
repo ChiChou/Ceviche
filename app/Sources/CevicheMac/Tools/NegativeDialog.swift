@@ -92,12 +92,7 @@ final class NegativeModel: ObservableObject {
     /// Whether the scans are balanced as one roll; a single scan is always its own.
     var isRoll: Bool { roll && request.assets.count > 1 }
     /// The scans to convert as the rolls they are balanced in: one, unless the selection was split.
-    var rolls: [[CatalogAsset]] {
-        guard let rollStarts else { return included.isEmpty ? [] : [included] }
-        var rolls: [[CatalogAsset]] = []
-        for asset in included { if rolls.isEmpty || rollStarts.contains(asset.id) { rolls.append([asset]) } else { rolls[rolls.count - 1].append(asset) } }
-        return rolls
-    }
+    var rolls: [[CatalogAsset]] { NegativeRoll.rolls(included, id: \.id, starts: rollStarts) }
     /// What a scan's roll is known by: its first scan.
     private func rollKey(_ id: String) -> String { rolls.first { $0.contains { $0.id == id } }?.first?.id ?? id }
     /// Whether a scan begins a roll other than the first.
@@ -153,17 +148,12 @@ final class NegativeModel: ObservableObject {
     /// Every scan's choices, the one on screen included.
     func allChoices() -> [String: NegativeChoice] {
         if stage == .ready { remember(asset) }
-        var all = choices
-        if isRoll, let rollInversions {
-            for asset in request.assets {
-                // The roll's shared values; a roll never looked at converts as measured, upright.
-                let shared = rollStates[rollKey(asset.id)]
-                all[asset.id] = NegativeChoice(frame: choices[asset.id]?.frame ?? samples[asset.id]?.frame, film: shared?.film,
-                                               orientation: shared?.orientation ?? NegativeOrientation(), base: shared?.base, inversion: rollInversions[asset.id])
-            }
-        }
-        for asset in request.assets { all[asset.id, default: NegativeChoice()].print = print }
-        return all
+        return NegativeRoll.choices(request.assets.map(\.id), kept: choices, samples: samples, inversions: isRoll ? rollInversions : nil,
+                                    shared: { self.rollShared(self.rollKey($0)) }, print: print)
+    }
+    /// What a roll's scans share, by the roll's first scan.
+    private func rollShared(_ key: String) -> NegativeRollShared? {
+        rollStates[key].map { NegativeRollShared(film: $0.film, orientation: $0.orientation, base: $0.base) }
     }
     private func remember(_ asset: CatalogAsset) {
         guard previewer != nil else { return }
@@ -310,10 +300,7 @@ extension NegativeModel {
     fileprivate func measureRoll() {
         rollTask?.cancel()
         guard isRoll, let catalog else { return }
-        let missing = included.filter { asset in
-            guard let sample = samples[asset.id] else { return true }
-            return knownFrame(asset).map { $0 != sample.frame } ?? false
-        }
+        let missing = included.filter { NegativeRoll.needsSample(samples[$0.id], frame: knownFrame($0)) }
         guard !missing.isEmpty else { measuring = nil; balanceRoll(); return }
         rollInversions = nil
         rollTask = Task {
@@ -350,27 +337,16 @@ extension NegativeModel {
         guard isRoll, measuring == nil else { return }
         rollInversions = nil
         // Each roll on its own, with the film and base set on it; a roll never looked at is measured as it comes.
-        let groups = rolls.map { roll -> (scans: [(String, NegativeSample)], film: NegativeFilm?, base: SIMD3<Float>?) in
-            let shared = roll.first.flatMap { rollStates[$0.id] }
-            return (roll.compactMap { asset in samples[asset.id].map { (asset.id, $0) } }, shared?.film, shared?.base)
-        }.filter { !$0.scans.isEmpty }
+        let groups = NegativeRoll.groups(rolls.map { $0.map(\.id) }, samples: samples, shared: rollShared)
         guard !groups.isEmpty else { return }
-        let scans = included.compactMap { asset -> (String, NegativeRollScan)? in
+        let scans = included.compactMap { asset -> (id: String, scan: NegativeRollScan)? in
             guard let sample = samples[asset.id], let session = sessions[asset.id] else { return nil }
-            return (asset.id, NegativeRollScan(captured: session.captured, settings: session.settings, camera: session.camera, base: sample.comparableBase))
+            return (asset.id, NegativeRoll.rollScan(sample, session: session))
         }
         balanceTask = Task {
-            let result = await Task.detached(priority: .userInitiated) { () -> ([String: NegativeInversion], Set<String>, [[String]]) in
-                var inversions: [String: NegativeInversion] = [:], apart = Set<String>()
-                for group in groups {
-                    let balanced = NegativeConverter.balance(group.scans.map(\.1), film: group.film, base: group.base)
-                    for (scan, inversion) in zip(group.scans, balanced.inversions) { inversions[scan.0] = inversion }
-                    apart.formUnion(balanced.apart.map { group.scans[$0].0 })
-                }
-                return (inversions, apart, NegativeRolls.rolls(scans.map(\.1)).map { $0.map { scans[$0].0 } })
-            }.value
+            let result = await Task.detached(priority: .userInitiated) { NegativeRoll.balance(groups, scans: scans) }.value
             guard !Task.isCancelled else { return }
-            rollInversions = result.0; apart = result.1; proposedRolls = result.2
+            rollInversions = result.inversions; apart = result.apart; proposedRolls = result.proposed
             renderInverted()
         }
     }

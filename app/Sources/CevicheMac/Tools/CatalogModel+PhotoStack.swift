@@ -26,7 +26,7 @@ extension CatalogModel {
     func startStack(_ stacker: PhotoStacker, analysis: PhotoStackAnalysis, settings: PhotoStackSettings, editsFrom base: CatalogAsset? = nil, access: [URL], format: ProcessedFormat = .original) {
         let count = analysis.frames.count - settings.excluded.count
         let mode = settings.mode.title
-        runMergeJob(beside: stacker.urls[analysis.reference], suffix: "Stack", title: L10n.tr("Stacking Photos"), editsFrom: base, placed: EditTransferItem.framedRetouched, access: access, format: format,
+        runMergeJob(beside: stacker.urls[analysis.reference], suffix: MergeOutput.stack.suffix, title: L10n.tr("Stacking Photos"), editsFrom: base, placed: EditTransferItem.framedRetouched, access: access, format: format,
                     merge: { url, progress in try stacker.stack(settings, to: url, progress: progress) },
                     done: L10n.tr("\(mode) of \(count) photos stacked"), detail: "",
                     stopped: L10n.tr("Stack stopped"), failed: { L10n.tr("The photos couldn’t be stacked. \($0)") })

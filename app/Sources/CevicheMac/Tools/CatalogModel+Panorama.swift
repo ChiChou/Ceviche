@@ -28,7 +28,7 @@ extension CatalogModel {
     /// the merge is done.
     func startPanoramaMerge(_ merger: PanoramaMerger, alignment: PanoramaAlignment, settings: PanoramaSettings, hdr: Bool = false, editsFrom base: CatalogAsset? = nil, access: [URL]) {
         let left = alignment.excluded.count
-        runMergeJob(beside: merger.urls[alignment.included.first ?? 0], suffix: hdr ? "HDR-Panorama" : "Panorama", title: hdr ? L10n.tr("Merging HDR panorama") : L10n.tr("Merging panorama"),
+        runMergeJob(beside: merger.urls[alignment.included.first ?? 0], suffix: (hdr ? MergeOutput.hdrPanorama : .panorama).suffix, title: hdr ? L10n.tr("Merging HDR panorama") : L10n.tr("Merging panorama"),
                     editsFrom: base, access: access,
                     merge: { url, progress in try merger.merge(settings, to: url, progress: progress) },
                     done: left == 0 ? L10n.tr("Panorama merged") : (left == 1 ? L10n.tr("Panorama merged - \(left) photo left out") : L10n.tr("Panorama merged - \(left) photos left out")),

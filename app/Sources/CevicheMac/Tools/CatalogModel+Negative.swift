@@ -7,19 +7,6 @@ struct NegativeRequest: Identifiable {
     let assets: [CatalogAsset]
 }
 
-/// What the Convert Negative dialog settled for one scan; nil frame and film are found when converting.
-struct NegativeChoice: Sendable {
-    var frame: FrameQuad?
-    var film: NegativeFilm?
-    var orientation = NegativeOrientation()
-    /// Film base picked on unexposed film, at an exposure of 1.
-    var base: SIMD3<Float>?
-    /// The scan's inversion from its roll, used instead of measuring the scan alone.
-    var inversion: NegativeInversion?
-    /// Printed on paper rather than inverted.
-    var print: NegativePrint?
-}
-
 /// Convert Negative: a camera scan of a film negative, straightened, cropped and inverted into a linear DNG beside it.
 /// Dust and damage are left to retouching in Develop.
 extension CatalogModel {
@@ -101,19 +88,12 @@ extension CatalogModel {
         let beside = !insideCatalog && AssetLocator.describing(source).scheme == .file && (try? folder.resourceValues(forKeys: [.volumeIsLocalKey]).volumeIsLocal) == true && FileManager.default.isWritableFile(atPath: folder.path)
         let directory = output.scratchDirectory
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        let stem = source.deletingPathExtension().lastPathComponent
-        var destination = directory.appendingPathComponent("\(stem)-\(NegativeConverter.suffix).dng")
-        var number = 2
-        while FileManager.default.fileExists(atPath: destination.path) {
-            destination = directory.appendingPathComponent("\(stem)-\(NegativeConverter.suffix)-\(number).dng"); number += 1
-        }
-        let url = destination
+        let url = NegativeConverter.destination(for: source, in: directory)
         var installed = false
         var copied: URL?
         defer { if !installed, let copied { try? FileManager.default.removeItem(at: copied) } }
         let work = Task.detached(priority: .userInitiated) {
-            try NegativeConverter.convert(source, to: url, frame: choice.frame, film: choice.film, orientation: choice.orientation,
-                                          base: choice.base, inversion: choice.inversion, print: choice.print, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
+            try NegativeConverter.convert(source, to: url, choice: choice, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
         }
         do { try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() } }
         catch { try? FileManager.default.removeItem(at: url); throw error }

@@ -24,7 +24,7 @@ extension CatalogModel {
     func startHDRMerge(_ merger: HDRMerger, analysis: HDRMergeAnalysis, settings: HDRMergeSettings, editsFrom base: CatalogAsset? = nil, access: [URL], format: ProcessedFormat = .original) {
         let reference = settings.reference ?? analysis.suggestedReference
         let count = analysis.frames.count - settings.excluded.count
-        runMergeJob(beside: merger.urls[reference], suffix: "HDR", title: L10n.tr("Merging HDR"), editsFrom: base, access: access, format: format,
+        runMergeJob(beside: merger.urls[reference], suffix: MergeOutput.hdr.suffix, title: L10n.tr("Merging HDR"), editsFrom: base, access: access, format: format,
                     merge: { url, progress in try merger.merge(settings, to: url, progress: progress) },
                     done: L10n.tr("HDR merged from \(count) exposures"), detail: "",
                     stopped: L10n.tr("HDR merge stopped"), failed: { L10n.tr("The exposures couldn’t be merged. \($0)") })

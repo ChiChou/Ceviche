@@ -42,7 +42,7 @@ extension CatalogModel {
                                  development: Adjustments?, source: URL, named: String, access: [URL], pending: Task<Void, Never>?) {
         let cut = crop.rect(in: photo, aspect: ratio)
         // Only the last frame, which is the still, is handed over at the still's size.
-        let sizes = Self.livePhotoSizes(ratio: ratio, crop: crop, preset: preset, photo: photo)
+        let sizes = TimelapseLivePhoto.sizes(ratio: ratio, crop: crop, preset: preset, photo: photo)
         func longEdge(_ size: CGSize) -> Int { Int((max(photo.width, photo.height) * min(1, size.width / max(1, cut.width))).rounded(.up)) }
         let shown = LivePhoto.sample(count), wanted = Set(shown), last = count - 1
         activity.start(.exporting, title: L10n.tr("Creating Live Photo"), detail: named, total: shown.count + 1) { job in

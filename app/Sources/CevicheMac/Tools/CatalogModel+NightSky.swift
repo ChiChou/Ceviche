@@ -106,9 +106,9 @@ extension CatalogModel {
     func startNightSky(_ tool: NightSkyTool, beside: URL, editsFrom: CatalogAsset?, count: Int, access: [URL], format: ProcessedFormat = .original,
                        merge: @escaping @Sendable (URL, @escaping @Sendable (Double, String) -> Void) throws -> Void) {
         let (suffix, title, done, stopped): (String, String, String, String) = switch tool {
-        case .starTrails: ("StarTrails", L10n.tr("Creating star trails"), L10n.tr("Star trails created from \(count) photos"), L10n.tr("Star trails stopped"))
-        case .denoise: ("NightSky", L10n.tr("Reducing noise in the night sky"), L10n.tr("Night sky stacked from \(count) photos"), L10n.tr("Night sky noise reduction stopped"))
-        case .meteorShower: ("Meteors", L10n.tr("Compositing meteors"), count == 1 ? L10n.tr("Meteor shower composited with 1 meteor") : L10n.tr("Meteor shower composited with \(count) meteors"),
+        case .starTrails: (MergeOutput.starTrails.suffix, L10n.tr("Creating star trails"), L10n.tr("Star trails created from \(count) photos"), L10n.tr("Star trails stopped"))
+        case .denoise: (MergeOutput.nightSky.suffix, L10n.tr("Reducing noise in the night sky"), L10n.tr("Night sky stacked from \(count) photos"), L10n.tr("Night sky noise reduction stopped"))
+        case .meteorShower: (MergeOutput.meteorShower.suffix, L10n.tr("Compositing meteors"), count == 1 ? L10n.tr("Meteor shower composited with 1 meteor") : L10n.tr("Meteor shower composited with \(count) meteors"),
                              L10n.tr("Meteor shower stopped"))
         }
         runMergeJob(beside: beside, suffix: suffix, title: title, editsFrom: editsFrom, access: access, format: format, merge: merge,
