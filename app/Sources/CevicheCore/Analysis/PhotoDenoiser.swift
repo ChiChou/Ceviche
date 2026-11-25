@@ -8,7 +8,23 @@ public struct DenoiseSettings: Codable, Equatable, Sendable {
     public init(strength: Double = 100) { self.strength = strength }
 }
 
-/// Denoise: develops a RAW photo as shot (demosaiced, lens-corrected, at its own white balance, without the decoder's
+/// The photo's Develop settings Denoise works at: its Exposure, which the network sees it brightened by, and its white
+/// balance, which the photo is developed at and the DNG keeps in its pixels.
+public struct DenoiseDevelopment: Equatable, Sendable {
+    public var exposure = 0.0
+    /// A RAW's Temperature and Tint as Develop has them; nil develops at the photo's as-shot white balance.
+    public var temperature: Double?
+    public var tint: Double?
+    public init(exposure: Double = 0, temperature: Double? = nil, tint: Double? = nil) {
+        self.exposure = exposure; self.temperature = temperature; self.tint = tint
+    }
+    /// The settings saved for a photo; nil is the photo as shot.
+    public init(_ saved: Adjustments?) {
+        self.init(exposure: saved?.exposure ?? 0, temperature: saved?.temperature, tint: saved?.tint)
+    }
+}
+
+/// Denoise: develops a RAW photo at its Develop white balance (demosaiced, lens-corrected, without the decoder's
 /// noise reduction), runs NAFNet over the whole frame and writes the result as a linear DNG that keeps the photo's
 /// EXIF, like a merge. Core Image runs the decode on the GPU when there is one and on the CPU otherwise; Core ML
 /// picks the Neural Engine, GPU or CPU for the network.
@@ -16,9 +32,18 @@ public enum PhotoDenoiser {
     /// The name the result gets after the photo's own: `DSC0001-NR.dng`.
     public static let suffix = "NR"
 
-    /// The photo developed as shot, in linear extended sRGB with its extent at the origin.
-    static func developed(_ url: URL, metadata: PanoramaFrameMetadata) throws -> CIImage {
-        try PanoramaDecoder.developedImage(url, longEdge: nil, whiteBalance: (metadata.temperature, metadata.tint), noiseReduction: false)
+    /// The photo developed at `development`'s white balance, in linear extended sRGB with its extent at the origin.
+    static func developed(_ url: URL, metadata: PanoramaFrameMetadata, development: DenoiseDevelopment) throws -> CIImage {
+        let balance = (development.temperature ?? metadata.temperature, development.tint ?? metadata.tint)
+        return try PanoramaDecoder.developedImage(url, longEdge: nil, whiteBalance: balance, noiseReduction: false)
+    }
+    /// The edits to carry onto the DNG of `source` developed with `saved`: its white balance is in the DNG's pixels, so
+    /// it carries as no change from as shot; everything else carries as it is.
+    public static func carried(_ saved: Adjustments, source: URL) throws -> Adjustments {
+        let metadata = try PanoramaDecoder.metadata(source)
+        var carried = saved
+        carried.temperature = metadata.temperature; carried.tint = metadata.tint
+        return carried
     }
     /// The photo's Exposure in stops, as far as the network is shown it: noise in shadows a brightened photo shows is
     /// treated at the level it is seen.
@@ -35,14 +60,15 @@ public enum PhotoDenoiser {
         CIContext(options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
     }
 
-    /// Denoises `source` into a DNG at `url`. `exposure` is the photo's Exposure (see `gain`); `progress` hears the
+    /// Denoises `source` into a DNG at `url`, developed at `development` (see `DenoiseDevelopment`); `progress` hears the
     /// fraction done and the step.
-    public static func denoise(_ source: URL, to url: URL, settings: DenoiseSettings, exposure: Double = 0,
+    public static func denoise(_ source: URL, to url: URL, settings: DenoiseSettings, development: DenoiseDevelopment = DenoiseDevelopment(),
                                progress: (Double, String) -> Void = { _, _ in }, cancelled: () -> Bool = { false }) throws {
         guard BundledModel.denoise.isAvailable else { throw PanoramaError.message(L10n.tr("The AI noise reduction model is not installed. Install it in Settings › Models.")) }
         let metadata = try PanoramaDecoder.metadata(source)
         progress(0, L10n.tr("Developing \(source.lastPathComponent)"))
-        let developed = try developed(source, metadata: metadata)
+        let developed = try developed(source, metadata: metadata, development: development)
+        let exposure = development.exposure
         let width = Int(developed.extent.width.rounded(.down)), height = Int(developed.extent.height.rounded(.down))
         guard width > 0, height > 0 else { throw PanoramaError.message(L10n.tr("\(source.lastPathComponent) decoded empty.")) }
         if cancelled() { throw CancellationError() }
@@ -93,8 +119,8 @@ public enum PhotoDenoiser {
     }
 }
 
-/// A close look at Denoise on one photo, for the dialog: the photo as shot, small, and a full-size crop before and
-/// after the network, brightened by the photo's Exposure.
+/// A close look at Denoise on one photo, for the dialog: the photo at its Develop white balance and Exposure, small,
+/// and a full-size crop before and after the network, as the DNG will have them.
 public final class DenoisePreviewer: @unchecked Sendable {
     public let overview: CGImage
     /// Full-size width and height, as developed.
@@ -106,10 +132,10 @@ public final class DenoisePreviewer: @unchecked Sendable {
     /// The tiles denoised so far, so moving the crop runs only new ones.
     private let tiles = NAFNetTileCache()
 
-    public init(_ source: URL, exposure: Double) throws {
+    public init(_ source: URL, development: DenoiseDevelopment) throws {
         let metadata = try PanoramaDecoder.metadata(source)
-        developed = try PhotoDenoiser.developed(source, metadata: metadata)
-        self.exposure = exposure
+        developed = try PhotoDenoiser.developed(source, metadata: metadata, development: development)
+        exposure = development.exposure
         size = developed.extent.size
         let scale = min(1, 720 / max(size.width, size.height))
         let small = Self.brightened(developed, exposure).transformed(by: CGAffineTransform(scaleX: scale, y: scale))
@@ -184,7 +210,7 @@ public final class DenoisePreviewer: @unchecked Sendable {
         return CGRect(x: x, y: y, width: width, height: height)
     }
 
-    /// The as-shot linear values at the photo's Exposure, encoded for display without a tone curve.
+    /// The developed linear values at the photo's Exposure, encoded for display without a tone curve.
     static func brightened(_ image: CIImage, _ exposure: Double) -> CIImage {
         let gain = PhotoDenoiser.gain(exposure)
         return gain == 0 ? image : image.applyingFilter("CIExposureAdjust", parameters: [kCIInputEVKey: gain])

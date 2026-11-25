@@ -2325,7 +2325,6 @@
 "Next photo" = "下一張照片";
 "Previous photo" = "上一張照片";
 "Remove All Keyframes" = "移除所有關鍵格";
-"Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only." = "按拍攝原樣顯影，並在本機上降噪；DNG 保留照片的 EXIF 和編輯。預覽只套用照片的曝光。";
 "Drag to look around. \\ shows Before." = "拖移以查看各處。按 \\ 顯示處理前。";
 "Saves a DNG beside each original." = "在每張原始照片旁儲存一個 DNG。";
 "Split" = "分割";
@@ -3596,3 +3595,4 @@
 "Saves a DNG of each photo." = "為每張照片儲存一個 DNG。";
 "Undo Edit" = "還原編輯";
 "Undo Move to Trash" = "還原移到垃圾桶";
+"Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure." = "按照片的白平衡顯影，並在這台 Mac 上清理；DNG 保留照片的 EXIF 和編輯。預覽按照片的白平衡和曝光顯示。";

@@ -23,6 +23,11 @@ extension CatalogModel {
         guard let store, let current = try? await store.asset(asset.id), let saved = try? await store.savedAdjustments(of: current) else { return 0 }
         return saved.exposure
     }
+    /// The photo's saved Exposure and white balance, which Denoise develops it at.
+    func denoiseDevelopment(_ asset: CatalogAsset) async -> DenoiseDevelopment {
+        guard let store, let current = try? await store.asset(asset.id), let saved = try? await store.savedAdjustments(of: current) else { return DenoiseDevelopment() }
+        return DenoiseDevelopment(saved)
+    }
 
     /// Denoises the photos one after another as one background job. Each DNG goes beside its photo when that folder is
     /// on this Mac and writable, and is imported in place; otherwise it is copied into the catalog's originals.
@@ -92,7 +97,7 @@ extension CatalogModel {
         let current = try await store.asset(photo.id)
         // An unreadable development denoises as shot, as the dialog's preview did.
         let development = (try? await store.savedAdjustments(of: current)) ?? nil
-        let exposure = development?.exposure ?? 0
+        let denoising = DenoiseDevelopment(development)
         let folder = source.deletingLastPathComponent()
         let insideCatalog = source.standardizedFileURL.path.hasPrefix(store.originalsRoot.standardizedFileURL.path + "/")
         let beside = !insideCatalog && AssetLocator.describing(source).scheme == .file && (try? folder.resourceValues(forKeys: [.volumeIsLocalKey]).volumeIsLocal) == true && FileManager.default.isWritableFile(atPath: folder.path)
@@ -115,7 +120,7 @@ extension CatalogModel {
             }
         }
         let work = Task.detached(priority: .userInitiated) {
-            try PhotoDenoiser.denoise(source, to: url, settings: settings, exposure: exposure, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
+            try PhotoDenoiser.denoise(source, to: url, settings: settings, development: denoising, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
         }
         do { try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() } }
         catch { try? FileManager.default.removeItem(at: url); throw error }
@@ -134,7 +139,9 @@ extension CatalogModel {
         try output.recordGenerated(copied)
         let renderer = try await Task.detached { try RawRenderer(sourceURL: imported) }.value
         var edit: Adjustments
-        if let carried = try await mergeDevelopment(from: photo, onto: renderer, sourceStore: store, development: .some(development), progress: { progress(0.96, $0) }) {
+        // The white balance is in the DNG's pixels; the other edits carry over.
+        let carriedDevelopment = try development.map { try PhotoDenoiser.carried($0, source: source) }
+        if let carried = try await mergeDevelopment(from: photo, onto: renderer, sourceStore: store, development: .some(carriedDevelopment), progress: { progress(0.96, $0) }) {
             edit = carried
         } else {
             // Unedited, it still looks as the photo does as shot, despite the generic file's milder tone response.

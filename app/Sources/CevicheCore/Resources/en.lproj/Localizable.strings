@@ -1052,7 +1052,7 @@
 "Detail Extractor" = "Detail Extractor";
 "Develop" = "Develop";
 "Develop (⌘↩)" = "Develop (⌘↩)";
-"Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only." = "Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only.";
+"Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure." = "Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure.";
 "Developed without %1$@: the filters do that." = "Developed without %1$@: the filters do that.";
 "Developing %1$@" = "Developing %1$@";
 "Developing %1$@ (%2$@ of %3$@)" = "Developing %1$@ (%2$@ of %3$@)";

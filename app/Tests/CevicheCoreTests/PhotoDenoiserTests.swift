@@ -96,6 +96,29 @@ final class PhotoDenoiserTests: XCTestCase {
         XCTAssertLessThan(difference, 1e-4)
     }
 
+    /// Opt-in, as it needs a RAW: CEVICHE_DENOISE_RAW=<RAW file>.
+    /// The preview is developed at the white balance given, and the edits carried onto the DNG keep it as no change.
+    func testPreviewFollowsTheDevelopWhiteBalance() throws {
+        guard let path = ProcessInfo.processInfo.environment["CEVICHE_DENOISE_RAW"] else { throw XCTSkip("Set CEVICHE_DENOISE_RAW to run") }
+        let sample = URL(fileURLWithPath: path)
+        func redOverBlue(_ temperature: Double) throws -> Double {
+            let image = try DenoisePreviewer(sample, development: DenoiseDevelopment(temperature: temperature, tint: 0)).overview
+            let mean = CIImage(cgImage: image).applyingFilter("CIAreaAverage", parameters: [kCIInputExtentKey: CIVector(cgRect: CGRect(x: 0, y: 0, width: image.width, height: image.height))])
+            var pixel = [Float](repeating: 0, count: 4)
+            CIContext().render(mean, toBitmap: &pixel, rowBytes: 16, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBAf, colorSpace: nil)
+            return Double(pixel[0]) / max(1e-4, Double(pixel[2]))
+        }
+        // A higher Temperature setting warms the picture, as in Develop.
+        XCTAssertGreaterThan(try redOverBlue(9000), try redOverBlue(3000) * 1.2)
+
+        var saved = Adjustments(); saved.temperature = 9000; saved.tint = 20; saved.exposure = 1
+        let carried = try PhotoDenoiser.carried(saved, source: sample)
+        let asShot = try XCTUnwrap(CIRAWFilter(imageURL: sample))
+        XCTAssertEqual(carried.temperature, Double(asShot.neutralTemperature), accuracy: 1)
+        XCTAssertEqual(carried.tint, Double(asShot.neutralTint), accuracy: 0.5)
+        XCTAssertEqual(carried.exposure, 1)
+    }
+
     /// Opt-in, as a full-size denoise takes minutes and needs a noisy photo: CEVICHE_DENOISE_RAW=<RAW file> with the
     /// NAFNet model installed.
     /// The DNG has the photo's size and EXIF, and less noise.
@@ -107,7 +130,7 @@ final class PhotoDenoiserTests: XCTestCase {
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let url = directory.appendingPathComponent("denoised.dng")
-        try PhotoDenoiser.denoise(sample, to: url, settings: DenoiseSettings(), exposure: 2)
+        try PhotoDenoiser.denoise(sample, to: url, settings: DenoiseSettings(), development: DenoiseDevelopment(exposure: 2))
 
         let source = try readProperties(sample), result = try readProperties(url)
         for dictionary in [kCGImagePropertyExifDictionary, kCGImagePropertyTIFFDictionary] {

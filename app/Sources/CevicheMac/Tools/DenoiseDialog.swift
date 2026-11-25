@@ -78,8 +78,8 @@ final class DenoiseModel: ObservableObject {
             do {
                 let url = try await catalog.resolveOriginal(asset)
                 if url.startAccessingSecurityScopedResource() { access = url }
-                let exposure = await catalog.denoiseExposure(asset)
-                let previewer = try await Task.detached(priority: .userInitiated) { try DenoisePreviewer(url, exposure: exposure) }.value
+                let development = await catalog.denoiseDevelopment(asset)
+                let previewer = try await Task.detached(priority: .userInitiated) { try DenoisePreviewer(url, development: development) }.value
                 guard !Task.isCancelled else { return }
                 self.previewer = previewer; overview = previewer.overview; stage = .ready
                 renderCrop()
@@ -385,7 +385,7 @@ struct DenoiseDialog: View {
             }
             Text(L10n.tr("Saves a DNG beside each original."))
                 .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-                .help(L10n.tr("Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only."))
+                .help(L10n.tr("Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure."))
             if !modelAvailable {
                 ModelPrompt(model: .denoise)
                     .padding(12).frame(maxWidth: .infinity, alignment: .leading)

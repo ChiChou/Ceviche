@@ -2325,7 +2325,6 @@
 "Next photo" = "Foto siguiente";
 "Previous photo" = "Foto anterior";
 "Remove All Keyframes" = "Quitar todos los fotogramas clave";
-"Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only." = "Revelada tal como se tomó y limpiada en este Mac; el DNG conserva el EXIF y los ajustes de la foto. La vista previa solo muestra la foto con su exposición.";
 "Drag to look around. \\ shows Before." = "Arrastra para recorrer la imagen. \\ muestra el antes.";
 "Saves a DNG beside each original." = "Guarda un DNG junto a cada original.";
 "Split" = "Dividida";
@@ -3596,3 +3595,4 @@
 "Saves a DNG of each photo." = "Guarda un DNG de cada foto.";
 "Undo Edit" = "Deshacer edición";
 "Undo Move to Trash" = "Deshacer Mover a la papelera";
+"Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure." = "Revelada con el balance de blancos de la foto y limpiada en este Mac; el DNG conserva los EXIF y las ediciones de la foto. La vista previa muestra la foto con su balance de blancos y su exposición.";

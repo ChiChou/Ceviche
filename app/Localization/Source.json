@@ -205,7 +205,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:384",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:384",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:125"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:122"
     ]
   },
   {
@@ -455,7 +455,7 @@
     "context": "Sources/CevicheCore/Analysis/NegativeConverter.swift:603",
     "uses": [
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:603",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:117",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:143",
       "Sources/CevicheCore/HDRMerge/HDRMergeDecoder.swift:96",
       "Sources/CevicheCore/Panorama/PanoramaDecoder.swift:106",
       "Sources/CevicheCore/Panorama/PanoramaDecoder.swift:120",
@@ -501,7 +501,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:112"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:109"
     ]
   },
   {
@@ -551,7 +551,7 @@
     "uses": [
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:483",
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:511",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:47",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:73",
       "Sources/CevicheCore/HDRMerge/HDRMergeDecoder.swift:80",
       "Sources/CevicheCore/Panorama/PanoramaDecoder.swift:88",
       "Sources/CevicheCore/WideAngle/WideAngleCorrector.swift:135"
@@ -994,7 +994,7 @@
       "Sources/CevicheMac/Catalog/CatalogModel+Import.swift:87",
       "Sources/CevicheMac/Export/CatalogExport.swift:98",
       "Sources/CevicheMac/Export/CatalogExport.swift:137",
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:45",
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:50",
       "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:50",
       "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:42",
       "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:115",
@@ -1782,11 +1782,7 @@
   {
     "key": "%1$@ · %2$@ photos",
     "source": "\"\\(paper.title) · \\(count) photos\"",
-    "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:160",
-    "uses": [
-      "Sources/CevicheMac/Tools/IDPhotoDialog.swift:160",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:84"
-    ]
+    "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:160"
   },
   {
     "key": "%1$@ · %2$@ photos on %3$@ sheets · %4$@",
@@ -2053,7 +2049,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:371",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:112"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:109"
     ]
   },
   {
@@ -2826,9 +2822,9 @@
   {
     "key": "Adding to the catalog",
     "source": "\"Adding to the catalog\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:123",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:128",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:123",
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:128",
       "Sources/CevicheMac/Tools/CatalogModel+Negative.swift:119",
       "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:194",
       "Sources/CevicheMac/Tools/CatalogModel+WideAngle.swift:119",
@@ -3315,7 +3311,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:375",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:375",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:116"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:113"
     ]
   },
   {
@@ -4583,7 +4579,7 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:101",
       "Sources/CevicheMac/Tools/NightSkyView.swift:398",
       "Sources/CevicheMobile/App/ModelsView.swift:133",
-      "Sources/CevicheMobile/Components/ShakeToUndo.swift:37",
+      "Sources/CevicheMobile/Components/ShakeToUndo.swift:38",
       "Sources/CevicheMobile/Components/ToolChrome.swift:22",
       "Sources/CevicheMobile/Develop/HistoryView.swift:50",
       "Sources/CevicheMobile/Develop/Masks/MasksPanel.swift:149",
@@ -4600,7 +4596,7 @@
       "Sources/CevicheMobile/Library/People/PeopleView.swift:136",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:169",
       "Sources/CevicheMobile/Library/People/PeopleView.swift:175",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:300",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:297",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:98"
     ]
   },
@@ -5050,7 +5046,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:562",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:562",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:49"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:50"
     ]
   },
   {
@@ -6413,7 +6409,7 @@
       "Sources/CevicheMac/Export/EditIn.swift:265",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:202",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:223",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:174"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:171"
     ]
   },
   {
@@ -6470,7 +6466,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoSession.swift:87",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoSession.swift:87",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:46"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:47"
     ]
   },
   {
@@ -6540,9 +6536,9 @@
   {
     "key": "Couldn’t Reduce Noise",
     "source": "\"Couldn’t Reduce Noise\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:34",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:39",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:34",
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:39",
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:89",
       "Sources/CevicheMobile/Tools/Denoise/DenoiseView.swift:42"
     ]
@@ -7433,8 +7429,8 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:29"
   },
   {
-    "key": "Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only.",
-    "source": "\"Developed as shot and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its Exposure only.\"",
+    "key": "Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure.",
+    "source": "\"Developed at the photo's white balance and cleaned on this Mac; the DNG keeps the photo's EXIF and edits. The preview shows the photo at its white balance and Exposure.\"",
     "context": "Sources/CevicheMac/Tools/DenoiseDialog.swift:388"
   },
   {
@@ -7450,7 +7446,7 @@
       "Sources/CevicheMac/Tools/FiltersDialog.swift:37",
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:474",
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:480",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:44",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:69",
       "Sources/CevicheCore/PixelShift/PixelShiftFusion.swift:110",
       "Sources/CevicheCore/WideAngle/WideAngleCorrector.swift:122"
     ]
@@ -7486,7 +7482,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoCanvas.swift:49",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:321",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:44"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:45"
     ]
   },
   {
@@ -7607,8 +7603,8 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:568",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:568",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:74",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:298"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:75",
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:295"
     ]
   },
   {
@@ -8610,8 +8606,7 @@
       "Sources/CevicheMobile/Develop/DevelopView.swift:217",
       "Sources/CevicheMobile/Export/ExportView.swift:63",
       "Sources/CevicheMobile/Export/VideoExport.swift:55",
-      "Sources/CevicheMobile/Library/LibraryGrid.swift:270",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:24"
+      "Sources/CevicheMobile/Library/LibraryGrid.swift:270"
     ]
   },
   {
@@ -10891,7 +10886,7 @@
       "Sources/CevicheMac/Tools/CatalogModel+IDPhoto.swift:49",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:33",
       "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:18",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:218"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:215"
     ]
   },
   {
@@ -13442,7 +13437,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:350",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:350",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:94"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:91"
     ]
   },
   {
@@ -15009,12 +15004,12 @@
   {
     "key": "Noise reduction stopped",
     "source": "\"Noise reduction stopped\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:71"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:76"
   },
   {
     "key": "Noise reduction stopped after %1$@ of %2$@ photos",
     "source": "\"Noise reduction stopped after \\(made.count) of \\(photos.count) photos\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:71"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:76"
   },
   {
     "key": "Noise reduction strength",
@@ -15894,7 +15889,6 @@
       "Sources/CevicheMac/Editor/PrintProof.swift:225",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:140",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:503",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:82",
       "Sources/CevicheMobile/Tools/Negative/NegativeView.swift:162"
     ]
   },
@@ -17480,28 +17474,28 @@
   {
     "key": "Reducing noise",
     "source": "\"Reducing noise\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:33",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:38",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:33",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:50"
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:38",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:76"
     ]
   },
   {
     "key": "Reducing noise for %1$@",
     "source": "\"Reducing noise for \\(photos[0].filename)\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:31",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:36",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:31",
-      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:163"
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:36",
+      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:165"
     ]
   },
   {
     "key": "Reducing noise for %1$@ photos",
     "source": "\"Reducing noise for \\(photos.count.formatted()) photos\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:31",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:36",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:31",
-      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:163"
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:36",
+      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:165"
     ]
   },
   {
@@ -18111,7 +18105,7 @@
     "context": "Sources/CevicheMac/Tools/IDPhotoDialog.swift:127",
     "uses": [
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:127",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:77"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:78"
     ]
   },
   {
@@ -18758,7 +18752,7 @@
       "Sources/CevicheMobile/Export/ExportView.swift:52",
       "Sources/CevicheMobile/Export/ExportView.swift:116",
       "Sources/CevicheMobile/Export/VideoExport.swift:45",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:21"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:24"
     ]
   },
   {
@@ -18784,7 +18778,7 @@
   {
     "key": "Saved a denoised copy of %1$@",
     "source": "\"Saved a denoised copy of \\(made[0].filename)\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:74"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79"
   },
   {
     "key": "Saved a positive of %1$@",
@@ -18813,16 +18807,16 @@
   {
     "key": "Saved denoised copies of %1$@ of %2$@ photos.\n",
     "source": "\"Saved denoised copies of \\(made.count) of \\(photos.count) photos.\\n\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:84",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79",
-      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:159"
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:84",
+      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:161"
     ]
   },
   {
     "key": "Saved denoised copies of %1$@ photos",
     "source": "\"Saved denoised copies of \\(made.count.formatted()) photos\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:74"
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79"
   },
   {
     "key": "Saved development",
@@ -18973,7 +18967,7 @@
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:236",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:66",
       "Sources/CevicheMobile/Library/LibraryView.swift:30",
-      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:297"
+      "Sources/CevicheMobile/Tools/IDPhoto/IDPhotoView.swift:294"
     ]
   },
   {
@@ -20182,10 +20176,10 @@
   {
     "key": "Some Photos Weren’t Denoised",
     "source": "\"Some Photos Weren’t Denoised\"",
-    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79",
+    "context": "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:84",
     "uses": [
-      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:79",
-      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:158"
+      "Sources/CevicheMac/Tools/CatalogModel+Denoise.swift:84",
+      "Sources/CevicheMobile/Tools/Denoise/DenoiseModel.swift:160"
     ]
   },
   {
@@ -21020,7 +21014,7 @@
       "Sources/CevicheMac/Export/ExportOptions.swift:120",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:681",
       "Sources/CevicheMobile/App/MobileFeatures.swift:178",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:42"
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:67"
     ]
   },
   {
@@ -21633,7 +21627,7 @@
     "context": "Sources/CevicheCore/Analysis/NegativeConverter.swift:636",
     "uses": [
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:636",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:170",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:196",
       "Sources/CevicheCore/WideAngle/WideAngleCorrector.swift:95"
     ]
   },
@@ -22749,7 +22743,7 @@
       "Sources/CevicheMac/Tools/NightSkyView.swift:9",
       "Sources/CevicheMac/Tools/NightSkyView.swift:260",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:309",
-      "Sources/CevicheMobile/Components/ShakeToUndo.swift:38",
+      "Sources/CevicheMobile/Components/ShakeToUndo.swift:39",
       "Sources/CevicheMobile/Develop/DevelopView.swift:127",
       "Sources/CevicheMobile/Develop/DevelopView.swift:205",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyMergeView.swift:106"
@@ -23797,8 +23791,8 @@
     "uses": [
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:493",
       "Sources/CevicheCore/Analysis/NegativeConverter.swift:496",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:52",
-      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:55",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:78",
+      "Sources/CevicheCore/Analysis/PhotoDenoiser.swift:81",
       "Sources/CevicheCore/WideAngle/WideAngleCorrector.swift:149",
       "Sources/CevicheCore/WideAngle/WideAngleCorrector.swift:152"
     ]
