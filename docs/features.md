@@ -292,7 +292,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
   and EXIF, offering popular tags while the field is empty and matching tags while typing, as on the Mac. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
-  Paste Edits, Set Location… and Trash. The version and Open Source Licenses are under Ceviche in the system's
+  Paste Edits, Set Location… and Trash; in the Trash the bar has Put Back and Delete (which asks first), in the archive
+  Unarchive, Export and Move to Trash, and selecting ends once the photos have left. The version and Open Source Licenses are under Ceviche in the system's
   Settings. With a keyboard, Shift-tap selects the run from the last photo tapped and Command-tap adds or removes one;
   ⌘A selects all, Esc ends selecting, P, X and U flag, 0 to 5 rate, ⌘G groups, ⌘E exports and ⌘⌫ moves to the Trash.
   In Develop, ⌘Z and ⇧⌘Z undo and redo, the arrows step through the photos, ⇧⌘C and ⇧⌘V copy and paste edits,
@@ -303,7 +304,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
 - **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
-  the bar, the histogram and the filmstrip (on an iPhone held upright the tools sit below the photo and the photo moves up above the open panel), in cards that fold;
+  the bar, the histogram and the filmstrip (not on an iPhone, whose screen is too small: upright the tools sit below the photo, which moves up above the open panel, and on its side they are docked in a column at the right, with the chosen scope across the top of Light), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
   in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. More › Move to Trash… (⌘⌫) asks first, then shows the next photo. Shaking the device offers to undo the last edit or Move to Trash, whichever came last; in the Library it puts back the photos last moved to the Trash. The card in the corner shows one
   scope at a time, Histogram, Waveform, Parade or Vectorscope: a tap moves to the next, More › Scope chooses or turns it off. The
