@@ -205,7 +205,7 @@ final class IDPhotoModel: ObservableObject, Identifiable {
     private func renderActualSize() {
         actualSizeTask?.cancel()
         guard showingActualSize, let renderer, let layout, let screenScale else { return }
-        let matte = layout.background == nil ? nil : self.matte
+        let matte = IDPhotoMatte.used(self.matte, by: layout)
         actualSizeTask = Task {
             try? await Task.sleep(for: .milliseconds(100))
             guard !Task.isCancelled else { return }
@@ -217,9 +217,7 @@ final class IDPhotoModel: ObservableObject, Identifiable {
     private func layoutChanged(refit: Bool = false) {
         guard let layout, let preview, let analysis else { return }
         if refit, !region.contains(frameBounds(layout, in: preview)) { frameRegion() }
-        // A background that couldn't be replaced is checked as it is.
-        var checked = layout
-        if matteError != nil { checked.background = nil }
+        let checked = layout.checked(matteFailed: matteError != nil)
         let measured = IDPhotoChecks.evaluate(analysis, layout: checked, photoSize: renderer?.size ?? CGSize(width: preview.width, height: preview.height))
         checks = measured + IDPhotoReview.applicable(hints, spec: layout.spec, measured: measured)
         refreshReplaced()
@@ -265,14 +263,14 @@ final class IDPhotoModel: ObservableObject, Identifiable {
     /// A failure stays on this photo: the batch's background setting is left alone, the print keeps its own
     /// background, its check says so, and it isn't tried again until Replace is turned on afresh.
     private func makeMatte() {
-        guard let preview, !matting, matteError == nil else { return }
+        guard let preview, IDPhotoMatte.needed(for: layout, made: matte != nil, making: matting, failed: matteError != nil) else { return }
         matting = true
         let previous = Self.lastMatte
         matteTask = Task {
             // One photo's matte at a time across a batch, which may turn on Replace for two dozen at once.
             await previous?.value
             guard !Task.isCancelled else { matting = false; return }
-            let result = await Task.detached(priority: .userInitiated) { Result { try IDPhotoMatte.make(preview) } }.value
+            let result = await IDPhotoMatte.making(preview)
             matting = false
             guard !Task.isCancelled else { return }
             switch result {
@@ -382,7 +380,7 @@ final class IDPhotoModel: ObservableObject, Identifiable {
     func render(_ output: Output) async throws -> CGImage {
         guard let renderer, let layout else { throw CancellationError() }
         working = true; defer { working = false }
-        let matte = layout.background == nil ? nil : self.matte
+        let matte = IDPhotoMatte.used(self.matte, by: layout)
         switch output {
         case .print: return try await renderer.renderPrint(layout, matte: matte)
         case .digital: return try await renderer.renderDigital(layout, matte: matte)

@@ -145,7 +145,7 @@ final class TimelapseModel: ObservableObject {
     /// Live Photo: the key photo's place in the frames.
     var keyPosition: Int { keyID.flatMap { id in frames.firstIndex { $0.id == id } } ?? frames.count / 2 }
     /// Live Photo: the movie's frames, with Bounce's way back, and how long it plays.
-    var livePhotoFrameCount: Int { CatalogModel.livePhotoFrames(count: plan?.frames.count ?? frames.count, bounce: bounce).count }
+    var livePhotoFrameCount: Int { TimelapseLivePhoto.frames(count: plan?.frames.count ?? frames.count, bounce: bounce).count }
     var livePhotoSeconds: Double { Double(livePhotoFrameCount) / max(1, settings.frameRate.rate) }
     /// Slower than a video's, so a few photos can fill a Live Photo's few seconds.
     static let liveRates = [4, 6, 8, 10, 12, 15, 24, 30, 60].map { VideoFrameRate($0) }
@@ -155,7 +155,7 @@ final class TimelapseModel: ObservableObject {
         let best = Self.liveRates.min { abs(log(frames / $0.rate / LivePhoto.movieSeconds)) < abs(log(frames / $1.rate / LivePhoto.movieSeconds)) }
         return best == settings.frameRate ? nil : best
     }
-    var livePhotoSizes: (movie: CGSize, still: CGSize) { CatalogModel.livePhotoSizes(ratio: ratio, settings: settings, photo: captures.first?.size) }
+    var livePhotoSizes: (movie: CGSize, still: CGSize) { TimelapseLivePhoto.sizes(ratio: ratio, settings: settings, photo: captures.first?.size) }
     var livePhotoSize: CGSize { livePhotoSizes.movie }
     /// Real time each frame covers in Follow Capture Time when the field is left to the series.
     var usualStep: Double { series?.interval ?? 1 }
@@ -224,7 +224,7 @@ final class TimelapseModel: ObservableObject {
     /// when the timing follows capture time. A Live Photo with Bounce plays forward and back.
     private func play() {
         guard frames.count > 1, let plan, plan.frames.count > 1 else { playing = false; return }
-        let order = output == .livePhoto ? CatalogModel.livePhotoFrames(count: plan.frames.count, bounce: bounce) : Array(plan.frames.indices)
+        let order = output == .livePhoto ? TimelapseLivePhoto.frames(count: plan.frames.count, bounce: bounce) : Array(plan.frames.indices)
         var frame = order.firstIndex { plan.frames[$0].dominant >= index } ?? 0
         if index == frames.count - 1 && !(output == .livePhoto && bounce) { frame = 0 }
         playTask?.cancel()
@@ -232,7 +232,7 @@ final class TimelapseModel: ObservableObject {
             let clock = ContinuousClock()
             var deadline = clock.now
             while let self, self.playing, !Task.isCancelled, let plan = self.plan, !plan.frames.isEmpty {
-                let order = self.output == .livePhoto ? CatalogModel.livePhotoFrames(count: plan.frames.count, bounce: self.bounce) : Array(plan.frames.indices)
+                let order = self.output == .livePhoto ? TimelapseLivePhoto.frames(count: plan.frames.count, bounce: self.bounce) : Array(plan.frames.indices)
                 frame = (frame + 1) % order.count
                 deadline += .seconds(1.0 / max(1, self.settings.frameRate.rate))
                 // Behind by more than a frame, drop the lost time instead of rushing to catch up.
@@ -452,13 +452,10 @@ final class TimelapseModel: ObservableObject {
         stabilization = nil
         guard settings.stabilize, frames.count >= 2 else { stabilizing = false; return }
         stabilizing = true
-        let ids = frames.map(\.id), thumbnails = thumbnails, times = captures.map(\.date)
+        let found = frames.map { thumbnails[$0.id] }, times = captures.map(\.date)
         stabilizeTask = Task { [weak self] in
             let result = await Task.detached(priority: .utility) { () -> TimelapseStabilization? in
-                // Decoded one at a time as the stabilizer asks for them.
-                let result = TimelapseStabilizer.stabilize(count: ids.count, times: times, isCancelled: { Task.isCancelled }) { index in
-                    thumbnails[ids[index]].flatMap { CGImageSourceCreateWithData($0 as CFData, nil) }.flatMap { CGImageSourceCreateImageAtIndex($0, 0, nil) }
-                }
+                let result = TimelapseStabilizer.stabilize(thumbnails: found, times: times, isCancelled: { Task.isCancelled })
                 return Task.isCancelled ? nil : result
             }.value
             guard let self, !Task.isCancelled, let result else { return }

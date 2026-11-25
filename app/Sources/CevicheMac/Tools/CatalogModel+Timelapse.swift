@@ -30,7 +30,7 @@ extension CatalogModel {
 
     /// Asks where to save the video, with the first photo's name and the container's file type; `prompt` names the
     /// panel's button after the window's own action.
-    func chooseTimelapseDestination(first: CatalogAsset?, settings: TimelapseSettings, suffix: String = "Timelapse",
+    func chooseTimelapseDestination(first: CatalogAsset?, settings: TimelapseSettings, suffix: String = MergeOutput.timelapse.suffix,
                                     prompt: String = L10n.tr("Create Video")) async -> URL? {
         let stem = first.map { ($0.filename as NSString).deletingPathExtension } ?? "Timelapse"
         guard let url = await FileChooser.save(FileSaveRequest(name: "\(stem)-\(suffix).\(settings.fileContainer.fileExtension)",

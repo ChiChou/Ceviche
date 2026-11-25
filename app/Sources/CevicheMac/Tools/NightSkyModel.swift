@@ -551,7 +551,7 @@ extension NightSkyModel where Workflow == StarTrailsMerger {
         guard canMerge, let workflow, included.first != nil else { return }
         Task {
             // The panel may stay open a while on iPad, so check the tool is still ready once it closes.
-            guard let url = await catalog.chooseTimelapseDestination(first: assetsByURL[workflow.urls[beside]], settings: video, suffix: "StarTrails",
+            guard let url = await catalog.chooseTimelapseDestination(first: assetsByURL[workflow.urls[beside]], settings: video, suffix: MergeOutput.starTrails.suffix,
                                                                    prompt: L10n.tr("Render Video")),
                   canMerge, let workflow = self.workflow, let analysis, let preview, let first = included.first else { return }
             startVideo(catalog: catalog, workflow: workflow, analysis: analysis, preview: preview, first: first, included: included,

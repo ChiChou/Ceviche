@@ -180,13 +180,13 @@ struct IDPhotoDialog: View {
     /// when it has them, so one file serves a print shop and an online application alike.
     private func exportPhotos(_ chosen: [IDPhotoModel]) {
         guard let layout = session.layout else { return }
-        let suffix = layout.spec.id
+        let spec = layout.spec
         let photos = chosen.filter { $0.stage == .ready }
         guard !photos.isEmpty else { return }
         // One photo is saved under a name; several go into a folder, each named after its original.
         Task {
             let chosen = photos.count == 1
-                ? await FileChooser.save(FileSaveRequest(name: "\(photos[0].stem)-\(suffix).jpg", types: [.jpeg]))
+                ? await FileChooser.save(FileSaveRequest(name: IDPhotoRenderer.digitalName(stem: photos[0].stem, spec: spec), types: [.jpeg]))
                 : await FileChooser.openOne(FileOpenRequest(files: false, folders: true, createFolders: true, prompt: L10n.tr("Export")))
             guard let destination = chosen else { return }
             save()
@@ -194,9 +194,8 @@ struct IDPhotoDialog: View {
                 for photo in photos {
                     guard let own = photo.layout else { continue }
                     let image = try await photo.render(.digital)
-                    let dpi = Double(image.width) / own.spec.widthMM * 25.4
-                    let url = photos.count == 1 ? destination : Self.free(destination.appendingPathComponent("\(photo.stem)-\(suffix).jpg"))
-                    try IDPhotoRenderer.write(image, to: url, type: .jpeg, dpi: dpi, maxKB: own.spec.digital?.maxKB)
+                    let url = photos.count == 1 ? destination : Self.free(destination.appendingPathComponent(IDPhotoRenderer.digitalName(stem: photo.stem, spec: spec)))
+                    try IDPhotoRenderer.writeDigital(image, spec: own.spec, to: url)
                 }
                 catalog.notice = photos.count == 1 ? L10n.tr("Exported \(destination.lastPathComponent)") : L10n.tr("Exported \(photos.count) photos")
             } catch { catalog.failure = Failure(L10n.tr("Couldn’t Export"), error) }

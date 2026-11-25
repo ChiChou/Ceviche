@@ -198,7 +198,7 @@ struct StarTrailsView: View {
     private var livePhotoStatus: String {
         guard model.analysis != nil else { return status }
         let frames = LivePhoto.sample(included.count).count, seconds = LivePhoto.sampleDuration(frames).seconds * Double(frames)
-        let size = CatalogModel.livePhotoSizes(ratio: video.settings.ratio(photo: photoSize), settings: video.settings, photo: photoSize).movie
+        let size = TimelapseLivePhoto.sizes(ratio: video.settings.ratio(photo: photoSize), settings: video.settings, photo: photoSize).movie
         return [L10n.tr("\(included.count) photos - \(Int((Double(frames) / seconds).rounded())) fps - \(String(format: "%.1f", locale: Locale.current, seconds)) s"),
                 "\(Int(size.width)) × \(Int(size.height))"].joined(separator: " - ")
     }

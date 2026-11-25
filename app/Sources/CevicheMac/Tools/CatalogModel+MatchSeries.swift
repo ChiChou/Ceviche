@@ -25,8 +25,7 @@ extension CatalogModel {
     func applyMatchSeries(_ photos: [CatalogAsset], values: [String: SeriesMatchValues], exposure: Bool, whiteBalance: Bool, editor: EditorModel) {
         let changed = photos.filter { values[$0.id] != nil }
         let set: @Sendable (inout Adjustments, SeriesMatchValues) -> Void = { settings, value in
-            if exposure { settings.exposure = value.exposure }
-            if whiteBalance { settings.temperature = value.temperature; settings.tint = value.tint }
+            value.apply(to: &settings, exposure: exposure, whiteBalance: whiteBalance)
         }
         Task {
             await runEditBatch(changed, editor: editor, title: L10n.tr("Matching series"),

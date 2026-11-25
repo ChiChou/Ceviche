@@ -15,22 +15,6 @@ extension CatalogModel {
         timelapse = TimelapseRequest(assets: targets.filter { $0.inLibrary && !$0.isLatent }, output: .livePhoto)
     }
 
-    /// The movie's frames as plan frame numbers: each once, or with `bounce` forward and back again.
-    nonisolated static func livePhotoFrames(count: Int, bounce: Bool) -> [Int] {
-        bounce && count > 1 ? Array(0..<count) + (0..<(count - 1)).reversed() : Array(0..<count)
-    }
-
-    /// The movie's size for a frame of `ratio` cut by `crop`, and the still's, as `preset` has them and no larger than
-    /// the photo's cut allows.
-    nonisolated static func livePhotoSizes(ratio: Double, crop: TimelapseCrop, preset: LivePhotoSize, photo: CGSize?) -> (movie: CGSize, still: CGSize) {
-        let limit = photo.map { size in let cut = crop.rect(in: size, aspect: ratio); return Double(max(cut.width, cut.height)) }
-        return (LivePhoto.size(ratio: ratio, longEdge: preset.movieLongEdge, limit: limit),
-                LivePhoto.size(ratio: ratio, longEdge: preset.stillLongEdge, limit: limit))
-    }
-    nonisolated static func livePhotoSizes(ratio: Double, settings: TimelapseSettings, photo: CGSize?) -> (movie: CGSize, still: CGSize) {
-        livePhotoSizes(ratio: ratio, crop: settings.crop, preset: settings.livePhotoSize, photo: photo)
-    }
-
     /// Makes the Live Photo as a background job and adds it to Photos: `photos` in capture order, the frames `plan`
     /// makes from them at the settings' rate and framing, and photo `key` as the still. The caller has leave to add to
     /// Photos.
@@ -38,11 +22,8 @@ extension CatalogModel {
                                  photo: CGSize, key: Int, bounce: Bool, steady: TimelapseStabilization? = nil) {
         guard let store, photos.indices.contains(key) else { return }
         let ratio = settings.ratio(photo: photo)
-        let sizes = Self.livePhotoSizes(ratio: ratio, settings: settings, photo: captures[key].size)
-        let order = Self.livePhotoFrames(count: plan.frames.count, bounce: bounce)
-        // The still's moment: the first frame that shows the key photo most, else the one nearest it.
-        let shown = order.firstIndex { plan.frames[$0].dominant == key }
-            ?? order.indices.min { abs(plan.frames[order[$0]].dominant - key) < abs(plan.frames[order[$1]].dominant - key) } ?? 0
+        let sizes = TimelapseLivePhoto.sizes(ratio: ratio, settings: settings, photo: captures[key].size)
+        let order = TimelapseLivePhoto.frames(count: plan.frames.count, bounce: bounce)
         let name = (photos[key].filename as NSString).deletingPathExtension
         activity.start(.exporting, title: L10n.tr("Creating Live Photo"), detail: photos[key].filename, total: order.count + 1) { job in
             let staging = FileManager.default.temporaryDirectory.appendingPathComponent("LivePhoto-\(UUID().uuidString)")
@@ -50,34 +31,22 @@ extension CatalogModel {
             do {
                 try FileManager.default.createDirectory(at: staging, withIntermediateDirectories: true)
                 let stillURL = staging.appendingPathComponent("\(name).heic"), movieURL = staging.appendingPathComponent("\(name).mov")
-                let identifier = UUID().uuidString, keySource = try await self.resolveOriginal(photos[key])
-                let still = try await Self.develop(photos[key], source: keySource, store: store) { renderer, adjustments in
-                    try await renderer.livePhotoStill(adjustments, crop: settings.crop, ratio: ratio, size: sizes.still, steady: steady?.frame(key))
-                }
-                try await Task.detached(priority: .userInitiated) { try LivePhoto.writeStill(still, to: stillURL, identifier: identifier, source: keySource) }.value
-                let writer = try LivePhotoWriter(url: movieURL, size: sizes.movie, frameDuration: settings.frameRate.frameDuration, stillFrame: shown, identifier: identifier)
-                do {
-                    let compositor = TimelapseCompositor()
-                    // Photos are kept while the next frame needs them; Bounce develops the way back again.
-                    var ready: [Int: TimelapsePhoto] = [:]
-                    for (position, index) in order.enumerated() {
-                        try Task.checkCancellation()
-                        let frame = plan.frames[index], next = order.indices.contains(position + 1) ? plan.frames[order[position + 1]].photos : []
-                        for photo in frame.photos where ready[photo] == nil {
-                            let source = try await self.resolveOriginal(photos[photo])
-                            let frameSteady = steady?.frame(photo)
-                            ready[photo] = try await Self.develop(photos[photo], source: source, store: store) { renderer, adjustments in
-                                try await renderer.renderTimelapsePhoto(adjustments, crop: settings.crop, ratio: ratio, size: sizes.movie, hdr: false, steady: frameSteady)
-                            }
-                        }
-                        let buffer = try writer.makeBuffer(), inputs = ready
-                        try await Task.detached(priority: .userInitiated) { try compositor.compose(frame, photos: inputs, into: buffer) }.value
-                        try await writer.append(buffer)
-                        ready = ready.filter { frame.photos.contains($0.key) || next.contains($0.key) }
-                        ActivityCenter.shared.update(job, completed: position + 1, detail: L10n.tr("Frame \(position + 1) of \(order.count)"))
+                let keySource = try await self.resolveOriginal(photos[key])
+                try await TimelapseLivePhoto.write(plan: plan, order: order, key: key, movieSize: sizes.movie, frameDuration: settings.frameRate.frameDuration,
+                                                   stillURL: stillURL, movieURL: movieURL, source: keySource,
+                                                   developStill: {
+                    try await Self.develop(photos[key], source: keySource, store: store) { renderer, adjustments in
+                        try await renderer.livePhotoStill(adjustments, crop: settings.crop, ratio: ratio, size: sizes.still, steady: steady?.frame(key))
                     }
-                    try await writer.finish()
-                } catch { writer.cancel(); throw error }
+                }, developPhoto: { photo in
+                    let source = try await self.resolveOriginal(photos[photo])
+                    let frameSteady = steady?.frame(photo)
+                    return try await Self.develop(photos[photo], source: source, store: store) { renderer, adjustments in
+                        try await renderer.renderTimelapsePhoto(adjustments, crop: settings.crop, ratio: ratio, size: sizes.movie, hdr: false, steady: frameSteady)
+                    }
+                }, progress: { done, total in
+                    ActivityCenter.shared.update(job, completed: done, detail: L10n.tr("Frame \(done) of \(total)"))
+                })
                 try Task.checkCancellation()
                 ActivityCenter.shared.update(job, completed: order.count + 1, detail: L10n.tr("Adding to Photos"))
                 try await Self.addLivePhoto(still: stillURL, movie: movieURL)

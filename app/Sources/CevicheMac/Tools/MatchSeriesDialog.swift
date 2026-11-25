@@ -7,33 +7,16 @@ import CevicheCore
 @MainActor
 final class MatchSeriesModel: ObservableObject {
     enum Stage: Equatable { case reading, ready, failed(String) }
-    enum Outcome { case waiting, matching, matched(SeriesMatchResult), failed(String) }
-
-    struct Photo: Identifiable {
-        let asset: CatalogAsset
-        var url: URL?
-        /// Its saved edits, or the defaults, and the defaults themselves.
-        var saved: Adjustments?
-        var defaults: Adjustments?
-        var outcome = Outcome.waiting
-        var prefer = SeriesMatchPreference.automatic
-        /// False leaves the photo as it is.
-        var included = true
-        var thumbnail: CGImage?
-        var id: String { asset.id }
-        var current: SeriesMatchValues? {
-            (saved ?? defaults).flatMap { settings in
-                defaults.map { let effective = settings.effective(defaults: $0)
-                    return SeriesMatchValues(exposure: effective.exposure, temperature: effective.temperature, tint: effective.tint) }
-            }
-        }
-        var result: SeriesMatchResult? { if case .matched(let result) = outcome { return result }; return nil }
-    }
+    typealias Photo = SeriesMatchPhoto
 
     let request: MatchSeriesRequest
     @Published private(set) var stage = Stage.reading
-    @Published private(set) var photos: [Photo]
-    @Published private(set) var reference: Int
+    /// The photos in capture order and the one they are matched to.
+    @Published private(set) var series: SeriesMatchSeries
+    var photos: [Photo] { series.photos }
+    var reference: Int { series.reference }
+    /// Each photo's catalog thumbnail, by asset ID.
+    @Published private(set) var thumbnails: [String: CGImage] = [:]
     @Published var selected: Int { didSet { if selected != oldValue { renderSelected() } } }
     @Published var matchExposure: Bool { didSet { preferences.set(matchExposure, forKey: "matchSeriesExposure"); renderSelected() } }
     @Published var matchWhiteBalance: Bool { didSet { preferences.set(matchWhiteBalance, forKey: "matchSeriesWhiteBalance"); renderSelected() } }
@@ -51,26 +34,16 @@ final class MatchSeriesModel: ObservableObject {
 
     init(request: MatchSeriesRequest) {
         self.request = request
-        photos = request.assets.map { Photo(asset: $0) }
         let first = request.assets.firstIndex { $0.id == request.referenceID } ?? 0
-        reference = first
+        series = SeriesMatchSeries(request.assets, reference: first)
         selected = request.assets.count > 1 ? (first == 0 ? 1 : 0) : 0
         matchExposure = preferences.object(forKey: "matchSeriesExposure") as? Bool ?? true
         matchWhiteBalance = preferences.object(forKey: "matchSeriesWhiteBalance") as? Bool ?? true
     }
 
     /// The values to write, by photo: matched, included, and different from what the photo has.
-    var changes: [String: SeriesMatchValues] {
-        var changes: [String: SeriesMatchValues] = [:]
-        for (index, photo) in photos.enumerated() where index != reference && photo.included {
-            guard let result = photo.result, result.method != .unmatched, let current = photo.current else { continue }
-            let differs = (matchExposure && abs(result.values.exposure - current.exposure) >= 0.005)
-                || (matchWhiteBalance && (abs(result.values.temperature - current.temperature) >= 1 || abs(result.values.tint - current.tint) >= 0.5))
-            if differs { changes[photo.id] = result.values }
-        }
-        return changes
-    }
-    var matching: Bool { photos.contains { if case .matching = $0.outcome { return true }; if case .waiting = $0.outcome { return true }; return false } && stage == .ready }
+    var changes: [String: SeriesMatchValues] { series.changes(exposure: matchExposure, whiteBalance: matchWhiteBalance) }
+    var matching: Bool { stage == .ready && series.matching }
     var canApply: Bool { stage == .ready && !matching && !changes.isEmpty && (matchExposure || matchWhiteBalance) }
 
     func start(catalog: CatalogModel) {
@@ -79,20 +52,20 @@ final class MatchSeriesModel: ObservableObject {
             for index in photos.indices {
                 if Task.isCancelled { return }
                 let asset = photos[index].asset
-                guard let url = try? await catalog.resolveOriginal(asset) else { photos[index].outcome = .failed(L10n.tr("The original isn’t available.")); continue }
+                guard let url = try? await catalog.resolveOriginal(asset) else { series.photos[index].outcome = .failed(L10n.tr("The original isn’t available.")); continue }
                 if url.startAccessingSecurityScopedResource() { access.append(url) }
-                photos[index].url = url
+                series.photos[index].url = url
                 if let data = try? await catalog.previews?.data(assetID: asset.id) {
-                    photos[index].thumbnail = NSImage(data: data)?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+                    thumbnails[asset.id] = NSImage(data: data)?.cgImage(forProposedRect: nil, context: nil, hints: nil)
                 }
                 do {
                     let (renderer, defaults) = try await Task.detached(priority: .userInitiated) { try RawRenderer.open(url) }.value
                     renderers[asset.id] = renderer
-                    photos[index].defaults = defaults
-                    photos[index].saved = try await store.savedAdjustments(of: store.asset(asset.id))
-                } catch { photos[index].outcome = .failed(error.localizedDescription) }
+                    series.photos[index].defaults = defaults
+                    series.photos[index].saved = try await store.savedAdjustments(of: store.asset(asset.id))
+                } catch { series.photos[index].outcome = .failed(error.localizedDescription) }
             }
-            guard photos[reference].url != nil, photos[reference].current != nil else {
+            guard photos[reference].readable else {
                 stage = .failed(L10n.tr("The reference photo’s original isn’t available.")); return
             }
             stage = .ready
@@ -109,16 +82,15 @@ final class MatchSeriesModel: ObservableObject {
         catch { stage = .failed(error.localizedDescription); return }
         if Task.isCancelled { return }
         referenceHasFace = matcher.referenceHasFace
-        for index in photos.indices where index != reference {
-            guard case .waiting = photos[index].outcome, let url = photos[index].url, let current = photos[index].current else { continue }
+        while let index = series.next, let url = photos[index].url, let current = photos[index].current {
             if Task.isCancelled { return }
-            photos[index].outcome = .matching
-            let prefer = photos[index].prefer == .automatic && skin ? SeriesMatchPreference.skin : photos[index].prefer
+            series.photos[index].outcome = .matching
+            let prefer = series.preference(index, skin: skin)
             let outcome = await Task.detached(priority: .userInitiated) { Result { try matcher.match(url, current: current, prefer: prefer) } }.value
             if Task.isCancelled { return }
             switch outcome {
-            case .success(let result): photos[index].outcome = .matched(result)
-            case .failure(let error): photos[index].outcome = .failed(error.localizedDescription)
+            case .success(let result): series.photos[index].outcome = .matched(result)
+            case .failure(let error): series.photos[index].outcome = .failed(error.localizedDescription)
             }
             if index == selected { renderSelected() }
         }
@@ -128,34 +100,24 @@ final class MatchSeriesModel: ObservableObject {
     private func rematch(only index: Int? = nil) {
         guard stage == .ready else { return }
         task?.cancel()
-        for k in photos.indices where k != reference && (index == nil || index == k) && photos[k].url != nil && photos[k].current != nil { photos[k].outcome = .waiting }
-        // One left matching by the cancelled pass waits again.
-        for k in photos.indices { if case .matching = photos[k].outcome { photos[k].outcome = .waiting } }
+        series.rematch(only: index)
         task = Task { await match() }
     }
 
     func makeReference(_ index: Int) {
-        guard index != reference, photos[index].url != nil, photos[index].current != nil else { return }
-        reference = index
+        guard series.makeReference(index) else { return }
         referenceImage = nil
         if selected == index { selected = photos.indices.first { $0 != index } ?? index }
         rematch()
     }
     func setPreference(_ prefer: SeriesMatchPreference, for index: Int) {
-        photos[index].prefer = prefer; photos[index].included = true
+        series.photos[index].prefer = prefer; series.photos[index].included = true
         rematch(only: index)
     }
-    func toggleIncluded(_ index: Int) { photos[index].included.toggle(); if index == selected { renderSelected() } }
+    func toggleIncluded(_ index: Int) { series.photos[index].included.toggle(); if index == selected { renderSelected() } }
 
     /// The values the photo would get, with the options applied to its own edits.
-    func adjusted(_ index: Int) -> Adjustments? {
-        guard var settings = photos[index].saved ?? photos[index].defaults else { return nil }
-        if index != reference, photos[index].included, let result = photos[index].result, result.method != .unmatched {
-            if matchExposure { settings.exposure = result.values.exposure }
-            if matchWhiteBalance { settings.temperature = result.values.temperature; settings.tint = result.values.tint }
-        }
-        return settings
-    }
+    func adjusted(_ index: Int) -> Adjustments? { series.adjusted(index, exposure: matchExposure, whiteBalance: matchWhiteBalance) }
 
     /// Develops the reference and the selected photo, before and after, with each one's own edits.
     private func renderSelected() {
@@ -171,11 +133,11 @@ final class MatchSeriesModel: ObservableObject {
                 return try? await renderer.displayImage(settings, maxDimension: 1400, sdr: true)
             }
             if needsReference {
-                let image = await develop(referenceIndex, photos[referenceIndex].saved ?? photos[referenceIndex].defaults)
+                let image = await develop(referenceIndex, photos[referenceIndex].edits)
                 guard !Task.isCancelled else { return }
                 referenceImage = image
             }
-            let original = await develop(index, photos[index].saved ?? photos[index].defaults)
+            let original = await develop(index, photos[index].edits)
             guard !Task.isCancelled else { return }
             before = original
             let matched = await develop(index, adjusted(index))
@@ -312,7 +274,7 @@ struct MatchSeriesDialog: View {
         return VStack(alignment: .leading, spacing: 4) {
             ZStack(alignment: .topLeading) {
                 Group {
-                    if let thumbnail = photo.thumbnail { Image(decorative: thumbnail, scale: 1).resizable().scaledToFit() } else { Color.black }
+                    if let thumbnail = model.thumbnails[photo.id] { Image(decorative: thumbnail, scale: 1).resizable().scaledToFit() } else { Color.black }
                 }
                 .frame(width: 132, height: 88).clipped()
                 .selectionRing(isReference ? Theme.accent : isSelected ? Theme.ink.opacity(0.8) : nil)

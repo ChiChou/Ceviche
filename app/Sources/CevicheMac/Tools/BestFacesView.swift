@@ -130,7 +130,7 @@ final class BestFacesModel: ObservableObject {
         self.access = []
         let count = choice.enumerated().filter { $0.element != base }.count
         let edits = request.assets.first { $0.filename == merger.names[base] }
-        catalog.runMergeJob(beside: first, suffix: "BestFaces", title: L10n.tr("Merging Best Faces"), editsFrom: edits, placed: EditTransferItem.framedRetouched,
+        catalog.runMergeJob(beside: first, suffix: MergeOutput.bestFaces.suffix, title: L10n.tr("Merging Best Faces"), editsFrom: edits, placed: EditTransferItem.framedRetouched,
                             access: access, format: format, merge: { url, progress in try merger.write(base: base, choice: choice, to: url, progress: progress) },
                             done: count == 0 ? L10n.tr("Best faces merged") : count == 1 ? L10n.tr("Best faces merged, 1 face swapped") : L10n.tr("Best faces merged, \(count) faces swapped"),
                             detail: "", stopped: L10n.tr("Best faces merge stopped"), failed: { L10n.tr("The photos couldn’t be merged. \($0)") })
