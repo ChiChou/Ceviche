@@ -263,3 +263,29 @@ extension CatalogStore {
         }
     }
 }
+
+/// How a tag's source is shown beside it in search suggestions, on the Mac and on iPad.
+extension CatalogTagSource {
+    public var symbol: String {
+        switch self {
+        case .keyword: "tag.fill"
+        case .automatic: "tag"
+        case .place: "mappin.and.ellipse"
+        case .camera: "camera"
+        case .lens: "camera.aperture"
+        case .artist: "person"
+        case .exposure: "dial.medium"
+        }
+    }
+    public var title: String {
+        switch self {
+        case .keyword: L10n.tr("Keyword")
+        case .automatic: L10n.tr("Automatic tag")
+        case .place: L10n.tr("Place")
+        case .camera: L10n.tr("Camera")
+        case .lens: L10n.tr("Lens")
+        case .artist: L10n.tr("Photographer")
+        case .exposure: L10n.tr("Exposure")
+        }
+    }
+}

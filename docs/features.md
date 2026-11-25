@@ -290,7 +290,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   in it, Trash and Models. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
   month shows as its first photo with its name and count, and a tap shows its photos. The
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
-  and EXIF. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
+  and EXIF, offering popular tags while the field is empty and matching tags while typing, as on the Mac. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
   actions, or Select to work on several: Pick, Reject, Rating, Merge, Tools, Export, and More for labels, albums, Group,
   Paste Edits, Set Location… and Trash. The version and Open Source Licenses are under Ceviche in the system's
   Settings. With a keyboard, Shift-tap selects the run from the last photo tapped and Command-tap adds or removes one;

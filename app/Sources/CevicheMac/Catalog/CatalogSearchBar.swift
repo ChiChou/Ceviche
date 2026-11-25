@@ -494,32 +494,6 @@ private extension CatalogFaces {
     }
 }
 
-private extension CatalogTagSource {
-    var symbol: String {
-        switch self {
-        case .keyword: "tag.fill"
-        case .automatic: "tag"
-        case .place: "mappin.and.ellipse"
-        case .camera: "camera"
-        case .lens: "camera.aperture"
-        case .artist: "person"
-        case .exposure: "dial.medium"
-        }
-    }
-    var title: String {
-        switch self {
-        case .keyword: L10n.tr("Keyword")
-        case .automatic: L10n.tr("Automatic tag")
-        case .place: L10n.tr("Place")
-        case .camera: L10n.tr("Camera")
-        case .lens: L10n.tr("Lens")
-        case .artist: L10n.tr("Photographer")
-        case .exposure: L10n.tr("Exposure")
-        }
-    }
-}
-
-
 /// Tags left to right, wrapping to a new line when the next one doesn't fit.
 private struct TagFlow: Layout {
     let spacing: CGFloat
