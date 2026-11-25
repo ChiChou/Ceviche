@@ -407,14 +407,16 @@ extension NightSkyAnalyzer {
     }
 
     /// Restores the plan's lines into a preview from the photos' aligned copies: inside each line's feathered footprint
-    /// the photo's own pixels replace the background, and where lines overlap the one standing out most wins.
+    /// the photo's pixels are matched to the local sky, and where lines overlap the one standing out most wins.
     private func restorePreview(_ out: inout [Float], plan: Plan, mapping: [SIMD2<Float>]?) throws {
         guard let cache else { return }
         let w = previewWidth, h = previewHeight, k = previewScale
         let clean = out
+        let backgrounds = try lineBackgrounds(plan, clean: clean)
         var score = [Float](repeating: -.infinity, count: w * h)
         try cache.read { reader in
-            for line in plan.restore {
+            for (line, background) in zip(plan.restore, backgrounds) {
+                guard let background else { continue }
                 let g = gains[line.frame]
                 // Only the preview pixels near the line, found through the base framing's inverse.
                 let ends = [line.start, line.end].map { ((plan.restoreAsCaptured ? $0 : pointOnBase($0, base: plan.base)) + 0.5) / k - 0.5 }
@@ -431,7 +433,7 @@ extension NightSkyAnalyzer {
                     let sample = plan.restoreAsCaptured ? (isSky(camera) ? reader.bilinear(line.frame, 0, SIMD2(Double(x), Double(y))) : nil)
                                                         : reader.bilinear(line.frame, 1, (a + 0.5) / k - 0.5)
                     guard alpha > 0, let s = sample else { continue }
-                    let source = s * g, base = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
+                    let source = s * g - background.value(at: a), base = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
                     // A meteor only adds light: a darker sample is the photo's own noise or edge, never restored.
                     let candidate = alpha * simd_dot(source - base, SIMD3(0.2126, 0.7152, 0.0722))
                     guard candidate > max(0, score[p]) else { continue }

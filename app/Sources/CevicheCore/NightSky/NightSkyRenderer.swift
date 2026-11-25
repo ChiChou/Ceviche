@@ -50,6 +50,12 @@ extension NightSkyAnalyzer {
             throw PanoramaError.message(L10n.tr("Not enough memory to stack \(w) × \(h) photos."))
         }
         try setSky(plan.skyShape)
+        var backgrounds: [NightSkyLineBackground?] = []
+        if !plan.restore.isEmpty {
+            var cleanPlan = plan
+            cleanPlan.restore = []; cleanPlan.regions = []
+            backgrounds = try lineBackgrounds(plan, clean: preview(cleanPlan))
+        }
         let list = contributions(plan)
         let restoring = Array(Set(plan.restore.map(\.frame))).sorted()
         // The robust sky's second pass visits the sky photos again, for the sky alone.
@@ -112,10 +118,11 @@ extension NightSkyAnalyzer {
                 step(list.count + clipped.count + done, i, list.count + clipped.count + restoring.count)
                 try autoreleasepool {
                     let image = try developedForGPU(i)
-                    let lines = plan.restore.filter { $0.frame == i }
+                    let selected = plan.restore.indices.filter { plan.restore[$0].frame == i }
+                    let lines = selected.map { plan.restore[$0] }
                     try gpu.restore(image, lines: lines, regions: lines.map { restoreRegion($0, plan: plan) }, into: sums, maps: maps, context: context, gain: gains[i],
                                     alignment: i == anchor || plan.restoreAsCaptured ? nil : alignments[i], base: plan.restoreAsCaptured ? nil : baseAlignment,
-                                    analysis: (analysisWidth, analysisHeight))
+                                    analysis: (analysisWidth, analysisHeight), backgrounds: selected.map { backgrounds[$0] })
                 }
                 lap("restore")
             }
@@ -172,9 +179,11 @@ extension NightSkyAnalyzer {
                     step(list.count + clipped.count + done, i, list.count + clipped.count + restoring.count)
                     try autoreleasepool {
                         let frame = try HDRMergeDecoder.decode(urls[i], metadata: metadata[i].base, longEdge: nil, whiteBalance: whiteBalance, context: context)
-                        for line in plan.restore where line.frame == i {
+                        for (line, background) in zip(plan.restore, backgrounds) where line.frame == i {
+                            guard let background else { continue }
                             restore(frame, line: line, region: restoreRegion(line, plan: plan), base: plan.restoreAsCaptured ? nil : baseAlignment,
-                                    alignment: line.frame == anchor || plan.restoreAsCaptured ? nil : alignments[line.frame], clean: clean, out: &out, score: &score)
+                                    alignment: line.frame == anchor || plan.restoreAsCaptured ? nil : alignments[line.frame], background: background,
+                                    clean: clean, out: &out, score: &score)
                         }
                     }
                     lap("restore")
@@ -443,10 +452,10 @@ extension NightSkyAnalyzer {
         }
     }
 
-    /// One line from its photo into the CPU result: the photo's own pixels inside the feathered footprint, the most
+    /// One line from its photo into the CPU result: locally sky-matched pixels inside the feathered footprint, the most
     /// prominent line winning where lines overlap.
     private func restore(_ frame: PanoramaFrame, line: NightSkyLine, region: (Int, Int, Int, Int), base: NightSkyAlignment?, alignment: NightSkyAlignment?,
-                         clean: [Float], out: inout [Float], score: inout [Float]) {
+                         background correction: NightSkyLineBackground, clean: [Float], out: inout [Float], score: inout [Float]) {
         let w = width, h = height, s = scale, gain = gains[line.frame]
         guard region.2 >= region.0, region.3 >= region.1 else { return }
         frame.pixels.withUnsafeBufferPointer { pixels in
@@ -457,7 +466,7 @@ extension NightSkyAnalyzer {
                 guard alpha > 0 else { continue }
                 let source = alignment?.sourcePoint(a) ?? a
                 guard isSky(source), let sample = Self.bilinear(pixels, w, h, (source + 0.5) * s - 0.5, channels: 4) else { continue }
-                let value = sample * gain, background = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
+                let value = sample * gain - correction.value(at: a), background = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
                 // A meteor only adds light: a darker sample is the photo's own noise or edge, never restored.
                 let candidate = alpha * simd_dot(value - background, SIMD3(0.2126, 0.7152, 0.0722))
                 guard candidate > max(0, score[p]) else { continue }

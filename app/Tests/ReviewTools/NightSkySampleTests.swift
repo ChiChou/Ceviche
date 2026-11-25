@@ -30,6 +30,83 @@ final class NightSkySampleTests: XCTestCase {
         CGImageDestinationFinalize(destination)
     }
 
+    /// A width sweep for assessing detection without real fireball samples; widths are Gaussian FWHM at analysis size.
+    func testMeteorWidthSweep() throws {
+        guard let folder = ProcessInfo.processInfo.environment["CEVICHE_METEOR_WIDTH_REVIEW"] else {
+            throw XCTSkip("Set CEVICHE_METEOR_WIDTH_REVIEW to a local output folder")
+        }
+        let output = URL(fileURLWithPath: folder)
+        try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
+        let w = 512, h = 256, inside = [Float](repeating: 1, count: w * h)
+        let line = NightSkyLine(frame: 0, start: SIMD2(80, 90), end: SIMD2(430, 170), width: 1, pixels: 350, peak: 100)
+        let sky = (0..<(w * h)).map { i in Float(0.1 + 0.03 * Double(i / w) / Double(h)) }
+        var report = "FWHM in analysis pixels,Detected lines,Measured widths\n"
+        for width in [1.0, 2, 4, 6, 8, 12, 20] {
+            let sigma = width / 2.355
+            let source = sky.enumerated().map { i, v in
+                v + 0.3 * Float(exp(-pow(line.distance(SIMD2(Double(i % w), Double(i / w))) / sigma, 2) / 2))
+                    + 0.0003 * Float(sin(Double(i) * 1.234))
+            }
+            let found = try NightSkyTransients.detect(frame: source, neighbors: [sky, sky], interior: inside, stars: [], width: w, height: h, index: 0)
+            report += "\(width),\(found.count),\(found.map { String(format: "%.2f", $0.width) }.joined(separator: ";"))\n"
+            Self.save(NightSkyFinishing.picture(source.flatMap { [$0, $0, $0] }, channels: 3, width: w, height: h, exposure: 1),
+                      output.appendingPathComponent("width-\(Int(width)).png"))
+        }
+        print(report)
+        try report.write(to: output.appendingPathComponent("widths.csv"), atomically: true, encoding: .utf8)
+    }
+
+    /// Compare the former source-pixel blend with local sky matching on a real sequence. Optional BASE is a filename;
+    /// the analysis is saved in the local output folder so repeated visual checks need only rebuild previews.
+    func testMeteorBackgroundMatching() throws {
+        let (urls, output) = try samples()
+        let saved = output.appendingPathComponent("analysis"), resultsURL = saved.appendingPathComponent("results.plist")
+        let previous = try FileManager.default.fileExists(atPath: resultsURL.path)
+            ? PropertyListDecoder().decode(NightSkyAnalyzer.Results.self, from: Data(contentsOf: resultsURL)) : nil
+        // Saved analysis expects capture order, which can differ from filenames when a camera's counter wraps.
+        let ordered = try previous.map { result in
+            try result.metadata.map { frame in try XCTUnwrap(urls.first { $0.lastPathComponent == frame.filename }) }
+        } ?? urls
+        let merger = try MeteorShowerMerger(urls: ordered)
+        if previous != nil {
+            _ = try merger.restoreAnalysis(from: saved) { _, _ in }
+        } else {
+            _ = try merger.analyze { fraction, message in print("\(Int(fraction * 100))% \(message)") }
+            try merger.saveAnalysis(to: saved)
+        }
+        let analyzer = merger.internalAnalyzer
+        var settings = MeteorShowerSettings()
+        if let name = ProcessInfo.processInfo.environment["CEVICHE_NIGHT_SKY_BASE"] {
+            settings.base = try XCTUnwrap(merger.urls.firstIndex { $0.lastPathComponent == name })
+        }
+        let plan = try merger.plan(settings), w = analyzer.previewWidth, h = analyzer.previewHeight, k = analyzer.previewScale
+        var clear = plan; clear.restore = []
+        let clean = try analyzer.preview(clear), matched = try analyzer.preview(plan)
+        var old = clean, score = [Float](repeating: 0, count: w * h)
+        let mapping = analyzer.alignments[plan.base]
+        try XCTUnwrap(analyzer.cache).read { reader in
+            for line in plan.restore {
+                print("METEOR \(analyzer.urls[line.frame].lastPathComponent) \(line.start) \(line.end) radius \(line.radius)")
+                for y in 0..<h { for x in 0..<w {
+                    let camera = SIMD2((Double(x) + 0.5) * k - 0.5, (Double(y) + 0.5) * k - 0.5)
+                    let a = plan.base == analyzer.anchor ? camera : mapping?.apply(camera) ?? camera
+                    let alpha = line.coverage(a)
+                    guard alpha > 0, let source = reader.bilinear(line.frame, 1, (a + 0.5) / k - 0.5) else { continue }
+                    let p = y * w + x, base = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
+                    let delta = alpha * (source * analyzer.gains[line.frame] - base)
+                    let candidate = simd_dot(delta, SIMD3(0.2126, 0.7152, 0.0722))
+                    guard candidate > score[p] else { continue }
+                    score[p] = candidate
+                    for c in 0..<3 { old[p * 3 + c] = base[c] + delta[c] }
+                }}
+            }
+        }
+        for (name, values) in [("before", old), ("after", matched), ("base", clean)] {
+            Self.save(NightSkyFinishing.picture(values, channels: 3, width: w, height: h, exposure: analyzer.displayExposure),
+                      output.appendingPathComponent("meteor-\(name).png"))
+        }
+    }
+
     func testAnalysisOnSamples() throws {
         let (urls, output) = try samples()
         let analyzer = try NightSkyAnalyzer(urls: urls, space: .sky)

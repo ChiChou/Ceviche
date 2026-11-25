@@ -27,6 +27,18 @@ CEVICHE_TEST_LOCAL_VISION=1 CEVICHE_UI_SNAPSHOTS=1 ./app/scripts/test.sh
 
 Panel snapshots are written to `/private/tmp/` with the prefix `ceviche-`. The test captures Crop, Retouch, Light & Color, Detail, Masks, Info and the export dialog. Set `CEVICHE_LOOKS_ROOT` to a library containing profiles or LUTs to also capture the applied looks under `ceviche-looks-`. Vision asset downloads may be needed on the first run. Normal test runs skip these opt-in checks.
 
+## Meteor Shower review
+
+For a Meteor Shower background comparison, run `NightSkySampleTests/testMeteorBackgroundMatching` with
+`CEVICHE_NIGHT_SKY_SAMPLES` naming the source folder and `CEVICHE_NIGHT_SKY_OUTPUT` a separate local output folder.
+`CEVICHE_NIGHT_SKY_BASE` optionally picks a base filename. It writes the base, the former blend and the corrected
+preview, and saves analysis locally for repeat runs. `NightSkyTests/testMeteorRestorationDoesNotCopyBrighterSkyInsideItsFootprint`
+checks a changing coloured sky against preview, CPU and Metal output on synthetic photos.
+`testMeteorBackgroundPreservesWideTrails` checks that sky matching preserves the core and wings for measured widths
+of 2–24 analysis pixels. `NightSkySampleTests/testMeteorWidthSweep`, with `CEVICHE_METEOR_WIDTH_REVIEW` set to a local
+output folder, writes synthetic trails and a detection report across Gaussian widths; it does not establish real
+fireball detection accuracy.
+
 ## Defringe review
 
 Two `ReviewTools` tests write comparison images for a RAW with fringing:

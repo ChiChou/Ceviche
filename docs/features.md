@@ -232,7 +232,8 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   seconds or frames. Output set to Live Photo fits that build-up into 3 seconds, ending on the finished trails as the
   still at the chosen size, and adds it to Photos. Star Trails and Meteor Shower list the meteors and aircraft found, each aircraft as one row
   across its photos, to choose which stay in the result. Sky Mask tints the sky and brings up tools to paint it in or
-  out or treat the whole frame as sky.
+  out or treat the whole frame as sky. Meteor Shower matches the sky around each meteor to the base, keeping changes
+  in horizon glow or sky colour from appearing as bright strips around the meteors.
 - **Stack.** Blends a sequence by median, mean, clipped mean, lighten or darken: removing people, smoothing water,
   light painting or action sequences.
 - **Timelapse.** Create Timelapse Video renders a sequence with framing and timing; optional Sky Noise Reduction on

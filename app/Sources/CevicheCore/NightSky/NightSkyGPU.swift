@@ -238,18 +238,22 @@ final class NightSkyGPU {
     }
 
     func restore(_ image: CIImage, lines: [NightSkyLine], regions: [(Int, Int, Int, Int)], into sums: Sums, maps: Maps, context: CIContext,
-                 gain: Float, alignment: NightSkyAlignment?, base: NightSkyAlignment?, analysis: (Int, Int)) throws {
+                 gain: Float, alignment: NightSkyAlignment?, base: NightSkyAlignment?, analysis: (Int, Int), backgrounds: [NightSkyLineBackground?]) throws {
         guard let clean = sums.clean, let score = sums.score else { return }
         let texture = try develop(image, into: sums, context: context)
         guard let commands = queue.makeCommandBuffer() else { throw PanoramaError.message(L10n.tr("The GPU couldn’t stack these photos.")) }
         render(image, to: texture, commands: commands, context: context)
-        for (line, region) in zip(lines, regions) where region.2 >= region.0 && region.3 >= region.1 {
+        for (index, line) in lines.enumerated() {
+            let region = regions[index]
+            guard region.2 >= region.0, region.3 >= region.1, let background = backgrounds[index] else { continue }
             let parameters = Self.parameters(width: sums.width, height: sums.height, analysis: analysis, gain: gain, weight: 1, flags: 0,
                                              skyLines: 1, peakLines: 0, base: base, frame: alignment, region: (region.0, region.1))
             let values = Self.lineValues([line])
+            let correction = background.packed
             guard let encoder = commands.makeComputeCommandEncoder(),
                   let parameterBuffer = device.makeBuffer(bytes: parameters, length: parameters.count * 4),
-                  let lineBuffer = device.makeBuffer(bytes: values, length: values.count * 4) else {
+                  let lineBuffer = device.makeBuffer(bytes: values, length: values.count * 4),
+                  let backgroundBuffer = device.makeBuffer(bytes: correction, length: correction.count * 4) else {
                 throw PanoramaError.message(L10n.tr("The GPU couldn’t stack these photos."))
             }
             encoder.setComputePipelineState(restorePipeline)
@@ -260,6 +264,7 @@ final class NightSkyGPU {
             encoder.setBuffer(maps.valid, offset: 0, index: 4)
             encoder.setBuffer(parameterBuffer, offset: 0, index: 5)
             encoder.setBuffer(lineBuffer, offset: 0, index: 6)
+            encoder.setBuffer(backgroundBuffer, offset: 0, index: 7)
             dispatch(encoder, restorePipeline, width: region.2 - region.0 + 1, height: region.3 - region.1 + 1)
             encoder.endEncoding()
         }
@@ -540,9 +545,24 @@ final class NightSkyGPU {
         if (flags & 256) clean[i] = out;
     }
 
+    float3 lineBackground(float2 a, device const float *line, device const float *sky) {
+        float2 start = float2(line[0], line[1]), delta = float2(line[2], line[3]) - start;
+        float len = length(delta), radius = line[4];
+        float2 direction = delta / max(1e-6f, len), d = a - start;
+        int count = int(sky[0]);
+        float t = clamp((dot(d, direction) + radius) / (len + 2 * radius) * (count - 1), 0.0f, float(count - 1));
+        int i = min(count - 2, int(t));
+        float f = t - i, across = clamp(0.5f + dot(d, float2(-direction.y, direction.x)) / (4 * radius), 0.0f, 1.0f);
+        device const float *v = sky + 1 + i * 6;
+        float3 left = mix(float3(v[0], v[1], v[2]), float3(v[6], v[7], v[8]), f);
+        float3 right = mix(float3(v[3], v[4], v[5]), float3(v[9], v[10], v[11]), f);
+        return mix(left, right, across);
+    }
+
     kernel void night_restore(texture2d<float, access::read> source [[texture(0)]],
                               device float4 *out [[buffer(0)]], device const float4 *clean [[buffer(1)]], device float *score [[buffer(2)]],
                               device const float *valid [[buffer(4)]], device const float *p [[buffer(5)]], device const float *lines [[buffer(6)]],
+                              device const float *sky [[buffer(7)]],
                               uint2 offset [[thread_position_in_grid]]) {
         uint2 gid = offset + uint2(uint(p[70]), uint(p[71]));
         if (gid.x >= uint(p[0]) || gid.y >= uint(p[1])) return;
@@ -555,7 +575,7 @@ final class NightSkyGPU {
         if (sampleMap(valid, s, p, true) <= 0.8f) return;
         float3 sample;
         if (!bilinear(source, (s + 0.5f) * p[4] - 0.5f, sample)) return;
-        float3 value = sample * p[5], background = clean[i].rgb;
+        float3 value = sample * p[5] - lineBackground(a, lines, sky), background = clean[i].rgb;
         float candidate = alpha * luminance(value - background);
         if (candidate <= max(0.0f, score[i])) return;
         score[i] = candidate;
