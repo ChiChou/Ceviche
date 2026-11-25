@@ -380,8 +380,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and Straight Lines, and adds the copy to the catalog with the photo's edits; it and AI Noise Reduction open on one photo. Match Series shows the reference beside
   the photo chosen in the strip and applies the matched Exposure and White Balance as edits. ID Photo frames one
   portrait to a document picked from a searchable list, by country, from the face it finds: a pinch on the print sets
-  the head's size and a drag its height within the document's limits, the Crown and Chin handles beside the print, or
-  Head's arrows in the options, move where the head is taken to start and end, and Auto puts back what was found, the checks not met are listed with Fit, Auto
+  the head's size and a drag its height within the document's limits, Head › Adjust shows the photo with the print's
+  frame, the document's allowed bands and the crown, chin and eye markers to drag, as on the Mac, and Auto puts back what was found, the checks not met are listed with Fit, Auto
   and Replace where the tool can fix them, and Save adds the photo at the document's upload size to Photos and
   closes the tool, a toast saying when it is there; Share beside it hands the same file to the share sheet. Each refuses photos
   that would not fit the device's memory.
