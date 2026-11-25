@@ -304,7 +304,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Set Location… places photos by a search, typed coordinates or touch and hold on the map, or removes their location.
 - **Develop.** The photo fills the screen, with the tools in the bar along the top: Looks, Light, Color, Detail,
   Darkroom, Retouch, Portrait, Masks and Crop. A tool's controls open in a panel that floats over the photo's edge in Liquid Glass, like
-  the bar, the histogram and the filmstrip (not on an iPhone, whose screen is too small: upright the tools sit below the photo, which moves up above the open panel, and on its side they are docked in a column at the right, with the chosen scope across the top of Light, and no filmstrip), in cards that fold;
+  the bar, the histogram and the filmstrip (not on an iPhone, whose screen is too small: upright the tools float below the photo in a glass capsule, which moves up above the open panel, and on its side they are docked in a column at the right, with the chosen scope across the top of Light, and no filmstrip), in cards that fold;
   the lit tool, touched again, closes the panel, and a tap on the photo hides everything. On an iPad the photo is centred
   in the whole screen and stays where it is as panels open and close; zoomed in, it runs under the status bar. The Tools button in the bar opens the tools that work on one photo on the photo being developed. An iPhone's bar keeps the original, Export and More; Undo, Redo and Info sit in a row at the top of More, with Tools and Scope as submenus and Copy, Paste and Reset Edits in a row. More › Move to Trash… (⌘⌫) asks first, then shows the next photo. Shaking the device offers to undo the last edit or Move to Trash, whichever came last; in the Library it puts back the photos last moved to the Trash. On an iPad the panel's grabber drags it to the
   other side and the scope card can be dragged to any corner, as Photos moves its Info. The card in the corner shows one
@@ -365,7 +365,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Options), undo and redo, then Outlines (and Crop for a movie) in the bar with what the result is made of, Merge in words at the far end, and As Captured for meteors.
   Objects lists the lines found as the Mac does, with kept and left-out counts, All, Aircraft or Meteors, and an
   aircraft's pieces under it; Sky has Sky Edge, Add to Sky, Remove from Sky and Use Photo Here, then Everything Is Sky and Revert to Detected, in a
-  palette at the foot of the picture (labelled on an iPad, round icons on an iPhone, whose modes run along the foot as Develop's tools do), with a slider over it for the edge or the brush size; Photos shows each photo's time with Base and a check that leaves it
+  palette at the foot of the picture (labelled on an iPad, round icons on an iPhone, whose modes float along the foot in glass as Develop's tools do), with a slider over it for the edge or the brush size; Photos shows each photo's time with Base and a check that leaves it
   out, touch and hold for Use as Base or Leave Out, and Include All or Leave Out Flagged in a palette over the strip. The result is written as the Mac app writes it and added to the catalog; progress shows in
   the ring in the toolbar, where a merge can be stopped. A merge that would not fit in the memory the device gives
   the app says so instead of starting. Where iOS gives the app less than 8 GB, as on an iPhone, a merge takes a short
