@@ -136,7 +136,7 @@ final class FocusStackModel: ObservableObject {
 
     func start(catalog: CatalogModel) {
         guard task == nil else { return }
-        developer.catalog = catalog
+        developer.store = catalog.store
         self.catalog = catalog
         catalog.focusStackHistory = history
         task = Task {

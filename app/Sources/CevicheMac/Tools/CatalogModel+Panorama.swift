@@ -41,23 +41,7 @@ extension CatalogModel {
     /// originals. `access` holds the security-scoped originals open until the merge is done.
     /// The exposure change that brings `renderer`'s picture with `edit` to the mean brightness of `target` with `targetEdit`.
     static func exposureMatching(_ renderer: RawRenderer, _ edit: Adjustments, to target: RawRenderer, _ targetEdit: Adjustments) async throws -> Double {
-        func brightness(_ image: CGImage) -> Double {
-            let picture = CIImage(cgImage: image)
-            guard let mean = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: picture, kCIInputExtentKey: CIVector(cgRect: picture.extent)])?.outputImage else { return 0 }
-            var pixel = [Float](repeating: 0, count: 4)
-            CIContext().render(mean, toBitmap: &pixel, rowBytes: 16, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBAf,
-                               colorSpace: CGColorSpace(name: CGColorSpace.sRGB))
-            return 0.2126 * Double(pixel[0]) + 0.7152 * Double(pixel[1]) + 0.0722 * Double(pixel[2])
-        }
-        let goal = brightness(try await target.displayImage(targetEdit, maxDimension: 512, sdr: true))
-        // Brightness rises with exposure, so halving the interval converges; a hundredth of a stop is close enough.
-        var low = -2.0, high = 2.0
-        for _ in 0..<9 {
-            var trial = edit
-            trial.exposure += (low + high) / 2
-            if brightness(try await renderer.displayImage(trial, maxDimension: 512, sdr: true)) < goal { low = (low + high) / 2 } else { high = (low + high) / 2 }
-        }
-        return ((low + high) / 2 * 100).rounded() / 100
+        try await MergeDevelopment.exposureMatching(renderer, edit, to: target, targetEdit)
     }
 
     /// The development of a merge in `renderer`: the source photo's, as Paste Edits copies it (lens correction is already
@@ -66,64 +50,19 @@ extension CatalogModel {
     func mergeDevelopment(from source: CatalogAsset?, onto renderer: RawRenderer, placed: Set<EditTransferItem> = [],
                           sourceStore: CatalogStore? = nil, development: Adjustments?? = nil,
                           progress: (String) -> Void = { _ in }) async throws -> Adjustments? {
-        guard let store = sourceStore ?? store else { return nil }
-        let defaults = renderer.info.defaults
-        guard let source else { return nil }
+        guard let store = sourceStore ?? store, let source else { return nil }
         let savedValue: Adjustments?
         if let development { savedValue = development } else { savedValue = try await store.savedAdjustments(of: store.asset(source.id)) }
         guard let saved = savedValue else { return nil }
         progress(L10n.tr("Applying edits"))
-        // The merge was developed at the source's as-shot white balance and is stored with a neutral one, so the source's
-        // white balance carries over as its change from as shot, not as the same numbers.
-        // A processed photo's merge is encoded back through the photo's own profile, so it looks as the photo did and its
-        // edits carry as they are.
-        guard renderer.info.isRAW else {
-            let transfer = EditTransfer(sourceName: source.filename, adjustments: saved, items: EditTransferItem.defaults.subtracting([.lensCorrection]).union(placed))
-            return try transfer.applying(to: defaults)
-        }
-        let sourceURL = CatalogImporter.sourceURL(for: source, root: store.root)
-        let original = try await Task.detached { try RawRenderer(sourceURL: sourceURL) }.value
-        let asShot = original.info.defaults
-        var carried = saved
-        carried.temperature = min(50000, max(2000, 1e6 / (1e6 / defaults.temperature + 1e6 / saved.temperature - 1e6 / asShot.temperature)))
-        carried.tint = min(150, max(-150, defaults.tint + saved.tint - asShot.tint))
-        let transfer = EditTransfer(sourceName: source.filename, adjustments: carried, items: EditTransferItem.defaults.subtracting([.lensCorrection]).union(placed))
-        var edit = try transfer.applying(to: defaults)
-        // Any difference in brightness between the source and the merge with the same sliders (merges written before their
-        // DNGs dropped the identity tone curve opened flatter) is made up with exposure.
-        // A framed merge is the source's own exposure, or a blend of lights that is meant to be brighter.
-        if placed.isEmpty { edit.exposure += try await Self.exposureMatching(renderer, edit, to: original, saved) }
-        return edit
+        return try await MergeDevelopment.carried(saved, sourceName: source.filename, source: CatalogImporter.sourceURL(for: source, root: store.root),
+                                                  onto: renderer, placed: placed)
     }
 
     /// Each photo's own retouching by its original's URL, AI fills included, for a merge to burn into the photo before
     /// aligning: dust, removed objects and face spots are in each photo's own place, not their place in the result.
     func retouching(of assets: [CatalogAsset], at urls: [URL]) async -> [URL: [RetouchStroke]] {
-        guard let store else { return [:] }
-        var found: [URL: [RetouchStroke]] = [:]
-        for (asset, url) in zip(assets, urls) {
-            if let saved = try? await store.savedAdjustments(of: asset), !saved.retouch.isEmpty { found[url] = saved.retouch }
-        }
-        return found
-    }
-
-    /// A merge preview developed as the result will be: with the edits of `asset`, the photo the result is based on.
-    /// `known` is what an earlier call found for that photo, so its edits are read once; `.some(nil)` is a photo with
-    /// none, which leaves the preview as drawn, as a failure does.
-    func developedPreview(_ source: MergePreviewSource, from asset: CatalogAsset, placed: Set<EditTransferItem>, maxDimension: Int,
-                          known: Adjustments??) async -> (image: CGImage?, edit: Adjustments??) {
-        if case .some(.none) = known { return (nil, known) }
-        let file = FileManager.default.temporaryDirectory.appendingPathComponent("Ceviche Merge Preview \(UUID().uuidString).\(source.fileExtension)")
-        defer { try? FileManager.default.removeItem(at: file) }
-        do {
-            let renderer = try await Task.detached(priority: .userInitiated) { try source.write(to: file); return try RawRenderer(sourceURL: file) }.value
-            let edit: Adjustments
-            if case .some(.some(let found)) = known { edit = found } else {
-                guard let found = try await mergeDevelopment(from: asset, onto: renderer, placed: placed) else { return (nil, .some(nil)) }
-                edit = found
-            }
-            return (try await renderer.displayImage(edit, maxDimension: Double(maxDimension), sdr: true), .some(edit))
-        } catch { return (nil, known) }
+        await store?.retouching(of: assets, at: urls) ?? [:]
     }
 
     /// A merge of processed photos is kept as `format` asks (see `ProcessedFormat`); of RAW photos, as a DNG.

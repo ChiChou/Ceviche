@@ -353,7 +353,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   archived JPEGs go to Archived, where Unarchive puts them back.
 - **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
-  and its main options in the inspector beside it (a sheet on an iPhone). Merges, tools and culling screens share
+  and its main options in the inspector beside it (a sheet on an iPhone). As on the Mac, each photo's retouching is
+  burnt in, the preview shows the result with the base photo's edits and the result takes them; HDR, Focus Stack and
+  Stack show the photos in a strip, where a tap makes one the base. Merges, tools and culling screens share
   Photos' editing bar: close at one end, the screen's name and progress in the middle, its action at the other. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
   frame with the Mac's Trails, Glow and Meteors options and the frame set on the preview; a video's Export… opens a
   sheet with Encoder, Container, Color and Quality, then Save or Share, which starts it. The three

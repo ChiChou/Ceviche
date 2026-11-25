@@ -50,7 +50,7 @@ final class HDRMergeModel: ObservableObject {
 
     func start(catalog: CatalogModel) {
         guard task == nil else { return }
-        developer.catalog = catalog
+        developer.store = catalog.store
         catalog.hdrMergeHistory = history
         task = Task {
             do {

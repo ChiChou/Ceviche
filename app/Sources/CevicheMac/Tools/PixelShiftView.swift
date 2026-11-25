@@ -27,7 +27,7 @@ final class PixelShiftModel: ObservableObject {
 
     func start(catalog: CatalogModel) {
         guard task == nil else { return }
-        developer.catalog = catalog
+        developer.store = catalog.store
         task = Task {
             do {
                 var urls: [URL] = []

@@ -64,9 +64,9 @@ extension CatalogPendingOutputTests {
         let store = try XCTUnwrap(catalog.store)
         let prepared = try CatalogImporter.prepare(photo)
         let source = try await store.insert(prepared.0, thumbnail: prepared.1)
-        for negative in [false, true] {
-            if negative { catalog.startNegative([source, source], choices: [:]) }
-            else { catalog.startDenoise([source, source], settings: DenoiseSettings()) }
+        // Convert Negative is the batch left: AI Noise Reduction and Wide-Angle Faces work on one photo.
+        do {
+            catalog.startNegative([source, source], choices: [:])
             let outputs = catalog.pendingOutputs
             XCTAssertEqual(outputs.count, 2)
             outputs[1].abort()

@@ -81,7 +81,7 @@ final class PanoramaMergeModel: ObservableObject {
 
     func start(catalog: CatalogModel) {
         guard task == nil else { return }
-        developer.catalog = catalog
+        developer.store = catalog.store
         task = Task {
             do {
                 for asset in request.assets {

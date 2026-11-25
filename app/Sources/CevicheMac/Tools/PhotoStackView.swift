@@ -98,7 +98,7 @@ final class PhotoStackModel: ObservableObject {
 
     func start(catalog: CatalogModel) {
         guard task == nil else { return }
-        developer.catalog = catalog
+        developer.store = catalog.store
         catalog.photoStackHistory = history
         task = Task {
             do {
