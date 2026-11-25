@@ -385,9 +385,9 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and Replace where the tool can fix them, and Save adds the photo at the document's upload size to Photos and
   closes the tool, a toast saying when it is there; Share beside it hands the same file to the share sheet. Each refuses photos
   that would not fit the device's memory.
-- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
-  adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A video's
-  export sheet offers the same two. Watermark stamps one watermark, a line of text or an image with transparency
+- **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save, which closes
+  the sheet and adds the files to Photos as a job, a toast saying when they are there, or Share beside it, the share
+  sheet for AirDrop, Files and other apps. A video's export sheet offers Save to Photos and Share…. Watermark stamps one watermark, a line of text or an image with transparency
   from Files, in one of nine places with its Size and Opacity, set on the photo being exported: a tap places it, a
   pinch sizes it.
 - **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
