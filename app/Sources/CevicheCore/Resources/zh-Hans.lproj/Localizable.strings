@@ -3584,3 +3584,5 @@
 "Saves a DNG beside the original." = "在原片旁存储一个 DNG。";
 "Saves a DNG of the photo." = "为照片存储一个 DNG。";
 "Saves a copy beside the original." = "在原片旁存储一个副本。";
+"Saved to Photos" = "已存储到“照片”";
+"Couldn’t Save" = "无法存储";

@@ -931,6 +931,7 @@
 "Couldn’t Replace the Original" = "Couldn’t Replace the Original";
 "Couldn’t Reset Edits" = "Couldn’t Reset Edits";
 "Couldn’t Restore the Earlier Version" = "Couldn’t Restore the Earlier Version";
+"Couldn’t Save" = "Couldn’t Save";
 "Couldn’t Save Edits" = "Couldn’t Save Edits";
 "Couldn’t Save a Copy" = "Couldn’t Save a Copy";
 "Couldn’t Save the Album" = "Couldn’t Save the Album";
@@ -2675,6 +2676,7 @@
 "Saved on This Mac" = "Saved on This Mac";
 "Saved positives of %1$@ negatives" = "Saved positives of %1$@ negatives";
 "Saved positives of %1$@ of %2$@ negatives.\n" = "Saved positives of %1$@ of %2$@ negatives.\n";
+"Saved to Photos" = "Saved to Photos";
 "Saved “%1$@” and applied it to %2$@ photos" = "Saved “%1$@” and applied it to %2$@ photos";
 "Saved “%1$@” and applied it to 1 photo" = "Saved “%1$@” and applied it to 1 photo";
 "Saved “%1$@”. Choose it under Camera Profile in Develop." = "Saved “%1$@”. Choose it under Camera Profile in Develop.";

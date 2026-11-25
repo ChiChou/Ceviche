@@ -382,8 +382,8 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   portrait to a document picked from a searchable list, by country, from the face it finds: a pinch on the print sets
   the head's size and a drag its height within the document's limits, the Crown and Chin handles move where the head
   is taken to start and end, the checks not met are listed with Fit, Auto
-  and Replace where the tool can fix them, and Save to Photos saves the photo at the document's upload size, the
-  share button beside it hands the same file to the share sheet. Each refuses photos
+  and Replace where the tool can fix them, and Save adds the photo at the document's upload size to Photos and
+  closes the tool, a toast saying when it is there; Share beside it hands the same file to the share sheet. Each refuses photos
   that would not fit the device's memory.
 - **Export.** JPEG, HEIF, AVIF, TIFF, PNG, WebP and JPEG XL with quality and size, then Save to Photos, which
   adds the files to the system's library, or Share…, the share sheet for AirDrop, Files and other apps. A video's
