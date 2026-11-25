@@ -28,6 +28,8 @@ private struct GeneralPreferences: View {
     @AppStorage(AppearanceChoice.key) private var appearance = AppearanceChoice.dark.rawValue
     @AppStorage(AccentChoice.key) private var accent = AccentChoice.neutral.rawValue
     @AppStorage(LanguageChoice.key) private var language = LanguageChoice.system.rawValue
+    /// The decoded RAWs kept on disk; nil while measuring.
+    @State private var cache: Int64?
     var body: some View {
         Form {
             Section(L10n.tr("Appearance")) {
@@ -53,6 +55,13 @@ private struct GeneralPreferences: View {
                 }
             }
             Section {
+                LabeledContent(L10n.tr("Cache")) {
+                    HStack {
+                        Text(cache.map { let f = ByteCountFormatter(); f.countStyle = .file; f.allowsNonnumericFormatting = false; return f.string(fromByteCount: $0) } ?? "…").monospacedDigit().foregroundStyle(.secondary)
+                        Button(L10n.tr("Clear Cache")) { Task { cache = await StorageUsage.clearCache() } }.disabled((cache ?? 0) == 0)
+                    }
+                }
+                .task { cache = await StorageUsage.measure(catalog: nil).cache }
                 Picker(L10n.tr("Keep thumbnails up to"), selection: $thumbnailBudgetMB) {
                     Text(L10n.tr("No limit")).tag(0)
                     ForEach([512, 1024, 2048, 5120, 10240], id: \.self) { Text($0 < 1024 ? "\($0) MB" : "\($0 / 1024) GB").tag($0) }
@@ -60,7 +69,7 @@ private struct GeneralPreferences: View {
             } header: {
                 Text(L10n.tr("Library"))
             } footer: {
-                Text(L10n.tr("Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.")).font(.caption).foregroundStyle(.secondary)
+                Text(L10n.tr("The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.")).font(.caption).foregroundStyle(.secondary)
             }
             Section {
                 Toggle(isOn: $lookUpPlaces) {

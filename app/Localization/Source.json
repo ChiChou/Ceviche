@@ -975,7 +975,7 @@
       "Sources/CevicheMac/Tools/FaceCheckView.swift:702",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:164",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:441",
-      "Sources/CevicheMobile/App/ModelsView.swift:122",
+      "Sources/CevicheMobile/App/StorageView.swift:156",
       "Sources/CevicheMobile/Culling/CullMeasurer.swift:45",
       "Sources/CevicheMobile/Library/LibraryModel.swift:229",
       "Sources/CevicheMobile/Library/LibraryModel.swift:254",
@@ -2643,12 +2643,12 @@
   {
     "key": "Accent color",
     "source": "\"Accent color\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:39"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:41"
   },
   {
     "key": "Access",
     "source": "\"Access\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:102"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:111"
   },
   {
     "key": "Action",
@@ -3065,7 +3065,7 @@
   {
     "key": "Allow AI clients to use Ceviche",
     "source": "\"Allow AI clients to use Ceviche\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:97"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:106"
   },
   {
     "key": "Allow Ceviche to add photos in Settings › Apps › Ceviche › Photos.",
@@ -3282,11 +3282,11 @@
   {
     "key": "Appearance",
     "source": "\"Appearance\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:33",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:35",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:33",
-      "Sources/CevicheMac/App/PreferencesView.swift:34",
       "Sources/CevicheMac/App/PreferencesView.swift:35",
+      "Sources/CevicheMac/App/PreferencesView.swift:36",
+      "Sources/CevicheMac/App/PreferencesView.swift:37",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:45",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:571",
       "Sources/CevicheMac/Catalog/CatalogSidebar.swift:571"
@@ -4281,7 +4281,7 @@
   {
     "key": "Browse, tag and edit photos in the open catalog over MCP. Originals can never be deleted.",
     "source": "\"Browse, tag and edit photos in the open catalog over MCP. Originals can never be deleted.\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:98"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:107"
   },
   {
     "key": "Brush",
@@ -4330,7 +4330,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:130",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:130",
-      "Sources/CevicheMobile/App/ModelsView.swift:94"
+      "Sources/CevicheMobile/App/StorageView.swift:128"
     ]
   },
   {
@@ -4386,6 +4386,15 @@
     "uses": [
       "Sources/CevicheMac/App/SystemInfo.swift:77",
       "Sources/CevicheMac/App/SystemInfoView.swift:29"
+    ]
+  },
+  {
+    "key": "Cache",
+    "source": "\"Cache\"",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:58",
+    "uses": [
+      "Sources/CevicheMac/App/PreferencesView.swift:58",
+      "Sources/CevicheMobile/App/StorageView.swift:27"
     ]
   },
   {
@@ -4568,7 +4577,7 @@
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:240",
       "Sources/CevicheMac/Tools/NightSkyView.swift:101",
       "Sources/CevicheMac/Tools/NightSkyView.swift:398",
-      "Sources/CevicheMobile/App/ModelsView.swift:133",
+      "Sources/CevicheMobile/App/StorageView.swift:167",
       "Sources/CevicheMobile/Components/ShakeToUndo.swift:38",
       "Sources/CevicheMobile/Components/ToolChrome.swift:22",
       "Sources/CevicheMobile/Develop/HistoryView.swift:50",
@@ -4868,7 +4877,7 @@
     "context": "Sources/CevicheMac/App/CevicheApp.swift:26",
     "uses": [
       "Sources/CevicheMac/App/CevicheApp.swift:26",
-      "Sources/CevicheMac/App/CevicheApp.swift:200",
+      "Sources/CevicheMac/App/CevicheApp.swift:201",
       "Sources/CevicheMac/App/WelcomeView.swift:102"
     ]
   },
@@ -5343,6 +5352,15 @@
     ]
   },
   {
+    "key": "Clear Cache",
+    "source": "\"Clear Cache\"",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:61",
+    "uses": [
+      "Sources/CevicheMac/App/PreferencesView.swift:61",
+      "Sources/CevicheMobile/App/StorageView.swift:28"
+    ]
+  },
+  {
     "key": "Clear Filters",
     "source": "\"Clear Filters\"",
     "context": "Sources/CevicheMac/Catalog/CatalogCommands.swift:175",
@@ -5470,7 +5488,7 @@
   {
     "key": "Clients using the old token are refused until they get the new one.",
     "source": "\"Clients using the old token are refused until they get the new one.\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:128"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:137"
   },
   {
     "key": "Clipped",
@@ -5847,7 +5865,7 @@
   {
     "key": "Connected - working",
     "source": "\"Connected - working\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:149"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:158"
   },
   {
     "key": "Connecting…",
@@ -5855,13 +5873,13 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:156",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:156",
-      "Sources/CevicheMobile/App/ModelsView.swift:118"
+      "Sources/CevicheMobile/App/StorageView.swift:152"
     ]
   },
   {
     "key": "Connection",
     "source": "\"Connection\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:139"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:148"
   },
   {
     "key": "Constant Quality",
@@ -6048,7 +6066,7 @@
   {
     "key": "Copy Configuration",
     "source": "\"Copy Configuration\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:132"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:141"
   },
   {
     "key": "Copy Edits",
@@ -6102,19 +6120,19 @@
   {
     "key": "Copy Token",
     "source": "\"Copy Token\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:125",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:134",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:125",
-      "Sources/CevicheMac/App/PreferencesView.swift:126"
+      "Sources/CevicheMac/App/PreferencesView.swift:134",
+      "Sources/CevicheMac/App/PreferencesView.swift:135"
     ]
   },
   {
     "key": "Copy URL",
     "source": "\"Copy URL\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:118",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:127",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:118",
-      "Sources/CevicheMac/App/PreferencesView.swift:119"
+      "Sources/CevicheMac/App/PreferencesView.swift:127",
+      "Sources/CevicheMac/App/PreferencesView.swift:128"
     ]
   },
   {
@@ -7088,6 +7106,11 @@
     "context": "Sources/CevicheCore/Filters/BorderAsset.swift:39"
   },
   {
+    "key": "Decoded RAWs, kept so recent photos open faster.",
+    "source": "\"Decoded RAWs, kept so recent photos open faster.\"",
+    "context": "Sources/CevicheMobile/App/StorageView.swift:32"
+  },
+  {
     "key": "Dedicated GPU memory",
     "source": "\"Dedicated GPU memory\"",
     "context": "Sources/CevicheMac/App/SystemInfo.swift:68"
@@ -7365,7 +7388,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:16",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:16",
-      "Sources/CevicheMobile/App/ModelsView.swift:24"
+      "Sources/CevicheMobile/App/StorageView.swift:42"
     ]
   },
   {
@@ -7725,8 +7748,8 @@
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:198",
       "Sources/CevicheMac/App/ModelManagerView.swift:203",
-      "Sources/CevicheMobile/App/ModelsView.swift:151",
-      "Sources/CevicheMobile/App/ModelsView.swift:155"
+      "Sources/CevicheMobile/App/StorageView.swift:185",
+      "Sources/CevicheMobile/App/StorageView.swift:189"
     ]
   },
   {
@@ -8333,7 +8356,7 @@
   {
     "key": "Endpoint",
     "source": "\"Endpoint\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:115"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:124"
   },
   {
     "key": "Enlarged %1$@%%",
@@ -10010,7 +10033,7 @@
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:184",
       "Sources/CevicheMac/App/ModelManagerView.swift:185",
-      "Sources/CevicheMobile/App/ModelsView.swift:143"
+      "Sources/CevicheMobile/App/StorageView.swift:177"
     ]
   },
   {
@@ -11431,7 +11454,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:143",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:143",
-      "Sources/CevicheMobile/App/ModelsView.swift:101"
+      "Sources/CevicheMobile/App/StorageView.swift:135"
     ]
   },
   {
@@ -11441,7 +11464,7 @@
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:161",
       "Sources/CevicheMac/App/ModelManagerView.swift:242",
-      "Sources/CevicheMobile/App/ModelsView.swift:123"
+      "Sources/CevicheMobile/App/StorageView.swift:157"
     ]
   },
   {
@@ -11862,7 +11885,7 @@
   {
     "key": "JSON for clients that launch the bundled ceviche-mcp helper",
     "source": "\"JSON for clients that launch the bundled ceviche-mcp helper\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:133"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:142"
   },
   {
     "key": "Jawline",
@@ -11961,7 +11984,7 @@
   {
     "key": "Keep thumbnails up to",
     "source": "\"Keep thumbnails up to\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:56"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:65"
   },
   {
     "key": "Keeps the brightest value: light and star trails",
@@ -12140,10 +12163,10 @@
   {
     "key": "Language",
     "source": "\"Language\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:45",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:47",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:45",
-      "Sources/CevicheMac/App/PreferencesView.swift:46",
+      "Sources/CevicheMac/App/PreferencesView.swift:47",
+      "Sources/CevicheMac/App/PreferencesView.swift:48",
       "Sources/CevicheMac/Catalog/CatalogCommands.swift:53"
     ]
   },
@@ -12183,7 +12206,7 @@
   {
     "key": "Largest preview",
     "source": "\"Largest preview\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:108"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:117"
   },
   {
     "key": "Largest spot radius shown whole on a 4000-pixel frame; larger ones show only their edge",
@@ -12460,9 +12483,9 @@
   {
     "key": "Library",
     "source": "\"Library\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:61",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:70",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:61",
+      "Sources/CevicheMac/App/PreferencesView.swift:70",
       "Sources/CevicheMac/Catalog/CatalogDeletionConfirmation.swift:95",
       "Sources/CevicheMac/Catalog/CatalogModel+Folders.swift:259",
       "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:44",
@@ -12632,12 +12655,12 @@
   {
     "key": "Listening",
     "source": "\"Listening\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:149"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:158"
   },
   {
     "key": "Listens on this Mac only (127.0.0.1). HTTP clients send the token as a Bearer header. Press Return after changing a value.",
     "source": "\"Listens on this Mac only (127.0.0.1). HTTP clients send the token as a Bearer header. Press Return after changing a value.\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:141"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:150"
   },
   {
     "key": "Lists the lines found beside the preview and outlines them over it, to choose which stay in the trails. Aircraft and satellites, whose lines continue across photos, are left out unless you include them; meteors stay unless you exclude them.",
@@ -12785,7 +12808,7 @@
   {
     "key": "Longest edge, in pixels, of previews sent to the client (64–4096).",
     "source": "\"Longest edge, in pixels, of previews sent to the client (64–4096).\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:110"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:119"
   },
   {
     "key": "Longest pause",
@@ -13836,8 +13859,7 @@
     "context": "Sources/CevicheMac/App/PreferencesView.swift:16",
     "uses": [
       "Sources/CevicheMac/App/PreferencesView.swift:16",
-      "Sources/CevicheMobile/App/ModelsView.swift:29",
-      "Sources/CevicheMobile/Library/LibrarySidebar.swift:75"
+      "Sources/CevicheMobile/App/StorageView.swift:39"
     ]
   },
   {
@@ -14151,7 +14173,7 @@
   {
     "key": "Name the places of photos with a location",
     "source": "\"Name the places of photos with a location\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:67"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:76"
   },
   {
     "key": "Name…",
@@ -14817,9 +14839,9 @@
   {
     "key": "No limit",
     "source": "\"No limit\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:57",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:66",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:57",
+      "Sources/CevicheMac/App/PreferencesView.swift:66",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:223"
     ]
   },
@@ -15158,7 +15180,7 @@
   {
     "key": "Not enough memory to stack these photos.",
     "source": "\"Not enough memory to stack these photos.\"",
-    "context": "Sources/CevicheCore/Stack/PhotoStacker.swift:706"
+    "context": "Sources/CevicheCore/Stack/PhotoStacker.swift:708"
   },
   {
     "key": "Not enough space for the originals: %1$@ needed.",
@@ -15177,7 +15199,7 @@
   {
     "key": "Not installed",
     "source": "\"Not installed\"",
-    "context": "Sources/CevicheMobile/App/ModelsView.swift:98"
+    "context": "Sources/CevicheMobile/App/StorageView.swift:132"
   },
   {
     "key": "Not measured",
@@ -15352,9 +15374,9 @@
   {
     "key": "Off",
     "source": "\"Off\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:147",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:156",
     "uses": [
-      "Sources/CevicheMac/App/PreferencesView.swift:147",
+      "Sources/CevicheMac/App/PreferencesView.swift:156",
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:34",
       "Sources/CevicheMac/Editor/DisclosureRow.swift:36",
       "Sources/CevicheMac/Editor/EditorInspector.swift:451",
@@ -15801,11 +15823,6 @@
     "context": "Sources/CevicheCore/Filters/CreativeFilter.swift:129"
   },
   {
-    "key": "Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.",
-    "source": "\"Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:63"
-  },
-  {
     "key": "Overexposed",
     "source": "\"Overexposed\"",
     "context": "Sources/CevicheCore/Analysis/Culling.swift:17"
@@ -16127,7 +16144,7 @@
   {
     "key": "Permissions",
     "source": "\"Permissions\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:103"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:112"
   },
   {
     "key": "Person %1$@",
@@ -16248,6 +16265,7 @@
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:510",
       "Sources/CevicheMac/Catalog/CatalogOverviewPanel.swift:29",
       "Sources/CevicheMac/Catalog/PeopleView.swift:314",
+      "Sources/CevicheMobile/App/StorageView.swift:24",
       "Sources/CevicheMobile/Tools/NightSky/NightSkyModes.swift:12"
     ]
   },
@@ -16587,7 +16605,7 @@
   {
     "key": "Port",
     "source": "\"Port\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:113"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:122"
   },
   {
     "key": "Portable XMP fields changed outside Ceviche; importing those fields instead of the embedded Ceviche recipe.",
@@ -16770,6 +16788,11 @@
     "key": "Preview: first 4 of 16",
     "source": "\"Preview: first 4 of 16\"",
     "context": "Sources/CevicheMac/Tools/PixelShiftView.swift:110"
+  },
+  {
+    "key": "Previews",
+    "source": "\"Previews\"",
+    "context": "Sources/CevicheMobile/App/StorageView.swift:25"
   },
   {
     "key": "Previous Photo",
@@ -17169,12 +17192,12 @@
   {
     "key": "Read and edit",
     "source": "\"Read and edit\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:104"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:113"
   },
   {
     "key": "Read only",
     "source": "\"Read only\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:105"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:114"
   },
   {
     "key": "Reading %1$@",
@@ -17578,7 +17601,7 @@
   {
     "key": "Regenerate",
     "source": "\"Regenerate\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:127"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:136"
   },
   {
     "key": "Reject",
@@ -17687,7 +17710,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:21",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:21",
-      "Sources/CevicheMobile/App/ModelsView.swift:25"
+      "Sources/CevicheMobile/App/StorageView.swift:43"
     ]
   },
   {
@@ -17719,7 +17742,7 @@
       "Sources/CevicheMac/Tools/FiltersDialog.swift:598",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:598",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:425",
-      "Sources/CevicheMobile/App/ModelsView.swift:138",
+      "Sources/CevicheMobile/App/StorageView.swift:172",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:113",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:136",
       "Sources/CevicheMobile/Develop/Portrait/PortraitPanel.swift:159",
@@ -17739,7 +17762,7 @@
       "Sources/CevicheMac/App/ModelManagerView.swift:178",
       "Sources/CevicheMac/Catalog/CatalogSearchBar.swift:437",
       "Sources/CevicheMac/Editor/LooksPanel.swift:353",
-      "Sources/CevicheMobile/App/ModelsView.swift:140"
+      "Sources/CevicheMobile/App/StorageView.swift:174"
     ]
   },
   {
@@ -19174,7 +19197,7 @@
   {
     "key": "Sends locations to Apple to find the city, region and country, so you can search and browse by place. Photos without a location taken around the same time get the same place.",
     "source": "\"Sends locations to Apple to find the city, region and country, so you can search and browse by place. Photos without a location taken around the same time get the same place.\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:68"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:77"
   },
   {
     "key": "Sensitivity",
@@ -20426,12 +20449,12 @@
   {
     "key": "Starting…",
     "source": "\"Starting…\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:148"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:157"
   },
   {
     "key": "Status",
     "source": "\"Status\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:100"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:109"
   },
   {
     "key": "Stay keeps each meteor to the end, as the still does; Fade holds it a while from its photo on, then fades it out",
@@ -20497,7 +20520,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:169",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:169",
-      "Sources/CevicheMobile/App/ModelsView.swift:135"
+      "Sources/CevicheMobile/App/StorageView.swift:169"
     ]
   },
   {
@@ -20509,6 +20532,15 @@
     "key": "Stopped - %1$@",
     "source": "\"Stopped - \\(when)\"",
     "context": "Sources/CevicheMac/Catalog/ActivityCenter.swift:284"
+  },
+  {
+    "key": "Storage",
+    "source": "\"Storage\"",
+    "context": "Sources/CevicheMobile/App/StorageView.swift:47",
+    "uses": [
+      "Sources/CevicheMobile/App/StorageView.swift:47",
+      "Sources/CevicheMobile/Library/LibrarySidebar.swift:75"
+    ]
   },
   {
     "key": "Story (9:16)",
@@ -21048,7 +21080,7 @@
       "Sources/CevicheCore/Stack/PhotoStackGPU.swift:57",
       "Sources/CevicheCore/Stack/PhotoStackGPU.swift:78",
       "Sources/CevicheCore/Stack/PhotoStackGPU.swift:89",
-      "Sources/CevicheCore/Stack/PhotoStacker.swift:716"
+      "Sources/CevicheCore/Stack/PhotoStacker.swift:718"
     ]
   },
   {
@@ -21106,6 +21138,11 @@
     "context": "Sources/CevicheCore/Analysis/ModelLibrary.swift:342"
   },
   {
+    "key": "The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.",
+    "source": "\"The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.\"",
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:72"
+  },
+  {
     "key": "The camera profile's tone curve replaces the camera default.",
     "source": "\"The camera profile's tone curve replaces the camera default.\"",
     "context": "Sources/CevicheMac/Editor/EditorInspector.swift:232"
@@ -21118,7 +21155,7 @@
   {
     "key": "The catalog couldn’t be opened.",
     "source": "\"The catalog couldn’t be opened.\"",
-    "context": "Sources/CevicheMobile/App/CevicheMobileApp.swift:33"
+    "context": "Sources/CevicheMobile/App/CevicheMobileApp.swift:35"
   },
   {
     "key": "The catalog couldn’t be read.",
@@ -21826,7 +21863,7 @@
   {
     "key": "There isn’t enough disk space to stack these photos.",
     "source": "\"There isn’t enough disk space to stack these photos.\"",
-    "context": "Sources/CevicheCore/Stack/PhotoStacker.swift:700"
+    "context": "Sources/CevicheCore/Stack/PhotoStacker.swift:703"
   },
   {
     "key": "These guides follow the same edge. Draw them on different edges.",
@@ -22338,7 +22375,7 @@
   {
     "key": "Token",
     "source": "\"Token\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:122"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:131"
   },
   {
     "key": "Tolerance",
@@ -24552,7 +24589,7 @@
   {
     "key": "stdio clients",
     "source": "\"stdio clients\"",
-    "context": "Sources/CevicheMac/App/PreferencesView.swift:131"
+    "context": "Sources/CevicheMac/App/PreferencesView.swift:140"
   },
   {
     "key": "strength|Light",

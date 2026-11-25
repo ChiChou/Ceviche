@@ -627,6 +627,7 @@
 "Busy, try again in a moment" = "Busy, try again in a moment";
 "Buy Ceviche Pro…" = "Buy Ceviche Pro…";
 "CPU threads" = "CPU threads";
+"Cache" = "Cache";
 "Calibration" = "Calibration";
 "Camera" = "Camera";
 "Camera JPEGs archived by Tidy RAW + JPEG Pairs appear here." = "Camera JPEGs archived by Tidy RAW + JPEG Pairs appear here.";
@@ -762,6 +763,7 @@
 "Clarity" = "Clarity";
 "Cleans RAW noise with the AI model into a new DNG beside the photo" = "Cleans RAW noise with the AI model into a new DNG beside the photo";
 "Clear" = "Clear";
+"Clear Cache" = "Clear Cache";
 "Clear Filters" = "Clear Filters";
 "Clear Filters (⌥⌘F)" = "Clear Filters (⌥⌘F)";
 "Clear Rating (0)" = "Clear Rating (0)";
@@ -1007,6 +1009,7 @@
 "Daylight" = "Daylight";
 "Daylight - 5500 K" = "Daylight - 5500 K";
 "Deckle Edge" = "Deckle Edge";
+"Decoded RAWs, kept so recent photos open faster." = "Decoded RAWs, kept so recent photos open faster.";
 "Dedicated GPU memory" = "Dedicated GPU memory";
 "Deflicker" = "Deflicker";
 "Defringe" = "Defringe";
@@ -2260,7 +2263,6 @@
 "Output" = "Output";
 "Output Sharpening" = "Output Sharpening";
 "Oval" = "Oval";
-"Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.";
 "Overexposed" = "Overexposed";
 "Overlap" = "Overlap";
 "Overlaps" = "Overlaps";
@@ -2397,6 +2399,7 @@
 "Preview size must be 64–4096 pixels." = "Preview size must be 64–4096 pixels.";
 "Preview the SDR rendition that SDR exports, thumbnails and SDR viewers show." = "Preview the SDR rendition that SDR exports, thumbnails and SDR viewers show.";
 "Preview: first 4 of 16" = "Preview: first 4 of 16";
+"Previews" = "Previews";
 "Previous Photo" = "Previous Photo";
 "Previous frame" = "Previous frame";
 "Primary calibration" = "Primary calibration";
@@ -2927,6 +2930,7 @@
 "Stop downloading %1$@" = "Stop downloading %1$@";
 "Stop, and keep a patch fill for these strokes (Esc)" = "Stop, and keep a patch fill for these strokes (Esc)";
 "Stopped - %1$@" = "Stopped - %1$@";
+"Storage" = "Storage";
 "Story (9:16)" = "Story (9:16)";
 "Story or Reel (9:16)" = "Story or Reel (9:16)";
 "Straight Lines" = "Straight Lines";
@@ -3018,6 +3022,7 @@
 "The album couldn’t be deleted." = "The album couldn’t be deleted.";
 "The analysed correction is too extreme for this photo." = "The analysed correction is too extreme for this photo.";
 "The archive could not be unpacked: %1$@" = "The archive could not be unpacked: %1$@";
+"The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view.";
 "The camera profile's tone curve replaces the camera default." = "The camera profile's tone curve replaces the camera default.";
 "The camera’s own colour, or a chart profile made in light near this photo’s white balance" = "The camera’s own colour, or a chart profile made in light near this photo’s white balance";
 "The catalog couldn’t be opened." = "The catalog couldn’t be opened.";

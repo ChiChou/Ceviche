@@ -924,7 +924,6 @@
 "Original development" = "Revelado original";
 "Original photos stay in their current locations and are not uploaded to iCloud." = "Las fotos originales permanecen en sus ubicaciones actuales y no se suben a iCloud.";
 "Original replaced" = "Original reemplazado";
-"Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "Si se supera el límite, se descartan las miniaturas de las fotos que lleven más tiempo sin verse y se vuelven a renderizar cuando vuelvan a aparecer en pantalla.";
 "Overlay" = "Superposición";
 "Overwrite" = "Sobrescribir";
 "Paint over what should go. A source is chosen automatically; drag it on the photo to use another area." = "Pinta sobre lo que quieras eliminar. Se elige un origen automáticamente; arrástralo sobre la foto para usar otra zona.";
@@ -3588,3 +3587,9 @@
 "Deselect" = "Deseleccionar";
 "SELECTED" = "SELECCIONADAS";
 "Tap or drag a box over strokes to select them." = "Toca un trazo o arrastra un recuadro sobre varios para seleccionarlos.";
+"Cache" = "Caché";
+"Clear Cache" = "Vaciar caché";
+"Decoded RAWs, kept so recent photos open faster." = "RAW decodificados, guardados para que las fotos recientes se abran antes.";
+"Previews" = "Vistas previas";
+"Storage" = "Almacenamiento";
+"The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "La caché guarda los RAW decodificados para que las fotos recientes se abran antes. Por encima del límite de miniaturas, se descartan las de las fotos que llevas más tiempo sin ver y se vuelven a generar cuando aparecen de nuevo.";

@@ -924,7 +924,6 @@
 "Original development" = "原始修圖設定";
 "Original photos stay in their current locations and are not uploaded to iCloud." = "原始照片保留在目前位置，不會上傳到 iCloud。";
 "Original replaced" = "原始照片已取代";
-"Over the limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "超過限額時，會丟棄最長時間未檢視的照片縮圖，並在它們下次捲動到可見區域時重新算繪。";
 "Overlay" = "疊加參考線";
 "Overwrite" = "覆寫";
 "Paint over what should go. A source is chosen automatically; drag it on the photo to use another area." = "塗抹要移除的內容。取樣來源會自動選取；在照片上拖移取樣來源即可使用其他區域。";
@@ -3588,3 +3587,9 @@
 "Deselect" = "取消選取";
 "SELECTED" = "已選取";
 "Tap or drag a box over strokes to select them." = "點一下筆觸，或拖出方框框住多個筆觸來選取。";
+"Cache" = "快取";
+"Clear Cache" = "清除快取";
+"Decoded RAWs, kept so recent photos open faster." = "已解碼的 RAW，保留以便更快打開最近的照片。";
+"Previews" = "預覽";
+"Storage" = "儲存空間";
+"The cache keeps decoded RAWs so recent photos open faster. Over the thumbnail limit, the thumbnails of photos you have not looked at for the longest are discarded and re-rendered when they next scroll into view." = "快取保留已解碼的 RAW，以便更快打開最近的照片。超過縮圖上限時，最久未檢視的照片的縮圖會被捨棄，並在再次捲動到可見範圍時重新產生。";

@@ -46,7 +46,7 @@ What the app ships today, by area. Names match the menus.
   open it, and Space to see the face at actual pixels from the original.
 - **Date and import menus.** Right-click a period in Capture Date, or a date or session under Recently Added to Select Photos, Export…, Add to Album, or Move to Trash…. Actions include every photo in that group; Move to Trash… asks for confirmation with the photo count.
 - **Duplicate.** Makes a second original beside each selected photo, as an APFS clone, with its own edits.
-- **Trash and housekeeping.** The catalog's Trash keeps a photo's edits and history until emptied with Empty Trash… in its context menu. Move Missing Photos
+- **Trash and housekeeping.** The catalog's Trash keeps a photo's edits and history until emptied with Empty Trash… in its context menu. Settings › General shows the cache of decoded RAWs, which keeps recent photos opening fast, with Clear Cache. Move Missing Photos
   to Trash clears entries whose file is gone, ignoring drives that are just unplugged. Locate Original and Replace
   Original relink a moved or swapped file.
 - **History and snapshots.** Every saved step is listed with a thumbnail; going back adds a new step, so nothing is
@@ -287,7 +287,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
 - **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
   included, and they show as they land. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
   which fold: Duplicates (each photo beside its copies, found by background analysis), Archived once something is
-  in it, Trash and Models. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
+  in it, Trash and Storage. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
   month shows as its first photo with its name and count, and a tap shows its photos. The
   filter menu narrows by rating, flag and label and sets the sort, and search covers text, keywords, automatic tags
   and EXIF, offering popular tags while the field is empty and matching tags while typing, as on the Mac. Photos lie in rows at their own shapes; a pinch changes their size. Touch and hold a photo for its
@@ -325,7 +325,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   Snapshots, Copy Edits and Paste Edits, Export and Reset Edits; Info holds the flag and stars with the title,
   caption and keywords.
 - **Masks.** Subject, Background, People, Brush, Linear gradient, Radial gradient and Color range, and Sky, Depth and
-  Scene once their models are installed in Models. A gradient is drawn with a drag and changed by its handles; the
+  Scene once their models are installed in Storage. A gradient is drawn with a drag and changed by its handles; the
   brush paints with one finger or Apple Pencil while two fingers move and zoom the photo. Each mask has the
   adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it. People is chosen in the panel, as on the Mac: a person, then Entire Person or their parts, each ticked part tinted on the photo before Create. Once the photo has a mask, a Target menu at the top of Light, Color and Detail
   chooses Global or a mask, and the panel's sliders, tone curve, mixers and grading then edit that mask, as on the Mac.
@@ -335,10 +335,10 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   photo boxes several, to hide, show or delete together; the Face spots row opens it with them selected. In Remove a tap outlines the object or wire under it, and Remove or a second tap takes it out. Find Dust
   marks sensor dust as circles: a tap selects one and a drag on bare photo boxes several, to heal, Dodge/Burn or
   remove just those; a tap on bare photo adds a spot. People finds everyone but the subject and outlines them; a tap keeps
-  one, Remove takes the rest (offered where the photo fits the device's memory). With its model installed in Models,
+  one, Remove takes the rest (offered where the photo fits the device's memory). With its model installed in Storage,
   AI fill fills Remove strokes; without it Remove fills from the surroundings.
 - **Portrait.** The photo's faces are tagged on it and listed in the panel; a tap chooses one person, or the main
-  people. Even tone (with its model installed in Models), Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
+  people. Even tone (with its model installed in Storage), Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
   set with a slider, Find blemishes (with its model installed) heals the spots on their faces at a chosen Sensitivity,
   listed as Face spots in Retouch, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.
 - **Crop.** Drag a corner or the crop itself over the whole photo; aspect presets, Straighten, rotate, flip and Swap.
@@ -396,7 +396,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   sheet for AirDrop, Files and other apps. A video's export sheet has the same Share and Save. Watermark stamps one watermark, a line of text or an image with transparency
   from Files, in one of nine places with its Size and Opacity, set on the photo being exported: a tap places it, a
   pinch sizes it.
-- **Models.** Models, under Utilities in the sidebar, lists the models the touch app uses, each with its size and state; a tap downloads one
+- **Storage.** Storage, under Utilities in the sidebar, shows the space the catalog's photos, previews and cache take, with Clear Cache for the decoded RAWs, then lists the models the touch app uses, each with its size and state; a tap downloads one
   from the pinned model set or adds it from a file, and Remove deletes it. The features that need it turn on as soon
   as it is installed. The face models are built in.
 
