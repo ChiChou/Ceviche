@@ -326,8 +326,10 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   adjustments it has on the Mac, Feather, Invert, and Add, Subtract and Intersect parts; Show Overlay tints it.
 - **Retouch.** Remove, Heal and Clone brushes painted with one finger or Apple Pencil, two fingers moving and
   zooming the photo; Clone's source is dragged where it should read from, and the strokes are listed to delete one or
-  clear all. Find Dust marks sensor dust as circles to drop or heal. With its model installed in Models, AI fill fills
-  Remove strokes; without it Remove fills from the surroundings.
+  clear all. In Remove a tap outlines the object or wire under it, and Remove or a second tap takes it out. Find Dust
+  marks sensor dust as circles to drop or heal. People finds everyone but the subject and outlines them; a tap keeps
+  one, Remove takes the rest (offered where the photo fits the device's memory). With its model installed in Models,
+  AI fill fills Remove strokes; without it Remove fills from the surroundings.
 - **Portrait.** The photo's faces are tagged on it and listed in the panel; a tap chooses one person, or the main
   people. Even tone (with its model installed in Models), Reduce shine, White balance, Teeth, Eye whites, Red eye, Lips and Brows are measured for them by Auto and then
   set with a slider, Reshape has the Mac's Face Liquify sliders, and Reframe crops to Close-up, Shoulders or Waist.

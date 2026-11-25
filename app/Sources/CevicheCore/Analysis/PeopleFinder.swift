@@ -595,6 +595,12 @@ extension RawRenderer {
     /// Remove strokes over every person who is not the photo's subject, in the retouch frame;
     /// `people` counts everyone found, the subject included. Strokes already made for people are left out first.
     public func distractingPeople(_ settings: Adjustments) throws -> (people: Int, strokes: [RetouchStroke]) {
+        let (people, distractions) = try distractions(settings)
+        return (people, distractions.flatMap { $0 })
+    }
+
+    /// As `distractingPeople`, the strokes kept apart by person, left to right, so each can be kept or removed alone.
+    public func distractions(_ settings: Adjustments) throws -> (people: Int, distractions: [[RetouchStroke]]) {
         var base = settings
         base.geometry = GeometryAdjustments(); base.quarterTurns = 0; base.masks = []; base.postCropVignette = PostCropVignette()
         base.retouch.removeAll { $0.group == .people }
@@ -614,13 +620,14 @@ extension RawRenderer {
         PeopleFinder.decide(&people, pixels: pixels)
         let protect = people.filter(\.subject).map(\.mask).reduce(PeopleFinder.Mask()) { $0.union($1) }
         let others = people.filter { !$0.subject }.sorted { $0.box.midX < $1.box.midX }
-        var strokes: [RetouchStroke] = []
+        let generative = BundledModel.inpaint.isAvailable
+        var distractions: [[RetouchStroke]] = []
         for person in others {
             try Task.checkCancellation()
             let radius = 3 + 0.02 * person.box.height + 0.002 * Double(min(W, H))
-            strokes += PeopleFinder.strokes(covering: person.mask, radius: radius, protect: protect, width: W, height: H)
+            let strokes = PeopleFinder.strokes(covering: person.mask, radius: radius, protect: protect, width: W, height: H)
+            if !strokes.isEmpty { distractions.append(strokes.map { var s = $0; s.generative = generative; return s }) }
         }
-        let generative = BundledModel.inpaint.isAvailable
-        return (people.count, strokes.map { var s = $0; s.generative = generative; return s })
+        return (people.count, distractions)
     }
 }
