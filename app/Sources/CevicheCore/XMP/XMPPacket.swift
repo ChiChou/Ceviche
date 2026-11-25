@@ -90,8 +90,12 @@ public struct XMPPacket: Sendable {
     public static func sidecarNames(for image: URL) -> [URL] { [image.deletingPathExtension().appendingPathExtension("xmp"), image.appendingPathExtension("xmp")] }
     public static func sidecar(for image: URL) throws -> URL? {
         let names = [image.deletingPathExtension().lastPathComponent + ".xmp", image.lastPathComponent + ".xmp"].map { $0.lowercased() }
-        let matches = try FileManager.default.contentsOfDirectory(at: image.deletingLastPathComponent(), includingPropertiesForKeys: nil)
-            .filter { names.contains($0.lastPathComponent.lowercased()) }
+        // A photo handed over alone (a file picker under the sandbox) comes without leave to list its folder:
+        // then only the two exact names can be looked for.
+        guard let listing = try? FileManager.default.contentsOfDirectory(at: image.deletingLastPathComponent(), includingPropertiesForKeys: nil) else {
+            return sidecarNames(for: image).first { FileManager.default.isReadableFile(atPath: $0.path) }
+        }
+        let matches = listing.filter { names.contains($0.lastPathComponent.lowercased()) }
         guard matches.count <= 1 else { throw EditorError.invalidDocument(L10n.tr("Multiple matching XMP sidecars. Import the desired XMP explicitly.")) }
         return matches.first
     }
