@@ -173,7 +173,7 @@ public final class ModelLibrary: ObservableObject {
                 try await self.install(model, archive: archive, record: record)
                 // The installed copy is what the app uses; the pack's archive need not stay as well.
                 #if canImport(BackgroundAssets)
-                if self.delivery == .assetPacks, #available(iOS 26, macOS 26, *) { await ModelAssetPacks.discard(asset) }
+                if self.delivery == .assetPacks, let tag = self.set.tag, #available(iOS 26, macOS 26, *) { await ModelAssetPacks.discard(asset, tag: tag) }
                 #endif
             } catch is CancellationError {
             } catch let error as URLError where error.code == .cancelled {
@@ -201,9 +201,9 @@ public final class ModelLibrary: ObservableObject {
             let url = try await assetURL(asset)
             file = try await ModelInstaller.download(url, session: session, expected: asset.bytes, progress: progress)
         case .assetPacks:
-            guard #available(iOS 26, macOS 26, *) else { throw ModelLibraryError.notPinned }
+            guard let tag = set.tag, #available(iOS 26, macOS 26, *) else { throw ModelLibraryError.notPinned }
             #if canImport(BackgroundAssets)
-            file = try await ModelAssetPacks.fetch(asset, progress: progress)
+            file = try await ModelAssetPacks.fetch(asset, tag: tag, progress: progress)
             #else
             throw ModelLibraryError.notPinned
             #endif
