@@ -283,4 +283,21 @@ final class MCPTests: XCTestCase {
         }
         try input.fileHandleForWriting.close()
     }
+
+    /// A crop given in pixels lands where the agent put it, counted from the top left of the turned photo.
+    func testCropInPixels() throws {
+        var base = Adjustments(); base.geometry.aspect = .fourFive
+        let source = CGSize(width: 6000, height: 4000)
+        let changes: [String: Any] = ["cropPixels": ["x": 600, "y": 400, "width": 3000, "height": 2000]]
+        try MCPSchema.validate(changes, against: MCPEditSchema.changes, path: "changes")
+        let cropped = try MCPEditSchema.applyCropPixels(changes, to: base, sourceSize: source)
+        XCTAssertEqual(cropped.geometry.aspect, .free)
+        let crop = cropped.geometry.crop
+        XCTAssertEqual(crop.x, 0.1, accuracy: 1e-9); XCTAssertEqual(crop.width, 0.5, accuracy: 1e-9)
+        XCTAssertEqual(crop.y, 0.4, accuracy: 1e-9, "bottom-left origin: 4000 − 400 − 2000 = 1600 px up"); XCTAssertEqual(crop.height, 0.5, accuracy: 1e-9)
+        // Turned a quarter, the photo is 4000 × 6000 and a crop past its width is refused.
+        var turned = base; turned.quarterTurns = 1
+        XCTAssertEqual(MCPEditSchema.uncroppedSize(turned, sourceSize: source), [4000, 6000])
+        XCTAssertThrowsError(try MCPEditSchema.applyCropPixels(["cropPixels": ["x": 1000, "y": 0, "width": 3500, "height": 100]], to: turned, sourceSize: source))
+    }
 }

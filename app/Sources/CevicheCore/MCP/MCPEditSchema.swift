@@ -228,8 +228,40 @@ public enum MCPEditSchema {
             "masks": ["type": "object", "propertyNames": MCPSchema.uuid, "additionalProperties": mask, "maxProperties": 100],
             "addMasks": MCPSchema.array(MCPSchema.object(newMask, required: ["id", "kind"]), max: 100),
             "removeMasks": MCPSchema.array(MCPSchema.uuid, max: 100),
-            "maskOrder": MCPSchema.array(MCPSchema.uuid, max: 100)
+            "maskOrder": MCPSchema.array(MCPSchema.uuid, max: 100),
+            // A crop in pixels of the photo after its turns, straightening and upright (`uncroppedSize`), top-left origin.
+            "cropPixels": MCPSchema.object(["x": MCPSchema.number(0, 1_000_000), "y": MCPSchema.number(0, 1_000_000),
+                                            "width": MCPSchema.number(1, 1_000_000), "height": MCPSchema.number(1, 1_000_000)],
+                                           required: ["x", "y", "width", "height"])
         ])
+    }
+
+    /// The photo's size in pixels before cropping, after its turns, straightening and upright: what `cropPixels` counts in.
+    public static func uncroppedSize(_ settings: Adjustments, sourceSize: CGSize) -> [Int]? {
+        guard let plan = try? GeometryPlan(size: sourceSize, settings: settings.geometry, quarterTurns: settings.quarterTurns) else { return nil }
+        return [Int(plan.fullSize.width.rounded()), Int(plan.fullSize.height.rounded())]
+    }
+
+    /// `changes.cropPixels` turned into the crop: the rectangle as given, its aspect Free. Applied after the rest of the
+    /// changes, so it counts in the photo as they leave it.
+    public static func applyCropPixels(_ changes: [String: Any], to base: Adjustments, sourceSize: CGSize) throws -> Adjustments {
+        guard let crop = changes["cropPixels"] as? [String: Any] else { return base }
+        func value(_ key: String) -> Double { (crop[key] as? NSNumber)?.doubleValue ?? 0 }
+        guard let plan = try? GeometryPlan(size: sourceSize, settings: base.geometry, quarterTurns: base.quarterTurns) else {
+            throw MCPFailure("invalid_value", "The photo's geometry can't be laid out.", path: "changes.cropPixels")
+        }
+        let size = plan.fullSize
+        let x = value("x"), y = value("y"), width = value("width"), height = value("height")
+        // Half a pixel of slack for rounding at the far edges.
+        guard x + width <= size.width + 0.5, y + height <= size.height + 0.5 else {
+            throw MCPFailure("out_of_bounds", "The crop must lie inside the \(Int(size.width.rounded())) × \(Int(size.height.rounded())) px photo (uncroppedSize).", path: "changes.cropPixels")
+        }
+        var result = base
+        let w = min(width, size.width - x) / size.width, h = min(height, size.height - y) / size.height
+        result.geometry.crop = CropRect(x: x / size.width, y: max(0, 1 - y / size.height - h), width: w, height: h)
+        result.geometry.aspect = .free; result.geometry.customAspect = nil
+        try result.geometry.validate()
+        return result
     }
     public static var document: [String: Any] {
         var result = MCPSchema.object([

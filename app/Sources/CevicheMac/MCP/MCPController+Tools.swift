@@ -164,6 +164,7 @@ extension MCPController {
         switch name {
         case "photo_read":
             state["editing"] = try MCPEditSchema.state(settings, defaults: renderer.info.defaults)
+            state["uncroppedSize"] = MCPEditSchema.uncroppedSize(settings, sourceSize: CGSize(width: renderer.info.width, height: renderer.info.height))
             if args["includePreview"] as? Bool == false { return try MCPTools.result(state) }
             let preview = try await renderer.mcpPreview(settings, maxEdge: min(args["maxEdge"] as? Int ?? activePreviewMaxEdge, activePreviewMaxEdge))
             state["preview"] = Self.previewInfo(preview); state["statistics"] = preview.statistics.json
@@ -191,9 +192,11 @@ extension MCPController {
                 try Task.checkCancellation()
             }
             settings = try MCPEditSchema.apply(changes, to: settings, isRAW: renderer.info.isRAW, generated: generated)
+            settings = try MCPEditSchema.applyCropPixels(changes, to: settings, sourceSize: CGSize(width: renderer.info.width, height: renderer.info.height))
             // Validate image-dependent geometry before any write.
             _ = try GeometryPlan(size: CGSize(width: renderer.info.width, height: renderer.info.height), settings: settings.geometry, quarterTurns: settings.quarterTurns)
             let editing = try MCPEditSchema.state(settings, defaults: renderer.info.defaults)
+            state["uncroppedSize"] = MCPEditSchema.uncroppedSize(settings, sourceSize: CGSize(width: renderer.info.width, height: renderer.info.height))
             let nextRevision = try MCPEditSchema.revision(settings, metadata: asset.metadata)
             try Task.checkCancellation()
             if dryRun {
@@ -390,7 +393,7 @@ extension MCPController {
         case "export": return ["formats": ExportFormat.allCases.filter(\.isAvailable).map { format in ["format": format.rawValue, "sdrBits": format.depths, "hdrBits": format.hdrDepths, "hdrEncodings": format.hdrEncodings.map { ["encoding": $0.rawValue, "bits": $0.depths(for: format)] as [String: Any] }, "lossy": format.isLossy, "losslessChoice": format.supportsLosslessChoice, "alpha": format.supportsAlpha] as [String: Any] }]
         default: return ["schemaVersion": MCPEditSchema.version, "sections": ["global", "masks", "changes", "d.json", "export"],
                          "globalControls": Array((MCPEditSchema.global["properties"] as! [String: Any]).keys).sorted(),
-                         "semantics": "Objects merge, arrays replace, omitted fields stay unchanged. Null is allowed only where declared. Remove masks with removeMasks. Reset controls by assigning their defaults. Curves are arrays of {x,y} points in 0…1. Exposure is EV; temperature is Kelvin. Global and local tint are -150…150; local warmth is -100…100. Mask and crop coordinates use a bottom-left origin; preview scope uses a top-left origin after geometry. AI mask rasters and embedded ICC bytes stay server-side. Changing existing masks and creating Brush/Linear gradient/Radial gradient/Color range masks is supported; Subject/Background/Sky/Object masks are generated in the app when added (Object needs a point). Mask components (Add/Subtract/Intersect) are edited through masks.<id>.components. Request photo_docs section masks for how each mask kind is evaluated.",
+                         "semantics": "Objects merge, arrays replace, omitted fields stay unchanged. Null is allowed only where declared. Remove masks with removeMasks. Reset controls by assigning their defaults. Curves are arrays of {x,y} points in 0…1. Exposure is EV; temperature is Kelvin. Global and local tint are -150…150; local warmth is -100…100. Mask and crop coordinates use a bottom-left origin; preview scope uses a top-left origin after geometry. changes.cropPixels {x,y,width,height} crops in pixels instead, top-left origin, counted in uncroppedSize (the photo after turns, straightening and upright, as photo_read reports it); it sets aspect Free. AI mask rasters and embedded ICC bytes stay server-side. Changing existing masks and creating Brush/Linear gradient/Radial gradient/Color range masks is supported; Subject/Background/Sky/Object masks are generated in the app when added (Object needs a point). Mask components (Add/Subtract/Intersect) are edited through masks.<id>.components. Request photo_docs section masks for how each mask kind is evaluated.",
                          "advice": MCPEditSchema.editingAdvice]
         }
         if let control = args["control"] as? String {
