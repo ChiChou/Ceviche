@@ -173,4 +173,25 @@ final class NAFNetTilesTests: XCTestCase {
         let before = seam(source, plain, width: width, height: height), after = seam(source, result, width: width, height: height)
         XCTAssertLessThan(after, before / 2.5)
     }
+
+    /// Measured strength leaves about two display levels of the noise taken out: none on a clean photo, most on a noisy one.
+    func testMeasuredStrengthFollowsNoise() {
+        var random = Random(state: 7)
+        func strength(sigma levels: Float) -> Double {
+            let count = 200_000
+            var before = [Float16](repeating: 1, count: count * 4), after = [Float](repeating: 1, count: count * 4)
+            for p in 0..<count {
+                // Mid-grey, 0.5 encoded; noise added in encoded levels and taken back to linear.
+                let u1 = max(1e-9, Float(random.next() % 1_000_000) / 1_000_000), u2 = Float(random.next() % 1_000_000) / 1_000_000
+                let encoded = 0.5 + levels / 255 * sqrt(-2 * log(u1)) * cos(2 * .pi * u2)
+                let linear = pow((min(1, max(0, encoded)) + 0.055) / 1.055, 2.4), clean = pow(Float(0.5 + 0.055) / 1.055, 2.4)
+                for c in 0..<3 { before[p * 4 + c] = Float16(linear); after[p * 4 + c] = clean }
+            }
+            return before.withUnsafeBufferPointer { b in after.withUnsafeBufferPointer { a in PhotoDenoiser.measuredStrength(before: b, after: a) } }
+        }
+        XCTAssertEqual(strength(sigma: 0), 40)
+        XCTAssertEqual(strength(sigma: 1), 40)
+        XCTAssertEqual(strength(sigma: 8), 75, accuracy: 4)
+        XCTAssertEqual(strength(sigma: 20), 90, accuracy: 3)
+    }
 }

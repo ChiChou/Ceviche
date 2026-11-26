@@ -5,7 +5,14 @@ import CoreImage
 public struct DenoiseSettings: Codable, Equatable, Sendable {
     /// 0–100: how much of the network's result replaces the photo.
     public var strength = 100.0
-    public init(strength: Double = 100) { self.strength = strength }
+    /// Strength is measured from the photo's own noise instead (`PhotoDenoiser.measuredStrength`).
+    public var measured = false
+    public init(strength: Double = 100, measured: Bool = false) { self.strength = strength; self.measured = measured }
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        strength = try values.decodeIfPresent(Double.self, forKey: .strength) ?? 100
+        measured = try values.decodeIfPresent(Bool.self, forKey: .measured) ?? false
+    }
 }
 
 /// The photo's Develop settings Denoise works at: its Exposure, which the network sees it brightened by, and its white
@@ -61,9 +68,10 @@ public enum PhotoDenoiser {
     }
 
     /// Denoises `source` into a DNG at `url`, developed at `development` (see `DenoiseDevelopment`); `progress` hears the
-    /// fraction done and the step.
+    /// fraction done and the step. Returns the strength used, the measured one when `settings.measured`.
+    @discardableResult
     public static func denoise(_ source: URL, to url: URL, settings: DenoiseSettings, development: DenoiseDevelopment = DenoiseDevelopment(),
-                               progress: (Double, String) -> Void = { _, _ in }, cancelled: () -> Bool = { false }) throws {
+                               progress: (Double, String) -> Void = { _, _ in }, cancelled: () -> Bool = { false }) throws -> Double {
         guard BundledModel.denoise.isAvailable else { throw PanoramaError.message(L10n.tr("The AI noise reduction model is not installed. Install it in Settings › Models.")) }
         let metadata = try PanoramaDecoder.metadata(source)
         progress(0, L10n.tr("Developing \(source.lastPathComponent)"))
@@ -72,20 +80,60 @@ public enum PhotoDenoiser {
         let width = Int(developed.extent.width.rounded(.down)), height = Int(developed.extent.height.rounded(.down))
         guard width > 0, height > 0 else { throw PanoramaError.message(L10n.tr("\(source.lastPathComponent) decoded empty.")) }
         if cancelled() { throw CancellationError() }
-        let rgba = try denoised(developed, width: width, height: height, strength: settings.strength, exposure: exposure, context: context(),
-                                progress: { progress(0.05 + 0.8 * $0, L10n.tr("Reducing noise")) }, cancelled: cancelled)
+        var strength = settings.strength
+        let rgba = try denoised(developed, width: width, height: height, strength: settings.measured ? nil : settings.strength, exposure: exposure,
+                                context: context(), progress: { progress(0.05 + 0.8 * $0, L10n.tr("Reducing noise")) }, cancelled: cancelled,
+                                used: { strength = $0 })
         if cancelled() { throw CancellationError() }
         progress(0.85, L10n.tr("Writing DNG"))
         let writer = PanoramaDNGWriter(metadata: metadata, source: DNGSourceMetadata(source, process: suffix))
         try writer.write(PanoramaRaster(width: width, height: height, rgba: rgba), to: url,
                          progress: { progress(0.85 + 0.15 * $0, L10n.tr("Writing DNG")) }, cancelled: cancelled)
+        return strength
+    }
+
+    /// Grain left on purpose, in 8-bit display levels: a trace of the noise stays so skin and skies keep some texture
+    /// rather than looking painted.
+    static let keptNoise = 2.0
+
+    /// The strength that leaves `keptNoise` of the photo's noise. The noise is the spread of what the network took out
+    /// (before − after) in display-encoded luma, 1.4826 × its median absolute value, so the few edges it softened count
+    /// little. Every 7th pixel is read. A clean photo gets a light touch (40 % at least), a noisy one nearly all of it.
+    static func measuredStrength(before: UnsafeBufferPointer<Float16>, after: UnsafeBufferPointer<Float>) -> Double {
+        // Quarter-level bins over 0–64 levels; a larger difference is an edge, counted in the last bin.
+        let bins = 256, perLevel: Float = 4
+        var histogram = [Int](repeating: 0, count: bins)
+        func encoded(_ v: Float) -> Float {
+            let v = min(1, max(0, v))
+            return v <= 0.0031308 ? 12.92 * v : 1.055 * pow(v, 1 / 2.4) - 0.055
+        }
+        func luma(_ r: Float, _ g: Float, _ b: Float) -> Float { 255 * (0.2126 * encoded(r) + 0.7152 * encoded(g) + 0.0722 * encoded(b)) }
+        var count = 0
+        for p in stride(from: 0, to: min(before.count, after.count) - 3, by: 4 * 7) {
+            let a = luma(Float(before[p]), Float(before[p + 1]), Float(before[p + 2])), b = luma(after[p], after[p + 1], after[p + 2])
+            let difference = abs(a - b)
+            guard difference.isFinite else { continue }
+            histogram[min(bins - 1, Int(difference * perLevel))] += 1
+            count += 1
+        }
+        guard count > 0 else { return 100 }
+        var seen = 0, median: Float = 0
+        for (bin, n) in histogram.enumerated() {
+            seen += n
+            if seen * 2 >= count { median = (Float(bin) + 0.5) / perLevel; break }
+        }
+        let sigma = 1.4826 * Double(median)
+        guard sigma > keptNoise else { return 40 }
+        return min(100, max(40, (1 - keptNoise / sigma) * 100)).rounded()
     }
 
     /// `image`'s `width` × `height` pixels from the origin, denoised like `denoised(_:strength:exposure:)`, as linear
     /// RGBA rows top down with alpha 1. The frame is developed once into memory and every tile of the network runs
-    /// once, rather than again at the edge of each region Core Image would render.
-    static func denoised(_ image: CIImage, width: Int, height: Int, strength: Double, exposure: Double, context: CIContext,
-                         progress: (Double) -> Void = { _ in }, cancelled: () -> Bool = { false }) throws -> [Float] {
+    /// once, rather than again at the edge of each region Core Image would render. A nil `strength` is measured from
+    /// the result (`measuredStrength`); `used` hears the strength blended at.
+    static func denoised(_ image: CIImage, width: Int, height: Int, strength: Double?, exposure: Double, context: CIContext,
+                         progress: (Double) -> Void = { _ in }, cancelled: () -> Bool = { false },
+                         used: (Double) -> Void = { _ in }) throws -> [Float] {
         let gain = gain(exposure)
         let lifted = gain == 0 ? image : image.applyingFilter("CIExposureAdjust", parameters: [kCIInputEVKey: gain])
         var decoded = [Float16](repeating: 0, count: width * height * 4)
@@ -94,7 +142,8 @@ public enum PhotoDenoiser {
                            format: .RGBAh, colorSpace: PanoramaDecoder.space)
         }
         var rgba = [Float](repeating: 0, count: width * height * 4)
-        let blend = Float(min(1, max(0, strength / 100))), scale = Float(pow(2, -gain))
+        var blend = Float(min(1, max(0, (strength ?? 100) / 100)))
+        let scale = Float(pow(2, -gain))
         try decoded.withUnsafeMutableBufferPointer { decoded in
             try rgba.withUnsafeMutableBufferPointer { rgba in
                 // Rows top down from Core Image's maxY, which the grid counts as -height.
@@ -105,7 +154,9 @@ public enum PhotoDenoiser {
                         if cancelled() { throw CancellationError() }
                         progress(Double(done) / Double(total))
                     }
+                    if strength == nil { blend = Float(measuredStrength(before: UnsafeBufferPointer(decoded), after: UnsafeBufferPointer(rgba)) / 100) }
                 }
+                used(Double(blend * 100).rounded())
                 for p in stride(from: 0, to: rgba.count, by: 4) {
                     for c in 0..<3 {
                         let original = Float(decoded[p + c]), value = blend > 0 ? (original + blend * (rgba[p + c] - original)) * scale : original * scale
