@@ -354,7 +354,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   JPEG Pairs, one suggested decision per shot (Archive JPEG, Keep JPEG, Keep RAW, Reject Both) changed pair by pair
   or for a selection; and Move Rejected Photos to Trash. As on the Mac, they set only flags and groups, and Tidy's
   archived JPEGs go to Archived, where Unarchive puts them back.
-- **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included),
+- **Merges.** From a selection: Merge to HDR, Focus Stack, Stack, Merge to Panorama (bracketed panoramas included, not on an iPhone),
   Create Star Trails, Night Sky Noise Reduction and Composite Meteor Shower, each with a preview
   and its main options in the inspector beside it (a sheet on an iPhone). As on the Mac, each photo's retouching is
   burnt in, the preview shows the result with the base photo's edits and the result takes them; HDR, Focus Stack and
