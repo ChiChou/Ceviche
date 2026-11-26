@@ -106,7 +106,7 @@ public enum EditTransferItem: String, CaseIterable, Identifiable, Codable, Senda
         case .defringe: result.defringe = s.defringe
         case .crop:
             let g = s.geometry
-            result.geometry.crop = g.crop; result.geometry.aspect = g.aspect; result.geometry.portrait = g.portrait
+            result.geometry.crop = g.crop; result.geometry.aspect = g.aspect; result.geometry.customAspect = g.customAspect; result.geometry.portrait = g.portrait
             result.geometry.straighten = g.straighten; result.geometry.constrainCrop = g.constrainCrop
             result.geometry.flipHorizontal = g.flipHorizontal; result.geometry.flipVertical = g.flipVertical
             result.quarterTurns = s.quarterTurns

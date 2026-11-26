@@ -39,7 +39,7 @@ extension GeometryAdjustments {
     /// The largest crop inside the outline: at the chosen aspect, or the frame's own shape when it is Free.
     private func largestCrop(in outline: CropOutline, sourceSize: CGSize, quarterTurns: Int) -> CropRect? {
         let original = quarterTurns % 2 == 0 ? sourceSize : CGSize(width: sourceSize.height, height: sourceSize.width)
-        guard let ratio = aspect.ratio(original: original, portrait: portrait) else {
+        guard let ratio = aspectRatio(original: original) else {
             return outline.contains(.full) ? .full : outline.largestCrop(aspect: outline.size.width / outline.size.height)
         }
         return outline.largestCrop(aspect: ratio)

@@ -156,7 +156,7 @@ public enum MCPEditSchema {
                 "rotate": MCPSchema.number(-10, 10), "aspect": MCPSchema.number(-100, 100), "scale": MCPSchema.number(50, 150),
                 "offsetX": MCPSchema.number(-100, 100), "offsetY": MCPSchema.number(-100, 100)]),
             "crop": MCPSchema.object(["x": MCPSchema.number(0, 1), "y": MCPSchema.number(0, 1), "width": MCPSchema.number(0.01, 1), "height": MCPSchema.number(0.01, 1)]),
-            "aspect": MCPSchema.string(CropAspect.allCases.map(\.rawValue)), "portrait": MCPSchema.bool,
+            "aspect": MCPSchema.string(CropAspect.presets.map(\.rawValue)), "portrait": MCPSchema.bool,
             "straighten": MCPSchema.number(-45, 45), "flipHorizontal": MCPSchema.bool, "flipVertical": MCPSchema.bool, "uprightMode": MCPSchema.string(UprightMode.allCases.map(\.rawValue)), "uprightEnabled": MCPSchema.bool, "constrainCrop": MCPSchema.bool,
             "guides": MCPSchema.array(MCPSchema.object(["id": MCPSchema.uuid, "axis": MCPSchema.string(GuideAxis.allCases.map(\.rawValue)), "start": point, "end": point], required: ["id", "axis", "start", "end"]), max: 4),
             "perspective": MCPSchema.nullable(["type": "object", "properties": ["corners": MCPSchema.array(point, max: 4), "proportion": ["type": "object"]], "required": ["corners"]])

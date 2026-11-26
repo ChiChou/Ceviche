@@ -16,8 +16,7 @@ struct CropPanel: View {
             }
             HStack {
                 Text(L10n.tr("Aspect")).foregroundStyle(.secondary)
-                PanelPicker(title: L10n.tr("Aspect"), selection: Binding(get: { geometry.aspect }, set: model.setCropAspect), options: CropAspect.allCases, label: \.localizedTitle, expands: true)
-                    .controlSize(.small)
+                aspectPicker
                 Spacer()
                 Button(action: model.swapCropAspect) { Image(systemName: "arrow.left.arrow.right") }
                     .buttonStyle(.plain).help(L10n.tr("Swap portrait and landscape (X)")).accessibilityLabel(L10n.tr("Swap crop orientation"))
@@ -50,6 +49,49 @@ struct CropPanel: View {
                 Button(L10n.tr("Done")) { model.cropDrawingGuide = false; model.cropPlacingCorners = false; model.finishCrop() }.buttonStyle(.primaryAction)
             }
         }.font(.system(size: 12)).padding(20).disabled(!model.hasImage || model.busy)
+    }
+    /// What the Aspect menu holds: the presets, the ratios typed before, and Custom… to type another.
+    private enum AspectChoice: Hashable { case preset(CropAspect), custom(CustomCropRatio), typing }
+    @State private var typingRatio = false
+    @State private var typedWidth = ""
+    @State private var typedHeight = ""
+    private var aspectPicker: some View {
+        let current: AspectChoice = geometry.aspect == .custom ? geometry.customAspect.map { .custom($0) } ?? .preset(.free) : .preset(geometry.aspect)
+        let saved = CustomCropRatio.remembered
+        let label = geometry.aspect == .custom ? geometry.customAspect?.title ?? CropAspect.free.localizedTitle : geometry.aspect.localizedTitle
+        return FormSelect(L10n.tr("Aspect"), selection: Binding(get: { current }, set: { choice in
+            switch choice {
+            case .preset(let aspect): model.setCropAspect(aspect)
+            case .custom(let ratio): model.setCropAspect(custom: ratio)
+            case .typing:
+                let shown = geometry.customAspect ?? saved.first
+                typedWidth = shown.map { CustomCropRatio.text($0.width) } ?? ""
+                typedHeight = shown.map { CustomCropRatio.text($0.height) } ?? ""
+                typingRatio = true
+            }
+        }), valueLabel: label, expands: true) {
+            ForEach(CropAspect.presets, id: \.self) { Text($0.localizedTitle).tag(AspectChoice.preset($0)) }
+            if !saved.isEmpty {
+                Divider()
+                ForEach(saved, id: \.self) { Text($0.title).tag(AspectChoice.custom($0)) }
+            }
+            Divider()
+            Text(L10n.tr("Custom…")).tag(AspectChoice.typing)
+        }
+        .controlSize(.small)
+        .popover(isPresented: $typingRatio, arrowEdge: .leading) { ratioForm }
+    }
+    /// Width and height of a ratio of one's own, as 6 and 17.
+    private var ratioForm: some View {
+        let ratio = CustomCropRatio(width: Double(typedWidth) ?? 0, height: Double(typedHeight) ?? 0)
+        return HStack(spacing: 6) {
+            TextField(L10n.tr("Width"), text: $typedWidth).frame(width: 48).multilineTextAlignment(.trailing)
+            Text(verbatim: ":")
+            TextField(L10n.tr("Height"), text: $typedHeight).frame(width: 48)
+            Button(L10n.tr("Set")) { model.setCropAspect(custom: ratio); typingRatio = false }
+                .keyboardShortcut(.defaultAction).disabled(!ratio.isValid)
+        }
+        .textFieldStyle(.roundedBorder).font(.system(size: 12)).padding(12)
     }
     /// The Straighten slider, with Auto, Eyes and the ruler in its title row.
     private var straighten: some View {
@@ -115,7 +157,7 @@ extension EditorModel {
             value.geometry.crop = geometryGestureStart?.geometry.crop ?? value.geometry.crop
             value.geometry.straighten = degrees
             let original = value.quarterTurns % 2 == 0 ? CGSize(width: info.width, height: info.height) : CGSize(width: info.height, height: info.width)
-            guard let ratio = value.geometry.aspect.ratio(original: original, portrait: value.geometry.portrait),
+            guard let ratio = value.geometry.aspectRatio(original: original),
                   let plan = try? GeometryPlan(size: CGSize(width: info.width, height: info.height), settings: value.geometry, quarterTurns: value.quarterTurns) else { return }
             value.geometry.crop = Self.fittingAspect(ratio * plan.fullSize.height / plan.fullSize.width, around: value.geometry.crop)
         }
@@ -150,13 +192,22 @@ extension EditorModel {
     func setCropPortrait(_ value: Bool) {
         beginGesture(); edit { $0.geometry.portrait = value }; setCropAspect(adjustments.geometry.aspect); endGesture()
     }
-    func setCropAspect(_ aspect: CropAspect) {
+    func setCropAspect(_ aspect: CropAspect) { setCropAspect(aspect, custom: aspect == .custom ? adjustments.geometry.customAspect : nil) }
+    /// A ratio typed as width and height: the crop turns to the shape it was typed in.
+    func setCropAspect(custom ratio: CustomCropRatio) {
+        guard ratio.isValid else { return }
+        CustomCropRatio.remember(ratio)
+        setCropAspect(.custom, custom: ratio, portrait: ratio.height > ratio.width)
+    }
+    private func setCropAspect(_ aspect: CropAspect, custom: CustomCropRatio?, portrait chosen: Bool? = nil) {
         guard let plan = geometryPlan, let info else { return }
         let original = adjustments.quarterTurns % 2 == 0 ? CGSize(width: info.width, height: info.height) : CGSize(width: info.height, height: info.width)
-        let portrait = aspect == .original && adjustments.geometry.aspect != .original ? original.height > original.width : adjustments.geometry.portrait
-        let ratio = aspect.ratio(original: original, portrait: portrait)
+        var target = adjustments.geometry
+        target.aspect = aspect; target.customAspect = aspect == .custom ? custom : nil
+        target.portrait = chosen ?? (aspect == .original && adjustments.geometry.aspect != .original ? original.height > original.width : adjustments.geometry.portrait)
+        let ratio = target.aspectRatio(original: original)
         edit { value in
-            value.geometry.aspect = aspect; value.geometry.portrait = portrait
+            value.geometry.aspect = target.aspect; value.geometry.customAspect = target.customAspect; value.geometry.portrait = target.portrait
             if let ratio { value.geometry.crop = Self.fittingAspect(ratio * plan.fullSize.height / plan.fullSize.width, around: value.geometry.crop) }
         }
     }
@@ -164,7 +215,7 @@ extension EditorModel {
     var normalizedCropAspect: Double? {
         guard let plan = geometryPlan, let info else { return nil }
         let original = adjustments.quarterTurns % 2 == 0 ? CGSize(width: info.width, height: info.height) : CGSize(width: info.height, height: info.width)
-        return adjustments.geometry.aspect.ratio(original: original, portrait: adjustments.geometry.portrait).map { $0 * plan.fullSize.height / plan.fullSize.width }
+        return adjustments.geometry.aspectRatio(original: original).map { $0 * plan.fullSize.height / plan.fullSize.width }
     }
     func acceptGuide() {
         guard let draft = guideDraft, let info else { guideDraft = nil; return }
@@ -184,5 +235,19 @@ extension EditorModel {
             edit { $0.geometry = candidate }
             selectedGuideID = draft.id; guideMessage = plan.uprightMessage
         } catch { guideMessage = error.localizedDescription }
+    }
+}
+
+
+extension CustomCropRatio {
+    private static let key = "cropCustomRatios"
+    /// The ratios typed on this Mac, newest first.
+    static var remembered: [CustomCropRatio] {
+        (UserDefaults.standard.data(forKey: key).flatMap { try? JSONDecoder().decode([CustomCropRatio].self, from: $0) } ?? []).filter(\.isValid)
+    }
+    /// Puts `ratio` first in the menu, keeping the last six.
+    static func remember(_ ratio: CustomCropRatio) {
+        let list = Array(([ratio] + remembered.filter { $0 != ratio }).prefix(6))
+        if let data = try? JSONEncoder().encode(list) { UserDefaults.standard.set(data, forKey: key) }
     }
 }

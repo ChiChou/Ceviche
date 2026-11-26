@@ -117,7 +117,7 @@ Closing a tool stops measuring the photos it asked for. Their large preview show
   the library with its Amount and switch.
 - **Darkroom.** Prints the photo through a film stock and paper with a spectral model: exposure, push and pull, grain,
   halation, paper grade, dodge and burn. Film rendering switches it on and off, keeping its settings.
-- **Crop.** Crop with aspect presets, rotate and flip. Upright straightens automatically, by level or vertical lines,
+- **Crop.** Crop with aspect presets, or a ratio of your own from Aspect › Custom… (the last six stay in the menu), rotate and flip. Upright straightens automatically, by level or vertical lines,
   or from guides you draw; manual transform covers the rest. Straighten's Eyes levels the line through the eyes of
   the largest face, for a portrait taken with the camera tilted. **Volume** undoes the stretch a wide-angle lens gives
   things near the edges, across the whole photo: Horizontal and Vertical keep straight lines in that direction,

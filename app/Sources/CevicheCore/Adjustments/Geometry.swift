@@ -15,15 +15,33 @@ public enum CropAspect: String, Codable, CaseIterable, Sendable {
     public var localizedTitle: String { L10n.key(rawValue) }
 
     case free = "Free", original = "Original", square = "1:1", fourFive = "4:5", threeTwo = "3:2", fourThree = "4:3", sixteenNine = "16:9", fiveSeven = "5:7"
+    /// A ratio the photographer typed (Mac only), kept in `GeometryAdjustments.customAspect`.
+    case custom = "Custom"
+    /// The fixed ratios, Free and Original, as the pickers list them.
+    public static let presets: [CropAspect] = allCases.filter { $0 != .custom }
+    /// Nil for Free, and for Custom, whose ratio is the edit's (`GeometryAdjustments.aspectRatio`).
     public func ratio(original: CGSize, portrait: Bool) -> Double? {
         let value: Double
         switch self {
-        case .free: return nil
+        case .free, .custom: return nil
         case .original: value = original.width / max(1, original.height)
         case .square: value = 1; case .fourFive: value = 4.0 / 5; case .threeTwo: value = 3.0 / 2
         case .fourThree: value = 4.0 / 3; case .sixteenNine: value = 16.0 / 9; case .fiveSeven: value = 5.0 / 7
         }
         return portrait ? min(value, 1 / value) : max(value, 1 / value)
+    }
+}
+/// A crop ratio typed as width and height, as 6:17.
+public struct CustomCropRatio: Codable, Hashable, Sendable {
+    public var width: Double, height: Double
+    public init(width: Double, height: Double) { self.width = width; self.height = height }
+    public var isValid: Bool { width.isFinite && height.isFinite && width > 0 && height > 0 && max(width / height, height / width) <= 20 }
+    /// "6:17", whole numbers without decimals.
+    public var title: String { "\(Self.text(width)):\(Self.text(height))" }
+    /// One side as typed: a whole number without decimals, else up to two places after a point (a ratio is written the
+    /// same in every language, and reads back as typed).
+    public static func text(_ value: Double) -> String {
+        value == value.rounded() && abs(value) < 1e9 ? String(Int(value)) : String((value * 100).rounded() / 100)
     }
 }
 public enum GuideAxis: String, Codable, CaseIterable, Sendable {
@@ -78,6 +96,8 @@ public struct UprightAnalysis: Codable, Equatable, Sendable {
 public struct GeometryAdjustments: Codable, Equatable, Sendable {
     public var crop = CropRect.full
     public var aspect = CropAspect.free
+    /// The ratio when `aspect` is Custom.
+    public var customAspect: CustomCropRatio?
     public var portrait = false
     public var straighten = 0.0
     public var flipHorizontal = false, flipVertical = false
@@ -95,12 +115,13 @@ public struct GeometryAdjustments: Codable, Equatable, Sendable {
     /// The wide-angle stretch undone across the whole photo, before Upright and the rest.
     public var volume = VolumeCorrection()
     public init() {}
-    private enum CodingKeys: String, CodingKey { case crop, aspect, portrait, straighten, flipHorizontal, flipVertical, guides, uprightMode, uprightAnalysis, uprightEnabled, constrainCrop, transform, perspective, volume }
+    private enum CodingKeys: String, CodingKey { case crop, aspect, customAspect, portrait, straighten, flipHorizontal, flipVertical, guides, uprightMode, uprightAnalysis, uprightEnabled, constrainCrop, transform, perspective, volume }
     /// A missing setting decodes with its default.
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         crop = try c.decodeIfPresent(CropRect.self, forKey: .crop) ?? crop
         aspect = try c.decodeIfPresent(CropAspect.self, forKey: .aspect) ?? aspect
+        customAspect = try c.decodeIfPresent(CustomCropRatio.self, forKey: .customAspect)
         portrait = try c.decodeIfPresent(Bool.self, forKey: .portrait) ?? portrait
         straighten = try c.decodeIfPresent(Double.self, forKey: .straighten) ?? straighten
         flipHorizontal = try c.decodeIfPresent(Bool.self, forKey: .flipHorizontal) ?? flipHorizontal
@@ -113,6 +134,14 @@ public struct GeometryAdjustments: Codable, Equatable, Sendable {
         transform = try c.decodeIfPresent(ManualTransform.self, forKey: .transform) ?? transform
         perspective = try c.decodeIfPresent(PerspectiveCrop.self, forKey: .perspective)
         volume = try c.decodeIfPresent(VolumeCorrection.self, forKey: .volume) ?? volume
+    }
+    /// The crop's width over height in an `original`-shaped photo, or nil when it is free: the preset's, or the custom
+    /// ratio's turned to `portrait`.
+    public func aspectRatio(original: CGSize) -> Double? {
+        guard aspect == .custom else { return aspect.ratio(original: original, portrait: portrait) }
+        guard let customAspect, customAspect.isValid else { return nil }
+        let value = customAspect.width / customAspect.height
+        return portrait ? min(value, 1 / value) : max(value, 1 / value)
     }
     /// Whether the chosen mode has a correction to apply (analysed, or guides to solve).
     public var uprightActive: Bool {
@@ -129,6 +158,7 @@ public struct GeometryAdjustments: Codable, Equatable, Sendable {
         try transform.validate()
         try volume.validate()
         try uprightAnalysis?.validate()
+        if let customAspect, !customAspect.isValid { throw EditorError.invalidDocument(L10n.tr("Invalid crop or upright guides.")) }
         if let perspective, !perspective.isValid { throw EditorError.invalidDocument(L10n.tr("The four corners must form a quadrilateral that doesn’t fold over itself.")) }
         guard crop.valid, straighten.isFinite, (-45...45).contains(straighten), guides.count <= 4,
               Set(guides.map(\.id)).count == guides.count,

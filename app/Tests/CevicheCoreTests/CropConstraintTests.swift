@@ -134,4 +134,20 @@ final class CropConstraintTests: XCTestCase {
         XCTAssertTrue(decoded.constrainCrop, "Constrain to image is the default, as in other RAW editors")
         XCTAssertEqual(decoded, GeometryAdjustments())
     }
+
+    /// A typed ratio is kept with the edit and turned with the crop, as the presets are.
+    func testCustomRatioTurnsWithTheCropAndRoundTrips() throws {
+        var geometry = GeometryAdjustments()
+        geometry.aspect = .custom; geometry.customAspect = CustomCropRatio(width: 6, height: 17)
+        let photo = CGSize(width: 6000, height: 4000)
+        geometry.portrait = true
+        XCTAssertEqual(geometry.aspectRatio(original: photo)!, 6.0 / 17, accuracy: 1e-9)
+        geometry.portrait = false
+        XCTAssertEqual(geometry.aspectRatio(original: photo)!, 17.0 / 6, accuracy: 1e-9)
+        let decoded = try JSONDecoder().decode(GeometryAdjustments.self, from: JSONEncoder().encode(geometry))
+        XCTAssertEqual(decoded, geometry)
+        XCTAssertEqual(CustomCropRatio(width: 2.35, height: 1).title, "2.35:1")
+        geometry.customAspect = nil
+        XCTAssertNil(geometry.aspectRatio(original: photo), "Custom without a ratio crops freely")
+    }
 }
