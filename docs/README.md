@@ -3,7 +3,6 @@
 - [Features](features.md): what the app does, by area
 - [Building](development/building.md): `make` targets, build settings, signing, CI and releases
 - [Architecture](development/architecture.md)
-- [iPad and iPhone](development/ios.md): the touch app's layout, building for a device, memory limits and what each device offers
 - [Testing](development/testing.md)
 - [Localization](development/localization.md)
 - [Models](../models/MODELS.md): sources, conversion and licences of the Core ML models

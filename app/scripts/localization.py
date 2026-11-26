@@ -4,6 +4,10 @@
 Run --extract after adding L10n.tr literals, display enums, or slider keys. This
 updates only English and Source.json; translations must be reviewed separately.
 No network or third-party dependencies are used.
+
+With no options it covers this package: CevicheCore and CevicheMac, into CevicheCore's tables. An app built on the
+package elsewhere keeps its own table (`L10n.addTable`) and runs this with --root, --sources, --resources, --source-json,
+--plists and --shared (the core's resources folder), so its table holds only the keys the core's lacks.
 """
 import argparse
 import collections
@@ -14,7 +18,6 @@ import re
 import sys
 
 APP = pathlib.Path(__file__).resolve().parents[1]
-RESOURCES = APP / "Sources/CevicheCore/Resources"
 LOCALES = ("en", "zh-Hans", "zh-Hant", "it", "es")
 # Between a context and its English (`L10n.contextKey`).
 CONTEXT_SEPARATOR = "|"
@@ -81,10 +84,10 @@ def message_key(parts):
     return result
 
 
-def inventory():
+def inventory(root, folders, shared, synthetic):
     entries = {}
-    for folder in ("CevicheMac", "CevicheMobile", "CevicheCore"):
-        for path in sorted((APP / "Sources" / folder).rglob("*.swift")):
+    for folder in folders:
+        for path in sorted((root / folder).rglob("*.swift")):
             if path.name == "Localization.swift":
                 continue
             source = path.read_text()
@@ -107,14 +110,16 @@ def inventory():
                 if CONTEXT_SEPARATOR in english or (meaning and CONTEXT_SEPARATOR in meaning.group(1)):
                     raise ValueError(f"{CONTEXT_SEPARATOR!r} is reserved for contexts: {english} in {path}")
                 key = f"{meaning.group(1)}{CONTEXT_SEPARATOR}{english}" if meaning else english
-                where = f"{path.relative_to(APP)}:{source.count(chr(10), 0, token['start']) + 1}"
+                where = f"{path.relative_to(root)}:{source.count(chr(10), 0, token['start']) + 1}"
                 entry = entries.setdefault(key, {"key": key, "english": english, "source": token["literal"], "context": where, "uses": []})
                 if meaning:
                     entry["meaning"] = meaning.group(1)
                 entry["uses"].append(where)
     # These names are also XMP field suffixes. Translate at the UI boundary only.
-    for name in ("Red", "Orange", "Yellow", "Green", "Aqua", "Blue", "Purple", "Magenta", "Cyan"):
+    for name in ("Red", "Orange", "Yellow", "Green", "Aqua", "Blue", "Purple", "Magenta", "Cyan") if synthetic else ():
         entries.setdefault(name, {"key": name, "english": name, "source": name, "context": "SelectiveColor.names (display only; XMP identifiers stay in English)", "uses": []})
+    for key in shared:
+        entries.pop(key, None)
     for entry in entries.values():
         # Every place a key shows, so a translator sees when one word serves two purposes.
         uses = entry.pop("uses")
@@ -152,19 +157,29 @@ def placeholders(value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--extract", action="store_true")
+    parser.add_argument("--root", type=pathlib.Path, default=APP, help="the folder the other paths are in")
+    parser.add_argument("--sources", nargs="+", default=["Sources/CevicheMac", "Sources/CevicheCore"])
+    parser.add_argument("--resources", default="Sources/CevicheCore/Resources")
+    parser.add_argument("--source-json", default="Localization/Source.json")
+    parser.add_argument("--plists", nargs="*", default=["Platforms/macOS/Info.plist", "Platforms/macOS/IndexService-Info.plist"])
+    parser.add_argument("--shared", type=pathlib.Path, help="another resources folder whose keys this table leaves out")
     args = parser.parse_args()
-    entries = inventory()
+    root = args.root.resolve()
+    resources = root / args.resources
+    shared = read_table(args.shared / "en.lproj/Localizable.strings").keys() if args.shared else ()
+    entries = inventory(root, args.sources, shared, synthetic=not args.shared)
     if args.extract:
         source = [{name: value for name, value in entry.items() if name != "english"} for entry in entries.values()]
-        (APP / "Localization/Source.json").write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n")
-        write_table(RESOURCES / "en.lproj/Localizable.strings", {key: entry["english"] for key, entry in entries.items()})
+        (root / args.source_json).parent.mkdir(parents=True, exist_ok=True)
+        (root / args.source_json).write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n")
+        write_table(resources / "en.lproj/Localizable.strings", {key: entry["english"] for key, entry in entries.items()})
     failures = []
-    for name in ["Platforms/macOS/Info.plist", "Platforms/macOS/IndexService-Info.plist"]:
-        info = plistlib.loads((APP / name).read_bytes())
+    for name in args.plists:
+        info = plistlib.loads((root / name).read_bytes())
         if set(info.get("CFBundleLocalizations", [])) != set(LOCALES):
             failures.append(f"{name}: declared languages differ from shipped tables")
     for locale in LOCALES:
-        path = RESOURCES / f"{locale}.lproj/Localizable.strings"
+        path = resources / f"{locale}.lproj/Localizable.strings"
         if not path.exists():
             failures.append(f"Missing {path}")
             continue

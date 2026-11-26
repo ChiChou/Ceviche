@@ -27,12 +27,6 @@ CEVICHE_TEST_LOCAL_VISION=1 CEVICHE_UI_SNAPSHOTS=1 ./app/scripts/test.sh
 
 Panel snapshots are written to `/private/tmp/` with the prefix `ceviche-`. The test captures Crop, Retouch, Light & Color, Detail, Masks, Info and the export dialog. Set `CEVICHE_LOOKS_ROOT` to a library containing profiles or LUTs to also capture the applied looks under `ceviche-looks-`. Vision asset downloads may be needed on the first run. Normal test runs skip these opt-in checks.
 
-## iPad and iPhone
-
-The package's tests run on the Mac and cover the core both apps share. The touch app has no tests of its own yet: its
-flows are tried in an iOS Simulator, and time and memory are measured on a device with `DeviceBenchmark`
-(`CEVICHE_BENCHMARK`), whose figures set what `MobileFeatures` offers. See [iPad and iPhone](ios.md).
-
 ## Meteor Shower review
 
 For a Meteor Shower background comparison, run `NightSkySampleTests/testMeteorBackgroundMatching` with

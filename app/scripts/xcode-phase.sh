@@ -2,7 +2,8 @@
 # The Ceviche target's script phases in Ceviche.xcodeproj; Xcode runs them with the build settings in the environment.
 #   check     before compiling: the build settings make sense, string tables and licence notices are complete.
 #   assemble  after the helpers are embedded: what the bundle needs beyond the targets' own products.
-#   assemble_ios  the same for the iPad and iPhone app, which needs far less.
+#   bundle_models DEST [PLATFORM]  the bundled models compiled for a platform (macos, or ios for an iOS app built on
+#                 this package in another project, with SRCROOT set to this folder).
 set -euo pipefail
 APP_ROOT="$SRCROOT"
 REPO_ROOT="$(cd "$APP_ROOT/.." && pwd)"
@@ -39,7 +40,7 @@ bundle_models() { # destination [platform]
     local store="$models/build/compiled" options=()
     [[ "$platform" == macos ]] || { store="$models/build/compiled-$platform"; options=(--platform "$platform" --deployment-target "$IPHONEOS_DEPLOYMENT_TARGET"); }
     source "$models/models.sh"
-    # A test build of the iPad and iPhone app (Debug, CEVICHE_BUNDLE_ALL_MODELS=1 by default) carries every model, so
+    # A test build for iOS (Debug, CEVICHE_BUNDLE_ALL_MODELS=1 by default) carries every model, so
     # it needs no download: the App Store's asset packs only reach TestFlight and Store builds, and the release's
     # downloads aren't what a test should depend on. CEVICHE_BUNDLE_ALL_MODELS=0 makes it carry only MODEL_BUNDLED.
     local bundled=("${MODEL_BUNDLED[@]}")
@@ -140,26 +141,4 @@ assemble() {
     DYLD_FRAMEWORK_PATH="$BUILT_PRODUCTS_DIR/PackageFrameworks:$BUILT_PRODUCTS_DIR" "$schema" --schema > "$resources/d.json"
 }
 
-# The iPad and iPhone app is one flat bundle: the package's resource bundles are already at its top, where
-# `Bundle.module` and the model lookup (`BundledModel.builtInDirectory`) find them.
-assemble_ios() {
-    bundle_models "$APP/Models" ios
-    # The App Store build fetches its models as Apple-hosted asset packs (ModelAssetPacks), through the downloader
-    # extension embedded in every build and the App Group both join in that build alone.
-    if [[ "$CEVICHE_DISTRIBUTION" == appstore ]]; then
-        local info="$APP/Info.plist"
-        plutil -replace BAAppGroupID -string "$CEVICHE_APP_GROUP" "$info"
-        plutil -replace BAHasManagedAssetPacks -bool YES "$info"
-        plutil -replace BAUsesAppleHosting -bool YES "$info"
-    fi
-    # The Looks tool's built-in presets, as in the Mac app: Ceviche's own and the open-source packs, each pack's
-    # LICENSE beside its folders (`LookLibrary.builtInPresets`).
-    "$REPO_ROOT/presets/fetch-presets.sh" >/dev/null
-    python3 -I "$REPO_ROOT/presets/bundle-presets.py" "$REPO_ROOT/presets" "$APP/Presets" >/dev/null
-    cp "$REPO_ROOT/LICENSE" "$APP/LICENSE"
-    # The version and the open-source notices are in the system's Settings, under Ceviche, not in the app.
-    python3 -I "$APP_ROOT/scripts/ios-settings.py" "$APP_ROOT/Sources/CevicheMac/Resources/OpenSourceLicenses" "$APP/Settings.bundle" \
-        "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist" 2>/dev/null || echo "${MARKETING_VERSION:-}")"
-}
-
-"$1"
+"$@"

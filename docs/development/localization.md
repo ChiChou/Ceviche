@@ -24,6 +24,12 @@ The core resource bundle ships in CevicheKit.framework, which the app and the in
 service share. SwiftUI, AppKit, accessibility text and background errors share
 `L10n`; system panels and standard menu titles use macOS's own localizations.
 
+An app built on the package in another project keeps its own keys in its own table and
+adds it at launch with `L10n.addTable(.module)`; `L10n` reads the core's table first.
+It runs `localization.py` with `--root`, `--sources`, `--resources`, `--source-json`,
+`--plists` and `--shared` (the core's resources folder), so its table holds only the
+keys the core's lacks.
+
 ## Editing strings
 
 Use `L10n.tr("Export \(count) Photos…")` for app-owned prose. Its interpolation

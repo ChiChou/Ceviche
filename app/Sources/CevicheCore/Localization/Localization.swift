@@ -15,21 +15,40 @@ public enum L10n {
 
     public static func updateActiveBundle() {
         _activeBundle = resolveBundle()
+        activeAppTables = appTables.map { resolveBundle($0) }
     }
 
-    private static func resolveBundle() -> Bundle {
+    /// An app's own string table (its module's `Localizable.strings`, in the same languages), read for the keys the
+    /// core's table lacks. Call once at launch, before any text is shown.
+    public static func addTable(_ bundle: Bundle) {
+        appTables.append(bundle)
+        updateActiveBundle()
+    }
+    private static var appTables: [Bundle] = []
+    private static var activeAppTables: [Bundle] = []
+
+    private static func resolveBundle(_ base: Bundle = .module) -> Bundle {
         let choice = LanguageChoice.current
         if choice != .system,
-           let path = Bundle.module.path(forResource: choice.rawValue, ofType: "lproj"),
+           let path = base.path(forResource: choice.rawValue, ofType: "lproj"),
            let specific = Bundle(path: path) {
             return specific
         }
-        return Bundle.module
+        return base
     }
 
     /// Only call with app-owned keys, never with filenames, user text or protocol identifiers.
     public static func key(_ key: String, bundle: Bundle = activeBundle) -> String {
-        bundle.localizedString(forKey: key, value: key, table: "Localizable")
+        lookup(key, value: key, bundle: bundle)
+    }
+    /// The core's table first, then the app's own.
+    private static func lookup(_ key: String, value: String, bundle: Bundle) -> String {
+        let missing = "\u{0}"
+        for table in [bundle] + activeAppTables {
+            let text = table.localizedString(forKey: key, value: missing, table: "Localizable")
+            if text != missing { return text }
+        }
+        return value
     }
 
     public static func tr(_ message: Message, bundle: Bundle = activeBundle) -> String {
@@ -39,7 +58,7 @@ public enum L10n {
     /// "Landscape" the shape and "Landscape" the scene mode are separate keys (`context|Landscape`) and get their own
     /// translations. Without a translation it reads as the English.
     public static func tr(_ message: Message, context: String, bundle: Bundle = activeBundle) -> String {
-        format(bundle.localizedString(forKey: contextKey(message.key, context: context), value: message.key, table: "Localizable"), message)
+        format(lookup(contextKey(message.key, context: context), value: message.key, bundle: bundle), message)
     }
     /// The table key of a message in a context; the extraction script writes the same.
     static func contextKey(_ key: String, context: String) -> String { context + contextSeparator + key }

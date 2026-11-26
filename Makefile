@@ -5,7 +5,7 @@
 CONFIGURATION ?= release
 export CEVICHE_TEAM_ID CEVICHE_BUNDLE_ID CEVICHE_ICLOUD CEVICHE_ICLOUD_CONTAINER CEVICHE_SIGN_IDENTITY CEVICHE_PROVISIONING_PROFILE CEVICHE_LOCAL_STORAGE CEVICHE_DISTRIBUTION CEVICHE_SANDBOX CEVICHE_STORE_PRODUCTS CEVICHE_NOTARY_PROFILE
 
-.PHONY: all build debug dev run ios ios-simulator xcode vendor snapshot snapshot-local presets test test-slow models models-prebuilt models-install models-uninstall models-package models-pin clean help
+.PHONY: all build debug dev run xcode vendor snapshot snapshot-local presets test test-slow models models-prebuilt models-install models-uninstall models-package models-pin clean help
 .DEFAULT_GOAL := build
 
 build:                       ## Release build and signed bundle at app/dist/Ceviche.app
@@ -22,12 +22,6 @@ dev:                         ## Debug build (fast incremental), then quit and re
 
 run: build                   ## Build, then open the app
 	open app/dist/Ceviche.app
-
-ios:                         ## Build the iPad and iPhone app; DEVICE=name-or-UDID also installs and launches it there
-	app/scripts/ios.sh $(CONFIGURATION) $(if $(DEVICE),--device "$(DEVICE)")
-
-ios-simulator:               ## Build the iPad and iPhone app for the iOS Simulator
-	app/scripts/ios.sh debug --simulator
 
 vendor:                      ## Build the codec frameworks the package links; once, before opening the project in Xcode
 	app/scripts/vendor.sh
@@ -76,4 +70,4 @@ clean:                       ## Remove build products and caches
 
 help:                        ## This list
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed -E 's/:[^#]*##/\t/' | column -t -s "$$(printf '\t')"
-	@printf '\nVariables: CONFIGURATION=%s  DEVICE  TAG=models-vN  CEVICHE_SIGN_IDENTITY  CEVICHE_PROVISIONING_PROFILE  CEVICHE_LOCAL_STORAGE=folders|database  CEVICHE_ICLOUD=1|0  CEVICHE_DISTRIBUTION=community|appstore  CEVICHE_SANDBOX=1|0  CEVICHE_STORE_PRODUCTS  MODELS=1  FILTER. Signing: build.config\n' "$(CONFIGURATION)"
+	@printf '\nVariables: CONFIGURATION=%s  TAG=models-vN  CEVICHE_SIGN_IDENTITY  CEVICHE_PROVISIONING_PROFILE  CEVICHE_LOCAL_STORAGE=folders|database  CEVICHE_ICLOUD=1|0  CEVICHE_DISTRIBUTION=community|appstore  CEVICHE_SANDBOX=1|0  CEVICHE_STORE_PRODUCTS  MODELS=1  FILTER. Signing: build.config\n' "$(CONFIGURATION)"

@@ -4,16 +4,14 @@ import Foundation
 // 15.0 for every build: the App Store app target alone raises its own to 26.0 (Platforms/macOS/Config/Ceviche.xcconfig).
 let macOSMinimum = Context.environment["CEVICHE_MACOS_MIN"] ?? "15.0"
 // The codecs are linked on iOS when scripts/vendor.sh built their iOS slices (CEVICHE_IOS=1 in build.config or the
-// environment, which scripts/ios.sh sets). Read from the frameworks on disk, not the environment: Xcode caches the
+// environment). Read from the frameworks on disk, not the environment: Xcode caches the
 // evaluated manifest and would not notice the variable. Without the slices iOS builds offer no WebP or JPEG XL export.
 let codecPlatforms: [Platform] = FileManager.default.fileExists(atPath: "\(Context.packageDirectory)/Vendor/Frameworks/CWebP.xcframework/ios-arm64") ? [.macOS, .iOS] : [.macOS]
 let package = Package(
     name: "Ceviche", defaultLocalization: "en", platforms: [.macOS(macOSMinimum), .iOS("26.0")],
     // The app, its index service and its MCP helper are targets of Ceviche.xcodeproj and share CevicheKit, one dynamic
     // library of the app's code and everything it links, which Xcode builds as CevicheKit.framework.
-    products: [.library(name: "CevicheKit", type: .dynamic, targets: ["CevicheMac", "CevicheCore"]), .library(name: "CevicheCore", targets: ["CevicheCore"]),
-               // The iPad and iPhone app's code, linked statically into the app target of Platforms/iOS.
-               .library(name: "CevicheMobile", targets: ["CevicheMobile"])],
+    products: [.library(name: "CevicheKit", type: .dynamic, targets: ["CevicheMac", "CevicheCore"]), .library(name: "CevicheCore", targets: ["CevicheCore"])],
     dependencies: [
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0")
     ],
@@ -42,9 +40,6 @@ let package = Package(
                                                "-Xlinker", "\(Context.packageDirectory)/Vendor/Frameworks/codec-symbols.txt"],
                                               .when(configuration: .release))]),
         .target(name: "CevicheMac", dependencies: ["CevicheCore"], resources: [.copy("Resources/OpenSourceLicenses")]),
-        // The touch app for iPadOS and iOS, on the same core. Its files compile to nothing on macOS (`#if os(iOS)`),
-        // so `swift build` and the tests still build the whole package.
-        .target(name: "CevicheMobile", dependencies: ["CevicheCore"]),
         // The slow-tier switch, the sample corpus and shared fixtures, for both test targets.
         .target(name: "CevicheTestSupport", dependencies: ["CevicheCore"], path: "Tests/TestSupport"),
         .testTarget(name: "CevicheCoreTests", dependencies: ["CevicheCore", "CameraRaw", "DustRemoval", "CevicheTestSupport"]),
