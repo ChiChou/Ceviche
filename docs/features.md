@@ -2,6 +2,8 @@
 
 What the app ships today, by area. Names match the menus.
 
+The app uses a simplified porcelain ceviche bowl icon in the Dock, Finder and app switcher.
+
 ## Library
 
 - **Catalogs.** A catalog is a `.cevichecatalog` package holding the database, previews and, if you choose, copies of

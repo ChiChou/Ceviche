@@ -1,5 +1,7 @@
 # Ceviche RAW Studio
 
+<img src="app/Platforms/macOS/Resources/AppIcon.png" width="128" alt="Ceviche">
+
 ![Screenshot](docs/screenshot.webp)
 
 A native macOS photo catalog and RAW darkroom: SwiftUI, Apple's Core Image RAW decoder, a Metal image pipeline and a
@@ -45,7 +47,7 @@ Build settings (team, signing, iCloud) go in `build.config`; copy `build.config.
 
 ## Documentation
 
-[Features](docs/features.md) lists what the app does. [docs/](docs/README.md) covers building, testing and internals; planned work is in [ROADMAP.md](ROADMAP.md).
+[Features](docs/features.md) lists what the app does. [docs/](docs/README.md) covers building, testing and internals; planned work is in [ROADMAP.md](ROADMAP.md). The [identity assets](docs/design/identity-system/README.md) include the bowl icon and outlined wordmarks.
 `Ceviche.app/Contents/MacOS/Ceviche --help` lists the command-line options; AI clients connect through
 **Settings › MCP**.
 

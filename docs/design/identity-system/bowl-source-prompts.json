@@ -1,0 +1,24 @@
+{
+  "tool": "built-in imagegen",
+  "reference": "bowl-system.png",
+  "output": "bowl-source.png",
+  "finalExport": "1024 × 1024 opaque PNG via sips; platform export via app/scripts/identity.swift",
+  "steps": [
+    {
+      "purpose": "Isolate the approved macOS composition",
+      "transparent_background": true,
+      "prompt": "Use case: precise-object-edit / logo-brand.\nInput image is the APPROVED Ceviche identity board. Produce ONE clean production macOS app icon asset based exactly on its upper middle macOS example. Do not redesign.\nOutput a square 1024 x 1024 canvas with TRUE TRANSPARENT pixels outside one porcelain macOS rounded-square tile.\nTile occupies 824 x 824 pixels centered horizontally and vertically (100 pixel transparent margins), Apple-like continuous rounded corners, thin restrained highlight and subtle short contact shadow. Warm off-white porcelain tile, no second frame, no thick bevel, no pillow shape.\nInside the tile: the SAME approved shallow nearly circular pale porcelain ceviche bowl, optically centered, diameter 73% of tile width (600 px). Preserve the bowl and ingredients from the macOS example of the reference board: 3 large ivory fish pieces at upper-left, middle-right and lower-left; 2 smaller coral pieces at left-middle and bottom-right; 1 lime wedge at upper-right; 2 short pink onion strips crossing upper-left/middle and lower-right. Match orientation, broad shapes, color, soft matte sculpted material and quiet upper-left lighting. Thin shallow bowl rim. No herbs, no leaves, no star forms, no C letter, no extra ingredients.\nClean smooth edges at all scales, completely clean alpha outside tile/shadow, no speckle, no grain, no texture, no checkerboard.\nNo words, no labels, no palette, no presentation board, no inset mini icon. One icon only."
+    },
+    {
+      "purpose": "Prepare full-bleed opaque source without generated frame alpha",
+      "transparent_background": false,
+      "prompt": "Use case: precise-object-edit.\nInput is the approved Ceviche icon. Make an opaque, full-bleed source artwork for platform export. Keep the bowl's exact ingredient arrangement, shapes, colors and soft sculpted material unchanged. This is asset preparation, not redesign.\nSquare 1024 x 1024 canvas. Replace the rounded-square tile and all transparent surroundings with one completely opaque, smooth, very pale warm porcelain background (#F8F5F1) that covers the FULL canvas edge to edge. No rounded corners or square-tile silhouette in the output, no outside margin, no outer frame, no tile bevel or tile shadow. The separate bowl remains.\nPlace the nearly circular bowl centered at (512,512), its rim occupying approximately 74% of canvas width and height, with generous balanced whitespace on all four sides. Keep a soft short shadow only directly under the bowl. Three ivory fish pieces, two coral pieces, one upper-right lime wedge, two short pink onion strips, exactly as in the reference. Clean smooth surfaces and thin shallow bowl rim. No new ingredients, no herbs, no letters, no labels. Opaque 1024px square source artwork, no transparency, no noise, no texture, no speckle."
+    },
+    {
+      "purpose": "Correct bowl occupancy to approximately three quarters",
+      "transparent_background": false,
+      "prompt": "Use case: precise-object-edit.\nThis is a layout correction ONLY. Enlarge the existing bowl AND ALL its contents uniformly by 1.25x around the center of the square canvas. Do not change the bowl, ingredients, colors, material, lighting, orientation, or background. The bowl rim is currently only about 59% of the canvas. It MUST instead be about 74% of canvas width and height: its outer rim should reach x=13% and x=87%, y=13% and y=87%, approximately. Center the bowl precisely. Maintain the completely opaque full-bleed pale porcelain background. No tile, no rounded corners, no frame, no text, no new objects. Preserve the design identically; only enlarge the bowl uniformly. Output a square image."
+    }
+  ],
+  "notes": "Intermediate generated images are not tracked. The final PNG is the reproducible export source; generation prompts document provenance, not deterministic image regeneration."
+}

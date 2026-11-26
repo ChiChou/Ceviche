@@ -1,0 +1,14 @@
+Nunito — wordmark source
+
+Upstream: https://github.com/googlefonts/nunito
+Revision: 8c6a9bb9732545b9ed53f29ec5e1ab0ff53c4e6f
+File: fonts/variable/Nunito[wght].ttf
+Tracked as: docs/design/identity-system/fonts/Nunito.ttf
+SHA-256: bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207
+Retrieved: 2026-11-27
+
+The font bytes are unmodified; only the filename is simplified. Core Text shapes
+lowercase "ceviche" at weight 700, with default spacing, and exports glyph outlines.
+The font is a design source and is not installed or shipped in the application.
+The accompanying LICENSE is the unmodified upstream OFL.txt. No separate NOTICE
+is supplied upstream. The outlined wordmark is a document made with the font.

@@ -704,6 +704,30 @@
           "path": "credits/opencv-sface/CHANGES.txt"
         }
       ]
+    },
+    {
+      "id": "nunito",
+      "name": "Nunito",
+      "license": "OFL-1.1",
+      "projectURL": "https://github.com/googlefonts/nunito",
+      "licenseURL": "https://github.com/googlefonts/nunito/blob/8c6a9bb9732545b9ed53f29ec5e1ab0ff53c4e6f/OFL.txt",
+      "distribution": "build-tool",
+      "usage": "Nunito Bold 700 outlines for the Ceviche wordmark; the unmodified source font is tracked for identity exports, not bundled in the app.",
+      "version": null,
+      "revision": "8c6a9bb9732545b9ed53f29ec5e1ab0ff53c4e6f",
+      "evidence": [
+        "docs/design/identity-system/fonts/Nunito.ttf",
+        "docs/design/identity-system/wordmark.svg",
+        "app/scripts/identity.swift"
+      ],
+      "notices": [
+        {
+          "path": "credits/nunito/LICENSE"
+        },
+        {
+          "path": "credits/nunito/SOURCE.txt"
+        }
+      ]
     }
   ]
 }

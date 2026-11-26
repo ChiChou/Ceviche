@@ -5,6 +5,7 @@
 - [Architecture](development/architecture.md)
 - [Testing](development/testing.md)
 - [Localization](development/localization.md)
+- [Identity](design/identity-system/README.md): bowl artwork, Nunito wordmarks and app icon exports
 - [Models](../models/MODELS.md): sources, conversion and licences of the Core ML models
 - [Models in the app](development/models.md): where each model is used
 - [ID photo presets](reference/id-photo-specs.md): measurements and official sources

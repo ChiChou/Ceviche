@@ -11,7 +11,7 @@ The [manifest](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits.json) 
 they are, in `Ceviche_CevicheMac.bundle`, and the window reads them there. It is the one file to edit:
 `scripts/credits.py --write` makes this page from it, and the build checks both.
 
-The manifest has 32 records and 51 notice files, collected on 2026-11-13.
+The manifest has 33 records and 53 notice files, collected on 2026-11-13.
 Scope: Ceviche app dependencies, vendored adaptations, native codec dependencies, optional models, direct model-conversion requirements, and proposed Hald assets. Not a complete inventory of the developer toolchain or transitive Python packages.
 
 ## Application
@@ -74,6 +74,7 @@ Scope: Ceviche app dependencies, vendored adaptations, native codec dependencies
 | [Core ML Tools](https://github.com/apple/coremltools) | BSD-3-Clause | [LICENSE](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits/coremltools/LICENSE) |
 | [NumPy](https://numpy.org/) | BSD-3-Clause | [LICENSE](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits/numpy/LICENSE) |
 | [ONNX](https://onnx.ai/) | Apache-2.0 | [LICENSE](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits/onnx/LICENSE) |
+| [Nunito](https://github.com/googlefonts/nunito) | OFL-1.1 | [LICENSE](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits/nunito/LICENSE), [SOURCE.txt](../Sources/CevicheMac/Resources/OpenSourceLicenses/credits/nunito/SOURCE.txt) |
 
 ## Proposed assets — not displayed
 

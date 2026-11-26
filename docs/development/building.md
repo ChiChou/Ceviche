@@ -87,6 +87,14 @@ Three GitHub Actions workflows in `.github/workflows` run on GitHub's `xcode-27`
 - **Release** (`release.yml`): for a `v*` tag whose version matches `CFBundleShortVersionString`, a release build zipped with its dSYMs and checksums, attached to a draft GitHub release to finish by hand (notes, the samples archive). Run manually it only uploads the same files as a workflow artifact.
 - **Models** (`models.yml`): run by hand with a tag such as `models-v2`, converts every model with `models/fetch-models.sh`, packages them with `models/package-models.sh` (one uncompressed Apple Archive per model, `<Name>.aar` with the model and its `LICENSE`, and for the models in `MODEL_INT8` a `<Name>-INT8.aar` with the INT8 copy that `models/quantize_int8.py` writes, plus `SHA256SUMS` and the `ModelSet.json` manifest, which lists the INT8 archives under `int8`; the app unpacks them with the AppleArchive framework) and publishes them as a model-set release, then opens a pull request that pins the manifest in the app. Model sets are versioned apart from the app and never overwritten; an app build downloads only the set it pins, so a new set reaches users through that one-file change, made only when a model changes. `make models-pin TAG=models-vN` pins by hand.
 
+## App icon and wordmark
+
+The tracked `app/Platforms/macOS/Resources/AppIcon.icns` is the application's icon. After changing the shared
+bowl source in `docs/design/identity-system`, run `swift app/scripts/identity.swift` to export the Mac PNG and
+outlined Nunito wordmarks, then `bash app/scripts/app-icon.sh` to rebuild the `.icns`. The latter uses `uv` for
+its pinned compression tools. The [identity notes](../design/identity-system/README.md) describe the sources,
+platform framing and font licence. Normal builds consume the tracked exports and do not regenerate the artwork.
+
 ## Export encoders
 
 WebP and JPEG XL build through SwiftPM from pinned source dependencies in `app/Vendor/Package.swift`.
