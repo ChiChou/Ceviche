@@ -15450,6 +15450,7 @@
       "Sources/CevicheMac/Editor/EditorInspector.swift:451",
       "Sources/CevicheMac/Editor/LooksPanel.swift:357",
       "Sources/CevicheMac/Export/ExportOptions.swift:115",
+      "Sources/CevicheMobile/Components/PanelColumns.swift:174",
       "Sources/CevicheMobile/Develop/Scopes/DevelopScopes.swift:12",
       "Sources/CevicheCore/Adjustments/Geometry.swift:62",
       "Sources/CevicheCore/HDRMerge/HDRMergeTypes.swift:10"
@@ -15520,7 +15521,8 @@
       "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:34",
       "Sources/CevicheMac/Editor/DisclosureRow.swift:36",
       "Sources/CevicheMac/Editor/EditorInspector.swift:451",
-      "Sources/CevicheMac/Editor/LooksPanel.swift:357"
+      "Sources/CevicheMac/Editor/LooksPanel.swift:357",
+      "Sources/CevicheMobile/Components/PanelColumns.swift:174"
     ]
   },
   {
@@ -18257,7 +18259,7 @@
       "Sources/CevicheMac/Tools/BestFacesView.swift:277",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
-      "Sources/CevicheMobile/Components/PanelColumns.swift:144",
+      "Sources/CevicheMobile/Components/PanelColumns.swift:152",
       "Sources/CevicheMobile/Culling/TidyPairsView.swift:157",
       "Sources/CevicheMobile/Develop/CurveEditor.swift:135",
       "Sources/CevicheMobile/Develop/DevelopView.swift:526",
