@@ -54,7 +54,7 @@ final class DenoiseModel: ObservableObject {
                 let url = try await catalog.resolveOriginal(asset)
                 if url.startAccessingSecurityScopedResource() { access = url }
                 let development = await catalog.denoiseDevelopment(asset)
-                let previewer = try await Task.detached(priority: .userInitiated) { try DenoisePreviewer(url, development: development) }.value
+                let previewer = try await Task.detached(priority: .userInitiated) { try autoreleasepool { try DenoisePreviewer(url, development: development) } }.value
                 guard !Task.isCancelled else { return }
                 self.previewer = previewer; overview = previewer.overview; stage = .ready
                 renderCrop()

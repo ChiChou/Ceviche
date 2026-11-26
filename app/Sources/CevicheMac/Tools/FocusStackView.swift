@@ -155,7 +155,7 @@ final class FocusStackModel: ObservableObject {
                         self.stage = .preparing(message.isEmpty ? L10n.tr("Measuring sharpness") : message, fraction)
                     }
                 }
-                let work = Task.detached(priority: .userInitiated) { try stacker.analyze(progress: progress) }
+                let work = Task.detached(priority: .userInitiated) { try autoreleasepool { try stacker.analyze(progress: progress) } }
                 let analysis = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
                 self.stacker = stacker; self.analysis = analysis
                 stage = .preparing(L10n.tr("Creating preview…"), nil)

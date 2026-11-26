@@ -112,11 +112,14 @@ extension CatalogModel {
                 try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
                 if rendersExport { try FileManager.default.createDirectory(at: scratch, withIntermediateDirectories: true) }
                 let share = rendersExport ? 0.8 : 0.95
+                // A pool around the merge, as on an iPad: what Core Image and the decoders hand back goes with it.
                 let work = Task.detached(priority: .userInitiated) {
-                    try merge(merged) { fraction, step in
-                        Task { @MainActor in
-                            output.progress = fraction * share
-                            ActivityCenter.shared.update(job, progress: fraction * share, detail: step)
+                    try autoreleasepool {
+                        try merge(merged) { fraction, step in
+                            Task { @MainActor in
+                                output.progress = fraction * share
+                                ActivityCenter.shared.update(job, progress: fraction * share, detail: step)
+                            }
                         }
                     }
                 }

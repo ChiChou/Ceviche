@@ -78,7 +78,7 @@ final class MatchSeriesModel: ObservableObject {
         guard let url = photos[reference].url, let values = photos[reference].current else { return }
         renderSelected()
         let matcher: SeriesMatcher
-        do { matcher = try await Task.detached(priority: .userInitiated) { try SeriesMatcher(reference: url, values: values) }.value }
+        do { matcher = try await Task.detached(priority: .userInitiated) { try autoreleasepool { try SeriesMatcher(reference: url, values: values) } }.value }
         catch { stage = .failed(error.localizedDescription); return }
         if Task.isCancelled { return }
         referenceHasFace = matcher.referenceHasFace
@@ -86,7 +86,7 @@ final class MatchSeriesModel: ObservableObject {
             if Task.isCancelled { return }
             series.photos[index].outcome = .matching
             let prefer = series.preference(index, skin: skin)
-            let outcome = await Task.detached(priority: .userInitiated) { Result { try matcher.match(url, current: current, prefer: prefer) } }.value
+            let outcome = await Task.detached(priority: .userInitiated) { autoreleasepool { Result { try matcher.match(url, current: current, prefer: prefer) } } }.value
             if Task.isCancelled { return }
             switch outcome {
             case .success(let result): series.photos[index].outcome = .matched(result)

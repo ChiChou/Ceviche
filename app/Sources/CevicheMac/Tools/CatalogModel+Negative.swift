@@ -93,7 +93,7 @@ extension CatalogModel {
         var copied: URL?
         defer { if !installed, let copied { try? FileManager.default.removeItem(at: copied) } }
         let work = Task.detached(priority: .userInitiated) {
-            try NegativeConverter.convert(source, to: url, choice: choice, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
+            try autoreleasepool { try NegativeConverter.convert(source, to: url, choice: choice, progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled }) }
         }
         do { try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() } }
         catch { try? FileManager.default.removeItem(at: url); throw error }

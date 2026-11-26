@@ -124,7 +124,7 @@ extension CatalogModel {
                     }
                     try Task.checkCancellation()
                     let buffer = try pass.writer.makeBuffer(), photos = ready
-                    try await Task.detached(priority: .userInitiated) { try compositor.compose(frame, photos: photos, into: buffer) }.value
+                    try await Task.detached(priority: .userInitiated) { try autoreleasepool { try compositor.compose(frame, photos: photos, into: buffer) } }.value
                     try await pass.writer.append(buffer, at: index)
                     for photo in frame.photos where lastUse[photo] == position { ready[photo] = nil }
                     pass.wrote(index)
@@ -150,7 +150,7 @@ extension CatalogModel {
             }
             try Task.checkCancellation()
             let buffer = try pass.writer.makeBuffer(), photos = ready
-            try await Task.detached(priority: .userInitiated) { try compositor.compose(frame, photos: photos, into: buffer) }.value
+            try await Task.detached(priority: .userInitiated) { try autoreleasepool { try compositor.compose(frame, photos: photos, into: buffer) } }.value
             try Task.checkCancellation()
             try await pass.writer.append(buffer, at: index)
             pass.wrote(index)

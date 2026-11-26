@@ -89,7 +89,9 @@ extension CatalogModel {
             }
         }
         let work = Task.detached(priority: .userInitiated) {
-            try WideAngleFaces.correct(source, to: url, settings: settings, people: people, focalLength: focal, retouch: development?.retouch ?? [], progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
+            try autoreleasepool {
+                try WideAngleFaces.correct(source, to: url, settings: settings, people: people, focalLength: focal, retouch: development?.retouch ?? [], progress: { progress(0.9 * $0, $1) }, cancelled: { Task.isCancelled })
+            }
         }
         do { try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() } }
         catch { try? FileManager.default.removeItem(at: url); throw error }

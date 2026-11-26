@@ -192,7 +192,7 @@ final class PanoramaMergeModel: ObservableObject {
             if !immediately { try? await Task.sleep(for: .milliseconds(settings.fillEdges && !settings.autoCrop ? 200 : 25)) }
             guard !Task.isCancelled, let self, let merger = self.merger else { return }
             self.rendering = true
-            let result = await Task.detached(priority: .userInitiated) { Result { try merger.preview(settings) } }.value
+            let result = await Task.detached(priority: .userInitiated) { autoreleasepool { Result { try merger.preview(settings) } } }.value
             guard !Task.isCancelled else { return }
             var developed: CGImage?
             if case .success(let preview) = result, let source = preview.source {

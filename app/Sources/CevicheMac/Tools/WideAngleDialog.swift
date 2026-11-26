@@ -84,7 +84,7 @@ final class WideAngleModel: ObservableObject {
                 if url.startAccessingSecurityScopedResource() { access = url }
                 let exposure = await catalog.denoiseExposure(asset)
                 let retouch = await catalog.retouching(of: [asset], at: [url])[url] ?? []
-                let previewer = try await Task.detached(priority: .userInitiated) { try WideAnglePreviewer(url, exposure: exposure, retouch: retouch) }.value
+                let previewer = try await Task.detached(priority: .userInitiated) { try autoreleasepool { try WideAnglePreviewer(url, exposure: exposure, retouch: retouch) } }.value
                 guard !Task.isCancelled else { return }
                 self.previewer = previewer
                 readFocal = .some(previewer.focalLength)

@@ -360,7 +360,7 @@ final class NightSkyModel<Workflow: NightSkyWorkflow>: ObservableObject {
             }
         }
         let sky = (allSky: settings.allSky, strokes: settings.skyStrokes.filter { $0.sky != nil })
-        let work = Task.detached(priority: .userInitiated) { try workflow.analyze(allSky: sky.allSky, skyStrokes: sky.strokes, progress: progress) }
+        let work = Task.detached(priority: .userInitiated) { try autoreleasepool { try workflow.analyze(allSky: sky.allSky, skyStrokes: sky.strokes, progress: progress) } }
         let analysis = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
         alignedSky = sky
         return analysis

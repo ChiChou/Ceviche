@@ -64,7 +64,7 @@ final class BestFacesModel: ObservableObject {
                         self.stage = .preparing(message, fraction)
                     }
                 }
-                let work = Task.detached(priority: .userInitiated) { try BestFacesMerger(urls: urls, progress: progress) }
+                let work = Task.detached(priority: .userInitiated) { try autoreleasepool { try BestFacesMerger(urls: urls, progress: progress) } }
                 let merger = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
                 merger.retouch = await catalog.retouching(of: request.assets, at: urls)
                 self.merger = merger
@@ -99,12 +99,12 @@ final class BestFacesModel: ObservableObject {
         previewTask?.cancel()
         full = nil
         previewTask = Task {
-            let image = await Task.detached(priority: .userInitiated) { merger.preview(base: base, choice: choice, longEdge: 2400) }.value
+            let image = await Task.detached(priority: .userInitiated) { autoreleasepool { merger.preview(base: base, choice: choice, longEdge: 2400) } }.value
             guard !Task.isCancelled else { return }
             preview = image
             try? await Task.sleep(for: .milliseconds(600))
             guard !Task.isCancelled else { return }
-            let whole = await Task.detached(priority: .utility) { merger.preview(base: base, choice: choice, longEdge: .infinity) }.value
+            let whole = await Task.detached(priority: .utility) { autoreleasepool { merger.preview(base: base, choice: choice, longEdge: .infinity) } }.value
             if !Task.isCancelled { full = whole }
         }
     }

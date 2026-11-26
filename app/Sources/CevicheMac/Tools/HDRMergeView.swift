@@ -68,7 +68,7 @@ final class HDRMergeModel: ObservableObject {
                         self.stage = .preparing(message.isEmpty ? L10n.tr("Analyzing exposures…") : message, fraction)
                     }
                 }
-                let work = Task.detached(priority: .userInitiated) { try merger.analyze(progress: progress) }
+                let work = Task.detached(priority: .userInitiated) { try autoreleasepool { try merger.analyze(progress: progress) } }
                 let analysis = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }
                 self.merger = merger; self.analysis = analysis
                 stage = .preparing(L10n.tr("Creating preview…"), nil)
@@ -89,7 +89,7 @@ final class HDRMergeModel: ObservableObject {
             if !immediately { try? await Task.sleep(for: .milliseconds(25)) }
             guard !Task.isCancelled, let self, let merger = self.merger else { return }
             self.rendering = true
-            let result = await Task.detached(priority: .userInitiated) { Result { try merger.preview(settings) } }.value
+            let result = await Task.detached(priority: .userInitiated) { autoreleasepool { Result { try merger.preview(settings) } } }.value
             guard !Task.isCancelled else { return }
             var developed: CGImage?
             if case .success(let preview) = result {

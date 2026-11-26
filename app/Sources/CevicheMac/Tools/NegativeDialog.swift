@@ -230,7 +230,7 @@ final class NegativeModel: ObservableObject {
             do {
                 let url = try await catalog.resolveOriginal(asset)
                 if url.startAccessingSecurityScopedResource() { access = url }
-                let previewer = try await Task.detached(priority: .userInitiated) { try NegativePreviewer(url) }.value
+                let previewer = try await Task.detached(priority: .userInitiated) { try autoreleasepool { try NegativePreviewer(url) } }.value
                 guard !Task.isCancelled else { return }
                 let saved = choices[asset.id]
                 let frame = saved?.frame ?? previewer.detected
@@ -316,7 +316,7 @@ extension NegativeModel {
                         let url = try await catalog.resolveOriginal(asset)
                         let access = url.startAccessingSecurityScopedResource()
                         defer { if access { url.stopAccessingSecurityScopedResource() } }
-                        sample = try await Task.detached(priority: .userInitiated) { try NegativeConverter.rollSample(url, frame: frame) }.value
+                        sample = try await Task.detached(priority: .userInitiated) { try autoreleasepool { try NegativeConverter.rollSample(url, frame: frame) } }.value
                         if sessions[asset.id] == nil { sessions[asset.id] = await Task.detached(priority: .userInitiated) { NegativeRollScan.session(url) }.value }
                     }
                     guard !Task.isCancelled else { return }
