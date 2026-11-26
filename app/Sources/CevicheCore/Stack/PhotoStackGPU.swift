@@ -42,7 +42,8 @@ final class PhotoStackGPU {
                inverse: HDRSimilarity, gain: Float) throws {
         let sourceWidth = Int(image.extent.width.rounded(.down)), sourceHeight = Int(image.extent.height.rounded(.down))
         if texture == nil || texture!.width != sourceWidth || texture!.height != sourceHeight {
-            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
+            // Half floats: the photo is stored as Float16.
+            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba16Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
             descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
             texture = device.makeTexture(descriptor: descriptor)
         }

@@ -18,7 +18,13 @@ public final class PhotoStacker: @unchecked Sendable {
     public var retouch: [URL: [RetouchStroke]] = [:]
     public private(set) var analysis: PhotoStackAnalysis?
 
-    private let context: CIContext
+    /// A Core Image context for one decode or render, in half floats (frames are stored as Float16): one kept for the
+    /// whole stack held every RAW decoder surface it had used until the stack ended. Callers that decode side by side take
+    /// one and share it.
+    private var context: CIContext {
+        let options: [CIContextOption: Any] = [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false]
+        return device.map { CIContext(mtlDevice: $0, options: options) } ?? CIContext(options: options)
+    }
     private let device: MTLDevice?
     private lazy var gpu: PhotoStackGPU? = device.flatMap { try? PhotoStackGPU(device: $0) }
     private var metadata: [HDRMergeFrameMetadata] = []
@@ -41,8 +47,6 @@ public final class PhotoStacker: @unchecked Sendable {
         guard urls.count >= 2 else { throw PanoramaError.message(L10n.tr("Choose at least two photos to stack.")) }
         self.urls = urls
         device = MTLCreateSystemDefaultDevice()
-        let options: [CIContextOption: Any] = [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false]
-        context = device.map { CIContext(mtlDevice: $0, options: options) } ?? CIContext(options: options)
     }
 
     // MARK: Analysis
@@ -457,6 +461,7 @@ public final class PhotoStacker: @unchecked Sendable {
                 // In bands of rows, top down, so the four-channel render stays small; Core Image counts rows from the bottom.
                 let rows = max(1, min(height, (64 << 20) / (width * 16)))
                 var band = [Float](repeating: 0, count: rows * width * 4)
+                let context = context
                 for top in stride(from: 0, to: height, by: rows) {
                     let count = min(rows, height - top)
                     band.withUnsafeMutableBytes {
@@ -519,7 +524,7 @@ public final class PhotoStacker: @unchecked Sendable {
         let gpu = engine == .cpu ? nil : self.gpu
         // Half-float RGBA per photo, plus the float result and one developed photo.
         let needed = Double(pixels) * (8 * Double(included.count) + 16 + 32)
-        let store = try PhotoStackStore(device: gpu?.device, count: included.count, bytesPerFrame: pixels * 8, fileBacked: needed > 0.6 * MemoryBudget.bytes)
+        let store = try PhotoStackStore(device: gpu?.device, count: included.count, bytesPerFrame: pixels * 8, fileBacked: MappedBuffer.enabled || needed > 0.6 * MemoryBudget.bytes)
         let scale = Double(width) / Double(analysisWidth)
         // Lighten and Darken keep each photo as exposed.
         let gains = settings.mode.blendsOverBase ? [Float](repeating: 1, count: self.gains.count) : self.gains

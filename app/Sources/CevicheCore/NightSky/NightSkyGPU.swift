@@ -66,29 +66,12 @@ final class NightSkyGPU {
         return buffer
     }
 
-    /// The merge's full-size sums go to a mapped temporary file rather than memory, on every platform (a 22 MP night's
-    /// sums are about 1.8 GB): their changed pages are the file's, which the system writes back under pressure instead
-    /// of counting them against the app, and the merge took no longer for it. `mapsSums` false keeps them in memory, for
-    /// tests that compare.
+    /// The merge's full-size sums go to a mapped temporary file (`MappedBuffer`) rather than memory, on every platform:
+    /// a 22 MP night's sums are about 1.8 GB. `mapsSums` false keeps them in memory, for tests that compare.
     nonisolated(unsafe) static var mapsSums: Bool?
-    private static func shouldMap(_ length: Int) -> Bool { mapsSums ?? true }
-    /// A zeroed GPU buffer over a temporary file mapped into memory, the file unlinked at once so nothing is left behind;
-    /// nil when memory is plentiful or the mapping fails, and the caller allocates as before.
     static func mappedBuffer(_ device: MTLDevice, length: Int) -> MTLBuffer? {
-        guard shouldMap(length) else { return nil }
-        let page = Int(getpagesize()), size = (length + page - 1) / page * page
-        let path = FileManager.default.temporaryDirectory.appendingPathComponent("Ceviche Night Sum \(UUID().uuidString)").path
-        let descriptor = open(path, O_RDWR | O_CREAT | O_EXCL, 0o600)
-        guard descriptor >= 0 else { return nil }
-        unlink(path)
-        guard ftruncate(descriptor, off_t(size)) == 0, let base = mmap(nil, size, PROT_READ | PROT_WRITE, MAP_SHARED, descriptor, 0), base != MAP_FAILED else {
-            close(descriptor); return nil
-        }
-        // A file's new pages read as zeros, so it needs no clearing.
-        guard let buffer = device.makeBuffer(bytesNoCopy: base, length: size, options: .storageModeShared, deallocator: { pointer, length in
-            munmap(pointer, length); close(descriptor)
-        }) else { munmap(base, size); close(descriptor); return nil }
-        return buffer
+        guard mapsSums ?? true else { return nil }
+        return MappedBuffer.make(device, length: length)
     }
 
     struct Maps { let probability: MTLBuffer, valid: MTLBuffer }

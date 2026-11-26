@@ -19,7 +19,11 @@ public final class HDRMerger: @unchecked Sendable {
     public var retouch: [URL: [RetouchStroke]] = [:]
     public private(set) var analysis: HDRMergeAnalysis?
 
-    let context: CIContext
+    /// A Core Image context for one decode, in half floats (the merge sums in 32-bit): one kept for the whole merge held
+    /// every RAW decoder surface it had used until the merge ended. The analysis takes one and shares it across its decodes.
+    var context: CIContext {
+        CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false])
+    }
     let device: MTLDevice
     /// The full-size blend's GPU engine.
     lazy var gpu = HDRMergeGPU(device: device)
@@ -50,7 +54,6 @@ public final class HDRMerger: @unchecked Sendable {
         self.urls = urls
         guard let device = MTLCreateSystemDefaultDevice() else { throw EditorError.noGPU }
         self.device = device
-        context = CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
     }
 
     // MARK: Analysis

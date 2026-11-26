@@ -42,8 +42,10 @@ final class HDRMergeGPU {
         let width: Int, height: Int
         fileprivate var texture: MTLTexture?
         init?(device: MTLDevice, width: Int, height: Int, painted: Bool) {
-            guard let buffer = device.makeBuffer(length: width * height * 16, options: .storageModeShared) else { return nil }
-            memset(buffer.contents(), 0, buffer.length)
+            // The 32-bit sum in a mapped temporary file (`MappedBuffer`), not the app's memory.
+            let mapped = MappedBuffer.make(device, length: width * height * 16)
+            guard let buffer = mapped ?? device.makeBuffer(length: width * height * 16, options: .storageModeShared) else { return nil }
+            if mapped == nil { memset(buffer.contents(), 0, buffer.length) }
             if painted {
                 guard let forced = device.makeBuffer(length: width * height * 16, options: .storageModePrivate) else { return nil }
                 self.forced = forced
@@ -68,7 +70,8 @@ final class HDRMergeGPU {
              trust: ([Float], Int, Int)?, keep: ([Float], Int, Int)? = nil, forced: ([Float], Int, Int)? = nil) throws {
         let sourceWidth = Int(image.extent.width.rounded(.down)), sourceHeight = Int(image.extent.height.rounded(.down))
         if sum.texture == nil || sum.texture!.width != sourceWidth || sum.texture!.height != sourceHeight {
-            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
+            // Half floats: one photo at a time, summed in 32-bit.
+            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba16Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
             descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
             sum.texture = device.makeTexture(descriptor: descriptor)
         }
