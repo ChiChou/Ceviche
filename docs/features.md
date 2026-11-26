@@ -358,7 +358,7 @@ Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is off
   and its main options in the inspector beside it (a sheet on an iPhone). As on the Mac, each photo's retouching is
   burnt in, the preview shows the result with the base photo's edits and the result takes them; HDR, Focus Stack and
   Stack show the photos in a strip, where a tap makes one the base. Merges, tools and culling screens share
-  Photos' editing bar: close at one end, the screen's name and progress in the middle, its action at the other. An iPhone has no Create Star Trails or Create Timelapse Video, which take hundreds of photos. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
+  Photos' editing bar: close at one end, the screen's name and progress in the middle, its action at the other. An iPhone has no Create Star Trails, Composite Meteor Shower or Create Timelapse Video, which take hundreds of photos. Create Star Trails' Output can also be Video or Live Photo, the trails building up frame by
   frame with the Mac's Trails, Glow and Meteors options; the movie's frame is drawn on the whole preview, and Crop in the bar opens a framing mode (Done at the leading edge, Reset at the other) where it is moved, resized from a corner or reset with a double tap; a video's Export… opens a
   sheet with Encoder, Container, Color and Quality, then Save or Share, which starts it. The three
   night-sky merges are laid out like the editor in Photos: a rail of modes at the side (Objects, Sky, Photos,
