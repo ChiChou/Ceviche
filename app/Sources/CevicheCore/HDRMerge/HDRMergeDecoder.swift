@@ -45,7 +45,7 @@ enum HDRMergeDecoder {
               let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any],
               let width = properties[kCGImagePropertyPixelWidth as String] as? Int,
               let height = properties[kCGImagePropertyPixelHeight as String] as? Int else {
-            throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a photo this Mac can read."))
+            throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a photo this device can read."))
         }
         let exif = properties[kCGImagePropertyExifDictionary as String] as? [String: Any] ?? [:]
         let tiff = properties[kCGImagePropertyTIFFDictionary as String] as? [String: Any] ?? [:]

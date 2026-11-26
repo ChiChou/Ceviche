@@ -154,7 +154,7 @@ public final class SeriesMatcher: @unchecked Sendable {
         let exposureIndex: Double?
 
         init(_ url: URL) throws {
-            guard let raw = CIRAWFilter(imageURL: url) else { throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a RAW photo this Mac can read.")) }
+            guard let raw = CIRAWFilter(imageURL: url) else { throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a RAW photo this device can read.")) }
             self.raw = raw
             let native = raw.nativeSize
             raw.scaleFactor = min(1, Float(SeriesMatcher.workSize) / Float(max(native.width, native.height, 1)))

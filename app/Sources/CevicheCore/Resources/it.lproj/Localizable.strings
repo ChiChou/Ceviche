@@ -53,8 +53,6 @@
 "%1$@ is off in this XMP; Ceviche's matching local edits were left unchanged." = "%1$@ è disattivato in questo XMP; le modifiche locali corrispondenti di Ceviche sono rimaste invariate.";
 "%1$@ is offline. %2$@" = "%1$@ non è in linea. %2$@";
 "%1$@ is stored in the writer's installed profile files, not in this XMP; it was not applied." = "%1$@ è memorizzato nei file di profilo installati nell’app di origine, non in questo XMP; non è stato applicato.";
-"%1$@ isn’t a RAW photo this Mac can read." = "%1$@ non è una foto RAW leggibile da questo Mac.";
-"%1$@ isn’t a photo this Mac can read." = "Questo Mac non può leggere %1$@.";
 "%1$@ low" = "Limite inferiore: %1$@";
 "%1$@ needs a model that is not installed." = "%1$@ richiede un modello che non è installato.";
 "%1$@ needs its model. Download it below, or add it from a file." = "%1$@ richiede il suo modello. Scaricalo qui sotto oppure aggiungilo da un file.";
@@ -3601,4 +3599,6 @@
 "Taller" = "Più alto";
 
 "Custom…" = "Personalizzato…";
-"Bracketed panoramas need an iPad or a Mac." = "I panorami con bracketing richiedono un iPad o un Mac.";
+"%1$@ isn’t a RAW photo this device can read." = "%1$@ non è una foto RAW leggibile da questo dispositivo.";
+"%1$@ isn’t a photo this device can read." = "Questo dispositivo non può leggere %1$@.";
+"This device doesn’t have enough memory for a bracketed panorama." = "Questo dispositivo non ha memoria sufficiente per un panorama con bracketing.";

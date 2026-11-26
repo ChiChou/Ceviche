@@ -121,9 +121,9 @@
 "%1$@ is off in this XMP; Ceviche's matching local edits were left unchanged." = "%1$@ is off in this XMP; Ceviche's matching local edits were left unchanged.";
 "%1$@ is offline. %2$@" = "%1$@ is offline. %2$@";
 "%1$@ is stored in the writer's installed profile files, not in this XMP; it was not applied." = "%1$@ is stored in the writer's installed profile files, not in this XMP; it was not applied.";
-"%1$@ isn’t a RAW photo this Mac can read." = "%1$@ isn’t a RAW photo this Mac can read.";
+"%1$@ isn’t a RAW photo this device can read." = "%1$@ isn’t a RAW photo this device can read.";
 "%1$@ isn’t a Sony RAW photo." = "%1$@ isn’t a Sony RAW photo.";
-"%1$@ isn’t a photo this Mac can read." = "%1$@ isn’t a photo this Mac can read.";
+"%1$@ isn’t a photo this device can read." = "%1$@ isn’t a photo this device can read.";
 "%1$@ isn’t a printer profile." = "%1$@ isn’t a printer profile.";
 "%1$@ isn’t a six-shot photo Pixel Shift supports." = "%1$@ isn’t a six-shot photo Pixel Shift supports.";
 "%1$@ isn’t from a camera Pixel Shift supports." = "%1$@ isn’t from a camera Pixel Shift supports.";
@@ -602,7 +602,6 @@
 "Bottom right" = "Bottom right";
 "Bounce" = "Bounce";
 "Boundary Warp" = "Boundary Warp";
-"Bracketed panoramas need an iPad or a Mac." = "Bracketed panoramas need an iPad or a Mac.";
 "Bright" = "Bright";
 "Brighter sky than the other photos" = "Brighter sky than the other photos";
 "Brightest" = "Brightest";
@@ -3187,6 +3186,7 @@
 "This copy of Ceviche is not signed for iCloud, so it cannot see catalogs from your other Macs." = "This copy of Ceviche is not signed for iCloud, so it cannot see catalogs from your other Macs.";
 "This copy of Ceviche is not signed for iCloud. Your catalog and edits are saved on this Mac. A signed build is needed to sync them." = "This copy of Ceviche is not signed for iCloud. Your catalog and edits are saved on this Mac. A signed build is needed to sync them.";
 "This deletion belongs to another catalog." = "This deletion belongs to another catalog.";
+"This device doesn’t have enough memory for a bracketed panorama." = "This device doesn’t have enough memory for a bracketed panorama.";
 "This display can’t show HDR" = "This display can’t show HDR";
 "This document was created by %1$@ with your previous settings and sources. Open it to pick up where you left off, change anything and export again." = "This document was created by %1$@ with your previous settings and sources. Open it to pick up where you left off, change anything and export again.";
 "This export format or bit depth is not supported by the installed encoder." = "This export format or bit depth is not supported by the installed encoder.";

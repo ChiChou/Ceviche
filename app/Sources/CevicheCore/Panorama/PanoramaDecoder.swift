@@ -48,7 +48,7 @@ enum PanoramaDecoder {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
               let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any],
               let raw = CIRAWFilter(imageURL: url), raw.nativeSize.width > 0 else {
-            throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a RAW photo this Mac can read."))
+            throw PanoramaError.message(L10n.tr("\(url.lastPathComponent) isn’t a RAW photo this device can read."))
         }
         let exif = properties[kCGImagePropertyExifDictionary as String] as? [String: Any] ?? [:]
         let tiff = properties[kCGImagePropertyTIFFDictionary as String] as? [String: Any] ?? [:]

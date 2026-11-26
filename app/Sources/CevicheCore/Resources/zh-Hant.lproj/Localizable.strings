@@ -53,8 +53,6 @@
 "%1$@ is off in this XMP; Ceviche's matching local edits were left unchanged." = "此 XMP 中的 %1$@ 已關閉；鮮調修圖中對應的局部編輯保持不變。";
 "%1$@ is offline. %2$@" = "%1$@ 處於離線狀態。%2$@";
 "%1$@ is stored in the writer's installed profile files, not in this XMP; it was not applied." = "%1$@ 儲存在寫入程式所安裝的描述檔中，而非此 XMP 中；未予套用。";
-"%1$@ isn’t a RAW photo this Mac can read." = "%1$@ 不是這台 Mac 可以讀取的 RAW 照片。";
-"%1$@ isn’t a photo this Mac can read." = "此 Mac 無法讀取 %1$@。";
 "%1$@ low" = "%1$@ 下限";
 "%1$@ needs a model that is not installed." = "%1$@ 需要的模型尚未安裝。";
 "%1$@ needs its model. Download it below, or add it from a file." = "%1$@ 需要其模型。請在下方下載，或從檔案加入。";
@@ -3601,4 +3599,6 @@
 "Taller" = "升高";
 
 "Custom…" = "自訂…";
-"Bracketed panoramas need an iPad or a Mac." = "包圍曝光全景需要 iPad 或 Mac。";
+"%1$@ isn’t a RAW photo this device can read." = "%1$@ 不是此裝置可以讀取的 RAW 照片。";
+"%1$@ isn’t a photo this device can read." = "此裝置無法讀取 %1$@。";
+"This device doesn’t have enough memory for a bracketed panorama." = "此裝置記憶體不足，無法合成包圍曝光全景。";
