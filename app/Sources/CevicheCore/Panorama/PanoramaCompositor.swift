@@ -220,8 +220,9 @@ final class PanoramaCompositor {
                                                source: { try texture($0).frame! }, progress: progress, cancelled: cancelled)
         }
         let count = layout.width * layout.height
-        guard count * 16 <= device.maxBufferLength, let sum = device.makeBuffer(length: count * 16, options: .storageModeShared),
-              let detail = device.makeBuffer(length: count * 16, options: .storageModePrivate) else {
+        // The two canvas-size sums in mapped temporary files (`MappedBuffer`), not the app's memory.
+        guard count * 16 <= device.maxBufferLength, let sum = MappedBuffer.large(device, length: count * 16),
+              let detail = MappedBuffer.large(device, length: count * 16) else {
             throw PanoramaError.message(L10n.tr("Not enough GPU memory for a \(layout.width) × \(layout.height) panorama."))
         }
         memset(sum.contents(), 0, sum.length)

@@ -104,7 +104,7 @@ extension FocusStacker {
     func fuse(_ layout: FocusStackLayout, _ steps: [FocusStackFrameStep], reference: Int, frame: (Int) throws -> PanoramaFrame) throws -> PanoramaRaster {
         // The merge's GPU engine blends the reduced photos too.
         if analysisEngine == .gpu {
-            let fusion = try gpu.fusion(layout)
+            let fusion = try gpu.fusion(layout), context = self.context
             for step in steps {
                 if Task.isCancelled { throw CancellationError() }
                 let source = try frame(step.index)

@@ -140,13 +140,16 @@ enum PanoramaDecoder {
         return PanoramaFrame(width: frame.width, height: frame.height, pixels: pixels)
     }
 
-    private static let retouchContext = CIContext(options: [.workingColorSpace: space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
+    /// Fresh each time: a shared context would keep every full-size photo retouched through it.
+    private static var retouchContext: CIContext { CIContext(options: [.workingColorSpace: space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false]) }
     /// `image` with a photo's retouching drawn in, AI fills included: a fill is stored relative to its surroundings, so it
     /// relights to this undeveloped decode as it does to a changed exposure. Only the strokes' footprints change, so those are rendered once here and laid over the photo as plain pixels:
     /// whatever renders the photo next, on the CPU or into a texture, sees the same repair.
     static func retouched(_ image: CIImage, _ strokes: [RetouchStroke]) -> CIImage {
         let strokes = strokes.filter(\.enabled)
-        guard !strokes.isEmpty, let repaired = try? RetouchRenderer(context: retouchContext).apply(strokes, to: image) else { return image }
+        guard !strokes.isEmpty else { return image }
+        let context = retouchContext
+        guard let repaired = try? RetouchRenderer(context: context).apply(strokes, to: image) else { return image }
         var out = image
         for stroke in strokes {
             let area = RetouchRenderer.bounds(of: stroke, in: image.extent)
@@ -154,7 +157,7 @@ enum PanoramaDecoder {
             guard width > 0, height > 0 else { continue }
             var pixels = [Float](repeating: 0, count: width * height * 4)
             pixels.withUnsafeMutableBytes {
-                retouchContext.render(repaired, toBitmap: $0.baseAddress!, rowBytes: width * 16, bounds: area, format: .RGBAf, colorSpace: space)
+                context.render(repaired, toBitmap: $0.baseAddress!, rowBytes: width * 16, bounds: area, format: .RGBAf, colorSpace: space)
             }
             let patch = CIImage(bitmapData: pixels.withUnsafeBufferPointer { Data(buffer: $0) }, bytesPerRow: width * 16, size: CGSize(width: width, height: height),
                                 format: .RGBAf, colorSpace: space)

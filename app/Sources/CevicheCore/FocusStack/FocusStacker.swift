@@ -23,7 +23,12 @@ public final class FocusStacker: @unchecked Sendable {
     /// Whether the edge-aware blend may ask the depth model, where it's installed, which photo suits low-texture areas.
     public var usesDepth = true
 
-    let context: CIContext
+    /// A fresh context each time it's asked for: Core Image keeps every surface a context used until the context goes,
+    /// so a full-size photo developed through one shared context stays in memory to the end. Half floats, as the merge
+    /// textures are.
+    var context: CIContext {
+        CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false])
+    }
     let device: MTLDevice
     /// The full-size merge's GPU engine.
     lazy var gpu = FocusStackGPU(device: device)
@@ -66,7 +71,6 @@ public final class FocusStacker: @unchecked Sendable {
         self.urls = urls
         guard let device = MTLCreateSystemDefaultDevice() else { throw EditorError.noGPU }
         self.device = device
-        context = CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
     }
 
     // MARK: Analysis

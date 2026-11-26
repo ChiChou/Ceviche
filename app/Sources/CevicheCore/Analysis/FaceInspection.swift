@@ -50,6 +50,8 @@ public enum FaceInspection {
     private static func crops(_ faces: [CGRect], url: URL, source: CGImageSource) -> [Face]? {
         guard let original = original(url, source: source) else { return nil }
         let size = original.extent.size
+        // A context per photo: a shared one would keep each RAW's decoder surfaces.
+        let context = CIContext(options: [.cacheIntermediates: false])
         return faces.compactMap { bounds in
             // Core Image counts from the bottom left; the crop rectangles from the top left.
             let rect = cropRect(face: bounds, imageSize: size, maxSide: maxCropSide)
@@ -59,8 +61,6 @@ public enum FaceInspection {
         }
     }
 
-    /// One context for every crop; intermediates are not kept, since each photo is rendered once.
-    private static let context = CIContext(options: [.cacheIntermediates: false])
     private static let displaySpace = CGColorSpace(name: CGColorSpace.displayP3)!
 
     /// The original upright at full size, unrendered: a RAW through Apple's decoder, a JPEG or HEIF as Core Image reads

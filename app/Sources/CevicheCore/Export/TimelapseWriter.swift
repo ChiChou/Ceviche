@@ -219,7 +219,8 @@ extension RawRenderer {
     public func renderTimelapsePhoto(_ adjustments: Adjustments, crop: TimelapseCrop, ratio: Double, size: CGSize, hdr: Bool,
                                      steady: TimelapseStabilization.Frame? = nil) throws -> TimelapsePhoto {
         let image = try timelapseImage(adjustments, crop: crop, ratio: ratio, size: size, hdr: hdr, steady: steady)
-        return try TimelapsePhoto.render(image, size: size, context: context)
+        // Developed from the full RAW: a context of its own, so the decoder's surfaces go with the frame.
+        return try TimelapsePhoto.render(image, size: size, context: renderContext())
     }
 
     /// One video frame: the photo developed with `adjustments`, cut to the crop's frame and scaled to `size`.

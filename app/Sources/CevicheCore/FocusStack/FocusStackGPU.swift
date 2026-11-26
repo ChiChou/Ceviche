@@ -55,7 +55,8 @@ final class FocusStackGPU {
 
         fileprivate init?(device: MTLDevice, layout: FocusStackLayout) {
             self.layout = layout
-            func buffer(_ length: Int) -> MTLBuffer? { device.makeBuffer(length: max(16, length), options: .storageModeShared) }
+            // Full-size levels and sums in a mapped temporary file (`MappedBuffer`), not the app's memory.
+            func buffer(_ length: Int) -> MTLBuffer? { MappedBuffer.large(device, length: length) }
             var w = layout.width, h = layout.height
             let count = layout.blending == .labels ? 1 : layout.levels
             for _ in 0..<count {
@@ -90,10 +91,10 @@ final class FocusStackGPU {
     /// One aligned, exposure-matched source for the repair brush. Uses the fusion's exact cubic sampler.
     func aligned(_ image: CIImage, layout: FocusStackLayout, step: FocusStackFrameStep, context: CIContext) throws -> MTLBuffer {
         let w = Int(image.extent.width), h = Int(image.extent.height)
-        let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: w, height: h, mipmapped: false)
+        let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba16Float, width: w, height: h, mipmapped: false)
         descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
         guard let texture = device.makeTexture(descriptor: descriptor), let commands = queue.makeCommandBuffer(),
-              let out = device.makeBuffer(length: layout.width * layout.height * 16, options: .storageModeShared) else { throw fail() }
+              let out = MappedBuffer.large(device, length: layout.width * layout.height * 16) else { throw fail() }
         let flipped = image.transformed(by: CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(h)))
         context.render(flipped, to: texture, commandBuffer: commands, bounds: CGRect(x: 0, y: 0, width: w, height: h), colorSpace: PanoramaDecoder.space)
         let l = step.inverse.linear
@@ -113,7 +114,7 @@ final class FocusStackGPU {
         let layout = fusion.layout
         let sourceWidth = Int(image.extent.width.rounded(.down)), sourceHeight = Int(image.extent.height.rounded(.down))
         if fusion.texture == nil || fusion.texture!.width != sourceWidth || fusion.texture!.height != sourceHeight {
-            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba32Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
+            let descriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba16Float, width: sourceWidth, height: sourceHeight, mipmapped: false)
             descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]; descriptor.storageMode = .private
             fusion.texture = device.makeTexture(descriptor: descriptor)
         }

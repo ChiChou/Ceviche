@@ -27,4 +27,9 @@ enum MappedBuffer {
         }) else { munmap(base, size); close(descriptor); return nil }
         return buffer
     }
+
+    /// A shared buffer over a mapped file when it is large (16 MB or more), else in memory; nil only when neither works.
+    static func large(_ device: MTLDevice, length: Int) -> MTLBuffer? {
+        (length >= 1 << 24 ? make(device, length: length) : nil) ?? device.makeBuffer(length: max(16, length), options: .storageModeShared)
+    }
 }

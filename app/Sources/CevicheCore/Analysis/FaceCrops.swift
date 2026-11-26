@@ -34,7 +34,8 @@ public enum FaceCrops {
     public static func whole(at url: URL) -> CGImage? {
         guard let image = original(url, scale: 1) else { return nil }
         let extent = image.extent
-        return context.createCGImage(image.transformed(by: CGAffineTransform(translationX: -extent.minX, y: -extent.minY)),
+        // A context of its own, gone with the call: the shared one would keep the whole decode.
+        return CIContext(options: [.cacheIntermediates: false]).createCGImage(image.transformed(by: CGAffineTransform(translationX: -extent.minX, y: -extent.minY)),
                                      from: CGRect(origin: .zero, size: CGSize(width: floor(extent.width), height: floor(extent.height))),
                                      format: .RGBA8, colorSpace: displaySpace)
     }

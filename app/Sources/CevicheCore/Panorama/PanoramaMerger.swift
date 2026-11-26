@@ -17,7 +17,12 @@ public final class PanoramaMerger: @unchecked Sendable {
                                             MemoryBudget.bytes / Double(48 + PanoramaCompositor.bytesPerPixel), 600e6)
 
     private let compositor: PanoramaCompositor
-    private let context: CIContext
+    /// A fresh context for each photo: Core Image keeps every surface a context used until the context goes, so one
+    /// shared context holds each full-size photo developed through it to the end.
+    private var context: CIContext {
+        let options: [CIContextOption: Any] = [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false]
+        return compositor.device.map { CIContext(mtlDevice: $0, options: options) } ?? CIContext(options: options)
+    }
     private var metadata: [PanoramaFrameMetadata] = []
     /// The white balance every photo is developed with: the middle photo's as shot.
     private var whiteBalance = (temperature: 5000.0, tint: 0.0)
@@ -46,8 +51,6 @@ public final class PanoramaMerger: @unchecked Sendable {
         guard urls.count >= 2 else { throw PanoramaError.message(L10n.tr("Choose at least two photos to merge.")) }
         self.urls = urls; inputs = nil
         compositor = PanoramaCompositor(useGPU: useGPU)
-        let options: [CIContextOption: Any] = [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false]
-        context = compositor.device.map { CIContext(mtlDevice: $0, options: options) } ?? CIContext(options: options)
     }
 
     /// A panorama of pictures made in memory. `urls` names the photo each stands for, whose camera and place the DNG keeps.
@@ -55,8 +58,6 @@ public final class PanoramaMerger: @unchecked Sendable {
         guard urls.count >= 2, inputs.count == urls.count else { throw PanoramaError.message(L10n.tr("Choose at least two photos to merge.")) }
         self.urls = urls; self.inputs = inputs
         compositor = PanoramaCompositor(useGPU: useGPU)
-        let options: [CIContextOption: Any] = [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false]
-        context = compositor.device.map { CIContext(mtlDevice: $0, options: options) } ?? CIContext(options: options)
     }
 
     /// `retouched` false leaves the photo's own retouching out, for aligning: a fill or patch must not move features.

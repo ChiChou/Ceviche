@@ -50,7 +50,11 @@ public final class HDRPanoramaMerger: @unchecked Sendable {
     private var shots: [Shot] = []
     /// Each photo's own retouching by URL, burnt in when the full-size result is rendered; aligning goes without it.
     public var retouch: [URL: [RetouchStroke]] = [:]
-    private let context = CIContext(options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
+    /// A fresh context each time: Core Image keeps every surface a context used until the context goes.
+    private var context: CIContext { Self.makeContext() }
+    private static func makeContext() -> CIContext {
+        CIContext(options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false])
+    }
 
     public init(urls: [URL]) throws {
         guard urls.count >= 4 else { throw PanoramaError.message(L10n.tr("Choose the brackets of at least two positions.")) }
@@ -258,9 +262,9 @@ public final class HDRPanoramaMerger: @unchecked Sendable {
             // own it finds no constraint at dusk and stops at two stops.
             let factor = common.flatMap { c in shots[reference].stops.map { exp2(c - $0) } } ?? 1
             if group.count == 1 {
-                let context = self.context, strokes = retouch[referenceURL] ?? []
+                let strokes = retouch[referenceURL] ?? []
                 inputs.append(PanoramaInput(metadata: metadata, exposureFactor: factor) { longEdge in
-                    let frame = try PanoramaDecoder.decode(referenceURL, longEdge: longEdge, whiteBalance: whiteBalance, context: context,
+                    let frame = try PanoramaDecoder.decode(referenceURL, longEdge: longEdge, whiteBalance: whiteBalance, context: Self.makeContext(),
                                                          retouch: longEdge == nil ? strokes : [])
                     return PanoramaFrame(width: frame.width, height: frame.height, pixels: Self.scaled(frame.pixels, by: Float(factor)))
                 })

@@ -88,7 +88,7 @@ public final class BestFacesMerger: @unchecked Sendable {
         for (index, url) in urls.enumerated() {
             try Task.checkCancellation()
             progress(Double(index) / Double(urls.count) * 0.95, L10n.tr("Finding faces in \(url.lastPathComponent)…"))
-            frames.append(try Self.read(url))
+            frames.append(try autoreleasepool { try Self.read(url) })
         }
         let order = frames.indices.sorted { (frames[$0].captureDate ?? 0, urls[$0].lastPathComponent) < (frames[$1].captureDate ?? 0, urls[$1].lastPathComponent) }
         guard order.count >= 2 else { throw BestFacesError.tooFewPhotos }
@@ -217,7 +217,8 @@ public final class BestFacesMerger: @unchecked Sendable {
         let format = url.pathExtension.uppercased()
         try writer.write(raster, to: url, progress: { progress(0.5 + 0.5 * $0, L10n.tr("Writing \(format)")) }, cancelled: { Task.isCancelled })
     }
-    static let linearContext = CIContext(options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
+    /// Fresh for each merge: a shared context would keep the full-size photos developed through it.
+    static var linearContext: CIContext { CIContext(options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false]) }
 
     /// A frame for the filmstrip, `pixels` on its long side.
     public func thumbnail(frame: Int, pixels: Int) -> CGImage? {

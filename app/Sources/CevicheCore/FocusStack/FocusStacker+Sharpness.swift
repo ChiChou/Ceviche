@@ -101,6 +101,7 @@ extension FocusStacker {
         let n = width * height
         let image = CIImage(bitmapData: Data(bytes: composite, count: n * 16), bytesPerRow: width * 16,
                             size: CGSize(width: width, height: height), format: .RGBAf, colorSpace: PanoramaDecoder.space)
+        let context = self.context
         guard let depth = try? RawRenderer.relativeDepth(image, context: context) else { return nil }
         let scaled = depth.transformed(by: CGAffineTransform(scaleX: CGFloat(width) / depth.extent.width, y: CGFloat(height) / depth.extent.height))
         var values = [Float](repeating: 0, count: n)
