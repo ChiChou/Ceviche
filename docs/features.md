@@ -285,7 +285,8 @@ same on the other. Features that belong to the Mac's shell (Folders, Edit In, th
 Pixel Shift, whose memory an iPad can't spare, are not there, and a merge is offered only when the photos chosen fit the device's memory.
 
 - **Library.** One catalog on the device. Import copies photos in from Files (files or folders) or from Photos, RAW
-  included, and they show as they land. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
+  included, and they show as they land. A RAW shared from another app, or opened from Files with Open in Ceviche, is
+  imported the same way. The sidebar has Library, Picks, Map and People, then Albums and Utilities,
   which fold: Duplicates (each photo beside its copies, found by background analysis), Archived once something is
   in it, Trash and Storage. Years, Months and All Photos at the foot of the photos lay them out in time: a year or
   month shows as its first photo with its name and count, and a tap shows its photos. The
