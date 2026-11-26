@@ -18,8 +18,11 @@ extension NightSkyAnalyzer {
             let found = try autoreleasepool { () -> Set<Int> in
                 if let gpu {
                     let image = try HDRMergeDecoder.developedImage(urls[i], metadata: metadata[i].base, longEdge: nil, whiteBalance: whiteBalance)
+                    // Half floats: a spike eight noise deviations above its ring needs nothing finer, and the full-size
+                    // decode's working surfaces take half the memory.
+                    let half = CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAh, .cacheIntermediates: false])
                     // Nil when the frame is too noisy to have a sensor's few defects: it then marks nothing.
-                    return Set(try gpu.spikes(image, context: context) ?? [])
+                    return Set(try gpu.spikes(image, context: half) ?? [])
                 }
                 let frame = try HDRMergeDecoder.decode(urls[i], metadata: metadata[i].base, longEdge: nil, whiteBalance: whiteBalance, context: context)
                 return Set(Self.spikes(frame.pixels, width: frame.width, height: frame.height))
@@ -159,8 +162,9 @@ extension NightSkyAnalyzer {
     }
 
     /// One photo developed at analysis size: RGBA top row first, and its image for the sky model.
-    func developAnalysis(_ i: Int) throws -> (CIImage, [Float]) {
-        try autoreleasepool {
+    func developAnalysis(_ i: Int, context: CIContext? = nil) throws -> (CIImage, [Float]) {
+        let context = context ?? self.context
+        return try autoreleasepool {
             let image = try HDRMergeDecoder.developedImage(urls[i], metadata: metadata[i].base, longEdge: Self.analysisLongEdge, whiteBalance: whiteBalance)
             let w = Int(image.extent.width.rounded(.down)), h = Int(image.extent.height.rounded(.down))
             if analysisWidth > 0, w != analysisWidth || h != analysisHeight {

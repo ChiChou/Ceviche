@@ -66,7 +66,20 @@ final class NightSkyAnalyzer: @unchecked Sendable {
     var skyModelInstalled = true
     private(set) var cache: NightSkyCache?
 
-    let context: CIContext
+    /// A Core Image context for one render or decode. Core Image keeps every surface a context has used, the RAW
+    /// decoder's working surfaces among them, until the context goes: one kept for the whole analysis grew by every
+    /// photo decoded (4 GB after the first few at 22 MP). A fresh one each time lets them go with it.
+    var context: CIContext {
+        CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
+    }
+    /// The same for a merge's full-size decodes, in half floats unless `mergesInFloat`: the sums stay 32-bit, and a photo's
+    /// development needs nothing finer than 1/2000 before averaging, while its working surfaces take half the memory.
+    var mergeContext: CIContext {
+        CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space,
+                                               .workingFormat: Self.mergesInFloat ? CIFormat.RGBAf : CIFormat.RGBAh, .cacheIntermediates: false])
+    }
+    /// Tests compare a merge decoded in half floats with one in full floats.
+    nonisolated(unsafe) static var mergesInFloat = false
     let device: MTLDevice
     /// Warps and the hot-pixel search; nil only when a test runs the CPU reference (`analyzesOnGPU`).
     let gpu: NightSkyAnalysisGPU?
@@ -86,7 +99,6 @@ final class NightSkyAnalyzer: @unchecked Sendable {
         guard let device = MTLCreateSystemDefaultDevice() else { throw EditorError.noGPU }
         self.device = device
         gpu = Self.analyzesOnGPU ? NightSkyAnalysisGPU(device: device) : nil
-        context = CIContext(mtlDevice: device, options: [.workingColorSpace: PanoramaDecoder.space, .workingFormat: CIFormat.RGBAf, .cacheIntermediates: false])
     }
 
     var count: Int { urls.count }
@@ -96,6 +108,19 @@ final class NightSkyAnalyzer: @unchecked Sendable {
     // MARK: Analysis
 
     func analyze(progress: @escaping @Sendable (Double, String) -> Void) throws {
+        // The sequence first, in a function of its own, so its decodes, planes and GPU maps are let go before the
+        // hot-pixel search decodes three photos at full size.
+        try analyzeSequence(progress: progress)
+        // Hot pixels don't depend on the sky: analyzing again with another correction keeps them.
+        if !hotPixelsFound {
+            progress(0.94, L10n.tr("Finding hot pixels…"))
+            hotPixels = try autoreleasepool { try findHotPixels { progress(0.94 + 0.02 * Double($0), L10n.tr("Finding hot pixels…")) } }
+            hotPixelsFound = true
+        }
+        progress(1, "")
+    }
+
+    private func analyzeSequence(progress: @escaping @Sendable (Double, String) -> Void) throws {
         progress(0, L10n.tr("Reading photos…"))
         var read = [NightSkyFrameMetadata?](repeating: nil, count: urls.count)
         var failure: Error?
@@ -191,10 +216,14 @@ final class NightSkyAnalyzer: @unchecked Sendable {
             }
             progress(fraction, lock.withLock { label })
         }
-        for chunk in stride(from: 0, to: processing.count, by: 6).map({ Array(processing[$0..<min(processing.count, $0 + 6)]) }) {
+        for chunk in stride(from: 0, to: processing.count, by: 6).map({ Array(processing[$0..<min(processing.count, $0 + 6)]) }) { try autoreleasepool {
+            // Each chunk's Core Image and Metal objects go when it ends, not when the analysis does: otherwise the last
+            // chunk's decodes were still held through the hot-pixel search (3.4 GB at 22 MP).
             if Task.isCancelled { throw CancellationError() }
             var developed = [Developed?](repeating: nil, count: chunk.count)
             var errors = [Error?](repeating: nil, count: chunk.count)
+            // One context for the chunk: its photos decode side by side and share the decoder's surfaces, which go with it.
+            let chunkContext = context
             DispatchQueue.concurrentPerform(iterations: chunk.count) { k in
                 let i = chunk[k]
                 if i == anchor {
@@ -203,7 +232,7 @@ final class NightSkyAnalyzer: @unchecked Sendable {
                     return
                 }
                 do {
-                    let (_, rgba) = try developAnalysis(i)
+                    let (_, rgba) = try developAnalysis(i, context: chunkContext)
                     let result = try develop(i, rgba: rgba, interior: interior)
                     let n = lock.withLock { developed[k] = result; developedCount += 1; return developedCount }
                     advance(L10n.tr("Analyzing \(frames[i].filename) (\(n) of \(count))"))
@@ -260,16 +289,9 @@ final class NightSkyAnalyzer: @unchecked Sendable {
             found += results.joined()
             searched.formUnion(ready)
             for j in planes.keys where (0..<count).filter({ Self.window($0, count: count).contains(j) }).allSatisfy(searched.contains) { planes[j] = nil }
-        }
+        } }
         lines = NightSkyTransients.groupTracks(found, size: max(aw, ah)).sorted { ($0.frame, $0.start.x) < ($1.frame, $1.start.x) }
         try cache.finish()
-        // Hot pixels don't depend on the sky: analyzing again with another correction keeps them.
-        if !hotPixelsFound {
-            progress(0.94, L10n.tr("Finding hot pixels…"))
-            hotPixels = try findHotPixels { progress(0.94 + 0.02 * Double($0), L10n.tr("Finding hot pixels…")) }
-            hotPixelsFound = true
-        }
-        progress(1, "")
     }
 }
 
@@ -404,11 +426,11 @@ extension NightSkyAnalyzer {
         for chunk in stride(from: 0, to: count, by: 6).map({ Array($0..<min(count, $0 + 6)) }) {
             if Task.isCancelled { throw CancellationError() }
             var copies = [[Float]?](repeating: nil, count: chunk.count), errors = [Error?](repeating: nil, count: chunk.count)
-            let exposure = displayExposure, gains = self.gains
+            let exposure = displayExposure, gains = self.gains, chunkContext = context
             // Decoding and the thumbnail run side by side; the file is written in order after.
             DispatchQueue.concurrentPerform(iterations: chunk.count) { k in
                 do {
-                    let i = chunk[k], copy = try developPreview(i)
+                    let i = chunk[k], copy = try developPreview(i, context: chunkContext)
                     let picture = NightSkyFinishing.picture(copy, channels: 3, width: pw, height: ph, exposure: exposure * gains[i], maxDimension: 220)
                     let n = lock.withLock { copies[k] = copy; pictures[i] = picture; done += 1; return done }
                     progress(Double(n) / Double(count), "")
@@ -435,8 +457,9 @@ extension NightSkyAnalyzer {
 
     /// Photo `i` decoded straight at preview size, linear RGB: about a third faster than decoding at analysis size
     /// and shrinking, and as close as previews need. Its exact size is pinned to the preview grid.
-    private func developPreview(_ i: Int) throws -> [Float] {
-        try autoreleasepool {
+    private func developPreview(_ i: Int, context: CIContext? = nil) throws -> [Float] {
+        let context = context ?? self.context
+        return try autoreleasepool {
             let pw = previewWidth, ph = previewHeight
             var image = try HDRMergeDecoder.developedImage(urls[i], metadata: metadata[i].base, longEdge: max(pw, ph), whiteBalance: whiteBalance)
             if image.extent.size != CGSize(width: pw, height: ph) {

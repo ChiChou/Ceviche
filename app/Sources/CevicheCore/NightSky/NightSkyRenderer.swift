@@ -89,7 +89,7 @@ extension NightSkyAnalyzer {
                 step(done, c.index, list.count + clipped.count + restoring.count)
                 try autoreleasepool {
                     let image = try developedForGPU(c.index)
-                    try gpu.accumulate(image, into: sums, maps: maps, context: context, contribution: c, base: baseAlignment, analysis: (analysisWidth, analysisHeight),
+                    try gpu.accumulate(image, into: sums, maps: maps, context: mergeContext, contribution: c, base: baseAlignment, analysis: (analysisWidth, analysisHeight),
                                        squares: squares)
                 }
                 lap("develop + accumulate")
@@ -105,7 +105,7 @@ extension NightSkyAnalyzer {
                     step(list.count + done, c.index, list.count + clipped.count + restoring.count)
                     try autoreleasepool {
                         let image = try developedForGPU(c.index)
-                        try gpu.accumulate(image, into: sums, maps: maps, context: context, contribution: c, base: baseAlignment, analysis: (analysisWidth, analysisHeight),
+                        try gpu.accumulate(image, into: sums, maps: maps, context: mergeContext, contribution: c, base: baseAlignment, analysis: (analysisWidth, analysisHeight),
                                            clip: (first, squares, clipping))
                     }
                     lap("develop + clip")
@@ -120,7 +120,7 @@ extension NightSkyAnalyzer {
                     let image = try developedForGPU(i)
                     let selected = plan.restore.indices.filter { plan.restore[$0].frame == i }
                     let lines = selected.map { plan.restore[$0] }
-                    try gpu.restore(image, lines: lines, regions: lines.map { restoreRegion($0, plan: plan) }, into: sums, maps: maps, context: context, gain: gains[i],
+                    try gpu.restore(image, lines: lines, regions: lines.map { restoreRegion($0, plan: plan) }, into: sums, maps: maps, context: mergeContext, gain: gains[i],
                                     alignment: i == anchor || plan.restoreAsCaptured ? nil : alignments[i], base: plan.restoreAsCaptured ? nil : baseAlignment,
                                     analysis: (analysisWidth, analysisHeight), backgrounds: selected.map { backgrounds[$0] })
                 }
@@ -234,7 +234,7 @@ extension NightSkyAnalyzer {
             progress(L10n.tr("Developing \(metadata[c.index].filename) (\(done + 1) of \(fixed.count))"))
             c.peak = false; c.detail = false; c.gap = nil
             try autoreleasepool {
-                try gpu.accumulate(developedForGPU(c.index), into: sums, maps: maps, context: context,
+                try gpu.accumulate(developedForGPU(c.index), into: sums, maps: maps, context: mergeContext,
                                    contribution: c, base: base, analysis: (analysisWidth, analysisHeight))
             }
         }
@@ -259,7 +259,7 @@ extension NightSkyAnalyzer {
             var c = original
             c.ground = false; c.isSkyPhoto = false; c.gap = nil
             try autoreleasepool {
-                try gpu.accumulate(developedForGPU(c.index), into: sums, maps: maps, context: context,
+                try gpu.accumulate(developedForGPU(c.index), into: sums, maps: maps, context: mergeContext,
                                    contribution: c, base: base, analysis: (analysisWidth, analysisHeight))
             }
             // Composing lets the texture go; keep it for the gap after this photo.
