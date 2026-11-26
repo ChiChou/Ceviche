@@ -335,9 +335,13 @@ public final class DenoiseRun: @unchecked Sendable {
     private var done = 0, total = 0
     /// `keepsTiles` keeps the tiles for the next render of the same image, as a preview wants; the caller makes a new
     /// run once the pixels going in change. `progress` hears the share of the tiles done, from any thread.
-    public init(keepsTiles: Bool = false, progress: (@Sendable (Double) -> Void)? = nil) {
+    public convenience init(keepsTiles: Bool = false, progress: (@Sendable (Double) -> Void)? = nil) {
         // About 1.5 MB a tile: a 2200-pixel preview needs some 30.
-        cache = keepsTiles ? NAFNetTileCache(limit: 160) : nil
+        self.init(keptTiles: keepsTiles ? 160 : 0, progress: progress)
+    }
+    /// Keeps up to `keptTiles` tiles, none for 0.
+    init(keptTiles: Int, progress: (@Sendable (Double) -> Void)? = nil) {
+        cache = keptTiles > 0 ? NAFNetTileCache(limit: keptTiles) : nil
         report = progress
     }
     func expect(_ tiles: Int) { lock.withLock { total += tiles } }

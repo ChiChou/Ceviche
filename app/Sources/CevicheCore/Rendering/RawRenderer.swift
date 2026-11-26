@@ -42,6 +42,9 @@ public actor RawRenderer {
     func setDecodeUse(_ use: DecodeUse) { decodeUse = use }
     /// Whether the graph last built reads the RAW decoder rather than a mapped decode.
     var liveDecode = false
+    /// Applied to the decoded photo before retouching, for one render: AI Noise Reduction's comparison
+    /// (`RawRenderer+Denoise`).
+    var decodedFilter: ((CIImage) throws -> CIImage)?
     /// A RAW decoder, or a rendered image (JPEG, HEIC, TIFF and the like).
     enum Source { case raw(CIRAWFilter), bitmap(CIImage) }
     let source: Source
@@ -376,6 +379,7 @@ public actor RawRenderer {
             image = output.applyingFilter("CIExposureAdjust", parameters: ["inputEV": a.exposure])
             image = PixelRenderer.noiseReduced(image, luma: a.noiseReduction, chroma: a.colorNoiseReduction, hdr: a.hdr.enabled)
         }
+        if !cameraRendering, let decodedFilter { image = try decodedFilter(image) }
         if raw != nil, let profile = a.cameraProfile, !scene {
             image = profileRenderer.apply(profile, to: image, temperature: a.temperature, hdr: a.hdr.enabled)
         }
