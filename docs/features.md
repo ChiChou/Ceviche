@@ -2,7 +2,7 @@
 
 What the app ships today, by area. Names match the menus.
 
-The app uses a simplified porcelain ceviche bowl icon in the Dock, Finder and app switcher.
+The app uses a porcelain ceviche bowl icon in the Dock, Finder and app switcher, with native dark, tinted and clear appearances where the system supports them.
 
 ## Library
 

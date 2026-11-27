@@ -1,6 +1,8 @@
 # Ceviche identity
 
-Adopted 27 November 2026: a soft, sculpted ceviche bowl with a lowercase Nunito Bold 700 wordmark.
+The soft porcelain ceviche bowl and lowercase Nunito Bold 700 wordmark were adopted on 27 November 2026.
+The app icon is authored in [AppIcon.icon](../../../app/Platforms/macOS/Resources/AppIcon.icon), an editable
+Icon Composer package shared by the Mac, iPhone and iPad apps.
 
 <img src="../../../app/Platforms/macOS/Resources/AppIcon.png" width="160" alt="Ceviche app icon">
 
@@ -9,57 +11,70 @@ Adopted 27 November 2026: a soft, sculpted ceviche bowl with a lowercase Nunito 
   <img src="wordmark.svg" width="300" alt="ceviche">
 </picture>
 
+## App icon
+
+Open `app/Platforms/macOS/Resources/AppIcon.icon` with Icon Composer. Its `icon.json` defines a porcelain background,
+with a graphite dark appearance, and a separate `Assets/Bowl.png` foreground. The foreground is a 1024-pixel RGBA
+layer with the bowl occupying approximately three quarters of the canvas. Its food and internal shading stay
+intact; the surrounding canvas and cast shadow were removed with built-in imagegen. The bowl is a single artwork
+layer, so the ingredients are not individually editable in Icon Composer.
+
+The foreground's glass effects and specular highlights are disabled to preserve the matte porcelain treatment.
+A restrained group shadow is native. Icon Composer supplies the platform enclosure and derives the tinted and
+clear appearances while preserving the bowl's tonal detail. No rounded-square mask or outer platform shadow is
+painted into the foreground. Default, dark, tinted and clear renders were inspected with Xcode 27.2's `ictool`;
+the package compiles with `actool` for macOS 15+ and iOS/iPadOS 26+.
+
+The Xcode target selects `AppIcon` through `ASSETCATALOG_COMPILER_APPICON_NAME`. The synchronized Resources group
+explicitly treats `AppIcon.icon` as an Icon Composer package. Xcode compiles it into the app's asset catalog and
+also generates the compatibility icon for older systems. The tracked PNG and `.icns` exports are excluded from
+Copy Bundle Resources to avoid competing with those generated outputs.
+
 ## Tracked assets
 
 | File | Purpose |
 | --- | --- |
-| `bowl-source.png` | Opaque 1024 × 1024 sRGB artwork; no platform corner mask. This is the source for both apps. |
-| `../../../app/Platforms/macOS/Resources/AppIcon.png` | Mac master: artwork in an 824-pixel continuous rounded square, centered on a transparent 1024-pixel canvas, with a short shadow. |
-| `../../../app/Platforms/macOS/Resources/AppIcon.icns` | Mac application icon, including small and Retina renditions. |
-| `wordmark.svg`, `wordmark-reversed.svg` | Nunito Bold 700 glyph outlines with the font's spacing; graphite and porcelain versions. They do not require an installed font. |
+| `../../../app/Platforms/macOS/Resources/AppIcon.icon` | Canonical editable app icon: appearance settings and the transparent bowl artwork. |
+| `../../../app/Platforms/macOS/Resources/AppIcon.png` | Native default macOS render for documentation and previews. |
+| `../../../app/Platforms/macOS/Resources/AppIcon.icns` | Xcode-generated compatibility export for external distribution tools. Normal app builds generate their own. |
+| `bowl-source.png` | Original opaque artwork; retained for the identity and extraction provenance, not used as the app icon. |
+| `wordmark.svg`, `wordmark-reversed.svg` | Nunito Bold 700 glyph outlines, in graphite and porcelain, with the font's default spacing. No installed font is required. |
 | `fonts/Nunito.ttf` | Unmodified variable font used to reproduce the outlines; not bundled in the app. |
-| `bowl-system.png` | Approved identity presentation, including appearance and monochrome directions. Its lettering is the earlier type study; the SVG wordmarks supersede it. |
-| `bowl-system-prompt.json`, `bowl-source-prompts.json` | Built-in imagegen prompts and asset provenance. |
+| `bowl-system.png` | Approved concept presentation. Native Icon Composer renders supersede its icon mockups, and the SVG wordmarks supersede its type study. The flat monochrome bowl remains a concept. |
+| `bowl-system-prompt.json`, `bowl-source-prompts.json`, `icon-composer-prompt.json` | Built-in imagegen prompts and artwork provenance. |
 
-The bowl is the mark. Three ivory fish pieces, two coral pieces, one lime wedge and two short pink onion strips
-form a fixed composition, with a thin shallow rim and restrained shading. Keep its proportions and placement;
-do not stretch it to fill an icon. Avoid enclosing onion crescents, star-shaped garnish or letter motifs.
-
-The bowl occupies approximately three quarters of the unmasked square. The Mac export adds its own frame and
-transparent outer margin for the existing `.icns` pipeline. iPhone and iPad use the opaque source directly;
-their system supplies the corner mask. Do not copy the framed Mac PNG into a mobile asset catalog.
-
-The current exports provide the light icon. Dark, tinted, clear and flat monochrome examples on the presentation
-remain design references, not separately shipped or native-validated assets. The presentation is not sliced up
-to make application icons. A future layered Icon Composer asset should retain this composition.
+Three ivory fish pieces, two coral pieces, one lime wedge and two short pink onion strips form a fixed composition,
+with a thin shallow rim. Keep its proportions and placement; do not stretch it to fill the frame. Avoid enclosing
+onion crescents, star-shaped garnish or letter motifs. Keep the wordmark clear of the bowl rim and shadow.
 
 ## Wordmark and color
 
-Use lowercase `ceviche`, Nunito Bold 700, upright, with the font's default spacing. The outlined exports are the
-canonical wordmarks. Porcelain `#F8F5F1` and graphite `#423D37` are their background/foreground roles; coral,
-lime and onion pink stay in the bowl artwork. Keep the wordmark clear of the bowl rim and shadow.
+Use lowercase `ceviche`, Nunito Bold 700, upright, with default spacing. The outlined exports are the canonical
+wordmarks. Porcelain `#F8F5F1` and graphite `#423D37` are their background/foreground roles; coral, lime and onion
+pink stay in the bowl artwork. Icon Composer owns the app background's appearance adjustments.
 
 Nunito is by Vernon Adams, Cyreal and Jacques Le Bailly. The source font is pinned to upstream revision
 `8c6a9bb9732545b9ed53f29ec5e1ab0ff53c4e6f`; its SHA-256 is
 `bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207`.
 Its [SIL Open Font License](../../../app/Sources/CevicheMac/Resources/OpenSourceLicenses/credits/nunito/LICENSE)
 and [source record](../../../app/Sources/CevicheMac/Resources/OpenSourceLicenses/credits/nunito/SOURCE.txt)
-are registered in the app's credits manifest as an identity export dependency.
+are registered in the credits manifest as an identity export dependency.
 
 ## Rebuilding
 
-From the repository root on macOS:
+From the repository root with Xcode and its bundled Icon Composer installed:
 
 ```sh
-swift app/scripts/identity.swift
 bash app/scripts/app-icon.sh
+swift app/scripts/identity.swift
 python3 -I app/scripts/credits.py
 ```
 
-The first command uses Core Text for the wordmark outlines and a native continuous corner path for the Mac
-frame, so no generated transparency edge is shipped. The second exports the `.icns` through the existing
-`sips`/`iconutil` and pinned compression pipeline. Commit the source, generated assets, scripts and notices together.
-Inspect the result on light and dark backgrounds at 16, 32, 64, 128 and 256 pixels when changing the artwork.
+The first command compiles `AppIcon.icon` with `actool` and exports the preview with `ictool`. It does not create
+another hand-drawn platform frame. The second command only regenerates the outlined wordmarks with Core Text.
+Commit the package, exports and related documentation together. When sharing the icon with another app, copy the
+whole `.icon` directory, keep the target's app icon name as `AppIcon`, and remove the obsolete flat app icon set.
+Inspect the native default, dark, tinted and clear renders, including small sizes, after changing the artwork.
 
-Platform references: [Apple app icons](https://developer.apple.com/design/human-interface-guidelines/app-icons/)
-and [Icon Composer](https://developer.apple.com/icon-composer/).
+See [Apple's Icon Composer integration guide](https://developer.apple.com/documentation/xcode/creating-your-app-icon-using-icon-composer)
+and [app icon guidelines](https://developer.apple.com/design/human-interface-guidelines/app-icons/).

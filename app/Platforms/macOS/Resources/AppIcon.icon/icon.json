@@ -1,0 +1,12 @@
+{
+  "fill": {"solid": "srgb:0.97255,0.96078,0.94510,1.00000"},
+  "fill-specializations": [{"appearance":"dark","value":{"solid":"srgb:0.16000,0.15000,0.14000,1.00000"}}],
+  "groups": [{
+    "name": "Porcelain bowl",
+    "layers": [{"image-name":"Bowl.png","name":"Bowl","glass":false}],
+    "shadow": {"kind":"neutral","opacity":0.15},
+    "translucency": {"enabled":false,"value":0.0},
+    "specular": false
+  }],
+  "supported-platforms": {"squares":"shared"}
+}
