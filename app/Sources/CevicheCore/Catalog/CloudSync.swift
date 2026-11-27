@@ -422,7 +422,7 @@ public actor CloudSyncEngine {
             context.insert(row)
         }
         // Pull: the parts of each photo newer than this Mac's, and deletions.
-        let clocks = try await store.syncClocks()
+        let clocks = try await store.syncClocks(), bases = try await store.syncBaseClocks()
         var photos = newest(try context.fetch(FetchDescriptor<SyncedPhoto>(predicate: #Predicate { $0.catalogID == id })), \.assetID, \.updatedAt, context)
         var originals = newest(try context.fetch(FetchDescriptor<SyncedOriginal>(predicate: #Predicate { $0.catalogID == id })), \.assetID, \.updatedAt, context)
         var developments = newest(try context.fetch(FetchDescriptor<SyncedDevelopment>(predicate: #Predicate { $0.catalogID == id })), \.assetID, \.updatedAt, context)
@@ -437,8 +437,13 @@ public actor CloudSyncEngine {
             let local = clocks[assetID]
             var photo = CatalogSyncPhoto(assetID: assetID)
             if let row = originals[assetID], local.map({ row.updatedAt > $0.original }) ?? true { photo.original = row.original }
-            if let row = photos[assetID], local.map({ row.updatedAt > $0.state }) ?? true { photo.state = row.state }
-            if let row = developments[assetID], local.map({ row.updatedAt > $0.development }) ?? true { photo.development = row.development }
+            // Newer than this Mac's, or changed on both sides since they last agreed (merged as it is applied).
+            func wanted(_ row: Date, _ here: Date?, _ base: Date?) -> Bool {
+                guard let here else { return true }
+                return row > here || CatalogStore.changedOnBothSides(local: here, remote: row, base: base)
+            }
+            if let row = photos[assetID], wanted(row.updatedAt, local?.state, bases[assetID]?.state) { photo.state = row.state }
+            if let row = developments[assetID], wanted(row.updatedAt, local?.development, bases[assetID]?.development) { photo.development = row.development }
             guard photo.original != nil || photo.state != nil || photo.development != nil else { continue }
             // A development whose blobs have not arrived yet stays pending until a later pass. One this build can't
             // apply (edits from a newer build, a damaged row) stays in the mirror, and the rest of the pass goes on.
@@ -459,9 +464,11 @@ public actor CloudSyncEngine {
         }
         // Push: the parts changed here since the mirror's copy (or that it lacks), and local permanent deletions.
         func newer(_ local: Date, than row: Date?) -> Bool { row.map { local > $0 } ?? true }
-        let pushOriginals = clocks.filter { newer($0.value.original, than: originals[$0.key]?.updatedAt) }.map(\.key)
-        let pushStates = clocks.filter { newer($0.value.state, than: photos[$0.key]?.updatedAt) }.map(\.key)
-        let pushDevelopments = clocks.filter { newer($0.value.development, than: developments[$0.key]?.updatedAt) }.map(\.key)
+        // As they stand after the pull, so a merge made there goes up in the same pass.
+        let pushClocks = try await store.syncClocks()
+        let pushOriginals = pushClocks.filter { newer($0.value.original, than: originals[$0.key]?.updatedAt) }.map(\.key)
+        let pushStates = pushClocks.filter { newer($0.value.state, than: photos[$0.key]?.updatedAt) }.map(\.key)
+        let pushDevelopments = pushClocks.filter { newer($0.value.development, than: developments[$0.key]?.updatedAt) }.map(\.key)
         for original in try await store.syncOriginals(pushOriginals) {
             if let row = originals[original.assetID] { row.apply(original) }
             else { let row = SyncedOriginal(catalogID: id, original: original); context.insert(row); originals[original.assetID] = row }
@@ -532,6 +539,13 @@ public actor CloudSyncEngine {
             try context.save()
             if cloudEnabled { pendingCloudChanges = true }
         }
+        // What this Mac and the mirror now agree on, for merging the next time both change a photo.
+        var agreedStates: [CatalogSyncState] = [], agreedDevelopments: [CatalogSyncDevelopment] = []
+        for (assetID, local) in try await store.syncClocks() {
+            if let row = photos[assetID], row.deletedAt == nil, row.updatedAt == local.state, bases[assetID]?.state != local.state { agreedStates.append(row.state) }
+            if let row = developments[assetID], row.updatedAt == local.development, bases[assetID]?.development != local.development { agreedDevelopments.append(row.development) }
+        }
+        try await store.recordSyncBases(states: agreedStates, developments: agreedDevelopments)
         try await store.removeTombstones(tombstones.map(\.id))
         try await store.markAlbumsSynced(albums.pushed.albums, entries: albums.pushed.entries)
         try await store.removeTombstones(albums.tombstones)

@@ -367,7 +367,7 @@ extension CatalogStore {
             var request = CatalogAsset.filter(Columns.trashedAt == nil && stale && edited)
             if onThisMac {
                 request = request.filter(sql: "origin NOT LIKE ? AND origin NOT LIKE ?",
-                                         arguments: [AssetLocator.Scheme.smb.rawValue + ":%", AssetLocator.Scheme.volume.rawValue + ":%"])
+                                         arguments: [AssetLocator.file(path: "/Volumes/").string + "%", AssetLocator.Scheme.volume.rawValue + ":%"])
             }
             return try String.fetchAll(db, request.select(Columns.id).order(Columns.importedAt.desc))
         }

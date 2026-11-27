@@ -61,7 +61,6 @@
 "%1$@ of %2$@ photos" = "%1$@ di %2$@ foto";
 "%1$@ of %2$@ photos couldn’t be merged: %3$@" = "Impossibile unire %1$@ foto su %2$@: %3$@";
 "%1$@ of 4" = "%1$@ di 4";
-"%1$@ on %2$@ did not mount." = "Impossibile montare %1$@ su %2$@.";
 "%1$@ originals deleted" = "%1$@ originali eliminati";
 "%1$@ photo" = "%1$@ foto";
 "%1$@ photo at this location" = "%1$@ foto in questa posizione";
@@ -353,7 +352,6 @@
 "Coral" = "Corallo";
 "Core Image could not render this image." = "Core Image non ha potuto elaborare questa immagine.";
 "Correct along guides drawn on the photo" = "Correggi seguendo le guide disegnate sulla foto";
-"Could not connect to %1$@ on %2$@. %3$@" = "Impossibile connettersi a %1$@ su %2$@. %3$@";
 "Could not save edits." = "Impossibile salvare le modifiche.";
 "Couldn’t Open the Photo" = "Impossibile aprire la foto";
 "Couldn’t align %1$@; merged as framed" = "Impossibile allineare %1$@; unite così come sono";
@@ -482,7 +480,6 @@
 "Enter whole-number dimensions from 1 to %1$@ px." = "Inserisci dimensioni intere da 1 a %1$@ px.";
 "Erase" = "Cancella";
 "Error" = "Errore";
-"Error %1$@." = "Errore %1$@.";
 "Esc to cancel" = "Esc per annullare";
 "Estimating depth…" = "Stima della profondità…";
 "Every adjustment, crop and mask returns to the camera defaults. Originals are not changed." = "Ogni regolazione, ritaglio e maschera torna ai valori predefiniti della fotocamera. Gli originali non vengono modificati.";
@@ -673,7 +670,6 @@
 "Invalid GPS coordinate." = "Coordinata GPS non valida.";
 "Invalid GPS direction." = "Direzione GPS non valida.";
 "Invalid HDR settings." = "Impostazioni HDR non valide.";
-"Invalid SMB address." = "Indirizzo SMB non valido.";
 "Invalid XMP boolean: %1$@." = "Valore booleano XMP non valido: %1$@.";
 "Invalid XMP curve point." = "Punto della curva XMP non valido.";
 "Invalid XMP number: %1$@." = "Numero XMP non valido: %1$@.";
@@ -711,7 +707,6 @@
 "Keep empty corners outside the crop" = "Mantieni gli angoli vuoti fuori dal ritaglio";
 "Keep only selection" = "Mantieni solo selezione";
 "Keep thumbnails up to" = "Conserva miniature fino a";
-"Keychain error %1$@." = "Errore Portachiavi %1$@.";
 "Keywords" = "Parole chiave";
 "Keywords added" = "Parole chiave aggiunte";
 "Keywords added to %1$@ photos" = "Parole chiave aggiunte a %1$@ foto";
@@ -944,7 +939,6 @@
 "Pattern" = "Multizona";
 "Pause" = "Pausa";
 "People" = "Persone";
-"Permission denied; check the user name and password saved for this server." = "Autorizzazione negata; controlla il nome utente e la password salvati per questo server.";
 "Permissions" = "Autorizzazioni";
 "Perspective" = "Prospettica";
 "Photo" = "Foto";
@@ -1255,7 +1249,6 @@
 "The encoder did not preserve the requested HDR encoding." = "Il codificatore non ha mantenuto la codifica HDR richiesta.";
 "The exposures couldn’t be merged. %1$@" = "Impossibile unire le esposizioni. %1$@";
 "The file at this path no longer matches the imported original. Nothing was deleted. Locate the original before trying again." = "Il file in questo percorso non corrisponde più all’originale importato. Non è stato eliminato nulla. Individua l’originale prima di riprovare.";
-"The file is missing from %1$@ on %2$@." = "Il file non è presente in %1$@ su %2$@.";
 "The file is missing from %1$@." = "Il file non è presente in %1$@.";
 "The file is no longer at %1$@." = "Il file non si trova più in %1$@.";
 "The guide is too short. Drag along a longer edge." = "La guida è troppo corta. Traccia un bordo più lungo.";
@@ -2528,7 +2521,6 @@
 "Show healed spots" = "Mostra macchie corrette";
 "Postcard (100 × 148 mm)" = "Cartolina (100 × 148 mm)";
 "Balance from the skin and the wall behind the head" = "Bilancia dalla pelle e dal muro dietro la testa";
-"Originals on network shares open on a Mac." = "Gli originali su condivisioni di rete si aprono su un Mac.";
 "Expected a sky model with %1$@ × %2$@ RGB input." = "Previsto un modello del cielo con input RGB di %1$@ × %2$@.";
 "Import From" = "Importa da";
 "Copy Changed Edits" = "Copia modifiche variate";
@@ -3493,3 +3485,7 @@
 "Custom…" = "Personalizzato…";
 "%1$@ isn’t a RAW photo this device can read." = "%1$@ non è una foto RAW leggibile da questo dispositivo.";
 "%1$@ isn’t a photo this device can read." = "Questo dispositivo non può leggere %1$@.";
+"%1$@ is not connected." = "%1$@ non è collegato.";
+"The development could not be read." = "Impossibile leggere lo sviluppo.";
+"Merged edits" = "Modifiche unite";
+"Other edits" = "Altre modifiche";

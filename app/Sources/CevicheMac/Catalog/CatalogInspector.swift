@@ -413,7 +413,7 @@ struct OriginalLocation {
         switch locator {
         case .catalog(let relative): self.init(storage: L10n.tr("Catalog folder"), path: relative)
         case .file(let absolute): self.init(storage: L10n.tr("This Mac"), path: (absolute as NSString).abbreviatingWithTildeInPath)
-        case .volume(_, let relative), .smb(_, _, let relative): self.init(storage: locator.storageDescription, path: relative)
+        case .volume(_, let relative): self.init(storage: locator.storageDescription, path: relative)
         }
     }
     /// Styled interpolation needs a `Text` to interpolate into; inside a `String` the storage printed its own description.

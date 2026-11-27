@@ -61,7 +61,6 @@
 "%1$@ of %2$@ photos" = "%1$@/%2$@ 张照片";
 "%1$@ of %2$@ photos couldn’t be merged: %3$@" = "%1$@/%2$@ 张照片无法合并：%3$@";
 "%1$@ of 4" = "%1$@/4";
-"%1$@ on %2$@ did not mount." = "%2$@ 上的 %1$@ 未装载。";
 "%1$@ originals deleted" = "已删除 %1$@ 张原片";
 "%1$@ photo" = "%1$@ 张照片";
 "%1$@ photo at this location" = "此位置有 %1$@ 张照片";
@@ -353,7 +352,6 @@
 "Coral" = "珊瑚色";
 "Core Image could not render this image." = "Core Image 无法渲染此图像。";
 "Correct along guides drawn on the photo" = "沿照片上绘制的参考线校正";
-"Could not connect to %1$@ on %2$@. %3$@" = "无法连接到 %2$@ 上的 %1$@。%3$@";
 "Could not save edits." = "无法存储编辑。";
 "Couldn’t Open the Photo" = "无法打开照片";
 "Couldn’t align %1$@; merged as framed" = "无法对齐 %1$@；已按原构图合并";
@@ -482,7 +480,6 @@
 "Enter whole-number dimensions from 1 to %1$@ px." = "请输入 1 到 %1$@ px 之间的整数尺寸。";
 "Erase" = "擦除";
 "Error" = "错误";
-"Error %1$@." = "错误 %1$@。";
 "Esc to cancel" = "按 Esc 取消";
 "Estimating depth…" = "正在估算深度…";
 "Every adjustment, crop and mask returns to the camera defaults. Originals are not changed." = "所有调整、裁剪和蒙版将恢复为相机默认设置。原片不会更改。";
@@ -673,7 +670,6 @@
 "Invalid GPS coordinate." = "无效的 GPS 坐标。";
 "Invalid GPS direction." = "无效的 GPS 方向。";
 "Invalid HDR settings." = "无效的 HDR 设置。";
-"Invalid SMB address." = "无效的 SMB 地址。";
 "Invalid XMP boolean: %1$@." = "无效的 XMP 布尔值：%1$@。";
 "Invalid XMP curve point." = "无效的 XMP 曲线控制点。";
 "Invalid XMP number: %1$@." = "无效的 XMP 数值：%1$@。";
@@ -711,7 +707,6 @@
 "Keep empty corners outside the crop" = "将空白边角保持在裁剪区域外";
 "Keep only selection" = "仅保留选区";
 "Keep thumbnails up to" = "缩略图存储上限";
-"Keychain error %1$@." = "钥匙串错误 %1$@。";
 "Keywords" = "关键词";
 "Keywords added" = "关键词已添加";
 "Keywords added to %1$@ photos" = "已为 %1$@ 张照片添加关键词";
@@ -944,7 +939,6 @@
 "Pattern" = "多区测光";
 "Pause" = "暂停";
 "People" = "人物";
-"Permission denied; check the user name and password saved for this server." = "权限被拒绝；请检查为此服务器存储的用户名和密码。";
 "Permissions" = "权限";
 "Perspective" = "透视";
 "Photo" = "照片";
@@ -1255,7 +1249,6 @@
 "The encoder did not preserve the requested HDR encoding." = "编码器未保留所请求的 HDR 编码。";
 "The exposures couldn’t be merged. %1$@" = "无法合并这些曝光。%1$@";
 "The file at this path no longer matches the imported original. Nothing was deleted. Locate the original before trying again." = "此路径下的文件已不再匹配导入的原片。未删除任何内容。请先查找原片，然后重试。";
-"The file is missing from %1$@ on %2$@." = "%2$@ 上的 %1$@ 中缺少此文件。";
 "The file is missing from %1$@." = "%1$@ 中缺少此文件。";
 "The file is no longer at %1$@." = "文件已不在 %1$@。";
 "The guide is too short. Drag along a longer edge." = "参考线太短。请沿更长的边缘拖移。";
@@ -2528,7 +2521,6 @@
 "Show healed spots" = "显示已修复的斑点";
 "Postcard (100 × 148 mm)" = "明信片 (100 × 148 mm)";
 "Balance from the skin and the wall behind the head" = "根据肤色和头部后方的墙面平衡";
-"Originals on network shares open on a Mac." = "网络共享上的原片需在 Mac 上打开。";
 "Expected a sky model with %1$@ × %2$@ RGB input." = "需要输入为 %1$@ × %2$@ RGB 的天空模型。";
 "Import From" = "导入来源";
 "Copy Changed Edits" = "拷贝已更改的编辑";
@@ -3493,3 +3485,7 @@
 "Custom…" = "自定义…";
 "%1$@ isn’t a RAW photo this device can read." = "%1$@ 不是此设备可以读取的 RAW 照片。";
 "%1$@ isn’t a photo this device can read." = "此设备无法读取 %1$@。";
+"%1$@ is not connected." = "%1$@ 未连接。";
+"The development could not be read." = "无法读取此照片的修图设置。";
+"Merged edits" = "已合并编辑";
+"Other edits" = "其他编辑";

@@ -6,20 +6,19 @@ import Foundation
 /// - `file:///Users/…`                     a file on an internal volume
 /// - `catalog:///Originals/2025-10/A.ARW` a copy inside the catalog folder (local to this Mac)
 /// - `volume://<UUID>/DCIM/100MSDCF/A.ARW` a removable or external volume, by volume UUID
-/// - `smb://host/share/folder/A.ARW`      a file on an SMB server, remounted on demand
+///
+/// A network share is a `file` under `/Volumes`, read while Finder has it mounted.
 public enum AssetLocator: Hashable, Sendable {
-    public enum Scheme: String, CaseIterable, Sendable { case file, catalog, volume, smb }
+    public enum Scheme: String, CaseIterable, Sendable { case file, catalog, volume }
     case file(path: String)
     case catalog(relativePath: String)
     case volume(uuid: String, relativePath: String)
-    case smb(host: String, share: String, path: String)
 
     public var scheme: Scheme {
         switch self {
         case .file: return .file
         case .catalog: return .catalog
         case .volume: return .volume
-        case .smb: return .smb
         }
     }
     public init?(string: String) {
@@ -36,11 +35,6 @@ public enum AssetLocator: Hashable, Sendable {
         case .volume:
             guard let host = components.host, !host.isEmpty, path.count > 1 else { return nil }
             self = .volume(uuid: host.uppercased(), relativePath: String(path.dropFirst()))
-        case .smb:
-            guard let host = components.host, !host.isEmpty else { return nil }
-            let parts = path.split(separator: "/", omittingEmptySubsequences: true).map(String.init)
-            guard let share = parts.first, parts.count >= 2 else { return nil }
-            self = .smb(host: host.lowercased(), share: share, path: parts.dropFirst().joined(separator: "/"))
         }
     }
     public var string: String {
@@ -50,13 +44,12 @@ public enum AssetLocator: Hashable, Sendable {
         case .file(let path): components.host = ""; components.path = path
         case .catalog(let relative): components.host = ""; components.path = "/" + relative
         case .volume(let uuid, let relative): components.host = uuid; components.path = "/" + relative
-        case .smb(let host, let share, let path): components.host = host; components.path = "/" + share + "/" + path
         }
         return components.string ?? scheme.rawValue + "://"
     }
     public var filename: String {
         switch self {
-        case .file(let path), .catalog(let path), .volume(_, let path), .smb(_, _, let path): return (path as NSString).lastPathComponent
+        case .file(let path), .catalog(let path), .volume(_, let path): return (path as NSString).lastPathComponent
         }
     }
     /// A short, human description of the storage, for inspectors and offline notices.
@@ -65,20 +58,15 @@ public enum AssetLocator: Hashable, Sendable {
         case .file: return L10n.tr("This Mac")
         case .catalog: return L10n.tr("Catalog folder")
         case .volume(let uuid, _): return FileSystemAssetProvider.volumeName(uuid: uuid) ?? L10n.tr("External volume")
-        case .smb(let host, let share, _): return "\(share) on \(host)"
         }
     }
-    /// The best locator for a file the user chose in Finder: SMB shares and external volumes are
-    /// recorded by server or volume identity so the reference survives remounts and other Macs.
+    /// The best locator for a file the user chose in Finder: external volumes are recorded by volume identity so the
+    /// reference survives remounts and other Macs. Network shares have no volume UUID and stay paths.
     public static func describing(_ url: URL) -> AssetLocator {
         let standardized = url.standardizedFileURL
-        if let values = try? standardized.resourceValues(forKeys: [.volumeURLForRemountingKey, .volumeUUIDStringKey, .volumeIsRootFileSystemKey, .volumeIsInternalKey, .volumeIsRemovableKey, .volumeIsEjectableKey, .volumeURLKey]),
+        if let values = try? standardized.resourceValues(forKeys: [.volumeUUIDStringKey, .volumeIsRootFileSystemKey, .volumeIsInternalKey, .volumeIsRemovableKey, .volumeIsEjectableKey, .volumeURLKey]),
            values.volumeIsRootFileSystem != true, let volumeURL = values.volume {
             let relative = relativePath(of: standardized, in: volumeURL)
-            if let remount = values.volumeURLForRemounting, remount.scheme?.lowercased() == "smb", let host = remount.host,
-               let share = remount.path.split(separator: "/").first.map(String.init), let relative {
-                return .smb(host: host.lowercased(), share: share, path: relative)
-            }
             if values.volumeIsRemovable == true || values.volumeIsEjectable == true || values.volumeIsInternal == false,
                let uuid = values.volumeUUIDString, let relative {
                 return .volume(uuid: uuid.uppercased(), relativePath: relative)
@@ -107,7 +95,7 @@ public enum AssetAvailability: Equatable, Sendable {
     public var isOffline: Bool { if case .offline = self { return true }; return false }
 }
 
-/// Resolves locators to files: on this Mac (`FileSystemAssetProvider`) or on SMB servers (`SMBAssetProvider`).
+/// Resolves locators to files (`FileSystemAssetProvider`).
 /// Availability checks are quick and synchronous (the grid calls them per page); fetching mounts a share or downloads
 /// into the catalog's cache.
 public enum AssetResolver {
@@ -116,11 +104,9 @@ public enum AssetResolver {
         case .file(let path): FileSystemAssetProvider.availability(path: path)
         case .catalog(let relative): FileSystemAssetProvider.availability(copy: relative, catalog: catalog)
         case .volume(let uuid, let relative): FileSystemAssetProvider.availability(volume: uuid, relativePath: relative)
-        case .smb(let host, let share, let path): SMBAssetProvider.availability(host: host, share: share, path: path)
         }
     }
     public static func fetch(_ locator: AssetLocator, catalog: URL?, progress: @escaping @Sendable (Double) -> Void = { _ in }) async throws -> URL {
-        if case .smb(let host, let share, let path) = locator { return try await SMBAssetProvider.fetch(host: host, share: share, path: path, progress: progress) }
         switch availability(of: locator, catalog: catalog) {
         case .available(let url): progress(1); return url
         case .fetchable(let text):
@@ -136,7 +122,13 @@ extension CatalogAsset {
     /// Where the original lives.
     public var locator: AssetLocator { AssetLocator(stored: origin) }
     /// The original is on this Mac's own disk, not a network share or another volume.
-    public var originalOnThisMac: Bool { locator.scheme == .file || locator.scheme == .catalog }
+    public var originalOnThisMac: Bool {
+        switch locator {
+        case .file(let path): return AssetLocator.volumesMount(path) == nil
+        case .catalog: return true
+        case .volume: return false
+        }
+    }
     /// A quick availability check for grids and inspectors.
     public func availability(catalog root: URL?) -> AssetAvailability {
         let url = CatalogImporter.sourceURL(for: self, root: root)
@@ -152,15 +144,13 @@ extension CatalogAsset {
         switch locator {
         case .file(let path):
             // A path on another volume counts only while that volume is mounted.
-            let parts = (path as NSString).pathComponents
-            if parts.count > 2, parts[1] == "Volumes" { return fm.fileExists(atPath: "/Volumes/" + parts[2]) }
+            if let mount = AssetLocator.volumesMount(path) { return fm.fileExists(atPath: mount) }
             return true
         case .catalog:
             // An iCloud catalog's copy may not have arrived from the Mac that imported it.
             guard let root else { return false }
             return CatalogImporter.originalsRoot(for: root) == root
         case .volume(let uuid, _): return FileSystemAssetProvider.mountedVolume(uuid: uuid) != nil
-        case .smb(let host, let share, _): return SMBAssetProvider.mountPoint(host: host, share: share) != nil
         }
     }
 }
@@ -169,6 +159,16 @@ extension AssetLocator {
     /// A locator the catalog stored itself (`CatalogAsset.origin`). One that doesn't parse (a damaged catalog, a newer
     /// build's scheme) becomes a file that isn't there, so the photo shows as missing its original.
     init(stored origin: String) {
-        self = AssetLocator(string: origin) ?? .file(path: origin.isEmpty ? "/" : origin)
+        if let locator = AssetLocator(string: origin) { self = locator; return }
+        // Builds before 2026-11-27 recorded shares as `smb://host/share/path`; Finder mounts them at /Volumes/share.
+        if let components = URLComponents(string: origin), components.scheme == "smb", components.path.count > 1 {
+            self = .file(path: "/Volumes" + components.path); return
+        }
+        self = .file(path: origin.isEmpty ? "/" : origin)
+    }
+    /// `/Volumes/<name>` for a path on another volume or a network share, else nil.
+    static func volumesMount(_ path: String) -> String? {
+        let parts = (path as NSString).pathComponents
+        return parts.count > 2 && parts[1] == "Volumes" ? "/Volumes/" + parts[2] : nil
     }
 }

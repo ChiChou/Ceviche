@@ -149,6 +149,7 @@ extension CatalogStore {
                 return true
             }
             var changed = false
+            let base = try Self.syncBase(assetID, db)
             if let original = photo.original, original.updatedAt > asset.originalUpdatedAt {
                 asset.filename = original.filename; asset.kind = original.kind; asset.fileSize = original.fileSize; asset.captureTime = original.captureTime
                 asset.importBatchID = original.importBatchID; asset.originalUpdatedAt = original.updatedAt
@@ -162,7 +163,7 @@ extension CatalogStore {
                 }
                 try asset.update(db); changed = true
             }
-            if let state = photo.state, state.updatedAt > asset.updatedAt {
+            if let remote = photo.state, let state = Self.incomingState(remote, asset: asset, base: base?.state) {
                 var metadata = state.metadata
                 // The same keywords keep this Mac's way of writing them.
                 if metadata.keywordList == asset.metadata.keywordList { metadata.keywords = asset.keywords }
@@ -182,8 +183,13 @@ extension CatalogStore {
                 if !asset.inLibrary { try CatalogAnalysisJob.deleteOne(db, key: assetID) }
                 changed = true
             }
-            if let development = photo.development, development.updatedAt > asset.developmentUpdatedAt, try applyDevelopment(development, blobs: blobs, db) {
-                changed = true
+            if let development = photo.development {
+                if let agreed = base?.development,
+                   Self.changedOnBothSides(local: asset.developmentUpdatedAt, remote: development.updatedAt, base: agreed.updatedAt) {
+                    if try mergeDevelopment(development, base: agreed, blobs: blobs, db) { changed = true }
+                } else if development.updatedAt > asset.developmentUpdatedAt, try applyDevelopment(development, blobs: blobs, db) {
+                    changed = true
+                }
             }
             if changed { try Self.analysisChanged(db) }
             return changed
@@ -213,7 +219,7 @@ extension CatalogStore {
         try revision(asset.id, kind: .metadata, summary: L10n.tr("Received from iCloud"), payload: JSONEncoder().encode(state.metadata)).insert(db)
     }
     /// Writes a development from another Mac; false, with nothing written, while data it refers to hasn't arrived.
-    private func applyDevelopment(_ remote: CatalogSyncDevelopment, blobs: [String: Data], _ db: Database) throws -> Bool {
+    func applyDevelopment(_ remote: CatalogSyncDevelopment, blobs: [String: Data], _ db: Database, summary: String = L10n.tr("Received from iCloud")) throws -> Bool {
         let assetID = remote.assetID
         guard var asset = try CatalogAsset.fetchOne(db, key: assetID) else { return false }
         var edits: Data?
@@ -223,7 +229,7 @@ extension CatalogStore {
         }
         var development = try Self.development(assetID, db)
         if let edits, development.adjustmentsData != edits {
-            var entry = revision(assetID, kind: .edit, summary: L10n.tr("Received from iCloud"), payload: edits); entry.milestone = true
+            var entry = revision(assetID, kind: .edit, summary: summary, payload: edits); entry.milestone = true
             try entry.insert(db)
         }
         development.adjustmentsData = edits; development.xmpData = remote.xmpData
@@ -290,7 +296,7 @@ extension CatalogStore {
     /// Stored JSON for one of `assetID`'s developments from another Mac, after adding the mask blobs it refers to
     /// from `blobs`; nil, with nothing written, while a blob is neither there nor in this catalog, or a LUT or profile
     /// it uses has not reached this Mac's library yet.
-    private static func receiveDevelopment(_ remote: Data, blobs: [String: Data], _ db: Database, assetID: String, resources: ResourceStorage) throws -> Data? {
+    static func receiveDevelopment(_ remote: Data, blobs: [String: Data], _ db: Database, assetID: String, resources: ResourceStorage) throws -> Data? {
         let missing = try RevisionPayload.references(remote).filter { try !CatalogBlob.exists(db, key: $0) }
         guard missing.allSatisfy({ blobs[$0] != nil }) else { return nil }
         for id in missing { try CatalogBlob(id: id, assetID: assetID, data: blobs[id]!).insert(db) }
