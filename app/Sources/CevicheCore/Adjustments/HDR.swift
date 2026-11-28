@@ -20,23 +20,38 @@ public struct HDRSettings: Codable, Equatable, Sendable {
 /// This is Ceviche's HDR extension of SDR operators, not another converter's process version.
 enum HDRRenderer {
     static let space = CGColorSpace(name: CGColorSpace.extendedLinearDisplayP3)!
-    private static let kernels = Dictionary(uniqueKeysWithValues: try! CIKernel.kernels(withMetalString: """
-    #include <metal_stdlib>
-    #include <CoreImage/CoreImage.h>
-    using namespace metal;
+    /// Each kernel is compiled from a Metal source of its own. Core Image keys the programs it stitches (a scale, the
+    /// kernel, a crop) by their library and shape, not by the function's name, so two kernels of one library with
+    /// the same shape around them shared one program: `measureHDR` could run as `lightHDR` ("Argument count
+    /// mismatch for program (ci_affine_measureHDR_crop)"), measure nonsense and tone map the photo to black.
+    private static func kernel(_ source: String) -> CIKernel {
+        try! CIKernel.kernels(withMetalString: """
+        #include <metal_stdlib>
+        #include <CoreImage/CoreImage.h>
+        using namespace metal;
+        \(source)
+        """)[0]
+    }
+    private static let measure = kernel("""
     extern "C" [[ stitchable ]] float4 measureHDR(coreimage::sample_t s) {
         return float4(s.a > 0.000001 ? s.rgb / s.a : float3(0.0), 1.0);
     }
+    """)
+    private static let normalize = kernel("""
     extern "C" [[ stitchable ]] float4 normalizeHDR(coreimage::sample_t s) {
         float3 c = s.rgb / max(s.a, 0.000001);
         float peak = max(1.0, max(c.r, max(c.g, c.b)));
         return float4(c / peak * s.a, s.a);
     }
+    """)
+    private static let restore = kernel("""
     extern "C" [[ stitchable ]] float4 restoreHDR(coreimage::sample_t s, coreimage::sample_t original) {
         float3 c = original.rgb / max(original.a, 0.000001);
         float peak = max(1.0, max(c.r, max(c.g, c.b)));
         return float4(s.rgb * peak, s.a);
     }
+    """)
+    private static let lighten = kernel("""
     extern "C" [[ stitchable ]] float4 lightHDR(coreimage::sample_t s, float4 tones, float contrast, float saturation) {
         float3 c = s.rgb / max(s.a, 0.000001);
         float y = max(0.0, dot(c, float3(0.2126, 0.7152, 0.0722)));
@@ -49,9 +64,7 @@ enum HDRRenderer {
         c = mix(float3(y), c, saturation) * exp2(ev);
         return float4(c * s.a, s.a);
     }
-    """).map { ($0.name, $0) })
-    private static let measure = kernels["measureHDR"]!, normalize = kernels["normalizeHDR"]!
-    private static let restore = kernels["restoreHDR"]!, lighten = kernels["lightHDR"]!
+    """)
     static func normalized(_ image: CIImage) -> CIImage {
         normalize.apply(extent: image.extent, roiCallback: { _, r in r }, arguments: [image])!
     }

@@ -112,6 +112,15 @@ final class HDRTests: XCTestCase {
         XCTAssertEqual(HDRRenderer.headroom(solid(8, 4, 2), context: ctx), 8, accuracy: 0.01)
         XCTAssertEqual(HDRRenderer.headroom(solid(8, 4, 2, alpha: 0.5), context: ctx), 8, accuracy: 0.01)
     }
+    /// Light's kernel stitched between a scale and a crop first, then the measure in the same place: Core Image ran
+    /// both as one program while they shared a Metal library, and the headroom came back as nonsense.
+    func testHeadroomAfterLightInTheSameShape() throws {
+        let ctx = try context(), extent = CGRect(x: 0, y: 0, width: 64, height: 64)
+        var light = PixelAdjustments(); light.highlights = 20
+        _ = pixel(HDRRenderer.light(solid(2, 2, 2), settings: light).cropped(to: extent), ctx)
+        XCTAssertEqual(HDRRenderer.headroom(solid(8, 4, 2).cropped(to: extent), context: ctx), 8, accuracy: 0.01)
+        XCTAssertEqual(HDRRenderer.headroom(solid(8, 4, 2).transformed(by: CGAffineTransform(scaleX: 0.5, y: 0.5)).cropped(to: CGRect(x: 0, y: 0, width: 32, height: 32)), context: ctx), 8, accuracy: 0.01)
+    }
     func testPreviewExportAndDocumentRetainHDR() async throws {
         let ctx = try context()
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
