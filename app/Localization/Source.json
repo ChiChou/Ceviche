@@ -650,6 +650,11 @@
     "context": "Sources/CevicheCore/Analysis/ModelLibrary.swift:454"
   },
   {
+    "key": "%1$@ is not connected.",
+    "source": "\"\\((mount as NSString).lastPathComponent) is not connected.\"",
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:9"
+  },
+  {
     "key": "%1$@ is not part of the %2$@ model set on GitHub.",
     "source": "\"\\(file) is not part of the \\(tag) model set on GitHub.\"",
     "context": "Sources/CevicheCore/Analysis/ModelLibrary.swift:338"
@@ -930,11 +935,6 @@
     "key": "%1$@ offline photos",
     "source": "\"\\(count) offline photos\"",
     "context": "Sources/CevicheMac/Tools/TimelapseModel.swift:357"
-  },
-  {
-    "key": "%1$@ on %2$@ did not mount.",
-    "source": "\"\\(share) on \\(host) did not mount.\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:80"
   },
   {
     "key": "%1$@ originals are offline. Reconnect or remove them to make the video.",
@@ -4226,7 +4226,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:414",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:414",
-      "Sources/CevicheCore/Originals/AssetLocator.swift:66"
+      "Sources/CevicheCore/Originals/AssetLocator.swift:59"
     ]
   },
   {
@@ -5450,7 +5450,7 @@
   {
     "key": "Copy originals into the catalog",
     "source": "\"Copy originals into the catalog\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:116"
+    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:114"
   },
   {
     "key": "Copy the originals to a folder with their edits as XMP, and keep them in the archive",
@@ -5470,7 +5470,7 @@
   {
     "key": "Copying originals needs an open catalog.",
     "source": "\"Copying originals needs an open catalog.\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:205"
+    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:203"
   },
   {
     "key": "Copyright",
@@ -5553,11 +5553,6 @@
     "key": "Correcting focus breathing",
     "source": "\"Correcting focus breathing\"",
     "context": "Sources/CevicheCore/FocusStack/FocusStacker.swift:124"
-  },
-  {
-    "key": "Could not connect to %1$@ on %2$@. %3$@",
-    "source": "\"Could not connect to \\(share) on \\(host). \\(reason)\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:77"
   },
   {
     "key": "Could not load photo.",
@@ -7471,11 +7466,6 @@
     ]
   },
   {
-    "key": "Error %1$@.",
-    "source": "\"Error \\(status).\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:76"
-  },
-  {
     "key": "Esc to cancel",
     "source": "\"Esc to cancel\"",
     "context": "Sources/CevicheMac/Editor/EditorView.swift:82"
@@ -7932,7 +7922,7 @@
   {
     "key": "External volume",
     "source": "\"External volume\"",
-    "context": "Sources/CevicheCore/Originals/AssetLocator.swift:67"
+    "context": "Sources/CevicheCore/Originals/AssetLocator.swift:60"
   },
   {
     "key": "Eye Sclera",
@@ -9867,17 +9857,17 @@
   {
     "key": "Imported XMP development",
     "source": "\"Imported XMP development\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:560"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:561"
   },
   {
     "key": "Imported XMP metadata",
     "source": "\"Imported XMP metadata\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:552"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:553"
   },
   {
     "key": "Imported development",
     "source": "\"Imported development\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:471"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:472"
   },
   {
     "key": "Imported look",
@@ -9892,7 +9882,7 @@
   {
     "key": "Imported metadata",
     "source": "\"Imported metadata\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:470"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:471"
   },
   {
     "key": "Importing photos",
@@ -10280,11 +10270,6 @@
       "Sources/CevicheCore/Looks/HaldCLUT.swift:69",
       "Sources/CevicheCore/Looks/HaldCLUT.swift:71"
     ]
-  },
-  {
-    "key": "Invalid SMB address.",
-    "source": "\"Invalid SMB address.\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:65"
   },
   {
     "key": "Invalid XMP boolean: %1$@.",
@@ -10692,11 +10677,6 @@
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:533",
       "Sources/CevicheMac/Tools/TimelapseFilmstrip.swift:151"
     ]
-  },
-  {
-    "key": "Keychain error %1$@.",
-    "source": "\"Keychain error \\(status).\"",
-    "context": "Sources/CevicheCore/Originals/KeychainStore.swift:14"
   },
   {
     "key": "Keyframe",
@@ -12145,6 +12125,15 @@
     "uses": [
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:448",
       "Sources/CevicheMac/Culling/CullingAssistantView.swift:567"
+    ]
+  },
+  {
+    "key": "Merged edits",
+    "source": "\"Merged edits\"",
+    "context": "Sources/CevicheCore/Catalog/CatalogStore+SyncMerge.swift:132",
+    "uses": [
+      "Sources/CevicheCore/Catalog/CatalogStore+SyncMerge.swift:132",
+      "Sources/CevicheCore/Catalog/CatalogStore+SyncMerge.swift:141"
     ]
   },
   {
@@ -13963,11 +13952,6 @@
     "context": "Sources/CevicheMac/Catalog/CatalogModel+Sources.swift:185"
   },
   {
-    "key": "Originals on network shares open on a Mac.",
-    "source": "\"Originals on network shares open on a Mac.\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:21"
-  },
-  {
     "key": "Other Lines Found",
     "source": "\"Other Lines Found\"",
     "context": "Sources/CevicheMac/Tools/NightSkyView.swift:91"
@@ -13986,6 +13970,11 @@
     "key": "Other editors read the portable settings only; camera profiles, masks, retouch, HDR, defringing and transformed crops stay in Ceviche's recipe.",
     "source": "\"Other editors read the portable settings only; camera profiles, masks, retouch, HDR, defringing and transformed crops stay in Ceviche's recipe.\"",
     "context": "Sources/CevicheCore/XMP/XMPExport.swift:22"
+  },
+  {
+    "key": "Other edits",
+    "source": "\"Other edits\"",
+    "context": "Sources/CevicheCore/Catalog/CatalogStore+SyncMerge.swift:156"
   },
   {
     "key": "Other settings: %1$@",
@@ -14329,11 +14318,6 @@
     "context": "Sources/CevicheMac/Editor/PrintProof.swift:221"
   },
   {
-    "key": "Permission denied; check the user name and password saved for this server.",
-    "source": "\"Permission denied; check the user name and password saved for this server.\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:76"
-  },
-  {
     "key": "Permissions",
     "source": "\"Permissions\"",
     "context": "Sources/CevicheMac/App/PreferencesView.swift:112"
@@ -14398,10 +14382,10 @@
   {
     "key": "Photo is no longer in this catalog.",
     "source": "\"Photo is no longer in this catalog.\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:413",
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:414",
     "uses": [
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:413",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:430",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:414",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:431",
       "Sources/CevicheCore/Catalog/CatalogTrash.swift:130"
     ]
   },
@@ -14417,11 +14401,11 @@
     "uses": [
       "Sources/CevicheCore/Catalog/CatalogStore+Developments.swift:138",
       "Sources/CevicheCore/Catalog/CatalogStore+Developments.swift:171",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:423",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:436",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:491",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:549",
-      "Sources/CevicheCore/Catalog/CatalogStore.swift:580"
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:424",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:437",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:492",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:550",
+      "Sources/CevicheCore/Catalog/CatalogStore.swift:581"
     ]
   },
   {
@@ -15267,7 +15251,7 @@
   {
     "key": "Rating must be 0 to 5.",
     "source": "\"Rating must be 0 to 5.\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:528"
+    "context": "Sources/CevicheCore/Catalog/CatalogStore.swift:529"
   },
   {
     "key": "Read and edit",
@@ -15382,10 +15366,10 @@
   {
     "key": "Received from iCloud",
     "source": "\"Received from iCloud\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:213",
+    "context": "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:219",
     "uses": [
-      "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:213",
-      "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:226"
+      "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:219",
+      "Sources/CevicheCore/Catalog/CatalogStore+Sync.swift:222"
     ]
   },
   {
@@ -15609,7 +15593,7 @@
   {
     "key": "Reference originals in place",
     "source": "\"Reference originals in place\"",
-    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:116"
+    "context": "Sources/CevicheCore/Catalog/CatalogImporter.swift:114"
   },
   {
     "key": "Referenced",
@@ -18826,7 +18810,7 @@
   {
     "key": "The copy is missing from this Mac's catalog folder.",
     "source": "\"The copy is missing from this Mac's catalog folder.\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:12"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:17"
   },
   {
     "key": "The copy keeps the photo's EXIF and edits, and the HDR of a HEIC or JPEG, but not crops, masks or retouching.",
@@ -18837,6 +18821,11 @@
     "key": "The corners cross: drag them into a quadrilateral",
     "source": "\"The corners cross: drag them into a quadrilateral\"",
     "context": "Sources/CevicheMac/Editor/CropTools.swift:170"
+  },
+  {
+    "key": "The development could not be read.",
+    "source": "\"The development could not be read.\"",
+    "context": "Sources/CevicheCore/Catalog/DevelopmentMerge.swift:171"
   },
   {
     "key": "The development refers to mask data that is missing from this catalog.",
@@ -18878,23 +18867,14 @@
     "context": "Sources/CevicheCore/Catalog/CatalogTrash.swift:161"
   },
   {
-    "key": "The file is missing from %1$@ on %2$@.",
-    "source": "\"The file is missing from \\(share) on \\(host).\"",
-    "context": "Sources/CevicheCore/Originals/SMBAssetProvider.swift:15",
-    "uses": [
-      "Sources/CevicheCore/Originals/SMBAssetProvider.swift:15",
-      "Sources/CevicheCore/Originals/SMBAssetProvider.swift:25"
-    ]
-  },
-  {
     "key": "The file is missing from %1$@.",
     "source": "\"The file is missing from \\(volume.lastPathComponent).\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:20"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:25"
   },
   {
     "key": "The file is no longer at %1$@.",
     "source": "\"The file is no longer at \\(path).\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:6"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:11"
   },
   {
     "key": "The files move to the Finder’s Trash.",
@@ -19008,7 +18988,7 @@
   {
     "key": "The original is not in iCloud Drive yet. It uploads from the Mac that imported it while Ceviche is open there.",
     "source": "\"The original is not in iCloud Drive yet. It uploads from the Mac that imported it while Ceviche is open there.\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:13"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:18"
   },
   {
     "key": "The original isn’t available.",
@@ -19039,7 +19019,7 @@
   {
     "key": "The original was copied into a catalog on another Mac.",
     "source": "\"The original was copied into a catalog on another Mac.\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:9"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:14"
   },
   {
     "key": "The original was deleted, but catalog cleanup failed: %1$@. Try permanent deletion again to remove the remaining catalog records.",
@@ -19304,7 +19284,7 @@
   {
     "key": "The volume holding this original is not connected.",
     "source": "\"The volume holding this original is not connected.\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:18"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:23"
   },
   {
     "key": "The watermark image “%1$@” could not be read.",
@@ -19440,7 +19420,7 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:415",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:415",
-      "Sources/CevicheCore/Originals/AssetLocator.swift:65"
+      "Sources/CevicheCore/Originals/AssetLocator.swift:58"
     ]
   },
   {
@@ -19505,7 +19485,7 @@
   {
     "key": "This catalog was deleted from iCloud.",
     "source": "\"This catalog was deleted from iCloud.\"",
-    "context": "Sources/CevicheCore/Catalog/CloudSync.swift:743"
+    "context": "Sources/CevicheCore/Catalog/CloudSync.swift:757"
   },
   {
     "key": "This catalog was last opened by a newer version of Ceviche.",
@@ -21558,7 +21538,7 @@
   {
     "key": "iCloud Drive",
     "source": "\"iCloud Drive\"",
-    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:15"
+    "context": "Sources/CevicheCore/Originals/FileSystemAssetProvider.swift:20"
   },
   {
     "key": "iCloud Library",

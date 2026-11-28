@@ -89,11 +89,14 @@ Three GitHub Actions workflows in `.github/workflows` run on GitHub's `xcode-27`
 
 ## App icon and wordmark
 
-The tracked `app/Platforms/macOS/Resources/AppIcon.icns` is the application's icon. After changing the shared
-bowl source in `docs/design/identity-system`, run `swift app/scripts/identity.swift` to export the Mac PNG and
-outlined Nunito wordmarks, then `bash app/scripts/app-icon.sh` to rebuild the `.icns`. The latter uses `uv` for
-its pinned compression tools. The [identity notes](../design/identity-system/README.md) describe the sources,
-platform framing and font licence. Normal builds consume the tracked exports and do not regenerate the artwork.
+The app builds `app/Platforms/macOS/Resources/AppIcon.icon` with Xcode's asset compiler. Edit that package in
+Icon Composer; it contains a separate bowl foreground and background/appearance settings. Xcode supplies the
+native platform frame, appearance variants and compatibility icon for older Macs.
+
+After editing the package, run `bash app/scripts/app-icon.sh` to refresh the tracked PNG preview and `.icns`
+compatibility export. Both exports are excluded from Copy Bundle Resources because the normal build generates
+its own `Assets.car` and fallback from the `.icon` source. `swift app/scripts/identity.swift` separately rebuilds
+the Nunito wordmark outlines. The [identity notes](../design/identity-system/README.md) describe the assets and licence.
 
 ## Export encoders
 

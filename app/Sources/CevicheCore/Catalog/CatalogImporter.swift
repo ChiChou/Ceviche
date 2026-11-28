@@ -60,7 +60,7 @@ public enum CatalogImporter {
         try matches(url, fileSize: asset.fileSize, captureTime: asset.captureTime)
     }
     /// The best local URL for an original right now. Copies inside the catalog and remote caches need
-    /// `root`; external volumes and SMB shares resolve through their current mount point.
+    /// `root`; external volumes resolve through their current mount point.
     public static func sourceURL(for asset: CatalogAsset, root: URL? = nil) -> URL {
         sourceURL(locator: asset.locator, sourcePath: asset.sourcePath, bookmark: asset.bookmark, root: root)
     }
@@ -79,8 +79,6 @@ public enum CatalogImporter {
         switch locator {
         case .volume(let uuid, let relative):
             if let volume = FileSystemAssetProvider.mountedVolume(uuid: uuid) { return volume.appendingPathComponent(relative) }
-        case .smb(let host, let share, let path):
-            if let mount = SMBAssetProvider.mountPoint(host: host, share: share) { return mount.appendingPathComponent(path) }
         case .file, .catalog: break
         }
         return URL(fileURLWithPath: sourcePath)

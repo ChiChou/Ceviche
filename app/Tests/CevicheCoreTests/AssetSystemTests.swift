@@ -24,15 +24,16 @@ final class AssetSystemTests: XCTestCase {
         let cases: [AssetLocator] = [
             .file(path: "/Users/me/Pictures/Été 2025/DSC001.ARW"),
             .catalog(relativePath: "Originals/2025-10/DSC001.ARW"),
-            .volume(uuid: "1A2B3C4D-0000-1111-2222-333344445555", relativePath: "DCIM/100MSDCF/DSC001.ARW"),
-            .smb(host: "nas.local", share: "Photos", path: "2025/Trip/DSC001.ARW")
+            .volume(uuid: "1A2B3C4D-0000-1111-2222-333344445555", relativePath: "DCIM/100MSDCF/DSC001.ARW")
         ]
         for locator in cases {
             XCTAssertEqual(AssetLocator(string: locator.string), locator, locator.string)
             XCTAssertEqual(locator.filename, "DSC001.ARW")
         }
         XCTAssertNil(AssetLocator(string: "ftp://x/y"))
-        XCTAssertNil(AssetLocator(string: "smb://host"))
+        XCTAssertNil(AssetLocator(string: "smb://nas.local/Photos/A.ARW"))
+        // Shares recorded by older builds read as the path Finder mounts them at.
+        XCTAssertEqual(AssetLocator(stored: "smb://nas.local/Photos/2025/A.ARW"), .file(path: "/Volumes/Photos/2025/A.ARW"))
         XCTAssertNil(AssetLocator(string: "gdrive:///me@example.com/abc"))
     }
     func testLocalFilesAreDescribedAsFilesAndMissingOnesAreOffline() throws {
@@ -205,7 +206,8 @@ final class AssetSystemTests: XCTestCase {
         XCTAssertFalse(unmounted.originalIsMissing(catalog: store.root), "A drive that is not mounted is offline, not missing")
         var volume = reloaded; volume.origin = AssetLocator.volume(uuid: UUID().uuidString, relativePath: "A.ARW").string
         XCTAssertFalse(volume.originalIsMissing(catalog: store.root))
-        var share = reloaded; share.origin = AssetLocator.smb(host: "nas.invalid", share: "photos", path: "A.ARW").string
-        XCTAssertFalse(share.originalIsMissing(catalog: store.root))
+        var share = reloaded; share.origin = "smb://nas.invalid/photos-\(UUID().uuidString)/A.ARW"
+        XCTAssertFalse(share.originalIsMissing(catalog: store.root), "A share recorded by an older build that is not mounted is offline")
+        XCTAssertFalse(share.originalOnThisMac)
     }
 }

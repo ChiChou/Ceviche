@@ -62,6 +62,12 @@ trash deletion, index exclusion, damaged results, and restoring all three Night 
 that detections and masks come back exactly, that previews decoded again stay within 3% of the originals, and that
 editing does not change the stored results; it requires Metal.
 
+## Development merge on a real catalog
+
+`DevelopmentMergeTests/testRealDevelopmentsMergeCleanly` opens a catalog read-only (`CEVICHE_MERGE_CATALOG` set to its
+folder) and checks, for every development, that a merge against an unchanged base gives the other side back, that
+either side merging gives the same bytes, and that the merge of two unrelated developments still decodes.
+
 ## Blemish portrait review
 
 `BlemishPortraitTests` passes local JPEGs through Vision, the converted blemish detector, source selection and the Heal renderer. Set `CEVICHE_MODELS` to the compiled models directory, `CEVICHE_BLEMISH_PORTRAITS` to an input directory and `CEVICHE_BLEMISH_REVIEW` to a separate local output directory, then run `swift test --package-path app --filter BlemishPortraitTests`. `CEVICHE_FACE_REGIONS="name=x,y,w,h;…"` (normalized, y up, file names without extension) replaces face detection with a manual Face region for those photos. The output holds the healed JPEG, the stroke coordinates and a Cheek width −75% rendering for each portrait.
@@ -71,3 +77,10 @@ Detection catches discrete spots and stronger freckles but leaves broad redness 
 ## Tonal spot review
 
 Run `app/scripts/test.sh --filter TonalSpotReviewTests` with `CEVICHE_SPOT_RAW`, an existing local output folder in `CEVICHE_SPOT_REVIEW`, normalized top-left coordinates in `CEVICHE_SPOT_X` and `CEVICHE_SPOT_Y`, and radius as a fraction of the short side in `CEVICHE_SPOT_RADIUS`. The review reports signed EV and writes matching before and after crops.
+
+## Recovery on a real catalog
+
+`CatalogRecoveryTests/testRealCatalogRecoversEveryEdit` runs `scripts/recover_catalog.py` on a catalog
+(`CEVICHE_RECOVER_CATALOG` set to its folder) into a temporary folder and checks that every recovered XMP holds the
+catalog's development. To try a damaged database, copy `catalog.sqlite` into a scratch package and overwrite a few
+hundred 4 KB pages with random bytes; `--salvage` takes that route on an intact one. Never run it with `--beside-originals` on a network drive.

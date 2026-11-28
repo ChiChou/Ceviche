@@ -53,7 +53,7 @@ extension CatalogModel {
             guard let locator else { return transferPath ?? filename }
             switch locator {
             case .file(let path): return path
-            case .catalog(let path), .volume(_, let path), .smb(_, _, let path): return locator.storageDescription + "/" + path
+            case .catalog(let path), .volume(_, let path): return locator.storageDescription + "/" + path
             }
         }
     }

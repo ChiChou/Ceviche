@@ -1,9 +1,14 @@
 import Foundation
 
-/// Files on this Mac: internal volumes, copies inside the catalog, and external volumes found by UUID.
+/// Files on this Mac: internal volumes, mounted shares, copies inside the catalog, and external volumes found by UUID.
 public enum FileSystemAssetProvider {
     static func availability(path: String) -> AssetAvailability {
-        FileManager.default.fileExists(atPath: path) ? .available(URL(fileURLWithPath: path)) : .offline(L10n.tr("The file is no longer at \(path)."))
+        let fm = FileManager.default
+        if fm.fileExists(atPath: path) { return .available(URL(fileURLWithPath: path)) }
+        if let mount = AssetLocator.volumesMount(path), !fm.fileExists(atPath: mount) {
+            return .offline(L10n.tr("\((mount as NSString).lastPathComponent) is not connected."))
+        }
+        return .offline(L10n.tr("The file is no longer at \(path)."))
     }
     static func availability(copy relative: String, catalog: URL?) -> AssetAvailability {
         guard let catalog else { return .offline(L10n.tr("The original was copied into a catalog on another Mac.")) }

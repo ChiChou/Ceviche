@@ -223,7 +223,7 @@ final class ThumbnailReactorTests: XCTestCase {
     func testCatchUpLeavesNetworkAndVolumeOriginals() async throws {
         let (store, ids) = try await catalog(3, edited: [0, 1, 2])
         try await store.database.write { db in
-            try db.execute(sql: "UPDATE asset SET origin = 'smb://nas/photo/a.ARW' WHERE id = ?", arguments: [ids[0]])
+            try db.execute(sql: "UPDATE asset SET origin = 'file:///Volumes/photo/a.ARW' WHERE id = ?", arguments: [ids[0]])
             try db.execute(sql: "UPDATE asset SET origin = 'volume://0000/a.ARW' WHERE id = ?", arguments: [ids[1]])
         }
         let all = try await store.undevelopedAssetIDs()

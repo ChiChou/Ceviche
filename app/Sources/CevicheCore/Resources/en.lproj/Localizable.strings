@@ -109,6 +109,7 @@
 "%1$@ is from a different camera or size than %2$@." = "%1$@ is from a different camera or size than %2$@.";
 "%1$@ is missing" = "%1$@ is missing";
 "%1$@ is not an Apple Archive." = "%1$@ is not an Apple Archive.";
+"%1$@ is not connected." = "%1$@ is not connected.";
 "%1$@ is not part of the %2$@ model set on GitHub." = "%1$@ is not part of the %2$@ model set on GitHub.";
 "%1$@ is not reachable from this Mac, so there is no preview. The export still runs for every photo it can read." = "%1$@ is not reachable from this Mac, so there is no preview. The export still runs for every photo it can read.";
 "%1$@ is not recalculated; the recorded values are used." = "%1$@ is not recalculated; the recorded values are used.";
@@ -157,7 +158,6 @@
 "%1$@ of 4" = "%1$@ of 4";
 "%1$@ offline originals not backed up: %2$@" = "%1$@ offline originals not backed up: %2$@";
 "%1$@ offline photos" = "%1$@ offline photos";
-"%1$@ on %2$@ did not mount." = "%1$@ on %2$@ did not mount.";
 "%1$@ originals are offline. Reconnect or remove them to make the video." = "%1$@ originals are offline. Reconnect or remove them to make the video.";
 "%1$@ originals deleted" = "%1$@ originals deleted";
 "%1$@ originals moved" = "%1$@ originals moved";
@@ -872,7 +872,6 @@
 "Correcting faces" = "Correcting faces";
 "Correcting faces in %1$@" = "Correcting faces in %1$@";
 "Correcting focus breathing" = "Correcting focus breathing";
-"Could not connect to %1$@ on %2$@. %3$@" = "Could not connect to %1$@ on %2$@. %3$@";
 "Could not load photo." = "Could not load photo.";
 "Could not save edits." = "Could not save edits.";
 "Couldn’t Add to Photos" = "Couldn’t Add to Photos";
@@ -1167,7 +1166,6 @@
 "Entire Person" = "Entire Person";
 "Erase" = "Erase";
 "Error" = "Error";
-"Error %1$@." = "Error %1$@.";
 "Esc to cancel" = "Esc to cancel";
 "Estimating depth…" = "Estimating depth…";
 "Even light" = "Even light";
@@ -1602,7 +1600,6 @@
 "Invalid GPS direction." = "Invalid GPS direction.";
 "Invalid HDR settings." = "Invalid HDR settings.";
 "Invalid Hald CLUT PNG." = "Invalid Hald CLUT PNG.";
-"Invalid SMB address." = "Invalid SMB address.";
 "Invalid XMP boolean: %1$@." = "Invalid XMP boolean: %1$@.";
 "Invalid XMP curve point." = "Invalid XMP curve point.";
 "Invalid XMP number: %1$@." = "Invalid XMP number: %1$@.";
@@ -1674,7 +1671,6 @@
 "Kept on this Mac and shared by every catalog; they are not synced to iCloud. Choose one under Watermark in the export dialog." = "Kept on this Mac and shared by every catalog; they are not synced to iCloud. Choose one under Watermark in the export dialog.";
 "Kept only for Export XMP." = "Kept only for Export XMP.";
 "Key Photo" = "Key Photo";
-"Keychain error %1$@." = "Keychain error %1$@.";
 "Keyframe" = "Keyframe";
 "Keyframes" = "Keyframes";
 "Keyline" = "Keyline";
@@ -1905,6 +1901,7 @@
 "Merge to Panorama…" = "Merge to Panorama…";
 "Merge to TIFF" = "Merge to TIFF";
 "Merge with Above" = "Merge with Above";
+"Merged edits" = "Merged edits";
 "Merges each position’s bracket to HDR, then stitches" = "Merges each position’s bracket to HDR, then stitches";
 "Merging %1$@ photos" = "Merging %1$@ photos";
 "Merging Best Faces" = "Merging Best Faces";
@@ -2197,11 +2194,11 @@
 "Original photos stay in their current locations and are not uploaded to iCloud." = "Original photos stay in their current locations and are not uploaded to iCloud.";
 "Original replaced" = "Original replaced";
 "Originals Not Moved to Trash" = "Originals Not Moved to Trash";
-"Originals on network shares open on a Mac." = "Originals on network shares open on a Mac.";
 "Other Lines Found" = "Other Lines Found";
 "Other camera" = "Other camera";
 "Other camera: %1$@" = "Other camera: %1$@";
 "Other editors read the portable settings only; camera profiles, masks, retouch, HDR, defringing and transformed crops stay in Ceviche's recipe." = "Other editors read the portable settings only; camera profiles, masks, retouch, HDR, defringing and transformed crops stay in Ceviche's recipe.";
+"Other edits" = "Other edits";
 "Other settings: %1$@" = "Other settings: %1$@";
 "Other size" = "Other size";
 "Other size: %1$@" = "Other size: %1$@";
@@ -2258,7 +2255,6 @@
 "People…" = "People…";
 "Perceptual" = "Perceptual";
 "Perceptual brings the whole range into the print, keeping how colours relate. Relative keeps printable colours as they are and clips the rest." = "Perceptual brings the whole range into the print, keeping how colours relate. Relative keeps printable colours as they are and clips the rest.";
-"Permission denied; check the user name and password saved for this server." = "Permission denied; check the user name and password saved for this server.";
 "Permissions" = "Permissions";
 "Person %1$@" = "Person %1$@";
 "Perspective" = "Perspective";
@@ -2959,6 +2955,7 @@
 "The copy is missing from this Mac's catalog folder." = "The copy is missing from this Mac's catalog folder.";
 "The copy keeps the photo's EXIF and edits, and the HDR of a HEIC or JPEG, but not crops, masks or retouching." = "The copy keeps the photo's EXIF and edits, and the HDR of a HEIC or JPEG, but not crops, masks or retouching.";
 "The corners cross: drag them into a quadrilateral" = "The corners cross: drag them into a quadrilateral";
+"The development could not be read." = "The development could not be read.";
 "The development refers to mask data that is missing from this catalog." = "The development refers to mask data that is missing from this catalog.";
 "The edges could not be filled." = "The edges could not be filled.";
 "The encoder did not preserve the requested %1$@-bit depth. Choose 16-bit TIFF or PNG for a lossless master." = "The encoder did not preserve the requested %1$@-bit depth. Choose 16-bit TIFF or PNG for a lossless master.";
@@ -2966,7 +2963,6 @@
 "The encoder reads the whole video before it spends its bits, so motion gets more of them. Every frame is developed twice, so the video takes about twice as long." = "The encoder reads the whole video before it spends its bits, so motion gets more of them. Every frame is developed twice, so the video takes about twice as long.";
 "The exposures couldn’t be merged. %1$@" = "The exposures couldn’t be merged. %1$@";
 "The file at this path no longer matches the imported original. Nothing was deleted. Locate the original before trying again." = "The file at this path no longer matches the imported original. Nothing was deleted. Locate the original before trying again.";
-"The file is missing from %1$@ on %2$@." = "The file is missing from %1$@ on %2$@.";
 "The file is missing from %1$@." = "The file is missing from %1$@.";
 "The file is no longer at %1$@." = "The file is no longer at %1$@.";
 "The files move to the Finder’s Trash." = "The files move to the Finder’s Trash.";

@@ -157,6 +157,7 @@ public actor CatalogStore {
     static var migrator: DatabaseMigrator {
         var migrations = DatabaseMigrator()
         migrations.registerMigration(schemaVersion) { db in try Self.createSchema(db) }
+        migrations.registerMigration("catalog-2026-11-27-sync-base") { db in try Self.createSyncBase(db) }
         return migrations
     }
     static let schemaVersion = "catalog-2026-11-22"

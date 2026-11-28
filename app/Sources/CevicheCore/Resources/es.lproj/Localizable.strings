@@ -61,7 +61,6 @@
 "%1$@ of %2$@ photos" = "%1$@ de %2$@ fotos";
 "%1$@ of %2$@ photos couldn’t be merged: %3$@" = "No se han podido combinar %1$@ de %2$@ fotos: %3$@";
 "%1$@ of 4" = "%1$@ de 4";
-"%1$@ on %2$@ did not mount." = "No se ha montado %1$@ en %2$@.";
 "%1$@ originals deleted" = "%1$@ originales eliminados";
 "%1$@ photo" = "%1$@ foto";
 "%1$@ photo at this location" = "%1$@ foto en esta ubicación";
@@ -353,7 +352,6 @@
 "Coral" = "Coral";
 "Core Image could not render this image." = "Core Image no ha podido renderizar esta imagen.";
 "Correct along guides drawn on the photo" = "Corregir según las guías dibujadas sobre la foto";
-"Could not connect to %1$@ on %2$@. %3$@" = "No se ha podido conectar a %1$@ en %2$@. %3$@";
 "Could not save edits." = "No se han podido guardar las ediciones.";
 "Couldn’t Open the Photo" = "No se ha podido abrir la foto";
 "Couldn’t align %1$@; merged as framed" = "No se ha podido alinear %1$@; se combinan tal cual";
@@ -482,7 +480,6 @@
 "Enter whole-number dimensions from 1 to %1$@ px." = "Introduce dimensiones enteras entre 1 y %1$@ px.";
 "Erase" = "Borrar";
 "Error" = "Error";
-"Error %1$@." = "Error %1$@.";
 "Esc to cancel" = "Esc para cancelar";
 "Estimating depth…" = "Estimando profundidad…";
 "Every adjustment, crop and mask returns to the camera defaults. Originals are not changed." = "Todos los ajustes, recortes y máscaras vuelven a los valores predeterminados de la cámara. Los originales no se modifican.";
@@ -673,7 +670,6 @@
 "Invalid GPS coordinate." = "Coordenada GPS no válida.";
 "Invalid GPS direction." = "Dirección GPS no válida.";
 "Invalid HDR settings." = "Ajustes HDR no válidos.";
-"Invalid SMB address." = "Dirección SMB no válida.";
 "Invalid XMP boolean: %1$@." = "Valor booleano XMP no válido: %1$@.";
 "Invalid XMP curve point." = "Punto de curva XMP no válido.";
 "Invalid XMP number: %1$@." = "Número XMP no válido: %1$@.";
@@ -711,7 +707,6 @@
 "Keep empty corners outside the crop" = "Mantener las esquinas vacías fuera del recorte";
 "Keep only selection" = "Conservar solo la selección";
 "Keep thumbnails up to" = "Conservar miniaturas hasta";
-"Keychain error %1$@." = "Error del llavero %1$@.";
 "Keywords" = "Palabras clave";
 "Keywords added" = "Palabras clave añadidas";
 "Keywords added to %1$@ photos" = "Palabras clave añadidas a %1$@ fotos";
@@ -944,7 +939,6 @@
 "Pattern" = "Matricial";
 "Pause" = "Pausa";
 "People" = "Personas";
-"Permission denied; check the user name and password saved for this server." = "Permiso denegado; comprueba el nombre de usuario y la contraseña guardados para este servidor.";
 "Permissions" = "Permisos";
 "Perspective" = "Perspectiva";
 "Photo" = "Foto";
@@ -1255,7 +1249,6 @@
 "The encoder did not preserve the requested HDR encoding." = "El codificador no ha conservado la codificación HDR solicitada.";
 "The exposures couldn’t be merged. %1$@" = "No se han podido combinar las exposiciones. %1$@";
 "The file at this path no longer matches the imported original. Nothing was deleted. Locate the original before trying again." = "El archivo de esta ruta ya no coincide con el original importado. No se ha eliminado nada. Localiza el original antes de volver a intentarlo.";
-"The file is missing from %1$@ on %2$@." = "Falta el archivo en %1$@ de %2$@.";
 "The file is missing from %1$@." = "Falta el archivo en %1$@.";
 "The file is no longer at %1$@." = "El archivo ya no está en %1$@.";
 "The guide is too short. Drag along a longer edge." = "La guía es demasiado corta. Arrastra a lo largo de un borde más largo.";
@@ -2519,7 +2512,6 @@
 "Show healed spots" = "Mostrar manchas corregidas";
 "Postcard (100 × 148 mm)" = "Postal (100 × 148 mm)";
 "Balance from the skin and the wall behind the head" = "Equilibrar a partir de la piel y la pared detrás de la cabeza";
-"Originals on network shares open on a Mac." = "Los originales en recursos compartidos de red se abren en un Mac.";
 "Expected a sky model with %1$@ × %2$@ RGB input." = "Se esperaba un modelo de cielo con entrada RGB de %1$@ × %2$@.";
 "Import From" = "Importar desde";
 "Copy Changed Edits" = "Copiar ediciones cambiadas";
@@ -3485,3 +3477,7 @@
 "Removes the areas painted from the base photo" = "Elimina las zonas pintadas desde la foto base";
 "Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out." = "Convierte todo el encuadre en cielo, para una foto sin suelo o un cielo que no se detecta bien. Después, Suelo puede dejar zonas fuera.";
 "Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted" = "Vuelve al cielo tal como se detectó: deshace Marcar todo como cielo y lo pintado con los pinceles Cielo y Suelo";
+"%1$@ is not connected." = "%1$@ no está conectado.";
+"The development could not be read." = "No se pudo leer el revelado.";
+"Merged edits" = "Ediciones combinadas";
+"Other edits" = "Otras ediciones";

@@ -1,0 +1,9 @@
+{
+  "tool": "built-in imagegen",
+  "intent": "background-extraction",
+  "input": "docs/design/identity-system/bowl-source.png",
+  "output": "app/Platforms/macOS/Resources/AppIcon.icon/Assets/Bowl.png",
+  "transparent_background": true,
+  "prompt": "Use case: background-extraction.\nInput is the APPROVED Ceviche bowl app icon artwork. Extract the complete bowl with its food as ONE foreground layer on a true transparent background.\nPreserve the exact bowl silhouette, its three ivory fish pieces, two coral pieces, lime wedge and two pink onion strips, their arrangement, proportions, colors and soft porcelain appearance. Keep the same square composition and bowl scale/position: bowl occupies approximately 76% of square width, centered. Do not zoom, crop, redesign or change anything inside the bowl.\nRemove ONLY the pale rectangular background and the external cast shadow beneath the bowl. Every pixel outside the bowl's thin outer rim must be genuinely transparent. Keep the rim and all internal shading opaque and intact. Smooth antialiased alpha edge, no fringe, no residual background or scattered speckles. No floating shadow, no backdrop, no icon frame, no rounded square, no text. Output a square transparent PNG suitable as a foreground layer in Apple Icon Composer.",
+  "postprocessing": "Normalized to a 1024 × 1024 canvas with sips; source alpha preserved. Platform appearance and shadows rendered by Icon Composer 27.2."
+}

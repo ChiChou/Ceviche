@@ -2,7 +2,7 @@
 
 What the app ships today, by area. Names match the menus.
 
-The app uses a simplified porcelain ceviche bowl icon in the Dock, Finder and app switcher.
+The app uses a porcelain ceviche bowl icon in the Dock, Finder and app switcher, with native dark, tinted and clear appearances where the system supports them.
 
 ## Library
 
@@ -13,13 +13,15 @@ The app uses a simplified porcelain ceviche bowl icon in the Dock, Finder and ap
 - **Welcome screen.** Shown when no catalog is open: one column with import, new and open catalog actions, Browse Folders, recent catalogs and Models, beside a credited photo or looping clip in wide windows, with arrows to step through the others. Return opens the most
   recent one.
 - **iCloud catalogs.** Available in builds configured for iCloud. Ratings, metadata, edits, albums, trash and snapshots sync between Macs. Originals are not
-  uploaded; each Mac reads them from its own disks. Work continues offline and syncs later.
+  uploaded; each Mac reads them from its own disks. Work continues offline and syncs later. A photo changed on two Macs
+  before they synced keeps both changes; a setting both changed takes the later one, and the other edits are kept as a
+  snapshot named Other edits.
 - **Folders tab.** Browse folders on disk without importing. Edits on browsed photos are saved to XMP sidecars beside
   them (`IMG.ceviche.xmp` when another app wrote `IMG.xmp`). RAW files opened from the Finder show here. The last folder
   shown opens again at launch and on coming back from the Library.
 - **Import.** From folders, cards, cameras and the Photos library. Originals are referenced in place by default, or
   copied into the catalog by month. Cards and drives are remembered by volume, so photos on an unplugged drive show as
-  offline rather than missing. A photo can be opened as soon as it lands: its thumbnail is the camera's embedded
+  offline rather than missing; network shares are read while mounted in Finder, and offline otherwise. A photo can be opened as soon as it lands: its thumbnail is the camera's embedded
   preview, and photos whose XMP sidecar changes their look are rendered right after, or as they scroll into view when
   the originals are on a network share or another drive. Tagging and faces follow in the background without holding
   up the import. The grid switches to the new batch only from the whole catalog or a finished import's batch; a
@@ -293,6 +295,10 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   selected and act on those. With read-only access it can still propose edits and metadata changes as dry runs.
   Exports leave GPS out unless the client asks for it. Clients send the token shown there; the bundled `ceviche-mcp` reads it from
   `~/Library/Application Support/Ceviche/mcp-token`.
+- **Recovery.** `app/scripts/recover_catalog.py <catalog> <folder>`, a single Python script, writes each photo's edits
+  and metadata as XMP from a catalog the app won't open, whether damaged or upgraded by a newer version, laid out in the
+  originals' folders with a `recovery.csv`. `--beside-originals` also writes `IMG.xmp` next to originals that have none,
+  so importing them again brings the edits. The catalog is only read.
 
 ## Models
 

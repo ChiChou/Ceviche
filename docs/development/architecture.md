@@ -45,6 +45,27 @@ lead, never two faces of one photo in one person. Existing people keep their fac
 and never moved again. Analysing a photo again carries each face's person to the new face in the same place
 (`CatalogStore.setFaces`). People are not synced yet.
 
+`DevelopmentMerge` merges two devices' developments of one photo against the last one both had, on the stored JSON
+so settings from a newer build pass through: one slider at a time, masks, retouch strokes and point colours item by
+item (by `id`), Disabled sections as a set, and white balance and crop with rotation each as one setting. A setting
+both sides changed differently takes the winner's and is listed; the result is the same whichever device merges.
+`CatalogSyncState.merged` does the same for a photo's state (keywords as a set). Each photo's `syncBase` row holds the
+state and development the catalog and the mirror last agreed on, recorded at the end of every pass. A pull applies a
+part when the mirror's is newer, or merges when both changed since that base (`CatalogStore.applyRemote`); the merge
+gets a clock 1 ms after both and a render key derived from both, and the other side's whole development is kept as a
+snapshot with an ID derived from it, so devices that merge the same pair write the same rows. Push reads the clocks
+after the pull, so a merge goes up in the same pass.
+
+`app/scripts/recover_catalog.py` reads a catalog the app refuses, without the app: it copies the database away, reads
+`asset`, `assetDevelopment`, `blob` and `resource` by column name with foreign keys off, and writes each stored
+development, mask rasters and resources put inline, as an XMP holding only `ceviche:Recipe` (so its `PortableDigest` is
+the empty one); photos with metadata alone get the standard fields instead. A copy `PRAGMA quick_check` rejects goes
+through `sqlite3 .recover`, after the photo table is redeclared as its stored columns alone: `.recover` drops a column of
+a table with generated columns. Rows it can't place come out in `lost_and_found` and are matched back by shape. So the
+script keeps working for future catalogs, those four tables' existing columns are only ever added to, never renamed or
+dropped, and a change to `XMPNativeRecipe` or the stored development format needs the script changed with it
+(`CatalogRecoveryTests` imports what it writes).
+
 The Library has three levels. Map and Faces have an overview (`CatalogModel.collectionOverview`: Map, People, or the
 Faces wall without the People model) above their photos; a pin (`CatalogFilter.mapArea`) or a person
 (`CatalogFilter.personID`) narrows the collection, and its photos show in the wall or the grid (`showPhotos`); Compare

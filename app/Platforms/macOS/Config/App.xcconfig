@@ -9,6 +9,7 @@ STRINGS_FILE_OUTPUT_ENCODING = binary
 LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
 INSTALL_PATH = /
 COMBINE_HIDPI_IMAGES = YES
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
 
 // Ceviche.entitlements, without the sandbox keys and/or the iCloud keys as the build asks.
 CODE_SIGN_ENTITLEMENTS = Platforms/macOS/Entitlements/Ceviche$(CEVICHE_ENTITLEMENTS_SANDBOX_$(CEVICHE_SANDBOX))$(CEVICHE_ENTITLEMENTS_CLOUD_$(CEVICHE_CLOUD_ENTITLED)).entitlements
