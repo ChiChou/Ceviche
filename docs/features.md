@@ -224,8 +224,9 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   developed, yet Merge Pixel Shift can still make a usable TIFF or JPEG from it.
 - **Merge Best Faces.** From a few frames of the same group, finds the one where everyone's eyes are open, facing the
   camera and sharp; when none is, it puts each person's best face from another frame into a base frame, chosen in the
-  filmstrip. Every person's face in every frame is beside the result to choose from, and a swap that would show (a head
-  that moved or turned, hair, hands or a neighbour that moved, different light) is marked. The result takes the base
+  filmstrip. A face is laid onto the base one by its features and only the face is blended in, so a head that moved or
+  leaned leaves no ghost. Every person's face in every frame is beside the result to choose from, and a swap that would
+  show (a head turned differently, hair or a hand across the face, different light) is marked. The result takes the base
   photo's edits; a merge that swaps no face asks first. Photos that don't show the same group in the
   same places aren't merged.
 - **Night Sky.** Create Star Trails, Night Sky Noise Reduction (averages the sky aligned to the stars) and Composite

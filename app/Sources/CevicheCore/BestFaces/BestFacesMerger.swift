@@ -9,10 +9,14 @@ import Vision
 ///
 /// Faces are found on a 3072-pixel reading of each frame with both Vision face detectors on overlapping tiles (a night
 /// group's faces are too small for one pass), measured on each face cut out and enlarged, and paired frame to frame by
-/// where they stand once the group's shift is taken out. A swap is aligned around the head, matched in brightness on the
-/// band around it and blended through a feathered ellipse; it is refused when the head moved toward or away from the
-/// camera, turned or tilted, when another face lies inside it, when the light differs, or when the band around the head
-/// still differs after alignment (a hand, hair or a neighbour moved). Frames are read with the decoder's defaults.
+/// where they stand once the group's shift is taken out. Where the face mesh found both faces, a swap lays the source
+/// face onto the base one by the mesh's points (moved, scaled and turned in the picture's plane) and blends in only the
+/// face inside its outline, matched in brightness, so the base keeps its own hair and surroundings and a head that moved
+/// leaves no ghost; it is refused when the head turned toward or away from the camera differently, when the points don't
+/// agree on the fit, when another face lies inside it, when the light differs, or when the face's edge still differs
+/// (hair or a hand across it). Without the mesh, a swap is aligned around the whole head by shifting it, matched on the
+/// band around it and blended through a feathered ellipse, and refused also when the head moved toward or away from the
+/// camera, tilted, moved, or the band around it differs. Frames are read with the decoder's defaults.
 public final class BestFacesMerger: @unchecked Sendable {
     public struct Face: Sendable {
         /// Full-resolution pixels of its frame, top-left origin.
@@ -27,6 +31,8 @@ public final class BestFacesMerger: @unchecked Sendable {
         public let quality: Double?
         /// Edge crispness of the face; compared only between one person's faces.
         public let sharpness: Double
+        /// The face mesh's 478 points, full pixels, top-left origin; nil without the model or when it didn't fit.
+        let points: [CGPoint]?
     }
     public enum Problem: Hashable, Sendable { case eyesClosed, turned, lookingUpOrDown, soft }
     public struct Person: Sendable {
@@ -46,6 +52,10 @@ public final class BestFacesMerger: @unchecked Sendable {
         /// Base pixel = source pixel + shift.
         let shift: CGVector
         let gain: Double
+        /// From the face mesh: source pixels onto base pixels (top-left origin), and the face's outline in the base
+        /// that is blended in, in place of the head's ellipse.
+        var transform: CGAffineTransform? = nil
+        var outline: [CGPoint]? = nil
     }
     public struct Swap: Sendable {
         public let refusals: [Refusal]
@@ -81,6 +91,8 @@ public final class BestFacesMerger: @unchecked Sendable {
 
     static let analysisEdge = 3072.0
     static let eyePixels = 60.0
+    /// The smallest face, in full pixels, whose mesh is fine enough to lay another face onto.
+    static let meshPixels = 40.0
 
     /// Reads the frames, in capture order, and finds and pairs everyone's faces.
     public init(urls: [URL], progress: @Sendable (Double, String) -> Void = { _, _ in }) throws {
@@ -335,8 +347,15 @@ public final class BestFacesMerger: @unchecked Sendable {
                 .map { ($0.left, $0.right) }
         }
         let sharp = render(frame.full, region: box.insetBy(dx: box.width * 0.1, dy: box.height * 0.1), height: frame.size.height, edge: 256).map { Gray($0).crispness } ?? 0
+        // The mesh on the face cut out at up to full resolution, for a swap to lay one face onto another.
+        var points: [CGPoint]?
+        if box.width >= meshPixels {
+            let k = Double(crop.width) / region.width
+            points = FaceMeshEyes.points(in: crop, face: CGRect(x: (box.minX - region.minX) * k, y: (box.minY - region.minY) * k, width: box.width * k, height: box.height * k))?
+                .map { CGPoint(x: region.minX + $0.x / k, y: region.minY + $0.y / k) }
+        }
         return Face(box: box, vision: vision, mesh: mesh, yaw: degrees(posed?.yaw), pitch: degrees(posed?.pitch), roll: degrees(posed?.roll),
-                    quality: capture.results?.first?.faceCaptureQuality.map(Double.init), sharpness: sharp)
+                    quality: capture.results?.first?.faceCaptureQuality.map(Double.init), sharpness: sharp, points: points)
     }
 
     /// Good = eyes ≥ 0.15, turned ≤ 25°, up or down ≤ 20°, at least 80 % as sharp as this person's sharpest face.
@@ -417,6 +436,7 @@ public final class BestFacesMerger: @unchecked Sendable {
     static let bandLimit = 14.0
 
     func check(base: Int, target: Face, source: Int, face: Face, shift: CGVector) -> Swap {
+        if let from = face.points, let to = target.points { return meshCheck(base: base, target: target, to: to, source: source, face: face, from: from) }
         var refusals: [Refusal] = []
         let ratio = face.box.width / target.box.width
         if ratio < 0.87 || ratio > 1.15 { refusals.append(.sizeChanged) }
@@ -454,9 +474,104 @@ public final class BestFacesMerger: @unchecked Sendable {
         return Swap(refusals: refusals, plan: Plan(region: region, ring: ring, shift: CGVector(dx: shift.dx + local.dx * k, dy: shift.dy + local.dy * k), gain: gain))
     }
 
+    // MARK: Swapping by the face mesh
+    /// The face's outline, round from the top of the forehead (MediaPipe's face mesh numbering).
+    static let oval = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136,
+                       172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109]
+    /// Points an expression hardly moves, to lay one face onto another by: the eyes' corners, the nose, the forehead,
+    /// the cheeks' edges and the chin.
+    static let rigid = [33, 133, 362, 263, 168, 6, 197, 195, 5, 4, 1, 10, 151, 9, 234, 454, 127, 356, 152]
+    /// The outline blended in, drawn in toward its middle so the base keeps the head's edge and the hairline.
+    static let outlineInset = 0.9
+    /// Above this, the rigid points disagree on the fit (their RMS distance over the face's width): the head turned
+    /// toward or away from the camera, which no move in the picture's plane makes up for.
+    static let fitLimit = 0.05
+
+    func meshCheck(base: Int, target: Face, to: [CGPoint], source: Int, face: Face, from: [CGPoint]) -> Swap {
+        var refusals: [Refusal] = []
+        let (transform, error) = Self.similarity(from: Self.rigid.map { from[$0] }, to: Self.rigid.map { to[$0] })
+        let scale = hypot(transform.a, transform.b), angle = atan2(transform.b, transform.a) * 180 / .pi
+        if let a = face.yaw, let b = target.yaw, abs(a - b) > 20 { refusals.append(.turned) }
+        else if error > Self.fitLimit * target.box.width { refusals.append(.turned) }
+        // Within these a face is laid on without losing detail or showing the turn at its edge.
+        if scale < 0.8 || scale > 1.25 { refusals.append(.sizeChanged) }
+        if abs(angle) > 30 { refusals.append(.tilted) }
+        let middle = Self.oval.map { to[$0] }.reduce(CGPoint.zero) { CGPoint(x: $0.x + $1.x / Double(Self.oval.count), y: $0.y + $1.y / Double(Self.oval.count)) }
+        let outline = Self.oval.map { CGPoint(x: middle.x + (to[$0].x - middle.x) * Self.outlineInset, y: middle.y + (to[$0].y - middle.y) * Self.outlineInset) }
+        let core = Self.bounds(outline)
+        let bounds = CGRect(origin: .zero, size: frames[base].size)
+        let region = core.insetBy(dx: -Self.feather(core), dy: -Self.feather(core)).intersection(bounds).integral
+        guard !region.isNull, region.width >= 8, region.height >= 8,
+              CGRect(origin: .zero, size: frames[source].size).contains(region.applying(transform.inverted()))
+        else { return Swap(refusals: [.outOfFrame], plan: nil) }
+        for other in frames[base].faces where other.box != target.box {
+            let i = core.intersection(other.box)
+            if !i.isNull, i.width * i.height > 0.08 * other.box.width * other.box.height { refusals.append(.faceInside); break }
+        }
+        // Brightness matched over the face, and its edge compared, the source laid on the base.
+        let laid = frames[source].full.transformed(by: Self.flipped(transform, from: frames[source].size.height, to: frames[base].size.height))
+        guard let a = Self.render(frames[base].full, region: region, height: frames[base].size.height, edge: 160),
+              let b = Self.render(laid, region: region, height: frames[base].size.height, edge: 160)
+        else { return Swap(refusals: [.outOfFrame], plan: nil) }
+        let ga = Gray(a), gb = Gray(b)
+        let local = outline.map { CGPoint(x: ($0.x - region.minX) / region.width, y: ($0.y - region.minY) / region.height) }
+        let lm = CGPoint(x: (middle.x - region.minX) / region.width, y: (middle.y - region.minY) / region.height)
+        let inner = local.map { CGPoint(x: lm.x + ($0.x - lm.x) * 0.8, y: lm.y + ($0.y - lm.y) * 0.8) }
+        var sa = 0.0, sb = 0.0
+        for y in 0..<ga.h { for x in 0..<ga.w where Self.contains(local, Double(x) / Double(ga.w), Double(y) / Double(ga.h)) {
+            sa += Double(ga[x, y]); sb += Double(gb[x, y])
+        } }
+        let gain = sb > 0 ? sa / sb : 1
+        if gain < 0.8 || gain > 1.25 { refusals.append(.lightDiffers) }
+        var gained = gb
+        gained.v = gb.v.map { min(255, $0 * Float(gain)) }
+        let edge = Gray.residual(ga, gained, .zero) { x, y in Self.contains(local, x, y) && !Self.contains(inner, x, y) }
+        if !edge.isFinite || edge > Self.bandLimit { refusals.append(.surroundingsDiffer) }
+        return Swap(refusals: refusals, plan: Plan(region: region, ring: region, shift: .zero, gain: gain, transform: transform, outline: outline))
+    }
+
+    /// The move, scale and turn in the plane that lays `from` closest onto `to` (least squares), and the RMS distance
+    /// left between them.
+    static func similarity(from: [CGPoint], to: [CGPoint]) -> (CGAffineTransform, Double) {
+        let n = Double(from.count)
+        let fm = CGPoint(x: from.map(\.x).reduce(0, +) / n, y: from.map(\.y).reduce(0, +) / n)
+        let tm = CGPoint(x: to.map(\.x).reduce(0, +) / n, y: to.map(\.y).reduce(0, +) / n)
+        var dot = 0.0, cross = 0.0, norm = 0.0
+        for (f, t) in zip(from, to) {
+            let (fx, fy, tx, ty) = (f.x - fm.x, f.y - fm.y, t.x - tm.x, t.y - tm.y)
+            dot += fx * tx + fy * ty; cross += fx * ty - fy * tx; norm += fx * fx + fy * fy
+        }
+        guard norm > 0 else { return (CGAffineTransform(translationX: tm.x - fm.x, y: tm.y - fm.y), .infinity) }
+        let a = dot / norm, b = cross / norm
+        let transform = CGAffineTransform(a: a, b: b, c: -b, d: a, tx: tm.x - (a * fm.x - b * fm.y), ty: tm.y - (b * fm.x + a * fm.y))
+        let error = (zip(from, to).map { f, t in let p = f.applying(transform); return pow(p.x - t.x, 2) + pow(p.y - t.y, 2) }.reduce(0, +) / n).squareRoot()
+        return (transform, error)
+    }
+    /// `transform` (top-left origin) for Core Image's bottom-left origin, between images `from` and `to` pixels tall.
+    static func flipped(_ transform: CGAffineTransform, from: Double, to: Double) -> CGAffineTransform {
+        CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: from).concatenating(transform).concatenating(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: to))
+    }
+    static func bounds(_ points: [CGPoint]) -> CGRect {
+        let xs = points.map(\.x), ys = points.map(\.y)
+        return CGRect(x: xs.min()!, y: ys.min()!, width: xs.max()! - xs.min()!, height: ys.max()! - ys.min()!)
+    }
+    static func feather(_ face: CGRect) -> Double { 0.06 * max(face.width, face.height) }
+    /// Whether (x, y) lies inside the polygon.
+    static func contains(_ polygon: [CGPoint], _ x: Double, _ y: Double) -> Bool {
+        var inside = false
+        var j = polygon.count - 1
+        for i in polygon.indices {
+            let (a, b) = (polygon[i], polygon[j])
+            if (a.y > y) != (b.y > y), x < (b.x - a.x) * (y - a.y) / (b.y - a.y) + a.x { inside.toggle() }
+            j = i
+        }
+        return inside
+    }
+
     /// `source` moved onto the composite and blended through the head's ellipse. `linear` is for linear values: the gain
     /// was measured on display values.
     func blend(_ composite: CIImage, source: CIImage, plan: Plan, height: Double, linear: Bool = false) -> CIImage {
+        if let transform = plan.transform, let outline = plan.outline { return blend(composite, source: source, plan: plan, transform: transform, outline: outline, height: height, linear: linear) }
         let r = plan.region, feather = 0.1 * r.width
         let w = Int(r.width.rounded()), h = Int(r.height.rounded())
         guard w > 0, h > 0, let c = CGContext(data: nil, width: w, height: h, bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceGray(),
@@ -473,6 +588,33 @@ public final class BestFacesMerger: @unchecked Sendable {
             .applyingFilter("CIColorMatrix", parameters: ["inputRVector": CIVector(x: g, y: 0, z: 0, w: 0), "inputGVector": CIVector(x: 0, y: g, z: 0, w: 0),
                                                           "inputBVector": CIVector(x: 0, y: 0, z: g, w: 0)])
         return moved.applyingFilter("CIBlendWithMask", parameters: [kCIInputBackgroundImageKey: composite, kCIInputMaskImageKey: mask]).cropped(to: composite.extent)
+    }
+
+    /// `source` laid onto the composite by the face mesh and blended through the face's outline, feathered inward.
+    func blend(_ composite: CIImage, source: CIImage, plan: Plan, transform: CGAffineTransform, outline: [CGPoint], height: Double, linear: Bool) -> CIImage {
+        let r = plan.region, feather = Self.feather(Self.bounds(outline))
+        let w = Int(r.width.rounded()), h = Int(r.height.rounded())
+        guard w > 0, h > 0, let c = CGContext(data: nil, width: w, height: h, bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceGray(),
+                                               bitmapInfo: CGImageAlphaInfo.none.rawValue) else { return composite }
+        // Drawn bottom-up, as Core Image reads it, a feather's width inside the outline so the blur stays within it.
+        let middle = CGPoint(x: outline.map(\.x).reduce(0, +) / Double(outline.count), y: outline.map(\.y).reduce(0, +) / Double(outline.count))
+        let inset = max(0.5, 1 - feather / max(1, Self.bounds(outline).width / 2))
+        c.setFillColor(gray: 1, alpha: 1)
+        c.addLines(between: outline.map { p in
+            let q = CGPoint(x: middle.x + (p.x - middle.x) * inset, y: middle.y + (p.y - middle.y) * inset)
+            return CGPoint(x: q.x - r.minX, y: r.maxY - q.y)
+        })
+        c.closePath(); c.fillPath()
+        guard let shape = c.makeImage() else { return composite }
+        let hard = CIImage(cgImage: shape)
+        let soft = hard.clampedToExtent().applyingFilter("CIGaussianBlur", parameters: [kCIInputRadiusKey: feather / 2]).cropped(to: hard.extent)
+        let mask = soft.transformed(by: CGAffineTransform(translationX: r.minX, y: height - r.maxY))
+            .composited(over: CIImage(color: .black).cropped(to: composite.extent))
+        let g = CGFloat(linear ? pow(plan.gain, 2.2) : plan.gain)
+        let laid = source.transformed(by: Self.flipped(transform, from: source.extent.height, to: height))
+            .applyingFilter("CIColorMatrix", parameters: ["inputRVector": CIVector(x: g, y: 0, z: 0, w: 0), "inputGVector": CIVector(x: 0, y: g, z: 0, w: 0),
+                                                          "inputBVector": CIVector(x: 0, y: 0, z: g, w: 0)])
+        return laid.applyingFilter("CIBlendWithMask", parameters: [kCIInputBackgroundImageKey: composite, kCIInputMaskImageKey: mask]).cropped(to: composite.extent)
     }
 }
 
