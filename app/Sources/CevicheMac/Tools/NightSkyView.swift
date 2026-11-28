@@ -56,6 +56,8 @@ struct NightSkyChrome<Workflow: NightSkyWorkflow, Toolbar: View, Sidebar: View, 
     private func sizedCell(_ frame: NightSkyFrameInfo) -> NightSkyFrameCell {
         var shown = cell(frame)
         shown.thumbnailHeight = stripHeight - 58
+        shown.asset = model.asset(at: frame.index)
+        shown.previews = catalog.previews
         return shown
     }
 
@@ -439,6 +441,9 @@ struct NightSkyFrameCell: View {
     var lane: NightSkyLaneMark? = nil
     /// The strip sets it from its own height; the photo is half again as wide.
     var thumbnailHeight: CGFloat = 80
+    /// The catalog photo and the store of its thumbnail, to show it as developed.
+    var asset: CatalogAsset? = nil
+    var previews: PreviewStore? = nil
 
     /// A bar as bright as the meteors look in this frame, reaching across the gap to the next photo so a meteor's bars
     /// read as one, with a dot where a meteor appears.
@@ -457,7 +462,7 @@ struct NightSkyFrameCell: View {
         return VStack(alignment: .leading, spacing: 4) {
             if let lane { laneBar(lane, width: width) }
             ZStack(alignment: .topLeading) {
-                ToolFrameThumbnail(image: frame.thumbnail, size: CGSize(width: width, height: thumbnailHeight), outline: badge != nil ? Theme.accent : nil, badge: nil, dimmed: !included)
+                ToolFrameThumbnail(image: frame.thumbnail, asset: asset, previews: previews, size: CGSize(width: width, height: thumbnailHeight), outline: badge != nil ? Theme.accent : nil, badge: nil, dimmed: !included)
                     .overlay(alignment: .topLeading) {
                         // The time at the top, the filename under the photo: side by side they don't fit.
                         HStack(spacing: 4) {

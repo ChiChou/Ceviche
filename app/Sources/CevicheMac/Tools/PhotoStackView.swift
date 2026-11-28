@@ -360,7 +360,8 @@ struct PhotoStackView: View {
         let brushing = model.brush != nil, isBrushPhoto = brushing && model.brushPhoto == frame.index
         let blending = model.settings.mode.blendsOverBase
         return VStack(alignment: .leading, spacing: 4) {
-            ToolFrameThumbnail(image: frame.thumbnail, outline: brushing ? (isBrushPhoto ? .white : nil) : isReference ? Theme.accent : nil,
+            ToolFrameThumbnail(image: frame.thumbnail, asset: model.request.assets.indices.contains(frame.index) ? model.request.assets[frame.index] : nil,
+                               previews: catalog.previews, outline: brushing ? (isBrushPhoto ? .white : nil) : isReference ? Theme.accent : nil,
                                badge: isReference ? L10n.tr("Base") : nil, dimmed: !included)
                 .overlay(alignment: .bottomTrailing) {
                     if model.settings.strokes.contains(where: { $0.photo == frame.index && ($0.hides != nil) == model.settings.mode.blendsOverBase }) {

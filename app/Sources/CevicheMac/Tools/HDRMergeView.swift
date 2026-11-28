@@ -432,7 +432,8 @@ struct HDRMergeView: View {
         let isReference = model.reference == frame.index
         let included = !model.settings.excluded.contains(frame.index)
         return VStack(alignment: .leading, spacing: 4) {
-            ToolFrameThumbnail(image: frame.thumbnail, outline: isReference ? Theme.accent : nil, badge: isReference ? L10n.tr("Base") : nil, dimmed: !included)
+            ToolFrameThumbnail(image: frame.thumbnail, asset: model.request.assets.indices.contains(frame.index) ? model.request.assets[frame.index] : nil,
+                               previews: catalog.previews, outline: isReference ? Theme.accent : nil, badge: isReference ? L10n.tr("Base") : nil, dimmed: !included)
             .onTapGesture { model.makeReference(frame.index) }
             .help(L10n.tr("Take moving things and the exposure from this photo"))
             HStack(spacing: 4) {

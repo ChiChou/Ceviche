@@ -124,9 +124,13 @@ struct ToolFilmstrip<Content: View>: View {
     }
 }
 
-/// One photo of a tool's filmstrip: outlined when it is the one the others follow, dimmed when left out.
+/// One photo of a tool's filmstrip: outlined when it is the one the others follow, dimmed when left out. With its
+/// catalog photo, the catalog's stored thumbnail, which shows it as developed; `image`, the tool's own reading of the
+/// file, until the photo has one.
 struct ToolFrameThumbnail: View {
     let image: CGImage?
+    var asset: CatalogAsset? = nil
+    var previews: PreviewStore? = nil
     var size = CGSize(width: 132, height: 88)
     var outline: Color?
     /// "Base" or "Reference" when this photo is it.
@@ -135,7 +139,8 @@ struct ToolFrameThumbnail: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             Group {
-                if let image { Image(decorative: image, scale: 1).resizable().scaledToFit() } else { Color.black }
+                if let asset, asset.thumbnailKey != nil, let previews { CatalogThumbnail(asset: asset, previews: previews) }
+                else if let image { Image(decorative: image, scale: 1).resizable().scaledToFit() } else { Color.black }
             }
             .frame(width: size.width, height: size.height).clipped()
             .overlay(Rectangle().strokeBorder(outline ?? .clear, lineWidth: 2))

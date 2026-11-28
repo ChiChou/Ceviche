@@ -188,7 +188,7 @@ Closing a tool stops measuring the photos it asked for. Their large preview show
 
 ## Tools
 
-Merges add their result to the catalog. If the first source is referenced from a writable local folder, the result goes beside it.
+Merges add their result to the catalog. Their filmstrips show each photo as developed, from the catalog's thumbnails. If the first source is referenced from a writable local folder, the result goes beside it.
 For other sources, including those on network shares, it goes into catalog originals. RAW merges normally produce a linear DNG. Oversized Pixel Shift results are saved as TIFF or JPEG. Merges of
 HEIC, JPEG, TIFF or PNG photos (Merge to HDR, Focus Stack, Stack, Merge Best Faces and the Night Sky tools) keep the
 photos' own format, color space and HDR gain map, or with **Merge to TIFF** (**Stack to TIFF**) are a 16-bit TIFF, and

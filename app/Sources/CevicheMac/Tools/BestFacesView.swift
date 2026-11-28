@@ -42,6 +42,10 @@ final class BestFacesModel: ObservableObject {
     /// Face crops by person and frame, cut once.
     @Published private(set) var faces: [String: CGImage] = [:]
     private var urls: [URL] = []
+    /// The catalog photo of a frame, which the merger names by its file and orders by capture time.
+    func asset(named name: String) -> CatalogAsset? {
+        urls.firstIndex { $0.lastPathComponent == name }.flatMap { request.assets.indices.contains($0) ? request.assets[$0] : nil }
+    }
     private var access: [URL] = []
     private var task: Task<Void, Never>?
     private var previewTask: Task<Void, Never>?
@@ -230,7 +234,7 @@ struct BestFacesView: View {
             ForEach(merger.names.indices, id: \.self) { f in
                 let isBase = model.base == f
                 VStack(alignment: .leading, spacing: 4) {
-                    ToolFrameThumbnail(image: model.thumbnails[f], outline: isBase ? Theme.accent : nil, badge: isBase ? L10n.tr("Base") : nil)
+                    ToolFrameThumbnail(image: model.thumbnails[f], asset: model.asset(named: merger.names[f]), previews: catalog.previews, outline: isBase ? Theme.accent : nil, badge: isBase ? L10n.tr("Base") : nil)
                         .onTapGesture { Task { await model.setBase(f) } }
                     HStack(spacing: 4) {
                         if merger.bestShot == f { Image(systemName: "star.fill").font(.system(size: 9)).foregroundStyle(Theme.accent) }

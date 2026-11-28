@@ -159,6 +159,11 @@ final class NightSkyModel<Workflow: NightSkyWorkflow>: ObservableObject {
     /// The brush's width on screen in points.
     @Published var brushDiameter: Double { didSet { preferences.set(brushDiameter, forKey: "nightSkyBrushDiameter") } }
     private(set) var workflow: Workflow?
+    /// The catalog photo of a frame of the analysis, by its index there.
+    func asset(at index: Int) -> CatalogAsset? {
+        guard let workflow, workflow.urls.indices.contains(index) else { return nil }
+        return assetsByURL[workflow.urls[index]]
+    }
     private var access: [URL] = []
     /// The photo each original belongs to: the result takes the edits of the photo it is based on.
     private var assetsByURL: [URL: CatalogAsset] = [:]
