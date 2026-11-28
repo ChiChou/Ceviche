@@ -56,6 +56,16 @@ gets a clock 1 ms after both and a render key derived from both, and the other s
 snapshot with an ID derived from it, so devices that merge the same pair write the same rows. Push reads the clocks
 after the pull, so a merge goes up in the same pass.
 
+`app/scripts/recover_catalog.py` reads a catalog the app refuses, without the app: it copies the database away, reads
+`asset`, `assetDevelopment`, `blob` and `resource` by column name with foreign keys off, and writes each stored
+development, mask rasters and resources put inline, as an XMP holding only `ceviche:Recipe` (so its `PortableDigest` is
+the empty one); photos with metadata alone get the standard fields instead. A copy `PRAGMA quick_check` rejects goes
+through `sqlite3 .recover`, after the photo table is redeclared as its stored columns alone: `.recover` drops a column of
+a table with generated columns. Rows it can't place come out in `lost_and_found` and are matched back by shape. So the
+script keeps working for future catalogs, those four tables' existing columns are only ever added to, never renamed or
+dropped, and a change to `XMPNativeRecipe` or the stored development format needs the script changed with it
+(`CatalogRecoveryTests` imports what it writes).
+
 The Library has three levels. Map and Faces have an overview (`CatalogModel.collectionOverview`: Map, People, or the
 Faces wall without the People model) above their photos; a pin (`CatalogFilter.mapArea`) or a person
 (`CatalogFilter.personID`) narrows the collection, and its photos show in the wall or the grid (`showPhotos`); Compare

@@ -293,6 +293,10 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   selected and act on those. With read-only access it can still propose edits and metadata changes as dry runs.
   Exports leave GPS out unless the client asks for it. Clients send the token shown there; the bundled `ceviche-mcp` reads it from
   `~/Library/Application Support/Ceviche/mcp-token`.
+- **Recovery.** `app/scripts/recover_catalog.py <catalog> <folder>`, a single Python script, writes each photo's edits
+  and metadata as XMP from a catalog the app won't open, whether damaged or upgraded by a newer version, laid out in the
+  originals' folders with a `recovery.csv`. `--beside-originals` also writes `IMG.xmp` next to originals that have none,
+  so importing them again brings the edits. The catalog is only read.
 
 ## Models
 

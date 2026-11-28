@@ -77,3 +77,10 @@ Detection catches discrete spots and stronger freckles but leaves broad redness 
 ## Tonal spot review
 
 Run `app/scripts/test.sh --filter TonalSpotReviewTests` with `CEVICHE_SPOT_RAW`, an existing local output folder in `CEVICHE_SPOT_REVIEW`, normalized top-left coordinates in `CEVICHE_SPOT_X` and `CEVICHE_SPOT_Y`, and radius as a fraction of the short side in `CEVICHE_SPOT_RADIUS`. The review reports signed EV and writes matching before and after crops.
+
+## Recovery on a real catalog
+
+`CatalogRecoveryTests/testRealCatalogRecoversEveryEdit` runs `scripts/recover_catalog.py` on a catalog
+(`CEVICHE_RECOVER_CATALOG` set to its folder) into a temporary folder and checks that every recovered XMP holds the
+catalog's development. To try a damaged database, copy `catalog.sqlite` into a scratch package and overwrite a few
+hundred 4 KB pages with random bytes; `--salvage` takes that route on an intact one. Never run it with `--beside-originals` on a network drive.
