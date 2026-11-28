@@ -1602,9 +1602,6 @@
 "Too few stars to align (%1$@)." = "Troppo poche stelle per allineare (%1$@).";
 "Use as Base" = "Usa come base";
 "no matching stars" = "nessuna stella corrispondente";
-"As Captured" = "Come scattate";
-"On Base Sky" = "Sul cielo base";
-"On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears." = "Sul cielo base sposta ogni meteora insieme alle stelle dove si trovava il cielo nella foto base, così la pioggia si irradia come avrebbe fatto in quel momento. Come scattate lascia ogni meteora dove l’ha registrata la fotocamera; in una lunga notte le stelle che ha attraversato si sono spostate e il radiante si sfuma.";
 "Averages the sky again without samples far from the other photos at that spot, such as faint satellites, hot pixels and passing lights. Takes about twice as long to create." = "Rifà la media del cielo senza i campioni molto distanti dalle altre foto in quel punto, come satelliti deboli, pixel caldi e luci di passaggio. La creazione richiede circa il doppio del tempo.";
 "Finding hot pixels…" = "Ricerca dei pixel caldi…";
 "Reject Outliers" = "Scarta valori anomali";

@@ -242,7 +242,7 @@ extension NightSkyAnalyzer {
         }
     }
 
-    func picture(_ rgb: [Float], lines: [(Int, NightSkyLine)], base: Int, asCaptured: Bool = false) throws -> NightSkyPreview {
+    func picture(_ rgb: [Float], lines: [(Int, NightSkyLine)], base: Int) throws -> NightSkyPreview {
         guard let image = NightSkyFinishing.picture(rgb, channels: 3, width: previewWidth, height: previewHeight, exposure: displayExposure) else {
             throw PanoramaError.message(L10n.tr("The preview could not be drawn."))
         }
@@ -250,7 +250,6 @@ extension NightSkyAnalyzer {
         let outlines = lines.map { id, line -> (id: Int, start: CGPoint, end: CGPoint) in
             func place(_ p: SIMD2<Double>) -> SIMD2<Double> {
                 guard space == .sky else { return p }
-                if asCaptured { return line.frame == anchor ? p : alignments[line.frame]?.sourcePoint(p) ?? p }
                 return pointOnBase(p, base: base)
             }
             let a = place(line.start), b = place(line.end)
@@ -669,8 +668,6 @@ public struct MeteorShowerSettings: Codable, Equatable, Sendable {
     public var skyPhotos = 1
     /// Photos left out of the averaged sky; the next nearest takes the place of each.
     public var excluded: Set<Int> = []
-    /// Keeps each meteor where the camera recorded it instead of moving it with the stars to the base photo's sky.
-    public var asCaptured = false
     public init() {}
 }
 
@@ -756,24 +753,12 @@ public final class MeteorShowerMerger: @unchecked Sendable {
             for line in analyzer.lines { plan.skyExclusions[line.frame, default: []].append(line) }
         }
         plan.restore = analysis.lines.filter { settings.includes($0) && analyzer.alignments[$0.frame] != nil }.map { analyzer.lines[$0.id] }
-        if settings.asCaptured {
-            // Lines are found on the anchor's sky; as captured they go back to where their own photo recorded them.
-            plan.restoreAsCaptured = true
-            plan.restore = plan.restore.map { line in
-                var line = line
-                if line.frame != analyzer.anchor, let alignment = analyzer.alignments[line.frame] {
-                    line.start = alignment.sourcePoint(line.start); line.end = alignment.sourcePoint(line.end)
-                }
-                return line
-            }
-        }
         return plan
     }
 
     public func preview(_ settings: MeteorShowerSettings) throws -> NightSkyPreview {
         let plan = try plan(settings)
-        return try analyzer.picture(try analyzer.preview(plan), lines: analyzer.lines.enumerated().map { ($0.offset, $0.element) }, base: plan.base,
-                                    asCaptured: settings.asCaptured)
+        return try analyzer.picture(try analyzer.preview(plan), lines: analyzer.lines.enumerated().map { ($0.offset, $0.element) }, base: plan.base)
     }
     func previewValues(_ settings: MeteorShowerSettings) throws -> [Float] { try analyzer.preview(plan(settings)) }
 

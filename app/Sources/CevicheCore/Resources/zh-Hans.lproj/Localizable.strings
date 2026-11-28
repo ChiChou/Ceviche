@@ -1602,9 +1602,6 @@
 "Too few stars to align (%1$@)." = "星星太少，无法对齐（%1$@）。";
 "Use as Base" = "用作底图";
 "no matching stars" = "没有匹配的星星";
-"As Captured" = "按拍摄位置";
-"On Base Sky" = "放在底图天空上";
-"On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears." = "“放在底图天空上”会让每颗流星随星星一起移到底图拍摄时天空所在的位置，使流星雨像在那一刻那样从辐射点散开。“按拍摄位置”则保留相机记录流星的位置；在漫长的夜里，流星经过的星星已经移动，辐射点会变得模糊。";
 "Averages the sky again without samples far from the other photos at that spot, such as faint satellites, hot pixels and passing lights. Takes about twice as long to create." = "再次平均天空，去掉与该处其他照片相差很大的样本，例如暗淡的卫星、热像素和经过的灯光。创建所需时间约为两倍。";
 "Finding hot pixels…" = "正在查找热像素…";
 "Reject Outliers" = "剔除离群值";

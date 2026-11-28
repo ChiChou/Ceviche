@@ -1081,38 +1081,34 @@ final class NightSkyTests: XCTestCase {
         let clearPlan = NightSkyAnalyzer.Plan(base: base, ground: [base])
         let clean = try analyzer.preview(clearPlan)
         let w = analyzer.previewWidth
-        for asCaptured in [false, true] {
-            var plan = clearPlan
-            func mapped(_ p: SIMD2<Double>, to target: Int) -> SIMD2<Double> { SyntheticNight.map(p, from: frame, to: target) }
-            let line = NightSkyLine(frame: frame, start: mapped(scene.meteor.start, to: analyzer.anchor),
-                                    end: mapped(scene.meteor.end, to: analyzer.anchor), width: 6, pixels: 100, peak: 10)
-            var restored = line
-            if asCaptured { restored.start = scene.meteor.start; restored.end = scene.meteor.end }
-            plan.restore = [restored]; plan.restoreAsCaptured = asCaptured
-            let preview = try analyzer.preview(plan)
-            let gpu = try analyzer.render(plan, engine: .gpu, progress: { _, _ in })
-            let cpu = try analyzer.render(plan, engine: .cpu, progress: { _, _ in })
-            let direction = simd_normalize(scene.meteor.end - scene.meteor.start), normal = SIMD2(-direction.y, direction.x)
-            var excess: [Float] = [], core: [Float] = [], engineError: [Float] = []
-            for t in stride(from: 0.15, through: 0.85, by: 0.025) {
-                for distance in [-6.0, 0, 6.0] {
-                    let source = scene.meteor.start + (scene.meteor.end - scene.meteor.start) * t + normal * distance
-                    let p = asCaptured ? source : mapped(source, to: base)
-                    let i = Int(p.y.rounded()) * w + Int(p.x.rounded())
-                    let delta = preview[i * 3 + 1] - clean[i * 3 + 1]
-                    if distance == 0 { core.append(delta) } else { excess.append(delta) }
-                    for c in 0..<3 {
-                        engineError.append(abs(gpu.rgba[i * 4 + c] - cpu.rgba[i * 4 + c]))
-                        // The cached preview resamples the narrow core twice; the surrounding sky must still agree.
-                        if distance != 0 { XCTAssertEqual(gpu.rgba[i * 4 + c], preview[i * 3 + c], accuracy: 0.02) }
-                    }
+        var plan = clearPlan
+        func mapped(_ p: SIMD2<Double>, to target: Int) -> SIMD2<Double> { SyntheticNight.map(p, from: frame, to: target) }
+        let line = NightSkyLine(frame: frame, start: mapped(scene.meteor.start, to: analyzer.anchor),
+                                end: mapped(scene.meteor.end, to: analyzer.anchor), width: 6, pixels: 100, peak: 10)
+        plan.restore = [line]
+        let preview = try analyzer.preview(plan)
+        let gpu = try analyzer.render(plan, engine: .gpu, progress: { _, _ in })
+        let cpu = try analyzer.render(plan, engine: .cpu, progress: { _, _ in })
+        let direction = simd_normalize(scene.meteor.end - scene.meteor.start), normal = SIMD2(-direction.y, direction.x)
+        var excess: [Float] = [], core: [Float] = [], engineError: [Float] = []
+        for t in stride(from: 0.15, through: 0.85, by: 0.025) {
+            for distance in [-6.0, 0, 6.0] {
+                let source = scene.meteor.start + (scene.meteor.end - scene.meteor.start) * t + normal * distance
+                let p = mapped(source, to: base)
+                let i = Int(p.y.rounded()) * w + Int(p.x.rounded())
+                let delta = preview[i * 3 + 1] - clean[i * 3 + 1]
+                if distance == 0 { core.append(delta) } else { excess.append(delta) }
+                for c in 0..<3 {
+                    engineError.append(abs(gpu.rgba[i * 4 + c] - cpu.rgba[i * 4 + c]))
+                    // The cached preview resamples the narrow core twice; the surrounding sky must still agree.
+                    if distance != 0 { XCTAssertEqual(gpu.rgba[i * 4 + c], preview[i * 3 + c], accuracy: 0.02) }
                 }
             }
-            XCTAssertLessThan(excess.sorted()[excess.count / 2], 0.008, "The surrounding glow must not fill the mask")
-            XCTAssertGreaterThan(core.sorted()[core.count / 2], 0.08, "The meteor must keep its light")
-            // Half-float development can flip the keep/skip decision for noise with nearly zero luminance.
-            XCTAssertLessThan(engineError.reduce(0, +) / Float(engineError.count), 0.0005)
         }
+        XCTAssertLessThan(excess.sorted()[excess.count / 2], 0.008, "The surrounding glow must not fill the mask")
+        XCTAssertGreaterThan(core.sorted()[core.count / 2], 0.08, "The meteor must keep its light")
+        // Half-float development can flip the keep/skip decision for noise with nearly zero luminance.
+        XCTAssertLessThan(engineError.reduce(0, +) / Float(engineError.count), 0.0005)
     }
 
     func testMeteorShowerFindsTheMeteorAndPlacesItOnTheBaseSky() throws {
@@ -1140,12 +1136,7 @@ final class NightSkyTests: XCTestCase {
         let without = try merger.previewValues(settings)
         let p = SyntheticNight.map((night.meteor.start + night.meteor.end) / 2, from: night.meteorFrame, to: 5)
         XCTAssertLessThan(abs(value(without, w, Int(p.x), Int(p.y)).y - base[Int(p.y) * w + Int(p.x)].y), 0.03)
-        // As captured, the meteor stays where its own photo recorded it.
-        settings.choices = [:]; settings.asCaptured = true
-        let captured = try merger.previewValues(settings)
-        let recorded = (night.meteor.start + night.meteor.end) / 2
-        XCTAssertGreaterThan(value(captured, w, Int(recorded.x), Int(recorded.y)).y - base[Int(recorded.y) * w + Int(recorded.x)].y, 0.08)
-        settings.asCaptured = false
+        settings.choices = [:]
         // A ground pixel is the base photo's own.
         let ground = (x: 300, y: 600)
         XCTAssertEqual(value(result, w, ground.x, ground.y).y, base[ground.y * w + ground.x].y, accuracy: 0.03)
@@ -1190,8 +1181,6 @@ final class NightSkyTests: XCTestCase {
         var shower = MeteorShowerSettings(); shower.base = 5; shower.skyPhotos = 20
         let gpu = try meteors.render(shower, engine: .gpu)
         compare(gpu, try meteors.render(shower, engine: .cpu), "meteor shower")
-        var captured = shower; captured.asCaptured = true
-        compare(try meteors.render(captured, engine: .gpu), try meteors.render(captured, engine: .cpu), "meteor shower as captured")
         let preview = try meteors.previewValues(shower)
         let p = SyntheticNight.map((night.meteor.start + night.meteor.end) / 2, from: night.meteorFrame, to: 5)
         let i = Int(p.y) * gpu.width + Int(p.x)

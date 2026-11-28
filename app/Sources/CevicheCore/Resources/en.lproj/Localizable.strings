@@ -484,7 +484,6 @@
 "Archived %1$@" = "Archived %1$@";
 "Archived photos stay out of the library with their files untouched. Recovered from the Trash, they come back here." = "Archived photos stay out of the library with their files untouched. Recovered from the Trash, they come back here.";
 "Artist" = "Artist";
-"As Captured" = "As Captured";
 "As Developed" = "As Developed";
 "As Photo" = "As Photo";
 "As Photographed" = "As Photographed";
@@ -2161,8 +2160,6 @@
 "Oldest First" = "Oldest First";
 "On" = "On";
 "On %1$@; downloads when opened" = "On %1$@; downloads when opened";
-"On Base Sky" = "On Base Sky";
-"On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears." = "On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears.";
 "One" = "One";
 "One Frame per Photo" = "One Frame per Photo";
 "One Photo" = "One Photo";

@@ -36,10 +36,9 @@ extension NightSkyAnalyzer {
         var skyExclusions: [Int: [NightSkyLine]] = [:]
         /// Per photo, lines left out of the peak (camera analysis pixels).
         var peakExclusions: [Int: [NightSkyLine]] = [:]
-        /// Lines restored from their own photos over the result (anchor analysis pixels, or camera pixels as captured).
+        /// Lines restored from their own photos over the result, moved with the stars to the base sky (anchor
+        /// analysis pixels).
         var restore: [NightSkyLine] = []
-        /// Restores lines where the camera recorded them instead of moving them with the stars to the base sky.
-        var restoreAsCaptured = false
         /// Averages the sky a second time, leaving out samples far from each pixel's mean.
         var rejectOutliers = false
         /// With `rejectOutliers`, leaves out samples far from the base photo's own pixel instead of from the mean: what the
@@ -419,7 +418,7 @@ extension NightSkyAnalyzer {
                 guard let background else { continue }
                 let g = gains[line.frame]
                 // Only the preview pixels near the line, found through the base framing's inverse.
-                let ends = [line.start, line.end].map { ((plan.restoreAsCaptured ? $0 : pointOnBase($0, base: plan.base)) + 0.5) / k - 0.5 }
+                let ends = [line.start, line.end].map { (pointOnBase($0, base: plan.base) + 0.5) / k - 0.5 }
                 let margin = line.radius / k + 3
                 let x0 = max(0, Int(min(ends[0].x, ends[1].x) - margin)), x1 = min(w - 1, Int(max(ends[0].x, ends[1].x) + margin))
                 let y0 = max(0, Int(min(ends[0].y, ends[1].y) - margin)), y1 = min(h - 1, Int(max(ends[0].y, ends[1].y) + margin))
@@ -427,11 +426,10 @@ extension NightSkyAnalyzer {
                 for y in y0...y1 { for x in x0...x1 {
                     let p = y * w + x
                     let camera = SIMD2((Double(x) + 0.5) * k - 0.5, (Double(y) + 0.5) * k - 0.5)
-                    let a = plan.restoreAsCaptured ? camera : mapping.map { SIMD2(Double($0[p].x), Double($0[p].y)) } ?? camera
+                    let a = mapping.map { SIMD2(Double($0[p].x), Double($0[p].y)) } ?? camera
                     let alpha = line.coverage(a)
-                    // As captured, the photo's own pixel at the same place; otherwise its sky on the anchor's.
-                    let sample = plan.restoreAsCaptured ? (isSky(camera) ? reader.bilinear(line.frame, 0, SIMD2(Double(x), Double(y))) : nil)
-                                                        : reader.bilinear(line.frame, 1, (a + 0.5) / k - 0.5)
+                    // The photo's sky on the anchor's.
+                    let sample = reader.bilinear(line.frame, 1, (a + 0.5) / k - 0.5)
                     guard alpha > 0, let s = sample else { continue }
                     let source = s * g - background.value(at: a), base = SIMD3(clean[p * 3], clean[p * 3 + 1], clean[p * 3 + 2])
                     // A meteor only adds light: a darker sample is the photo's own noise or edge, never restored.

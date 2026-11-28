@@ -46,7 +46,7 @@
   {
     "key": " - %1$@ pauses",
     "source": "\" - \\(timing.gaps) pauses\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:606"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:611"
   },
   {
     "key": " - %1$@ photos couldn’t be aligned",
@@ -61,12 +61,12 @@
   {
     "key": " - %1$@, every %2$@",
     "source": "\" - \\(duration(timing.span)), every \\(duration(timing.interval))\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:605"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:610"
   },
   {
     "key": " - 1 pause",
     "source": "\" - 1 pause\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:606"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:611"
   },
   {
     "key": " - 1 photo couldn’t be aligned",
@@ -76,7 +76,7 @@
   {
     "key": " - base %1$@",
     "source": "\" - base \\(base)\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:368"
   },
   {
     "key": " - its copy deleted",
@@ -116,12 +116,12 @@
   {
     "key": " from %1$@ photos",
     "source": "\" from \\(photos) photos\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:368"
   },
   {
     "key": " from 1 photo",
     "source": "\" from 1 photo\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:370"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:368"
   },
   {
     "key": "%1$@",
@@ -249,7 +249,7 @@
     "context": "Sources/CevicheMac/Tools/ExposureRampDialog.swift:195",
     "uses": [
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:195",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:456",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:457",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:255"
     ]
   },
@@ -326,7 +326,7 @@
   {
     "key": "%1$@ and %2$@ don’t show the same group in the same places. Choose frames shot together.",
     "source": "\"\\(a) and \\(b) don’t show the same group in the same places. Choose frames shot together.\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:485"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:627"
   },
   {
     "key": "%1$@ and %2$@ share too little detail to measure their exposures. Brackets more than about 3 stops apart need exposure information in the files.",
@@ -451,7 +451,7 @@
   {
     "key": "%1$@ couldn’t be read.",
     "source": "\"\\(name) couldn’t be read.\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:486"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:628"
   },
   {
     "key": "%1$@ decoded empty.",
@@ -509,7 +509,7 @@
   {
     "key": "%1$@ faces from other photos",
     "source": "\"\\(model.swapped) faces from other photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:209"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:213"
   },
   {
     "key": "%1$@ faces to group",
@@ -745,7 +745,7 @@
   {
     "key": "%1$@ lines chosen",
     "source": "\"\\(chosen.count) lines chosen\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:367"
   },
   {
     "key": "%1$@ lines selected",
@@ -821,7 +821,7 @@
     "context": "Sources/CevicheMac/App/ModelManagerView.swift:160",
     "uses": [
       "Sources/CevicheMac/App/ModelManagerView.swift:160",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:237",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:241",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:434",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:702",
       "Sources/CevicheMac/Tools/TimelapseDialog.swift:164",
@@ -964,7 +964,7 @@
   {
     "key": "%1$@ people",
     "source": "\"\\(merger.persons.count) people\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:280"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:284"
   },
   {
     "key": "%1$@ photo",
@@ -1015,7 +1015,7 @@
       "Sources/CevicheMac/Editor/PhotoPrinting.swift:9",
       "Sources/CevicheMac/Export/ExportSession.swift:132",
       "Sources/CevicheMac/Import/CardImportView.swift:244",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:207",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:211",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:186",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:93",
       "Sources/CevicheMac/Tools/FiltersModel.swift:376",
@@ -1027,7 +1027,7 @@
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:360",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:114",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:257",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:365",
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:363",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:272",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:286",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:242",
@@ -1078,7 +1078,7 @@
   {
     "key": "%1$@ photos can’t be stacked with the others",
     "source": "\"\\(photos.count) photos can’t be stacked with the others\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:397"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:399"
   },
   {
     "key": "%1$@ photos change",
@@ -1217,9 +1217,9 @@
   {
     "key": "%1$@ photos off pace",
     "source": "\"\\(faster) photos off pace\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:617",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:622",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:617",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:622",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:365"
     ]
   },
@@ -1241,14 +1241,14 @@
   {
     "key": "%1$@ photos with other settings",
     "source": "\"\\(settings) photos with other settings\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:620"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:625"
   },
   {
     "key": "%1$@ photos without capture time",
     "source": "\"\\(untimed) photos without capture time\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:619",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:624",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:619",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:624",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:358"
     ]
   },
@@ -1318,9 +1318,9 @@
   {
     "key": "%1$@ repeats",
     "source": "\"\\(repeats) repeats\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:618",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:623",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:618",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:623",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:359"
     ]
   },
@@ -1523,7 +1523,7 @@
       "Sources/CevicheMac/Tools/DenoiseDialog.swift:315",
       "Sources/CevicheMac/Tools/ExposureRampDialog.swift:469",
       "Sources/CevicheMac/Tools/FocusStackView.swift:569",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:668",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:669",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:354",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:51",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:491",
@@ -1533,7 +1533,7 @@
   {
     "key": "%1$@%2$@ px",
     "source": "\"\\(edge > 0 ? \"+\" : \"−\")\\(abs(edge)) px\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:384"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:386"
   },
   {
     "key": "%1$@, %2$@",
@@ -1600,17 +1600,17 @@
   {
     "key": "%1$@: couldn’t be aligned, used as framed",
     "source": "\"\\(frame.filename): couldn’t be aligned, used as framed\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:672",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:673",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:672",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:460",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:404"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:673",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:461",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:405"
     ]
   },
   {
     "key": "%1$@: magnified %2$@%%, moved %3$@ px, turned %4$@°",
     "source": "\"\\(frame.filename): magnified \\(magnification)%, moved \\(distance) px, turned \\(degrees)°\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:676"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:677"
   },
   {
     "key": "%1$@: missing or oversized mask geometry; group was not applied.",
@@ -1620,12 +1620,12 @@
   {
     "key": "%1$@: moved %2$@ px, turned %3$@°",
     "source": "\"\\(frame.filename): moved \\(distance) px, turned \\(degrees)°\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:463"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:464"
   },
   {
     "key": "%1$@: moved %2$@ px, turned %3$@°, %4$@ EV evened out",
     "source": "\"\\(frame.filename): moved \\(distance) px, turned \\(degrees)°, \\(stops) EV evened out\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:408"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:409"
   },
   {
     "key": "%1$@: not a preset, camera profile or LUT",
@@ -1655,7 +1655,7 @@
   {
     "key": "(base)",
     "source": "\"(base)\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:343"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:347"
   },
   {
     "key": ", %1$@ px",
@@ -1684,12 +1684,12 @@
   {
     "key": "0 EV",
     "source": "\"0 EV\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:456"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:457"
   },
   {
     "key": "0 px",
     "source": "\"0 px\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:384"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:386"
   },
   {
     "key": "1 RAW + JPEG pair grouped",
@@ -1729,7 +1729,7 @@
   {
     "key": "1 face from another photo",
     "source": "\"1 face from another photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:209"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:213"
   },
   {
     "key": "1 face to group",
@@ -1764,7 +1764,7 @@
   {
     "key": "1 line chosen",
     "source": "\"1 line chosen\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:369"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:367"
   },
   {
     "key": "1 line selected",
@@ -1807,7 +1807,7 @@
   {
     "key": "1 photo can’t be stacked with the others",
     "source": "\"1 photo can’t be stacked with the others\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:397"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:399"
   },
   {
     "key": "1 photo changes",
@@ -1877,32 +1877,32 @@
   {
     "key": "1 photo off pace",
     "source": "\"1 photo off pace\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:617",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:622",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:617",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:622",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:365"
     ]
   },
   {
     "key": "1 photo with other settings",
     "source": "\"1 photo with other settings\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:620"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:625"
   },
   {
     "key": "1 photo without capture time",
     "source": "\"1 photo without capture time\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:619",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:624",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:619",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:624",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:358"
     ]
   },
   {
     "key": "1 repeat",
     "source": "\"1 repeat\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:618",
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:623",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyView.swift:618",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:623",
       "Sources/CevicheMac/Tools/TimelapseModel.swift:359"
     ]
   },
@@ -2534,7 +2534,7 @@
   {
     "key": "Align Again",
     "source": "\"Align Again\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:103"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:105"
   },
   {
     "key": "Align the photos first.",
@@ -2558,7 +2558,7 @@
   {
     "key": "Aligning again found other lines. Using them clears the lines you chose.",
     "source": "\"Aligning again found other lines. Using them clears the lines you chose.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:93"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:95"
   },
   {
     "key": "Aligning photos",
@@ -2728,11 +2728,11 @@
       "Sources/CevicheCore/FocusStack/FocusStacker.swift:255",
       "Sources/CevicheCore/HDRMerge/HDRMerger+Rendering.swift:186",
       "Sources/CevicheCore/HDRMerge/HDRMerger+Weights.swift:45",
-      "Sources/CevicheCore/NightSky/NightSkyAnalyzer+Previews.swift:218",
+      "Sources/CevicheCore/NightSky/NightSkyAnalyzer+Previews.swift:217",
       "Sources/CevicheCore/NightSky/NightSkyCache.swift:43",
       "Sources/CevicheCore/NightSky/NightSkyCache.swift:83",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:286",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:746",
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:285",
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:743",
       "Sources/CevicheCore/PixelShift/PixelShiftFusion.swift:104",
       "Sources/CevicheCore/PixelShift/PixelShiftMerger.swift:316",
       "Sources/CevicheCore/PixelShift/PixelShiftMerger.swift:408",
@@ -2776,10 +2776,10 @@
   {
     "key": "Analyzing the sky…",
     "source": "\"Analyzing the sky…\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:303",
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:308",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:303",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:359"
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:308",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:364"
     ]
   },
   {
@@ -3014,11 +3014,6 @@
     "context": "Sources/CevicheMac/Catalog/PhotoInfoPanel.swift:177"
   },
   {
-    "key": "As Captured",
-    "source": "\"As Captured\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337"
-  },
-  {
     "key": "As Developed",
     "source": "\"As Developed\"",
     "context": "Sources/CevicheMac/Export/ExportOptions.swift:84",
@@ -3127,16 +3122,16 @@
     "context": "Sources/CevicheCore/Metadata/PhotoMetadata.swift:70",
     "uses": [
       "Sources/CevicheCore/Metadata/PhotoMetadata.swift:70",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:529"
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:528"
     ]
   },
   {
     "key": "Average %1$@ Photos",
     "source": "\"Average \\(model.settings.skyPhotos) Photos\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:340",
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:340",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:345"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338",
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:343"
     ]
   },
   {
@@ -3162,7 +3157,7 @@
   {
     "key": "Averages the sky of the base photo with the photos taken just before and after it, aligned to it, to lower noise. Neighbors in time differ least from the base, so the sky glow and clouds match. A photo unchecked in the strip is replaced by the next nearest. Takes longer to create.",
     "source": "\"Averages the sky of the base photo with the photos taken just before and after it, aligned to it, to lower noise. Neighbors in time differ least from the base, so the sky glow and clouds match. A photo unchecked in the strip is replaced by the next nearest. Takes longer to create.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:347"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:345"
   },
   {
     "key": "B&W",
@@ -3334,32 +3329,32 @@
   {
     "key": "Base",
     "source": "\"Base\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:233",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:237",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:233",
-      "Sources/CevicheMac/Tools/FocusStackView.swift:649",
-      "Sources/CevicheMac/Tools/HDRMergeView.swift:435",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:237",
+      "Sources/CevicheMac/Tools/FocusStackView.swift:650",
+      "Sources/CevicheMac/Tools/HDRMergeView.swift:436",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:44",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:100",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:231",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:329",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:377",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:364",
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:375",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:365",
       "Sources/CevicheCore/Stack/PhotoStackTypes.swift:111"
     ]
   },
   {
     "key": "Base Photo",
     "source": "\"Base Photo\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:529"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:528"
   },
   {
     "key": "Base Photo Only",
     "source": "\"Base Photo Only\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:340",
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:340",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:341"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338",
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:339"
     ]
   },
   {
@@ -3410,28 +3405,28 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:231",
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogInspector.swift:231",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:174"
+      "Sources/CevicheMac/Tools/BestFacesView.swift:178"
     ]
   },
   {
     "key": "Best faces merge stopped",
     "source": "\"Best faces merge stopped\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:136"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:140"
   },
   {
     "key": "Best faces merged",
     "source": "\"Best faces merged\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:135"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:139"
   },
   {
     "key": "Best faces merged, %1$@ faces swapped",
     "source": "\"Best faces merged, \\(count) faces swapped\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:135"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:139"
   },
   {
     "key": "Best faces merged, 1 face swapped",
     "source": "\"Best faces merged, 1 face swapped\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:135"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:139"
   },
   {
     "key": "Between photos",
@@ -3554,7 +3549,7 @@
   {
     "key": "Blending faces",
     "source": "\"Blending faces\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:196"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:208"
   },
   {
     "key": "Blending photo %1$@ of %2$@",
@@ -3692,7 +3687,7 @@
   {
     "key": "Brightest",
     "source": "\"Brightest\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:330"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:329"
   },
   {
     "key": "Brightest keeps every photo’s brightest light, aurora and glow included. One Photo keeps one photo’s sky, chosen in the strip below, and draws the stars’ trails over it.",
@@ -3752,12 +3747,12 @@
   {
     "key": "Brush Size",
     "source": "\"Brush Size\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:236"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:238"
   },
   {
     "key": "Brush size, in points on screen; [ and ] make it smaller and larger",
     "source": "\"Brush size, in points on screen; [ and ] make it smaller and larger\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:235"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:237"
   },
   {
     "key": "Brush strokes",
@@ -3767,7 +3762,7 @@
   {
     "key": "Brushed in",
     "source": "\"Brushed in\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:369"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:370"
   },
   {
     "key": "Buildings",
@@ -4009,8 +4004,8 @@
       "Sources/CevicheMac/MCP/MCPController.swift:250",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:63",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:240",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:101",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:412"
+      "Sources/CevicheMac/Tools/NightSkyView.swift:103",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:414"
     ]
   },
   {
@@ -4031,10 +4026,10 @@
   {
     "key": "Can’t Combine These Photos",
     "source": "\"Can’t Combine These Photos\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:439",
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:444",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:439",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:141"
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:444",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:143"
     ]
   },
   {
@@ -4065,10 +4060,10 @@
   {
     "key": "Can’t Merge These Photos",
     "source": "\"Can’t Merge These Photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:143",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:147",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:143",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:221",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:147",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:225",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:143",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:228",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:226",
@@ -4634,7 +4629,7 @@
   {
     "key": "Choose two or more photos of the same group.",
     "source": "\"Choose two or more photos of the same group.\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:483"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:625"
   },
   {
     "key": "Choose what to select.",
@@ -4702,7 +4697,7 @@
       "Sources/CevicheMac/Editor/ImageCanvas+FaceTags.swift:79",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:552",
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:70",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:295"
+      "Sources/CevicheMac/Tools/NightSkyView.swift:297"
     ]
   },
   {
@@ -4818,12 +4813,12 @@
   {
     "key": "Click to brush this photo in. %1$@",
     "source": "\"Click to brush this photo in. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:401"
   },
   {
     "key": "Click to brush this photo’s light. %1$@",
     "source": "\"Click to brush this photo’s light. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:401"
   },
   {
     "key": "Click to type a value",
@@ -4833,7 +4828,7 @@
   {
     "key": "Click to use as the base. %1$@",
     "source": "\"Click to use as the base. \\(alignmentHelp(frame))\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:400"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:401"
   },
   {
     "key": "Clients using the old token are refused until they get the new one.",
@@ -4872,7 +4867,7 @@
       "Sources/CevicheMac/Catalog/PlaceMap.swift:55",
       "Sources/CevicheMac/Editor/EditorInspector.swift:349",
       "Sources/CevicheMac/Tools/IDPhotoDialog.swift:35",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:101"
+      "Sources/CevicheMac/Tools/NightSkyView.swift:103"
     ]
   },
   {
@@ -5142,12 +5137,12 @@
   {
     "key": "Comparing faces…",
     "source": "\"Comparing faces…\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:131"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:143"
   },
   {
     "key": "Comparing photos…",
     "source": "\"Comparing photos…\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:98"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:110"
   },
   {
     "key": "Compensation",
@@ -5993,12 +5988,12 @@
       "Sources/CevicheMac/Tools/FocusStackView.swift:394",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:74",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:229",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:213",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:217",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:294",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:340",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:351",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:144",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:218",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:222",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:299",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:345",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:356",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:146",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:173",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:301",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:122",
@@ -6278,7 +6273,7 @@
   {
     "key": "Dashed",
     "source": "\"Dashed\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:340"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:339"
   },
   {
     "key": "Date",
@@ -6331,7 +6326,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/HDRMergeView.swift:265",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:266",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:285",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:287",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:332",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:333"
     ]
@@ -6805,7 +6800,7 @@
   {
     "key": "Don’t Merge",
     "source": "\"Don’t Merge\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:199"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:203"
   },
   {
     "key": "Don’t enlarge",
@@ -7525,7 +7520,7 @@
   {
     "key": "Every face comes from %1$@, so the result is a copy of that photo.",
     "source": "\"Every face comes from \\(model.merger?.names[model.base] ?? \"\"), so the result is a copy of that photo.\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:201"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:205"
   },
   {
     "key": "Every feature stays free. Pro removes the badge.",
@@ -7545,12 +7540,12 @@
   {
     "key": "Everyone looks good in %1$@",
     "source": "\"Everyone looks good in \\(merger.names[best])\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:208"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:212"
   },
   {
     "key": "Everyone looks good in this photo",
     "source": "\"Everyone looks good in this photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:241"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:245"
   },
   {
     "key": "Exchange the two panes",
@@ -7995,9 +7990,9 @@
   {
     "key": "Eyes look closed",
     "source": "\"Eyes look closed\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:353",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:357",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:353",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:357",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:671",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:797",
       "Sources/CevicheMac/Tools/FaceCheckView.swift:900",
@@ -8368,7 +8363,7 @@
   {
     "key": "Finding faces in %1$@…",
     "source": "\"Finding faces in \\(url.lastPathComponent)…\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:90"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:102"
   },
   {
     "key": "Finding features",
@@ -9021,7 +9016,7 @@
   {
     "key": "Go back to the suggested faces",
     "source": "\"Go back to the suggested faces\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:278"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:282"
   },
   {
     "key": "Go to Date",
@@ -9035,7 +9030,7 @@
   {
     "key": "Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted",
     "source": "\"Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:323"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:325"
   },
   {
     "key": "Gold",
@@ -9155,7 +9150,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:241",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:242",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:314",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:316",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:290",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:291",
       "Sources/CevicheCore/Masks/Masks.swift:46"
@@ -9672,7 +9667,7 @@
   {
     "key": "How much of this photo’s light is used",
     "source": "\"How much of this photo’s light is used\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:397"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:398"
   },
   {
     "key": "How readily a photo counts as blurry, out of focus, badly exposed or blinking",
@@ -9992,7 +9987,7 @@
   {
     "key": "Include at least two photos whose stars could be aligned.",
     "source": "\"Include at least two photos whose stars could be aligned.\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:608"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:607"
   },
   {
     "key": "Include at least two photos.",
@@ -10000,7 +9995,7 @@
     "context": "Sources/CevicheCore/FocusStack/FocusStacker.swift:200",
     "uses": [
       "Sources/CevicheCore/FocusStack/FocusStacker.swift:200",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:431",
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:430",
       "Sources/CevicheCore/Stack/PhotoStacker.swift:237"
     ]
   },
@@ -10022,7 +10017,7 @@
   {
     "key": "Include in Stack",
     "source": "\"Include in Stack\"",
-    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:383"
+    "context": "Sources/CevicheMac/Tools/PhotoStackView.swift:384"
   },
   {
     "key": "Include photos with this flaw",
@@ -10037,20 +10032,20 @@
   {
     "key": "Include this exposure in the merge",
     "source": "\"Include this exposure in the merge\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:442"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:443"
   },
   {
     "key": "Include this photo",
     "source": "\"Include this photo\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:486"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:491"
   },
   {
     "key": "Include this photo in the stack",
     "source": "\"Include this photo in the stack\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:656",
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:657",
     "uses": [
-      "Sources/CevicheMac/Tools/FocusStackView.swift:656",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:390"
+      "Sources/CevicheMac/Tools/FocusStackView.swift:657",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:391"
     ]
   },
   {
@@ -10617,7 +10612,7 @@
   {
     "key": "Keep Previous Lines",
     "source": "\"Keep Previous Lines\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:91"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:93"
   },
   {
     "key": "Keep RAW",
@@ -10647,7 +10642,7 @@
   {
     "key": "Keep the framing and exposure of this photo",
     "source": "\"Keep the framing and exposure of this photo\"",
-    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:651"
+    "context": "Sources/CevicheMac/Tools/FocusStackView.swift:652"
   },
   {
     "key": "Keep the scans as one roll",
@@ -10936,7 +10931,7 @@
   {
     "key": "Leave Out and Continue",
     "source": "\"Leave Out and Continue\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:413"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:415"
   },
   {
     "key": "Leave Out of Merge",
@@ -10949,7 +10944,7 @@
     "context": "Sources/CevicheMac/Tools/FocusStackView.swift:584",
     "uses": [
       "Sources/CevicheMac/Tools/FocusStackView.swift:584",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:380"
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:381"
     ]
   },
   {
@@ -11514,7 +11509,7 @@
   {
     "key": "Looking up or down",
     "source": "\"Looking up or down\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:355"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:359"
   },
   {
     "key": "Looks",
@@ -11679,7 +11674,7 @@
   {
     "key": "Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out.",
     "source": "\"Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:320"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:322"
   },
   {
     "key": "Making %1$@ AI fills…",
@@ -11764,12 +11759,12 @@
   {
     "key": "Mark All as Sky",
     "source": "\"Mark All as Sky\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:318"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:320"
   },
   {
     "key": "Marks every line found: green lines go into the result, red dashed ones are left out. Click a line or drag a box to select lines.",
     "source": "\"Marks every line found: green lines go into the result, red dashed ones are left out. Click a line or drag a box to select lines.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:355"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:353"
   },
   {
     "key": "Mask actions",
@@ -12046,8 +12041,8 @@
     "uses": [
       "Sources/CevicheMac/Catalog/PeopleView.swift:77",
       "Sources/CevicheMac/Catalog/PhotoContextMenu.swift:102",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:174",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:197",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:178",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:201",
       "Sources/CevicheMac/Tools/FocusStackView.swift:320",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:174",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:179",
@@ -12089,7 +12084,7 @@
   {
     "key": "Merge RAW photos or processed photos, not both.",
     "source": "\"Merge RAW photos or processed photos, not both.\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:191"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:203"
   },
   {
     "key": "Merge RAW photos or processed photos, not both. Brackets need to be the same kind of file.",
@@ -12099,7 +12094,7 @@
   {
     "key": "Merge Without Swapping Faces?",
     "source": "\"Merge Without Swapping Faces?\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:196"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:200"
   },
   {
     "key": "Merge to DNG",
@@ -12134,12 +12129,12 @@
   {
     "key": "Merge to TIFF",
     "source": "\"Merge to TIFF\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:176",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:180",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:176",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:180",
       "Sources/CevicheMac/Tools/FocusStackView.swift:321",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:175",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:107",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:109",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:101"
     ]
   },
@@ -12165,7 +12160,7 @@
   {
     "key": "Merging Best Faces",
     "source": "\"Merging Best Faces\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:133"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:137"
   },
   {
     "key": "Merging HDR",
@@ -12261,7 +12256,6 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:93",
       "Sources/CevicheMac/Tools/NightSkyObjects.swift:218",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:116",
       "Sources/CevicheMac/Tools/StarTrailVideoPanel.swift:117"
     ]
@@ -12269,7 +12263,7 @@
   {
     "key": "Meteors in this frame of the video",
     "source": "\"Meteors in this frame of the video\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:452"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:457"
   },
   {
     "key": "Meter the spot against its surroundings.",
@@ -12550,7 +12544,7 @@
   {
     "key": "Moves the boundary between sky and ground: right takes more of the skyline as sky, left keeps more of it as ground",
     "source": "\"Moves the boundary between sky and ground: right takes more of the skyline as sky, left keeps more of it as ground\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:381"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:383"
   },
   {
     "key": "Moving originals",
@@ -13142,7 +13136,7 @@
   {
     "key": "No faces were found in these photos.",
     "source": "\"No faces were found in these photos.\"",
-    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:484"
+    "context": "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:626"
   },
   {
     "key": "No flags changed",
@@ -13491,7 +13485,7 @@
   {
     "key": "Not found in %1$@",
     "source": "\"Not found in \\(merger.names[f])\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:338"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:342"
   },
   {
     "key": "Not measured",
@@ -13733,16 +13727,6 @@
     "context": "Sources/CevicheMac/Catalog/CatalogInspector.swift:116"
   },
   {
-    "key": "On Base Sky",
-    "source": "\"On Base Sky\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337"
-  },
-  {
-    "key": "On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears.",
-    "source": "\"On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338"
-  },
-  {
     "key": "One",
     "source": "\"One\"",
     "context": "Sources/CevicheCore/IDPhoto/IDPhotoChecks.swift:31"
@@ -13755,7 +13739,7 @@
   {
     "key": "One Photo",
     "source": "\"One Photo\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:330"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:329"
   },
   {
     "key": "Only %1$@ of 24 patches are usable. Shoot the chart evenly lit, without glare, and not overexposed.",
@@ -13986,7 +13970,7 @@
   {
     "key": "Other Lines Found",
     "source": "\"Other Lines Found\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:89"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:91"
   },
   {
     "key": "Other camera",
@@ -14040,7 +14024,7 @@
   {
     "key": "Outlines",
     "source": "\"Outlines\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:354"
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:352"
   },
   {
     "key": "Output",
@@ -14105,17 +14089,17 @@
   {
     "key": "Paint over the preview to keep those areas out of the sky",
     "source": "\"Paint over the preview to keep those areas out of the sky\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:315"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:317"
   },
   {
     "key": "Paint over the preview to take those areas from the base photo alone, such as something that moved",
     "source": "\"Paint over the preview to take those areas from the base photo alone, such as something that moved\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:292"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:294"
   },
   {
     "key": "Paint over the preview to treat those areas as sky",
     "source": "\"Paint over the preview to treat those areas as sky\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:313"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:315"
   },
   {
     "key": "Paint over what should go. A source is chosen automatically; drag it on the photo to use another area.",
@@ -14300,7 +14284,7 @@
       "Sources/CevicheMac/Editor/PeopleMaskChooser.swift:32",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:57",
       "Sources/CevicheMac/Editor/RetouchPanel.swift:174",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:273",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:277",
       "Sources/CevicheMac/Tools/WideAngleDialog.swift:440",
       "Sources/CevicheCore/Adjustments/EditTransfer.swift:26",
       "Sources/CevicheCore/Analysis/BundledModels.swift:109",
@@ -15127,7 +15111,7 @@
   {
     "key": "Put the other faces into this photo",
     "source": "\"Put the other faces into this photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:241"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:245"
   },
   {
     "key": "Put the photo back in the library (⌘⌫)",
@@ -15335,7 +15319,7 @@
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:198",
       "Sources/CevicheMac/Tools/MatchSeriesDialog.swift:230",
       "Sources/CevicheMac/Tools/NightSkyModel.swift:124",
-      "Sources/CevicheMac/Tools/NightSkyModel.swift:280",
+      "Sources/CevicheMac/Tools/NightSkyModel.swift:285",
       "Sources/CevicheMac/Tools/PanoramaMergeView.swift:14",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:13",
       "Sources/CevicheMac/Tools/PixelShiftView.swift:13",
@@ -15539,7 +15523,7 @@
       "Sources/CevicheMac/Tools/NegativeDialog.swift:360",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:559",
       "Sources/CevicheMac/Tools/NightSkyView.swift:10",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:262",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:264",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:311"
     ]
   },
@@ -15564,7 +15548,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/FocusStackView.swift:500",
       "Sources/CevicheMac/Tools/HDRMergeView.swift:292",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:263",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:265",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:312"
     ]
   },
@@ -16036,7 +16020,7 @@
   {
     "key": "Removes the areas painted from the base photo",
     "source": "\"Removes the areas painted from the base photo\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:297"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:299"
   },
   {
     "key": "Removes what the brushes painted on the selected layer, so it is as the merge chose it",
@@ -16086,7 +16070,7 @@
   {
     "key": "Render Video",
     "source": "\"Render Video\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:555"
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:560"
   },
   {
     "key": "Render Video…",
@@ -16178,7 +16162,7 @@
     "context": "Sources/CevicheMac/Culling/TidyPairsView.swift:419",
     "uses": [
       "Sources/CevicheMac/Culling/TidyPairsView.swift:419",
-      "Sources/CevicheMac/Tools/BestFacesView.swift:277",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:281",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590",
       "Sources/CevicheMac/Tools/FiltersDialog.swift:590"
     ]
@@ -16442,7 +16426,7 @@
   {
     "key": "Revert to Detected",
     "source": "\"Revert to Detected\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:321"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:323"
   },
   {
     "key": "Revert to Detection",
@@ -16719,7 +16703,7 @@
       "Sources/CevicheMac/Editor/HistoryPanel.swift:156",
       "Sources/CevicheCore/FocusStack/FocusStacker+Rendering.swift:139",
       "Sources/CevicheCore/HDRMerge/HDRMerger+Rendering.swift:180",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:275",
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:274",
       "Sources/CevicheCore/Panorama/PanoramaMerger.swift:306",
       "Sources/CevicheCore/PixelShift/PixelShiftMerger.swift:364",
       "Sources/CevicheCore/PixelShift/PixelShiftMerger.swift:402",
@@ -17685,8 +17669,8 @@
       "Sources/CevicheMac/Tools/IDPhotoTemplates.swift:200",
       "Sources/CevicheMac/Tools/LivePhotoOptions.swift:10",
       "Sources/CevicheMac/Tools/LivePhotoOptions.swift:11",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:239",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:242",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:241",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:244",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:82",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:92",
       "Sources/CevicheMac/Tools/VideoEncodingOptions.swift:93",
@@ -17735,7 +17719,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:73",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:74",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:312",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:314",
       "Sources/CevicheCore/Analysis/BundledModels.swift:109",
       "Sources/CevicheCore/Masks/Masks.swift:7",
       "Sources/CevicheCore/Masks/Masks.swift:46"
@@ -17744,20 +17728,20 @@
   {
     "key": "Sky Edge",
     "source": "\"Sky Edge\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:379"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:381"
   },
   {
     "key": "Sky Mask",
     "source": "\"Sky Mask\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:386"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:388"
   },
   {
     "key": "Sky Noise",
     "source": "\"Sky Noise\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:339",
+    "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337",
     "uses": [
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:339",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:340"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:337",
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:338"
     ]
   },
   {
@@ -17841,7 +17825,7 @@
   {
     "key": "Smooth",
     "source": "\"Smooth\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:340"
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:339"
   },
   {
     "key": "Smooth draws in the pauses between exposures and adds a slight glow; Dashed shows the trails as the photos recorded them",
@@ -17905,7 +17889,7 @@
   {
     "key": "Softer than in other photos",
     "source": "\"Softer than in other photos\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:356"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:360"
   },
   {
     "key": "Softness",
@@ -18561,7 +18545,7 @@
   {
     "key": "Take moving things and the exposure from this photo",
     "source": "\"Take moving things and the exposure from this photo\"",
-    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:437"
+    "context": "Sources/CevicheMac/Tools/HDRMergeView.swift:438"
   },
   {
     "key": "Take the ground and the stars’ positions from this photo",
@@ -18569,7 +18553,7 @@
     "context": "Sources/CevicheMac/Tools/NightSkyToolViews.swift:331",
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:331",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:380"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:378"
     ]
   },
   {
@@ -18796,7 +18780,7 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:115",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:258",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:366"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:364"
     ]
   },
   {
@@ -19139,9 +19123,9 @@
   {
     "key": "The photos couldn’t be merged. %1$@",
     "source": "\"The photos couldn’t be merged. \\($0)\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:136",
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:140",
     "uses": [
-      "Sources/CevicheMac/Tools/BestFacesView.swift:136",
+      "Sources/CevicheMac/Tools/BestFacesView.swift:140",
       "Sources/CevicheMac/Tools/CatalogModel+PixelShift.swift:35"
     ]
   },
@@ -19286,7 +19270,7 @@
   {
     "key": "The stars were found and aligned with the sky as it was. Aligning again uses the corrected sky, which matters most when the sky finder missed part of it.",
     "source": "\"The stars were found and aligned with the sky as it was. Aligning again uses the corrected sky, which matters most when the sky finder missed part of it.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:104"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:106"
   },
   {
     "key": "The still’s size; the movie stays at 1080p or less",
@@ -19667,8 +19651,8 @@
     "uses": [
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:146",
       "Sources/CevicheMac/Catalog/CatalogStatusBar.swift:146",
-      "Sources/CevicheMac/Components/ToolChrome.swift:165",
-      "Sources/CevicheMac/Components/ToolChrome.swift:167"
+      "Sources/CevicheMac/Components/ToolChrome.swift:170",
+      "Sources/CevicheMac/Components/ToolChrome.swift:172"
     ]
   },
   {
@@ -19801,7 +19785,7 @@
   {
     "key": "Tints what is treated as sky and shows the tools that correct it",
     "source": "\"Tints what is treated as sky and shows the tools that correct it\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:386"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:388"
   },
   {
     "key": "Tints what moved between the photos; those areas come from one photo alone (%1$@%% of the photo)",
@@ -19901,7 +19885,7 @@
   {
     "key": "Too few photos are left to combine.",
     "source": "\"Too few photos are left to combine.\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:279"
+    "context": "Sources/CevicheMac/Tools/NightSkyModel.swift:284"
   },
   {
     "key": "Too few stars agree on one sky motion.",
@@ -20120,7 +20104,7 @@
   {
     "key": "Turned away",
     "source": "\"Turned away\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:354"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:358"
   },
   {
     "key": "Two Photos",
@@ -20208,7 +20192,7 @@
       "Sources/CevicheMac/Tools/NegativeDialog.swift:359",
       "Sources/CevicheMac/Tools/NegativeDialog.swift:558",
       "Sources/CevicheMac/Tools/NightSkyView.swift:9",
-      "Sources/CevicheMac/Tools/NightSkyView.swift:260",
+      "Sources/CevicheMac/Tools/NightSkyView.swift:262",
       "Sources/CevicheMac/Tools/PhotoStackView.swift:309"
     ]
   },
@@ -20259,7 +20243,7 @@
   {
     "key": "Undoes the last brush stroke or retouching change (⌘Z)",
     "source": "\"Undoes the last brush stroke or retouching change (⌘Z)\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:261"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:263"
   },
   {
     "key": "Undoes the stretch of people at the sides of a wide-angle shot into a new copy beside the photo",
@@ -20531,7 +20515,7 @@
   {
     "key": "Use New Lines",
     "source": "\"Use New Lines\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:90"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:92"
   },
   {
     "key": "Use This File",
@@ -20560,8 +20544,8 @@
     "uses": [
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:46",
       "Sources/CevicheMac/Tools/NightSkyToolViews.swift:102",
-      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:379",
-      "Sources/CevicheMac/Tools/PhotoStackView.swift:377"
+      "Sources/CevicheMac/Tools/NightSkyToolViews.swift:377",
+      "Sources/CevicheMac/Tools/PhotoStackView.swift:378"
     ]
   },
   {
@@ -21081,7 +21065,7 @@
   {
     "key": "Would show: %1$@",
     "source": "\"Would show: \\(swap.refusals.map(\\.title).joined(separator: \", \"))\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:345"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:349"
   },
   {
     "key": "Writing %1$@",
@@ -21089,7 +21073,7 @@
     "context": "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:128",
     "uses": [
       "Sources/CevicheMac/Tools/CatalogModel+Panorama.swift:128",
-      "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:218"
+      "Sources/CevicheCore/BestFaces/BestFacesMerger.swift:230"
     ]
   },
   {
@@ -21099,7 +21083,7 @@
     "uses": [
       "Sources/CevicheCore/FocusStack/FocusStacker+Rendering.swift:138",
       "Sources/CevicheCore/HDRMerge/HDRMerger+Rendering.swift:179",
-      "Sources/CevicheCore/NightSky/NightSkyTools.swift:274",
+      "Sources/CevicheCore/NightSky/NightSkyTools.swift:273",
       "Sources/CevicheCore/Stack/PhotoStacker.swift:514"
     ]
   },
@@ -21379,7 +21363,7 @@
   {
     "key": "another face too close",
     "source": "\"another face too close\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:369"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:373"
   },
   {
     "key": "appearance|Dark",
@@ -21396,7 +21380,7 @@
   {
     "key": "at the edge of the photo",
     "source": "\"at the edge of the photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:365"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:369"
   },
   {
     "key": "burst action|Group",
@@ -21517,40 +21501,40 @@
   {
     "key": "glow|Light",
     "source": "\"Light\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:368",
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:367",
     "meaning": "glow"
   },
   {
     "key": "glow|Medium",
     "source": "\"Medium\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:369",
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:368",
     "meaning": "glow"
   },
   {
     "key": "glow|Strong",
     "source": "\"Strong\"",
-    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:370",
+    "context": "Sources/CevicheCore/NightSky/NightSkyTools.swift:369",
     "meaning": "glow"
   },
   {
     "key": "hair, hands or people around moved",
     "source": "\"hair, hands or people around moved\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:372"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:376"
   },
   {
     "key": "head moved",
     "source": "\"head moved\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:370"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:374"
   },
   {
     "key": "head tilted",
     "source": "\"head tilted\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:368"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:372"
   },
   {
     "key": "head turned",
     "source": "\"head turned\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:367"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:371"
   },
   {
     "key": "iCloud Catalog",
@@ -21640,7 +21624,7 @@
   {
     "key": "light differs",
     "source": "\"light differs\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:371"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:375"
   },
   {
     "key": "light varies by %1$@",
@@ -21698,7 +21682,7 @@
   {
     "key": "moved closer or further",
     "source": "\"moved closer or further\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:366"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:370"
   },
   {
     "key": "night sky|Stars",
@@ -21714,7 +21698,7 @@
   {
     "key": "not found in the base photo",
     "source": "\"not found in the base photo\"",
-    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:364"
+    "context": "Sources/CevicheMac/Tools/BestFacesView.swift:368"
   },
   {
     "key": "one photo was just archived, as a short notice|Archived",
@@ -21777,7 +21761,7 @@
   {
     "key": "pt",
     "source": "\"pt\"",
-    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:244"
+    "context": "Sources/CevicheMac/Tools/NightSkyView.swift:246"
   },
   {
     "key": "px",

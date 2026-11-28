@@ -121,7 +121,7 @@ extension NightSkyAnalyzer {
                     let selected = plan.restore.indices.filter { plan.restore[$0].frame == i }
                     let lines = selected.map { plan.restore[$0] }
                     try gpu.restore(image, lines: lines, regions: lines.map { restoreRegion($0, plan: plan) }, into: sums, maps: maps, context: mergeContext, gain: gains[i],
-                                    alignment: i == anchor || plan.restoreAsCaptured ? nil : alignments[i], base: plan.restoreAsCaptured ? nil : baseAlignment,
+                                    alignment: i == anchor ? nil : alignments[i], base: baseAlignment,
                                     analysis: (analysisWidth, analysisHeight), backgrounds: selected.map { backgrounds[$0] })
                 }
                 lap("restore")
@@ -181,8 +181,8 @@ extension NightSkyAnalyzer {
                         let frame = try HDRMergeDecoder.decode(urls[i], metadata: metadata[i].base, longEdge: nil, whiteBalance: whiteBalance, context: context)
                         for (line, background) in zip(plan.restore, backgrounds) where line.frame == i {
                             guard let background else { continue }
-                            restore(frame, line: line, region: restoreRegion(line, plan: plan), base: plan.restoreAsCaptured ? nil : baseAlignment,
-                                    alignment: line.frame == anchor || plan.restoreAsCaptured ? nil : alignments[line.frame], background: background,
+                            restore(frame, line: line, region: restoreRegion(line, plan: plan), base: baseAlignment,
+                                    alignment: line.frame == anchor ? nil : alignments[line.frame], background: background,
                                     clean: clean, out: &out, score: &score)
                         }
                     }
@@ -363,7 +363,7 @@ extension NightSkyAnalyzer {
     /// Full-size pixels around a line where the plan restores it: x0, y0, x1, y1 inclusive.
     func restoreRegion(_ line: NightSkyLine, plan: Plan) -> (Int, Int, Int, Int) {
         let s = scale
-        let ends = [line.start, line.end].map { ((plan.restoreAsCaptured ? $0 : pointOnBase($0, base: plan.base)) + 0.5) * s - 0.5 }
+        let ends = [line.start, line.end].map { (pointOnBase($0, base: plan.base) + 0.5) * s - 0.5 }
         let margin = (line.radius + 3) * s
         return (max(0, Int(min(ends[0].x, ends[1].x) - margin)), max(0, Int(min(ends[0].y, ends[1].y) - margin)),
                 min(width - 1, Int(max(ends[0].x, ends[1].x) + margin)), min(height - 1, Int(max(ends[0].y, ends[1].y) + margin)))

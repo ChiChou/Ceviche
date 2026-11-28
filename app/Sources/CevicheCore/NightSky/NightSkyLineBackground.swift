@@ -72,10 +72,10 @@ extension NightSkyAnalyzer {
                 for line in plan.restore {
                     result.append(NightSkyLineBackground(line: line) { a in
                         guard !plan.restore.contains(where: { $0.distance(a) <= $0.radius }) else { return nil }
-                        let camera = plan.restoreAsCaptured ? a : pointOnBase(a, base: plan.base)
+                        let camera = pointOnBase(a, base: plan.base)
                         guard isSky(camera), let base = Self.bilinear(pixels, previewWidth, previewHeight,
                             (camera + 0.5) / previewScale - 0.5, channels: 3),
-                            let source = reader.bilinear(line.frame, plan.restoreAsCaptured ? 0 : 1, (a + 0.5) / previewScale - 0.5) else { return nil }
+                            let source = reader.bilinear(line.frame, 1, (a + 0.5) / previewScale - 0.5) else { return nil }
                         return source * gains[line.frame] - base
                     })
                 }

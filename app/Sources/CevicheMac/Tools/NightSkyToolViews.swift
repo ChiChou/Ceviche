@@ -334,8 +334,6 @@ struct MeteorShowerView: View {
     }
 
     @ViewBuilder private var toolbar: some View {
-        FormSegments(title: L10n.tr("Meteors"), selection: $model.settings.asCaptured, options: [false, true], label: { $0 ? L10n.tr("As Captured") : L10n.tr("On Base Sky") }).labelsHidden().fixedSize()
-            .help(L10n.tr("On Base Sky moves each meteor with the stars to where the sky stood in the base photo, so the shower radiates as it would have at that moment. As Captured keeps each meteor where the camera recorded it; over a long night the stars it crossed have moved on, and the radiant smears."))
         Text(L10n.tr("Sky Noise")).foregroundStyle(.secondary)
         FormSelect(L10n.tr("Sky Noise"), selection: $model.settings.skyPhotos, valueLabel: model.settings.skyPhotos == 1 ? L10n.tr("Base Photo Only") : L10n.tr("Average \(model.settings.skyPhotos) Photos")) {
             Text(L10n.tr("Base Photo Only")).tag(1)
