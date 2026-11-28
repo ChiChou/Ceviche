@@ -234,8 +234,9 @@ Focus Stack, Stack, Merge Best Faces and Wide-Angle Faces; the photos are aligne
   and frame in the window and the filmstrip as its timeline; meteors can stay or hold and then fade out, timed in
   seconds or frames. Output set to Live Photo fits that build-up into 3 seconds, ending on the finished trails as the
   still at the chosen size, and adds it to Photos. Star Trails and Meteor Shower list the meteors and aircraft found, each aircraft as one row
-  across its photos, to choose which stay in the result. Sky Mask tints the sky and brings up tools to paint it in or
-  out or treat the whole frame as sky. Meteor Shower matches the sky around each meteor to the base, keeping changes
+  across its photos, to choose which stay in the result. Sky Mask tints the sky and brings up the Sky and Ground brushes, which paint what an
+  area is, and Mark All as Sky in one step; Deghost paints areas of the result from the base photo alone, for something
+  that moved. Star Trails always has a base, chosen in the strip: One Photo keeps its sky. Meteor Shower matches the sky around each meteor to the base, keeping changes
   in horizon glow or sky colour from appearing as bright strips around the meteors.
 - **Stack.** Blends a sequence by median, mean, clipped mean, lighten or darken: removing people, smoothing water,
   light painting or action sequences.

@@ -1619,9 +1619,6 @@
 "0 px" = "0 像素";
 "Moves the boundary between sky and ground: right takes more of the skyline as sky, left keeps more of it as ground" = "移动天空与地面的分界：向右把更多天际线当作天空，向左把更多保留为地面";
 "Sky Edge" = "天空边缘";
-"Use Photo Here" = "此处使用照片";
-"the base photo" = "底图";
-"the middle photo" = "中间那张照片";
 "%1$@ lines selected" = "已选择 %1$@ 条线";
 "1 line selected" = "已选择 1 条线";
 "Align Again" = "重新对齐";
@@ -1630,7 +1627,6 @@
 "Averages the sky of the base photo with the photos taken just before and after it, aligned to it, to lower noise. Neighbors in time differ least from the base, so the sky glow and clouds match. A photo unchecked in the strip is replaced by the next nearest. Takes longer to create." = "将底图的天空与其前后紧邻拍摄的照片对齐后取平均，以降低噪点。时间上相邻的照片与底图差异最小，因此天空辉光和云层一致。在胶片条中取消勾选的照片会由下一张最近的照片替代。创建时间更长。";
 "Base Photo Only" = "仅底图";
 "Collapse Group" = "折叠组";
-"Everything Is Sky" = "全部为天空";
 "Exclude" = "排除";
 "Exclude %1$@ Lines from Result" = "从结果中排除 %1$@ 条线";
 "Exclude from Result" = "从结果中排除";
@@ -1656,8 +1652,6 @@
 "Ungroup Photos" = "取消照片编组";
 "Brush Size" = "画笔大小";
 "Brush size, in points on screen; [ and ] make it smaller and larger" = "画笔大小，以屏幕点数计；按 [ 和 ] 缩小和放大";
-"Removes the areas painted with Use Photo Here" = "移除用“此处使用照片”涂抹的区域";
-"Use Photo Here: paint over the preview to take those areas from %1$@ alone, such as something that moved" = "此处使用照片：在预览上涂抹，使这些区域仅取自%1$@，例如移动过的物体";
 "pt" = "点";
 "Redoes what Undo took back (⇧⌘Z)" = "重做被撤销的操作 (⇧⌘Z)";
 "Undoes the last brush stroke or retouching change (⌘Z)" = "撤销上一笔画笔或修饰更改 (⌘Z)";
@@ -2953,7 +2947,6 @@
 "Camera Movement" = "相机移动";
 "Hide the photos" = "隐藏照片";
 "Leave the selected lines out of the result (X)" = "将所选线条排除出结果 (X)";
-"Paint over the preview to keep those areas out of the sky, even with Everything Is Sky" = "在预览上涂抹，使这些区域不算作天空，即使开启了“全部为天空”";
 "Paint over the preview to treat those areas as sky" = "在预览上涂抹，将这些区域视为天空";
 "Show each photo" = "显示每张照片";
 "Tints what is treated as sky and shows the tools that correct it" = "为视为天空的区域着色，并显示修正工具";
@@ -2965,11 +2958,7 @@
 "How long a meteor stays at full strength from its photo on" = "流星从所在照片起以全亮度停留多久";
 "How long it then takes to fade out; 0 takes it away at once" = "之后淡出需要多久；0 表示立即消失";
 "Stay keeps each meteor to the end, as the still does; Fade holds it a while from its photo on, then fades it out" = "“保留”让每颗流星留到最后，与静态照片一致；“淡出”让它从所在照片起保持一段时间，然后淡出";
-"Add to Sky" = "加入天空";
-"Goes back to the sky as it was detected: removes what Add to Sky and Remove from Sky painted and turns off Everything Is Sky" = "恢复为检测到的天空：移除用“加入天空”和“移出天空”涂抹的内容，并关闭“全部为天空”";
-"Remove from Sky" = "移出天空";
 "Revert to Detected" = "恢复检测结果";
-"Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out." = "将整个画面视为天空，适用于没有地面或天空检测不佳的照片。“移出天空”仍可排除部分区域。";
 "Meteors in this frame of the video" = "视频此帧中的流星";
 "output|Image" = "图像";
 "Render Video…" = "渲染视频…";
@@ -3493,3 +3482,9 @@
 "Custom…" = "自定义…";
 "%1$@ isn’t a RAW photo this device can read." = "%1$@ 不是此设备可以读取的 RAW 照片。";
 "%1$@ isn’t a photo this device can read." = "此设备无法读取 %1$@。";
+"Mark All as Sky" = "全部标为天空";
+"Paint over the preview to keep those areas out of the sky" = "在预览上涂抹，使这些区域不计入天空";
+"Paint over the preview to take those areas from the base photo alone, such as something that moved" = "在预览上涂抹，使这些区域仅取自底图，例如移动过的物体";
+"Removes the areas painted from the base photo" = "移除从底图绘制的区域";
+"Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out." = "将整个画面标为天空，适用于没有地面或天空识别不佳的照片。之后可用“地面”排除部分区域。";
+"Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted" = "恢复为检测到的天空：撤销“全部标为天空”以及用“天空”和“地面”画笔涂抹的内容";

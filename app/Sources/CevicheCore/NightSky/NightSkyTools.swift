@@ -310,7 +310,8 @@ public struct StarTrailsSettings: Codable, Equatable, Sendable {
     public var fillGaps = false
     /// The sky behind the trails: every photo's brightest (the literal maximum), or one photo's sky with the trails over it.
     public var sky = StarTrailsSky.brightest
-    /// The photo whose sky the trails are drawn over; nil for the middle one.
+    /// The base: the photo whose sky One Photo draws the trails over, and whose pixels Deghost paints in; nil for
+    /// the middle one.
     public var skyPhoto: Int?
     public init() {}
 }
@@ -430,9 +431,12 @@ public final class StarTrailsMerger: @unchecked Sendable {
         guard included.count >= 2 else { throw PanoramaError.message(L10n.tr("Include at least two photos.")) }
         var plan = NightSkyAnalyzer.Plan(base: analyzer.anchor, ground: included, peak: included, peakMode: settings.keepStarColors ? .color : .channels)
         plan.skyShape = NightSkyAnalyzer.SkyShape(edge: settings.skyEdge, everything: settings.allSky, strokes: settings.skyStrokes)
-        if settings.sky == .onePhoto { plan.peakOverPhoto = settings.skyPhoto.flatMap { included.contains($0) ? $0 : nil } ?? included.sorted()[included.count / 2] }
+        // The base: the chosen photo, or the middle one. One Photo keeps its sky; Deghost takes areas from it in
+        // either mode, as the sky mask, found once, stays the same whichever it is.
+        let base = settings.skyPhoto.flatMap { included.contains($0) ? $0 : nil } ?? included.sorted()[included.count / 2]
+        if settings.sky == .onePhoto { plan.peakOverPhoto = base }
         plan.regions = settings.photoRegions
-        plan.regionPhoto = plan.peakOverPhoto ?? included.sorted()[included.count / 2]
+        plan.regionPhoto = base
         for (id, line) in analyzer.lines.enumerated() where !settings.includes(id, kind: line.kind) {
             plan.peakExclusions[line.frame, default: []].append(line)
         }

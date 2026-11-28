@@ -1619,9 +1619,6 @@
 "0 px" = "0 px";
 "Moves the boundary between sky and ground: right takes more of the skyline as sky, left keeps more of it as ground" = "Sposta il confine tra cielo e terreno: a destra prende più dell’orizzonte come cielo, a sinistra ne lascia di più come terreno";
 "Sky Edge" = "Bordo del cielo";
-"Use Photo Here" = "Usa foto qui";
-"the base photo" = "la foto base";
-"the middle photo" = "la foto centrale";
 "%1$@ lines selected" = "%1$@ linee selezionate";
 "1 line selected" = "1 linea selezionata";
 "Align Again" = "Allinea di nuovo";
@@ -1630,7 +1627,6 @@
 "Averages the sky of the base photo with the photos taken just before and after it, aligned to it, to lower noise. Neighbors in time differ least from the base, so the sky glow and clouds match. A photo unchecked in the strip is replaced by the next nearest. Takes longer to create." = "Fa la media del cielo della foto base con le foto scattate subito prima e subito dopo, allineate a essa, per ridurre il rumore. Le foto più vicine nel tempo sono quelle che differiscono meno dalla base, quindi il bagliore del cielo e le nuvole coincidono. Una foto deselezionata nella striscia viene sostituita dalla successiva più vicina. Richiede più tempo per la creazione.";
 "Base Photo Only" = "Solo la foto base";
 "Collapse Group" = "Comprimi gruppo";
-"Everything Is Sky" = "Tutto è cielo";
 "Exclude" = "Escludi";
 "Exclude %1$@ Lines from Result" = "Escludi %1$@ linee dal risultato";
 "Exclude from Result" = "Escludi dal risultato";
@@ -1656,8 +1652,6 @@
 "Ungroup Photos" = "Separa foto";
 "Brush Size" = "Dimensione pennello";
 "Brush size, in points on screen; [ and ] make it smaller and larger" = "Dimensione del pennello, in punti sullo schermo; [ e ] la riducono e la aumentano";
-"Removes the areas painted with Use Photo Here" = "Rimuove le aree dipinte con Usa foto qui";
-"Use Photo Here: paint over the preview to take those areas from %1$@ alone, such as something that moved" = "Usa foto qui: dipingi sull’anteprima per prendere quelle aree solo da %1$@, come qualcosa che si è mosso";
 "pt" = "pt";
 "Redoes what Undo took back (⇧⌘Z)" = "Ripristina ciò che Annulla ha annullato (⇧⌘Z)";
 "Undoes the last brush stroke or retouching change (⌘Z)" = "Annulla l’ultima pennellata o l’ultima modifica di ritocco (⌘Z)";
@@ -2953,7 +2947,6 @@
 "Camera Movement" = "Movimento della fotocamera";
 "Hide the photos" = "Nascondi le foto";
 "Leave the selected lines out of the result (X)" = "Escludi le linee selezionate dal risultato (X)";
-"Paint over the preview to keep those areas out of the sky, even with Everything Is Sky" = "Dipingi sull’anteprima per tenere quelle aree fuori dal cielo, anche con Tutto è cielo";
 "Paint over the preview to treat those areas as sky" = "Dipingi sull’anteprima per trattare quelle aree come cielo";
 "Show each photo" = "Mostra ogni foto";
 "Tints what is treated as sky and shows the tools that correct it" = "Colora ciò che è considerato cielo e mostra gli strumenti per correggerlo";
@@ -2965,11 +2958,7 @@
 "How long a meteor stays at full strength from its photo on" = "Per quanto una meteora resta a piena intensità dalla sua foto in poi";
 "How long it then takes to fade out; 0 takes it away at once" = "Quanto impiega poi a dissolversi; 0 la toglie subito";
 "Stay keeps each meteor to the end, as the still does; Fade holds it a while from its photo on, then fades it out" = "Restano tiene ogni meteora fino alla fine, come l’immagine fissa; Dissolvi la mantiene per un po’ dalla sua foto, poi la dissolve";
-"Add to Sky" = "Aggiungi al cielo";
-"Goes back to the sky as it was detected: removes what Add to Sky and Remove from Sky painted and turns off Everything Is Sky" = "Torna al cielo come è stato rilevato: rimuove quanto dipinto con Aggiungi al cielo e Togli dal cielo e disattiva Tutto è cielo";
-"Remove from Sky" = "Togli dal cielo";
 "Revert to Detected" = "Torna al rilevato";
-"Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out." = "Tratta tutta l’inquadratura come cielo, per una foto senza terreno o un cielo rilevato male. Togli dal cielo può ancora escludere delle aree.";
 "Meteors in this frame of the video" = "Meteore in questo fotogramma del video";
 "output|Image" = "Immagine";
 "Render Video…" = "Esegui rendering video…";
@@ -3493,3 +3482,9 @@
 "Custom…" = "Personalizzato…";
 "%1$@ isn’t a RAW photo this device can read." = "%1$@ non è una foto RAW leggibile da questo dispositivo.";
 "%1$@ isn’t a photo this device can read." = "Questo dispositivo non può leggere %1$@.";
+"Mark All as Sky" = "Segna tutto come cielo";
+"Paint over the preview to keep those areas out of the sky" = "Dipingi sull’anteprima per tenere quelle zone fuori dal cielo";
+"Paint over the preview to take those areas from the base photo alone, such as something that moved" = "Dipingi sull’anteprima per prendere quelle zone solo dalla foto base, come qualcosa che si è mosso";
+"Removes the areas painted from the base photo" = "Rimuove le zone dipinte dalla foto base";
+"Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out." = "Rende cielo l’intera inquadratura, per una foto senza terreno o un cielo rilevato male. Poi Terreno può tenere fuori alcune zone.";
+"Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted" = "Torna al cielo come è stato rilevato: annulla Segna tutto come cielo e ciò che è stato dipinto con i pennelli Cielo e Terreno";

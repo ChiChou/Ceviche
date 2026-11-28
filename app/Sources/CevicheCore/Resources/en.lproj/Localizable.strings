@@ -396,7 +396,6 @@
 "Add to Layer" = "Add to Layer";
 "Add to Layer: paint over the preview to take those areas from the selected exposure alone" = "Add to Layer: paint over the preview to take those areas from the selected exposure alone";
 "Add to Layer: paint over the preview to take those areas from the selected layer’s photo alone" = "Add to Layer: paint over the preview to take those areas from the selected layer’s photo alone";
-"Add to Sky" = "Add to Sky";
 "Adding to Photos" = "Adding to Photos";
 "Adding to the catalog" = "Adding to the catalog";
 "Adds a heal stroke for each spot, sampling a matching clean area nearby" = "Adds a heal stroke for each spot, sampling a matching clean area nearby";
@@ -1182,7 +1181,6 @@
 "Every photo is left out. Give one a copy in the side panel or the strip below." = "Every photo is left out. Give one a copy in the side panel or the strip below.";
 "Everyone looks good in %1$@" = "Everyone looks good in %1$@";
 "Everyone looks good in this photo" = "Everyone looks good in this photo";
-"Everything Is Sky" = "Everything Is Sky";
 "Exchange the two panes" = "Exchange the two panes";
 "Exchanging changes with iCloud." = "Exchanging changes with iCloud.";
 "Exclude" = "Exclude";
@@ -1403,7 +1401,7 @@
 "Go back to the suggested decisions" = "Go back to the suggested decisions";
 "Go back to the suggested faces" = "Go back to the suggested faces";
 "Go to Date" = "Go to Date";
-"Goes back to the sky as it was detected: removes what Add to Sky and Remove from Sky painted and turns off Everything Is Sky" = "Goes back to the sky as it was detected: removes what Add to Sky and Remove from Sky painted and turns off Everything Is Sky";
+"Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted" = "Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted";
 "Gold" = "Gold";
 "Golden Ratio" = "Golden Ratio";
 "Golden Spiral" = "Golden Spiral";
@@ -1835,6 +1833,7 @@
 "Main subjects" = "Main subjects";
 "Make Key Photo" = "Make Key Photo";
 "Make another AI fill (⇧R)" = "Make another AI fill (⇧R)";
+"Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out." = "Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out.";
 "Making %1$@ AI fills…" = "Making %1$@ AI fills…";
 "Making the AI fill…" = "Making the AI fill…";
 "Manage %1$@" = "Manage %1$@";
@@ -1847,6 +1846,7 @@
 "Manual" = "Manual";
 "Map" = "Map";
 "Margin" = "Margin";
+"Mark All as Sky" = "Mark All as Sky";
 "Marks every line found: green lines go into the result, red dashed ones are left out. Click a line or drag a box to select lines." = "Marks every line found: green lines go into the result, red dashed ones are left out. Click a line or drag a box to select lines.";
 "Mask actions" = "Mask actions";
 "Mask adjustment %1$@ is preserved but not rendered." = "Mask adjustment %1$@ is preserved but not rendered.";
@@ -2222,7 +2222,8 @@
 "Overwrite" = "Overwrite";
 "PQ - Rec. 2100" = "PQ - Rec. 2100";
 "Paint over a halo to repair it from an aligned source. No layer selection needed." = "Paint over a halo to repair it from an aligned source. No layer selection needed.";
-"Paint over the preview to keep those areas out of the sky, even with Everything Is Sky" = "Paint over the preview to keep those areas out of the sky, even with Everything Is Sky";
+"Paint over the preview to keep those areas out of the sky" = "Paint over the preview to keep those areas out of the sky";
+"Paint over the preview to take those areas from the base photo alone, such as something that moved" = "Paint over the preview to take those areas from the base photo alone, such as something that moved";
 "Paint over the preview to treat those areas as sky" = "Paint over the preview to treat those areas as sky";
 "Paint over what should go. A source is chosen automatically; drag it on the photo to use another area." = "Paint over what should go. A source is chosen automatically; drag it on the photo to use another area.";
 "Paint over what should go; an inpainting model redraws it from its surroundings." = "Paint over what should go; an inpainting model redraws it from its surroundings.";
@@ -2502,7 +2503,6 @@
 "Remove from Library…" = "Remove from Library…";
 "Remove from List" = "Remove from List";
 "Remove from Person" = "Remove from Person";
-"Remove from Sky" = "Remove from Sky";
 "Remove from This Photo" = "Remove from This Photo";
 "Remove if possible" = "Remove if possible";
 "Remove the Photo from the Library?" = "Remove the Photo from the Library?";
@@ -2511,7 +2511,7 @@
 "Removed from the library" = "Removed from the library";
 "Removes everything the brush painted" = "Removes everything the brush painted";
 "Removes people and traffic that move through the frame" = "Removes people and traffic that move through the frame";
-"Removes the areas painted with Use Photo Here" = "Removes the areas painted with Use Photo Here";
+"Removes the areas painted from the base photo" = "Removes the areas painted from the base photo";
 "Removes what the brushes painted on the selected layer, so it is as the merge chose it" = "Removes what the brushes painted on the selected layer, so it is as the merge chose it";
 "Removes what the brushes painted on the selected layer, so it is as the stack chose it" = "Removes what the brushes painted on the selected layer, so it is as the stack chose it";
 "Removing photos…" = "Removing photos…";
@@ -3168,7 +3168,6 @@
 "Trash Is Empty" = "Trash Is Empty";
 "Trash Photos and Delete Album" = "Trash Photos and Delete Album";
 "Trash Photos and Delete Album…" = "Trash Photos and Delete Album…";
-"Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out." = "Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out.";
 "Triangle" = "Triangle";
 "Try Again" = "Try Again";
 "Try changing your filters." = "Try changing your filters.";
@@ -3244,8 +3243,6 @@
 "Upright mode" = "Upright mode";
 "Use %1$@" = "Use %1$@";
 "Use New Lines" = "Use New Lines";
-"Use Photo Here" = "Use Photo Here";
-"Use Photo Here: paint over the preview to take those areas from %1$@ alone, such as something that moved" = "Use Photo Here: paint over the preview to take those areas from %1$@ alone, such as something that moved";
 "Use This File" = "Use This File";
 "Use This File as the Original?" = "Use This File as the Original?";
 "Use YYYY-MM-DD, or leave empty." = "Use YYYY-MM-DD, or leave empty.";
@@ -3451,9 +3448,7 @@
 "stdio clients" = "stdio clients";
 "strength|Light" = "Light";
 "the %1$@ group" = "the %1$@ group";
-"the base photo" = "the base photo";
 "the data is damaged" = "the data is damaged";
-"the middle photo" = "the middle photo";
 "this photo" = "this photo";
 "this profile's camera" = "this profile's camera";
 "tool group|Color" = "Color";

@@ -184,7 +184,7 @@ struct NightSkyBrush: View {
                     let r = stroke.radius * size.width
                     path.addEllipse(in: CGRect(x: stroke.x * size.width - r, y: stroke.y * size.height - r, width: 2 * r, height: 2 * r))
                 }
-                context.fill(path, with: .color(mode == .photo ? .purple.opacity(0.35) : mode == .addSky ? .cyan.opacity(0.45) : .orange.opacity(0.45)))
+                context.fill(path, with: .color(mode == .photo ? NightSkyBrushColor.deghost.opacity(0.35) : mode == .addSky ? NightSkyBrushColor.sky.opacity(0.45) : NightSkyBrushColor.ground.opacity(0.45)))
                 if let pointer {
                     // A dark ring under a light one, so the outline shows on sky and ground alike.
                     let ring = Path(ellipseIn: CGRect(x: pointer.x - diameter / 2, y: pointer.y - diameter / 2, width: diameter, height: diameter))
@@ -265,29 +265,36 @@ struct NightSkyHistoryButtons: View {
     }
 }
 
-/// The brush that takes areas from one photo, which `photo` names, a Clear once it has painted, and while any brush
-/// is in use (the sky's included) the size it paints with.
+/// What the mask brushes paint with over the preview, and the colour of each tool.
+enum NightSkyBrushColor {
+    static let sky = Color.cyan
+    static let ground = Color.orange
+    static let deghost = Color.purple
+}
+
+/// Deghost, the brush that takes areas from the base photo alone, a Clear once it has painted, and while any
+/// brush is in use (the sky's included) the size it paints with.
 struct NightSkyPhotoBrushes<Settings: NightSkyEditableSettings>: View {
     @Binding var brush: NightSkyBrushMode?
     @Binding var settings: Settings
     @Binding var diameter: Double
-    let photo: String
     var body: some View {
         HStack(spacing: 6) {
             Button { brush = brush == .photo ? nil : .photo } label: {
-                Label(L10n.tr("Use Photo Here"), systemImage: "paintbrush.pointed").labelStyle(.titleAndIcon).fixedSize()
+                // In the colour it paints with over the preview.
+                Label(L10n.tr("Deghost"), systemImage: "figure.walk.motion").labelStyle(.titleAndIcon).fixedSize()
                     .padding(.horizontal, 7).frame(height: 22)
-                    .foregroundStyle(brush == .photo ? Theme.onAccent : Color.primary)
-                    .background(brush == .photo ? Theme.accent : .clear, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
+                    .foregroundStyle(brush == .photo ? Color.white : NightSkyBrushColor.deghost)
+                    .background(brush == .photo ? NightSkyBrushColor.deghost : .clear, in: RoundedRectangle(cornerRadius: Theme.Radius.control))
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain).accessibilityAddTraits(brush == .photo ? .isSelected : [])
-            .help(L10n.tr("Use Photo Here: paint over the preview to take those areas from \(photo) alone, such as something that moved"))
+            .help(L10n.tr("Paint over the preview to take those areas from the base photo alone, such as something that moved"))
             // Each shows only while it does something: Clear once there is something to clear, the size while painting.
             if !settings.photoRegions.isEmpty {
                 Button(L10n.tr("Clear")) { settings.photoRegions = [] }
                     .buttonStyle(.plain).foregroundStyle(.secondary).fixedSize()
-                    .help(L10n.tr("Removes the areas painted with Use Photo Here"))
+                    .help(L10n.tr("Removes the areas painted from the base photo"))
             }
             if brush != nil { NightSkyBrushSize(diameter: $diameter).fixedSize() }
         }
@@ -295,22 +302,25 @@ struct NightSkyPhotoBrushes<Settings: NightSkyEditableSettings>: View {
 }
 
 /// Editing the sky mask, over the preview while the mask shows: brushes that add to it and take from it (at the
-/// toolbar's brush size), the whole frame as sky, and back to the sky as detected. A brush clicked again puts it down.
+/// toolbar's brush size), marking the whole frame as sky, and back to the sky as detected. A brush clicked again puts it down.
 struct NightSkyMaskBar<Settings: NightSkyEditableSettings>: View {
     @Binding var brush: NightSkyBrushMode?
     @Binding var settings: Settings
     var body: some View {
         HStack(spacing: 4) {
-            tool(L10n.tr("Add to Sky"), icon: "plus.circle", on: brush == .addSky) { use(.addSky) }
+            // Named for what the area is, in the colours they paint with.
+            tool(L10n.tr("Sky"), icon: "sparkles", color: NightSkyBrushColor.sky, on: brush == .addSky) { use(.addSky) }
                 .help(L10n.tr("Paint over the preview to treat those areas as sky"))
-            tool(L10n.tr("Remove from Sky"), icon: "minus.circle", on: brush == .removeSky) { use(.removeSky) }
-                .help(L10n.tr("Paint over the preview to keep those areas out of the sky, even with Everything Is Sky"))
+            tool(L10n.tr("Ground"), icon: "mountain.2", color: NightSkyBrushColor.ground, on: brush == .removeSky) { use(.removeSky) }
+                .help(L10n.tr("Paint over the preview to keep those areas out of the sky"))
             Rule(.vertical).frame(height: 16).overlay(Color.white.opacity(0.25))
-            tool(L10n.tr("Everything Is Sky"), icon: "square.dashed.inset.filled", on: settings.allSky) { settings.allSky.toggle() }
-                .help(L10n.tr("Treats the whole frame as sky, for a photo without ground or a sky that isn’t found well. Remove from Sky can still keep areas out."))
-            tool(L10n.tr("Revert to Detected"), icon: "arrow.counterclockwise", on: false) { settings.skyStrokes = []; settings.allSky = false }
+            // An action, not a state: it makes the whole frame sky once, and Ground then takes areas out.
+            tool(L10n.tr("Mark All as Sky"), icon: "square.dashed.inset.filled", on: false) { reset(allSky: true) }
+                .disabled(settings.allSky && settings.skyStrokes.isEmpty)
+                .help(L10n.tr("Makes the whole frame sky, for a photo without ground or a sky that isn’t found well. Ground can then keep areas out."))
+            tool(L10n.tr("Revert to Detected"), icon: "arrow.counterclockwise", on: false) { reset(allSky: false) }
                 .disabled(settings.skyStrokes.isEmpty && !settings.allSky)
-                .help(L10n.tr("Goes back to the sky as it was detected: removes what Add to Sky and Remove from Sky painted and turns off Everything Is Sky"))
+                .help(L10n.tr("Goes back to the sky as it was detected: undoes Mark All as Sky and what the Sky and Ground brushes painted"))
         }
         .font(.callout).foregroundStyle(.white)
         .padding(.horizontal, 6).padding(.vertical, 4)
@@ -318,12 +328,16 @@ struct NightSkyMaskBar<Settings: NightSkyEditableSettings>: View {
         .padding(12)
     }
     private func use(_ mode: NightSkyBrushMode) { brush = brush == mode ? nil : mode }
-    private func tool(_ title: String, icon: String, on: Bool, action: @escaping () -> Void) -> some View {
+    /// The whole frame as sky, or the sky as detected, with nothing painted over it: one change, so one step to undo.
+    private func reset(allSky: Bool) {
+        var value = settings; value.allSky = allSky; value.skyStrokes = []; settings = value
+    }
+    private func tool(_ title: String, icon: String, color: Color? = nil, on: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Label(title, systemImage: icon).labelStyle(.titleAndIcon)
                 .padding(.horizontal, 8).frame(height: 24)
-                .foregroundStyle(on ? Theme.onAccent : Color.white)
-                .background(on ? Theme.accent : .clear, in: Capsule())
+                .foregroundStyle(on ? (color == nil ? Theme.onAccent : Color.black) : color ?? Color.white)
+                .background(on ? color ?? Theme.accent : .clear, in: Capsule())
                 .contentShape(Capsule())
         }
         .buttonStyle(.plain).accessibilityAddTraits(on ? .isSelected : [])

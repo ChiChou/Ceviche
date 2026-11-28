@@ -41,9 +41,9 @@ struct StarTrailsView: View {
                        },
                        filmstrip: model.analysis?.frames ?? []) { frame in
             NightSkyFrameCell(frame: frame, included: !model.settings.excluded.contains(frame.index), canToggle: canToggle(frame),
-                              badge: model.settings.sky == .onePhoto && frame.index == skyPhoto ? L10n.tr("Base") : nil, onToggle: { toggle(frame.index) },
-                              onSelect: model.settings.sky == .onePhoto ? { useSky(frame.index) } : nil,
-                              selectHelp: L10n.tr("Draw the trails over this photo’s sky"), lane: output.animates ? lane[frame.index] ?? NightSkyLaneMark.empty : nil)
+                              badge: frame.index == skyPhoto ? L10n.tr("Base") : nil, onToggle: { toggle(frame.index) },
+                              onSelect: { useSky(frame.index) },
+                              selectHelp: model.settings.sky == .onePhoto ? L10n.tr("Draw the trails over this photo’s sky") : L10n.tr("Use as Base"), lane: output.animates ? lane[frame.index] ?? NightSkyLaneMark.empty : nil)
         }
         .onAppear {
             if model.request.latentURL == nil { restoredPresentation = true; savePresentation() }
@@ -83,7 +83,7 @@ struct StarTrailsView: View {
         Rule(.vertical).frame(height: 16)
         NightSkyEdgeControls(settings: $model.settings, showSky: $model.showSky)
         Rule(.vertical).frame(height: 16)
-        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter, photo: model.settings.sky == .onePhoto ? L10n.tr("the base photo") : L10n.tr("the middle photo"))
+        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter)
         NightSkyHistoryButtons(history: model.history)
         Rule(.vertical).frame(height: 16)
         Toggle(L10n.tr("Objects"), isOn: Binding(get: { showsObjects }, set: { showObjects = $0 }))
@@ -119,14 +119,14 @@ struct StarTrailsView: View {
         guard let timing = analysis.timing else { return photos }
         return L10n.tr("\(photos), \(NightSkyFormat.duration(timing.span))")
     }
-    /// The photo whose sky One Photo keeps: the chosen one, or the middle included one.
+    /// The base: the photo whose sky One Photo keeps and Deghost paints from, the chosen one or the middle included one.
     private var skyPhoto: Int? {
         guard let analysis = model.analysis else { return nil }
         let included = analysis.frames.map(\.index).filter { !model.settings.excluded.contains($0) }
         return model.settings.skyPhoto.flatMap { included.contains($0) ? $0 : nil } ?? (included.isEmpty ? nil : included[included.count / 2])
     }
     private func canToggle(_ frame: NightSkyFrameInfo) -> Bool {
-        !(model.settings.sky == .onePhoto && frame.index == skyPhoto)
+        frame.index != skyPhoto
             && (model.settings.excluded.contains(frame.index) || (model.analysis?.frames.count ?? 0) - model.settings.excluded.count > 2)
     }
     private func toggle(_ index: Int) {
@@ -246,7 +246,7 @@ struct NightSkyDenoiseView: View {
         Rule(.vertical).frame(height: 16)
         NightSkyEdgeControls(settings: $model.settings, showSky: $model.showSky)
         Rule(.vertical).frame(height: 16)
-        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter, photo: L10n.tr("the base photo"))
+        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter)
         NightSkyHistoryButtons(history: model.history)
         Rule(.vertical).frame(height: 16)
         Toggle(L10n.tr("Show Base"), isOn: $showReference).help(L10n.tr("Shows the base photo alone, to compare"))
@@ -348,7 +348,7 @@ struct MeteorShowerView: View {
         Rule(.vertical).frame(height: 16)
         NightSkyEdgeControls(settings: $model.settings, showSky: $model.showSky)
         Rule(.vertical).frame(height: 16)
-        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter, photo: L10n.tr("the base photo"))
+        NightSkyPhotoBrushes(brush: $model.brush, settings: $model.settings, diameter: $model.brushDiameter)
         NightSkyHistoryButtons(history: model.history)
         Rule(.vertical).frame(height: 16)
         Toggle(L10n.tr("Outlines"), isOn: $showOutlines)
